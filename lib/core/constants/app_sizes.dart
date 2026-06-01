@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AppSizes {
   static const double sidebarWidth = 260;
 
@@ -15,8 +17,11 @@ class AppSizes {
   static const double spacingLarge = 20;
   static const double spacingXL = 30;
   static const double iconSize = 24;
+  static const double iconSizeSmall = 14;
   static const double iconLarge = 28;
   static const double iconXLarge = 48;
 
   static const double dialogWidth = 450;
+
+  static double get homeContainerHeight => 310.h;
 }
