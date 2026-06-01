@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
 
@@ -140,36 +141,16 @@ class OnboardingStepTwoContent extends StatelessWidget {
                 ),
                 SizedBox(height: 32.h),
                 // Bottom Button
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.r),
-                    gradient: const LinearGradient(
-                      colors: [
-                        AppColors.greenPrimary,
-                        AppColors.dark,
-                      ],
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: onStart,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.r),
-                      ),
-                    ),
-                    child: Text(
-                      'ابدأ الآن  >>>',
-                      style: GoogleFonts.ibmPlexSansArabic(
-                        color: AppColors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                CustomButtom(
+                    onTap: onStart,
+                    text:   'ابدأ الآن  >>>',
+                    textStyle: GoogleFonts.ibmPlexSansArabic(
+                              color: AppColors.white,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                    startColor: AppColors.greenPrimary,
+                    endColor: AppColors.dark
                 ),
                 SizedBox(height: 40.h),
               ],
