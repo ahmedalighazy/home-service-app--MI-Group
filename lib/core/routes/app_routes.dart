@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
@@ -24,10 +25,7 @@ class AppRoutes {
         transitionDuration: const Duration(milliseconds: 400),
         pageBuilder: (context, animation, secondaryAnimation) => page,
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
+          return FadeTransition(opacity: animation, child: child);
         },
       );
     }
@@ -74,23 +72,10 @@ class AppRoutes {
       case login:
         return fadeRoute(const LoginScreen());
       case home:
-        return fadeRoute(
-          const Scaffold(
-            body: Center(
-              child: Text(
-                'الرئيسية (قريباً)',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        );
+        return fadeRoute(const Scaffold(body: Center(child: HomePage())));
       default:
         return fadeRoute(
-          const Scaffold(
-            body: Center(
-              child: Text('العنوان غير معروف'),
-            ),
-          ),
+          const Scaffold(body: Center(child: Text('العنوان غير معروف'))),
         );
     }
   }
