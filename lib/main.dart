@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/features/profile/screen/profile_screen.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 
 import 'core/di/injection.dart';
 import 'core/themes/theming/app_theme.dart';
@@ -34,9 +34,8 @@ class HomeServiceApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.light, // Default to light mode
-          // initialRoute: AppRoutes.home,
-          // onGenerateRoute: AppRoutes.onGenerateRoute,
-          home: const ProfileScreen(),
+          initialRoute: AppRoutes.splash,
+          onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },
     );
