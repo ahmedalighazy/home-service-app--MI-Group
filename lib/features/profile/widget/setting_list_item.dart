@@ -19,7 +19,7 @@ class SettingListItem extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-      leading:  const Icon(
+      trailing:  const Icon(
         Icons.chevron_left,
         color: AppColors.greenPrimary,
         size: 30,
@@ -35,7 +35,9 @@ class SettingListItem extends StatelessWidget {
           ),
         ),
       ),
-      trailing: Icon(
+    
+    leading
+      : Icon(
         icon,
         color: AppColors.greenPrimary,
         size: 28,
