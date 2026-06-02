@@ -20,10 +20,12 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: AppColors.backgroundGrey,
       appBar: AppBar(
+                scrolledUnderElevation: 0,
+
         backgroundColor: AppColors.white,
-        elevation: 0,
         leading:const ArrowBack() ,
         title: Text(
           AppStrings.editProfile,
