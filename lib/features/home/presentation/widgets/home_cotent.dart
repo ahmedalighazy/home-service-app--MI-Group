@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/home/presentation/widgets/home_header.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
@@ -13,6 +13,7 @@ class HomeContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          alignment: Alignment.topCenter,
           padding: const EdgeInsets.all(AppSizes.padding),
           height: AppSizes.homeContainerHeight,
           width: double.infinity,
@@ -28,26 +29,7 @@ class HomeContent extends StatelessWidget {
               bottomRight: Radius.circular(AppSizes.radiusXL),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: AppSizes.iconSizeSmall,
-                backgroundColor: AppColors.white,
-                child: SvgPicture.asset('assets/icons/profile.svg'),
-              ),
-              Column(
-                children: [
-                  Row(children: [Text('الموقع الحالي')]),
-                ],
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset('assets/icons/notification_bell.svg'),
-              ),
-            ],
-          ),
+          child: HomeHeader(),
         ),
       ],
     );
