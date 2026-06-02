@@ -7,5 +7,13 @@ class IconsPath {
   static const String notificationBell = 'assets/icons/notification_bell.svg';
   static const String arrow = 'assets/icons/arrow.svg';
 
-  
+  static const String calendarRed = 'assets/icons/calender_red.svg';
+  static const String container = 'assets/icons/Container.svg';
+  static const String delete = 'assets/icons/delete.svg';
+  static const String docs = 'assets/icons/docs.svg';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String email = 'assets/icons/email.svg';
+  static const String imageProfile = 'assets/icons/image_profile.svg';
+  static const String repeat = 'assets/icons/solar_repeat-bold.svg';
+  static const String warning = 'assets/icons/warning.svg';
 }

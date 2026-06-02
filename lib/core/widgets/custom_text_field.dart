@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../themes/colors/app_colors.dart';
+import '../themes/text/app_text.dart';
+
+class CustomTextField extends StatelessWidget {
+  final String? label;
+  final String? initialValue;
+  final String hintText;
+  final bool isReadOnly;
+  final Widget? suffixIcon;
+  final Color? fillColor;
+  final Widget? icon;
+  final Color? borderColor;
+  final TextEditingController? controller;
+  final bool ?centerText;
+
+  const CustomTextField({
+    super.key,
+    this.label,
+    this.initialValue,
+    required this.hintText,
+    this.isReadOnly = false,
+    this.suffixIcon,
+    this.fillColor,
+    this.icon,
+    this.borderColor,
+    this.controller,  this.centerText=false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label != null) ...[
+          Text(
+            label!,
+            style: AppText.mediumIbm(color: AppColors.textDarkGrey, fontSize: 14, ),
+          ),
+          SizedBox(height: 6.h),
+        ],
+        TextFormField(
+
+          controller: controller,
+          initialValue: controller == null ? initialValue : null,
+          readOnly: isReadOnly,
+          textAlign: centerText!  ? TextAlign.center : TextAlign.right,
+          style: AppText.regularIbm(color: AppColors.black, fontSize: 15),
+          decoration: InputDecoration(
+            
+            hintText: hintText,
+            hintStyle: AppText.regularIbm(color: AppColors.borderInputs, fontSize: 14).copyWith(),
+            fillColor: fillColor ?? AppColors.borderInputs,
+            filled: true,
+            
+            suffixIcon: suffixIcon,
+            prefixIcon: icon,
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: borderSide(),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: borderSide(),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: const BorderSide(color: AppColors.tealPrimary, width: 1.5),
+            ))),
+          ],
+        );
+      
+    
+  }
+
+  BorderSide borderSide() {
+    if (borderColor != null) return BorderSide(color: borderColor!);
+    return BorderSide.none;
+  }
+}

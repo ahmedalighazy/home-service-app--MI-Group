@@ -1,11 +1,44 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Basic Colors
-  static const Color transparentColor = Colors.transparent;
+
+
+// colors ui profile
+static const Color transparentColor = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
-    static const Color black100 = Color(0x0A000000);
+  static const Color black100 = Color(0x0A000000);
+
+  // UI Specific Colors
+  static const Color backgroundGrey = Color(0xFFF9FAFB);
+  static const Color borderGrey = Color(0xFFE5E7EB);
+  static const Color textDarkGrey = Color(0xFF374151);
+  static const Color textLightGrey = Color(0xFF6B7280);
+  static const Color inputBg = Color(0xFFF3F4F6);
+  
+  // Danger / Delete Colors
+  static const Color redDanger = Color(0xFFDC2626);
+    static const Color red = Color(0xFFD2503C);
+
+  static const Color redDangerBg = Color(0xFFFEF2F2);
+  static const Color redBorder = Color(0xFFFCA5A5);
+  
+  // Teal / Button Colors
+  static const Color tealPrimary = Color(0xFF0F766E);
+
+
+
+
+
+
+  static const Color dark300 = Color(0xFFEEF2F6);         // Main dark teal
+
+
+
+
+
+
+
 
   
   // Theme Main Colors (Teal)
@@ -41,6 +74,7 @@ class AppColors {
 
   // Darker Shade
   static const Color darker = Color(0xFF083638); // #083638 - rgb(8, 54, 63)
+  static const Color whitecancel = Color(0xFFD9E1EE); // #083638 - rgb(8, 54, 63)
 
   // Aliases for backward compatibility
 

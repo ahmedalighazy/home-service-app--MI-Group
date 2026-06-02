@@ -7,7 +7,10 @@ import '../../features/onboarding/presentation/widgets/onboarding_step_one_conte
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
+import '../../features/profile/screen/delete_account_screen.dart';
+import '../../features/profile/screen/edit_profile_screen.dart';
 import '../../features/profile/screen/profile_screen.dart';
+import '../../features/profile/screen/setting_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
@@ -20,6 +23,10 @@ class AppRoutes {
   static const String login = '/login';
   static const String home = '/home';
     static const String profile = '/profile';
+        static const String editProfile = '/edit-profile';
+    static const String deleteAccount = '/delete-account';
+    static const String setting = '/setting';
+
 
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -39,6 +46,12 @@ class AppRoutes {
         return fadeRoute(const SplashScreen());
               case profile:
         return fadeRoute(const ProfileScreen());
+      case setting:
+        return fadeRoute(const SettingScreen());
+      case deleteAccount:
+        return fadeRoute( const DeleteAccountScreen());
+      case editProfile:
+        return fadeRoute(const EditProfileScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:

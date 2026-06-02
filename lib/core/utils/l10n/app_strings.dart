@@ -5,10 +5,64 @@ class AppStrings {
   static const String profileName = 'Ahmed Ibrahim';
   static const String phoneNumber = '+974 5123 4567';
 
+// content profile 
+static const String save = 'حفظ';
+
+static const String editProfile = ' الملف الشخصي';
+  static const String nameLabel = 'الاسم';
+  static const String phoneLabel = 'الهاتف';
+  static const String emailLabel = 'البريد الإلكتروني';
+  static const String emailValue = 'ahmed.m@gmail.com';
+  static const String deleteAccountBtn = 'حذف الحساب';
+  static const String footerHint = 'سيتم استخدام هذه المعلومات للتواصل معك بشأن حجوزاتك والخدمات المتاحة، ولن يتم مشاركتها بشكل عام.';
+
+  // Delete Account Screens
+  static const String deleteAccountHeader = 'حذف الحساب';
+  static const String deleteWarningTitle = 'حذف الحساب نهائياً!';
+  static const String deleteWarningDesc = 'سيؤدي حذف حسابك إلى إزالة بياناتك الشخصية والعناوين المحفوظة وسجل الطلبات والإحصاءات بشكل نهائي.';
+  
+  static const String rule1Title = 'لا يمكن التراجع عن هذا الإجراء بعد التأكيد';
+  static const String rule1Desc = 'سيتم حذف حسابك وجميع بياناتك بشكل دائم.';
+  static const String rule2Title = 'يجب إنهاء أو إلغاء جميع الطلبات النشطة';
+  static const String rule2Desc = 'لا يمكنك حذف الحساب ولديك طلبات قيد التنفيذ.';
+  static const String rule3Title = 'سيتم إلغاء أي اشتراكات أو باقات مفعولة';
+  static const String rule3Desc = 'جميع الاشتراكات أو الباقات المدفوعة المرتبطة بحسابك سيتم إلغاؤها.';
+  static const String rule4Title = 'قد يتم الاحتفاظ ببعض البيانات لأغراض قانونية';
+  static const String rule4Desc = 'مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.';
+
+  static const String confirmDeleteHint = 'لتأكيد حذف الحساب يرجى كتابة كلمة (حذف)';
+  static const String confirmFieldHint = 'كلمة التأكيد غير صحيحة';
+  static const String deleteConfirmBtn = 'حذف الحساب نهائياً';
+  static const String cancelBtn = 'إلغاء';
+
+  // Pop-ups
+  static const String cannotDeleteTitle = 'لا يمكن حذف الحساب';
+  static const String cannotDeleteDesc = 'لديك طلبات أو باقات نشطة، يرجى إنهاء أو إلغاء المعاملات النشطة أولاً ثم إعادة المحاولة.';
+  static const String okBtn = 'حسناً';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // --- General & Shared ---\
   static const String confirm = 'تأكيد';
   static const String sendCode = 'أرسل الكود';
-  static const String emailLabel = 'البريد الإلكتروني';
   static const String emailPlaceholder = 'أدخل البريد الإلكتروني';
   static const String passwordLabel = 'كلمة المرور';
   static const String passwordPlaceholder = 'أدخل كلمة المرور';
@@ -46,7 +100,6 @@ class AppStrings {
   // --- Complete Profile Screen ---
   static const String completeProfile = 'أكمل ملفك الشخصي';
   static const String completeProfileSubtitle = 'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
-  static const String nameLabel = 'الاسم';
   static const String namePlaceholder = 'أدخل اسمك بالكامل';
   static const String completeRegistration = 'إكمال التسجيل';
 

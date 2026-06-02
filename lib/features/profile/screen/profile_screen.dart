@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
+import '../../../core/extensions/extention_navigator.dart';
 import '../widget/profile_card.dart';
 import '../widget/profile_header.dart';
 import '../widget/setting_list_item.dart';
@@ -34,7 +35,10 @@ class ProfileScreen extends StatelessWidget {
                         SettingListItem(
                           icon: Icons.account_circle_outlined,
                           title: 'الملف الشخصي',
-                          onTap: () {},
+                          onTap: () {
+
+                            context.pushName('/edit-profile');
+                          },
                         ),
                         SettingListItem(
                           icon: Icons.favorite_border_outlined,
@@ -74,7 +78,10 @@ class ProfileScreen extends StatelessWidget {
                         SettingListItem(
                           icon: Icons.settings_outlined,
                           title: 'الاعدادات',
-                          onTap: () {},
+                          onTap: () {
+
+                            context.pushName('/setting');
+                          },
                         ),
                         SettingListItem(
                           icon: Icons.language,
