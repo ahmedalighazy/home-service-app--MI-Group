@@ -22,18 +22,27 @@ class HomeServiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ScreenUtilInit makes layout dimensions responsive
+    String appLanguage = 'ar';
+
     return ScreenUtilInit(
-      designSize: const Size(375, 812), // standard mobile design viewport
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Home Service App',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.light, // Default to light mode
+          themeMode: ThemeMode.light,
+          locale: Locale(appLanguage),
+          builder: (context, child) {
+            return Directionality(
+              textDirection: appLanguage == 'ar'
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              child: child!,
+            );
+          },
           initialRoute: AppRoutes.splash,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );

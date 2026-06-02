@@ -60,9 +60,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           
           // Screen 2: Onboarding 2 - Static
-          OnboardingStepTwoStatic(
-            onStart: _nextPage,
-          ),
+          // OnboardingStepTwoStatic(
+          //   onStart: _nextPage,
+          // ),
           
           // Screen 3: Onboarding 2 - Content
           OnboardingStepTwoContent(

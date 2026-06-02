@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
         
         if (onBoarding != null && onBoarding == true) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+          Navigator.of(context).pushReplacementNamed(AppRoutes.onboarding);
         } else {
           Navigator.of(context).pushReplacementNamed(AppRoutes.onboarding);
         }
