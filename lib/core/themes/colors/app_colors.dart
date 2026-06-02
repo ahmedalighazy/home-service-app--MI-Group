@@ -5,6 +5,8 @@ class AppColors {
   static const Color transparentColor = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+    static const Color black100 = Color(0x0A000000);
+
   
   // Theme Main Colors (Teal)
   static const Color dark = Color(0xFF0A434E);         // Main dark teal
@@ -14,6 +16,8 @@ class AppColors {
   static const Color greenPrimary = Color(0xFF189AB4);   // Main green/cyan
   static const Color greenNormalActive = Color(0xFF137B90);
   static const Color select = Color(0x40189AB4);        // 25% opacity greenPrimary (fixed from 0xFF189AB440)
+
+
 
   // Light shades
   static const Color light = Color(0xFFE8F5F8);
