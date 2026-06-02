@@ -42,7 +42,7 @@ class NotificationBell extends StatelessWidget {
                 right: 10,
                 child: SvgPicture.asset(
                   IconsPath.notificationDot,
-                  colorFilter: ColorFilter.mode(
+                  colorFilter: const ColorFilter.mode(
                     AppColors.errorRed,
                     BlendMode.srcIn,
                   ),

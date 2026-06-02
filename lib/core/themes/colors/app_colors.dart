@@ -25,14 +25,6 @@ class AppColors {
   static const Color lightActive = Color(0xFFB7E0E8);
 
   // Primary Teal/Cyan Colors - Based on Design System
-  // Light Shades
-  static const Color light = Color(0xFFE8F5F6); // #e8f5f6 - rgb(232, 245, 248)
-  static const Color lightHover = Color(
-    0xFFDCF0F4,
-  ); // #dcf0f4 - rgb(220, 240, 244)
-  static const Color lightActive = Color(
-    0xFFB7E0E8,
-  ); // #b7e0e8 - rgb(183, 224, 232)
 
   // Normal/Primary Shades
   static const Color primary = Color(
@@ -46,22 +38,11 @@ class AppColors {
   ); // #137b90 - rgb(19, 123, 144)
 
   // Dark Shades
-  static const Color dark = Color(0xFF127487); // #127487 - rgb(18, 116, 135)
-  static const Color darkHover = Color(
-    0xFF0E5C6C,
-  ); // #0e5c6c - rgb(14, 92, 108)
-  static const Color darkActive = Color(
-    0xFF0B4551,
-  ); // #0b4551 - rgb(11, 69, 81)
 
   // Darker Shade
   static const Color darker = Color(0xFF083638); // #083638 - rgb(8, 54, 63)
 
   // Aliases for backward compatibility
-  static const Color greenPrimary = primary;
-  static const Color greenNormalActive = primaryActive;
-  static const Color greenDarker = darker;
-  static const Color select = Color(0x40189AB4); // 25% opacity primary
 
   // Background Colors
   static const Color bgPrimary = Color(0xFFF8FAFC);

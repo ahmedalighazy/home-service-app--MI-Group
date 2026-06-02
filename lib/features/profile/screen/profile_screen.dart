@@ -11,8 +11,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return  Scaffold(
-      body: Stack(
+    return  Stack(
         children: [
           const ProfileHeader(),
 
@@ -48,7 +47,7 @@ verticalSpace(10)   ,
         
         
         ],
-      ),
+    
     );
   }
 

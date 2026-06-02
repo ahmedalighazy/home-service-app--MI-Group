@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
-import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
-import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';

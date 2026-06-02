@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../widgets/onboarding_step_one_content.dart';
-import '../widgets/onboarding_step_two_static.dart';
-import '../widgets/onboarding_step_two_content.dart';
 
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/helpers/cache_helper.dart';
+import '../widgets/onboarding_step_one_content.dart';
+import '../widgets/onboarding_step_two_content.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

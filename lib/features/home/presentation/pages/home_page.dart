@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:home_service_app/features/home/presentation/widgets/bookings_content.dart';
 import 'package:home_service_app/features/home/presentation/widgets/home_cotent.dart';
-import 'package:home_service_app/features/home/presentation/widgets/profile_content.dart';
+import 'package:home_service_app/features/profile/screen/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeContent(),
     const BookingsContent(),
-    const ProfileContent(),
+    const ProfileScreen(),
   ];
 
   @override

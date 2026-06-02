@@ -17,8 +17,8 @@ class HomeContent extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizes.padding),
           height: AppSizes.homeContainerHeight,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
               colors: [AppColors.primary, AppColors.white],
               begin: Alignment.topRight,
               end: Alignment.bottomRight,
@@ -29,7 +29,7 @@ class HomeContent extends StatelessWidget {
               bottomRight: Radius.circular(AppSizes.radiusXL),
             ),
           ),
-          child: HomeHeader(),
+          child: const HomeHeader(),
         ),
       ],
     );
