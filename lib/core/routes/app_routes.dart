@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+
+import '../../features/auth/presentation/screens/login_screen.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
+import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_content.dart';
-import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
+import '../../features/profile/screen/profile_screen.dart';
+import '../../features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -17,6 +20,8 @@ class AppRoutes {
   static const String onboarding2 = '/onboarding2';
   static const String login = '/login';
   static const String home = '/home';
+    static const String profile = '/profile';
+
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     Route<dynamic> fadeRoute(Widget page) {
@@ -33,6 +38,8 @@ class AppRoutes {
     switch (settings.name) {
       case splash:
         return fadeRoute(const SplashScreen());
+              case profile:
+        return fadeRoute(const ProfileScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:
