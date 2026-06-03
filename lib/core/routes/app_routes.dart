@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/features/auth/presentation/screens/language_selection/language_selection_screen.dart';
-<<<<<<< HEAD
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
-=======
->>>>>>> Authentication-screens
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/sing_in/sing_in.dart';
