@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart';
-import 'package:home_service_app/features/home/presentation/widgets/bookings_content.dart';
-import 'package:home_service_app/features/home/presentation/widgets/home_cotent.dart';
+import 'package:home_service_app/booking/presentation/pages/bookings_content.dart';
+import 'package:home_service_app/features/home/sections/home_cotent.dart';
 import 'package:home_service_app/features/profile/screen/profile_screen.dart';
 
 class HomePage extends StatefulWidget {

@@ -6,12 +6,12 @@ class AppSizes {
   static const double radius = 16;
   static const double radiusMedium = 12;
   static const double radiusSmall = 8;
+  static const double radiusLarge = 20;
   static const double radiusXL = 30;
 
   static const double paddingSmall = 8;
   static const double paddingMedium = 12;
   static const double padding = 16;
-  static const double paddingLarge = 60;
 
   static const double spacingMin = 4;
   static const double spacingSmall = 8;
@@ -29,6 +29,15 @@ class AppSizes {
   static const double dialogWidth = 450;
 
   static double get homeHeaderHeight => 180.h;
-  static double get promoBannerCardHeight => 195.h;
+
+  static const double sectionOffset = 60;
+
+  static const double cardWidth = 160;
+  static const double cardImageHeight = 120;
+
+  static const double categoryCardWidth = 85;
+  static const double categoryIconContainerSize = 70;
+
+  static double get bannerCardHeight => 220.h;
   static double get homeToBoxAdapterHeight => 24.h;
 }

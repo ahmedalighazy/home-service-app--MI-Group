@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -24,7 +25,7 @@ class ServiceCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 160,
+        width: AppSizes.cardWidth.h,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(AppSizes.radius),
@@ -41,7 +42,7 @@ class ServiceCard extends StatelessWidget {
           children: [
             // Image Section
             Container(
-              height: 120,
+              height: AppSizes.cardImageHeight,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(AppSizes.radius),
@@ -58,7 +59,7 @@ class ServiceCard extends StatelessWidget {
                     child: Image.asset(
                       imagePath,
                       width: double.infinity,
-                      height: 120,
+                      height: AppSizes.cardImageHeight,
                       fit: BoxFit.cover,
                     ),
                   ),
