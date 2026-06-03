@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../colors/app_colors.dart';
 
 class AppText {
@@ -284,6 +285,12 @@ class AppText {
   static const ibmPlexSansArabic16SemiBold = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+    fontFamily: 'IBM Plex Sans Arabic',
+    color: AppColors.secondary,
+  );
+  static const ibmPlexSansArabic12SemiBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
     fontFamily: 'IBM Plex Sans Arabic',
     color: AppColors.secondary,
   );

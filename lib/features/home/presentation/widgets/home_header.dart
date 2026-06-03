@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/features/home/presentation/widgets/location_block.dart';
 import 'package:home_service_app/features/home/presentation/widgets/notification_bell.dart';
 import 'package:home_service_app/features/home/presentation/widgets/user_avatar.dart';
@@ -33,28 +34,31 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // User Avatar
-        UserAvatar(
-          imageUrl: avatarImageUrl,
-          assetPath: avatarPlaceholder,
-          onTap: onAvatarTap,
-        ),
-
-        //Location Block (center)
-        Expanded(
-          child: LocationBlock(
-            label: locationLabel,
-            address: locationAddress,
-            onTap: onLocationTap,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // User Avatar
+          UserAvatar(
+            imageUrl: avatarImageUrl,
+            assetPath: avatarPlaceholder,
+            onTap: onAvatarTap,
           ),
-        ),
-        // Notification Bell
-        NotificationBell(count: notificationCount, onTap: onNotificationTap),
-      ],
+
+          //Location Block (center)
+          Expanded(
+            child: LocationBlock(
+              label: locationLabel,
+              address: locationAddress,
+              onTap: onLocationTap,
+            ),
+          ),
+          // Notification Bell
+          NotificationBell(count: notificationCount, onTap: onNotificationTap),
+        ],
+      ),
     );
   }
 }
