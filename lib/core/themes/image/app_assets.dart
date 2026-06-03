@@ -13,4 +13,11 @@ class AppAssets {
   static const String forgot = 'assets/images/illustration-forgot.png';
   static const String message = 'assets/images/illustration-message.png';
   static const String banner = 'assets/images/banner.png';
+  static const String glassCleaning = 'assets/images/glassCleaning.png';
+  static const String pestControlService =
+      'assets/images/pestControlService.png';
+  static const String deepFurnitureCleaning =
+      'assets/images/deepFurnitureCleaning.png';
+  static const String specialOfferBanner =
+      'assets/images/special_offer_img.png';
 }

@@ -49,15 +49,6 @@ class NotificationBell extends StatelessWidget {
                   width: AppSizes.spacingSmall,
                   height: AppSizes.spacingSmall,
                 ),
-
-                // Container(
-                //   width: 9,
-                //   height: 9,
-                //   decoration: const BoxDecoration(
-                //     color: Color(0xFFE53935),
-                //     shape: BoxShape.circle,
-                //   ),
-                // ),
               ),
           ],
         ),
