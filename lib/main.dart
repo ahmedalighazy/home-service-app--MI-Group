@@ -4,7 +4,8 @@ import 'core/routes/app_routes.dart';
 import 'core/themes/theming/app_theme.dart';
 import 'core/di/injection.dart';
 import 'core/utils/helpers/cache_helper.dart';
-import 'features/splash/presentation/screens/splash_screen.dart';
+// For testing auth screens, start with sign up instead of splash
+import 'features/auth/sing_up_screens/sing_up.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -33,7 +34,8 @@ class HomeServiceApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.light,
-          home: const SplashScreen(),
+          // Start with SingUp screen for testing (bypassing splash/onboarding)
+          home: const SingUp(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
           locale: Locale(appLanguage),
           supportedLocales: const [Locale('en', ''), Locale('ar', '')],
