@@ -325,38 +325,50 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 10),
+                  // Success icon with larger, more prominent design
                   Container(
-                    width: 60,
-                    height: 60,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFEBF7F0),
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE8F5F0),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
-                      Icons.check_circle_outline,
-                      color: Color(0xFF3B8766),
-                      size: 36,
+                    child: Center(
+                      child: Container(
+                        width: 70,
+                        height: 70,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF3B8766),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.check_rounded,
+                          color: Colors.white,
+                          size: 42,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 28),
                   const Text(
                     "تم تغيير كلمة المرور بنجاح",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   const Text(
                     "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       color: Colors.grey,
+                      height: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 28),
                   SizedBox(
                     width: double.infinity,
                     height: 48,
