@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/di/injection.dart';
-import '../logic/cubits/auth_cubit.dart';
-import '../logic/states/auth_state.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/text/app_text.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../presentation/widgets/auth_back_button.dart';
-import '../presentation/widgets/auth_form_field.dart';
-import '../presentation/widgets/auth_primary_button.dart';
+import '../../../../core/di/injection.dart';
+import '../../logic/cubits/auth_cubit.dart';
+import '../../logic/states/auth_state.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/text/app_text.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../../presentation/widgets/auth_back_button.dart';
+import '../../presentation/widgets/auth_form_field.dart';
+import '../../presentation/widgets/auth_primary_button.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   final String? phoneNumber;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'otp_screen.dart';
+import 'otp_screen/otp_screen.dart';
 
 class SingUp extends StatelessWidget {
   const SingUp({super.key});

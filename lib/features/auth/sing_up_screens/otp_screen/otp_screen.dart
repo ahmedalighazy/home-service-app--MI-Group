@@ -4,15 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../logic/cubits/auth_cubit.dart';
-import '../logic/states/auth_state.dart';
-import '../presentation/widgets/auth_back_button.dart';
-import '../presentation/widgets/otp_confirm_button.dart';
-import '../presentation/widgets/otp_input_row.dart';
+import '../../../../core/di/injection.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../../logic/cubits/auth_cubit.dart';
+import '../../logic/states/auth_state.dart';
+import '../../presentation/widgets/auth_back_button.dart';
+import '../../presentation/widgets/otp_confirm_button.dart';
+import '../../presentation/widgets/otp_input_row.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;
