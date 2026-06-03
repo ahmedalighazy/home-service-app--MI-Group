@@ -15,7 +15,7 @@ class GradientHeader extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [AppColors.primary, AppColors.white],
+          colors: [AppColors.greenPrimary, AppColors.white],
         ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(AppSizes.radiusXL),

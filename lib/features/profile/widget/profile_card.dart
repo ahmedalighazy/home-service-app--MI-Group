@@ -5,6 +5,7 @@ import '../../../core/themes/colors/app_colors.dart';
 import '../../../core/themes/image/app_assets.dart';
 import '../../../core/themes/text/app_text.dart';
 import '../../../core/utils/l10n/app_strings.dart';
+
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
 
@@ -17,16 +18,14 @@ class ProfileCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         color: AppColors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         shadows: const [
           BoxShadow(
             color: Color(0x0A000000),
             blurRadius: 4,
             offset: Offset(0, 4),
             spreadRadius: 0,
-          )
+          ),
         ],
       ),
       child: Row(
@@ -47,7 +46,7 @@ class ProfileCard extends StatelessWidget {
               const SizedBox(height: 5),
 
               Text(
-                AppStrings.phoneNumber,
+                AppStrings.phonePlaceholder,
                 textDirection: TextDirection.ltr,
                 style: AppText.regularText(
                   color: AppColors.secondaryText,
@@ -62,10 +61,7 @@ class ProfileCard extends StatelessWidget {
           CircleAvatar(
             backgroundColor: AppColors.white,
             radius: 40,
-            child: Image.asset(
-              AppAssets.cleaningGuy,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AppAssets.cleaningGuy, fit: BoxFit.cover),
           ),
 
           const Spacer(),

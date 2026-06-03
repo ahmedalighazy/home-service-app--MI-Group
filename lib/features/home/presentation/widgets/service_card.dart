@@ -121,7 +121,7 @@ class ServiceCard extends StatelessWidget {
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        color: AppColors.greenPrimary,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(

@@ -107,7 +107,7 @@ class PromoBannerCard extends StatelessWidget {
                           vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primary,
+                          color: AppColors.greenPrimary,
                           borderRadius: BorderRadius.circular(
                             AppSizes.radiusSmall.r,
                           ),

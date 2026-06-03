@@ -38,10 +38,7 @@ class AppText {
     );
   }
 
-  static TextStyle boldText({
-    required Color color,
-    required double fontSize,
-  }) {
+  static TextStyle boldText({required Color color, required double fontSize}) {
     return GoogleFonts.inter(
       color: color,
       fontSize: fontSize.sp,
@@ -73,7 +70,7 @@ class AppText {
   }
 
   // --- IBM Plex Sans Arabic Font Styles (Arabic General-Purpose) ---
-  
+
   static TextStyle regularIbm({
     required Color color,
     required double fontSize,
@@ -85,10 +82,7 @@ class AppText {
     );
   }
 
-  static TextStyle mediumIbm({
-    required Color color,
-    required double fontSize,
-  }) {
+  static TextStyle mediumIbm({required Color color, required double fontSize}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: fontSize.sp,
@@ -107,10 +101,7 @@ class AppText {
     );
   }
 
-  static TextStyle boldIbm({
-    required Color color,
-    required double fontSize,
-  }) {
+  static TextStyle boldIbm({required Color color, required double fontSize}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: fontSize.sp,
@@ -121,7 +112,7 @@ class AppText {
   // --- Semantic IBM Plex Sans Arabic UI Styles matching the designed screens with Arabic & English translations ---
 
   /// Headline style for screen main titles
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `أهلاً بعودتك` / `مرحباً بعودتك` ➔ **English:** `Welcome back`
   /// - `تأكيد الرمز` ➔ **English:** `Confirm code`
@@ -136,9 +127,7 @@ class AppText {
   /// - `الاشعارات` ➔ **English:** `Notifications`
   /// - `مكافحة الحشرات` / `تنظيف الأثاث` ➔ **English:** `Pest Control` / `Furniture Cleaning`
   /// - `الاضافات` / `التاريخ والوقت` / `العنوان` / `الدفع` ➔ **English:** `Add-ons` / `Date and Time` / `Address` / `Payment`
-  static TextStyle ibmHeading22({
-    Color color = AppColors.dark,
-  }) {
+  static TextStyle ibmHeading22({Color color = AppColors.dark}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 22.sp,
@@ -147,7 +136,7 @@ class AppText {
   }
 
   /// Subheading or description style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول` ➔ **English:** `We will call you or send you a verification code to complete sign in`
   /// - `أدخل رمز التحقق المكون من 6 أرقام المرسل إلى` ➔ **English:** `Enter the 6-digit verification code sent to`
@@ -163,9 +152,7 @@ class AppText {
   /// - `نأمل أن تكون قد استمتعت بخدمة تنظيف السجاد، رأيك يهمنا، يرجى تقييم الفريق.` ➔ **English:** `We hope you enjoyed the carpet cleaning service. Your opinion matters, please rate the team.`
   /// - `تنظيف سطوح الكنبة بالمكنسة ...` ➔ **English:** `Vacuuming sofa surfaces...`
   /// - `يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة...` ➔ **English:** `You can cancel or modify the booking for free before 5 hours...`
-  static TextStyle ibmDescription14({
-    Color color = AppColors.secondaryText,
-  }) {
+  static TextStyle ibmDescription14({Color color = AppColors.secondaryText}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 14.sp,
@@ -175,7 +162,7 @@ class AppText {
   }
 
   /// Field labels style above inputs or Section Titles
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `الاسم` ➔ **English:** `Name`
   /// - `البريد الإلكتروني` ➔ **English:** `Email`
@@ -192,9 +179,7 @@ class AppText {
   /// - `تشمل الخدمة:` / `ملاحظات قبل الحجز:` ➔ **English:** `Service Includes:` / `Notes before booking:`
   /// - `اختر اليوم` / `اختر وقت` ➔ **English:** `Choose Day` / `Choose Time`
   /// - `طريقة الدفع` / `كود الخصم` ➔ **English:** `Payment Method` / `Discount Code`
-  static TextStyle ibmFieldLabel14({
-    Color color = AppColors.dark,
-  }) {
+  static TextStyle ibmFieldLabel14({Color color = AppColors.dark}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 14.sp,
@@ -203,7 +188,7 @@ class AppText {
   }
 
   /// Field input text or hint placeholder style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `أدخل اسمك بالكامل` ➔ **English:** `Enter your full name`
   /// - `أدخل البريد الإلكتروني` ➔ **English:** `Enter your email`
@@ -213,9 +198,7 @@ class AppText {
   /// - `ابحث عن خدمة أو مشكلة...` ➔ **English:** `Search for a service or problem...`
   /// - `ادخل كود الخصم` ➔ **English:** `Enter discount code`
   /// - `مثال: اتصل امام المسجد..` ➔ **English:** `Example: Call in front of the mosque..`
-  static TextStyle ibmPlaceholder14({
-    Color color = AppColors.placeholder,
-  }) {
+  static TextStyle ibmPlaceholder14({Color color = AppColors.placeholder}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 14.sp,
@@ -224,7 +207,7 @@ class AppText {
   }
 
   /// Button text style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `أرسل الكود` ➔ **English:** `Send code`
   /// - `تأكيد` ➔ **English:** `Confirm`
@@ -236,9 +219,7 @@ class AppText {
   /// - `جرب كلمات أخرى` ➔ **English:** `Try other words`
   /// - `التالي` ➔ **English:** `Next`
   /// - `اطلب معاينة` ➔ **English:** `Request inspection`
-  static TextStyle ibmButton16({
-    Color color = AppColors.white,
-  }) {
+  static TextStyle ibmButton16({Color color = AppColors.white}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 16.sp,
@@ -247,7 +228,7 @@ class AppText {
   }
 
   /// Actionable/Link text style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `إعادة إرسال الكود` ➔ **English:** `Resend code`
   /// - `تسجيل الدخول` ➔ **English:** `Sign in`
@@ -262,9 +243,7 @@ class AppText {
   /// - `مسح الكل` ➔ **English:** `Clear All`
   /// - `+ إضافة عنوان جديد` ➔ **English:** `Add a new address`
   /// - `عرض تفاصيل الخدمة` ➔ **English:** `View service details`
-  static TextStyle ibmLink13({
-    Color color = AppColors.greenPrimary,
-  }) {
+  static TextStyle ibmLink13({Color color = AppColors.greenPrimary}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 13.sp,
@@ -273,16 +252,14 @@ class AppText {
   }
 
   /// Small caption text style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية` ➔ **English:** `By signing in, you agree to the Terms & Conditions and Privacy Policy`
   /// - `أو باستخدام` ➔ **English:** `Or using`
   /// - `منذ 1 د` / `منذ 10 س` ➔ **English:** `1 min ago` / `10 hrs ago`
   /// - `جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.` ➔ **English:** `All payments are encrypted to ensure the highest levels of security and privacy.`
   /// - `الخطوة 2 من 5` ➔ **English:** `Step 2 of 5`
-  static TextStyle ibmCaption11({
-    Color color = AppColors.gray,
-  }) {
+  static TextStyle ibmCaption11({Color color = AppColors.gray}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 11.sp,
@@ -291,18 +268,29 @@ class AppText {
   }
 
   /// Field error messages text style
-  /// 
+  ///
   /// **Arabic UI Examples:**
   /// - `كلمة مرور غير صحيحة` ➔ **English:** `Incorrect password`
   /// - `كلمتا المرور غير متطابقتين` ➔ **English:** `The two passwords do not match`
   /// - `عذراً لا نقدم خدمة في هذه المنطقة` ➔ **English:** `Sorry, we do not provide service in this area`
-  static TextStyle ibmError12({
-    Color color = AppColors.errorRed,
-  }) {
+  static TextStyle ibmError12({Color color = AppColors.errorRed}) {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 12.sp,
       fontWeight: FontWeight.w500,
     );
   }
+
+  static const ibmPlexSansArabic16SemiBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'IBM Plex Sans Arabic',
+    color: AppColors.secondary,
+  );
+  static const ibmPlexSansArabic12SemiBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'IBM Plex Sans Arabic',
+    color: AppColors.secondary,
+  );
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeSearchField extends StatelessWidget {
   const HomeSearchField({super.key});
@@ -32,11 +31,7 @@ class HomeSearchField extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: AppColors.placeholder.withValues(alpha: 0.6),
             ),
-            prefixIcon: const Icon(
-              Iconsax.search_normal_1_copy,
-              color: AppColors.secondaryGrey,
-              size: 24,
-            ),
+
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 20,

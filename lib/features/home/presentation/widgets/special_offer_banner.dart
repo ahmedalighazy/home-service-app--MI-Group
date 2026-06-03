@@ -59,7 +59,7 @@ class SpecialOfferBanner extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primary,
+                    color: AppColors.greenPrimary,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
@@ -91,7 +91,7 @@ class SpecialOfferBanner extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: AppColors.greenPrimary,
                         foregroundColor: AppColors.white,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,

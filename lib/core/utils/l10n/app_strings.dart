@@ -12,7 +12,8 @@ class AppStrings {
   static const String confirmPasswordLabel = 'تأكيد كلمة المرور';
   static const String confirmPasswordPlaceholder = 'أعد إدخال كلمة المرور';
   static const String login = 'تسجيل الدخول';
-  static const String termsAndPrivacy = 'بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية';
+  static const String termsAndPrivacy =
+      'بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية';
   static const String orUsing = 'أو باستخدام';
   static const String viewAll = 'عرض الكل';
   static const String bookNow = 'احجز الآن';
@@ -20,7 +21,8 @@ class AppStrings {
   // --- Sign Up / Login Screen ---
   static const String welcomeBack = 'أهلاً بعودتك';
   static const String welcomeBackAlt = 'مرحباً بعودتك';
-  static const String verificationMethodInfo = 'سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول';
+  static const String verificationMethodInfo =
+      'سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول';
   static const String signUpWithGoogle = 'تسجيل عبر Google';
   static const String signUpWithApple = 'تسجيل عبر Apple';
   static const String continueAsGuest = 'المتابعة كضيف';
@@ -34,7 +36,8 @@ class AppStrings {
 
   // --- OTP Verification Screen ---
   static const String confirmCode = 'تأكيد الرمز';
-  static const String enterVerificationCode = 'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى';
+  static const String enterVerificationCode =
+      'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى';
   static const String resendCodePrompt = 'لم تتلقى الكود بعد؟ ';
   static const String resendCodePromptAlt = 'لم تتلقى الكود بعد ؟ ';
   static const String resendCodeLink = 'إعادة إرسال الكود';
@@ -42,31 +45,39 @@ class AppStrings {
 
   // --- Complete Profile Screen ---
   static const String completeProfile = 'أكمل ملفك الشخصي';
-  static const String completeProfileSubtitle = 'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
+  static const String profileName = 'اسم الملف الشخصي';
+  static const String completeProfileSubtitle =
+      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
   static const String nameLabel = 'الاسم';
   static const String namePlaceholder = 'أدخل اسمك بالكامل';
   static const String completeRegistration = 'إكمال التسجيل';
 
   // --- Reset Password & Verification ---
   static const String resetPassword = 'إعادة تعيين كلمة المرور';
-  static const String resetPasswordDescription = 'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر';
+  static const String resetPasswordDescription =
+      'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر';
   static const String checkEmail = 'تحقق من بريدك الإلكتروني';
-  static const String emailSentDescription = 'تم إرسال رابط إعادة تعيين إلى ahmed...‌@gmail.com أدخل الرمز المتكون من 4 أرقام لتأكيد البريد الإلكتروني';
+  static const String emailSentDescription =
+      'تم إرسال رابط إعادة تعيين إلى ahmed...‌@gmail.com أدخل الرمز المتكون من 4 أرقام لتأكيد البريد الإلكتروني';
 
   // --- Set New Password Screen ---
   static const String setNewPassword = 'تعيين كلمة مرور جديدة';
-  static const String setNewPasswordDescription = 'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمة المرور السابقة .';
-  static const String passwordChangedSuccessfully = 'تم تغيير كلمة المرور بنجاح';
-  static const String loginWithNewPassword = 'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة';
+  static const String setNewPasswordDescription =
+      'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمة المرور السابقة .';
+  static const String passwordChangedSuccessfully =
+      'تم تغيير كلمة المرور بنجاح';
+  static const String loginWithNewPassword =
+      'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة';
 
   // --- Location & Map Screens ---
   static const String setYourLocation = 'حدد موقعك';
-  static const String locationPermissionDescription = 'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك';
+  static const String locationPermissionDescription =
+      'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك';
   static const String setCurrentLocation = 'تحديد الموقع الحالي';
   static const String chooseLocationManually = 'اختيار الموقع يدويا';
   static const String searchLocationPlaceholder = 'ابحث عن منطقة أو عنوان...';
   static const String confirmLocation = 'تأكيد الموقع';
-  
+
   // --- Home Screen ---
   static const String currentLocation = 'الموقع الحالي';
   static const String searchServiceOrProblem = 'ابحث عن خدمة أو مشكلة...';
@@ -99,7 +110,8 @@ class AppStrings {
   static const String floorNumber = 'الدور';
   static const String officeOrFloorNumber = 'رقم المكتب / الدور';
   static const String additionalNotes = 'ملاحظات إضافية';
-  static const String editAddressHint = 'لتعديل عنوان، اذهب إلى حسابي -> العناوين .';
+  static const String editAddressHint =
+      'لتعديل عنوان، اذهب إلى حسابي -> العناوين .';
 
   // --- Notifications Screens ---
   static const String notifications = 'الاشعارات';
@@ -108,19 +120,25 @@ class AppStrings {
   static const String today = 'اليوم';
   static const String earlier = 'سابقا';
   static const String serviceCompleted = 'اكتملت الخدمة';
-  static const String serviceCompletedDesc = 'نأمل أن تكون قد استمتعت بخدمة تنظيف السجاد، رأيك يهمنا، يرجى تقييم الفريق.';
+  static const String serviceCompletedDesc =
+      'نأمل أن تكون قد استمتعت بخدمة تنظيف السجاد، رأيك يهمنا، يرجى تقييم الفريق.';
   static const String serviceStarted = 'بدء الخدمة';
-  static const String serviceStartedDesc = 'يعمل فريقنا الآن على تنفيذ خدمتك المطلوبة بأعلى جودة.';
+  static const String serviceStartedDesc =
+      'يعمل فريقنا الآن على تنفيذ خدمتك المطلوبة بأعلى جودة.';
   static const String serviceReminder = 'تذكير بموعد الخدمة';
-  static const String serviceReminderDesc = 'موعد خدمتك اليوم الساعة 5:00 مساءً';
+  static const String serviceReminderDesc =
+      'موعد خدمتك اليوم الساعة 5:00 مساءً';
   static const String bookingConfirmed = 'تم تأكيد حجزك';
-  static const String bookingConfirmedDesc = 'تم تأكيد موعد الخدمة يوم الثلاثاء الساعة 4:00 مساءً.';
+  static const String bookingConfirmedDesc =
+      'تم تأكيد موعد الخدمة يوم الثلاثاء الساعة 4:00 مساءً.';
   static const String appointmentModified = 'تم تعديل موعد الخدمة';
-  static const String appointmentModifiedDesc = 'تم تحديث موعد الحجز إلى الساعة 6:00 مساءً بناءً على طلبك.';
+  static const String appointmentModifiedDesc =
+      'تم تحديث موعد الحجز إلى الساعة 6:00 مساءً بناءً على طلبك.';
   static const String rebookPrompt = 'هل ترغب بإعادة الحجز؟';
   static const String rebookPromptDesc = 'احجز نفس الخدمة مرة أخرى خلال ثواني.';
   static const String specialDiscount = 'خصم خاص لفترة محدودة';
-  static const String specialDiscountDesc = 'استمتع بخصم 20٪ على خدمات تنظيف الكنب كود الخصم clean20.';
+  static const String specialDiscountDesc =
+      'استمتع بخصم 20٪ على خدمات تنظيف الكنب كود الخصم clean20.';
 
   // --- Service Details Screen ---
   static const String reviewsCount = 'تقييم';
@@ -141,15 +159,18 @@ class AppStrings {
 
   // --- Booking Flow: Step 2 (Add-ons) ---
   static const String addonsTitle = 'الاضافات';
-  static const String notSureFreeInspection = 'لست متأكداً احصل على معاينة مجانية';
-  static const String inspectionDescription = 'فريقنا جاهز لمساعدتك في اختيار الخدمة المناسبة بسهولة';
+  static const String notSureFreeInspection =
+      'لست متأكداً احصل على معاينة مجانية';
+  static const String inspectionDescription =
+      'فريقنا جاهز لمساعدتك في اختيار الخدمة المناسبة بسهولة';
   static const String requestInspection = 'اطلب معاينة';
 
   // --- Booking Flow: Step 3 (Date & Time) ---
   static const String dateAndTimeTitle = 'التاريخ والوقت';
   static const String chooseDay = 'اختر اليوم';
   static const String chooseTime = 'اختر وقت';
-  static const String cancellationPolicy = 'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل';
+  static const String cancellationPolicy =
+      'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل';
   static const String saturday = 'السبت';
   static const String sunday = 'الاحد';
   static const String monday = 'الاثنين';
@@ -171,7 +192,8 @@ class AppStrings {
   static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
   static const String discountCode = 'كود الخصم';
   static const String enterDiscountCode = 'ادخل كود الخصم';
-  static const String securePaymentNote = 'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
+  static const String securePaymentNote =
+      'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
 
   static const String savedCards = 'البطاقات المحفوظة';
   static const String defaultCard = 'افتراضي';
@@ -202,7 +224,7 @@ class AppStrings {
   static const String femaleTeam = 'نسائي';
   static const String maleTeam = 'رجالي';
   static const String noPreference = 'لا يهم';
-  
+
   // --- Service Frequency ---
   static const String serviceFrequency = 'تكرار الخدمة';
   static const String once = 'مرة واحدة';
@@ -225,22 +247,26 @@ class AppStrings {
   // --- Service Completed ---
   static const String serviceCompletedScreenTitle = 'اكتملت الخدمة';
   static const String thankYouForChoosingUs = 'شكرا لاختيارك لنا';
-  static const String serviceExecutedSuccessfully = 'تم تنفيذ خدمة التنظيف العميق لمنزلك بنجاح وبأعلى معايير الجودة الفندقية.';
+  static const String serviceExecutedSuccessfully =
+      'تم تنفيذ خدمة التنظيف العميق لمنزلك بنجاح وبأعلى معايير الجودة الفندقية.';
   static const String workSummary = 'ملخص العمل المنجز';
   static const String serviceType = 'نوع الخدمة';
   static const String timeTaken = 'الوقت المستغرق';
   static const String minutes45 = '45 دقيقة';
   static const String roomsCompleted = 'تم إنجاز 4 غرف';
-  static const String roomsCompletedDesc = 'شامل الصالة، المطبخ، وغرف النوم مع التعقيم الكامل.';
+  static const String roomsCompletedDesc =
+      'شامل الصالة، المطبخ، وغرف النوم مع التعقيم الكامل.';
   static const String rebook = 'إعادة الحجز';
   static const String rateExperience = 'قيم تجربتك';
 
   // --- Rating ---
   static const String serviceRating = 'تقييم الخدمة';
   static const String teamRating = 'تقييم الفريق';
-  static const String teamRatingQuestion = 'كيف كانت تجربتك مع فريق "ابراهيم محمد" اليوم؟';
+  static const String teamRatingQuestion =
+      'كيف كانت تجربتك مع فريق "ابراهيم محمد" اليوم؟';
   static const String addYourNotesHere = 'أضف ملاحظاتك هنا...';
-  static const String levelOfServiceRatingQuestion = 'كيف كانت تجربتك مع مستوى الخدمة اليوم؟';
+  static const String levelOfServiceRatingQuestion =
+      'كيف كانت تجربتك مع مستوى الخدمة اليوم؟';
   static const String submitRating = 'إرسال التقييم';
 
   // --- Popups ---
@@ -248,18 +274,21 @@ class AppStrings {
   static const String ratingHelpsImprove = 'رأيك يساعدنا على تحسين الخدمة';
   static const String backToHome = 'العودة للرئيسية';
   static const String noAppointmentsAvailable = 'لا تتوفر مواعيد';
-  static const String noAppointmentsDesc = 'عذراً، جميع المواعيد محجوزة لليوم المختار، إليك بعض الاقتراحات البديلة:';
+  static const String noAppointmentsDesc =
+      'عذراً، جميع المواعيد محجوزة لليوم المختار، إليك بعض الاقتراحات البديلة:';
   static const String viewAllAppointments = 'عرض جميع المواعيد';
 
   // --- Payment Result Popups ---
   static const String bookingConfirmedSuccess = 'تم تأكيد حجزك بنجاح !';
-  static const String bookingConfirmedPopupDesc = 'تم تأكيد حجزك وسيتم تذكيرك قبل موعد الزيارة بساعة';
+  static const String bookingConfirmedPopupDesc =
+      'تم تأكيد حجزك وسيتم تذكيرك قبل موعد الزيارة بساعة';
   static const String bookingNumber = 'رقم الحجز';
   static const String copy = 'نسخ';
   static const String share = 'مشاركة';
   static const String trackBooking = 'تتبع الحجز';
   static const String paymentFailed = 'فشل الدفع';
-  static const String paymentFailedDesc = 'نعتذر، لم نتمكن من معالجة عملية الدفع الخاصة بك، يرجى التحقق من بيانات البطاقة أو المحاولة مرة أخرى.';
+  static const String paymentFailedDesc =
+      'نعتذر، لم نتمكن من معالجة عملية الدفع الخاصة بك، يرجى التحقق من بيانات البطاقة أو المحاولة مرة أخرى.';
   static const String retry = 'اعادة المحاولة';
   static const String changePaymentMethod = 'تغيير طريقه الدفع';
 

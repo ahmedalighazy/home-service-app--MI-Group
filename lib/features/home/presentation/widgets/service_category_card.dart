@@ -30,7 +30,7 @@ class ServiceCategoryCard extends StatelessWidget {
                 color: AppColors.light,
                 borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
               ),
-              child: Icon(icon, size: 36, color: AppColors.primary),
+              child: Icon(icon, size: 36, color: AppColors.greenPrimary),
             ),
             const SizedBox(height: 8),
             Text(

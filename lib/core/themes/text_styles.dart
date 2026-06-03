@@ -45,7 +45,7 @@ class AppTextStyles {
   static TextStyle priceText = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeight.bold,
-    color: AppColors.primary,
+    color: AppColors.greenPrimary,
   );
 
   static TextStyle categoryLabel = GoogleFonts.cairo(

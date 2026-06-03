@@ -7,11 +7,12 @@ import 'core/utils/helpers/cache_helper.dart';
 import 'features/splash/presentation/screens/splash_screen.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await setupGetIt();
-  
+
   runApp(const HomeServiceApp());
 }
 
@@ -20,6 +21,7 @@ class HomeServiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String appLanguage = 'ar';
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -33,10 +35,8 @@ class HomeServiceApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           home: const SplashScreen(),
           onGenerateRoute: AppRoutes.onGenerateRoute,
-          supportedLocales: const [
-            Locale('en', ''),
-            Locale('ar', ''),
-          ],
+          locale: Locale(appLanguage),
+          supportedLocales: const [Locale('en', ''), Locale('ar', '')],
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -44,7 +44,9 @@ class HomeServiceApp extends StatelessWidget {
           ],
           localeResolutionCallback: (locale, supportedLocales) {
             // Use device locale if supported, otherwise fallback to first supported locale
-            return supportedLocales.contains(locale) ? locale : supportedLocales.first;
+            return supportedLocales.contains(locale)
+                ? locale
+                : supportedLocales.first;
           },
         );
       },
