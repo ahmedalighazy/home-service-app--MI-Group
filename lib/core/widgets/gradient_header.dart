@@ -11,10 +11,6 @@ class GradientHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.only(
-        top: AppSizes.paddingLarge,
-        bottom: AppSizes.paddingLarge,
-      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
