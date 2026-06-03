@@ -7,11 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/injection.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/colors/app_colors.dart';
+import '../../../core/utils/l10n/app_strings.dart';
 import '../logic/cubits/auth_cubit.dart';
 import '../logic/states/auth_state.dart';
-
-/// حالات واجهة الرمز المؤقت
-enum _OtpState { idle, error, success }
+import '../presentation/widgets/otp_confirm_button.dart';
+import '../presentation/widgets/otp_input_row.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;
@@ -29,12 +29,11 @@ class _OtpScreenState extends State<OtpScreen>
   final TextEditingController _ctrl = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
-  _OtpState _state = _OtpState.idle;
+  OtpFieldState _fieldState = OtpFieldState.idle;
   int _secondsLeft = _totalSeconds;
   bool _canResend = false;
   Timer? _timer;
 
-  // تأثير الاهتزاز عند الخطأ
   late AnimationController _shakeCtrl;
   late Animation<double> _shakeAnim;
 
@@ -55,19 +54,15 @@ class _OtpScreenState extends State<OtpScreen>
     ]).animate(CurvedAnimation(parent: _shakeCtrl, curve: Curves.easeInOut));
 
     _ctrl.addListener(() {
-      if (_state == _OtpState.error) {
-        setState(() {
-          _state = _OtpState.idle;
-        });
+      if (_fieldState == OtpFieldState.error) {
+        setState(() => _fieldState = OtpFieldState.idle);
       }
     });
 
     _startTimer();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        _focusNode.requestFocus();
-      }
+      if (mounted) _focusNode.requestFocus();
     });
   }
 
@@ -87,10 +82,7 @@ class _OtpScreenState extends State<OtpScreen>
       _canResend = false;
     });
     _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted) {
-        t.cancel();
-        return;
-      }
+      if (!mounted) { t.cancel(); return; }
       setState(() {
         if (_secondsLeft > 0) {
           _secondsLeft--;
@@ -112,7 +104,7 @@ class _OtpScreenState extends State<OtpScreen>
     if (!_canResend) return;
     setState(() {
       _ctrl.clear();
-      _state = _OtpState.idle;
+      _fieldState = OtpFieldState.idle;
     });
     context.read<AuthCubit>().loginWithPhone(widget.phoneNumber);
     _startTimer();
@@ -126,40 +118,7 @@ class _OtpScreenState extends State<OtpScreen>
     return BlocProvider<AuthCubit>(
       create: (_) => getIt<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            setState(() {
-              _state = _OtpState.success;
-            });
-            final navigator = Navigator.of(context);
-            Future.delayed(const Duration(milliseconds: 400), () {
-              if (mounted) {
-                navigator.pushReplacementNamed(
-                  AppRoutes.completeProfile,
-                  arguments: widget.phoneNumber,
-                );
-              }
-            });
-          } else if (state is AuthError) {
-            setState(() {
-              _state = _OtpState.error;
-            });
-            _shakeCtrl.forward(from: 0.0);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: AppColors.errorRed,
-              ),
-            );
-          } else if (state is OtpSent) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('تم إعادة إرسال رمز التحقق بنجاح'),
-                backgroundColor: AppColors.greenPrimary,
-              ),
-            );
-          }
-        },
+        listener: _handleState,
         builder: (context, state) {
           final isLoading = state is AuthLoading;
 
@@ -179,15 +138,20 @@ class _OtpScreenState extends State<OtpScreen>
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             SizedBox(height: 16.h),
+
+                            // ── Back button ──────────────────────────
                             Align(
                               alignment: Alignment.centerRight,
-                              child: _BackButton(
+                              child: _AuthBackButton(
                                 onTap: () => Navigator.pop(context),
                               ),
                             ),
+
                             SizedBox(height: 40.h),
+
+                            // ── Title ────────────────────────────────
                             Text(
-                              'تأكيد الرمز',
+                              AppStrings.confirmCode,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.dark,
@@ -195,9 +159,11 @@ class _OtpScreenState extends State<OtpScreen>
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+
                             SizedBox(height: 10.h),
+
                             Text(
-                              'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى',
+                              AppStrings.enterVerificationCode,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.secondaryText,
@@ -205,7 +171,9 @@ class _OtpScreenState extends State<OtpScreen>
                                 height: 1.5,
                               ),
                             ),
+
                             SizedBox(height: 4.h),
+
                             Directionality(
                               textDirection: TextDirection.ltr,
                               child: Text(
@@ -218,31 +186,49 @@ class _OtpScreenState extends State<OtpScreen>
                                 ),
                               ),
                             ),
+
                             SizedBox(height: 44.h),
-                            _buildOtpRow(),
+
+                            // ── OTP circles ──────────────────────────
+                            OtpInputRow(
+                              digits: _digits,
+                              length: _length,
+                              fieldState: _fieldState,
+                              shakeAnimation: _shakeAnim,
+                              onTap: () => _focusNode.requestFocus(),
+                            ),
+
                             SizedBox(height: 20.h),
+
+                            // ── Countdown timer ──────────────────────
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: !_canResend
                                   ? Text(
-                                '0:${_secondsLeft.toString().padLeft(2, '0')}',
-                                key: const ValueKey('timer'),
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.ibmPlexSansArabic(
-                                  color: AppColors.gray,
-                                  fontSize: 14.sp,
-                                ),
-                              )
-                                  : const SizedBox.shrink(key: ValueKey('empty')),
+                                      '0:${_secondsLeft.toString().padLeft(2, '0')}',
+                                      key: const ValueKey('timer'),
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.ibmPlexSansArabic(
+                                        color: AppColors.gray,
+                                        fontSize: 14.sp,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink(
+                                      key: ValueKey('empty')),
                             ),
+
                             SizedBox(height: 10.h),
+
+                            // ── Resend row ───────────────────────────
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 GestureDetector(
-                                  onTap: _canResend ? () => _onResend(context) : null,
+                                  onTap: _canResend
+                                      ? () => _onResend(context)
+                                      : null,
                                   child: Text(
-                                    'إعادة إرسال الكود',
+                                    AppStrings.resendCodeLink,
                                     style: GoogleFonts.ibmPlexSansArabic(
                                       color: _canResend
                                           ? AppColors.greenPrimary
@@ -257,7 +243,7 @@ class _OtpScreenState extends State<OtpScreen>
                                   ),
                                 ),
                                 Text(
-                                  ' لم تتلقى الكود بعد؟',
+                                  ' ${AppStrings.resendCodePrompt}',
                                   style: GoogleFonts.ibmPlexSansArabic(
                                     color: AppColors.gray,
                                     fontSize: 13.sp,
@@ -265,8 +251,11 @@ class _OtpScreenState extends State<OtpScreen>
                                 ),
                               ],
                             ),
+
                             SizedBox(height: 32.h),
-                            if (_state == _OtpState.error)
+
+                            // ── Inline error message ─────────────────
+                            if (_fieldState == OtpFieldState.error)
                               Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
                                 child: Text(
@@ -278,26 +267,34 @@ class _OtpScreenState extends State<OtpScreen>
                                   ),
                                 ),
                               ),
+
+                            // ── Confirm button ───────────────────────
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: _digits.length == _length
-                                  ? _ConfirmButton(
-                                key: const ValueKey('btn'),
-                                isLoading: isLoading,
-                                isSuccess: _state == _OtpState.success,
-                                onPressed: _state != _OtpState.error
-                                    ? () => _onConfirm(context)
-                                    : () {},
-                              )
-                                  : SizedBox(height: 54.h, key: const ValueKey('empty')),
+                                  ? OtpConfirmButton(
+                                      key: const ValueKey('btn'),
+                                      label: AppStrings.confirm,
+                                      isLoading: isLoading,
+                                      isSuccess:
+                                          _fieldState == OtpFieldState.success,
+                                      onPressed:
+                                          _fieldState != OtpFieldState.error
+                                              ? () => _onConfirm(context)
+                                              : () {},
+                                    )
+                                  : SizedBox(
+                                      height: 54.h,
+                                      key: const ValueKey('empty')),
                             ),
+
                             SizedBox(height: 16.h),
                           ],
                         ),
                       ),
                     ),
 
-                    // الحقل المخفي المحدث لاستقبال المدخلات بشكل آمن وثابت
+                    // ── Hidden text input ────────────────────────────
                     SizedBox(
                       width: 1,
                       height: 1,
@@ -310,12 +307,15 @@ class _OtpScreenState extends State<OtpScreen>
                           maxLength: _length,
                           showCursor: false,
                           enableInteractiveSelection: false,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             counterText: '',
                           ),
-                          style: const TextStyle(color: Colors.transparent, fontSize: 0),
+                          style: const TextStyle(
+                              color: Colors.transparent, fontSize: 0),
                           cursorColor: Colors.transparent,
                         ),
                       ),
@@ -330,133 +330,62 @@ class _OtpScreenState extends State<OtpScreen>
     );
   }
 
-  Widget _buildOtpRow() {
-    return AnimatedBuilder(
-      animation: _shakeAnim,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(_state == _OtpState.error ? _shakeAnim.value : 0.0, 0.0),
-          child: child,
-        );
-      },
-      child: GestureDetector(
-        onTap: () => _focusNode.requestFocus(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(_length, (i) {
-            final hasDigit = i < _digits.length;
-            final isCurrent = i == _digits.length;
-
-            Color borderColor;
-            Color fillColor;
-            Color textColor;
-
-            if (_state == _OtpState.error && hasDigit) {
-              borderColor = AppColors.errorRed;
-              fillColor = AppColors.bgError;
-              textColor = AppColors.errorRed;
-            } else if (_state == _OtpState.success && hasDigit) {
-              borderColor = AppColors.greenPrimary;
-              fillColor = AppColors.light;
-              textColor = AppColors.greenPrimary;
-            } else if (hasDigit) {
-              borderColor = AppColors.greenPrimary;
-              fillColor = AppColors.white;
-              textColor = AppColors.primaryText;
-            } else if (isCurrent) {
-              borderColor = AppColors.greenPrimary;
-              fillColor = AppColors.white;
-              textColor = AppColors.primaryText;
-            } else {
-              borderColor = AppColors.borderInputs;
-              fillColor = AppColors.white;
-              textColor = AppColors.primaryText;
-            }
-
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              margin: EdgeInsets.symmetric(horizontal: 4.w),
-              width: 44.w,
-              height: 44.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: fillColor,
-                border: Border.all(color: borderColor, width: 1.5),
-                boxShadow: (hasDigit || isCurrent)
-                    ? [
-                  BoxShadow(
-                    color: (_state == _OtpState.error
-                        ? AppColors.errorRed
-                        : AppColors.greenPrimary)
-                        .withValues(alpha: 0.12),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-                    : [],
-              ),
-              child: Center(
-                child: hasDigit
-                    ? Text(
-                  _digits[i],
-                  style: GoogleFonts.ibmPlexSansArabic(
-                    color: textColor,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-                    : isCurrent
-                    ? _BlinkingCursor()
-                    : null,
-              ),
-            );
-          }),
-        ),
-      ),
-    );
+  void _handleState(BuildContext context, AuthState state) {
+    if (state is OtpVerified) {
+      setState(() => _fieldState = OtpFieldState.success);
+      final navigator = Navigator.of(context);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (mounted) {
+          navigator.pushReplacementNamed(
+            AppRoutes.completeProfile,
+            arguments: widget.phoneNumber,
+          );
+        }
+      });
+    } else if (state is OtpError) {
+      setState(() => _fieldState = OtpFieldState.error);
+      _shakeCtrl.forward(from: 0.0);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(state.message),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
+    } else if (state is AuthError) {
+      setState(() => _fieldState = OtpFieldState.error);
+      _shakeCtrl.forward(from: 0.0);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(state.message),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
+    } else if (state is OtpSent) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: const Text('تم إعادة إرسال رمز التحقق بنجاح'),
+          backgroundColor: AppColors.greenPrimary,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
+    }
   }
 }
 
-class _BlinkingCursor extends StatefulWidget {
-  @override
-  State<_BlinkingCursor> createState() => _BlinkingCursorState();
-}
-
-class _BlinkingCursorState extends State<_BlinkingCursor>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    )..repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _ctrl,
-      child: Container(
-        width: 1.5.w,
-        height: 18.h,
-        color: AppColors.greenPrimary,
-      ),
-    );
-  }
-}
-
-class _BackButton extends StatelessWidget {
+// ─────────────────────────────────────────────────────────────
+//  Shared back button (RTL arrow)
+// ─────────────────────────────────────────────────────────────
+class _AuthBackButton extends StatelessWidget {
   final VoidCallback onTap;
-  const _BackButton({required this.onTap});
+  const _AuthBackButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -474,67 +403,6 @@ class _BackButton extends StatelessWidget {
           Icons.arrow_forward_ios_rounded,
           size: 15.sp,
           color: AppColors.primaryText,
-        ),
-      ),
-    );
-  }
-}
-
-class _ConfirmButton extends StatelessWidget {
-  final bool isLoading;
-  final bool isSuccess;
-  final VoidCallback onPressed;
-
-  const _ConfirmButton({
-    super.key,
-    required this.isLoading,
-    required this.isSuccess,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: isLoading ? null : onPressed,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        width: double.infinity,
-        height: 54.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.r),
-          gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [Color(0xFF0A434E), Color(0xFF189AB4)],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF189AB4).withValues(alpha: 0.3),
-              blurRadius: 14,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Center(
-          child: isLoading
-              ? SizedBox(
-            width: 22.w,
-            height: 22.w,
-            child: const CircularProgressIndicator(
-              color: Colors.white,
-              strokeWidth: 2.5,
-            ),
-          )
-              : isSuccess
-              ? Icon(Icons.check_rounded, color: Colors.white, size: 24.sp)
-              : Text(
-            'تأكيد',
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: Colors.white,
-              fontSize: 17.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         ),
       ),
     );
