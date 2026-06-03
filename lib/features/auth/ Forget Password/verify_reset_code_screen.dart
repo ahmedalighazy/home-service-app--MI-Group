@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
@@ -9,7 +8,9 @@ import '../../../core/di/injection.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/colors/app_colors.dart';
 import '../../../core/themes/image/app_assets.dart';
+import '../../../core/themes/text/app_text.dart';
 import '../../../core/utils/l10n/app_strings.dart';
+import '../presentation/widgets/auth_back_button.dart';
 import '../presentation/widgets/otp_confirm_button.dart';
 import '../presentation/widgets/otp_input_row.dart';
 
@@ -23,7 +24,8 @@ class VerifyResetCodeScreen extends StatefulWidget {
 
 class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
     with SingleTickerProviderStateMixin {
-  static const int _length = 6;
+  // Design uses 4-digit reset code
+  static const int _length = 4;
 
   final TextEditingController _ctrl = TextEditingController();
   final FocusNode _focusNode = FocusNode();
@@ -51,8 +53,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
 
     _ctrl.addListener(() {
       final raw = _ctrl.text.replaceAll(RegExp(r'\D'), '');
-      final capped =
-          raw.length > _length ? raw.substring(0, _length) : raw;
+      final capped = raw.length > _length ? raw.substring(0, _length) : raw;
       if (_ctrl.text != capped) {
         _ctrl.value = _ctrl.value.copyWith(
           text: capped,
@@ -62,6 +63,8 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
       }
       if (_fieldState == OtpFieldState.error) {
         setState(() => _fieldState = OtpFieldState.idle);
+      } else {
+        setState(() {}); // rebuild to reflect new digit count
       }
     });
 
@@ -86,26 +89,44 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
     context.read<AuthCubit>().verifyResetCode(widget.email, _digits);
   }
 
+  void _onResend(BuildContext context) {
+    setState(() {
+      _ctrl.clear();
+      _fieldState = OtpFieldState.idle;
+    });
+    context.read<AuthCubit>().sendResetCode(widget.email);
+    _focusNode.requestFocus();
+  }
+
+  /// Truncate long email: ahmed...@gmail.com
+  String _truncateEmail(String email) {
+    final atIndex = email.indexOf('@');
+    if (atIndex <= 5) return email;
+    return '${email.substring(0, 5)}...${email.substring(atIndex)}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthCubit>(
       create: (_) => getIt<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, AuthState>(
-        listener: _handleState,
-        builder: (context, state) {
-          final isLoading = state is AuthLoading;
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        resizeToAvoidBottomInset: true,
+        body: BlocConsumer<AuthCubit, AuthState>(
+          listener: _handleState,
+          builder: (context, state) {
+            final isLoading = state is AuthLoading;
 
-          return Scaffold(
-            backgroundColor: AppColors.white,
-            resizeToAvoidBottomInset: true,
-            body: Directionality(
+            return Directionality(
               textDirection: TextDirection.rtl,
               child: SafeArea(
                 child: Column(
                   children: [
+                    // ── Scrollable content ───────────────────────────
                     Expanded(
                       child: SingleChildScrollView(
-                        reverse: true,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,83 +135,85 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
 
                             // ── Back button ──────────────────────────
                             Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
+                              alignment: Alignment.centerLeft,
+                              child: AuthBackButton(
                                 onTap: () => Navigator.pop(context),
-                                child: Container(
-                                  width: 40.w,
-                                  height: 40.w,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: AppColors.borderInputs),
-                                    color: AppColors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 15.sp,
-                                    color: AppColors.primaryText,
-                                  ),
-                                ),
                               ),
                             ),
 
-                            SizedBox(height: 40.h),
+                            SizedBox(height: 24.h),
+
+                            // ── Illustration with glow ───────────────
+                            Center(
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  // Soft teal glow behind image
+                                  Container(
+                                    width: 180.w,
+                                    height: 180.w,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: RadialGradient(
+                                        colors: [
+                                          AppColors.greenPrimary
+                                              .withValues(alpha: 0.12),
+                                          AppColors.white
+                                              .withValues(alpha: 0.0),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    AppAssets.message,
+                                    width: 150.w,
+                                    height: 150.w,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(height: 28.h),
 
                             // ── Title ────────────────────────────────
                             Text(
                               AppStrings.checkEmail,
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.ibmPlexSansArabic(
-                                color: AppColors.dark,
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: AppText.ibmHeading22(
+                                  color: AppColors.dark),
                             ),
 
-                            SizedBox(height: 10.h),
+                            SizedBox(height: 12.h),
 
-                            Text(
-                              AppStrings.enterVerificationCode,
+                            // ── Subtitle with teal email ─────────────
+                            RichText(
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.ibmPlexSansArabic(
-                                color: AppColors.secondaryText,
-                                fontSize: 13.sp,
-                                height: 1.5,
+                              text: TextSpan(
+                                style: AppText.ibmDescription14(
+                                    color: AppColors.secondaryText),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        'تم إرسال رابط إعادة تعيين إلى ',
+                                  ),
+                                  TextSpan(
+                                    text: _truncateEmail(widget.email),
+                                    style: AppText.ibmLink13(
+                                        color: AppColors.greenPrimary),
+                                  ),
+                                  const TextSpan(text: '\n'),
+                                  TextSpan(
+                                    text:
+                                        'أدخل الرمز المكون من 4 أرقام لتأكيد البريد الإلكتروني',
+                                  ),
+                                ],
                               ),
                             ),
 
-                            SizedBox(height: 4.h),
+                            SizedBox(height: 36.h),
 
-                            // ── Email display ────────────────────────
-                            Directionality(
-                              textDirection: TextDirection.ltr,
-                              child: Text(
-                                widget.email,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.ibmPlexSansArabic(
-                                  color: AppColors.greenPrimary,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(height: 32.h),
-
-                            // ── Message illustration ─────────────────
-                            Center(
-                              child: Image.asset(
-                                AppAssets.message,
-                                width: 180.w,
-                                height: 180.w,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-
-                            SizedBox(height: 32.h),
-
-                            // ── OTP circles ──────────────────────────
+                            // ── 4-digit OTP circles ──────────────────
                             OtpInputRow(
                               digits: _digits,
                               length: _length,
@@ -199,72 +222,101 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               onTap: () => _focusNode.requestFocus(),
                             ),
 
-                            SizedBox(height: 32.h),
+                            SizedBox(height: 20.h),
 
-                            // ── Inline error message ─────────────────
+                            // ── Inline error ─────────────────────────
                             if (_fieldState == OtpFieldState.error)
                               Padding(
-                                padding: EdgeInsets.only(bottom: 12.h),
+                                padding: EdgeInsets.only(bottom: 8.h),
                                 child: Text(
                                   'الرمز غير صحيح، يرجى المحاولة مرة أخرى',
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.ibmPlexSansArabic(
-                                    color: AppColors.errorRed,
-                                    fontSize: 12.sp,
-                                  ),
+                                  style: AppText.ibmError12(),
                                 ),
                               ),
 
-                            // ── Confirm button ───────────────────────
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: _digits.length == _length
-                                  ? OtpConfirmButton(
-                                      key: const ValueKey('btn'),
-                                      label: AppStrings.confirm,
-                                      isLoading: isLoading,
-                                      isSuccess:
-                                          _fieldState == OtpFieldState.success,
-                                      onPressed: () => _onVerify(context),
-                                    )
-                                  : SizedBox(
-                                      height: 54.h,
-                                      key: const ValueKey('empty')),
+                            SizedBox(height: 12.h),
+
+                            // ── Resend row ───────────────────────────
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${AppStrings.resendCodePromptAlt} ',
+                                  style: AppText.ibmDescription14(
+                                      color: AppColors.secondaryText),
+                                ),
+                                GestureDetector(
+                                  onTap: isLoading
+                                      ? null
+                                      : () => _onResend(context),
+                                  child: Text(
+                                    AppStrings.resendCodeLink,
+                                    style: AppText.ibmLink13(
+                                      color: isLoading
+                                          ? AppColors.placeholder
+                                          : AppColors.greenPrimary,
+                                    ).copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: AppColors.greenPrimary,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
 
-                            SizedBox(height: 16.h),
+                            SizedBox(height: 32.h),
                           ],
                         ),
                       ),
                     ),
 
-                    // ── Hidden text input ────────────────────────────
+                    // ── Confirm button pinned at bottom ──────────────
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+                      child: OtpConfirmButton(
+                        label: AppStrings.confirm,
+                        isLoading: isLoading,
+                        isSuccess: _fieldState == OtpFieldState.success,
+                        onPressed: _digits.length == _length
+                            ? () => _onVerify(context)
+                            : () {},
+                        isEnabled: _digits.length == _length,
+                      ),
+                    ),
+
+                    // ── Hidden keyboard input ────────────────────────
                     SizedBox(
-                      height: 0,
-                      child: TextField(
-                        controller: _ctrl,
-                        focusNode: _focusNode,
-                        keyboardType: TextInputType.number,
-                        maxLength: _length,
-                        showCursor: false,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          counterText: '',
+                      width: 1,
+                      height: 1,
+                      child: Opacity(
+                        opacity: 0,
+                        child: TextField(
+                          controller: _ctrl,
+                          focusNode: _focusNode,
+                          keyboardType: TextInputType.number,
+                          maxLength: _length,
+                          showCursor: false,
+                          enableInteractiveSelection: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            counterText: '',
+                          ),
+                          style: const TextStyle(
+                              color: Colors.transparent, fontSize: 0),
+                          cursorColor: Colors.transparent,
                         ),
-                        style: const TextStyle(
-                            color: Colors.transparent, fontSize: 1),
-                        cursorColor: Colors.transparent,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -281,30 +333,40 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
           );
         }
       });
-
-    // ── Wrong or expired code ────────────────────────────
     } else if (state is ResetCodeError) {
       setState(() => _fieldState = OtpFieldState.error);
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(
-          content: Text(state.message),
+          content: Text(state.message,
+              style: AppText.ibmDescription14(color: AppColors.white)),
           backgroundColor: AppColors.errorRed,
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ));
-
-    // ── Network / general error ──────────────────────────
     } else if (state is AuthError) {
       setState(() => _fieldState = OtpFieldState.error);
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(
-          content: Text(state.message),
+          content: Text(state.message,
+              style: AppText.ibmDescription14(color: AppColors.white)),
           backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
+    } else if (state is ResetCodeSent) {
+      // Resend success feedback
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text('تم إعادة إرسال الرمز بنجاح',
+              style: AppText.ibmDescription14(color: AppColors.white)),
+          backgroundColor: AppColors.greenPrimary,
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

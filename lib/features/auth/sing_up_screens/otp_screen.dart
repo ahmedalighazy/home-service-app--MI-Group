@@ -10,6 +10,7 @@ import '../../../core/themes/colors/app_colors.dart';
 import '../../../core/utils/l10n/app_strings.dart';
 import '../logic/cubits/auth_cubit.dart';
 import '../logic/states/auth_state.dart';
+import '../presentation/widgets/auth_back_button.dart';
 import '../presentation/widgets/otp_confirm_button.dart';
 import '../presentation/widgets/otp_input_row.dart';
 
@@ -142,7 +143,7 @@ class _OtpScreenState extends State<OtpScreen>
                             // ── Back button ──────────────────────────
                             Align(
                               alignment: Alignment.centerRight,
-                              child: _AuthBackButton(
+                              child: AuthBackButton(
                                 onTap: () => Navigator.pop(context),
                               ),
                             ),
@@ -278,10 +279,9 @@ class _OtpScreenState extends State<OtpScreen>
                                       isLoading: isLoading,
                                       isSuccess:
                                           _fieldState == OtpFieldState.success,
-                                      onPressed:
-                                          _fieldState != OtpFieldState.error
-                                              ? () => _onConfirm(context)
-                                              : () {},
+                                      isEnabled:
+                                          _fieldState != OtpFieldState.error,
+                                      onPressed: () => _onConfirm(context),
                                     )
                                   : SizedBox(
                                       height: 54.h,
@@ -380,31 +380,5 @@ class _OtpScreenState extends State<OtpScreen>
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-//  Shared back button (RTL arrow)
-// ─────────────────────────────────────────────────────────────
-class _AuthBackButton extends StatelessWidget {
-  final VoidCallback onTap;
-  const _AuthBackButton({required this.onTap});
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 40.w,
-        height: 40.w,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: AppColors.borderInputs),
-          color: AppColors.white,
-        ),
-        child: Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 15.sp,
-          color: AppColors.primaryText,
-        ),
-      ),
-    );
-  }
-}
+

@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/image/app_assets.dart';
-import '../../../../core/utils/helpers/cache_helper.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
