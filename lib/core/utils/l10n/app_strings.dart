@@ -2,10 +2,7 @@ class AppStrings {
   // Private constructor to prevent instantiation
   AppStrings._();
 
-  static const String profileName = 'Ahmed Ibrahim';
-  static const String phoneNumber = '+974 5123 4567';
-
-  // --- General & Shared ---\
+  // --- General & Shared ---
   static const String confirm = 'تأكيد';
   static const String sendCode = 'أرسل الكود';
   static const String emailLabel = 'البريد الإلكتروني';
