@@ -8,6 +8,7 @@ import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
 import '../../../core/di/injection.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/colors/app_colors.dart';
+import '../../../core/themes/image/app_assets.dart';
 import '../../../core/utils/l10n/app_strings.dart';
 import '../presentation/widgets/otp_confirm_button.dart';
 import '../presentation/widgets/otp_input_row.dart';
@@ -175,7 +176,19 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               ),
                             ),
 
-                            SizedBox(height: 44.h),
+                            SizedBox(height: 32.h),
+
+                            // ── Message illustration ─────────────────
+                            Center(
+                              child: Image.asset(
+                                AppAssets.message,
+                                width: 180.w,
+                                height: 180.w,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+
+                            SizedBox(height: 32.h),
 
                             // ── OTP circles ──────────────────────────
                             OtpInputRow(
