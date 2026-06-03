@@ -193,20 +193,48 @@ class _SingInState extends State<SingIn> {
   }
 
   void _handleState(BuildContext context, AuthState state) {
-    if (state is AuthError) {
-      setState(() => _hasError = true);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            state.message,
-            style: AppText.ibmDescription14(color: AppColors.white),
-          ),
-          backgroundColor: AppColors.errorRed,
-        ),
-      );
-    } else if (state is AuthSuccess) {
+    // ── Login success ────────────────────────────────────
+    if (state is SignInSuccess) {
       setState(() => _hasError = false);
       Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+
+    // ── Wrong email / password ───────────────────────────
+    } else if (state is SignInInvalidCredentials) {
+      setState(() => _hasError = true);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              AppStrings.errorIncorrectPassword,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
+
+    // ── Network / server error ───────────────────────────
+    } else if (state is SignInError) {
+      setState(() => _hasError = false);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     }
   }
 }

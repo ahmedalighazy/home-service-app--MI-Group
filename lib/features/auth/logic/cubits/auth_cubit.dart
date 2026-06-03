@@ -76,10 +76,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> loginWithEmail(String email, String password) async {
     emit(AuthLoading());
     try {
+      // TODO: replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
-      emit(AuthSuccess());
+
+      // Simulate: wrong password triggers invalid-credentials state
+      if (password == 'wrong') {
+        emit(SignInInvalidCredentials());
+      } else {
+        emit(SignInSuccess());
+      }
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(SignInError('حدث خطأ في الاتصال، يرجى المحاولة مرة أخرى'));
     }
   }
 
@@ -96,10 +103,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyOtp(String phoneNumber, String code) async {
     emit(AuthLoading());
     try {
+      // TODO: replace with real Firebase / API verification
       await Future.delayed(const Duration(seconds: 2));
-      emit(AuthSuccess());
+
+      // Simulate: code "000000" = wrong, anything else = success
+      if (code == '000000') {
+        emit(OtpError('الرمز غير صحيح، يرجى المحاولة مرة أخرى'));
+      } else {
+        emit(OtpVerified());
+      }
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(OtpError('فشل التحقق من الرمز، يرجى المحاولة مرة أخرى'));
     }
   }
 }
