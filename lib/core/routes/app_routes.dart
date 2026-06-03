@@ -47,7 +47,7 @@ class AppRoutes {
         return fadeRoute(const LanguageSelectionScreen());
 
       case login:
-        return fadeRoute(const LoginScreen());
+        return fadeRoute(const SingIn());
 
       // ── Auth flow ──────────────────────────────────────────
       case otp:
