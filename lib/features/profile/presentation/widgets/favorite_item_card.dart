@@ -64,7 +64,7 @@ class FavoriteItemCard extends StatelessWidget {
                           Shadow(
                             offset: const Offset(0, 4),
                             blurRadius: 4,
-                            color: const Color(0xFF000000).withOpacity(0.25),
+                            color: const Color(0xFF000000).withValues(alpha: 0.25),
                           ),
                         ],
                       ),

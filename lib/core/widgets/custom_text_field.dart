@@ -14,7 +14,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? icon;
   final Color? borderColor;
   final TextEditingController? controller;
-  final bool ?centerText;
+  final bool? centerText;
+  final TextStyle? textStyle;
 
   const CustomTextField({
     super.key,
@@ -24,9 +25,11 @@ class CustomTextField extends StatelessWidget {
     this.isReadOnly = false,
     this.suffixIcon,
     this.fillColor,
+    this.textStyle,
     this.icon,
     this.borderColor,
-    this.controller,  this.centerText=false,
+    this.controller,
+    this.centerText = false,
   });
 
   @override
@@ -37,27 +40,36 @@ class CustomTextField extends StatelessWidget {
         if (label != null) ...[
           Text(
             label!,
-            style: AppText.mediumIbm(color: AppColors.textDarkGrey, fontSize: 14, ),
+            style: AppText.mediumIbm(
+              color: AppColors.textDarkGrey,
+              fontSize: 14,
+            ),
           ),
           SizedBox(height: 6.h),
         ],
         TextFormField(
-
           controller: controller,
           initialValue: controller == null ? initialValue : null,
           readOnly: isReadOnly,
-          textAlign: centerText!  ? TextAlign.center : TextAlign.right,
+          textAlign: centerText! ? TextAlign.center : TextAlign.right,
           style: AppText.regularIbm(color: AppColors.black, fontSize: 15),
           decoration: InputDecoration(
-            
             hintText: hintText,
-            hintStyle: AppText.regularIbm(color: AppColors.borderInputs, fontSize: 14).copyWith(),
-            fillColor: fillColor ?? AppColors.borderInputs,
+            hintStyle:
+                textStyle ??
+                AppText.regularIbm(
+                  color: AppColors.borderInputs,
+                  fontSize: 14,
+                ).copyWith(),
+            fillColor: fillColor ?? AppColors.white,
             filled: true,
-            
+
             suffixIcon: suffixIcon,
             prefixIcon: icon,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 14.h,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
               borderSide: borderSide(),
@@ -68,12 +80,15 @@ class CustomTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: const BorderSide(color: AppColors.tealPrimary, width: 1.5),
-            ))),
-          ],
-        );
-      
-    
+              borderSide: const BorderSide(
+                color: AppColors.tealPrimary,
+                width: 1.5,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   BorderSide borderSide() {

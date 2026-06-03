@@ -7,7 +7,7 @@ import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
-import '../widgets/setting_list_item.dart';
+import '../../../setting/presentation/widgets/setting_list_item.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

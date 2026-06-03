@@ -24,5 +24,7 @@ class IconsPath {
   static const String ticket = 'assets/icons/vector_I632_3748_370_2051.svg';
   static const String illustration = 'assets/images/illustration.png';
   static const String sofaCleaning = 'assets/images/sofa_cleaning.png'; // Placeholder for feature
+  static const String send = 'assets/icons/icon_onlyprimary.svg';
+  static const String back = 'assets/icons/frame_2147225407.svg';
   static const String frame = 'assets/icons/frame.svg';
 }

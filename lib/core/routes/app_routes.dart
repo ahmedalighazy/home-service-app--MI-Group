@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/set_new_password_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
@@ -11,9 +10,15 @@ import '../../features/onboarding/presentation/widgets/onboarding_step_two_stati
 import '../../features/profile/presentation/screens/delete_account_screen.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/favorites_screen.dart';
-import '../../features/profile/presentation/screens/help_center_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
-import '../../features/profile/presentation/screens/setting_screen.dart';
+import '../../features/setting/presentation/screens/chat_detail_screen.dart';
+import '../../features/setting/presentation/screens/faq_screen.dart';
+import '../../features/setting/presentation/screens/help_center_screen.dart';
+import '../../features/setting/presentation/screens/legal_and_policies_screen.dart';
+import '../../features/setting/presentation/screens/privacy_policy_screen.dart';
+import '../../features/setting/presentation/screens/set_new_password_screen.dart';
+import '../../features/setting/presentation/screens/settings_screen.dart';
+import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../utils/l10n/app_strings.dart';
 
 class AppRoutes {
@@ -32,6 +37,11 @@ class AppRoutes {
   static const String favorites = '/favorites';
   static const String helpCenter = '/help-center';
   static const String setNewPassword = '/set-new-password';
+  static const String legalAndPolicies = '/legal-and-policies';
+  static const String privacyPolicy = '/privacy-policy';
+  static const String termsAndConditions = '/terms-and-conditions';
+  static const String faq = '/faq';
+  static const String chatDetail = '/chat-detail';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     Route<dynamic> fadeRoute(Widget page) {
@@ -51,7 +61,7 @@ class AppRoutes {
       case profile:
         return fadeRoute(const ProfileScreen());
       case setting:
-        return fadeRoute(const SettingScreen());
+        return fadeRoute(const SettingsScreen());
       case deleteAccount:
         return fadeRoute(const DeleteAccountScreen());
       case editProfile:
@@ -62,6 +72,16 @@ class AppRoutes {
         return fadeRoute(const HelpCenterScreen());
       case setNewPassword:
         return fadeRoute(const SetNewPasswordScreen());
+      case legalAndPolicies:
+        return fadeRoute(const LegalAndPoliciesScreen());
+      case privacyPolicy:
+        return fadeRoute(const PrivacyPolicyScreen());
+      case termsAndConditions:
+        return fadeRoute(const TermsAndConditionsScreen());
+      case faq:
+        return fadeRoute(const FAQScreen());
+      case chatDetail:
+        return fadeRoute(const ChatDetailScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:

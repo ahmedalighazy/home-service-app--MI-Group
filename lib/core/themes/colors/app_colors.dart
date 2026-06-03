@@ -62,6 +62,9 @@ class AppColors {
   static const Color whitecancel = Color(
     0xFFD9E1EE,
   ); // #083638 - rgb(8, 54, 63)
+  static const Color dividerGrey = Color(
+    0xFFF3F4F6,
+  ); // Using inputBg color as divider
 
   // Aliases for backward compatibility
 
@@ -89,6 +92,8 @@ class AppColors {
 
   // Border Colors
   static const Color borderInputs = Color(0xFFE5E7EB);
+  static const Color borderInput = Color(0xFFE5E7EB);
+
   static const Color borderFocus = primary;
   static const Color borderCards = Color(0xFFF1F5F9);
   static const Color borderSuccess = Color(0xFF15803D);

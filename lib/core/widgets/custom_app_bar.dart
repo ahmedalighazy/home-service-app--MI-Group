@@ -5,8 +5,9 @@ import '../themes/colors/app_colors.dart';
 import '../themes/text/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key, required this.title, this.widget});
   final String title;
+  final Widget? widget;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -14,11 +15,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
       backgroundColor: AppColors.white,
       leading: const ArrowBack(),
+
       title: Text(
         title,
-        style: AppText.boldIbm(color: AppColors.black, fontSize: 18),
+        style: AppText.boldIbm(
+          color: AppColors.black,
+          fontSize: widget == null ? 18 : 13,
+        ),
       ),
-      centerTitle: true,
+      // centerTitle: true,
+      actions: [widget ?? const SizedBox.shrink()],
     );
   }
 
