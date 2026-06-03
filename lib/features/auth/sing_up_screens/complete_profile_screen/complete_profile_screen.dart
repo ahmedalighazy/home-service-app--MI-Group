@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/di/injection.dart';
 import '../../logic/cubits/auth_cubit.dart';
 import '../../logic/states/auth_state.dart';
@@ -63,11 +64,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
   void _onComplete(BuildContext context) {
     if (!_formKey.currentState!.validate()) return;
     context.read<AuthCubit>().register(
-          name: _nameCtrl.text.trim(),
-          email: _emailCtrl.text.trim(),
-          phone: widget.phoneNumber ?? '',
-          password: _passCtrl.text,
-        );
+      name: _nameCtrl.text.trim(),
+      email: _emailCtrl.text.trim(),
+      phone: widget.phoneNumber ?? '',
+      password: _passCtrl.text,
+    );
   }
 
   @override
@@ -79,19 +80,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+              context.go(AppRouter.home);
             } else if (state is AuthError) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(
-                  content: Text(state.message,
-                      style:
-                          AppText.ibmDescription14(color: AppColors.white)),
-                  backgroundColor: AppColors.errorRed,
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ));
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      state.message,
+                      style: AppText.ibmDescription14(color: AppColors.white),
+                    ),
+                    backgroundColor: AppColors.errorRed,
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                );
             }
           },
           builder: (context, state) {
@@ -118,9 +123,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                             // ── Back button ──────────────────────────
                             Align(
                               alignment: Alignment.centerRight,
-                              child: AuthBackButton(
-                                onTap: () => Navigator.pop(context),
-                              ),
+                              child: AuthBackButton(onTap: () => context.pop()),
                             ),
 
                             SizedBox(height: 20.h),
@@ -156,11 +159,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                                         shape: BoxShape.circle,
                                         color: AppColors.white,
                                         border: Border.all(
-                                            color: AppColors.borderInputs),
+                                          color: AppColors.borderInputs,
+                                        ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black
-                                                .withValues(alpha: 0.08),
+                                            color: Colors.black.withValues(
+                                              alpha: 0.08,
+                                            ),
                                             blurRadius: 6,
                                           ),
                                         ],
@@ -183,7 +188,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                               AppStrings.completeProfile,
                               textAlign: TextAlign.center,
                               style: AppText.ibmHeading22(
-                                  color: AppColors.dark),
+                                color: AppColors.dark,
+                              ),
                             ),
 
                             SizedBox(height: 6.h),
@@ -192,7 +198,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                               AppStrings.completeProfileSubtitle,
                               textAlign: TextAlign.center,
                               style: AppText.ibmDescription14(
-                                  color: AppColors.secondaryText),
+                                color: AppColors.secondaryText,
+                              ),
                             ),
 
                             SizedBox(height: 28.h),
@@ -265,7 +272,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                               isPassword: true,
                               obscureText: _obscureConfirm,
                               onToggleObscure: () => setState(
-                                  () => _obscureConfirm = !_obscureConfirm),
+                                () => _obscureConfirm = !_obscureConfirm,
+                              ),
                               validator: (v) {
                                 if (v == null || v.isEmpty) {
                                   return 'تأكيد كلمة المرور مطلوب';

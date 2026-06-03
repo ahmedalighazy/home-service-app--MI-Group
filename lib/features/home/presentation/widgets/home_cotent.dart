@@ -20,17 +20,17 @@ class HomeContent extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         // Header Section with Gradient
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: GradientHeader(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: AppSizes.spacingMedium),
-                HomeHeader(),
+                const HomeHeader(),
                 SizedBox(height: AppSizes.spacingLarge),
-                HomeSearchField(),
+                const HomeSearchField(),
                 SizedBox(height: AppSizes.spacingLarge),
-                PromoBannerCard(
+                const PromoBannerCard(
                   title: 'أنس أعمال التنظيف بعد العمل',
                   subTitle: 'تنظيف بالساعة',
                   price: '120 ',
@@ -47,7 +47,7 @@ class HomeContent extends StatelessWidget {
         // Service Categories Section
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               reverse: true,
@@ -85,7 +85,7 @@ class HomeContent extends StatelessWidget {
         // Popular Services Section
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
             child: Column(
               children: [
                 Row(

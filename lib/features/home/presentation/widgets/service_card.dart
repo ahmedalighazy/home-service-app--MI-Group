@@ -42,7 +42,7 @@ class ServiceCard extends StatelessWidget {
             // Image Section
             Container(
               height: 120,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(AppSizes.radius),
                   topRight: Radius.circular(AppSizes.radius),
@@ -51,7 +51,7 @@ class ServiceCard extends StatelessWidget {
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(AppSizes.radius),
                       topRight: Radius.circular(AppSizes.radius),
                     ),

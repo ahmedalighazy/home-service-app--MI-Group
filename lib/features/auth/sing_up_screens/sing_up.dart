@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'otp_screen/otp_screen.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/routes/app_routes.dart';
 
 class SingUp extends StatelessWidget {
   const SingUp({super.key});
@@ -40,29 +41,44 @@ class SingUp extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: Row(
                           children: [
-                            const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                            const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.grey,
+                            ),
                             const SizedBox(width: 4),
                             const Text(
                               '+974',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(width: 8),
-                            const Text('🇶🇦', style: TextStyle(fontSize: 18)), // علم قطر كمثال
+                            const Text(
+                              '🇶🇦',
+                              style: TextStyle(fontSize: 18),
+                            ), // علم قطر كمثال
                           ],
                         ),
                       ),
                       const SizedBox(
                         height: 30,
-                        child: VerticalDivider(color: Color(0xFFE2E8F0), width: 1),
+                        child: VerticalDivider(
+                          color: Color(0xFFE2E8F0),
+                          width: 1,
+                        ),
                       ),
                       // حقل كتابة رقم الهاتف
                       const Expanded(
                         child: TextField(
                           keyboardType: TextInputType.phone,
-                          textAlign: TextAlign.left, // الأرقام دائماً تُكتب يسار-يمين LTR
+                          textAlign: TextAlign
+                              .left, // الأرقام دائماً تُكتب يسار-يمين LTR
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
                             hintText: '5123 4567',
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
@@ -75,12 +91,7 @@ class SingUp extends StatelessWidget {
 
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const OtpScreen(phoneNumber: '+974 5123 4567'),
-                      ),
-                    );
+                    context.push(AppRouter.otp, extra: '+974 5123 4567');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0E5C6C),
@@ -145,7 +156,10 @@ class SingUp extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('لديك حساب بالفعل؟ ', style: TextStyle(color: Colors.grey)),
+                    const Text(
+                      'لديك حساب بالفعل؟ ',
+                      style: TextStyle(color: Colors.grey),
+                    ),
                     GestureDetector(
                       onTap: () {},
                       child: const Text(
@@ -185,9 +199,7 @@ class SingUp extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: Colors.grey.shade200),
         minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -207,4 +219,3 @@ class SingUp extends StatelessWidget {
     );
   }
 }
-

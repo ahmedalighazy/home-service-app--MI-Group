@@ -48,7 +48,7 @@ class PromoBannerCard extends StatelessWidget {
                 child: Container(color: AppColors.white.withValues(alpha: .08)),
               ),
               Padding(
-                padding: const EdgeInsets.only(
+                padding: EdgeInsets.only(
                   top: AppSizes.paddingLarge,
                   right: AppSizes.padding,
                   left: AppSizes.padding,
@@ -76,7 +76,7 @@ class PromoBannerCard extends StatelessWidget {
                     SizedBox(height: AppSizes.spacingSmall.h),
 
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
+                      padding: EdgeInsetsDirectional.only(
                         start: AppSizes.paddingLarge,
                       ),
                       child: OldPrice(price: price),
@@ -85,7 +85,7 @@ class PromoBannerCard extends StatelessWidget {
                     SizedBox(height: AppSizes.spacingMin.h),
 
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
+                      padding: EdgeInsetsDirectional.only(
                         start: AppSizes.paddingMedium,
                       ),
                       child: Text(
@@ -166,7 +166,7 @@ class OldPrice extends StatelessWidget {
               height: 2,
               decoration: BoxDecoration(
                 color: Colors.red,
-                borderRadius: BorderRadius.circular(AppSizes.radiusXL),
+                borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
               ),
             ),
           ),

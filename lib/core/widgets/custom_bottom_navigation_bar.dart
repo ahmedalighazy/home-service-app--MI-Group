@@ -25,7 +25,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppSizes.radius),
           topRight: Radius.circular(AppSizes.radius),
         ),
@@ -38,7 +38,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         vertical: AppSizes.padding,
         horizontal: AppSizes.paddingMedium,
       ),
@@ -75,13 +75,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: AppSizes.paddingMedium,
             vertical: AppSizes.paddingMedium,
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.circular(AppSizes.radiusXL),
+            borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +93,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 height: AppSizes.iconSize,
                 colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
               ),
-              const SizedBox(width: AppSizes.spacingSmall),
+              SizedBox(width: AppSizes.spacingSmall),
               Text(
                 label,
                 style: TextStyle(
