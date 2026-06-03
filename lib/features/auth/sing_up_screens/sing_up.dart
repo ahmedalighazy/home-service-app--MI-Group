@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'otp_screen/otp_screen.dart';
 import '../presentation/widgets/auth_back_button.dart';
+import '../presentation/widgets/auth_social_button.dart';
 
 class SingUp extends StatelessWidget {
   const SingUp({super.key});
@@ -131,15 +132,13 @@ class SingUp extends StatelessWidget {
                   SizedBox(height: 24.h),
 
                   // أزرار التواصل الاجتماعي
-                  _buildSocialButton(
-                    context,
+                  AuthSocialButton(
                     icon: Icons.g_mobiledata,
                     text: 'تسجيل عبر Google',
                     onTap: () {},
                   ),
                   SizedBox(height: 12.h),
-                  _buildSocialButton(
-                    context,
+                  AuthSocialButton(
                     icon: Icons.apple,
                     text: 'تسجيل عبر Apple',
                     onTap: () {},
@@ -192,39 +191,6 @@ class SingUp extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSocialButton(
-    BuildContext context, {
-    required IconData icon,
-    required String text,
-    required VoidCallback onTap,
-  }) {
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.grey.shade200),
-        minimumSize: Size(double.infinity, 50.h),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 28.sp, color: Colors.black87),
-          SizedBox(width: 8.w),
-          Text(
-            text,
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }

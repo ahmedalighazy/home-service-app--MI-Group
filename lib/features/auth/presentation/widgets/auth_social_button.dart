@@ -1,72 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/text/app_text.dart';
 
 /// A reusable social login button (Google, Apple, etc.) for auth screens.
 ///
-/// Usage example:
+/// Usage:
 /// ```dart
 /// AuthSocialButton(
-///   iconPath: AppAssets.iconGoogle,
-///   label: AppStrings.signUpWithGoogle,
-///   onPressed: () => _signInWithGoogle(),
+///   icon: Icons.g_mobiledata,
+///   text: 'تسجيل عبر Google',
+///   onTap: () => _handleGoogleLogin(),
 /// )
 /// ```
-class AuthSocialButton extends StatefulWidget {
-  final String iconPath;
-  final String label;
-  final VoidCallback onPressed;
+class AuthSocialButton extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final VoidCallback onTap;
 
   const AuthSocialButton({
     super.key,
-    required this.iconPath,
-    required this.label,
-    required this.onPressed,
+    required this.icon,
+    required this.text,
+    required this.onTap,
   });
 
   @override
-  State<AuthSocialButton> createState() => _AuthSocialButtonState();
-}
-
-class _AuthSocialButtonState extends State<AuthSocialButton> {
-  bool _pressed = false;
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _pressed = true),
-      onTapUp: (_) {
-        setState(() => _pressed = false);
-        widget.onPressed();
-      },
-      onTapCancel: () => setState(() => _pressed = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 120),
-        height: 54.h,
-        decoration: BoxDecoration(
-          color: _pressed ? const Color(0xFFF8FAFC) : AppColors.white,
-          borderRadius: BorderRadius.circular(30.r),
-          border: Border.all(color: AppColors.borderInputs),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 6,
-              offset: const Offset(0, 2),
-            ),
-          ],
+    return OutlinedButton(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: Colors.grey.shade200),
+        minimumSize: Size(double.infinity, 50.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(widget.iconPath, width: 24.w, height: 24.w),
-            SizedBox(width: 10.w),
-            Text(
-              widget.label,
-              style: AppText.ibmFieldLabel14(color: AppColors.primaryText),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 28.sp, color: Colors.black87),
+          SizedBox(width: 8.w),
+          Text(
+            text,
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
