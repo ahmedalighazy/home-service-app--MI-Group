@@ -56,6 +56,13 @@ class ResetCodeSent extends AuthState {
   ResetCodeSent(this.email);
 }
 
+/// Reset code was verified successfully.
 class ResetCodeVerified extends AuthState {}
+
+/// Reset code was wrong or expired.
+class ResetCodeError extends AuthState {
+  final String message;
+  ResetCodeError(this.message);
+}
 
 class ResetPasswordSuccess extends AuthState {}

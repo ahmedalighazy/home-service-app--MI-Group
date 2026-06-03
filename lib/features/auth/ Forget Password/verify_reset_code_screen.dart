@@ -281,6 +281,22 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
           );
         }
       });
+
+    // ── Wrong or expired code ────────────────────────────
+    } else if (state is ResetCodeError) {
+      setState(() => _fieldState = OtpFieldState.error);
+      _shakeCtrl.forward(from: 0.0);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(state.message),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
+
+    // ── Network / general error ──────────────────────────
     } else if (state is AuthError) {
       setState(() => _fieldState = OtpFieldState.error);
       _shakeCtrl.forward(from: 0.0);

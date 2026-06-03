@@ -93,10 +93,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyResetCode(String email, String code) async {
     emit(AuthLoading());
     try {
+      // TODO: replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
-      emit(ResetCodeVerified());
+
+      // Simulate: code "000000" = wrong/expired, anything else = success
+      if (code == '000000') {
+        emit(ResetCodeError('الرمز غير صحيح أو منتهي الصلاحية، يرجى المحاولة مرة أخرى'));
+      } else {
+        emit(ResetCodeVerified());
+      }
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(ResetCodeError('فشل التحقق من الرمز، يرجى المحاولة مرة أخرى'));
     }
   }
 
