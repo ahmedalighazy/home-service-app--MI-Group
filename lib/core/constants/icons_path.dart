@@ -16,4 +16,13 @@ class IconsPath {
   static const String imageProfile = 'assets/icons/image_profile.svg';
   static const String repeat = 'assets/icons/solar_repeat-bold.svg';
   static const String warning = 'assets/icons/warning.svg';
+
+  // New Icons from Design
+  static const String backButton = 'assets/icons/frame_2147225407.svg';
+  static const String logout = 'assets/icons/logout.svg'; // Guessed
+  static const String faq = 'assets/icons/vector_632_3606.svg';
+  static const String ticket = 'assets/icons/vector_I632_3748_370_2051.svg';
+  static const String illustration = 'assets/images/illustration.png';
+  static const String sofaCleaning = 'assets/images/sofa_cleaning.png'; // Placeholder for feature
+  static const String frame = 'assets/icons/frame.svg';
 }

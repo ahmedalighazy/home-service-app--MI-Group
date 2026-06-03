@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/text/app_text.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/text/app_text.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
     shape: RoundedRectangleBorder(
       side: const BorderSide(
         width: 1,
-        color: Color(0xFFEF4444),
+        color: AppColors.redBorder,
       ),
       borderRadius: BorderRadius.circular(44),
     ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/image/app_assets.dart';
-import '../../../core/themes/text/app_text.dart';
-import '../../../core/utils/l10n/app_strings.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/image/app_assets.dart';
+import '../../../../core/themes/text/app_text.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
 
@@ -22,7 +22,7 @@ class ProfileCard extends StatelessWidget {
         ),
         shadows: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: AppColors.black100,
             blurRadius: 4,
             offset: Offset(0, 4),
             spreadRadius: 0,

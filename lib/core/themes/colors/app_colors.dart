@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
-
-// colors ui profile
-static const Color transparentColor = Colors.transparent;
+  // colors ui profile
+  static const Color transparentColor = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color black100 = Color(0x0A000000);
@@ -15,42 +13,29 @@ static const Color transparentColor = Colors.transparent;
   static const Color textDarkGrey = Color(0xFF374151);
   static const Color textLightGrey = Color(0xFF6B7280);
   static const Color inputBg = Color(0xFFF3F4F6);
-  
+
   // Danger / Delete Colors
   static const Color redDanger = Color(0xFFDC2626);
-    static const Color red = Color(0xFFD2503C);
+  static const Color red = Color(0xFFD2503C);
 
   static const Color redDangerBg = Color(0xFFFEF2F2);
   static const Color redBorder = Color(0xFFFCA5A5);
-  
+
   // Teal / Button Colors
   static const Color tealPrimary = Color(0xFF0F766E);
 
+  static const Color dark300 = Color(0xFFEEF2F6); // Main dark teal
 
-
-
-
-
-  static const Color dark300 = Color(0xFFEEF2F6);         // Main dark teal
-
-
-
-
-
-
-
-
-  
   // Theme Main Colors (Teal)
-  static const Color dark = Color(0xFF0A434E);         // Main dark teal
+  static const Color dark = Color(0xFF0A434E); // Main dark teal
   static const Color darkHover = Color(0xFF0E5C6C);
   static const Color darkActive = Color(0xFF0B4551);
   static const Color greenDarker = Color(0xFF08363F);
-  static const Color greenPrimary = Color(0xFF189AB4);   // Main green/cyan
+  static const Color greenPrimary = Color(0xFF189AB4); // Main green/cyan
   static const Color greenNormalActive = Color(0xFF137B90);
-  static const Color select = Color(0x40189AB4);        // 25% opacity greenPrimary (fixed from 0xFF189AB440)
-
-
+  static const Color select = Color(
+    0x40189AB4,
+  ); // 25% opacity greenPrimary (fixed from 0xFF189AB440)
 
   // Light shades
   static const Color light = Color(0xFFE8F5F8);
@@ -74,7 +59,9 @@ static const Color transparentColor = Colors.transparent;
 
   // Darker Shade
   static const Color darker = Color(0xFF083638); // #083638 - rgb(8, 54, 63)
-  static const Color whitecancel = Color(0xFFD9E1EE); // #083638 - rgb(8, 54, 63)
+  static const Color whitecancel = Color(
+    0xFFD9E1EE,
+  ); // #083638 - rgb(8, 54, 63)
 
   // Aliases for backward compatibility
 

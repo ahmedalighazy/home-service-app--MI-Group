@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import '../../../../core/themes/text/app_text.dart';
 
 class SettingListItem extends StatelessWidget {
   final IconData icon;
@@ -28,11 +28,7 @@ class SettingListItem extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Text(
           title,
-          style:  TextStyle(
-            color:AppColors.primaryText,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
-          ),
+          style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 16),
         ),
       ),
     

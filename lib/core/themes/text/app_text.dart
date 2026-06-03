@@ -135,6 +135,14 @@ class AppText {
     );
   }
 
+  static TextStyle ibmHeading20({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   /// Subheading or description style
   ///
   /// **Arabic UI Examples:**

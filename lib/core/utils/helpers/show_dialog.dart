@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../features/profile/widget/custom_buttom.dart';
+import '../../../../features/profile/presentation/widgets/custom_buttom.dart';
 import '../../themes/colors/app_colors.dart';
 import '../../themes/text/app_text.dart';
 import '../l10n/app_strings.dart';
@@ -23,7 +23,7 @@ void showCannotDeleteDialog(BuildContext context) {
               Text(
                 AppStrings.cannotDeleteTitle,
                 style: AppText.boldIbm(color: AppColors.black, fontSize: 16),
-                textAlign:TextAlign. center,
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 12.h),
               Text(

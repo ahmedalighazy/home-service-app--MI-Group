@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/colors/app_colors.dart';
 
 class ArrowBack extends StatelessWidget {
   const ArrowBack({
@@ -24,7 +24,7 @@ class ArrowBack extends StatelessWidget {
         shape: RoundedRectangleBorder(
             side: const BorderSide(
               width: 1,
-              color: Color(0xFFE5E7EB) /* border-inputs */,
+              color: AppColors.borderInputs,
             ),
             borderRadius: BorderRadius.circular(44),
         ),

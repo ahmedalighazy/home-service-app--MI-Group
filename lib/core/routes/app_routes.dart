@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/set_new_password_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
-import '../../features/profile/screen/delete_account_screen.dart';
-import '../../features/profile/screen/edit_profile_screen.dart';
-import '../../features/profile/screen/profile_screen.dart';
-import '../../features/profile/screen/setting_screen.dart';
-import '../../features/splash/presentation/screens/splash_screen.dart';
+import '../../features/profile/presentation/screens/delete_account_screen.dart';
+import '../../features/profile/presentation/screens/edit_profile_screen.dart';
+import '../../features/profile/presentation/screens/favorites_screen.dart';
+import '../../features/profile/presentation/screens/help_center_screen.dart';
+import '../../features/profile/presentation/screens/profile_screen.dart';
+import '../../features/profile/presentation/screens/setting_screen.dart';
+import '../utils/l10n/app_strings.dart';
 
 class AppRoutes {
-  static const String splash = '/';
+  // static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String onboarding1Static = '/onboarding1_static';
   static const String onboarding1 = '/onboarding1';
@@ -22,12 +25,13 @@ class AppRoutes {
   static const String onboarding2 = '/onboarding2';
   static const String login = '/login';
   static const String home = '/home';
-    static const String profile = '/profile';
-        static const String editProfile = '/edit-profile';
-    static const String deleteAccount = '/delete-account';
-    static const String setting = '/setting';
-
-
+  static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
+  static const String deleteAccount = '/delete-account';
+  static const String setting = '/setting';
+  static const String favorites = '/favorites';
+  static const String helpCenter = '/help-center';
+  static const String setNewPassword = '/set-new-password';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     Route<dynamic> fadeRoute(Widget page) {
@@ -42,16 +46,22 @@ class AppRoutes {
     }
 
     switch (settings.name) {
-      case splash:
-        return fadeRoute(const SplashScreen());
-              case profile:
+      // case splash:
+      //   return fadeRoute(const SplashScreen());
+      case profile:
         return fadeRoute(const ProfileScreen());
       case setting:
         return fadeRoute(const SettingScreen());
       case deleteAccount:
-        return fadeRoute( const DeleteAccountScreen());
+        return fadeRoute(const DeleteAccountScreen());
       case editProfile:
         return fadeRoute(const EditProfileScreen());
+      case favorites:
+        return fadeRoute(const FavoritesScreen());
+      case helpCenter:
+        return fadeRoute(const HelpCenterScreen());
+      case setNewPassword:
+        return fadeRoute(const SetNewPasswordScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:
@@ -91,10 +101,10 @@ class AppRoutes {
       case login:
         return fadeRoute(const LoginScreen());
       case home:
-        return fadeRoute(const Scaffold(body: Center(child: HomePage())));
+        return fadeRoute(const HomePage());
       default:
         return fadeRoute(
-          const Scaffold(body: Center(child: Text('العنوان غير معروف'))),
+          const Scaffold(body: Center(child: Text(AppStrings.unknownRoute))),
         );
     }
   }

@@ -31,6 +31,7 @@ static const String editProfile = ' الملف الشخصي';
   static const String rule4Desc = 'مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.';
 
   static const String confirmDeleteHint = 'لتأكيد حذف الحساب يرجى كتابة كلمة (حذف)';
+  static const String deleteConfirmWord = 'حذف';
   static const String confirmFieldHint = 'كلمة التأكيد غير صحيحة';
   static const String deleteConfirmBtn = 'حذف الحساب نهائياً';
   static const String cancelBtn = 'إلغاء';
@@ -323,4 +324,45 @@ static const String editProfile = ' الملف الشخصي';
   static const String errorIncorrectPassword = 'كلمة مرور غير صحيحة';
   static const String errorPasswordsDoNotMatch = 'كلمتا المرور غير متطابقتين';
   static const String errorOutOfZone = 'عذراً لا نقدم خدمة في هذه المنطقة';
+
+  // --- Favorites ---
+  static const String favorites = 'المفضلات';
+  static const String noFavoritesYet = 'لا توجد خدمات مفضلة حتى الآن';
+  static const String saveServicesToAccessLater = 'قم بحفظ الخدمات التي تعجبك للوصول إليها بسرعة لاحقًا.';
+
+  // --- Help Center ---
+  static const String helpCenter = 'مركز المساعدة';
+  static const String faq = 'الاسئلة الشائعة';
+  static const String technicalSupport = 'الدعم الفني';
+  static const String newIssue = 'مشكلة جديدة';
+  static const String open = 'مفتوح';
+  static const String resolved = 'تم الحل';
+  static const String ticketPrefix = 'TKT.';
+
+  // --- Profile Sections ---
+  static const String myAddresses = 'العناوين';
+  static const String mySubscriptions = 'اشتراكاتي';
+  static const String paymentMethods = 'طرق الدفع';
+  static const String settings = 'الاعدادات';
+  static const String contactUs = 'تواصل معنا';
+
+  // --- Help Center Examples ---
+  static const String ticketTitle1 = 'مشكلة في خدمه التنظيف';
+  static const String ticketDesc1 = 'المطبخ والحمام الرئيسي لم يتم تنضيفهما يشكل جيد';
+  static const String ticketTitle2 = 'سعر خدمة مكافحة الحشرات';
+  static const String ticketDesc2 = 'شكرا لكم هذا واضح';
+  static const String timeOneDayAgo = 'منذ ١ يوم';
+
+  // --- Setting Screen ---
+  static const String changePassword = 'تغيير كلمة المرور';
+  static const String privacy = 'الخصوصية';
+  static const String help = 'المساعدة';
+  static const String unknownRoute = 'العنوان غير معروف';
+
+  // --- Auth Screen (Set New Password) ---
+  static const String createNewPassDescription = 'يرجى إدخال كلمة مرور جديدة قوية وسهلة التذكر.';
+  static const String password = 'كلمة المرور';
+  static const String enterPassword = 'أدخل كلمة المرور';
+  static const String confirmPassword = 'تأكيد كلمة المرور';
+  static const String reEnterPassword = 'أعد إدخال كلمة المرور';
 }

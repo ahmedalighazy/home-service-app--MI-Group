@@ -11,10 +11,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await setupGetIt();
- runApp(
-  DevicePreview(
-    enabled: true,
-    builder: (context) => const HomeServiceApp()));
+  runApp(
+    DevicePreview(enabled: true, builder: (context) => const HomeServiceApp()),
+  );
 }
 
 class HomeServiceApp extends StatelessWidget {
@@ -43,7 +42,7 @@ class HomeServiceApp extends StatelessWidget {
               child: child!,
             );
           },
-          initialRoute: AppRoutes.profile,
+          initialRoute: AppRoutes.home,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },

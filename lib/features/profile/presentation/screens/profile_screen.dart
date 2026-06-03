@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
-import '../../../core/extensions/extention_navigator.dart';
-import '../widget/profile_card.dart';
-import '../widget/profile_header.dart';
-import '../widget/setting_list_item.dart';
+import '../../../../core/extensions/extention_navigator.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../widgets/profile_card.dart';
+import '../widgets/profile_header.dart';
+import '../widgets/setting_list_item.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -14,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: SizedBox(
-            height: height(context) ,
+            height: height(context),
             child: Stack(
               clipBehavior: Clip.none,
               children: [
@@ -34,30 +38,31 @@ class ProfileScreen extends StatelessWidget {
                       _buildSettingGroup([
                         SettingListItem(
                           icon: Icons.account_circle_outlined,
-                          title: 'الملف الشخصي',
+                          title: AppStrings.editProfile,
                           onTap: () {
-
-                            context.pushName('/edit-profile');
+                            context.pushName(AppRoutes.editProfile);
                           },
                         ),
                         SettingListItem(
                           icon: Icons.favorite_border_outlined,
-                          title: 'المفضلات',
-                          onTap: () {},
+                          title: AppStrings.favorites,
+                          onTap: () {
+                            context.pushName(AppRoutes.favorites);
+                          },
                         ),
                         SettingListItem(
                           icon: Icons.location_on_outlined,
-                          title: 'العناوين',
+                          title: AppStrings.myAddresses,
                           onTap: () {},
                         ),
                         SettingListItem(
                           icon: Icons.subscriptions_outlined,
-                          title: 'اشتراكاتي',
+                          title: AppStrings.mySubscriptions,
                           onTap: () {},
                         ),
                         SettingListItem(
                           icon: Icons.credit_card,
-                          title: 'طرق الدفع',
+                          title: AppStrings.paymentMethods,
                           onTap: () {},
                         ),
                       ]),
@@ -67,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: Divider(
-                          color: Color(0x1F000000),
+                          color: AppColors.borderGrey,
                           thickness: 1,
                         ),
                       ),
@@ -77,15 +82,14 @@ class ProfileScreen extends StatelessWidget {
                       _buildSettingGroup([
                         SettingListItem(
                           icon: Icons.settings_outlined,
-                          title: 'الاعدادات',
+                          title: AppStrings.settings,
                           onTap: () {
-
-                            context.pushName('/setting');
+                            context.pushName(AppRoutes.setting);
                           },
                         ),
                         SettingListItem(
                           icon: Icons.language,
-                          title: 'تواصل معنا',
+                          title: AppStrings.contactUs,
                           onTap: () {},
                         ),
                       ]),
@@ -103,12 +107,7 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildSettingGroup(List<Widget> items) {
     return Column(
       children: items
-          .map(
-            (item) => Padding(
-              padding: const EdgeInsets.all(2),
-              child: item,
-            ),
-          )
+          .map((item) => Padding(padding: const EdgeInsets.all(2), child: item))
           .toList(),
     );
   }
