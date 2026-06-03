@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
 import '../../../core/di/injection.dart';
@@ -8,7 +9,11 @@ import '../../../core/routes/app_routes.dart';
 class SetNewPasswordScreen extends StatefulWidget {
   final String email;
   final String code;
-  const SetNewPasswordScreen({super.key, required this.email, required this.code});
+  const SetNewPasswordScreen({
+    super.key,
+    required this.email,
+    required this.code,
+  });
 
   @override
   State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
@@ -16,7 +21,8 @@ class SetNewPasswordScreen extends StatefulWidget {
 
 class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
@@ -120,10 +126,12 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       border: Border.all(color: const Color(0xFFE2E8F0)),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_forward, color: Colors.black, size: 18),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black,
+                        size: 18,
+                      ),
+                      onPressed: () => context.pop(),
                     ),
                   ),
                 ),
@@ -138,7 +146,9 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                         ),
                         child: IntrinsicHeight(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24.0,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -175,7 +185,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: getBorderColor(), width: 1.5),
+                                    border: Border.all(
+                                      color: getBorderColor(),
+                                      width: 1.5,
+                                    ),
                                   ),
                                   child: TextField(
                                     controller: _passwordController,
@@ -183,17 +196,27 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                     textAlign: TextAlign.right,
                                     decoration: InputDecoration(
                                       hintText: "أدخل كلمة المرور",
-                                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
+                                      hintStyle: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                      ),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 14,
+                                          ),
                                       prefixIcon: IconButton(
                                         icon: Icon(
-                                          _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                          _obscurePassword
+                                              ? Icons.visibility_off_outlined
+                                              : Icons.visibility_outlined,
                                           color: Colors.grey,
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            _obscurePassword = !_obscurePassword;
+                                            _obscurePassword =
+                                                !_obscurePassword;
                                           });
                                         },
                                       ),
@@ -215,7 +238,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: getBorderColor(), width: 1.5),
+                                    border: Border.all(
+                                      color: getBorderColor(),
+                                      width: 1.5,
+                                    ),
                                   ),
                                   child: TextField(
                                     controller: _confirmPasswordController,
@@ -223,17 +249,27 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                     textAlign: TextAlign.right,
                                     decoration: InputDecoration(
                                       hintText: "أعد إدخال كلمة المرور",
-                                      hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
+                                      hintStyle: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 13,
+                                      ),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 14,
+                                          ),
                                       prefixIcon: IconButton(
                                         icon: Icon(
-                                          _obscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                          _obscureConfirmPassword
+                                              ? Icons.visibility_off_outlined
+                                              : Icons.visibility_outlined,
                                           color: Colors.grey,
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            _obscureConfirmPassword = !_obscureConfirmPassword;
+                                            _obscureConfirmPassword =
+                                                !_obscureConfirmPassword;
                                           });
                                         },
                                       ),
@@ -266,7 +302,9 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                         ? () => _onConfirm(context)
                                         : null,
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: isSuccess ? const Color(0xFF0F687D) : const Color(0xFFE9F0F4),
+                                      backgroundColor: isSuccess
+                                          ? const Color(0xFF0F687D)
+                                          : const Color(0xFFE9F0F4),
                                       elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(15),
@@ -274,21 +312,23 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                                     ),
                                     child: isLoading
                                         ? const SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
-                                        strokeWidth: 2,
-                                      ),
-                                    )
+                                            width: 20,
+                                            height: 20,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 2,
+                                            ),
+                                          )
                                         : Text(
-                                      "تأكيد",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: isSuccess ? Colors.white : const Color(0xFF98A9BC),
-                                      ),
-                                    ),
+                                            "تأكيد",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: isSuccess
+                                                  ? Colors.white
+                                                  : const Color(0xFF98A9BC),
+                                            ),
+                                          ),
                                   ),
                                 ),
                                 const SizedBox(height: 20),
@@ -362,11 +402,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                   const Text(
                     "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   const SizedBox(height: 28),
                   SizedBox(
@@ -376,10 +412,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       onPressed: () {
                         Navigator.of(dialogContext).pop();
                         if (parentContext.mounted) {
-                          Navigator.of(parentContext).pushNamedAndRemoveUntil(
-                            AppRoutes.emailLogin,
-                                (route) => route.isFirst,
-                          );
+                          GoRouter.of(parentContext).go(AppRouter.signIn);
                         }
                       },
                       style: ElevatedButton.styleFrom(

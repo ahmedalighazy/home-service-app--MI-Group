@@ -47,11 +47,12 @@ class PromoBannerCard extends StatelessWidget {
               Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
 
               Padding(
-                padding: EdgeInsetsDirectional.only(
-                  top: AppSizes.sectionOffset.h,
-                  start: AppSizes.padding.w,
-                ), // EdgeInsets.only(
-
+                padding: EdgeInsets.only(
+                  top: AppSizes.paddingLarge,
+                  right: AppSizes.padding,
+                  left: AppSizes.padding,
+                  bottom: AppSizes.padding,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,7 +76,7 @@ class PromoBannerCard extends StatelessWidget {
 
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.sectionOffset.w,
+                        start: AppSizes.paddingLarge,
                       ),
                       child: OldPrice(price: price),
                     ),
@@ -84,7 +85,7 @@ class PromoBannerCard extends StatelessWidget {
 
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingMedium.w,
+                        start: AppSizes.paddingMedium,
                       ),
                       child: Text(
                         offerPrice,
@@ -126,14 +127,16 @@ class OldPrice extends StatelessWidget {
           style: AppText.ibmPlexSansArabic12SemiBold.copyWith(fontSize: 14.sp),
         ),
 
-        Transform.rotate(
-          angle: -0.35,
-          child: Container(
-            width: 33.w,
-            height: 2.h,
-            decoration: BoxDecoration(
-              color: AppColors.errorRed,
-              borderRadius: BorderRadius.circular(AppSizes.radiusXL.r),
+        Positioned(
+          child: Transform.rotate(
+            angle: -0.35,
+            child: Container(
+              width: 33,
+              height: 2,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
+              ),
             ),
           ),
         ),

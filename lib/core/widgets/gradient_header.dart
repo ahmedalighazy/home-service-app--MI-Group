@@ -11,15 +11,15 @@ class GradientHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [AppColors.greenPrimary, AppColors.white],
         ),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(AppSizes.radiusXL),
-          bottomRight: Radius.circular(AppSizes.radiusXL),
+          bottomLeft: Radius.circular(AppSizes.radiusXLarge),
+          bottomRight: Radius.circular(AppSizes.radiusXLarge),
         ),
       ),
       child: child,

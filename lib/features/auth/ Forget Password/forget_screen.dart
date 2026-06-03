@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
 import '../../../core/di/injection.dart';
@@ -89,7 +90,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: AuthBackButton(
-                                    onTap: () => Navigator.pop(context),
+                                    onTap: () => context.pop(),
                                   ),
                                 ),
 
@@ -112,7 +113,8 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                   AppStrings.resetPassword,
                                   textAlign: TextAlign.center,
                                   style: AppText.ibmHeading22(
-                                      color: AppColors.dark),
+                                    color: AppColors.dark,
+                                  ),
                                 ),
 
                                 SizedBox(height: 10.h),
@@ -122,7 +124,8 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                   AppStrings.resetPasswordDescription,
                                   textAlign: TextAlign.center,
                                   style: AppText.ibmDescription14(
-                                      color: AppColors.secondaryText),
+                                    color: AppColors.secondaryText,
+                                  ),
                                 ),
 
                                 SizedBox(height: 32.h),
@@ -135,8 +138,7 @@ class _ForgetScreenState extends State<ForgetScreen> {
                                   prefixIcon: Icons.email_outlined,
                                   keyboardType: TextInputType.emailAddress,
                                   hasError: _hasError,
-                                  errorMessage:
-                                      'يرجى إدخال بريد إلكتروني صحيح',
+                                  errorMessage: 'يرجى إدخال بريد إلكتروني صحيح',
                                   onChanged: _onFieldChanged,
                                 ),
 
@@ -172,12 +174,9 @@ class _ForgetScreenState extends State<ForgetScreen> {
   void _handleState(BuildContext context, AuthState state) {
     // ── Code sent → navigate to verify screen ───────────
     if (state is ResetCodeSent) {
-      Navigator.of(context).pushNamed(
-        AppRoutes.verifyResetCode,
-        arguments: state.email,
-      );
+      context.push(AppRouter.verifyResetCode, extra: state.email);
 
-    // ── Network / server error ───────────────────────────
+      // ── Network / server error ───────────────────────────
     } else if (state is AuthError) {
       setState(() => _hasError = true);
       ScaffoldMessenger.of(context)

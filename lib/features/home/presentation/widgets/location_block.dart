@@ -30,7 +30,7 @@ class LocationBlock extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(label, style: AppText.ibmButton16()),
-              const SizedBox(width: AppSizes.spacingMin),
+              SizedBox(width: AppSizes.spacingMin),
               SvgPicture.asset(
                 IconsPath.arrow,
                 width: AppSizes.spacingSmall,
@@ -39,7 +39,7 @@ class LocationBlock extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: AppSizes.spacingMin),
+          SizedBox(height: AppSizes.spacingMin),
 
           // Address row with pin icon
           Row(
@@ -51,7 +51,7 @@ class LocationBlock extends StatelessWidget {
                 width: AppSizes.spacingLarge,
                 height: AppSizes.spacingLarge,
               ),
-              const SizedBox(width: AppSizes.spacingMin),
+              SizedBox(width: AppSizes.spacingMin),
               Flexible(
                 child: Text(
                   address,

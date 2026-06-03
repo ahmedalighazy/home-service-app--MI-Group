@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
 import '../../../core/di/injection.dart';
@@ -136,9 +137,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                             // ── Back button ──────────────────────────
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: AuthBackButton(
-                                onTap: () => Navigator.pop(context),
-                              ),
+                              child: AuthBackButton(onTap: () => context.pop()),
                             ),
 
                             SizedBox(height: 24.h),
@@ -156,10 +155,12 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                                       shape: BoxShape.circle,
                                       gradient: RadialGradient(
                                         colors: [
-                                          AppColors.greenPrimary
-                                              .withValues(alpha: 0.12),
-                                          AppColors.white
-                                              .withValues(alpha: 0.0),
+                                          AppColors.greenPrimary.withValues(
+                                            alpha: 0.12,
+                                          ),
+                                          AppColors.white.withValues(
+                                            alpha: 0.0,
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -181,7 +182,8 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               AppStrings.checkEmail,
                               textAlign: TextAlign.center,
                               style: AppText.ibmHeading22(
-                                  color: AppColors.dark),
+                                color: AppColors.dark,
+                              ),
                             ),
 
                             SizedBox(height: 12.h),
@@ -191,16 +193,17 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               textAlign: TextAlign.center,
                               text: TextSpan(
                                 style: AppText.ibmDescription14(
-                                    color: AppColors.secondaryText),
+                                  color: AppColors.secondaryText,
+                                ),
                                 children: [
                                   TextSpan(
-                                    text:
-                                        'تم إرسال رابط إعادة تعيين إلى ',
+                                    text: 'تم إرسال رابط إعادة تعيين إلى ',
                                   ),
                                   TextSpan(
                                     text: _truncateEmail(widget.email),
                                     style: AppText.ibmLink13(
-                                        color: AppColors.greenPrimary),
+                                      color: AppColors.greenPrimary,
+                                    ),
                                   ),
                                   const TextSpan(text: '\n'),
                                   TextSpan(
@@ -244,7 +247,8 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                                 Text(
                                   '${AppStrings.resendCodePromptAlt} ',
                                   style: AppText.ibmDescription14(
-                                      color: AppColors.secondaryText),
+                                    color: AppColors.secondaryText,
+                                  ),
                                 ),
                                 GestureDetector(
                                   onTap: isLoading
@@ -252,14 +256,16 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                                       : () => _onResend(context),
                                   child: Text(
                                     AppStrings.resendCodeLink,
-                                    style: AppText.ibmLink13(
-                                      color: isLoading
-                                          ? AppColors.placeholder
-                                          : AppColors.greenPrimary,
-                                    ).copyWith(
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: AppColors.greenPrimary,
-                                    ),
+                                    style:
+                                        AppText.ibmLink13(
+                                          color: isLoading
+                                              ? AppColors.placeholder
+                                              : AppColors.greenPrimary,
+                                        ).copyWith(
+                                          decoration: TextDecoration.underline,
+                                          decorationColor:
+                                              AppColors.greenPrimary,
+                                        ),
                                   ),
                                 ),
                               ],
@@ -299,14 +305,16 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                           showCursor: false,
                           enableInteractiveSelection: false,
                           inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
+                            FilteringTextInputFormatter.digitsOnly,
                           ],
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             counterText: '',
                           ),
                           style: const TextStyle(
-                              color: Colors.transparent, fontSize: 0),
+                            color: Colors.transparent,
+                            fontSize: 0,
+                          ),
                           cursorColor: Colors.transparent,
                         ),
                       ),
@@ -324,12 +332,12 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
   void _handleState(BuildContext context, AuthState state) {
     if (state is ResetCodeVerified) {
       setState(() => _fieldState = OtpFieldState.success);
-      final navigator = Navigator.of(context);
+      final router = GoRouter.of(context);
       Future.delayed(const Duration(milliseconds: 500), () {
         if (mounted) {
-          navigator.pushReplacementNamed(
-            AppRoutes.setNewPassword,
-            arguments: {'email': widget.email, 'code': _digits},
+          router.go(
+            AppRouter.setNewPassword,
+            extra: {'email': widget.email, 'code': _digits},
           );
         }
       });
@@ -338,39 +346,54 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(state.message,
-              style: AppText.ibmDescription14(color: AppColors.white)),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     } else if (state is AuthError) {
       setState(() => _fieldState = OtpFieldState.error);
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(state.message,
-              style: AppText.ibmDescription14(color: AppColors.white)),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     } else if (state is ResetCodeSent) {
       // Resend success feedback
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text('تم إعادة إرسال الرمز بنجاح',
-              style: AppText.ibmDescription14(color: AppColors.white)),
-          backgroundColor: AppColors.greenPrimary,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              'تم إعادة إرسال الرمز بنجاح',
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.greenPrimary,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     }
   }
 }

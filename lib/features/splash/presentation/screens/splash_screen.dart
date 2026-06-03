@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
@@ -25,12 +26,9 @@ class _SplashScreenState extends State<SplashScreen>
     // Animation that fades the logo in over 2 seconds
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 500),
     );
-    _fadeAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
+    _fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
     // Keep splash visible for 8 seconds before navigating
@@ -44,11 +42,14 @@ class _SplashScreenState extends State<SplashScreen>
 
   void _navigateFromSplash() async {
     if (!mounted) return;
+
     final bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
     final route = (onBoarding != null && onBoarding)
-        ? AppRoutes.login
-        : AppRoutes.onboarding;
-    Navigator.of(context).pushReplacementNamed(route);
+        ? AppRouter.signIn
+        : AppRouter.onboarding;
+
+    // Use GoRouter navigation
+    context.go(route);
   }
 
   @override
@@ -81,10 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
               height: 0.5.sh,
               child: Opacity(
                 opacity: 0.25,
-                child: Image.asset(
-                  AppAssets.topographicBg,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(AppAssets.topographicBg, fit: BoxFit.cover),
               ),
             ),
             // Centered logo that fades in

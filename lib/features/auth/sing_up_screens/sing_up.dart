@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'otp_screen/otp_screen.dart';
-import '../presentation/widgets/auth_back_button.dart';
-import '../presentation/widgets/auth_social_button.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/routes/app_routes.dart';
 
 class SingUp extends StatelessWidget {
   const SingUp({super.key});
@@ -15,182 +13,215 @@ class SingUp extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: 16.h),
-                  
-                  // ── Back button ──────────────────────────
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: AuthBackButton(
-                      onTap: () => Navigator.pop(context),
-                    ),
-                  ),
+                  const SizedBox(height: 16),
 
-                  SizedBox(height: 32.h),
-                  
                   // كلمة الترحيب
-                  Text(
+                  const Text(
                     'أهلاً بعودتك',
                     style: TextStyle(
-                      fontSize: 24.sp,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF1E293B),
+                      color: Color(0xFF1E293B),
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 32.h),
 
                   // حقل إدخال رقم الهاتف المصمم
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: const Color(0xFFE2E8F0)),
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
                         // كود الدولة والعلم (جهة اليمين بسبب محاذاة RTL)
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
                           child: Row(
                             children: [
-                              Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 20.sp),
-                              SizedBox(width: 4.w),
-                              Text(
-                                '+974',
-                                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                              const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.grey,
                               ),
-                              SizedBox(width: 8.w),
-                              Text('🇶🇦', style: TextStyle(fontSize: 18.sp)), // علم قطر كمثال
+                              const SizedBox(width: 4),
+                              const Text(
+                                '+974',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                '🇶🇦',
+                                style: TextStyle(fontSize: 18),
+                              ), // علم قطر كمثال
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 30.h,
-                          child: const VerticalDivider(color: Color(0xFFE2E8F0), width: 1),
+                        const SizedBox(
+                          height: 30,
+                          child: VerticalDivider(
+                            color: Color(0xFFE2E8F0),
+                            width: 1,
+                          ),
                         ),
                         // حقل كتابة رقم الهاتف
-                        Expanded(
+                        const Expanded(
                           child: TextField(
                             keyboardType: TextInputType.phone,
-                            textAlign: TextAlign.left, // الأرقام دائماً تُكتب يسار-يمين LTR
+                            textAlign: TextAlign
+                                .left, // الأرقام دائماً تُكتب يسار-يمين LTR
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
                               hintText: '5123 4567',
-                              hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                              hintStyle: TextStyle(color: Colors.grey),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 24.h),
+                  const SizedBox(height: 40),
 
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OtpScreen(phoneNumber: '+974 5123 4567'),
-                        ),
-                      );
+                      context.push(AppRouter.otp, extra: '+974 5123 4567');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0E5C6C),
                       foregroundColor: Colors.cyan,
-                      minimumSize: Size(double.infinity, 50.h),
+                      minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       elevation: 0,
                     ),
-                    child: Text(
+                    child: const Text(
                       'أرسل الكود',
-                      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 24.h),
+                  const SizedBox(height: 24),
 
                   // خط الفاصل (أو باستخدام)
                   Row(
                     children: [
                       Expanded(child: Divider(color: Colors.grey.shade300)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           'أو باستخدام',
-                          style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                          style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
                       ),
                       Expanded(child: Divider(color: Colors.grey.shade300)),
                     ],
                   ),
-                  SizedBox(height: 24.h),
+                  const SizedBox(height: 24),
 
                   // أزرار التواصل الاجتماعي
-                  AuthSocialButton(
+                  _buildSocialButton(
                     icon: Icons.g_mobiledata,
                     text: 'تسجيل عبر Google',
                     onTap: () {},
                   ),
-                  SizedBox(height: 12.h),
-                  AuthSocialButton(
+                  const SizedBox(height: 12),
+                  _buildSocialButton(
                     icon: Icons.apple,
                     text: 'تسجيل عبر Apple',
                     onTap: () {},
                   ),
-                  SizedBox(height: 24.h),
+                  const SizedBox(height: 24),
 
                   // المتابعة كضيف
                   TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'المتابعة كضيف',
                       style: TextStyle(
-                        fontSize: 14.sp,
-                        color: const Color(0xFF0F7F90),
+                        color: Color(0xFF0F7F90),
                         decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
 
                   // تسجيل الدخول
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('لديك حساب بالفعل؟ ', style: TextStyle(color: Colors.grey, fontSize: 13.sp)),
+                      const Text(
+                        'لديك حساب بالفعل؟ ',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                       GestureDetector(
                         onTap: () {},
-                        child: Text(
+                        child: const Text(
                           'تسجيل الدخول',
                           style: TextStyle(
-                            fontSize: 13.sp,
-                            color: const Color(0xFF0F7F90),
+                            color: Color(0xFF0F7F90),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 40.h),
+                  const SizedBox(height: 60),
 
                   // نص الشروط والأحكام في الأسفل
-                  Text(
+                  const Text(
                     'بتسجيل الدخول، أنت توافق على الشروط والأحكام وسياسة الخصوصية',
-                    style: TextStyle(color: Colors.grey, fontSize: 10.sp),
+                    style: TextStyle(color: Colors.grey, fontSize: 10),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSocialButton({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return OutlinedButton(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: Colors.grey.shade200),
+        minimumSize: const Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 28, color: Colors.black87),
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }
