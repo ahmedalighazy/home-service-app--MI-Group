@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// A reusable social login button (Google, Apple, etc.) for auth screens.
+/// Supports both icon images (assets) and IconData.
 ///
-/// Usage:
+/// Usage with IconData:
 /// ```dart
 /// AuthSocialButton(
 ///   icon: Icons.g_mobiledata,
@@ -11,17 +12,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 ///   onTap: () => _handleGoogleLogin(),
 /// )
 /// ```
+///
+/// Usage with image asset:
+/// ```dart
+/// AuthSocialButton(
+///   iconPath: AppAssets.iconGoogle,
+///   text: 'تسجيل عبر Google',
+///   onTap: () => _handleGoogleLogin(),
+/// )
+/// ```
 class AuthSocialButton extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
+  final String? iconPath;
   final String text;
   final VoidCallback onTap;
 
   const AuthSocialButton({
     super.key,
-    required this.icon,
+    this.icon,
+    this.iconPath,
     required this.text,
     required this.onTap,
-  });
+  }) : assert(icon != null || iconPath != null, 
+         'Either icon or iconPath must be provided');
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +50,18 @@ class AuthSocialButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 28.sp, color: Colors.black87),
+          // Show either IconData or Image asset
+          if (iconPath != null)
+            Image.asset(
+              iconPath!,
+              width: 24.w,
+              height: 24.w,
+            )
+          else if (icon != null)
+            Icon(icon, size: 28.sp, color: Colors.black87),
+          
           SizedBox(width: 8.w),
+          
           Text(
             text,
             style: TextStyle(

@@ -144,8 +144,8 @@ class _SingInState extends State<SingIn> {
                       // ── Google ───────────────────────────────────
                       AuthSocialButton(
                         iconPath: AppAssets.iconGoogle,
-                        label: AppStrings.signUpWithGoogle,
-                        onPressed: () {},
+                        text: AppStrings.signUpWithGoogle,
+                        onTap: () {},
                       ),
 
                       SizedBox(height: 12.h),
@@ -153,8 +153,8 @@ class _SingInState extends State<SingIn> {
                       // ── Apple ────────────────────────────────────
                       AuthSocialButton(
                         iconPath: AppAssets.iconApple,
-                        label: AppStrings.signUpWithApple,
-                        onPressed: () {},
+                        text: AppStrings.signUpWithApple,
+                        onTap: () {},
                       ),
 
                       SizedBox(height: 32.h),
