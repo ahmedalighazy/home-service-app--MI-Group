@@ -56,10 +56,17 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
+      // TODO: replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
-      emit(ResetPasswordSuccess());
+
+      // Simulate: password "error" triggers failure, anything else = success
+      if (newPassword == 'error') {
+        emit(ResetPasswordError('فشل تعيين كلمة المرور الجديدة، يرجى المحاولة مرة أخرى'));
+      } else {
+        emit(ResetPasswordSuccess());
+      }
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(ResetPasswordError('حدث خطأ في الاتصال، يرجى المحاولة مرة أخرى'));
     }
   }
 
