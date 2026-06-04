@@ -42,4 +42,6 @@ class IconsPath {
   static const String emptyAddresses = 'assets/icons/union.svg';
   static const String emptyPayment = 'assets/icons/vector_I28_4071_1_370.svg';
   static const String checkSmall = 'assets/icons/check_small.svg';
+  static const String emptySubscriptions = 'assets/icons/vector_I28_4235_252_1385.svg';
+  static const String copy = 'assets/icons/copy.svg';
 }

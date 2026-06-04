@@ -5,9 +5,9 @@ import '../../../../core/extensions/extention_navigator.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
+import '../../../setting/presentation/widgets/setting_list_item.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
-import '../../../setting/presentation/widgets/setting_list_item.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -53,17 +53,23 @@ class ProfileScreen extends StatelessWidget {
                         SettingListItem(
                           icon: Icons.location_on_outlined,
                           title: AppStrings.myAddresses,
-                          onTap: () {},
+                          onTap: () {
+                            context.pushName(AppRoutes.savedAddresses);
+                          },
                         ),
                         SettingListItem(
                           icon: Icons.subscriptions_outlined,
                           title: AppStrings.mySubscriptions,
-                          onTap: () {},
+                          onTap: () {
+                            context.pushName(AppRoutes.subscriptions);
+                          },
                         ),
                         SettingListItem(
                           icon: Icons.credit_card,
                           title: AppStrings.paymentMethods,
-                          onTap: () {},
+                          onTap: () {
+                            context.pushName(AppRoutes.paymentMethods);
+                          },
                         ),
                       ]),
 
@@ -90,7 +96,9 @@ class ProfileScreen extends StatelessWidget {
                         SettingListItem(
                           icon: Icons.language,
                           title: AppStrings.contactUs,
-                          onTap: () {},
+                          onTap: () {
+                            context.pushName(AppRoutes.contactUs);
+                          },
                         ),
                       ]),
                     ],

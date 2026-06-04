@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
+import 'package:home_service_app/core/widgets/custom_text_field.dart';
 
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/helpers/spacing.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
-import '../../../../core/widgets/custom_buttom.dart';
-import '../../../../core/widgets/custom_text_field.dart';
+import '../widgets/forget_password_link.dart';
 
 class SetNewPasswordScreen extends StatelessWidget {
   const SetNewPasswordScreen({super.key});
@@ -15,6 +16,7 @@ class SetNewPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: const CustomAppBar(title: ''),
       body: SafeArea(
         child: Padding(
@@ -36,41 +38,28 @@ class SetNewPasswordScreen extends StatelessWidget {
               CustomTextField(
                 label: AppStrings.passwordNow,
                 hintText: AppStrings.enterPassword,
-                // fillColor: AppColors.inputBg,
-                textStyle: AppText.regularIbm(
-                  color: AppColors.placeholder,
-                  fontSize: 15,
-                ),
+                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
                 borderColor: AppColors.placeholder,
-                // AppColors.borderInputs
               ),
-              const ForgetPasswordText(),
+              const ForgetPasswordLink(),
               verticalSpace(16),
               CustomTextField(
-                textStyle: AppText.regularIbm(
-                  color: AppColors.placeholder,
-                  fontSize: 15,
-                ),
                 label: AppStrings.newPassword,
                 hintText: AppStrings.enterPassword,
+                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
                 borderColor: AppColors.placeholder,
               ),
               verticalSpace(16),
               CustomTextField(
-                textStyle: AppText.regularIbm(
-                  color: AppColors.placeholder,
-                  fontSize: 15,
-                ),
                 label: AppStrings.confirmPassword,
                 hintText: AppStrings.reEnterPassword,
+                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
                 borderColor: AppColors.placeholder,
               ),
               const Spacer(),
               CustomButtom(
                 text: AppStrings.confirm,
-                onTap: () {
-                  // TODO: Implement password reset logic
-                },
+                onTap: () {},
                 startColor: AppColors.bgDisabled,
                 endColor: AppColors.bgDisabled,
                 textStyle: AppText.ibmButton16(color: AppColors.secondaryGrey),
@@ -80,49 +69,6 @@ class SetNewPasswordScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ForgetPasswordText extends StatelessWidget {
-  const ForgetPasswordText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Spacer(),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 2,
-          children: [
-            Text(
-              'نسيت كلمة المرورو؟',
-              textAlign: TextAlign.center,
-              style: AppText.regularIbm(
-                fontSize: 14,
-
-                color: const Color(0xFF189AB4) /* primary */,
-              ),
-            ),
-
-            Container(
-              width: width(context) / 4,
-              decoration: const ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: 1,
-                    strokeAlign: BorderSide.strokeAlignCenter,
-                    color: Color(0xFF189AB4) /* primary */,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

@@ -489,4 +489,48 @@ class AppStrings {
   static const String emailAddressLabel = 'البريد الالكتروني';
   static const String supportEmailAddress = 'support@migroup.com';
   static const String privacyConfidentialityNote = 'جميع بياناتك وارائك تعامل بسرية تامة ولا تشارك مع اي طرف ثالت .';
+
+  // --- Subscriptions ---
+  static const String currentSubscriptions = 'الحالية';
+  static const String previousSubscriptions = 'السابقة';
+  static const String noActiveSubscriptions = 'لا توجد اشتراكات نشطة';
+  static const String subscribePackagesDesc = 'اشترك في إحدى الباقات لتوفير الوقت والحصول على زيارات منتظمة بسهولة.';
+  static const String browsePackagesBtn = 'استعراض الباقات';
+  static const String manageSubscription = 'إدارة الاشتراك';
+  static const String activeStatus = 'نشط';
+  static const String pausedStatus = 'موقوف';
+  static const String endedStatus = 'منتهي';
+  static const String weeklyCleaning = 'تنظيف منزلي أسبوعي';
+  static const String subscriptionTypeLabel = 'نوع الاشتراك';
+  static const String nextVisitLabel = 'الزيارة القادمة';
+  static const String expiryDateLabelTitle = 'ميعاد الانتهاء';
+  static const String timeLabel = 'الوقت';
+  static const String priceLabel = 'السعر';
+  static const String monthlyPriceSuffix = 'ر.ق / شهرياً';
+  static const String viewVisits = 'عرض الزيارات';
+  static const String viewVisitsDesc = 'عرض المواعيد القادمة وسجل الزيارات';
+  static const String pauseTemporarily = 'إيقاف مؤقت';
+  static const String pauseTemporarilyDesc = 'إيقاف الاشتراك لفترة مؤقتة';
+  static const String changePackage = 'تغيير الباقة';
+  static const String changePackageDesc = 'تغيير الباقة الحالية لباقة أخرى';
+  static const String cancelSubscription = 'إلغاء الاشتراك';
+  static const String cancelSubscriptionDesc = 'إيقاف الاشتراك نهائياً';
+  static const String reactivateBtn = 'إعادة التفعيل';
+  static const String subscribeAgainBtn = 'اشترك مرة أخرى';
+  static const String subscriptionPausedMsg = 'تم إيقاف الاشتراك مؤقتاً';
+
+  // --- Visits ---
+  static const String myVisits = 'زياراتي';
+  static const String upcomingVisits = 'القادمة';
+  static const String scheduledStatus = 'مجدولة';
+  static const String inProgressStatus = 'قيد التنفيذ';
+
+  // --- Subscription Popups ---
+  static const String pausePopupTitle = 'إيقاف الاشتراك مؤقتاً';
+  static const String pausePopupDesc = 'لن يتم جدولة أي زيارات أثناء فترة الإيقاف يمكنك إعادة تفعيلة في أي وقت';
+  static const String confirmPauseBtn = 'تأكيد الإيقاف';
+  static const String cancelPopupTitle = 'إلغاء الاشتراك';
+  static const String cancelPopupDesc = 'سيتم إلغاء جميع الزيارات القادمة لن تتمكن من استئناف الاشتراك بعد إلغائه';
+  static const String confirmCancelBtn = 'تأكيد الإلغاء';
+  static const String backBtn = 'رجوع';
 }

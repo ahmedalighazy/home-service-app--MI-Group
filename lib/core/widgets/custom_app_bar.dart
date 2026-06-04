@@ -5,10 +5,11 @@ import '../themes/colors/app_colors.dart';
 import '../themes/text/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.title, this.widget, this.onBack});
+  const CustomAppBar({super.key, required this.title, this.widget, this.onBack, this.bottom});
   final String title;
   final Widget? widget;
   final VoidCallback? onBack;
+  final PreferredSizeWidget? bottom;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -26,10 +27,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       // centerTitle: true,
       actions: [widget ?? const SizedBox.shrink()],
+      bottom: bottom,
     );
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight); // ✅ Required override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0.0));
 }

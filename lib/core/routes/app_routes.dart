@@ -13,6 +13,7 @@ import '../../features/profile/presentation/screens/favorites_screen.dart';
 import '../../features/profile/presentation/screens/saved_addresses_screen.dart';
 import '../../features/profile/presentation/screens/payment_methods_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
+import '../../features/profile/presentation/screens/contact_us_screen.dart';
 import '../../features/setting/presentation/screens/chat_detail_screen.dart';
 import '../../features/setting/presentation/screens/faq_screen.dart';
 import '../../features/setting/presentation/screens/help_center_screen.dart';
@@ -21,6 +22,10 @@ import '../../features/setting/presentation/screens/privacy_policy_screen.dart';
 import '../../features/setting/presentation/screens/set_new_password_screen.dart';
 import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
+import '../../features/profile/presentation/screens/subscriptions_screen.dart';
+import '../../features/profile/presentation/screens/subscription_detail_screen.dart';
+import '../../features/profile/presentation/screens/my_visits_screen.dart';
+import '../../features/profile/data/models/subscription_model.dart';
 import '../utils/l10n/app_strings.dart';
 
 class AppRoutes {
@@ -46,6 +51,10 @@ class AppRoutes {
   static const String chatDetail = '/chat-detail';
   static const String savedAddresses = '/saved-addresses';
   static const String paymentMethods = '/payment-methods';
+  static const String subscriptions = '/subscriptions';
+  static const String subscriptionDetail = '/subscription-detail';
+  static const String myVisits = '/my-visits';
+  static const String contactUs = '/contact-us';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     Route<dynamic> fadeRoute(Widget page) {
@@ -90,6 +99,13 @@ class AppRoutes {
         return fadeRoute(const SavedAddressesScreen());
       case paymentMethods:
         return fadeRoute(const PaymentMethodsScreen());
+      case subscriptions:
+        return fadeRoute(const SubscriptionsScreen());
+      case subscriptionDetail:
+        final subscription = settings.arguments as SubscriptionModel;
+        return fadeRoute(SubscriptionDetailScreen(subscription: subscription));
+      case myVisits:
+        return fadeRoute(const MyVisitsScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:
@@ -130,6 +146,9 @@ class AppRoutes {
         return fadeRoute(const LoginScreen());
       case home:
         return fadeRoute(const HomePage());
+      case contactUs:
+        return fadeRoute(const ContactUsScreen());
+
       default:
         return fadeRoute(
           const Scaffold(body: Center(child: Text(AppStrings.unknownRoute))),

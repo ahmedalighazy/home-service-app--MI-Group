@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/constants/icons_path.dart';
 import '../../../../core/extensions/extention_navigator.dart';
@@ -31,7 +30,7 @@ class EditProfileScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   SizedBox(
-                    width: 80.w,
+                    // width: 80.w,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -41,12 +40,8 @@ class EditProfileScreen extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
 
                           // width: width(context)*0.6,
-                          height: height(context) * 0.13,
+                          // height: height(context) * 0.13,
                           decoration: const ShapeDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(AppAssets.cleaningGuy),
-                              fit: BoxFit.cover,
-                            ),
                             shape: OvalBorder(
                               side: BorderSide(
                                 width: 1,
@@ -54,18 +49,25 @@ class EditProfileScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          child: CircleAvatar(
+                            backgroundColor: AppColors.white,
+                            radius: 48.r,
+                            child: Image.asset(AppAssets.cleaningGuy),
+                            // fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     ),
                   ),
 
                   Positioned(
-                    bottom: 0,
+                    bottom: -9,
                     right: 0,
+
                     child: CircleAvatar(
                       backgroundColor: AppColors.white,
 
-                      radius: 18.r,
+                      radius: 20.r,
                       child: SvgPicture.asset(
                         IconsPath.edit,
                         // width: 16.r,

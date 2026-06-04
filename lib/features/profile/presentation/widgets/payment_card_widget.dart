@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -21,27 +20,25 @@ class PaymentCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.paddingM.r),
+      padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
-        border: Border.all(color: AppColors.borderGrey),
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: AppColors.borderGrey.withValues(alpha: 0.5)),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.all(8.r),
-            decoration: BoxDecoration(
-              color: AppColors.inputBg,
-              borderRadius: BorderRadius.circular(8.r),
-            ),
+          // Logo
+          SizedBox(
+            width: 48.w,
             child: SvgPicture.asset(
               paymentMethod.iconPath,
-              width: 32.w,
-              height: 20.h,
+              fit: BoxFit.contain,
             ),
           ),
           horizontalSpace(12),
+          // Details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,42 +46,56 @@ class PaymentCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${paymentMethod.brand} •••• ${paymentMethod.lastFourDigits}',
-                      style: AppText.ibmHeading16(color: AppColors.primaryText),
+                      '**** ${paymentMethod.lastFourDigits}',
+                      style: AppText.ibmHeading16(color: AppColors.black),
                     ),
-                    if (paymentMethod.isDefault) ...[
-                      horizontalSpace(8),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.badgeBlue,
-                          borderRadius: BorderRadius.circular(4.r),
-                        ),
-                        child: Text(
-                          'افتراضي',
-                          style: AppText.ibmDescription10(color: AppColors.white),
-                        ),
+                    const Spacer(),
+                    if (paymentMethod.isDefault)
+                      _buildDefaultBadge(),
+                    horizontalSpace(8),
+                    InkWell(
+                      onTap: onMoreTap,
+                      child: SvgPicture.asset(
+                        IconsPath.moreVertical,
+                        width: 18.w,
+                        height: 18.h,
+                        colorFilter: const ColorFilter.mode(AppColors.black, BlendMode.srcIn),
                       ),
-                    ],
+                    ),
                   ],
                 ),
-                verticalSpace(4),
-                Text(
-                  'ينتهي في ${paymentMethod.expiryDate}',
-                  style: AppText.ibmDescription12(color: AppColors.textLightGrey),
+                verticalSpace(8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      paymentMethod.cardHolderName,
+                      style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+                    ),
+                    Text(
+                      'تنتهي في ${paymentMethod.expiryDate}',
+                      style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          IconButton(
-            onPressed: onMoreTap,
-            icon: SvgPicture.asset(
-              IconsPath.moreVertical,
-              width: 20.w,
-              height: 20.h,
-            ),
-          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDefaultBadge() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: const Color(0xFF53AABF), // The teal color from image
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Text(
+        'افتراضي',
+        style: AppText.ibmDescription12(color: AppColors.white).copyWith(fontWeight: FontWeight.w600),
       ),
     );
   }

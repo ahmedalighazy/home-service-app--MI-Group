@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -55,7 +53,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundGrey,
+      backgroundColor: AppColors.white, // Screen usually has white background in MI apps
       appBar: CustomAppBar(
         title: AppStrings.paymentMethods,
         onBack: () => Navigator.pop(context),
@@ -72,13 +70,8 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                     onButtonPressed: _showAddCardBottomSheet,
                   )
                 : ListView(
-                    padding: EdgeInsets.all(AppSizes.paddingM.r),
+                    padding: EdgeInsets.all(16.r),
                     children: [
-                      Text(
-                        AppStrings.savedCards,
-                        style: AppText.ibmHeading16(color: AppColors.primaryText),
-                      ),
-                      verticalSpace(12),
                       ..._paymentMethods.map((method) => Padding(
                         padding: EdgeInsets.only(bottom: 12.h),
                         child: PaymentCardWidget(
@@ -88,53 +81,73 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                           },
                         ),
                       )),
-                      verticalSpace(8),
-                      TextButton.icon(
-                        onPressed: _showAddCardBottomSheet,
-                        icon: Icon(Icons.add, color: AppColors.primary, size: 20.r),
-                        label: Text(
-                          AppStrings.addNewCard,
-                          style: AppText.ibmHeading14(color: AppColors.primary),
-                        ),
-                        style: TextButton.styleFrom(
-                          alignment: Alignment.centerRight,
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
+                      verticalSpace(16),
+                      _buildAddCardButton(),
                     ],
                   ),
           ),
           if (_paymentMethods.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.all(AppSizes.paddingM.r),
-              child: Container(
-                padding: EdgeInsets.all(12.r),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: AppColors.borderGrey),
+            _buildFooterInfo(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAddCardButton() {
+    return InkWell(
+      onTap: _showAddCardBottomSheet,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 14.h),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.r),
+          border: Border.all(
+            color: AppColors.primary.withValues(alpha: 0.3),
+            style: BorderStyle.solid, // Should be dashed, but using solid with low opacity for now
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppStrings.addNewCard,
+              style: AppText.ibmHeading16(color: AppColors.primary),
+            ),
+            horizontalSpace(8),
+            Icon(Icons.add, color: AppColors.primary, size: 24.r),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooterInfo() {
+    return Padding(
+      padding: EdgeInsets.all(16.r),
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF3F4F6), // Light grey from image
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                AppStrings.defaultPaymentNotice,
+                style: AppText.ibmDescription14(color: AppColors.textLightGrey).copyWith(
+                  height: 1.5,
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(
-                      IconsPath.infoCircle,
-                      width: 20.w,
-                      height: 20.h,
-                      colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
-                    ),
-                    horizontalSpace(8),
-                    Expanded(
-                      child: Text(
-                        AppStrings.defaultPaymentNotice,
-                        style: AppText.ibmDescription12(color: AppColors.textLightGrey),
-                      ),
-                    ),
-                  ],
-                ),
+                textAlign: TextAlign.right,
               ),
             ),
-        ],
+            horizontalSpace(12),
+            Icon(
+              Icons.info_outline,
+              color: AppColors.textLightGrey,
+              size: 24.r,
+            ),
+          ],
+        ),
       ),
     );
   }
