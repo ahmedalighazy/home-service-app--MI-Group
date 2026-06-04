@@ -5,16 +5,17 @@ import '../themes/colors/app_colors.dart';
 import '../themes/text/app_text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.title, this.widget});
+  const CustomAppBar({super.key, required this.title, this.widget, this.onBack});
   final String title;
   final Widget? widget;
+  final VoidCallback? onBack;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: 0,
 
       backgroundColor: AppColors.white,
-      leading: const ArrowBack(),
+      leading: ArrowBack(onTap: onBack),
 
       title: Text(
         title,

@@ -16,7 +16,7 @@ class DeleteAccountScreen extends StatefulWidget {
   const DeleteAccountScreen({super.key});
 
   @override
-  _DeleteAccountScreenState createState() => _DeleteAccountScreenState();
+  State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
 }
 
 class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
@@ -111,7 +111,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               SizedBox(height: 20.h),
               Container(
                 decoration: ShapeDecoration(
-                  color: AppColors.bgDisabled.withOpacity(0.5),
+                  color: AppColors.bgDisabled.withValues(alpha: 0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

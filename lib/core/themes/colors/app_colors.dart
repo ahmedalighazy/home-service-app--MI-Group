@@ -115,4 +115,8 @@ class AppColors {
   static const Color secondary = Color(0xFF1E275C);
   static const Color iconPrimary = Color(0xFF030E51);
   static const Color primaryBlack = Color(0xFF1A1A1A);
+
+  // UI Specific Badges/Buttons
+  static const Color badgeBlue = Color(0xFF4DA3BF);
+  static const Color lightIndigo = Color(0xFFEDF1FA);
 }

@@ -7,10 +7,15 @@ class AppSizes {
   static const double radiusMedium = 12;
   static const double radiusSmall = 8;
   static const double radiusXL = 30;
+  static const double radiusM = 12;
+  static const double radiusCircular = 100;
 
   static const double paddingSmall = 8;
   static const double padding = 16;
   static const double paddingMedium = 12;
+  static const double paddingM = 12;
+  static const double paddingL = 20;
+  static const double paddingXL = 24;
 
   static const double spacingMin = 4;
   static const double spacingSmall = 8;

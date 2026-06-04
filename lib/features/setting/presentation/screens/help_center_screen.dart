@@ -60,10 +60,56 @@ class HelpCenterScreen extends StatelessWidget {
                     context.pushName(AppRoutes.chatDetail);
                   },
                 ),
+                verticalSpace(24),
+                _buildContactInfo(),
+                verticalSpace(32),
+                _buildPrivacyNote(),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildContactInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.contactUs,
+          style: AppText.ibmHeading16(color: AppColors.primaryText),
+        ),
+        verticalSpace(16),
+        _buildContactRow(Icons.phone_outlined, AppStrings.customerServiceNumber),
+        verticalSpace(12),
+        _buildContactRow(Icons.email_outlined, AppStrings.supportEmailAddress),
+      ],
+    );
+  }
+
+  Widget _buildContactRow(IconData icon, String value) {
+    return Row(
+      children: [
+        Icon(icon, color: AppColors.greenPrimary, size: 20.r),
+        horizontalSpace(12),
+        Text(
+          value,
+          style: AppText.ibmDescription14(color: AppColors.primaryText),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPrivacyNote() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Text(
+          AppStrings.privacyConfidentialityNote,
+          textAlign: TextAlign.center,
+          style: AppText.ibmDescription12(color: AppColors.textLightGrey),
+        ),
       ),
     );
   }

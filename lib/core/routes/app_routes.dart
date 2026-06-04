@@ -10,6 +10,8 @@ import '../../features/onboarding/presentation/widgets/onboarding_step_two_stati
 import '../../features/profile/presentation/screens/delete_account_screen.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/favorites_screen.dart';
+import '../../features/profile/presentation/screens/saved_addresses_screen.dart';
+import '../../features/profile/presentation/screens/payment_methods_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/setting/presentation/screens/chat_detail_screen.dart';
 import '../../features/setting/presentation/screens/faq_screen.dart';
@@ -42,6 +44,8 @@ class AppRoutes {
   static const String termsAndConditions = '/terms-and-conditions';
   static const String faq = '/faq';
   static const String chatDetail = '/chat-detail';
+  static const String savedAddresses = '/saved-addresses';
+  static const String paymentMethods = '/payment-methods';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     Route<dynamic> fadeRoute(Widget page) {
@@ -82,6 +86,10 @@ class AppRoutes {
         return fadeRoute(const FAQScreen());
       case chatDetail:
         return fadeRoute(const ChatDetailScreen());
+      case savedAddresses:
+        return fadeRoute(const SavedAddressesScreen());
+      case paymentMethods:
+        return fadeRoute(const PaymentMethodsScreen());
       case onboarding:
         return fadeRoute(const OnboardingScreen());
       case onboarding1Static:

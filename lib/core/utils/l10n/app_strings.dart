@@ -459,4 +459,34 @@ class AppStrings {
   static const String typeMessageHint = 'اكتب رسالتك...';
   static const String supportMsg1 = 'مرحباً أحمد، كيف يمكننا مساعدتك اليوم؟';
   static const String userMsg1 = 'أريد الاستفسار عن موعد الزيارة القادم.';
+
+  // --- Saved Addresses ---
+  static const String noAddressesYet = 'لا توجد عناوين أخرى';
+  static const String addFavoriteAddressesDesc = 'أضف عناوينك المفضلة للوصول السريع إليها أثناء الحجز.';
+  static const String addAddressBtn = 'اضافة عنوان';
+  static const String savedAddressesHeader = 'العناوين';
+  static const String homeAddress = 'المنزل';
+  static const String workAddress = 'العمل';
+  static const String deleteAddressTitle = 'حذف العنوان';
+  static const String deleteDefaultAddressDesc = 'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
+
+  // --- Payment Methods ---
+  static const String noSavedPaymentMethods = 'لا توجد طرق دفع محفوظة';
+  static const String addPaymentMethodDesc = 'قم بإضافة وسيلة دفع لتسهيل إتمام الطلبات بسرعة وأمان.';
+  static const String addPaymentMethodBtn = 'اضافة وسيلة دفع';
+  static const String defaultPaymentNotice = 'سيتم استخدام وسيلة الدفع الافتراضية تلقائياً لجميع الحجوزات القادمة. يمكنك تغيير هذا الإعداد في أي وقت قبل إتمام عملية الدفع.';
+  static const String cardNumberLabel = 'رقم البطاقه';
+  static const String cardHolderLabel = 'اسم حامل البطاقة';
+  static const String cardHolderPlaceholder = 'ادخل الاسم كما هوا علي البطاقة';
+  static const String expiryDateLabel = 'تاريخ الانتهاء';
+  static const String cvvLabel = 'رمز الامان';
+  static const String saveCardForLater = 'حفظ البطاقة لاستخدام لاحقا';
+
+  // --- Help Center Extra ---
+  static const String contactInfoLabel = 'معلومات التواصل';
+  static const String customerServiceNumberLabel = 'رقم خدمة العملاء';
+  static const String customerServiceNumber = '+974 3000 0000';
+  static const String emailAddressLabel = 'البريد الالكتروني';
+  static const String supportEmailAddress = 'support@migroup.com';
+  static const String privacyConfidentialityNote = 'جميع بياناتك وارائك تعامل بسرية تامة ولا تشارك مع اي طرف ثالت .';
 }

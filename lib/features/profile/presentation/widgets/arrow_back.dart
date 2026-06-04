@@ -5,12 +5,14 @@ import '../../../../core/themes/colors/app_colors.dart';
 class ArrowBack extends StatelessWidget {
   const ArrowBack({
     super.key,
+    this.onTap,
   });
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: onTap ?? () {
         Navigator.pop(context);
       },
       child: Padding(

@@ -143,6 +143,22 @@ class AppText {
     );
   }
 
+  static TextStyle ibmHeading16({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle ibmHeading14({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   /// Subheading or description style
   ///
   /// **Arabic UI Examples:**
@@ -164,6 +180,24 @@ class AppText {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle ibmDescription12({Color color = AppColors.secondaryText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle ibmDescription10({Color color = AppColors.secondaryText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 10.sp,
       fontWeight: FontWeight.w500,
       height: 1.5,
     );
