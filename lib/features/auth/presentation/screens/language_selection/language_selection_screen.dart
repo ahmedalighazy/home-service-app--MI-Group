@@ -1,11 +1,12 @@
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/image/app_assets.dart';
-import '../../../../core/utils/helpers/cache_helper.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
+import 'package:home_service_app/core/language/language_cubit.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -57,6 +58,11 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
     if (_selectedLang == null) return;
     await CacheHelper.saveData(key: 'language', value: _selectedLang!);
     if (!mounted) return;
+    if (_selectedLang == 'ar') {
+      context.read<LanguageCubit>().setArabic();
+    } else {
+      context.read<LanguageCubit>().setEnglish();
+    }
     Navigator.of(context).pushReplacementNamed(AppRoutes.login);
   }
 
@@ -100,7 +106,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                 height: 250.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.greenPrimary.withOpacity(0.15),
+                  color: AppColors.greenPrimary.withValues(alpha: 0.15),
                 ),
               ),
             ),
@@ -112,7 +118,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                 height: 300.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.dark.withOpacity(0.3),
+                  color: AppColors.dark.withValues(alpha: 0.3),
                 ),
               ),
             ),
@@ -135,9 +141,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                           height: 90.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.white.withOpacity(0.12),
+                            color: AppColors.white.withValues(alpha: 0.12),
                             border: Border.all(
-                              color: AppColors.white.withOpacity(0.25),
+                              color: AppColors.white.withValues(alpha: 0.25),
                               width: 1.5,
                             ),
                           ),
@@ -165,7 +171,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                           'Choose Your Language',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                            color: AppColors.white.withOpacity(0.7),
+                            color: AppColors.white.withValues(alpha: 0.7),
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
                           ),
@@ -177,7 +183,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                           'يمكنك تغيير اللغة لاحقاً من الإعدادات',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.ibmPlexSansArabic(
-                            color: AppColors.white.withOpacity(0.55),
+                            color: AppColors.white.withValues(alpha: 0.55),
                             fontSize: 13.sp,
                           ),
                         ),
@@ -227,13 +233,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                                       )
                                     : null,
                                 color: _selectedLang == null
-                                    ? AppColors.white.withOpacity(0.15)
+                                    ? AppColors.white.withValues(alpha: 0.15)
                                     : null,
                                 boxShadow: _selectedLang != null
                                     ? [
                                         BoxShadow(
                                           color: AppColors.greenPrimary
-                                              .withOpacity(0.4),
+                                              .withValues(alpha: 0.4),
                                           blurRadius: 20,
                                           offset: const Offset(0, 8),
                                         ),
@@ -297,17 +303,17 @@ class _LanguageCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
           color: isSelected
-              ? AppColors.white.withOpacity(0.18)
-              : AppColors.white.withOpacity(0.07),
+              ? AppColors.white.withValues(alpha: 0.18)
+              : AppColors.white.withValues(alpha: 0.07),
           border: Border.all(
             color:
-                isSelected ? AppColors.white : AppColors.white.withOpacity(0.2),
+                isSelected ? AppColors.white : AppColors.white.withValues(alpha: 0.2),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppColors.greenPrimary.withOpacity(0.25),
+                    color: AppColors.greenPrimary.withValues(alpha: 0.25),
                     blurRadius: 16,
                     offset: const Offset(0, 4),
                   ),
@@ -339,7 +345,7 @@ class _LanguageCard extends StatelessWidget {
                     Text(
                       subName,
                       style: GoogleFonts.inter(
-                        color: AppColors.white.withOpacity(0.6),
+                        color: AppColors.white.withValues(alpha: 0.6),
                         fontSize: 13.sp,
                       ),
                     ),
@@ -360,7 +366,7 @@ class _LanguageCard extends StatelessWidget {
                   border: Border.all(
                     color: isSelected
                         ? AppColors.white
-                        : AppColors.white.withOpacity(0.4),
+                        : AppColors.white.withValues(alpha: 0.4),
                     width: 2,
                   ),
                 ),

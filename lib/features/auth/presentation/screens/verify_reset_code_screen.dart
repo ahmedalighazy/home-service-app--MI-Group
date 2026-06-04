@@ -3,11 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/common/auth_back_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/common/auth_gradient_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/otp/otp_circles_row.dart';
 
 class VerifyResetCodeScreen extends StatefulWidget {
   final String email;
@@ -117,12 +121,13 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
         },
         builder: (context, state) {
           final isLoading = state is AuthLoading;
+          final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
           return Scaffold(
             backgroundColor: AppColors.white,
             resizeToAvoidBottomInset: true,
             body: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
               child: SafeArea(
                 child: Column(
                   children: [
@@ -137,23 +142,11 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
 
                             // ── Back button ────────────────────────────
                             Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
+                              alignment: isArabic
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: AuthBackButton(
                                 onTap: () => Navigator.pop(context),
-                                child: Container(
-                                  width: 40.w,
-                                  height: 40.w,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: AppColors.borderInputs),
-                                    color: AppColors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 15.sp,
-                                    color: AppColors.primaryText,
-                                  ),
-                                ),
                               ),
                             ),
 
@@ -161,7 +154,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
 
                             // ── Title ──────────────────────────────────
                             Text(
-                              'تحقق من بريدك',
+                              isArabic ? 'تحقق من بريدك' : 'Verify Email',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.dark,
@@ -173,7 +166,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                             SizedBox(height: 10.h),
 
                             Text(
-                              'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى',
+                              AppStrings.enterVerificationCode,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.secondaryText,
@@ -200,7 +193,14 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                             SizedBox(height: 44.h),
 
                             // ── OTP circles ────────────────────────────
-                            _buildOtpRow(),
+                            OtpCirclesRow(
+                              digits: _digits,
+                              length: _length,
+                              hasError: _hasError,
+                              isSuccess: _isSuccess,
+                              shakeAnimation: _shakeAnim,
+                              onTap: () => _focusNode.requestFocus(),
+                            ),
 
                             SizedBox(height: 32.h),
 
@@ -208,7 +208,9 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
                                 child: Text(
-                                  'الرمز غير صحيح، يرجى المحاولة مرة أخرى',
+                                  isArabic
+                                      ? 'الرمز غير صحيح، يرجى المحاولة مرة أخرى'
+                                      : 'Incorrect code, please try again',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.ibmPlexSansArabic(
                                     color: AppColors.errorRed,
@@ -221,15 +223,17 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: _digits.length == _length
-                                  ? _buildConfirmButton(
-                                key: const ValueKey('btn'),
-                                isLoading: isLoading,
-                                context: context,
-                              )
+                                  ? AuthGradientButton(
+                                      key: const ValueKey('btn'),
+                                      label: isArabic ? 'تأكيد' : 'Confirm',
+                                      isLoading: isLoading,
+                                      isSuccess: _isSuccess,
+                                      onPressed: () => _onVerify(context),
+                                    )
                                   : SizedBox(
-                                height: 54.h,
-                                key: const ValueKey('empty'),
-                              ),
+                                      height: 54.h,
+                                      key: const ValueKey('empty'),
+                                    ),
                             ),
 
                             SizedBox(height: 16.h),
@@ -247,12 +251,15 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                         keyboardType: TextInputType.number,
                         maxLength: _length,
                         showCursor: false,
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           counterText: '',
                         ),
-                        style: const TextStyle(color: Colors.transparent, fontSize: 1),
+                        style: const TextStyle(
+                            color: Colors.transparent, fontSize: 1),
                         cursorColor: Colors.transparent,
                       ),
                     ),
@@ -262,177 +269,6 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildOtpRow() {
-    return AnimatedBuilder(
-      animation: _shakeAnim,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(_hasError ? _shakeAnim.value : 0, 0),
-          child: child,
-        );
-      },
-      child: GestureDetector(
-        onTap: () => _focusNode.requestFocus(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(_length, (i) {
-            final hasDigit = i < _digits.length;
-            final isCurrent = i == _digits.length;
-
-            Color borderColor;
-            Color fillColor;
-            Color textColor;
-
-            if (_hasError && hasDigit) {
-              borderColor = AppColors.errorRed;
-              fillColor = AppColors.bgError;
-              textColor = AppColors.errorRed;
-            } else if (_isSuccess && hasDigit) {
-              borderColor = AppColors.greenPrimary;
-              fillColor = AppColors.light;
-              textColor = AppColors.greenPrimary;
-            } else if (hasDigit || isCurrent) {
-              borderColor = AppColors.greenPrimary;
-              fillColor = AppColors.white;
-              textColor = AppColors.primaryText;
-            } else {
-              borderColor = AppColors.borderInputs;
-              fillColor = AppColors.white;
-              textColor = AppColors.primaryText;
-            }
-
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              margin: EdgeInsets.symmetric(horizontal: 4.w),
-              width: 44.w,
-              height: 44.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: fillColor,
-                border: Border.all(color: borderColor, width: 1.5),
-                boxShadow: (hasDigit || isCurrent)
-                    ? [
-                  BoxShadow(
-                    color: (_hasError
-                        ? AppColors.errorRed
-                        : AppColors.greenPrimary)
-                        .withValues(alpha: 0.12),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-                    : [],
-              ),
-              child: Center(
-                child: hasDigit
-                    ? Text(
-                  _digits[i],
-                  style: GoogleFonts.ibmPlexSansArabic(
-                    color: textColor,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-                    : isCurrent
-                    ? _BlinkingCursor()
-                    : null,
-              ),
-            );
-          }),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConfirmButton({
-    Key? key,
-    required bool isLoading,
-    required BuildContext context,
-  }) {
-    return GestureDetector(
-      key: key,
-      onTap: isLoading ? null : () => _onVerify(context),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        width: double.infinity,
-        height: 54.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.r),
-          gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [Color(0xFF0A434E), Color(0xFF189AB4)],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF189AB4).withValues(alpha: 0.3),
-              blurRadius: 14,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Center(
-          child: isLoading
-              ? SizedBox(
-            width: 22.w,
-            height: 22.w,
-            child: const CircularProgressIndicator(
-              color: Colors.white,
-              strokeWidth: 2.5,
-            ),
-          )
-              : _isSuccess
-              ? Icon(Icons.check_rounded, color: Colors.white, size: 24.sp)
-              : Text(
-            'تأكيد الرمز',
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: Colors.white,
-              fontSize: 17.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _BlinkingCursor extends StatefulWidget {
-  @override
-  State<_BlinkingCursor> createState() => _BlinkingCursorState();
-}
-
-class _BlinkingCursorState extends State<_BlinkingCursor>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    )..repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _ctrl,
-      child: Container(
-        width: 1.5.w,
-        height: 18.h,
-        color: AppColors.greenPrimary,
       ),
     );
   }

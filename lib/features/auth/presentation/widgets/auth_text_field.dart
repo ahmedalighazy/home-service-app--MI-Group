@@ -57,8 +57,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
             : AppColors.borderInputs;
     final double borderWidth = _isFocused ? 1.5 : 1.0;
 
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         // ── Label ──────────────────────────────────────────
         Text(
@@ -94,7 +96,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
                 controller: widget.controller,
                 obscureText: showObscure && _obscure,
                 keyboardType: widget.keyboardType,
-                textDirection: TextDirection.rtl,
+                textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
                 onChanged: widget.onChanged,
                 style: AppText.ibmDescription14(color: AppColors.primaryText),
                 decoration: InputDecoration(
@@ -132,7 +134,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
         if (widget.hasError && widget.errorMessage != null) ...[
           SizedBox(height: 6.h),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
             child: Text(
               widget.errorMessage!,
               style: AppText.ibmError12(),

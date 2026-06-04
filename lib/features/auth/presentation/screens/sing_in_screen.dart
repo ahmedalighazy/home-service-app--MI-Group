@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/image/app_assets.dart';
-import '../../../core/themes/text/app_text.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../logic/cubits/auth_cubit.dart';
-import '../logic/states/auth_state.dart';
-import '../presentation/widgets/auth_or_divider.dart';
-import '../presentation/widgets/auth_primary_button.dart';
-import '../presentation/widgets/auth_social_button.dart';
-import '../presentation/widgets/auth_text_field.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_or_divider.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_social_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/sign_in/remember_forgot_row.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/sign_in/sign_up_link_row.dart';
 
 class SingIn extends StatefulWidget {
   const SingIn({super.key});
@@ -68,9 +70,10 @@ class _SingInState extends State<SingIn> {
           listener: _handleState,
           builder: (context, state) {
             final isLoading = state is AuthLoading;
+            final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
             return Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
               child: SafeArea(
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
@@ -84,7 +87,7 @@ class _SingInState extends State<SingIn> {
                       // ── Title ────────────────────────────────────
                       Text(
                         AppStrings.welcomeBackAlt,
-                        textAlign: TextAlign.right,
+                        textAlign: isArabic ? TextAlign.right : TextAlign.left,
                         style: AppText.ibmHeading22(color: AppColors.dark),
                       ),
 
@@ -126,7 +129,7 @@ class _SingInState extends State<SingIn> {
                       SizedBox(height: 16.h),
 
                       // ── Remember me & Forgot password ────────────
-                      _RememberAndForgot(
+                      RememberForgotRow(
                         rememberMe: _rememberMe,
                         onRememberChanged: (v) =>
                             setState(() => _rememberMe = v ?? false),
@@ -160,7 +163,7 @@ class _SingInState extends State<SingIn> {
                       SizedBox(height: 32.h),
 
                       // ── Sign up link ─────────────────────────────
-                      _SignUpRow(
+                      SignUpLinkRow(
                         onTap: () {
                           if (Navigator.of(context).canPop()) {
                             Navigator.of(context).pop();
@@ -208,88 +211,5 @@ class _SingInState extends State<SingIn> {
       setState(() => _hasError = false);
       Navigator.of(context).pushReplacementNamed(AppRoutes.home);
     }
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-//  Remember me row + forgot password link
-// ─────────────────────────────────────────────────────────────
-class _RememberAndForgot extends StatelessWidget {
-  final bool rememberMe;
-  final ValueChanged<bool?> onRememberChanged;
-  final VoidCallback onForgotTap;
-
-  const _RememberAndForgot({
-    required this.rememberMe,
-    required this.onRememberChanged,
-    required this.onForgotTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        // Remember me
-        Row(
-          children: [
-            SizedBox(
-              width: 20.w,
-              height: 20.w,
-              child: Checkbox(
-                value: rememberMe,
-                activeColor: AppColors.greenPrimary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                onChanged: onRememberChanged,
-              ),
-            ),
-            SizedBox(width: 8.w),
-            Text(
-              AppStrings.rememberMe,
-              style: AppText.ibmDescription14(color: AppColors.dark),
-            ),
-          ],
-        ),
-
-        // Forgot password
-        GestureDetector(
-          onTap: onForgotTap,
-          child: Text(
-            AppStrings.forgotPassword,
-            style: AppText.ibmLink13(color: AppColors.greenPrimary),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-//  "Don't have an account? Create one" row
-// ─────────────────────────────────────────────────────────────
-class _SignUpRow extends StatelessWidget {
-  final VoidCallback onTap;
-  const _SignUpRow({required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          AppStrings.dontHaveAccount,
-          style: AppText.ibmDescription14(color: AppColors.secondaryText),
-        ),
-        GestureDetector(
-          onTap: onTap,
-          child: Text(
-            AppStrings.createAccount,
-            style: AppText.ibmLink13(color: AppColors.greenPrimary),
-          ),
-        ),
-      ],
-    );
   }
 }
