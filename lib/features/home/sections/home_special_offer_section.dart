@@ -52,7 +52,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
               ),
 
               PositionedDirectional(
-                top: AppSizes.spacingXL.h,
+                top: AppSizes.spacingXLarge.h,
                 start: AppSizes.spacingSmall.w,
                 // end: AppSizes.spacingLarge.w,
                 child: Container(

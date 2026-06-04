@@ -10,7 +10,7 @@ class HomeCategoriesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         reverse: true,
@@ -20,20 +20,18 @@ class HomeCategoriesSection extends StatelessWidget {
             ServiceCategoryCard(
               iconPath: IconsPath.cleanerIcon,
               title: AppStrings.deepCleaning,
-              //AppStrings.institutionServices,
               onTap: () {},
             ),
 
-            const SizedBox(width: AppSizes.spacingMedium),
+            SizedBox(width: AppSizes.spacingMedium),
 
             ServiceCategoryCard(
               iconPath: IconsPath.manualCleanerIcon,
               title: AppStrings.homeCleaning,
-              //AppStrings.pestControl,
               onTap: () {},
             ),
 
-            const SizedBox(width: AppSizes.spacingMedium),
+            SizedBox(width: AppSizes.spacingMedium),
 
             ServiceCategoryCard(
               iconPath: IconsPath.bugIcon,
@@ -41,7 +39,7 @@ class HomeCategoriesSection extends StatelessWidget {
               onTap: () {},
             ),
 
-            const SizedBox(width: AppSizes.spacingMedium),
+            SizedBox(width: AppSizes.spacingMedium),
 
             ServiceCategoryCard(
               iconPath: IconsPath.institutionsIcon,

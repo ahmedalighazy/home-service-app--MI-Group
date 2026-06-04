@@ -11,21 +11,16 @@ class HomeHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GradientHeader(
+    return GradientHeader(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: AppSizes.spacingMedium),
-
-          HomeHeader(),
-
+          const HomeHeader(),
           SizedBox(height: AppSizes.spacingLarge),
-
-          HomeSearchField(),
-
+          const HomeSearchField(),
           SizedBox(height: AppSizes.spacingLarge),
-
-          PromoBannerCard(
+          const PromoBannerCard(
             title: 'أنس أعمال التنظيف بعد العمل',
             subTitle: 'تنظيف بالساعة',
             price: '120',
@@ -33,7 +28,6 @@ class HomeHeaderSection extends StatelessWidget {
             promoCode: 'CLEAN15',
             imagePath: AppAssets.banner,
           ),
-
           SizedBox(height: AppSizes.spacingLarge),
         ],
       ),

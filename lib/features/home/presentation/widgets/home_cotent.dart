@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/widgets/gradient_header.dart';
@@ -9,7 +10,6 @@ import 'package:home_service_app/features/home/presentation/widgets/promo_banner
 import 'package:home_service_app/features/home/presentation/widgets/service_card.dart';
 import 'package:home_service_app/features/home/presentation/widgets/service_category_card.dart';
 import 'package:home_service_app/features/home/presentation/widgets/special_offer_banner.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
@@ -54,25 +54,25 @@ class HomeContent extends StatelessWidget {
               child: Row(
                 children: [
                   ServiceCategoryCard(
-                    icon: Iconsax.building_copy,
+                    iconPath: IconsPath.institutionsIcon,
                     title: 'خدمات المؤسسات',
                     onTap: () {},
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: AppSizes.spacingMedium),
                   ServiceCategoryCard(
-                    icon: Iconsax.security_safe_copy,
+                    iconPath: IconsPath.bugIcon,
                     title: 'خدمات مكافحة الحشرات',
                     onTap: () {},
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: AppSizes.spacingMedium),
                   ServiceCategoryCard(
-                    icon: Iconsax.broom_copy,
+                    iconPath: IconsPath.manualCleanerIcon,
                     title: 'تنظيف منزل',
                     onTap: () {},
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: AppSizes.spacingMedium),
                   ServiceCategoryCard(
-                    icon: Iconsax.heart_copy,
+                    iconPath: IconsPath.cleanerIcon,
                     title: 'تنظيف منزل عميق',
                     onTap: () {},
                   ),

@@ -35,15 +35,15 @@ class ServiceCategoryCard extends StatelessWidget {
               ),
               child: SvgPicture.asset(
                 iconPath,
-                width: AppSizes.iconLarge,
-                height: AppSizes.iconLarge,
+                width: AppSizes.iconSizeLarge,
+                height: AppSizes.iconSizeLarge,
                 colorFilter: const ColorFilter.mode(
                   AppColors.greenPrimary,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            const SizedBox(height: AppSizes.spacingSmall),
+            SizedBox(height: AppSizes.spacingSmall),
             Text(
               title,
               textAlign: TextAlign.center,
