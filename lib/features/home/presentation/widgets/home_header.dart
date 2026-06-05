@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/constants/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/home/presentation/widgets/location_block.dart';
 import 'package:home_service_app/features/home/presentation/widgets/notification_bell.dart';
 import 'package:home_service_app/features/home/presentation/widgets/user_avatar.dart';

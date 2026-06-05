@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/constants/app_strings.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({super.key, required this.title, this.onViewAll});
@@ -14,16 +14,16 @@ class SectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Text(
+          title,
+          style: AppText.ibmFieldLabel14(color: AppColors.primaryText),
+        ),
         TextButton(
           onPressed: onViewAll,
           child: Text(
             AppStrings.viewAll,
             style: AppText.ibmLink13(color: AppColors.secondaryGrey),
           ),
-        ),
-        Text(
-          title,
-          style: AppText.ibmFieldLabel14(color: AppColors.primaryText),
         ),
       ],
     );

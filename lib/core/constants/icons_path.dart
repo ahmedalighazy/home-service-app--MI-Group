@@ -10,4 +10,5 @@ class IconsPath {
   static const String cleanerIcon = 'assets/icons/cleaner_icon.svg';
   static const String institutionsIcon = 'assets/icons/institutions_icon.svg';
   static const String manualCleanerIcon = 'assets/icons/manual_cleaner.svg';
+  static const String arrowIcon = 'assets/icons/arrow_icon.svg';
 }

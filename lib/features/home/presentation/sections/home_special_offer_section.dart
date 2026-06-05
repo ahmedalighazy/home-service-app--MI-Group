@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
@@ -7,16 +6,22 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class HomeSpecialOfferSection extends StatelessWidget {
-  const HomeSpecialOfferSection({super.key});
+  const HomeSpecialOfferSection({
+    super.key,
+    required this.specialOfferTitle,
+    required this.serviceAvailable24h,
+  });
+  final String specialOfferTitle;
+  final String serviceAvailable24h;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding.w),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
       child: Container(
         height: AppSizes.bannerCardHeight,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           boxShadow: [
             BoxShadow(
               color: AppColors.black.withValues(alpha: .08),
@@ -26,7 +31,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           child: Stack(
             children: [
               Positioned.fill(
@@ -52,55 +57,67 @@ class HomeSpecialOfferSection extends StatelessWidget {
               ),
 
               PositionedDirectional(
-                top: AppSizes.spacingXLarge.h,
-                start: AppSizes.spacingSmall.w,
-                // end: AppSizes.spacingLarge.w,
+                top: AppSizes.spacingXLarge,
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: AppSizes.padding.w,
-                    vertical: AppSizes.paddingSmall.h,
+                    horizontal: AppSizes.paddingMedium,
+                    vertical: AppSizes.paddinMinHeight,
                   ),
                   decoration: BoxDecoration(
                     color: AppColors.greenPrimary,
-                    borderRadius: BorderRadius.circular(
-                      AppSizes.radiusMedium.r,
+                    borderRadius: BorderRadiusDirectional.only(
+                      topEnd: Radius.circular(AppSizes.radiusMedium),
                     ),
                   ),
                   child: Text(
-                    'عروض مخصصة للشركات والمؤسسات',
+                    specialOfferTitle,
                     style: AppText.ibmFieldLabel14(color: AppColors.white),
                   ),
                 ),
               ),
               PositionedDirectional(
-                bottom: AppSizes.spacingMedium.h,
-                start: AppSizes.spacingMedium.w,
+                bottom: AppSizes.spacingMedium,
+                start: AppSizes.spacingMedium,
                 child: Text(
-                  'خدمة سريعة خلال 24 ساعة',
+                  serviceAvailable24h,
                   style: AppText.ibmCaption11(color: AppColors.white),
                 ),
               ),
+              //
               PositionedDirectional(
                 end: 0,
                 bottom: 0,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.greenPrimary,
-                    foregroundColor: AppColors.white,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24.w,
-                      vertical: 12.h,
-                    ),
-                    shape: RoundedRectangleBorder(
+                child: Material(
+                  color: Colors.transparent,
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [AppColors.greenPrimary, AppColors.dark],
+                      ),
                       borderRadius: BorderRadiusDirectional.only(
-                        topStart: Radius.circular(AppSizes.radiusLarge.r),
+                        topStart: Radius.circular(AppSizes.radiusLarge),
                       ),
                     ),
-                  ),
-                  child: Text(
-                    AppStrings.bookNow,
-                    style: AppText.ibmFieldLabel14(color: AppColors.white),
+                    child: InkWell(
+                      borderRadius: BorderRadiusDirectional.only(
+                        topStart: Radius.circular(AppSizes.radiusLarge),
+                      ).resolve(Directionality.of(context)),
+                      onTap: () {},
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.paddingLarge,
+                          vertical: AppSizes.paddingSmallHeight,
+                        ),
+                        child: Text(
+                          AppStrings.bookNow,
+                          style: AppText.ibmFieldLabel14(
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -17,9 +17,13 @@ class AppSizes {
   static double get radiusXLarge => 30.r;
 
   // ============ Padding ============
+  static double get paddinMinHeight => 4.h;
+  static double get paddinMinWidth => 4.w;
   static double get paddingSmall => 8.w;
+  static double get paddingSmallHeight => 8.w;
   static double get paddingMedium => 12.w;
   static double get padding => 16.w;
+  static double get paddingHeight => 16.h;
   static double get paddingLarge => 24.w;
   static double get paddingXLarge => 32.w;
   static double get paddingXXLarge => 60.w;
@@ -49,13 +53,16 @@ class AppSizes {
 
   static const double sectionOffset = 60;
 
-  static const double cardWidth = 160;
-  static const double cardImageHeight = 120;
+  static double get cardWidth => 130.w;
+  static double get cardImageHeight => 120.h;
+
+  static double get arrowIconHeight => 32.h;
+  static double get arrowIconWidth => 32.w;
 
   static const double categoryCardWidth = 85;
   static const double categoryIconContainerSize = 70;
 
-  static double get bannerCardHeight => 220.h;
+  static double get bannerCardHeight => 165.h;
   static double get homeToBoxAdapterHeight => 24.h;
 
   // ============ Button Sizes ============

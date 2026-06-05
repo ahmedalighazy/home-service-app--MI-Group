@@ -10,7 +10,7 @@ import 'core/utils/helpers/cache_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  await setupGetIt();
+  configureDependencies();
 
   runApp(const HomeServiceApp());
 }
