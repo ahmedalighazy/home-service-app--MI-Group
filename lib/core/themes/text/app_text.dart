@@ -187,6 +187,14 @@ class AppText {
     );
   }
 
+  static TextStyle ibmFieldLabel12({Color color = AppColors.iconPrimary}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
   /// Field input text or hint placeholder style
   ///
   /// **Arabic UI Examples:**

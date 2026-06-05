@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart';
-import 'package:home_service_app/booking/presentation/pages/bookings_content.dart';
-import 'package:home_service_app/features/home/sections/home_cotent.dart';
+import 'package:home_service_app/features/booking/presentation/pages/bookings_content.dart';
+import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:home_service_app/features/home/presentation/pages/home_cotent.dart';
 import 'package:home_service_app/features/profile/screen/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +18,10 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeContent(),
+    BlocProvider(
+      create: (_) => getIt<HomeCubit>()..getHomeData(),
+      child: const HomeContent(),
+    ),
     const BookingsContent(),
     const ProfileScreen(),
   ];

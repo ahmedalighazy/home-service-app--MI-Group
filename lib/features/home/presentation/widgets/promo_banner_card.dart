@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/constants/app_strings.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class PromoBannerCard extends StatelessWidget {
   const PromoBannerCard({
@@ -26,12 +26,12 @@ class PromoBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding.w),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
       child: Container(
         width: double.infinity,
         height: AppSizes.bannerCardHeight,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           boxShadow: [
             BoxShadow(
               color: AppColors.black.withValues(alpha: .05),
@@ -41,17 +41,15 @@ class PromoBannerCard extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           child: Stack(
             children: [
               Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
 
               Padding(
-                padding: EdgeInsets.only(
+                padding: EdgeInsetsDirectional.only(
                   top: AppSizes.paddingLarge,
-                  right: AppSizes.padding,
-                  left: AppSizes.padding,
-                  bottom: AppSizes.padding,
+                  start: AppSizes.padding,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +62,7 @@ class PromoBannerCard extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: AppSizes.spacingMin.h),
+                    SizedBox(height: AppSizes.spacingMin),
 
                     Text(
                       subTitle,
@@ -72,20 +70,20 @@ class PromoBannerCard extends StatelessWidget {
                       style: AppText.ibmPlexSansArabic12SemiBold,
                     ),
 
-                    SizedBox(height: AppSizes.spacingSmall.h),
+                    SizedBox(height: AppSizes.spacingSmall),
 
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingLarge,
+                        start: AppSizes.paddingXXLarge,
                       ),
                       child: OldPrice(price: price),
                     ),
 
-                    SizedBox(height: AppSizes.spacingMin.h),
+                    SizedBox(height: AppSizes.spacingMin),
 
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingMedium,
+                        start: AppSizes.padding,
                       ),
                       child: Text(
                         offerPrice,
@@ -112,6 +110,7 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
+// Old Price
 class OldPrice extends StatelessWidget {
   const OldPrice({super.key, required this.price});
 
@@ -145,6 +144,7 @@ class OldPrice extends StatelessWidget {
   }
 }
 
+// Promo Code Badge
 class PromoCodeBadge extends StatelessWidget {
   const PromoCodeBadge({super.key, required this.promoCode});
 
@@ -152,47 +152,45 @@ class PromoCodeBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(AppSizes.radiusSmall.r),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.secondary,
-          borderRadius: BorderRadiusDirectional.only(
-            topStart: Radius.circular(AppSizes.radiusLarge.r),
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.secondary,
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: Radius.circular(AppSizes.radius),
         ),
+      ),
 
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSizes.paddingSmall.w,
-                vertical: AppSizes.paddingSmall.h,
-              ),
-              child: Text(
-                promoCode,
-                style: AppText.ibmCaption11(color: AppColors.white),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingSmall,
+              //vertical: AppSizes.paddingSmall,
+            ),
+            child: Text(
+              promoCode,
+              style: AppText.ibmCaption11(color: AppColors.white),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingSmall,
+              vertical: AppSizes.paddingSmall,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.greenPrimary,
+              borderRadius: BorderRadiusDirectional.only(
+                topStart: Radius.circular(AppSizes.radius),
+                topEnd: Radius.zero,
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSizes.paddingSmall.w,
-                vertical: AppSizes.paddingSmall.h,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.greenPrimary,
-                borderRadius: BorderRadiusDirectional.only(
-                  topStart: Radius.circular(AppSizes.radiusLarge.r),
-                ),
-              ),
-              child: Text(
-                AppStrings.code,
-                style: AppText.ibmCaption11(color: AppColors.white),
-              ),
+            child: Text(
+              AppStrings.code,
+              style: AppText.ibmCaption11(color: AppColors.white),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

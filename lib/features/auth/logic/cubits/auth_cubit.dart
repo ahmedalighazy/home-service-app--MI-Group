@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import '../states/auth_state.dart';
 
+@injectable
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
@@ -56,12 +58,16 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      // TODO: replace with real API / Firebase call
+      //  replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
 
       // Simulate: password "error" triggers failure, anything else = success
       if (newPassword == 'error') {
-        emit(ResetPasswordError('فشل تعيين كلمة المرور الجديدة، يرجى المحاولة مرة أخرى'));
+        emit(
+          ResetPasswordError(
+            'فشل تعيين كلمة المرور الجديدة، يرجى المحاولة مرة أخرى',
+          ),
+        );
       } else {
         emit(ResetPasswordSuccess());
       }
@@ -83,7 +89,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> loginWithEmail(String email, String password) async {
     emit(AuthLoading());
     try {
-      // TODO: replace with real API / Firebase call
+      // replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
 
       // Simulate: wrong password triggers invalid-credentials state
@@ -100,12 +106,16 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyResetCode(String email, String code) async {
     emit(AuthLoading());
     try {
-      // TODO: replace with real API / Firebase call
+      // replace with real API / Firebase call
       await Future.delayed(const Duration(seconds: 2));
 
       // Simulate: code "000000" = wrong/expired, anything else = success
       if (code == '000000') {
-        emit(ResetCodeError('الرمز غير صحيح أو منتهي الصلاحية، يرجى المحاولة مرة أخرى'));
+        emit(
+          ResetCodeError(
+            'الرمز غير صحيح أو منتهي الصلاحية، يرجى المحاولة مرة أخرى',
+          ),
+        );
       } else {
         emit(ResetCodeVerified());
       }
@@ -117,7 +127,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyOtp(String phoneNumber, String code) async {
     emit(AuthLoading());
     try {
-      // TODO: replace with real Firebase / API verification
+      // replace with real Firebase / API verification
       await Future.delayed(const Duration(seconds: 2));
 
       // Simulate: code "000000" = wrong, anything else = success

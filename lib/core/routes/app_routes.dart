@@ -6,7 +6,6 @@ import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 
 // ============ Auth Screens ============
-import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_in/sing_in.dart';
 import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
