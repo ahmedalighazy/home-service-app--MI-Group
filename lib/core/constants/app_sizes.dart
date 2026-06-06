@@ -6,22 +6,28 @@ class AppSizes {
   // Private constructor to prevent instantiation
   AppSizes._();
 
+  static const double radius = 16;
+  static const double radiusMedium = 12;
+  static const double radiusSmall = 8;
+  static const double radiusXL = 30;
+  static const double radiusM = 12;
+  static const double radiusCircular = 100;
+
+  static const double paddingSmall = 8;
+  static const double paddingMedium = 12;
+  static const double paddingM = 12;
+  static const double paddingL = 20;
+  static const double paddingXL = 24;
   // ============ Avatar Sizes ============
   static double get avatarSize => 48.w;
 
-  // ============ Border Radius ============
-  static double get radiusSmall => 8.r;
-  static double get radiusMedium => 12.r;
-  static double get radius => 16.r;
   static double get radiusLarge => 24.r;
   static double get radiusXLarge => 30.r;
 
   // ============ Padding ============
   static double get paddinMinHeight => 4.h;
   static double get paddinMinWidth => 4.w;
-  static double get paddingSmall => 8.w;
   static double get paddingSmallHeight => 8.w;
-  static double get paddingMedium => 12.w;
   static double get padding => 16.w;
   static double get paddingHeight => 16.h;
   static double get paddingLarge => 24.w;
