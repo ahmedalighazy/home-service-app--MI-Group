@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
@@ -48,7 +48,6 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: AppColors.backgroundGrey,
         appBar: CustomAppBar(
           title: AppStrings.mySubscriptions,
           onBack: () => Navigator.pop(context),
@@ -75,10 +74,14 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
     );
   }
 
-  Widget _buildSubscriptionList(List<SubscriptionModel> subscriptions, bool isCurrent) {
+  Widget _buildSubscriptionList(
+    List<SubscriptionModel> subscriptions,
+    bool isCurrent,
+  ) {
     if (subscriptions.isEmpty) {
       return EmptyStateWidget(
-        iconPath: IconsPath.emptySubscriptions, // Assuming this exists or using a fallback
+        iconPath:
+            IconsPath.group590Svg, // Assuming this exists or using a fallback
         title: AppStrings.noActiveSubscriptions,
         subtitle: AppStrings.subscribePackagesDesc,
         buttonLabel: AppStrings.browsePackagesBtn,
@@ -98,8 +101,13 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             subscription: subscriptions[index],
             onTap: () {
               if (subscriptions[index].status == SubscriptionStatus.active) {
-                Navigator.pushNamed(context, AppRoutes.subscriptionDetail, arguments: subscriptions[index]);
-              } else if (subscriptions[index].status == SubscriptionStatus.paused) {
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.subscriptionDetail,
+                  arguments: subscriptions[index],
+                );
+              } else if (subscriptions[index].status ==
+                  SubscriptionStatus.paused) {
                 // Implement reactivate logic
               } else {
                 // Implement subscribe again logic

@@ -47,9 +47,9 @@ class HelpCenterItem extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(
-              IconsPath.container, // Arrow forward
-              width: 7.4.w,
-              height: 12.h,
+              IconsPath.vectorBook, // Arrow forward
+              width: 18.w,
+              height: 18.h,
             ),
             horizontalSpace(12),
 

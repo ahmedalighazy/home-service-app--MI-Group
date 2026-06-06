@@ -100,6 +100,8 @@ class AppColors {
 
   // Status Colors
   static const Color errorRed = Color(0xFFDC2626);
+  static const Color errorRed2 = Color(0xAAFBF3F3);
+
   static const Color bgError = Color(0xFFFEF2F2);
   static const Color bgHint = Color(0xFF84E0A6);
 

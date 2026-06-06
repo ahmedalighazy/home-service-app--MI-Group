@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final bool isOutlined;
   final double? flex;
-
+  final bool? porderRed;
   const CustomButton({
     super.key,
     required this.text,
@@ -19,6 +19,7 @@ class CustomButton extends StatelessWidget {
     required this.backgroundColor,
     required this.textColor,
     this.isOutlined = false,
+    this.porderRed,
     this.flex,
   });
 
@@ -27,29 +28,26 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 48.h,
-      child: Container(
-      decoration:isOutlined?   ShapeDecoration(
-    shape: RoundedRectangleBorder(
-      side: const BorderSide(
-        width: 1,
-        color: AppColors.redBorder,
-      ),
-      borderRadius: BorderRadius.circular(44),
-    ),
-  ):null,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: isOutlined ? AppColors.transparentColor : backgroundColor,
-            // side: isOutlined ? BorderSide(color: backgroundColor, width: 5,) : BorderSide.none,
+      child: GestureDetector(
+        onTap: onPressed,
+
+        child: Container(
+          decoration: ShapeDecoration(
+            color: isOutlined ? AppColors.white : backgroundColor,
+
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular( flex != null ? flex??0 : 18.r),
+              side: BorderSide(
+                width: 1,
+                color: !isOutlined ? AppColors.borderGrey : AppColors.redBorder,
+              ),
+              borderRadius: BorderRadius.circular(33),
             ),
           ),
-          child: Text(
-            text,
-            style: AppText.semiBoldIbm(color: textColor, fontSize: 16),
+          child: Center(
+            child: Text(
+              text,
+              style: AppText.semiBoldIbm(color: textColor, fontSize: 16),
+            ),
           ),
         ),
       ),

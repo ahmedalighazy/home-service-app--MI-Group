@@ -22,7 +22,7 @@ class ContactUsFooterNote extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPicture.asset(
-            IconsPath.shieldTick,
+            IconsPath.ok,
             colorFilter: const ColorFilter.mode(
               AppColors.dark,
               BlendMode.srcIn,

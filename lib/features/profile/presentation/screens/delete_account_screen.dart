@@ -59,10 +59,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             SizedBox(height: 24.h),
             const CustomWidgetDelete(),
             SizedBox(height: 8.h),
-            _ConfirmTextField(
-              controller: _confirmController,
-              isCorrect: _isTextCorrect,
-            ),
+            _ConfirmTextField(controller: _confirmController),
             SizedBox(height: 32.h),
             CustomButton(
               flex: 44,
@@ -72,7 +69,11 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                   : AppColors.red,
               textColor: AppColors.white,
               onPressed: _isTextCorrect
-                  ? () => showCannotDeleteDialog(context)
+                  ? () => showCannotDeleteDialog(
+                      context,
+                      'لا يمكن حذف الحساب',
+                      'لا يمكن حذف الحساب أثناء وجود اشتراكات أو زيارات مجدولة نشطة. يرجى إلغاء جميع المواعيد القادمة أولًا.',
+                    )
                   : () {},
             ),
             SizedBox(height: 12.h),
@@ -92,13 +93,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
 
 class _ConfirmTextField extends StatelessWidget {
   final TextEditingController controller;
-  final bool isCorrect;
 
-  const _ConfirmTextField({required this.controller, required this.isCorrect});
+  const _ConfirmTextField({required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final isCorrect = controller.text.trim() == 'حذف';
     final hasError = controller.text.isNotEmpty && !isCorrect;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

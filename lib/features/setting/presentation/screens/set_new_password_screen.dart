@@ -6,9 +6,9 @@ import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
-import 'package:home_service_app/core/widgets/custom_text_field.dart';
 
 import '../widgets/forget_password_link.dart';
+import '../widgets/password_text_field.dart';
 
 class SetNewPasswordScreen extends StatelessWidget {
   const SetNewPasswordScreen({super.key});
@@ -35,26 +35,20 @@ class SetNewPasswordScreen extends StatelessWidget {
                 style: AppText.ibmDescription14(color: AppColors.body),
               ),
               verticalSpace(32),
-              CustomTextField(
+              const PasswordTextField(
                 label: AppStrings.passwordNow,
                 hintText: AppStrings.enterPassword,
-                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
-                borderColor: AppColors.placeholder,
               ),
               const ForgetPasswordLink(),
               verticalSpace(16),
-              CustomTextField(
+              const PasswordTextField(
                 label: AppStrings.newPassword,
                 hintText: AppStrings.enterPassword,
-                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
-                borderColor: AppColors.placeholder,
               ),
               verticalSpace(16),
-              CustomTextField(
+              const PasswordTextField(
                 label: AppStrings.confirmPassword,
                 hintText: AppStrings.reEnterPassword,
-                textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
-                borderColor: AppColors.placeholder,
               ),
               const Spacer(),
               CustomButtom(

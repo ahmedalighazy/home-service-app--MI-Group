@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
-import '../widgets/empty_favorites_view.dart';
+import '../../../../core/widgets/empty_state_widget.dart';
 import '../widgets/favorite_item_card.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -13,15 +14,19 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool hasFavorites = MediaQuery.of(context).size.width > 0;
-
     return Scaffold(
       backgroundColor: AppColors.softWhite,
       appBar: const CustomAppBar(title: AppStrings.favorites),
       body: SafeArea(
-        child: hasFavorites
+        child: true
             ? _buildFavoritesList()
-            : const EmptyFavoritesView(),
+            : EmptyStateWidget(
+                iconPath: IconsPath.illustrationSvg,
+                title: AppStrings.noFavoritesYet,
+                subtitle: AppStrings.saveServicesToAccessLater,
+                onButtonPressed: () {},
+                buttonLabel: AppStrings.browseServices,
+              ),
       ),
     );
   }

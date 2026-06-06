@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 
 class DeleteRuleItem extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String title;
   final String description;
 
@@ -23,7 +24,7 @@ class DeleteRuleItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: AppColors.redDanger, size: 20.r),
+          SvgPicture.asset(icon),
           SizedBox(width: 12.w),
           Expanded(
             child: Column(
@@ -31,12 +32,18 @@ class DeleteRuleItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppText.mediumIbm(color: AppColors.textDarkGrey, fontSize: 14),
+                  style: AppText.mediumIbm(
+                    color: AppColors.textDarkGrey,
+                    fontSize: 14,
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   description,
-                  style: AppText.regularIbm(color: AppColors.textLightGrey, fontSize: 12),
+                  style: AppText.regularIbm(
+                    color: AppColors.textLightGrey,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -18,8 +17,8 @@ class ContactUsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: const CustomAppBar(title: AppStrings.helpCenter),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(AppSizes.paddingL.r),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +32,7 @@ class ContactUsScreen extends StatelessWidget {
             ContactCard(
               title: AppStrings.customerServiceNumberLabel,
               value: AppStrings.customerServiceNumber,
-              icon: IconsPath.phoneCall,
+              icon: IconsPath.phone,
               onCopy: () {},
             ),
             SizedBox(height: 16.h),
@@ -43,7 +42,7 @@ class ContactUsScreen extends StatelessWidget {
               icon: IconsPath.email,
               onCopy: () {},
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.4),
+            const Spacer(),
             const ContactUsFooterNote(),
           ],
         ),

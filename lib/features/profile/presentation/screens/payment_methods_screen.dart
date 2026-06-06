@@ -28,7 +28,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
       expiryDate: '12/26',
       brand: 'Visa',
       isDefault: true,
-      iconPath: IconsPath.visa,
+      iconPath: IconsPath.visaCard,
     ),
     PaymentMethodModel(
       id: '2',
@@ -37,7 +37,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
       expiryDate: '09/25',
       brand: 'Mastercard',
       isDefault: false,
-      iconPath: IconsPath.mastercard,
+      iconPath: IconsPath.logosMastercardSvg,
     ),
   ];
 
@@ -53,7 +53,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white, // Screen usually has white background in MI apps
+      // backgroundColor: AppColors.white, // Screen usually has white background in MI apps
       appBar: CustomAppBar(
         title: AppStrings.paymentMethods,
         onBack: () => Navigator.pop(context),
@@ -63,7 +63,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
           Expanded(
             child: _paymentMethods.isEmpty
                 ? EmptyStateWidget(
-                    iconPath: IconsPath.emptyPayment,
+                    iconPath: IconsPath.wallet05Svg,
                     title: AppStrings.noSavedPaymentMethods,
                     subtitle: AppStrings.addPaymentMethodDesc,
                     buttonLabel: AppStrings.addPaymentMethodBtn,
@@ -72,22 +72,23 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                 : ListView(
                     padding: EdgeInsets.all(16.r),
                     children: [
-                      ..._paymentMethods.map((method) => Padding(
-                        padding: EdgeInsets.only(bottom: 12.h),
-                        child: PaymentCardWidget(
-                          paymentMethod: method,
-                          onMoreTap: () {
-                            // Show options (Edit, Delete, Set as default)
-                          },
+                      ..._paymentMethods.map(
+                        (method) => Padding(
+                          padding: EdgeInsets.only(bottom: 12.h),
+                          child: PaymentCardWidget(
+                            paymentMethod: method,
+                            onMoreTap: () {
+                              // Show options (Edit, Delete, Set as default)
+                            },
+                          ),
                         ),
-                      )),
+                      ),
                       verticalSpace(16),
                       _buildAddCardButton(),
                     ],
                   ),
           ),
-          if (_paymentMethods.isNotEmpty)
-            _buildFooterInfo(),
+          if (_paymentMethods.isNotEmpty) _buildFooterInfo(),
         ],
       ),
     );
@@ -102,7 +103,8 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
           borderRadius: BorderRadius.circular(30.r),
           border: Border.all(
             color: AppColors.primary.withValues(alpha: 0.3),
-            style: BorderStyle.solid, // Should be dashed, but using solid with low opacity for now
+            style: BorderStyle
+                .solid, // Should be dashed, but using solid with low opacity for now
           ),
         ),
         child: Row(
@@ -131,20 +133,21 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
         ),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                AppStrings.defaultPaymentNotice,
-                style: AppText.ibmDescription14(color: AppColors.textLightGrey).copyWith(
-                  height: 1.5,
-                ),
-                textAlign: TextAlign.right,
-              ),
-            ),
-            horizontalSpace(12),
             Icon(
               Icons.info_outline,
               color: AppColors.textLightGrey,
               size: 24.r,
+            ),
+            horizontalSpace(12),
+
+            Expanded(
+              child: Text(
+                AppStrings.defaultPaymentNotice,
+                style: AppText.ibmDescription14(
+                  color: AppColors.textLightGrey,
+                ).copyWith(height: 1.5),
+                textAlign: TextAlign.right,
+              ),
             ),
           ],
         ),

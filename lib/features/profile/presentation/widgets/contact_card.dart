@@ -24,7 +24,7 @@ class ContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.r),
+      padding: EdgeInsets.all(12.r),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
@@ -39,20 +39,6 @@ class ContactCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _CopyButton(onCopy: onCopy),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(title, style: AppText.ibmHeading14(color: AppColors.black)),
-              SizedBox(height: 4.h),
-              Text(
-                value,
-                style: AppText.ibmDescription14(color: AppColors.textLightGrey),
-              ),
-            ],
-          ),
-          SizedBox(width: 16.w),
           Container(
             padding: EdgeInsets.all(8.r),
             decoration: BoxDecoration(
@@ -61,14 +47,32 @@ class ContactCard extends StatelessWidget {
             ),
             child: SvgPicture.asset(
               icon,
-              width: 24.w,
-              height: 24.w,
+              width: 17.w,
+              height: 17.h,
               colorFilter: const ColorFilter.mode(
                 AppColors.primary,
                 BlendMode.srcIn,
               ),
             ),
           ),
+          SizedBox(width: 5.w),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: AppText.ibmHeading14(color: AppColors.black)),
+              SizedBox(height: 4.h),
+              Text(
+                value,
+                style: AppText.ibmDescription14(
+                  color: AppColors.textLightGrey,
+                ).copyWith(overflow: TextOverflow.ellipsis),
+              ),
+            ],
+          ),
+          const Spacer(),
+
+          _CopyButton(onCopy: onCopy),
         ],
       ),
     );
@@ -100,8 +104,8 @@ class _CopyButton extends StatelessWidget {
             SizedBox(width: 4.w),
             SvgPicture.asset(
               IconsPath.copy,
-              width: 16.w,
-              height: 16.w,
+              width: 14.w,
+              height: 14.w,
               colorFilter: const ColorFilter.mode(
                 AppColors.primary,
                 BlendMode.srcIn,

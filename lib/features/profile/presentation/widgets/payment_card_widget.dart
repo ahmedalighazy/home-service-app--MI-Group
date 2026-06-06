@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
+
+import 'popup_menu_button.dart';
 
 class PaymentCardWidget extends StatelessWidget {
   final PaymentMethodModel paymentMethod;
@@ -20,23 +21,52 @@ class PaymentCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: AppColors.borderGrey.withValues(alpha: 0.5)),
+      padding: EdgeInsets.all(8.r),
+      decoration: ShapeDecoration(
+        color: const Color(0xFFF8FBFF) /* bg-secondary */,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            width: 1,
+            color: Color(0xFFF1F5F9) /* border-cards */,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Logo
-          SizedBox(
-            width: 48.w,
-            child: SvgPicture.asset(
-              paymentMethod.iconPath,
-              fit: BoxFit.contain,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomPopupMenu(
+                onSelected: (action) {
+                  switch (action) {
+                    case MenuAction.favorite:
+                      // Favorite
+                      break;
+
+                    case MenuAction.edit:
+                      // Edit
+                      break;
+
+                    case MenuAction.delete:
+                      // Delete
+                      break;
+                  }
+                },
+              ),
+              // const Icon(Icons.power)
+              verticalSpace(40),
+            ],
           ),
+          // SizedBox(
+          //   width: 48.w,
+          //   child: SvgPicture.asset(
+          //     paymentMethod.iconPath,
+          //     fit: BoxFit.contain,
+          //   ),
+          // ),
           horizontalSpace(12),
           // Details
           Expanded(
@@ -45,22 +75,13 @@ class PaymentCardWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    // const Icon(Icons.power),
+                    if (paymentMethod.isDefault) _buildDefaultBadge(),
+                    const Spacer(),
+
                     Text(
                       '**** ${paymentMethod.lastFourDigits}',
-                      style: AppText.ibmHeading16(color: AppColors.black),
-                    ),
-                    const Spacer(),
-                    if (paymentMethod.isDefault)
-                      _buildDefaultBadge(),
-                    horizontalSpace(8),
-                    InkWell(
-                      onTap: onMoreTap,
-                      child: SvgPicture.asset(
-                        IconsPath.moreVertical,
-                        width: 18.w,
-                        height: 18.h,
-                        colorFilter: const ColorFilter.mode(AppColors.black, BlendMode.srcIn),
-                      ),
+                      style: AppText.ibmHeading14(color: AppColors.black),
                     ),
                   ],
                 ),
@@ -69,16 +90,34 @@ class PaymentCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      paymentMethod.cardHolderName,
-                      style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+                      'تنتهي في ${paymentMethod.expiryDate}',
+                      style: AppText.ibmDescription12(
+                        color: AppColors.textLightGrey,
+                      ),
                     ),
                     Text(
-                      'تنتهي في ${paymentMethod.expiryDate}',
-                      style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+                      paymentMethod.cardHolderName,
+                      style: AppText.ibmDescription12(
+                        color: AppColors.textLightGrey,
+                      ).copyWith(overflow: TextOverflow.ellipsis),
                     ),
                   ],
                 ),
               ],
+            ),
+          ),
+          horizontalSpace(8),
+          InkWell(
+            onTap: onMoreTap,
+            child: SvgPicture.asset(
+              paymentMethod.iconPath,
+
+              width: 18.w,
+              height: 18.h,
+              // colorFilter: const ColorFilter.mode(
+              //   AppColors.black,
+              //   BlendMode.srcIn,
+              // ),
             ),
           ),
         ],
@@ -95,7 +134,9 @@ class PaymentCardWidget extends StatelessWidget {
       ),
       child: Text(
         'افتراضي',
-        style: AppText.ibmDescription12(color: AppColors.white).copyWith(fontWeight: FontWeight.w600),
+        style: AppText.ibmDescription12(
+          color: AppColors.white,
+        ).copyWith(fontWeight: FontWeight.w600),
       ),
     );
   }

@@ -27,11 +27,17 @@ class ChatInputBar extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(10.r),
-            decoration: const BoxDecoration(
-              color: AppColors.primaryBlack,
-              shape: BoxShape.circle,
+            decoration: ShapeDecoration(
+              color: const Color(0xFFEDF1FA) /* bg-disabled */,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(44),
+              ),
             ),
-            child: SvgPicture.asset(IconsPath.send, width: 20.w, height: 20.h),
+            child: SvgPicture.asset(
+              IconsPath.iconSend,
+              width: 20.w,
+              height: 20.h,
+            ),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -39,14 +45,20 @@ class ChatInputBar extends StatelessWidget {
               textAlign: TextAlign.right,
               decoration: InputDecoration(
                 hintText: AppStrings.typeMessageHint,
-                hintStyle: AppText.regularIbm(color: AppColors.textLightGrey, fontSize: 14),
+                hintStyle: AppText.regularIbm(
+                  color: AppColors.textLightGrey,
+                  fontSize: 14,
+                ),
                 fillColor: AppColors.inputBg,
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24.r),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 8.h,
+                ),
               ),
             ),
           ),

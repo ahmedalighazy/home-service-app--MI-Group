@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/extensions/extention_navigator.dart';
@@ -37,35 +38,35 @@ class ProfileScreen extends StatelessWidget {
 
                       _buildSettingGroup([
                         SettingListItem(
-                          icon: Icons.account_circle_outlined,
+                          icon: IconsPath.vectorPerson,
                           title: AppStrings.editProfile,
                           onTap: () {
                             context.pushName(AppRoutes.editProfile);
                           },
                         ),
                         SettingListItem(
-                          icon: Icons.favorite_border_outlined,
+                          icon: IconsPath.vectorFavorite,
                           title: AppStrings.favorites,
                           onTap: () {
                             context.pushName(AppRoutes.favorites);
                           },
                         ),
                         SettingListItem(
-                          icon: Icons.location_on_outlined,
+                          icon: IconsPath.vectorLocation,
                           title: AppStrings.myAddresses,
                           onTap: () {
                             context.pushName(AppRoutes.savedAddresses);
                           },
                         ),
                         SettingListItem(
-                          icon: Icons.subscriptions_outlined,
+                          icon: IconsPath.vectorSub,
                           title: AppStrings.mySubscriptions,
                           onTap: () {
                             context.pushName(AppRoutes.subscriptions);
                           },
                         ),
                         SettingListItem(
-                          icon: Icons.credit_card,
+                          icon: IconsPath.group,
                           title: AppStrings.paymentMethods,
                           onTap: () {
                             context.pushName(AppRoutes.paymentMethods);
@@ -73,28 +74,28 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ]),
 
-                      verticalSpace(10),
+                      verticalSpace(7),
 
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Divider(
                           color: AppColors.borderGrey,
                           thickness: 1,
                         ),
                       ),
 
-                      verticalSpace(10),
+                      verticalSpace(7),
 
                       _buildSettingGroup([
                         SettingListItem(
-                          icon: Icons.settings_outlined,
+                          icon: IconsPath.vectorSetting,
                           title: AppStrings.settings,
                           onTap: () {
                             context.pushName(AppRoutes.setting);
                           },
                         ),
                         SettingListItem(
-                          icon: Icons.language,
+                          icon: IconsPath.iconLang,
                           title: AppStrings.contactUs,
                           onTap: () {
                             context.pushName(AppRoutes.contactUs);

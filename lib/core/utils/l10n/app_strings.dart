@@ -36,8 +36,7 @@ class AppStrings {
   static const String rule4Desc =
       'مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.';
 
-  static const String confirmDeleteHint =
-      'لتأكيد حذف الحساب يرجى كتابة كلمة (حذف)';
+  static const String confirmDeleteHint = 'لتأكيد حذف الحساب يرجى كتابة كلمة (';
   static const String deleteConfirmWord = 'حذف';
   static const String confirmFieldHint = 'كلمة التأكيد غير صحيحة';
   static const String deleteConfirmBtn = 'حذف الحساب نهائياً';
@@ -215,6 +214,8 @@ class AppStrings {
   static const String dateAndTimeTitle = 'التاريخ والوقت';
   static const String chooseDay = 'اختر اليوم';
   static const String chooseTime = 'اختر وقت';
+  static const String start = ' مقدمه';
+
   static const String cancellationPolicy =
       'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل';
   static const String saturday = 'السبت';
@@ -384,6 +385,8 @@ class AppStrings {
   static const String arabic = 'العربية';
   static const String bookingNotifications = 'إشعارات الحجز';
   static const String logout = 'تسجيل الخروج';
+  static const String logoutContent =
+      'هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟ ';
 
   // --- Legal & Policies ---
   static const String policiesAndRules = 'القوانيين والسياسات';
@@ -406,6 +409,8 @@ class AppStrings {
   static const String dataUsage = 'كيفية استخدام البيانات';
   static const String dataProtection = 'حماية البيانات';
   static const String dataSharing = 'مشاركة البيانات';
+  static const String data = 'القبول بالشروط';
+
   static const String policyModifications = 'التعديلات على السياسة';
 
   // --- Terms & Conditions Content ---
@@ -462,19 +467,23 @@ class AppStrings {
 
   // --- Saved Addresses ---
   static const String noAddressesYet = 'لا توجد عناوين أخرى';
-  static const String addFavoriteAddressesDesc = 'أضف عناوينك المفضلة للوصول السريع إليها أثناء الحجز.';
+  static const String addFavoriteAddressesDesc =
+      'أضف عناوينك المفضلة للوصول السريع إليها أثناء الحجز.';
   static const String addAddressBtn = 'اضافة عنوان';
   static const String savedAddressesHeader = 'العناوين';
   static const String homeAddress = 'المنزل';
   static const String workAddress = 'العمل';
   static const String deleteAddressTitle = 'حذف العنوان';
-  static const String deleteDefaultAddressDesc = 'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
+  static const String deleteDefaultAddressDesc =
+      'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
 
   // --- Payment Methods ---
   static const String noSavedPaymentMethods = 'لا توجد طرق دفع محفوظة';
-  static const String addPaymentMethodDesc = 'قم بإضافة وسيلة دفع لتسهيل إتمام الطلبات بسرعة وأمان.';
+  static const String addPaymentMethodDesc =
+      'قم بإضافة وسيلة دفع لتسهيل إتمام الطلبات بسرعة وأمان.';
   static const String addPaymentMethodBtn = 'اضافة وسيلة دفع';
-  static const String defaultPaymentNotice = 'سيتم استخدام وسيلة الدفع الافتراضية تلقائياً لجميع الحجوزات القادمة. يمكنك تغيير هذا الإعداد في أي وقت قبل إتمام عملية الدفع.';
+  static const String defaultPaymentNotice =
+      'سيتم استخدام وسيلة الدفع الافتراضية تلقائياً لجميع الحجوزات القادمة. يمكنك تغيير هذا الإعداد في أي وقت قبل إتمام عملية الدفع.';
   static const String cardNumberLabel = 'رقم البطاقه';
   static const String cardHolderLabel = 'اسم حامل البطاقة';
   static const String cardHolderPlaceholder = 'ادخل الاسم كما هوا علي البطاقة';
@@ -488,13 +497,15 @@ class AppStrings {
   static const String customerServiceNumber = '+974 3000 0000';
   static const String emailAddressLabel = 'البريد الالكتروني';
   static const String supportEmailAddress = 'support@migroup.com';
-  static const String privacyConfidentialityNote = 'جميع بياناتك وارائك تعامل بسرية تامة ولا تشارك مع اي طرف ثالت .';
+  static const String privacyConfidentialityNote =
+      'جميع بياناتك وارائك تعامل بسرية تامة ولا تشارك مع اي طرف ثالت .';
 
   // --- Subscriptions ---
   static const String currentSubscriptions = 'الحالية';
   static const String previousSubscriptions = 'السابقة';
   static const String noActiveSubscriptions = 'لا توجد اشتراكات نشطة';
-  static const String subscribePackagesDesc = 'اشترك في إحدى الباقات لتوفير الوقت والحصول على زيارات منتظمة بسهولة.';
+  static const String subscribePackagesDesc =
+      'اشترك في إحدى الباقات لتوفير الوقت والحصول على زيارات منتظمة بسهولة.';
   static const String browsePackagesBtn = 'استعراض الباقات';
   static const String manageSubscription = 'إدارة الاشتراك';
   static const String activeStatus = 'نشط';
@@ -527,10 +538,12 @@ class AppStrings {
 
   // --- Subscription Popups ---
   static const String pausePopupTitle = 'إيقاف الاشتراك مؤقتاً';
-  static const String pausePopupDesc = 'لن يتم جدولة أي زيارات أثناء فترة الإيقاف يمكنك إعادة تفعيلة في أي وقت';
+  static const String pausePopupDesc =
+      'لن يتم جدولة أي زيارات أثناء فترة الإيقاف يمكنك إعادة تفعيلة في أي وقت';
   static const String confirmPauseBtn = 'تأكيد الإيقاف';
   static const String cancelPopupTitle = 'إلغاء الاشتراك';
-  static const String cancelPopupDesc = 'سيتم إلغاء جميع الزيارات القادمة لن تتمكن من استئناف الاشتراك بعد إلغائه';
+  static const String cancelPopupDesc =
+      'سيتم إلغاء جميع الزيارات القادمة لن تتمكن من استئناف الاشتراك بعد إلغائه';
   static const String confirmCancelBtn = 'تأكيد الإلغاء';
   static const String backBtn = 'رجوع';
 }

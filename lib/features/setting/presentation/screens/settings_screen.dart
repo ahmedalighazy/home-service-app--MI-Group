@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/extensions/extention_navigator.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
+import '../../../../core/utils/helpers/show_dialog.dart';
 import '../widgets/setting_list_item.dart';
 import '../widgets/settings_divider.dart';
 import '../widgets/settings_toggle_item.dart';
@@ -29,13 +31,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingListItem(
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
-            icon: Icons.lock_outline,
+            icon: IconsPath.vectorPassword,
             title: AppStrings.changePassword,
             onTap: () => context.pushName(AppRoutes.setNewPassword),
           ),
           const SettingsDivider(),
           SettingListItem(
-            icon: Icons.language_outlined,
+            seetingScreen: true,
+
+            icon: IconsPath.iconLang,
             title: AppStrings.language,
             trailing: _LanguageTrailingText(),
             onTap: () {},
@@ -51,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingListItem(
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
-            icon: Icons.help_outline,
+            icon: IconsPath.vectorWhat,
             title: AppStrings.helpCenter,
             onTap: () => context.pushName(AppRoutes.helpCenter),
           ),
@@ -59,19 +63,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingListItem(
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
-            icon: Icons.gavel_outlined,
+            icon: IconsPath.group2,
             title: AppStrings.policiesAndRules,
             onTap: () => context.pushName(AppRoutes.legalAndPolicies),
           ),
           const SettingsDivider(),
           SettingListItem(
-            icon: Icons.logout,
+            icon: IconsPath.iconLogout,
             title: AppStrings.logout,
             logout: true,
             seetingScreen: true,
             settingColorIcon: AppColors.red,
             titleColor: AppColors.red,
-            onTap: () {},
+            onTap: () {
+              showCannotDeleteDialogred(
+                context,
+                AppStrings.logout,
+                AppStrings.logoutContent,
+                AppStrings.logout,
+              );
+            },
           ),
         ],
       ),
@@ -82,12 +93,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
 class _LanguageTrailingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      AppStrings.arabic,
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-        color: AppColors.textLightGrey,
-        fontSize: 14,
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          AppStrings.arabic,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppColors.textLightGrey,
+            fontSize: 15,
+          ),
+        ),
+        const Icon(Icons.chevron_right),
+      ],
     );
   }
 }

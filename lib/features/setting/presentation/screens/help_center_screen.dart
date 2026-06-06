@@ -7,9 +7,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
-import '../widgets/help_center_contact_info.dart';
 import '../widgets/help_center_item.dart';
-import '../widgets/help_center_privacy_note.dart';
 import '../widgets/technical_support_header.dart';
 import '../widgets/ticket_card.dart';
 
@@ -19,7 +17,7 @@ class HelpCenterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      // backgroundColor: AppColors.white,
       appBar: const CustomAppBar(title: AppStrings.helpCenter),
       body: ListView(
         padding: EdgeInsets.all(16.r),
@@ -51,10 +49,6 @@ class HelpCenterScreen extends StatelessWidget {
             description: AppStrings.ticketDesc2,
             onTap: () => context.pushName(AppRoutes.chatDetail),
           ),
-          SizedBox(height: 24.h),
-          const HelpCenterContactInfo(),
-          SizedBox(height: 32.h),
-          const HelpCenterPrivacyNote(),
         ],
       ),
     );

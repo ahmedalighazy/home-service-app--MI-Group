@@ -16,14 +16,23 @@ class MyVisitsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: Replace with real data from Cubit
     final upcomingVisits = [
-      VisitModel(id: '1', date: 'الأحد، 15 مايو 2026', time: '08:00 ص - 09:00 ص', status: VisitStatus.scheduled),
-      VisitModel(id: '2', date: 'الأحد، 15 مايو 2026', time: '08:00 ص - 09:00 ص', status: VisitStatus.inProgress),
+      VisitModel(
+        id: '1',
+        date: 'الأحد، 15 مايو 2026',
+        time: '08:00 ص - 09:00 ص',
+        status: VisitStatus.scheduled,
+      ),
+      VisitModel(
+        id: '2',
+        date: 'الأحد، 15 مايو 2026',
+        time: '08:00 ص - 09:00 ص',
+        status: VisitStatus.inProgress,
+      ),
     ];
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: AppColors.backgroundGrey,
         appBar: CustomAppBar(
           title: AppStrings.myVisits,
           onBack: () => Navigator.pop(context),
@@ -35,8 +44,9 @@ class MyVisitsScreen extends StatelessWidget {
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: const [
-              Tab(text: AppStrings.previousSubscriptions),
               Tab(text: AppStrings.upcomingVisits),
+
+              Tab(text: AppStrings.previousSubscriptions),
             ],
           ),
         ),
@@ -46,7 +56,8 @@ class MyVisitsScreen extends StatelessWidget {
             ListView.builder(
               padding: EdgeInsets.all(AppSizes.paddingM.r),
               itemCount: upcomingVisits.length,
-              itemBuilder: (_, index) => VisitCard(visit: upcomingVisits[index]),
+              itemBuilder: (_, index) =>
+                  VisitCard(visit: upcomingVisits[index]),
             ),
           ],
         ),

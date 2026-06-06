@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/core/routes/app_routes.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import 'subscription_action_tile.dart';
 
@@ -30,28 +30,28 @@ class SubscriptionActionList extends StatelessWidget {
           SubscriptionActionTile(
             title: AppStrings.viewVisits,
             subtitle: AppStrings.viewVisitsDesc,
-            icon: Iconsax.calendar_tick,
+            icon: IconsPath.timeBlue,
             onTap: () => Navigator.pushNamed(context, AppRoutes.myVisits),
           ),
           const Divider(height: 1),
           SubscriptionActionTile(
             title: AppStrings.pauseTemporarily,
             subtitle: AppStrings.pauseTemporarilyDesc,
-            icon: Iconsax.pause_circle,
+            icon: IconsPath.paused,
             onTap: onPauseTap,
           ),
           const Divider(height: 1),
           SubscriptionActionTile(
             title: AppStrings.changePackage,
             subtitle: AppStrings.changePackageDesc,
-            icon: Iconsax.refresh,
+            icon: IconsPath.exit,
             onTap: () {},
           ),
           const Divider(height: 1),
           SubscriptionActionTile(
             title: AppStrings.cancelSubscription,
             subtitle: AppStrings.cancelSubscriptionDesc,
-            icon: Iconsax.close_circle,
+            icon: IconsPath.delete,
             onTap: onCancelTap,
             isDanger: true,
           ),

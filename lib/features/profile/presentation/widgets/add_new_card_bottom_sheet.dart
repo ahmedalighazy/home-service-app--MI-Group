@@ -41,40 +41,61 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                 ),
               ),
             ),
+
             verticalSpace(24),
-            Text(
-              AppStrings.addNewCard,
-              style: AppText.ibmHeading20(color: AppColors.primaryText),
-            ),
-            verticalSpace(24),
-            const CustomTextField(
+            CustomTextField(
               hintText: '0000 0000 0000 0000',
               label: AppStrings.cardNumberLabel,
-              fillColor: AppColors.inputBg,
+              fillColor: AppColors.white,
+              textStyle: AppText.regularIbm(
+                color: AppColors.placeholder,
+                fontSize: 14,
+              ),
+              borderColor: AppColors.textLightGrey,
             ),
             verticalSpace(16),
-            const CustomTextField(
+            CustomTextField(
               hintText: AppStrings.cardHolderPlaceholder,
               label: AppStrings.cardHolderLabel,
-              fillColor: AppColors.inputBg,
+              fillColor: AppColors.white,
+              borderColor: AppColors.textLightGrey,
+              textStyle: AppText.regularIbm(
+                color: AppColors.placeholder,
+                fontSize: 14,
+              ),
             ),
             verticalSpace(16),
             Row(
               children: [
-                const Expanded(
-                  child: CustomTextField(
-                    hintText: 'MM/YY',
-                    label: AppStrings.expiryDateLabel,
-                    fillColor: AppColors.inputBg,
-                  ),
-                ),
-                horizontalSpace(16),
                 Expanded(
                   child: CustomTextField(
                     hintText: '000',
                     label: AppStrings.cvvLabel,
-                    fillColor: AppColors.inputBg,
-                    suffixIcon: Icon(Icons.help_outline, size: 20.r, color: AppColors.textLightGrey),
+                    fillColor: AppColors.white,
+                    borderColor: AppColors.textLightGrey,
+                    textStyle: AppText.regularIbm(
+                      color: AppColors.placeholder,
+                      fontSize: 14,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.help_outline,
+                      size: 20.r,
+                      color: AppColors.textLightGrey,
+                    ),
+                  ),
+                ),
+                horizontalSpace(16),
+
+                Expanded(
+                  child: CustomTextField(
+                    hintText: 'MM/YY',
+                    textStyle: AppText.regularIbm(
+                      color: AppColors.placeholder,
+                      fontSize: 14,
+                    ),
+                    label: AppStrings.expiryDateLabel,
+                    fillColor: AppColors.white,
+                    borderColor: AppColors.textLightGrey,
                   ),
                 ),
               ],
@@ -84,7 +105,8 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
               children: [
                 Checkbox(
                   value: _saveForLater,
-                  onChanged: (val) => setState(() => _saveForLater = val ?? false),
+                  onChanged: (val) =>
+                      setState(() => _saveForLater = val ?? false),
                   activeColor: AppColors.primary,
                 ),
                 Text(
@@ -96,7 +118,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             verticalSpace(24),
             CustomButtom(
               onTap: () => Navigator.pop(context),
-              text: AppStrings.add,
+              text: AppStrings.save,
               textStyle: AppText.ibmButton16(),
               startColor: AppColors.primary,
               endColor: AppColors.primaryActive,

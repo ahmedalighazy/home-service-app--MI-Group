@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class SubscriptionCardWidget extends StatelessWidget {
   final SubscriptionModel subscription;
@@ -34,26 +35,29 @@ class SubscriptionCardWidget extends StatelessWidget {
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
               color: const Color(0xFFE8FBFF), // Light cyan from YAML
-              borderRadius: BorderRadius.vertical(top: Radius.circular(AppSizes.radiusM.r)),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(AppSizes.radiusM.r),
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildStatusBadge(),
                 Row(
                   children: [
+                    SvgPicture.asset(IconsPath.clean),
+                    horizontalSpace(8),
+
                     Text(
                       subscription.title,
                       style: AppText.ibmHeading14(color: AppColors.black),
                     ),
-                    horizontalSpace(8),
-                    Icon(Iconsax.calendar_tick, size: 20.r, color: AppColors.primary),
                   ],
                 ),
+                _buildStatusBadge(),
               ],
             ),
           ),
-          
+
           // Details Section
           Padding(
             padding: EdgeInsets.all(16.r),
@@ -62,14 +66,14 @@ class SubscriptionCardWidget extends StatelessWidget {
                 _buildDetailRow(
                   AppStrings.subscriptionTypeLabel,
                   subscription.type,
-                  Iconsax.refresh,
+                  IconsPath.loadingDark,
                 ),
                 if (subscription.nextVisitDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
                     AppStrings.nextVisitLabel,
                     subscription.nextVisitDate!,
-                    Iconsax.calendar_1,
+                    IconsPath.calenderBlack,
                   ),
                 ],
                 if (subscription.nextVisitTime != null) ...[
@@ -77,7 +81,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                   _buildDetailRow(
                     AppStrings.timeLabel,
                     subscription.nextVisitTime!,
-                    Iconsax.clock,
+                    IconsPath.time,
                   ),
                 ],
                 if (subscription.expiryDate != null) ...[
@@ -85,7 +89,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                   _buildDetailRow(
                     AppStrings.expiryDateLabelTitle,
                     subscription.expiryDate!,
-                    Iconsax.calendar_1,
+                    IconsPath.group,
                   ),
                 ],
                 verticalSpace(12),
@@ -93,12 +97,14 @@ class SubscriptionCardWidget extends StatelessWidget {
                 verticalSpace(16),
                 CustomButtom(
                   onTap: onTap,
-                  text: subscription.status == SubscriptionStatus.active 
-                    ? AppStrings.manageSubscription 
-                    : (subscription.status == SubscriptionStatus.paused ? AppStrings.reactivateBtn : AppStrings.subscribeAgainBtn),
+                  text: subscription.status == SubscriptionStatus.active
+                      ? AppStrings.manageSubscription
+                      : (subscription.status == SubscriptionStatus.paused
+                            ? AppStrings.reactivateBtn
+                            : AppStrings.subscribeAgainBtn),
                   textStyle: AppText.ibmButton16(color: AppColors.white),
-                  startColor: subscription.status == SubscriptionStatus.paused ? AppColors.yellow : AppColors.primary,
-                  endColor: subscription.status == SubscriptionStatus.paused ? AppColors.yellow : AppColors.dark,
+                  startColor: AppColors.primary,
+                  endColor: AppColors.dark,
                 ),
               ],
             ),
@@ -139,28 +145,34 @@ class SubscriptionCardWidget extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: AppText.ibmDescription12(color: textColor).copyWith(fontWeight: FontWeight.w600),
+        style: AppText.ibmDescription12(
+          color: textColor,
+        ).copyWith(fontWeight: FontWeight.w600),
       ),
     );
   }
 
-  Widget _buildDetailRow(String label, String value, IconData icon) {
+  Widget _buildDetailRow(String label, String value, String icon) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          value,
-          style: AppText.ibmDescription14(color: AppColors.primaryText).copyWith(fontWeight: FontWeight.w600),
-        ),
         Row(
           children: [
+            SvgPicture.asset(icon),
+            horizontalSpace(8),
+
             Text(
               label,
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
             ),
-            horizontalSpace(8),
-            Icon(icon, size: 18.r, color: AppColors.textLightGrey),
+            // Icon(icon, size: 18.r, color: AppColors.textLightGrey),
           ],
+        ),
+        Text(
+          value,
+          style: AppText.ibmDescription14(
+            color: AppColors.primaryText,
+          ).copyWith(fontWeight: FontWeight.w600),
         ),
       ],
     );
@@ -170,19 +182,21 @@ class SubscriptionCardWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          '${subscription.price.toInt()} ${AppStrings.monthlyPriceSuffix}',
-          style: AppText.ibmHeading14(color: AppColors.primary),
-        ),
         Row(
           children: [
+            SvgPicture.asset(IconsPath.group),
+
+            horizontalSpace(8),
+
             Text(
               AppStrings.priceLabel,
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
             ),
-            horizontalSpace(8),
-            Icon(Iconsax.money_2, size: 18.r, color: AppColors.textLightGrey),
           ],
+        ),
+        Text(
+          '${subscription.price.toInt()} ${AppStrings.monthlyPriceSuffix}',
+          style: AppText.ibmHeading14(color: AppColors.primary),
         ),
       ],
     );

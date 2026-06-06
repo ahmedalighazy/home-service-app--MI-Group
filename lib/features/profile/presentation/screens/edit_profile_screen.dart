@@ -19,7 +19,6 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundGrey,
       appBar: const CustomAppBar(title: AppStrings.editProfile),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
@@ -151,7 +150,7 @@ class EditProfileScreen extends StatelessWidget {
                 ),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.info_outline,

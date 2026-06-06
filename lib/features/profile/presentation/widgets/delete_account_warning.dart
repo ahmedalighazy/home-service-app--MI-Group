@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
@@ -22,7 +24,7 @@ class DeleteAccountWarning extends StatelessWidget {
                   borderRadius: BorderRadius.circular(44),
                 ),
               ),
-              child: const Icon(Icons.delete, color: AppColors.redDanger),
+              child: SvgPicture.asset(IconsPath.delete),
             ),
             horizontalSpace(12),
             Text(

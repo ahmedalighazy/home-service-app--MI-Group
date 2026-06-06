@@ -26,7 +26,8 @@ class AddAddressDashedButton extends StatelessWidget {
           border: Border.all(
             color: AppColors.primary.withValues(alpha: 0.1),
             width: 1.5,
-            style: BorderStyle.solid, // For real dashed border, CustomPainter or package like dotted_border is needed.
+            style: BorderStyle
+                .solid, // For real dashed border, CustomPainter or package like dotted_border is needed.
             // But since the design shows a light border, I'll use solid with low alpha or simulate dashes
           ),
         ),
@@ -35,10 +36,7 @@ class AddAddressDashedButton extends StatelessWidget {
           children: [
             Icon(Icons.add, color: AppColors.primary, size: 24.r),
             horizontalSpace(8),
-            Text(
-              label,
-              style: AppText.ibmHeading16(color: AppColors.primary),
-            ),
+            Text(label, style: AppText.ibmHeading16(color: AppColors.primary)),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
@@ -11,28 +12,28 @@ class DeleteRulesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: AppColors.bgDisabled.withValues(alpha: 0.5),
+        color: AppColors.errorRed2.withValues(alpha: 0.8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: const Column(
         children: [
           DeleteRuleItem(
-            icon: Icons.warning_amber_rounded,
+            icon: IconsPath.warning,
             title: AppStrings.rule1Title,
             description: AppStrings.rule1Desc,
           ),
           DeleteRuleItem(
-            icon: Icons.calendar_today_outlined,
+            icon: IconsPath.calendarRed,
             title: AppStrings.rule2Title,
             description: AppStrings.rule2Desc,
           ),
           DeleteRuleItem(
-            icon: Icons.autorenew_rounded,
+            icon: IconsPath.repeat,
             title: AppStrings.rule3Title,
             description: AppStrings.rule3Desc,
           ),
           DeleteRuleItem(
-            icon: Icons.gavel_rounded,
+            icon: IconsPath.docs,
             title: AppStrings.rule4Title,
             description: AppStrings.rule4Desc,
           ),

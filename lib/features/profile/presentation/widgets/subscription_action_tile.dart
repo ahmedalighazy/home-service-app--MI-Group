@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
@@ -7,7 +8,7 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 class SubscriptionActionTile extends StatelessWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
+  final String icon;
   final VoidCallback onTap;
   final bool isDanger;
 
@@ -23,30 +24,40 @@ class SubscriptionActionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color tileColor = isDanger ? AppColors.redDanger : AppColors.primary;
-    final Color titleColor = isDanger ? AppColors.redDanger : AppColors.primaryText;
+    final Color titleColor = isDanger
+        ? AppColors.redDanger
+        : AppColors.primaryText;
 
     return ListTile(
       onTap: onTap,
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      leading: Icon(Icons.arrow_back_ios_new, size: 16.r, color: AppColors.textLightGrey),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        size: 16.r,
+        color: AppColors.textLightGrey,
+      ),
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SvgPicture.asset(icon, color: tileColor, height: 19.w, width: 19.h),
+
+          SizedBox(width: 12.w),
+
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppText.ibmHeading14(color: titleColor)),
                 Text(
                   subtitle,
-                  style: AppText.ibmDescription12(color: AppColors.textLightGrey),
+                  style: AppText.ibmDescription12(
+                    color: AppColors.textLightGrey,
+                  ),
                   textAlign: TextAlign.right,
                 ),
               ],
             ),
           ),
-          SizedBox(width: 12.w),
-          Icon(icon, size: 24.r, color: tileColor),
         ],
       ),
     );

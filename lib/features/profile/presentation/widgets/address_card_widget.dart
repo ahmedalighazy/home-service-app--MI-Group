@@ -23,85 +23,80 @@ class AddressCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: const Color(0xFFF3F4F6)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+      padding: const EdgeInsets.all(8),
+      decoration: ShapeDecoration(
+        color: const Color(0xFFF8FBFF) /* bg-secondary */,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            width: 1,
+            color: Color(0xFFF1F5F9) /* border-cards */,
           ),
-        ],
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Default Badge (Positioned Top Left)
-          if (address.isDefault)
-            Positioned(
-              left: 12.w,
-              top: 12.h,
-              child: _DefaultBadge(),
-            ),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SvgPicture.asset(
+                address.iconPath,
+                width: 24.r,
+                height: 24.r,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.primary,
+                  BlendMode.srcIn,
+                ),
+              ),
+              horizontalSpace(8),
+
+              Text(
+                address.label,
+                style: AppText.ibmHeading16(color: AppColors.black),
+              ),
+
+              const Spacer(),
+              if (address.isDefault) _DefaultBadge(),
+            ],
+          ),
 
           // Main Content (Right Aligned)
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                // Title and Icon
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      address.label,
-                      style: AppText.ibmHeading16(color: AppColors.black),
-                    ),
-                    horizontalSpace(8),
-                    SvgPicture.asset(
-                      address.iconPath,
-                      width: 24.r,
-                      height: 24.r,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.primary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ],
-                ),
-                verticalSpace(8),
-                // Address Details
-                Text(
-                  address.details,
-                  style: AppText.ibmDescription14(color: AppColors.textLightGrey),
-                  textAlign: TextAlign.right,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                verticalSpace(12),
-                // Action Buttons (Edit/Delete)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    _ActionButton(
-                      label: 'حذف',
-                      icon: IconsPath.trashOutline,
-                      color: AppColors.red,
-                      onTap: onDelete,
-                    ),
-                    horizontalSpace(16),
-                    _ActionButton(
-                      label: 'تعديل',
-                      icon: IconsPath.editOutline,
-                      color: AppColors.primary,
-                      onTap: onEdit,
-                    ),
-                  ],
-                ),
-              ],
+
+          // Title and Icon
+          verticalSpace(8),
+          // Address Details
+          Align(
+            alignment: AlignmentGeometry.bottomRight,
+            child: Text(
+              address.details,
+              style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+              // textAlign: TextAlign.left,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
+          ),
+          verticalSpace(12),
+          // Action Buttons (Edit/Delete)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _ActionButton(
+                label: 'تعديل',
+                icon: IconsPath.editLocation,
+                color: AppColors.primary,
+                onTap: onEdit,
+              ),
+              horizontalSpace(16),
+
+              _ActionButton(
+                label: 'حذف',
+                icon: IconsPath.delete,
+                color: AppColors.red,
+                onTap: onDelete,
+              ),
+            ],
           ),
         ],
       ),
@@ -146,17 +141,15 @@ class _ActionButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            label,
-            style: AppText.regularIbm(color: color, fontSize: 13),
-          ),
-          horizontalSpace(4),
           SvgPicture.asset(
             icon,
-            width: 16.r,
-            height: 16.r,
+            width: 17.r,
+            height: 17.r,
             colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
           ),
+          horizontalSpace(4),
+
+          Text(label, style: AppText.regularIbm(color: color, fontSize: 15)),
         ],
       ),
     );

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 class SettingListItem extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String title;
   final VoidCallback onTap;
   final Color? titleColor;
@@ -30,8 +31,10 @@ class SettingListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      splashColor: AppColors.white,
       onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+
+      contentPadding: const EdgeInsets.symmetric(horizontal: 13.0),
       trailing:
           trailing ??
           Icon(
@@ -40,7 +43,7 @@ class SettingListItem extends StatelessWidget {
             size: 28,
           ),
       title: Align(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.topRight,
         child: Text(
           title,
           style: AppText.mediumIbm(
@@ -49,10 +52,9 @@ class SettingListItem extends StatelessWidget {
           ),
         ),
       ),
-      leading: Icon(
+      leading: SvgPicture.asset(
         icon,
         color: logout! ? AppColors.red : AppColors.greenPrimary,
-        size: 24,
       ),
     );
   }

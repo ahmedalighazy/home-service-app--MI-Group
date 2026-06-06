@@ -16,6 +16,8 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool? centerText;
   final TextStyle? textStyle;
+  final bool ?obscureText;
+final VoidCallback? onTogglePasswordVisibility;
 
   const CustomTextField({
     super.key,
@@ -29,7 +31,7 @@ class CustomTextField extends StatelessWidget {
     this.icon,
     this.borderColor,
     this.controller,
-    this.centerText = false,
+    this.centerText = false,  this.obscureText=false, this.onTogglePasswordVisibility,
   });
 
   @override
@@ -47,46 +49,65 @@ class CustomTextField extends StatelessWidget {
           ),
           SizedBox(height: 6.h),
         ],
-        TextFormField(
-          controller: controller,
-          initialValue: controller == null ? initialValue : null,
-          readOnly: isReadOnly,
-          textAlign: centerText! ? TextAlign.center : TextAlign.right,
-          style: AppText.regularIbm(color: AppColors.black, fontSize: 15),
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle:
-                textStyle ??
-                AppText.regularIbm(
-                  color: AppColors.borderInputs,
-                  fontSize: 14,
-                ).copyWith(),
-            fillColor: fillColor ?? AppColors.white,
-            filled: true,
-
-            suffixIcon: suffixIcon,
-            prefixIcon: icon,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 14.h,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: borderSide(),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: borderSide(),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: const BorderSide(
-                color: AppColors.tealPrimary,
-                width: 1.5,
-              ),
-            ),
-          ),
+       TextFormField(
+  obscureText: obscureText??false,
+  controller: controller,
+  initialValue: controller == null ? initialValue : null,
+  readOnly: isReadOnly,
+  textAlign: centerText! ? TextAlign.center : TextAlign.right,
+  style: AppText.regularIbm(
+    color: AppColors.black,
+    fontSize: 15,
+  ),
+  decoration: InputDecoration(
+    hintText: hintText,
+    hintStyle:
+        textStyle ??
+        AppText.regularIbm(
+          color: AppColors.borderInputs,
+          fontSize: 14,
         ),
+    fillColor: fillColor ?? AppColors.white,
+    filled: true,
+
+    suffixIcon:
+        onTogglePasswordVisibility != null
+            ? IconButton(
+                onPressed: onTogglePasswordVisibility,
+                icon: Icon(
+                  obscureText!
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                ),
+              )
+            : suffixIcon,
+
+    prefixIcon: icon,
+
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: 16.w,
+      vertical: 14.h,
+    ),
+
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.r),
+      borderSide: borderSide(),
+    ),
+
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.r),
+      borderSide: borderSide(),
+    ),
+
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12.r),
+      borderSide: const BorderSide(
+        color: AppColors.tealPrimary,
+        width: 1.5,
+      ),
+    ),
+  ),
+)
       ],
     );
   }
