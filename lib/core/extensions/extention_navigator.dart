@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-
 extension Navigation on BuildContext {
-
-
   //Navigation
 
   Future<dynamic> pushName(String routeName, {Object? arguments}) {
@@ -11,16 +8,18 @@ extension Navigation on BuildContext {
   }
 
   Future<dynamic> pushReplacementNamed(String routeName, {Object? arguments}) {
-    return Navigator.of(this).pushReplacementNamed(
-      routeName,
-      arguments: arguments,
-    );
+    return Navigator.of(
+      this,
+    ).pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments}) {
-    return Navigator.of(this)
-        .pushNamedAndRemoveUntil(routeName, (route) => false);
+  Future<dynamic> pushNamedAndRemoveUntil(
+    String routeName, {
+    Object? arguments,
+  }) {
+    return Navigator.of(
+      this,
+    ).pushNamedAndRemoveUntil(routeName, (route) => false);
   }
 
   void pop() => Navigator.of(this).pop();

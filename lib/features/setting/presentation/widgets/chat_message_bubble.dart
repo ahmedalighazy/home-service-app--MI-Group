@@ -3,89 +3,50 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
-/// Support message bubble (aligned right, grey background)
-class SupportMessageBubble extends StatelessWidget {
-  final String text;
-  final String time;
+import '../../data/models/message_model.dart';
 
-  const SupportMessageBubble({
-    super.key,
-    required this.text,
-    required this.time,
-  });
+class ChatMessageBubble extends StatelessWidget {
+  final MessageModel message;
+
+  const ChatMessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
+    bool isUser = message.sender == MessageSender.user;
+
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: isUser
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
         children: [
           Container(
-            padding: EdgeInsets.all(12.r),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: AppColors.inputBg,
+              color: isUser ? AppColors.greenPrimary : AppColors.darkHover2,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.r),
-                bottomLeft: Radius.circular(12.r),
                 bottomRight: Radius.circular(12.r),
+                bottomLeft: Radius.circular(12.r),
+                topLeft: isUser ? Radius.circular(12.r) : Radius.zero,
+                topRight: isUser ? Radius.zero : Radius.circular(12.r),
               ),
             ),
             child: Text(
-              text,
-              textAlign: TextAlign.right,
-              style: AppText.regularIbm(color: AppColors.primaryText, fontSize: 14),
+              message.content,
+              style: AppText.regularText(
+                color: isUser ? AppColors.bgPrimary : AppColors.primaryText,
+                fontSize: 14,
+              ),
             ),
           ),
           SizedBox(height: 4.h),
           Text(
-            time,
-            style: AppText.regularIbm(color: AppColors.textLightGrey, fontSize: 10),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// User message bubble (aligned left, primary green background)
-class UserMessageBubble extends StatelessWidget {
-  final String text;
-  final String time;
-
-  const UserMessageBubble({
-    super.key,
-    required this.text,
-    required this.time,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.all(12.r),
-            decoration: BoxDecoration(
-              color: AppColors.greenPrimary,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(12.r),
-                bottomLeft: Radius.circular(12.r),
-                bottomRight: Radius.circular(12.r),
-              ),
+            '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
+            style: AppText.regularText(
+              color: AppColors.secondaryText,
+              fontSize: 11,
             ),
-            child: Text(
-              text,
-              textAlign: TextAlign.left,
-              style: AppText.regularIbm(color: AppColors.white, fontSize: 14),
-            ),
-          ),
-          SizedBox(height: 4.h),
-          Text(
-            time,
-            style: AppText.regularIbm(color: AppColors.textLightGrey, fontSize: 10),
           ),
         ],
       ),

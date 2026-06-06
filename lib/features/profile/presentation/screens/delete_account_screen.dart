@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/show_dialog.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
-import 'package:home_service_app/core/widgets/custom_text_field.dart';
 
 import '../widgets/custom_buttom.dart';
 import '../widgets/custom_widget_delete.dart';
 import '../widgets/delete_account_warning.dart';
+import '../widgets/delete_confirm_text_field.dart';
 import '../widgets/delete_rules_list.dart';
 
 class DeleteAccountScreen extends StatefulWidget {
@@ -38,16 +37,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   void _onTextChanged() {
     setState(
       () => _isTextCorrect =
-          _confirmController.text == AppStrings.deleteConfirmWord,
+          _confirmController.text.trim() == AppStrings.deleteConfirmWord,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundGrey,
       appBar: const CustomAppBar(title: AppStrings.deleteAccountHeader),
-
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -59,7 +56,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             SizedBox(height: 24.h),
             const CustomWidgetDelete(),
             SizedBox(height: 8.h),
-            _ConfirmTextField(controller: _confirmController),
+            DeleteConfirmTextField(controller: _confirmController),
             SizedBox(height: 32.h),
             CustomButton(
               flex: 44,
@@ -71,8 +68,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               onPressed: _isTextCorrect
                   ? () => showCannotDeleteDialog(
                       context,
-                      'لا يمكن حذف الحساب',
-                      'لا يمكن حذف الحساب أثناء وجود اشتراكات أو زيارات مجدولة نشطة. يرجى إلغاء جميع المواعيد القادمة أولًا.',
+                      AppStrings.cannotDeleteTitle,
+                      AppStrings.cannotDeleteDesc,
                     )
                   : () {},
             ),
@@ -87,38 +84,6 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ConfirmTextField extends StatelessWidget {
-  final TextEditingController controller;
-
-  const _ConfirmTextField({required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    final isCorrect = controller.text.trim() == 'حذف';
-    final hasError = controller.text.isNotEmpty && !isCorrect;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomTextField(
-          centerText: true,
-          controller: controller,
-          hintText: AppStrings.confirmDeleteHint,
-          fillColor: AppColors.white,
-          borderColor: hasError ? AppColors.redBorder : AppColors.borderGrey,
-        ),
-        if (hasError) ...[
-          SizedBox(height: 4.h),
-          Text(
-            AppStrings.confirmFieldHint,
-            style: AppText.regularIbm(color: AppColors.redDanger, fontSize: 12),
-          ),
-        ],
-      ],
     );
   }
 }

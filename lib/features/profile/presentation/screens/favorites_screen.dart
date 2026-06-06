@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/utils/helpers/spacing.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
-import '../widgets/favorite_item_card.dart';
+import '../widgets/favorites_list_widget.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const bool hasFavorites = true;
+
     return Scaffold(
-      backgroundColor: AppColors.softWhite,
+      // backgroundColor: AppColors.softWhite,
       appBar: const CustomAppBar(title: AppStrings.favorites),
       body: SafeArea(
-        child: true
-            ? _buildFavoritesList()
+        child: hasFavorites
+            ? const FavoritesListWidget()
             : EmptyStateWidget(
                 iconPath: IconsPath.illustrationSvg,
                 title: AppStrings.noFavoritesYet,
@@ -28,21 +27,6 @@ class FavoritesScreen extends StatelessWidget {
                 buttonLabel: AppStrings.browseServices,
               ),
       ),
-    );
-  }
-
-  Widget _buildFavoritesList() {
-    return ListView.separated(
-      padding: EdgeInsets.all(16.r),
-      itemCount: 3,
-      separatorBuilder: (context, index) => verticalSpace(12),
-      itemBuilder: (context, index) {
-        return const FavoriteItemCard(
-          title: AppStrings.deepCleaning,
-          category: AppStrings.houseCleaning,
-          price: '٥٠ ${AppStrings.currency}',
-        );
-      },
     );
   }
 }

@@ -14,10 +14,12 @@ class CustomTextField extends StatelessWidget {
   final Widget? icon;
   final Color? borderColor;
   final TextEditingController? controller;
-  final bool? centerText;
+  final bool centerText;
   final TextStyle? textStyle;
-  final bool ?obscureText;
-final VoidCallback? onTogglePasswordVisibility;
+  final bool obscureText;
+  final VoidCallback? onTogglePasswordVisibility;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
@@ -31,7 +33,11 @@ final VoidCallback? onTogglePasswordVisibility;
     this.icon,
     this.borderColor,
     this.controller,
-    this.centerText = false,  this.obscureText=false, this.onTogglePasswordVisibility,
+    this.centerText = false,
+    this.obscureText = false,
+    this.onTogglePasswordVisibility,
+    this.validator,
+    this.keyboardType,
   });
 
   @override
@@ -49,65 +55,66 @@ final VoidCallback? onTogglePasswordVisibility;
           ),
           SizedBox(height: 6.h),
         ],
-       TextFormField(
-  obscureText: obscureText??false,
-  controller: controller,
-  initialValue: controller == null ? initialValue : null,
-  readOnly: isReadOnly,
-  textAlign: centerText! ? TextAlign.center : TextAlign.right,
-  style: AppText.regularIbm(
-    color: AppColors.black,
-    fontSize: 15,
-  ),
-  decoration: InputDecoration(
-    hintText: hintText,
-    hintStyle:
-        textStyle ??
-        AppText.regularIbm(
-          color: AppColors.borderInputs,
-          fontSize: 14,
+        TextFormField(
+          obscureText: obscureText,
+          controller: controller,
+          initialValue: controller == null ? initialValue : null,
+          readOnly: isReadOnly,
+          textAlign: centerText ? TextAlign.center : TextAlign.start,
+          style: AppText.regularIbm(color: AppColors.primaryText, fontSize: 14),
+          keyboardType: keyboardType,
+          validator: validator,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle:
+                textStyle ??
+                AppText.regularIbm(color: AppColors.borderInputs, fontSize: 14),
+            fillColor: fillColor ?? AppColors.white,
+            filled: true,
+            suffixIcon: onTogglePasswordVisibility != null
+                ? IconButton(
+                    onPressed: onTogglePasswordVisibility,
+                    icon: Icon(
+                      obscureText
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                    ),
+                  )
+                : suffixIcon,
+            prefixIcon: icon,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 14.h,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: borderSide(),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: borderSide(),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: const BorderSide(
+                color: AppColors.tealPrimary,
+                width: 1.5,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: const BorderSide(color: AppColors.errorRed, width: 1),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: const BorderSide(
+                color: AppColors.errorRed,
+                width: 1.5,
+              ),
+            ),
+            errorStyle: AppText.ibmError12(),
+          ),
         ),
-    fillColor: fillColor ?? AppColors.white,
-    filled: true,
-
-    suffixIcon:
-        onTogglePasswordVisibility != null
-            ? IconButton(
-                onPressed: onTogglePasswordVisibility,
-                icon: Icon(
-                  obscureText!
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                ),
-              )
-            : suffixIcon,
-
-    prefixIcon: icon,
-
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: 16.w,
-      vertical: 14.h,
-    ),
-
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.r),
-      borderSide: borderSide(),
-    ),
-
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.r),
-      borderSide: borderSide(),
-    ),
-
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.r),
-      borderSide: const BorderSide(
-        color: AppColors.tealPrimary,
-        width: 1.5,
-      ),
-    ),
-  ),
-)
       ],
     );
   }

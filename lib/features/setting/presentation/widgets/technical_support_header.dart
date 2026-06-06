@@ -31,7 +31,9 @@ class TechnicalSupportHeader extends StatelessWidget {
           ),
           child: Text(
             AppStrings.newIssue,
-            style: AppText.ibmButton16(color: AppColors.greenPrimary).copyWith(fontSize: 14.sp),
+            style: AppText.ibmButton16(
+              color: AppColors.greenPrimary,
+            ).copyWith(fontSize: 14.sp),
           ),
         ),
       ],

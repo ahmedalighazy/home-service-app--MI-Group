@@ -42,7 +42,7 @@ class HomeServiceApp extends StatelessWidget {
               child: child!,
             );
           },
-          initialRoute: AppRoutes.home,
+          initialRoute: AppRoutes.splash,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );
       },

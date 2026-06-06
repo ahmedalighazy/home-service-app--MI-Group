@@ -29,6 +29,8 @@ class AppColors {
   // Theme Main Colors (Teal)
   static const Color dark = Color(0xFF0A434E); // Main dark teal
   static const Color darkHover = Color(0xFF0E5C6C);
+  static const Color darkHover2 = Color(0xFFF2F2F2);
+
   static const Color darkActive = Color(0xFF0B4551);
   static const Color greenDarker = Color(0xFF08363F);
   static const Color greenPrimary = Color(0xFF189AB4); // Main green/cyan

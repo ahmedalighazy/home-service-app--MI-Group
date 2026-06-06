@@ -1,63 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
-class ChatInputBar extends StatelessWidget {
+import '../../logic/cubit/chat_cubit.dart';
+
+class ChatInputBar extends StatefulWidget {
   const ChatInputBar({super.key});
+
+  @override
+  State<ChatInputBar> createState() => _ChatInputBarState();
+}
+
+class _ChatInputBarState extends State<ChatInputBar> {
+  final TextEditingController _controller = TextEditingController();
+
+  void _sendMessage() {
+    if (_controller.text.trim().isNotEmpty) {
+      context.read<ChatCubit>().sendMessage(_controller.text.trim());
+      _controller.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       decoration: BoxDecoration(
         color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withValues(alpha: 0.05),
-            offset: const Offset(0, -2),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
+            offset: const Offset(0, -5),
           ),
         ],
       ),
       child: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(10.r),
-            decoration: ShapeDecoration(
-              color: const Color(0xFFEDF1FA) /* bg-disabled */,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(44),
+          GestureDetector(
+            onTap: _sendMessage,
+            child: Container(
+              padding: EdgeInsets.all(12.r),
+              decoration: const BoxDecoration(
+                color: AppColors.borderInputs,
+                shape: BoxShape.circle,
               ),
-            ),
-            child: SvgPicture.asset(
-              IconsPath.iconSend,
-              width: 20.w,
-              height: 20.h,
+              child: SvgPicture.asset(
+                IconsPath.vectorSendDark,
+                // colorFilter: const ColorFilter.mode(
+                //   // AppColors.white,
+                //   BlendMode.srcIn,
+                // ),
+              ),
             ),
           ),
           SizedBox(width: 12.w),
+
           Expanded(
-            child: TextField(
-              textAlign: TextAlign.right,
-              decoration: InputDecoration(
-                hintText: AppStrings.typeMessageHint,
-                hintStyle: AppText.regularIbm(
-                  color: AppColors.textLightGrey,
-                  fontSize: 14,
-                ),
-                fillColor: AppColors.inputBg,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24.r),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 8.h,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              decoration: BoxDecoration(
+                color: AppColors.backgroundGrey,
+                borderRadius: BorderRadius.circular(24.r),
+              ),
+              child: TextField(
+                controller: _controller,
+                decoration: InputDecoration(
+                  hintText: AppStrings.writeYourMessage,
+                  hintStyle: AppText.regularText(
+                    color: AppColors.secondaryText,
+                    fontSize: 14,
+                  ),
+                  border: InputBorder.none,
                 ),
               ),
             ),

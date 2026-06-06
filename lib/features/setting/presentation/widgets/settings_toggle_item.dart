@@ -28,7 +28,10 @@ class SettingsToggleItem extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 16),
+              style: AppText.mediumIbm(
+                color: AppColors.primaryText,
+                fontSize: 16,
+              ),
             ),
           ),
           Switch(

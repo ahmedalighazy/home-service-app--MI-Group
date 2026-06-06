@@ -28,10 +28,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       hintText: widget.hintText,
       obscureText: _obscureText,
       borderColor: AppColors.placeholder,
-      textStyle: AppText.regularIbm(
-        color: AppColors.placeholder,
-        fontSize: 15,
-      ),
+      textStyle: AppText.regularIbm(color: AppColors.placeholder, fontSize: 15),
       onTogglePasswordVisibility: () {
         setState(() {
           _obscureText = !_obscureText;

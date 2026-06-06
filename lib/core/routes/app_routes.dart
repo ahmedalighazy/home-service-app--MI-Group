@@ -7,13 +7,17 @@ import '../../features/onboarding/presentation/widgets/onboarding_step_one_conte
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
+import '../../features/profile/data/models/subscription_model.dart';
+import '../../features/profile/presentation/screens/contact_us_screen.dart';
 import '../../features/profile/presentation/screens/delete_account_screen.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/favorites_screen.dart';
-import '../../features/profile/presentation/screens/saved_addresses_screen.dart';
+import '../../features/profile/presentation/screens/my_visits_screen.dart';
 import '../../features/profile/presentation/screens/payment_methods_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
-import '../../features/profile/presentation/screens/contact_us_screen.dart';
+import '../../features/profile/presentation/screens/saved_addresses_screen.dart';
+import '../../features/profile/presentation/screens/subscription_detail_screen.dart';
+import '../../features/profile/presentation/screens/subscriptions_screen.dart';
 import '../../features/setting/presentation/screens/chat_detail_screen.dart';
 import '../../features/setting/presentation/screens/faq_screen.dart';
 import '../../features/setting/presentation/screens/help_center_screen.dart';
@@ -22,14 +26,11 @@ import '../../features/setting/presentation/screens/privacy_policy_screen.dart';
 import '../../features/setting/presentation/screens/set_new_password_screen.dart';
 import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
-import '../../features/profile/presentation/screens/subscriptions_screen.dart';
-import '../../features/profile/presentation/screens/subscription_detail_screen.dart';
-import '../../features/profile/presentation/screens/my_visits_screen.dart';
-import '../../features/profile/data/models/subscription_model.dart';
+import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../utils/l10n/app_strings.dart';
 
 class AppRoutes {
-  // static const String splash = '/';
+  static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String onboarding1Static = '/onboarding1_static';
   static const String onboarding1 = '/onboarding1';
@@ -69,8 +70,8 @@ class AppRoutes {
     }
 
     switch (settings.name) {
-      // case splash:
-      //   return fadeRoute(const SplashScreen());
+      case splash:
+        return fadeRoute(const SplashScreen());
       case profile:
         return fadeRoute(const ProfileScreen());
       case setting:

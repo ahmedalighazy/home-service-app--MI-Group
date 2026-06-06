@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/extensions/extention_navigator.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
+import '../../../../core/constants/icons_path.dart';
 import '../../../../core/utils/helpers/show_dialog.dart';
+import '../widgets/language_trailing_text.dart';
 import '../widgets/setting_list_item.dart';
 import '../widgets/settings_divider.dart';
 import '../widgets/settings_toggle_item.dart';
@@ -41,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
             icon: IconsPath.iconLang,
             title: AppStrings.language,
-            trailing: _LanguageTrailingText(),
+            trailing: const LanguageTrailingText(),
             onTap: () {},
           ),
           const SettingsDivider(),
@@ -86,25 +87,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _LanguageTrailingText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          AppStrings.arabic,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: AppColors.textLightGrey,
-            fontSize: 15,
-          ),
-        ),
-        const Icon(Icons.chevron_right),
-      ],
     );
   }
 }

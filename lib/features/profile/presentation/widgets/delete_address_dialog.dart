@@ -37,7 +37,10 @@ class DeleteAddressDialog extends StatelessWidget {
                 IconsPath.trashOutline,
                 width: 32.w,
                 height: 32.h,
-                colorFilter: const ColorFilter.mode(AppColors.red, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(
+                  AppColors.red,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             verticalSpace(20),
@@ -61,7 +64,9 @@ class DeleteAddressDialog extends StatelessWidget {
                     onPressed: () => Navigator.pop(context),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.borderGrey),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.r),
+                      ),
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
@@ -79,7 +84,9 @@ class DeleteAddressDialog extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.red,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.r),
+                      ),
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(

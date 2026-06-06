@@ -30,11 +30,7 @@ class EmptyStateWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              iconPath,
-              width: 200.w,
-              height: 200.h,
-            ),
+            SvgPicture.asset(iconPath, width: 200.w, height: 200.h),
             SizedBox(height: AppSizes.spacingMedium.h),
             Text(
               title,

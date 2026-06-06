@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
@@ -29,6 +30,7 @@ class ProfileCard extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
           CircleAvatar(
@@ -36,11 +38,10 @@ class ProfileCard extends StatelessWidget {
             radius: 35,
             child: Image.asset(AppAssets.cleaningGuy, fit: BoxFit.cover),
           ),
-          const SizedBox(width: 20),
-
+          SizedBox(width: 20.w),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 AppStrings.profileName,
@@ -49,8 +50,7 @@ class ProfileCard extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              const SizedBox(height: 5),
-
+              SizedBox(height: 5.h),
               Text(
                 AppStrings.phoneNumber,
                 textDirection: TextDirection.ltr,
@@ -61,7 +61,6 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-
           const Spacer(),
         ],
       ),

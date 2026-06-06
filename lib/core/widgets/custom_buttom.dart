@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomButtom extends StatelessWidget {
-  Color startColor ;
-  Color endColor ;
+  Color startColor;
+  Color endColor;
   String text;
   TextStyle textStyle;
-  VoidCallback onTap ;
+  VoidCallback onTap;
   CustomButtom({
     super.key,
     required this.onTap,
@@ -23,10 +23,7 @@ class CustomButtom extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
-          colors: [
-            startColor,
-            endColor,
-          ],
+          colors: [startColor, endColor],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
@@ -37,10 +34,7 @@ class CustomButtom extends StatelessWidget {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
         ),
-        child: Text(
-          text,
-          style: textStyle,
-        ),
+        child: Text(text, style: textStyle),
       ),
     );
   }

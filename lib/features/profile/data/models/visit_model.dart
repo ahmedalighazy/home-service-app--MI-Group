@@ -12,8 +12,4 @@ class VisitModel {
   });
 }
 
-enum VisitStatus {
-  scheduled,
-  inProgress,
-  completed,
-}
+enum VisitStatus { scheduled, inProgress, completed }

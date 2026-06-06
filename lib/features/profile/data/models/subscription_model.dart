@@ -20,8 +20,4 @@ class SubscriptionModel {
   });
 }
 
-enum SubscriptionStatus {
-  active,
-  paused,
-  ended,
-}
+enum SubscriptionStatus { active, paused, ended }

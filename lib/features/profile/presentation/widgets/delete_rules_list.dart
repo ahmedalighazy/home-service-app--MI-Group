@@ -11,6 +11,7 @@ class DeleteRulesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       decoration: ShapeDecoration(
         color: AppColors.errorRed2.withValues(alpha: 0.8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
