@@ -2,10 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/image/app_assets.dart';
-import '../../../../core/utils/helpers/cache_helper.dart';
+import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
@@ -57,7 +58,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
     if (_selectedLang == null) return;
     await CacheHelper.saveData(key: 'language', value: _selectedLang!);
     if (!mounted) return;
-    Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+    context.go(AppRouter.signIn);
   }
 
   @override
@@ -70,11 +71,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF0A434E),
-              Color(0xFF189AB4),
-              Color(0xFF0A434E),
-            ],
+            colors: [Color(0xFF0A434E), Color(0xFF189AB4), Color(0xFF0A434E)],
             stops: [0.0, 0.5, 1.0],
           ),
         ),
@@ -84,10 +81,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
             Positioned.fill(
               child: Opacity(
                 opacity: 0.08,
-                child: Image.asset(
-                  AppAssets.topographicBg,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(AppAssets.topographicBg, fit: BoxFit.cover),
               ),
             ),
 
@@ -300,8 +294,9 @@ class _LanguageCard extends StatelessWidget {
               ? AppColors.white.withOpacity(0.18)
               : AppColors.white.withOpacity(0.07),
           border: Border.all(
-            color:
-                isSelected ? AppColors.white : AppColors.white.withOpacity(0.2),
+            color: isSelected
+                ? AppColors.white
+                : AppColors.white.withOpacity(0.2),
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
@@ -354,9 +349,7 @@ class _LanguageCard extends StatelessWidget {
                 height: 26.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: isSelected
-                      ? AppColors.white
-                      : Colors.transparent,
+                  color: isSelected ? AppColors.white : Colors.transparent,
                   border: Border.all(
                     color: isSelected
                         ? AppColors.white

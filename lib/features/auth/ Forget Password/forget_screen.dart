@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
 import '../../../core/di/injection.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/colors/app_colors.dart';
+import '../../../core/themes/image/app_assets.dart';
+import '../../../core/themes/text/app_text.dart';
+import '../../../core/utils/l10n/app_strings.dart';
+import '../presentation/widgets/auth_back_button.dart';
+import '../presentation/widgets/auth_primary_button.dart';
+import '../presentation/widgets/auth_text_field.dart';
 
 class ForgetScreen extends StatefulWidget {
   const ForgetScreen({super.key});
@@ -17,7 +23,18 @@ class ForgetScreen extends StatefulWidget {
 
 class _ForgetScreenState extends State<ForgetScreen> {
   final TextEditingController _emailCtrl = TextEditingController();
+
   bool _hasError = false;
+  bool _hasInput = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailCtrl.addListener(() {
+      final hasInput = _emailCtrl.text.trim().isNotEmpty;
+      if (hasInput != _hasInput) setState(() => _hasInput = hasInput);
+    });
+  }
 
   @override
   void dispose() {
@@ -32,41 +49,31 @@ class _ForgetScreenState extends State<ForgetScreen> {
 
   void _onSend(BuildContext context) {
     if (!_isValid) return;
+    setState(() => _hasError = false);
     context.read<AuthCubit>().sendResetCode(_emailCtrl.text.trim());
   }
+
+  void _onFieldChanged(String _) => setState(() => _hasError = false);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AuthCubit>(
       create: (_) => getIt<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, AuthState>(
-        listener: (context, state) {
-          if (state is ResetCodeSent) {
-            Navigator.of(context).pushNamed(
-              AppRoutes.verifyResetCode,
-              arguments: state.email,
-            );
-          } else if (state is AuthError) {
-            setState(() => _hasError = true);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: AppColors.errorRed,
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          final isLoading = state is AuthLoading;
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        body: BlocConsumer<AuthCubit, AuthState>(
+          listener: _handleState,
+          builder: (context, state) {
+            final isLoading = state is AuthLoading;
 
-          return Scaffold(
-            backgroundColor: AppColors.white,
-            body: Directionality(
+            return Directionality(
               textDirection: TextDirection.rtl,
               child: SafeArea(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
                           minHeight: constraints.maxHeight,
@@ -79,183 +86,75 @@ class _ForgetScreenState extends State<ForgetScreen> {
                               children: [
                                 SizedBox(height: 16.h),
 
-                                // ── Back button ──────────────────────────────────
+                                // ── Back button ──────────────────────
                                 Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    onTap: () => Navigator.pop(context),
-                                    child: Container(
-                                      width: 40.w,
-                                      height: 40.w,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: AppColors.borderInputs),
-                                        color: AppColors.white,
-                                      ),
-                                      child: Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        size: 15.sp,
-                                        color: AppColors.primaryText,
-                                      ),
-                                    ),
+                                  alignment: Alignment.centerLeft,
+                                  child: AuthBackButton(
+                                    onTap: () => context.pop(),
                                   ),
                                 ),
 
-                                SizedBox(height: 40.h),
+                                SizedBox(height: 32.h),
 
-                                // ── Title ────────────────────────────────────────
+                                // ── Illustration ─────────────────────
+                                Center(
+                                  child: Image.asset(
+                                    AppAssets.forgot,
+                                    width: 200.w,
+                                    height: 200.w,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+
+                                SizedBox(height: 32.h),
+
+                                // ── Title ────────────────────────────
                                 Text(
-                                  'نسيت كلمة المرور؟',
+                                  AppStrings.resetPassword,
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.ibmPlexSansArabic(
+                                  style: AppText.ibmHeading22(
                                     color: AppColors.dark,
-                                    fontSize: 22.sp,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
 
                                 SizedBox(height: 10.h),
 
+                                // ── Subtitle ─────────────────────────
                                 Text(
-                                  'أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق لإعادة تعيين كلمة المرور',
+                                  AppStrings.resetPasswordDescription,
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.ibmPlexSansArabic(
+                                  style: AppText.ibmDescription14(
                                     color: AppColors.secondaryText,
-                                    fontSize: 13.sp,
-                                    height: 1.6,
                                   ),
                                 ),
 
-                                SizedBox(height: 44.h),
+                                SizedBox(height: 32.h),
 
-                                // ── Email label ──────────────────────────────────
-                                Text(
-                                  'البريد الإلكتروني',
-                                  style: GoogleFonts.ibmPlexSansArabic(
-                                    color: AppColors.primaryText,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                // ── Email field ──────────────────────
+                                AuthTextField(
+                                  label: AppStrings.emailLabel,
+                                  hint: AppStrings.emailPlaceholder,
+                                  controller: _emailCtrl,
+                                  prefixIcon: Icons.email_outlined,
+                                  keyboardType: TextInputType.emailAddress,
+                                  hasError: _hasError,
+                                  errorMessage: 'يرجى إدخال بريد إلكتروني صحيح',
+                                  onChanged: _onFieldChanged,
                                 ),
-
-                                SizedBox(height: 8.h),
-
-                                // ── Email field ──────────────────────────────────
-                                AnimatedContainer(
-                                  duration: const Duration(milliseconds: 200),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                      color: _hasError
-                                          ? AppColors.errorRed
-                                          : AppColors.borderInputs,
-                                      width: 1.5,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: AppColors.greenPrimary.withValues(alpha: 0.06),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: TextField(
-                                    controller: _emailCtrl,
-                                    keyboardType: TextInputType.emailAddress,
-                                    textDirection: TextDirection.ltr,
-                                    textAlign: TextAlign.left,
-                                    onChanged: (_) => setState(() => _hasError = false),
-                                    style: GoogleFonts.ibmPlexSansArabic(
-                                      color: AppColors.primaryText,
-                                      fontSize: 14.sp,
-                                    ),
-                                    decoration: InputDecoration(
-                                      hintText: 'example@email.com',
-                                      hintStyle: GoogleFonts.ibmPlexSansArabic(
-                                        color: AppColors.placeholder,
-                                        fontSize: 13.sp,
-                                      ),
-                                      border: InputBorder.none,
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16.w,
-                                        vertical: 14.h,
-                                      ),
-                                      prefixIcon: Icon(
-                                        Icons.email_outlined,
-                                        color: AppColors.gray,
-                                        size: 20.sp,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                if (_hasError) ...[
-                                  SizedBox(height: 6.h),
-                                  Text(
-                                    'يرجى إدخال بريد إلكتروني صحيح',
-                                    style: GoogleFonts.ibmPlexSansArabic(
-                                      color: AppColors.errorRed,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ],
 
                                 const Spacer(),
+
                                 SizedBox(height: 24.h),
 
-                                // ── Send button ──────────────────────────────────
-                                GestureDetector(
-                                  onTap: _isValid && !isLoading ? () => _onSend(context) : null,
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 250),
-                                    width: double.infinity,
-                                    height: 54.h,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.r),
-                                      gradient: _isValid
-                                          ? const LinearGradient(
-                                        begin: Alignment.centerRight,
-                                        end: Alignment.centerLeft,
-                                        colors: [Color(0xFF0A434E), Color(0xFF189AB4)],
-                                      )
-                                          : null,
-                                      color: _isValid ? null : AppColors.bgDisabled,
-                                      boxShadow: _isValid
-                                          ? [
-                                        BoxShadow(
-                                          color: const Color(0xFF189AB4).withValues(alpha: 0.3),
-                                          blurRadius: 14,
-                                          offset: const Offset(0, 5),
-                                        ),
-                                      ]
-                                          : [],
-                                    ),
-                                    child: Center(
-                                      child: isLoading
-                                          ? SizedBox(
-                                        width: 22.w,
-                                        height: 22.w,
-                                        child: const CircularProgressIndicator(
-                                          color: Colors.white,
-                                          strokeWidth: 2.5,
-                                        ),
-                                      )
-                                          : Text(
-                                        'إرسال رمز التحقق',
-                                        style: GoogleFonts.ibmPlexSansArabic(
-                                          color: _isValid
-                                              ? Colors.white
-                                              : AppColors.disabledText,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                // ── Send button ──────────────────────
+                                AuthPrimaryButton(
+                                  label: AppStrings.sendCode,
+                                  isLoading: isLoading,
+                                  isEnabled: _isValid,
+                                  onPressed: () => _onSend(context),
                                 ),
 
-                                SizedBox(height: 24.h),
+                                SizedBox(height: 32.h),
                               ],
                             ),
                           ),
@@ -265,10 +164,36 @@ class _ForgetScreenState extends State<ForgetScreen> {
                   },
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
+  }
+
+  void _handleState(BuildContext context, AuthState state) {
+    // ── Code sent → navigate to verify screen ───────────
+    if (state is ResetCodeSent) {
+      context.push(AppRouter.verifyResetCode, extra: state.email);
+
+      // ── Network / server error ───────────────────────────
+    } else if (state is AuthError) {
+      setState(() => _hasError = true);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
+    }
   }
 }

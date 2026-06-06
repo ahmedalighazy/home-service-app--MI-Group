@@ -5,13 +5,93 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
 
-class OnboardingStepTwoContent extends StatelessWidget {
+class OnboardingStepTwoContent extends StatefulWidget {
   final VoidCallback onStart;
+  final int currentPage;
 
   const OnboardingStepTwoContent({
     super.key,
     required this.onStart,
+    required this.currentPage,
   });
+
+  @override
+  State<OnboardingStepTwoContent> createState() =>
+      _OnboardingStepTwoContentState();
+}
+
+class _OnboardingStepTwoContentState extends State<OnboardingStepTwoContent>
+    with TickerProviderStateMixin {
+  late AnimationController _imageController;
+  late AnimationController _textController;
+  late Animation<Offset> _imageSlideAnimation;
+  late Animation<double> _imageFadeAnimation;
+  late Animation<Offset> _textSlideAnimation;
+  late Animation<double> _textFadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Image Animation Controller
+    _imageController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
+
+    // Text Animation Controller
+    _textController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    // Image Animations (slide from bottom + fade)
+    _imageSlideAnimation =
+        Tween<Offset>(
+          begin: const Offset(0, 1.0), // Start from bottom
+          end: Offset.zero, // End at normal position
+        ).animate(
+          CurvedAnimation(parent: _imageController, curve: Curves.easeOutCubic),
+        );
+
+    _imageFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _imageController, curve: Curves.easeInOut),
+    );
+
+    // Text Animations (slide from bottom + fade)
+    _textSlideAnimation =
+        Tween<Offset>(
+          begin: const Offset(0, 0.5), // Start from bottom (less distance)
+          end: Offset.zero,
+        ).animate(
+          CurvedAnimation(parent: _textController, curve: Curves.easeOutQuart),
+        );
+
+    _textFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _textController, curve: Curves.easeInOut),
+    );
+
+    // Start animations with delay
+    _startAnimations();
+  }
+
+  void _startAnimations() async {
+    // Start image animation immediately
+    _imageController.forward();
+
+    // Start text animation with delay
+    await Future.delayed(const Duration(milliseconds: 400));
+    if (mounted) {
+      _textController.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _imageController.dispose();
+    _textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +102,7 @@ class OnboardingStepTwoContent extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            AppColors.greenPrimary,
-            AppColors.white,
-          ],
+          colors: [AppColors.greenPrimary, AppColors.white],
           stops: [0.0, 0.7],
         ),
       ),
@@ -39,25 +116,28 @@ class OnboardingStepTwoContent extends StatelessWidget {
             height: 0.6.sh,
             child: Opacity(
               opacity: 0.12,
-              child: Image.asset(
-                AppAssets.qatarMap,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(AppAssets.qatarMap, fit: BoxFit.cover),
             ),
           ),
 
-          // Technician guy image
+          // Animated Technician guy image
           Positioned(
             top: 0.15.sh,
             left: 0,
             right: 0,
             bottom: 0.36.sh,
-            child: Image.asset(
-              AppAssets.technicianGuy,
-              fit: BoxFit.contain,
+            child: SlideTransition(
+              position: _imageSlideAnimation,
+              child: FadeTransition(
+                opacity: _imageFadeAnimation,
+                child: Image.asset(
+                  AppAssets.technicianGuy,
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
           ),
-          
+
           // White fade at the bottom
           Positioned(
             bottom: 0,
@@ -80,99 +160,106 @@ class OnboardingStepTwoContent extends StatelessWidget {
             ),
           ),
 
-          // Content and Button
+          // Animated Content and Button
           Positioned(
             bottom: 0,
             left: 24.w,
             right: 24.w,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Title
-                Text(
-                  'أفضل الكفاءات لخدمة منزلك',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.ibmPlexSansArabic(
-                    color: AppColors.dark,
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                // Description
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Text(
-                    'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.ibmPlexSansArabic(
-                      color: AppColors.secondaryText,
-                      fontSize: 14.sp,
-                      height: 1.5,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 24.h),
-                // Page Indicator (Dot 2 active)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            child: SlideTransition(
+              position: _textSlideAnimation,
+              child: FadeTransition(
+                opacity: _textFadeAnimation,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 6.w,
-                      height: 6.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGray,
-                        borderRadius: BorderRadius.circular(3.r),
-                      ),
-                    ),
-                    SizedBox(width: 6.w),
-                    Container(
-                      width: 18.w,
-                      height: 6.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.greenPrimary,
-                        borderRadius: BorderRadius.circular(3.r),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 32.h),
-                // Bottom Button
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.r),
-                    gradient: const LinearGradient(
-                      colors: [
-                        AppColors.greenPrimary,
-                        AppColors.dark,
-                      ],
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: onStart,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.r),
-                      ),
-                    ),
-                    child: Text(
-                      'ابدأ الآن  >>>',
+                    // Title
+                    Text(
+                      'أفضل الكفاءات لخدمة منزلك',
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.ibmPlexSansArabic(
-                        color: AppColors.white,
-                        fontSize: 18.sp,
+                        color: AppColors.dark,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                    SizedBox(height: 12.h),
+                    // Description
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.ibmPlexSansArabic(
+                          color: AppColors.secondaryText,
+                          fontSize: 14.sp,
+                          height: 1.5,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    // Page Indicator - Dynamic based on currentPage
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: widget.currentPage == 0 ? 18.w : 6.w,
+                          height: 6.h,
+                          decoration: BoxDecoration(
+                            color: widget.currentPage == 0
+                                ? AppColors.greenPrimary
+                                : AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(3.r),
+                          ),
+                        ),
+                        SizedBox(width: 6.w),
+                        Container(
+                          width: widget.currentPage == 1 ? 18.w : 6.w,
+                          height: 6.h,
+                          decoration: BoxDecoration(
+                            color: widget.currentPage == 1
+                                ? AppColors.greenPrimary
+                                : AppColors.lightGray,
+                            borderRadius: BorderRadius.circular(3.r),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 32.h),
+                    // Bottom Button
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.r),
+                        gradient: const LinearGradient(
+                          colors: [AppColors.greenPrimary, AppColors.dark],
+                        ),
+                      ),
+                      child: ElevatedButton(
+                        onPressed: widget.onStart,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          padding: EdgeInsets.symmetric(vertical: 16.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
+                        ),
+                        child: Text(
+                          'ابدأ الآن  >>>',
+                          style: GoogleFonts.ibmPlexSansArabic(
+                            color: AppColors.white,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40.h),
+                  ],
                 ),
-                SizedBox(height: 40.h),
-              ],
+              ),
             ),
           ),
         ],

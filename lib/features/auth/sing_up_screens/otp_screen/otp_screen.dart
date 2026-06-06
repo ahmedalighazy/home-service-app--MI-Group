@@ -4,14 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../logic/cubits/auth_cubit.dart';
-import '../logic/states/auth_state.dart';
-import '../presentation/widgets/otp_confirm_button.dart';
-import '../presentation/widgets/otp_input_row.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/di/injection.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../../logic/cubits/auth_cubit.dart';
+import '../../logic/states/auth_state.dart';
+import '../../presentation/widgets/auth_back_button.dart';
+import '../../presentation/widgets/otp_confirm_button.dart';
+import '../../presentation/widgets/otp_input_row.dart';
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;
@@ -82,7 +84,10 @@ class _OtpScreenState extends State<OtpScreen>
       _canResend = false;
     });
     _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted) { t.cancel(); return; }
+      if (!mounted) {
+        t.cancel();
+        return;
+      }
       setState(() {
         if (_secondsLeft > 0) {
           _secondsLeft--;
@@ -142,9 +147,7 @@ class _OtpScreenState extends State<OtpScreen>
                             // ── Back button ──────────────────────────
                             Align(
                               alignment: Alignment.centerRight,
-                              child: _AuthBackButton(
-                                onTap: () => Navigator.pop(context),
-                              ),
+                              child: AuthBackButton(onTap: () => context.pop()),
                             ),
 
                             SizedBox(height: 40.h),
@@ -214,7 +217,8 @@ class _OtpScreenState extends State<OtpScreen>
                                       ),
                                     )
                                   : const SizedBox.shrink(
-                                      key: ValueKey('empty')),
+                                      key: ValueKey('empty'),
+                                    ),
                             ),
 
                             SizedBox(height: 10.h),
@@ -278,14 +282,14 @@ class _OtpScreenState extends State<OtpScreen>
                                       isLoading: isLoading,
                                       isSuccess:
                                           _fieldState == OtpFieldState.success,
-                                      onPressed:
-                                          _fieldState != OtpFieldState.error
-                                              ? () => _onConfirm(context)
-                                              : () {},
+                                      isEnabled:
+                                          _fieldState != OtpFieldState.error,
+                                      onPressed: () => _onConfirm(context),
                                     )
                                   : SizedBox(
                                       height: 54.h,
-                                      key: const ValueKey('empty')),
+                                      key: const ValueKey('empty'),
+                                    ),
                             ),
 
                             SizedBox(height: 16.h),
@@ -308,14 +312,16 @@ class _OtpScreenState extends State<OtpScreen>
                           showCursor: false,
                           enableInteractiveSelection: false,
                           inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
+                            FilteringTextInputFormatter.digitsOnly,
                           ],
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             counterText: '',
                           ),
                           style: const TextStyle(
-                              color: Colors.transparent, fontSize: 0),
+                            color: Colors.transparent,
+                            fontSize: 0,
+                          ),
                           cursorColor: Colors.transparent,
                         ),
                       ),
@@ -333,13 +339,10 @@ class _OtpScreenState extends State<OtpScreen>
   void _handleState(BuildContext context, AuthState state) {
     if (state is OtpVerified) {
       setState(() => _fieldState = OtpFieldState.success);
-      final navigator = Navigator.of(context);
+      final router = GoRouter.of(context);
       Future.delayed(const Duration(milliseconds: 500), () {
         if (mounted) {
-          navigator.pushReplacementNamed(
-            AppRoutes.completeProfile,
-            arguments: widget.phoneNumber,
-          );
+          router.go(AppRouter.completeProfile, extra: widget.phoneNumber);
         }
       });
     } else if (state is OtpError) {
@@ -347,64 +350,44 @@ class _OtpScreenState extends State<OtpScreen>
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(state.message),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(state.message),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     } else if (state is AuthError) {
       setState(() => _fieldState = OtpFieldState.error);
       _shakeCtrl.forward(from: 0.0);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(state.message),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(state.message),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     } else if (state is OtpSent) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: const Text('تم إعادة إرسال رمز التحقق بنجاح'),
-          backgroundColor: AppColors.greenPrimary,
-          behavior: SnackBarBehavior.floating,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: const Text('تم إعادة إرسال رمز التحقق بنجاح'),
+            backgroundColor: AppColors.greenPrimary,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     }
-  }
-}
-
-// ─────────────────────────────────────────────────────────────
-//  Shared back button (RTL arrow)
-// ─────────────────────────────────────────────────────────────
-class _AuthBackButton extends StatelessWidget {
-  final VoidCallback onTap;
-  const _AuthBackButton({required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 40.w,
-        height: 40.w,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: AppColors.borderInputs),
-          color: AppColors.white,
-        ),
-        child: Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 15.sp,
-          color: AppColors.primaryText,
-        ),
-      ),
-    );
   }
 }

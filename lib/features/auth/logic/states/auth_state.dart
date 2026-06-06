@@ -65,4 +65,11 @@ class ResetCodeError extends AuthState {
   ResetCodeError(this.message);
 }
 
+/// Password reset completed successfully.
 class ResetPasswordSuccess extends AuthState {}
+
+/// Password reset failed (e.g., invalid code, expired token).
+class ResetPasswordError extends AuthState {
+  final String message;
+  ResetPasswordError(this.message);
+}

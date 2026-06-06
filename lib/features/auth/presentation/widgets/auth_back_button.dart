@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+
+/// A circular RTL-style back button used across auth screens.
+///
+/// Usage:
+/// ```dart
+/// AuthBackButton(onTap: () => Navigator.pop(context))
+/// ```
+class AuthBackButton extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const AuthBackButton({super.key, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 40.w,
+        height: 40.w,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: AppColors.borderInputs),
+          color: AppColors.white,
+        ),
+        child: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 15.sp,
+          color: AppColors.primaryText,
+        ),
+      ),
+    );
+  }
+}

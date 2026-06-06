@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class PromoBannerCard extends StatelessWidget {
   const PromoBannerCard({
@@ -25,11 +26,12 @@ class PromoBannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding.w),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
       child: Container(
-        height: AppSizes.promoBannerCardHeight,
+        width: double.infinity,
+        height: AppSizes.bannerCardHeight,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           boxShadow: [
             BoxShadow(
               color: AppColors.black.withValues(alpha: .05),
@@ -39,20 +41,15 @@ class PromoBannerCard extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSizes.radius.r),
+          borderRadius: BorderRadius.circular(AppSizes.radius),
           child: Stack(
             children: [
               Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
 
-              Positioned.fill(
-                child: Container(color: AppColors.white.withValues(alpha: .08)),
-              ),
               Padding(
-                padding: const EdgeInsets.only(
+                padding: EdgeInsetsDirectional.only(
                   top: AppSizes.paddingLarge,
-                  right: AppSizes.padding,
-                  left: AppSizes.padding,
-                  bottom: AppSizes.padding,
+                  start: AppSizes.padding,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +62,7 @@ class PromoBannerCard extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: AppSizes.spacingMin.h),
+                    SizedBox(height: AppSizes.spacingMin),
 
                     Text(
                       subTitle,
@@ -73,26 +70,25 @@ class PromoBannerCard extends StatelessWidget {
                       style: AppText.ibmPlexSansArabic12SemiBold,
                     ),
 
-                    SizedBox(height: AppSizes.spacingSmall.h),
+                    SizedBox(height: AppSizes.spacingSmall),
 
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingLarge,
+                      padding: EdgeInsetsDirectional.only(
+                        start: AppSizes.paddingXXLarge,
                       ),
                       child: OldPrice(price: price),
                     ),
 
-                    SizedBox(height: AppSizes.spacingMin.h),
+                    SizedBox(height: AppSizes.spacingMin),
 
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingMedium,
+                      padding: EdgeInsetsDirectional.only(
+                        start: AppSizes.padding,
                       ),
                       child: Text(
                         offerPrice,
-                        textAlign: TextAlign.right,
                         style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ),
@@ -100,37 +96,8 @@ class PromoBannerCard extends StatelessWidget {
                     const Spacer(),
 
                     Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 6.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.greenPrimary,
-                          borderRadius: BorderRadius.circular(
-                            AppSizes.radiusSmall.r,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              promoCode,
-                              style: AppText.ibmCaption11(
-                                color: AppColors.white,
-                              ),
-                            ),
-                            SizedBox(width: AppSizes.spacingMin.w),
-                            Text(
-                              'code',
-                              style: AppText.ibmCaption11(
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: PromoCodeBadge(promoCode: promoCode),
                     ),
                   ],
                 ),
@@ -143,6 +110,7 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
+// Old Price
 class OldPrice extends StatelessWidget {
   const OldPrice({super.key, required this.price});
 
@@ -155,7 +123,7 @@ class OldPrice extends StatelessWidget {
       children: [
         Text(
           price,
-          style: AppText.ibmPlexSansArabic12SemiBold.copyWith(fontSize: 14),
+          style: AppText.ibmPlexSansArabic12SemiBold.copyWith(fontSize: 14.sp),
         ),
 
         Positioned(
@@ -166,12 +134,64 @@ class OldPrice extends StatelessWidget {
               height: 2,
               decoration: BoxDecoration(
                 color: Colors.red,
-                borderRadius: BorderRadius.circular(AppSizes.radiusXL),
+                borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
               ),
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+// Promo Code Badge
+class PromoCodeBadge extends StatelessWidget {
+  const PromoCodeBadge({super.key, required this.promoCode});
+
+  final String promoCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.secondary,
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: Radius.circular(AppSizes.radius),
+        ),
+      ),
+
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingSmall,
+              //vertical: AppSizes.paddingSmall,
+            ),
+            child: Text(
+              promoCode,
+              style: AppText.ibmCaption11(color: AppColors.white),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.paddingSmall,
+              vertical: AppSizes.paddingSmall,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.greenPrimary,
+              borderRadius: BorderRadiusDirectional.only(
+                topStart: Radius.circular(AppSizes.radius),
+                topEnd: Radius.zero,
+              ),
+            ),
+            child: Text(
+              AppStrings.code,
+              style: AppText.ibmCaption11(color: AppColors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

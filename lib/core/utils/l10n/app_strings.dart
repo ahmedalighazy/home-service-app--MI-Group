@@ -63,6 +63,8 @@ class AppStrings {
   static const String orUsing = 'أو باستخدام';
   static const String viewAll = 'عرض الكل';
   static const String bookNow = 'احجز الآن';
+  static const String specialOfferTitle = 'عروض مخصصة للشركات والمؤسسات';
+  static const String serviceAvailable24h = 'خدمة سريعة خلال 24 ساعة';
 
   // --- Sign Up / Login Screen ---
   static const String welcomeBack = 'أهلاً بعودتك';
@@ -136,6 +138,14 @@ class AppStrings {
   static const String navBookings = 'حجوزاتي';
   static const String navAccount = 'حسابي';
 
+  // Promo Banner
+  static const String bestCleaningWork = 'أنس أعمال التنظيف بعد العمل';
+  static const String hourlyClean = 'تنظيف بالساعة';
+  static const String promoCode = 'CLEAN15';
+  static const String code = 'Code';
+  static const String startingPrice = 'تبدأ الأسعار من 100 ريال';
+  static const String price120 = '120';
+
   // --- Search Screens ---
   static const String recentSearches = 'عمليات البحث الأخيرة';
   static const String clearAll = 'مسح الكل';
@@ -145,6 +155,11 @@ class AppStrings {
   static const String noResultsFound = 'لم يتم العثور على نتائج';
   static const String browseServices = 'تصفح الخدمات';
   static const String tryOtherWords = 'جرب كلمات أخرى';
+
+  //Service Cards
+  static const String deepFurnitureCleaning = 'تنظيف أثاث عميق';
+  static const String pestControlService = 'القضاء علي الحشرات';
+  static const String glassCleaning = 'تنظيف الزجاج';
 
   // --- Addresses Bottom Sheet ---
   static const String chooseYourAddress = 'اختر عنوانك';
@@ -189,7 +204,6 @@ class AppStrings {
   // --- Service Details Screen ---
   static const String reviewsCount = 'تقييم';
   static const String discount = 'خصم';
-  static const String code = 'كود';
   static const String applyCode = 'تطبيق الكود';
   static const String viewServiceDetails = 'عرض تفاصيل الخدمة';
   static const String serviceIncludes = 'تشمل الخدمة:';
@@ -280,6 +294,7 @@ class AppStrings {
   static const String monthly = 'شهريا';
   static const String discountUpTo10 = 'خصم يصل الى 10%';
   static const String discountUpTo20 = 'خصم يصل الى 20%';
+  static const String discountUpTo70 = 'خصم يصل لـ %70';
 
   // --- Order Tracking ---
   static const String trackOrder = 'تتبع الطلب';

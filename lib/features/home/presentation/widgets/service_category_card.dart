@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
 
 class ServiceCategoryCard extends StatelessWidget {
-  final IconData icon;
+  final String iconPath;
   final String title;
   final VoidCallback? onTap;
 
   const ServiceCategoryCard({
     super.key,
-    required this.icon,
+    required this.iconPath,
     required this.title,
     this.onTap,
   });
@@ -19,30 +21,37 @@ class ServiceCategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: 90,
+        width: AppSizes.categoryCardWidth,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 70,
-              height: 70,
+              width: AppSizes.categoryIconContainerSize,
+              height: AppSizes.categoryIconContainerSize,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.light,
+                color: AppColors.grayWhite,
                 borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
               ),
-              child: Icon(icon, size: 36, color: AppColors.greenPrimary),
+              child: SvgPicture.asset(
+                iconPath,
+                width: AppSizes.iconSizeLarge,
+                height: AppSizes.iconSizeLarge,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.greenPrimary,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: AppSizes.spacingSmall),
             Text(
               title,
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
+              style: AppText.mediumIbm(
                 color: AppColors.primaryText,
-                height: 1.2,
+                fontSize: 10,
               ),
             ),
           ],

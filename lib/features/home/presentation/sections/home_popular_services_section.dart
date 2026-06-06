@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/features/home/domain/entities/service_entity.dart';
+import 'package:home_service_app/features/home/presentation/widgets/section_header.dart';
+import 'package:home_service_app/features/home/presentation/widgets/service_card.dart';
+
+class HomePopularServicesSection extends StatelessWidget {
+  const HomePopularServicesSection({super.key, required this.services});
+
+  final List<ServiceEntity> services;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
+      child: Column(
+        children: [
+          const SectionHeader(title: AppStrings.mostRequested),
+
+          SizedBox(height: AppSizes.spacingMedium),
+
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            child: Row(
+              children: services
+                  .map(
+                    (service) => Padding(
+                      padding: EdgeInsetsDirectional.only(
+                        end: AppSizes.spacingMedium,
+                      ),
+                      child: ServiceCard(
+                        title: service.title,
+                        imagePath: service.imagePath,
+                        badge: service.badge,
+                        onTap: () {},
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

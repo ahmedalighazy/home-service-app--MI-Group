@@ -74,6 +74,7 @@ class AppColors {
   // Background Colors
   static const Color bgPrimary = Color(0xFFF8FAFC);
   static const Color softWhite = Color(0xFFF8FAFC); // Alias for theme support
+  static const Color grayWhite = Color(0xFFF2F2F2); // Alias for theme support
 
   // Grays
   static const Color gray = Color(0xFF6D7688);

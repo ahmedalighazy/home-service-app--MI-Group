@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/di/injection.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/themes/colors/app_colors.dart';
 import '../../../core/themes/image/app_assets.dart';
 import '../../../core/themes/text/app_text.dart';
 import '../../../core/utils/l10n/app_strings.dart';
+import '../../../core/widgets/language_toggle.dart';
 import '../logic/cubits/auth_cubit.dart';
 import '../logic/states/auth_state.dart';
 import '../presentation/widgets/auth_or_divider.dart';
@@ -42,9 +44,9 @@ class _SingInState extends State<SingIn> {
     if (!_canSubmit) return;
     setState(() => _hasError = false);
     context.read<AuthCubit>().loginWithEmail(
-          _emailCtrl.text.trim(),
-          _passwordCtrl.text,
-        );
+      _emailCtrl.text.trim(),
+      _passwordCtrl.text,
+    );
   }
 
   void _onFieldChanged(String _) => setState(() => _hasError = false);
@@ -59,10 +61,21 @@ class _SingInState extends State<SingIn> {
           backgroundColor: AppColors.white,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: AppColors.dark),
-            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColors.dark,
+            ),
+            onPressed: () => context.pop(),
           ),
+          actions: [
+            // Language Toggle in top right
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(right: 16.w),
+                child: const LanguageToggle(),
+              ),
+            ),
+          ],
         ),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: _handleState,
@@ -130,8 +143,8 @@ class _SingInState extends State<SingIn> {
                         rememberMe: _rememberMe,
                         onRememberChanged: (v) =>
                             setState(() => _rememberMe = v ?? false),
-                        onForgotTap: () => Navigator.of(context)
-                            .pushNamed(AppRoutes.forgetPassword),
+                        onForgotTap: () =>
+                            context.push(AppRouter.forgetPassword),
                       ),
 
                       SizedBox(height: 32.h),
@@ -144,8 +157,8 @@ class _SingInState extends State<SingIn> {
                       // ── Google ───────────────────────────────────
                       AuthSocialButton(
                         iconPath: AppAssets.iconGoogle,
-                        label: AppStrings.signUpWithGoogle,
-                        onPressed: () {},
+                        text: AppStrings.signUpWithGoogle,
+                        onTap: () {},
                       ),
 
                       SizedBox(height: 12.h),
@@ -153,23 +166,14 @@ class _SingInState extends State<SingIn> {
                       // ── Apple ────────────────────────────────────
                       AuthSocialButton(
                         iconPath: AppAssets.iconApple,
-                        label: AppStrings.signUpWithApple,
-                        onPressed: () {},
+                        text: AppStrings.signUpWithApple,
+                        onTap: () {},
                       ),
 
                       SizedBox(height: 32.h),
 
                       // ── Sign up link ─────────────────────────────
-                      _SignUpRow(
-                        onTap: () {
-                          if (Navigator.of(context).canPop()) {
-                            Navigator.of(context).pop();
-                          } else {
-                            Navigator.of(context)
-                                .pushReplacementNamed(AppRoutes.login);
-                          }
-                        },
-                      ),
+                      _SignUpRow(onTap: () => context.go(AppRouter.signUp)),
 
                       SizedBox(height: 16.h),
 
@@ -193,12 +197,11 @@ class _SingInState extends State<SingIn> {
   }
 
   void _handleState(BuildContext context, AuthState state) {
-    // ── Login success ────────────────────────────────────
     if (state is SignInSuccess) {
       setState(() => _hasError = false);
-      Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+      context.go(AppRouter.home);
 
-    // ── Wrong email / password ───────────────────────────
+      // ── Wrong email / password ───────────────────────────
     } else if (state is SignInInvalidCredentials) {
       setState(() => _hasError = true);
       ScaffoldMessenger.of(context)
@@ -217,7 +220,7 @@ class _SingInState extends State<SingIn> {
           ),
         );
 
-    // ── Network / server error ───────────────────────────
+      // ── Network / server error ───────────────────────────
     } else if (state is SignInError) {
       setState(() => _hasError = false);
       ScaffoldMessenger.of(context)

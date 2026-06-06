@@ -52,7 +52,7 @@ class ProfileCard extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               Text(
-                AppStrings.phonePlaceholder,
+                AppStrings.phoneNumber,
                 textDirection: TextDirection.ltr,
                 style: AppText.regularText(
                   color: AppColors.secondaryText,

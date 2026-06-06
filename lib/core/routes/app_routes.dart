@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
+import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
+import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
 import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
@@ -28,11 +30,7 @@ import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../utils/l10n/app_strings.dart';
-import '../../features/splash/presentation/screens/splash_screen.dart';
-import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
-import '../../features/auth/presentation/screens/language_selection_screen.dart';
-import '../../features/auth/sing_up_screens/otp_screen.dart';
-import '../../features/auth/sing_up_screens/complete_profile_screen.dart';
+
 import '../../features/auth/sing_in/sing_in.dart';
 import '../../features/auth/ Forget Password/forget_screen.dart';
 import '../../features/auth/ Forget Password/verify_reset_code_screen.dart';
@@ -56,7 +54,7 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String favorites = '/favorites';
   static const String helpCenter = '/help-center';
-  static const String updatePassword = '/Update-password';
+  static const String updatePassword = '/updatePassword';
   static const String legalAndPolicies = '/legal-and-policies';
   static const String privacyPolicy = '/privacy-policy';
   static const String termsAndConditions = '/terms-and-conditions';
