@@ -16,6 +16,7 @@ class AppText {
     );
   }
 
+
   static TextStyle mediumText({
     required Color color,
     required double fontSize,
@@ -303,6 +304,29 @@ class AppText {
       color: color,
       fontSize: 12.sp,
       fontWeight: FontWeight.w500,
+    );
+  }
+
+  /// Heading style for smaller titles
+  static TextStyle ibmHeading18({
+    Color color = AppColors.dark,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  /// Description style for smaller text
+  static TextStyle ibmDescription12({
+    Color color = AppColors.secondaryText,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w400,
+      height: 1.4,
     );
   }
 }

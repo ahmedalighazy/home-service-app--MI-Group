@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/routes/app_routes.dart';
 import 'core/themes/theming/app_theme.dart';
 import 'core/di/injection.dart';
 import 'core/utils/helpers/cache_helper.dart';
-import 'core/language/language_cubit.dart';
-import 'features/splash/presentation/screens/splash_screen.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await setupGetIt();
-  
   runApp(const HomeServiceApp());
 }
 
@@ -27,35 +23,28 @@ class HomeServiceApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider<LanguageCubit>(
-          create: (context) => getIt<LanguageCubit>(),
-          child: BlocBuilder<LanguageCubit, LanguageState>(
-            builder: (context, state) {
-              return MaterialApp(
-                title: 'Home Service App',
-                debugShowCheckedModeBanner: false,
-                theme: AppTheme.lightTheme,
-                darkTheme: AppTheme.darkTheme,
-                themeMode: ThemeMode.light,
-                locale: state.isArabic ? const Locale('ar') : const Locale('en'),
-                home: const SplashScreen(),
-                onGenerateRoute: AppRoutes.onGenerateRoute,
-                supportedLocales: const [
-                  Locale('en', ''),
-                  Locale('ar', ''),
-                ],
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                localeResolutionCallback: (locale, supportedLocales) {
-                  // Use device locale if supported, otherwise fallback to first supported locale
-                  return supportedLocales.contains(locale) ? locale : supportedLocales.first;
-                },
-              );
-            },
-          ),
+        return MaterialApp.router(
+          title: 'Home Service App',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.light,
+          routerConfig: AppRouter.router,
+          locale: const Locale('en'),
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('ar', ''),
+          ],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback: (locale, supportedLocales) {
+            return supportedLocales.contains(locale)
+                ? locale
+                : supportedLocales.first;
+          },
         );
       },
     );

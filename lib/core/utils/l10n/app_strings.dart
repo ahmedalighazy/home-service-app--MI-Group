@@ -14,6 +14,12 @@ class AppStrings {
     }
   }
 
+  static bool get isArabic => _isArabic;
+
+  static void syncLocale(String language) {
+    CacheHelper.saveData(key: 'language', value: language);
+  }
+
   // --- General & Shared ---
   static String get confirm => _isArabic ? 'تأكيد' : 'Confirm';
   static String get sendCode => _isArabic ? 'أرسل الكود' : 'Send Code';
@@ -327,4 +333,55 @@ class AppStrings {
   static String get errorIncorrectPassword => _isArabic ? 'كلمة مرور غير صحيحة' : 'Incorrect password';
   static String get errorPasswordsDoNotMatch => _isArabic ? 'كلمتا المرور غير متطابقتين' : 'Passwords do not match';
   static String get errorOutOfZone => _isArabic ? 'عذراً لا نقدم خدمة في هذه المنطقة' : 'Sorry, we do not serve this area';
+  static String get errorFieldRequired => _isArabic ? 'هذا الحقل مطلوب' : 'This field is required';
+  static String get errorInvalidEmail => _isArabic ? 'البريد الإلكتروني غير صالح' : 'Invalid email address';
+
+  // --- Additional missing strings ---
+  static String get passwordsDoNotMatch => _isArabic ? 'كلمتا المرور غير متطابقتين' : 'Passwords do not match';
+  static String get passwordsMatch => _isArabic ? 'كلمتا المرور متطابقتين' : 'Passwords match';
+  static String get phoneRequired => _isArabic ? 'رقم الهاتف مطلوب' : 'Phone number is required';
+  static String get signUpOtpMessage => _isArabic ? 'تم إرسال رمز التحقق إلى هاتفك' : 'Verification code sent to your phone';
+  
+  // --- OTP Screen ---
+  static String get otpVerificationTitle => _isArabic ? 'تأكيد الرمز' : 'Confirm Code';
+  static String get otpVerificationSubtitle => _isArabic 
+      ? 'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى'
+      : 'Enter the 6-digit verification code sent to';
+  static String get otpVerifiedSuccess => _isArabic ? 'تم تأكيد الرمز بنجاح!' : 'Code verified successfully!';
+  static String get otpVerificationError => _isArabic ? 'الرمز غير صحيح' : 'Invalid code';
+  
+  // --- Verify Reset Code Screen ---
+  static String get resetPasswordTitle => _isArabic ? 'إعادة تعيين كلمة المرور' : 'Reset Password';
+  static String get resetPasswordSubtitle => _isArabic 
+      ? 'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر'
+      : 'Please enter your email to reset your password';
+  static String get sendCodeSuccess => _isArabic 
+      ? 'تم إرسال رمز التحقق إلى'
+      : 'Verification code sent to';
+  static String get sendCodeButton => _isArabic ? 'أرسل الكود' : 'Send Code';
+  
+  // --- Check Your Email Screen ---
+  static String get checkEmailTitle => _isArabic ? 'تحقق من بريدك الالكتروني' : 'Check Your Email';
+  static String get resetLinkSent => _isArabic ? 'تم إرسال رابط إعادة تعيين إلى' : 'Reset link sent to';
+  static String get enter4DigitCode => _isArabic 
+      ? 'أدخل الرمز المكون من 4 أرقام المذكور في البريد الإلكتروني'
+      : 'Enter the 4-digit code mentioned in the email';
+  static String get emailVerifiedSuccess => _isArabic ? 'تم التحقق من بريدك الإلكتروني بنجاح' : 'Email verified successfully';
+  
+  // --- Onboarding ---
+  static String get onboardingSkip => _isArabic ? 'تخطي' : 'Skip';
+  static String get onboardingNext => _isArabic ? 'التالي' : 'Next';
+  static String get onboardingGetStarted => _isArabic ? 'ابدأ الآن' : 'Get Started';
+  static String get onboardingStep1Title => _isArabic 
+      ? 'معدات وخامات بمعايير احترافية'
+      : 'Professional-Grade Equipment & Supplies';
+  static String get onboardingStep1Description => _isArabic 
+      ? 'نعتمد على أحدث المعدات والخامات عالية الجودة لضمان نتائج تنظيف احترافية تدوم'
+      : 'We rely on the latest high-quality equipment to ensure professional, long-lasting cleaning results';
+  static String get onboardingStep2Title => _isArabic 
+      ? 'أفضل الكفاءات لخدمة منزلك'
+      : 'The Best Professionals for Your Home';
+  static String get onboardingStep2Description => _isArabic 
+      ? 'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة'
+      : 'Professional services delivered by a trusted, carefully trained team to ensure quality and comfort on every visit';
 }

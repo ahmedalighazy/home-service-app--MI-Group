@@ -27,6 +27,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
   @override
   void initState() {
     super.initState();
+    // Default to Arabic
+    _selectedLang = 'ar';
     _fadeController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -63,11 +65,14 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
     } else {
       context.read<LanguageCubit>().setEnglish();
     }
-    Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+    debugPrint('Language selected: $_selectedLang, navigating to sign up');
+    Navigator.of(context).pushReplacementNamed(AppRoutes.signUp);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isArabic = context.watch<LanguageCubit>().isArabic;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -158,7 +163,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
 
                         // Title
                         Text(
-                          'اختر لغتك',
+                          isArabic ? 'اختر لغتك' : 'Choose Your Language',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.ibmPlexSansArabic(
                             color: AppColors.white,
@@ -168,7 +173,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                         ),
                         SizedBox(height: 4.h),
                         Text(
-                          'Choose Your Language',
+                          isArabic ? 'اختر لغتك' : 'Choose Your Language',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
                             color: AppColors.white.withValues(alpha: 0.7),
@@ -180,7 +185,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                         SizedBox(height: 14.h),
 
                         Text(
-                          'يمكنك تغيير اللغة لاحقاً من الإعدادات',
+                          isArabic ? 'يمكنك تغيير اللغة لاحقاً من الإعدادات' : 'You can change language later in settings',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.ibmPlexSansArabic(
                             color: AppColors.white.withValues(alpha: 0.55),
@@ -248,7 +253,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
                               ),
                               child: Center(
                                 child: Text(
-                                  'متابعة  ›',
+                                  isArabic ? 'متابعة  ›' : 'Continue  ›',
                                   style: GoogleFonts.ibmPlexSansArabic(
                                     color: AppColors.white,
                                     fontSize: 18.sp,

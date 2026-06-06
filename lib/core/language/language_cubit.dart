@@ -4,7 +4,7 @@ import '../utils/helpers/cache_helper.dart';
 part 'language_state.dart';
 
 class LanguageCubit extends Cubit<LanguageState> {
-  static const String _langKey = 'selected_language';
+  static const String _langKey = 'language';
 
   LanguageCubit() : super(_loadInitialState());
 

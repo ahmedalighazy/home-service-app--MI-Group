@@ -1,11 +1,10 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/language/language_cubit.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
 
 class OnboardingStepTwoStatic extends StatelessWidget {
   final VoidCallback onStart;
@@ -17,8 +16,6 @@ class OnboardingStepTwoStatic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isArabic = context.watch<LanguageCubit>().isArabic;
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -71,7 +68,7 @@ class OnboardingStepTwoStatic extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
                 ),
                 child: Text(
-                  isArabic ? 'ابدأ الآن  >>>' : 'Get Started  >>>',
+                  AppStrings.onboardingGetStarted,
                   style: GoogleFonts.ibmPlexSansArabic(
                     color: AppColors.white, fontSize: 18.sp, fontWeight: FontWeight.bold,
                     letterSpacing: 1.2,

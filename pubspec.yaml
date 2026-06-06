@@ -43,6 +43,8 @@ dependencies:
   flutter_svg: ^2.0.10
   flutter_localizations:
     sdk: flutter
+  go_router: ^17.3.0
+  image_picker: ^1.2.2
 
 dev_dependencies:
   flutter_test:

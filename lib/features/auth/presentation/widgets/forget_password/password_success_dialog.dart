@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 void showPasswordSuccessDialog(BuildContext context, VoidCallback onLogin) {
