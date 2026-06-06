@@ -329,4 +329,10 @@ class AppText {
     fontFamily: 'IBM Plex Sans Arabic',
     color: AppColors.secondary,
   );
+  static const ibmPlexSansArabic12SemiBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'IBM Plex Sans Arabic',
+    color: AppColors.secondary,
+  );
 }

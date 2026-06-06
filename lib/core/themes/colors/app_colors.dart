@@ -25,6 +25,7 @@ class AppColors {
   static const Color tealPrimary = Color(0xFF0F766E);
 
   static const Color dark300 = Color(0xFFEEF2F6); // Main dark teal
+  // Brand Colors (Teal / Cyan family)
 
   // Theme Main Colors (Teal)
   static const Color dark = Color(0xFF0A434E); // Main dark teal
@@ -72,16 +73,20 @@ class AppColors {
 
   // Background Colors
   static const Color bgPrimary = Color(0xFFF8FAFC);
-  static const Color softWhite = Color(0xFFF8FAFC);
-  static const Color bgDisabled = Color(0xFFEDF2FA);
+  static const Color softWhite = Color(0xFFF8FAFC); // Alias for theme support
 
-  // Gray Scale
+  // Grays
   static const Color gray = Color(0xFF6D7688);
-  static const Color lightGray = Color(0xFFD0D5D6);
+  static const Color lightGray = Color(
+    0xFFD0D5D6,
+  ); // Fixed from 0xFFD0D5D62E (invisible due to 18% opacity / invalid 10-digit)
   static const Color greyDarker = Color(0xFF2E353E);
-  static const Color darkGrey = Color(0xFF2E353E);
-  static const Color primaryGrey = Color(0xFF6D7688);
-  static const Color secondaryGrey = Color(0xFF697D95);
+  static const Color darkGrey = Color(0xFF2E353E); // Alias for theme support
+  static const Color primaryGrey = Color(0xFF6D7688); // Alias for theme support
+  static const Color secondaryGrey = Color(
+    0xFF6D7688,
+  ); // Alias for theme support
+  static const Color bgDisabled = Color(0xFF697D95);
   static const Color disabledText = Color(0xFFDAE1EE);
 
   // Text Colors
@@ -92,7 +97,7 @@ class AppColors {
   static const Color body = Color(0xFF737373);
   static const Color hintText = Color(0xFF234731);
 
-  // Border Colors
+  // Borders
   static const Color borderInputs = Color(0xFFE5E7EB);
   static const Color borderInput = Color(0xFFE5E7EB);
 
@@ -100,22 +105,28 @@ class AppColors {
   static const Color borderCards = Color(0xFFF1F5F9);
   static const Color borderSuccess = Color(0xFF15803D);
 
-  // Status Colors
+  // Status & Actions
   static const Color errorRed = Color(0xFFDC2626);
   static const Color errorRed2 = Color(0xAAFBF3F3);
 
   static const Color bgError = Color(0xFFFEF2F2);
-  static const Color bgHint = Color(0xFF84E0A6);
 
-  // Warning Colors
+  // Warnings (Spelling and format fixed)
   static const Color yellow = Color(0xFFFEBB38);
-  static const Color primaryYellow = Color(0xFFFEBB38);
+  static const Color primaryYellow = Color(
+    0xFFFEBB38,
+  ); // Alias for theme support
   static const Color warningText = Color(0xFFD97706);
   static const Color bgWarning = Color(0xFFFFFBEB);
-  static const Color warningRed = Color(0xFFD3503C);
-  static const Color warningDark = Color(0xFF512C1B);
+  static const Color warningRed = Color(0xFFD3503C); // Fixed from bgWaring2
+  static const Color warningDark = Color(
+    0xFF512C1B,
+  ); // Fixed from bgWaring 10-digit (was 0xFF512C1BF0)
 
-  // Icon Colors
+  // Custom Alerts
+  static const Color bgHint = Color(0xFF84E0A6);
+
+  // UI Icon Colors
   static const Color secondary = Color(0xFF1E275C);
   static const Color iconPrimary = Color(0xFF030E51);
   static const Color primaryBlack = Color(0xFF1A1A1A);

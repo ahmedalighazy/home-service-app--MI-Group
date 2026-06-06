@@ -63,9 +63,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     required int index,
   }) {
     final isSelected = widget.currentIndex == index;
-    final color = isSelected
-        ? AppColors.primaryActive
-        : AppColors.secondaryGrey;
+    final color = isSelected ? AppColors.greenPrimary : AppColors.secondaryGrey;
     final backgroundColor = isSelected
         ? AppColors.lightActive.withValues(alpha: 0.5)
         : Colors.transparent;

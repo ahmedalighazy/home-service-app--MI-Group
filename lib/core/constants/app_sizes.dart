@@ -11,7 +11,6 @@ class AppSizes {
   static const double radiusCircular = 100;
 
   static const double paddingSmall = 8;
-  static const double padding = 16;
   static const double paddingMedium = 12;
   static const double paddingM = 12;
   static const double paddingL = 20;
@@ -32,5 +31,7 @@ class AppSizes {
 
   static const double dialogWidth = 450;
 
-  static double get homeContainerHeight => 310.h;
+  static double get homeHeaderHeight => 180.h;
+  static double get promoBannerCardHeight => 195.h;
+  static double get homeToBoxAdapterHeight => 24.h;
 }

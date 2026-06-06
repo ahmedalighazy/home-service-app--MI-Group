@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/routes/app_routes.dart';
-import '../../../../core/utils/helpers/cache_helper.dart';
 import '../widgets/onboarding_step_one_content.dart';
+import '../widgets/onboarding_step_two_static.dart';
 import '../widgets/onboarding_step_two_content.dart';
+
+import '../../../../core/utils/helpers/cache_helper.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -34,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (!mounted) return;
       if (value) {
-        Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+        Navigator.of(context).pushReplacementNamed(AppRoutes.language);
       }
     });
   }
@@ -59,9 +60,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           
           // Screen 2: Onboarding 2 - Static
-          // OnboardingStepTwoStatic(
-          //   onStart: _nextPage,
-          // ),
+          OnboardingStepTwoStatic(
+            onStart: _nextPage,
+          ),
           
           // Screen 3: Onboarding 2 - Content
           OnboardingStepTwoContent(

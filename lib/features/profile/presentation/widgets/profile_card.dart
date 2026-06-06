@@ -52,7 +52,7 @@ class ProfileCard extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               Text(
-                AppStrings.phoneNumber,
+                AppStrings.phonePlaceholder,
                 textDirection: TextDirection.ltr,
                 style: AppText.regularText(
                   color: AppColors.secondaryText,
@@ -61,6 +61,15 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
+
+          const SizedBox(width: 20),
+
+          CircleAvatar(
+            backgroundColor: AppColors.white,
+            radius: 40,
+            child: Image.asset(AppAssets.cleaningGuy, fit: BoxFit.cover),
+          ),
+
           const Spacer(),
         ],
       ),

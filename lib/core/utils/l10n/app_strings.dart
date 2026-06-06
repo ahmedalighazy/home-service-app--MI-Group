@@ -49,6 +49,7 @@ class AppStrings {
   static const String okBtn = 'حسناً';
 
   // --- General & Shared ---\
+  // --- General & Shared ---
   static const String confirm = 'تأكيد';
   static const String sendCode = 'أرسل الكود';
   static const String emailPlaceholder = 'أدخل البريد الإلكتروني';
@@ -90,8 +91,7 @@ class AppStrings {
 
   // --- Complete Profile Screen ---
   static const String completeProfile = 'أكمل ملفك الشخصي';
-  static const String completeProfileSubtitle =
-      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
+
   static const String namePlaceholder = 'أدخل اسمك بالكامل';
   static const String completeRegistration = 'إكمال التسجيل';
 
@@ -116,6 +116,7 @@ class AppStrings {
   // --- Location & Map Screens ---
   static const String setYourLocation = 'حدد موقعك';
 
+  // --- Location & Map Screens ---
   static const String locationPermissionDescription =
       'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك';
   static const String setCurrentLocation = 'تحديد الموقع الحالي';

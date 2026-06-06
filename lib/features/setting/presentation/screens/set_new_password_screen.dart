@@ -10,8 +10,8 @@ import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import '../widgets/forget_password_link.dart';
 import '../widgets/password_text_field.dart';
 
-class SetNewPasswordScreen extends StatelessWidget {
-  const SetNewPasswordScreen({super.key});
+class UpdatePasswordScreen extends StatelessWidget {
+  const UpdatePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
