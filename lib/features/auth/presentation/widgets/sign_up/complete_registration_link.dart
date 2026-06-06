@@ -20,7 +20,10 @@ class CompleteRegistrationLink extends StatelessWidget {
         child: Text(
           'المتابعة كضيف',
           textAlign: TextAlign.center,
-          style: AppText.ibmLink13(color: AppColors.greenPrimary),
+          style: AppText.ibmLink13(color: AppColors.greenPrimary).copyWith(
+            decoration: TextDecoration.underline,
+            decorationColor: AppColors.greenPrimary,
+          ),
         ),
       ),
     );

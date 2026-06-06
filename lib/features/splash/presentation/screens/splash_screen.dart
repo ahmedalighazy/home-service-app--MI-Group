@@ -45,9 +45,11 @@ class _SplashScreenState extends State<SplashScreen>
   void _navigateFromSplash() async {
     if (!mounted) return;
     final bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+    debugPrint('Splash: onBoarding value = $onBoarding');
     final route = (onBoarding != null && onBoarding)
-        ? AppRoutes.login
+        ? AppRoutes.signUp
         : AppRoutes.onboarding;
+    debugPrint('Splash: navigating to $route');
     Navigator.of(context).pushReplacementNamed(route);
   }
 

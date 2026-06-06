@@ -40,18 +40,18 @@ class AuthPrimaryButton extends StatelessWidget {
         height: 54.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
-          color: active ? null : AppColors.bgDisabled,
           gradient: active
               ? const LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.centerLeft,
-                  colors: [Color(0xFF0A434E), Color(0xFF189AB4)],
+                  colors: [Color(0xFF189AB4), Color(0xFF0A434E)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
                 )
               : null,
+          color: active ? null : AppColors.bgDisabled,
           boxShadow: active
               ? [
                   BoxShadow(
-                    color: AppColors.greenPrimary.withValues(alpha: 0.3),
+                    color: const Color(0xFF189AB4).withValues(alpha: 0.3),
                     blurRadius: 14,
                     offset: const Offset(0, 5),
                   ),

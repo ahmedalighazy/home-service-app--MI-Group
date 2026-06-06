@@ -7,6 +7,6 @@ final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
   // Register cubits
-  getIt.registerFactory<AuthCubit>(() => AuthCubit());
+  getIt.registerSingleton<AuthCubit>(AuthCubit());
   getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
 }

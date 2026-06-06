@@ -13,16 +13,15 @@ class AuthBackButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40.w,
-        height: 40.w,
+        width: 44.w,
+        height: 44.w,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.borderInputs),
-          color: AppColors.white,
+          color: Colors.transparent,
         ),
         child: Icon(
           isArabic ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_rounded,
-          size: 15.sp,
+          size: 20.sp,
           color: AppColors.primaryText,
         ),
       ),

@@ -5,11 +5,11 @@ import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/language/l10n/app_strings.dart';
 
-class SocialSignUpButtons extends StatelessWidget {
+class SocialSignInButtons extends StatelessWidget {
   final VoidCallback onGoogleTap;
   final VoidCallback onAppleTap;
 
-  const SocialSignUpButtons({
+  const SocialSignInButtons({
     super.key,
     required this.onGoogleTap,
     required this.onAppleTap,
@@ -19,13 +19,13 @@ class SocialSignUpButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildSocialButton(
+        _buildButton(
           label: AppStrings.signUpWithGoogle,
           iconPath: AppAssets.iconGoogle,
           onTap: onGoogleTap,
         ),
         SizedBox(height: 12.h),
-        _buildSocialButton(
+        _buildButton(
           label: AppStrings.signUpWithApple,
           iconPath: AppAssets.iconApple,
           onTap: onAppleTap,
@@ -34,7 +34,7 @@ class SocialSignUpButtons extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton({
+  Widget _buildButton({
     required String label,
     required String iconPath,
     required VoidCallback onTap,

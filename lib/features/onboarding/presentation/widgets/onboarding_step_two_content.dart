@@ -1,11 +1,10 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../core/language/language_cubit.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
 
 class OnboardingStepTwoContent extends StatelessWidget {
   final VoidCallback onStart;
@@ -17,8 +16,6 @@ class OnboardingStepTwoContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isArabic = context.watch<LanguageCubit>().isArabic;
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -67,9 +64,7 @@ class OnboardingStepTwoContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  isArabic
-                      ? 'أفضل الكفاءات لخدمة منزلك'
-                      : 'The Best Professionals for Your Home',
+                  AppStrings.onboardingStep2Title,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.ibmPlexSansArabic(
                     color: AppColors.dark, fontSize: 22.sp, fontWeight: FontWeight.bold,
@@ -79,9 +74,7 @@ class OnboardingStepTwoContent extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    isArabic
-                        ? 'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة'
-                        : 'Professional services delivered by a trusted, carefully trained team to ensure quality and comfort on every visit',
+                    AppStrings.onboardingStep2Description,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.ibmPlexSansArabic(
                       color: AppColors.secondaryText, fontSize: 14.sp, height: 1.5, fontWeight: FontWeight.w500,
@@ -118,7 +111,7 @@ class OnboardingStepTwoContent extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
                     ),
                     child: Text(
-                      isArabic ? 'ابدأ الآن  >>>' : 'Get Started  >>>',
+                      AppStrings.onboardingGetStarted,
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: AppColors.white, fontSize: 18.sp, fontWeight: FontWeight.bold,
                       ),

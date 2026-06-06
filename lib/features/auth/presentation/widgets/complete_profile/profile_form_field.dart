@@ -7,24 +7,24 @@ class ProfileFormField extends StatefulWidget {
   final String label;
   final String hint;
   final TextEditingController controller;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final bool isPassword;
   final bool obscureText;
   final VoidCallback? onToggleObscure;
   final TextInputType keyboardType;
-  final String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged;
 
   const ProfileFormField({
     super.key,
     required this.label,
     required this.hint,
     required this.controller,
-    required this.prefixIcon,
+    this.prefixIcon,
     this.isPassword = false,
     this.obscureText = false,
     this.onToggleObscure,
     this.keyboardType = TextInputType.text,
-    this.validator,
+    this.onChanged,
   });
 
   @override
@@ -58,8 +58,7 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
             obscureText: widget.isPassword ? widget.obscureText : false,
             keyboardType: widget.keyboardType,
             textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
-            validator: widget.validator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            onChanged: widget.onChanged,
             style: GoogleFonts.ibmPlexSansArabic(
               color: AppColors.primaryText,
               fontSize: 14.sp,
@@ -70,11 +69,13 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
                 color: AppColors.placeholder,
                 fontSize: 13.sp,
               ),
-              prefixIcon: Icon(
-                widget.prefixIcon,
-                size: 20.sp,
-                color: _isFocused ? AppColors.greenPrimary : AppColors.gray,
-              ),
+              prefixIcon: widget.prefixIcon != null
+                  ? Icon(
+                      widget.prefixIcon,
+                      size: 20.sp,
+                      color: _isFocused ? AppColors.greenPrimary : AppColors.gray,
+                    )
+                  : null,
               suffixIcon: widget.isPassword
                   ? IconButton(
                       icon: Icon(
@@ -88,30 +89,19 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
                     )
                   : null,
               filled: true,
-              fillColor: AppColors.bgPrimary,
+              fillColor: AppColors.white,
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(14.r),
                 borderSide: const BorderSide(color: AppColors.borderInputs),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(14.r),
                 borderSide: const BorderSide(
-                    color: AppColors.greenPrimary, width: 1.5),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
-                borderSide: const BorderSide(color: AppColors.errorRed),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.r),
-                borderSide:
-                    const BorderSide(color: AppColors.errorRed, width: 1.5),
-              ),
-              errorStyle: GoogleFonts.ibmPlexSansArabic(
-                fontSize: 11.sp,
-                color: AppColors.errorRed,
+                  color: AppColors.greenPrimary,
+                  width: 1.5,
+                ),
               ),
             ),
           ),
