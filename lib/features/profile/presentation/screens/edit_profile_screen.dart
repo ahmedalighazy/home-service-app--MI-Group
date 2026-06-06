@@ -42,7 +42,7 @@ class EditProfileScreen extends StatelessWidget {
               textColor: AppColors.redDanger,
               isOutlined: true,
               onPressed: () {
-                context.pushName(AppRoutes.deleteAccount);
+                context.pushName(AppRouter.deleteAccount);
               },
             ),
             SizedBox(height: 24.h),

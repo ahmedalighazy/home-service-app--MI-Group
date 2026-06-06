@@ -7,6 +7,8 @@ class AppStrings {
 
   // content profile
   static const String save = 'حفظ';
+  static const String completeProfileSubtitle =
+      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
 
   static const String editProfile = ' الملف الشخصي';
   static const String nameLabel = 'الاسم';

@@ -25,7 +25,7 @@ class HelpCenterScreen extends StatelessWidget {
           HelpCenterItem(
             title: AppStrings.faq,
             icon: IconsPath.faq,
-            onTap: () => context.pushName(AppRoutes.faq),
+            onTap: () => context.pushName(AppRouter.faq),
           ),
           SizedBox(height: 24.h),
           const TechnicalSupportHeader(),
@@ -37,7 +37,7 @@ class HelpCenterScreen extends StatelessWidget {
             ticketCode: '${AppStrings.ticketPrefix}1001',
             time: AppStrings.timeOneDayAgo,
             description: AppStrings.ticketDesc1,
-            onTap: () => context.pushName(AppRoutes.chatDetail),
+            onTap: () => context.pushName(AppRouter.chatDetail),
           ),
           SizedBox(height: 12.h),
           TicketCard(
@@ -47,7 +47,7 @@ class HelpCenterScreen extends StatelessWidget {
             ticketCode: '${AppStrings.ticketPrefix}1002',
             time: AppStrings.timeOneDayAgo,
             description: AppStrings.ticketDesc2,
-            onTap: () => context.pushName(AppRoutes.chatDetail),
+            onTap: () => context.pushName(AppRouter.chatDetail),
           ),
         ],
       ),

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_one_content.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_one_static.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_two_content.dart';
-import '../../features/onboarding/presentation/widgets/onboarding_step_two_static.dart';
 import '../../features/profile/data/models/subscription_model.dart';
 import '../../features/profile/presentation/screens/contact_us_screen.dart';
 import '../../features/profile/presentation/screens/delete_account_screen.dart';
@@ -36,8 +33,15 @@ import '../../features/auth/ Forget Password/forget_screen.dart';
 import '../../features/auth/ Forget Password/verify_reset_code_screen.dart';
 import '../../features/auth/set_new_pass/set_new_pass.dart';
 
-class AppRoutes {
+class AppRouter {
+  // Private constructor to prevent instantiation
+  AppRouter._();
   static const String splash = '/';
+
+  // Auth Routes
+  static const String signIn = '/sign-in';
+  static const String signUp = '/sign-up';
+
   static const String onboarding = '/onboarding';
   static const String language = '/language';
   static const String login = '/sign up screens';
@@ -67,111 +71,271 @@ class AppRoutes {
   static const String myVisits = '/my-visits';
   static const String contactUs = '/contact-us';
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    // smooth fade transition for all routes
-    Route<dynamic> fadeRoute(Widget page) {
-      return PageRouteBuilder(
-        settings: settings,
-        transitionDuration: const Duration(milliseconds: 350),
-        pageBuilder: (context, animation, _) => page,
-        transitionsBuilder: (context, animation, _, child) =>
-            FadeTransition(opacity: animation, child: child),
-      );
-    }
-
-    switch (settings.name) {
-      // ── Core flow ─────────────────────────────────────────
-      case splash:
-        return fadeRoute(const SplashScreen());
-      case profile:
-        return fadeRoute(const ProfileScreen());
-      case setting:
-        return fadeRoute(const SettingsScreen());
-      case deleteAccount:
-        return fadeRoute(const DeleteAccountScreen());
-      case editProfile:
-        return fadeRoute(const EditProfileScreen());
-      case favorites:
-        return fadeRoute(const FavoritesScreen());
-      case helpCenter:
-        return fadeRoute(const HelpCenterScreen());
-      case updatePassword:
-        return fadeRoute(const UpdatePasswordScreen());
-      case legalAndPolicies:
-        return fadeRoute(const LegalAndPoliciesScreen());
-      case privacyPolicy:
-        return fadeRoute(const PrivacyPolicyScreen());
-      case termsAndConditions:
-        return fadeRoute(const TermsAndConditionsScreen());
-      case faq:
-        return fadeRoute(const FAQScreen());
-      case chatDetail:
-        return fadeRoute(const ChatDetailScreen());
-      case savedAddresses:
-        return fadeRoute(const SavedAddressesScreen());
-      case paymentMethods:
-        return fadeRoute(const PaymentMethodsScreen());
-      case subscriptions:
-        return fadeRoute(const SubscriptionsScreen());
-      case subscriptionDetail:
-        final subscription = settings.arguments as SubscriptionModel;
-        return fadeRoute(SubscriptionDetailScreen(subscription: subscription));
-      case myVisits:
-        return fadeRoute(const MyVisitsScreen());
-
-      case onboarding:
-        return fadeRoute(const OnboardingScreen());
-
-      case language:
-        return fadeRoute(const LanguageSelectionScreen());
-
-      case login:
-        return fadeRoute(const SingIn());
-
-      // ── Auth flow ──────────────────────────────────────────
-      case otp:
-        final phone = settings.arguments is String
-            ? settings.arguments as String
-            : '+974XXXXXXXX';
-        return fadeRoute(OtpScreen(phoneNumber: phone));
-
-      case completeProfile:
-        final phone = settings.arguments is String
-            ? settings.arguments as String
-            : '';
-        return fadeRoute(CompleteProfileScreen(phoneNumber: phone));
-
-      case emailLogin:
-        return fadeRoute(const SingIn());
-
-      case forgetPassword:
-        return fadeRoute(const ForgetScreen());
-
-      case verifyResetCode:
-        final email = settings.arguments is String
-            ? settings.arguments as String
-            : 'example@email.com';
-        return fadeRoute(VerifyResetCodeScreen(email: email));
-
-      case setNewPassword:
-        final args = settings.arguments as Map<String, String>;
-        return fadeRoute(
-          SetNewPasswordScreen(
-            email: args['email'] ?? '',
-            code: args['code'] ?? '',
+  // GoRouter Configuration
+  static final GoRouter router = GoRouter(
+    initialLocation: splash,
+    debugLogDiagnostics: true,
+    errorPageBuilder: (context, state) => CustomTransitionPage(
+      key: state.pageKey,
+      child: const Scaffold(
+        body: Center(
+          child: Text(
+            'صفحة غير موجودة',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-        );
+        ),
+      ),
+      transitionsBuilder: _fadeTransition,
+    ),
+    routes: [
+      // Core Routes
+      GoRoute(
+        path: splash,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SplashScreen(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
 
-      // ── Main app ───────────────────────────────────────────
-      case home:
-        return fadeRoute(const HomePage());
-      case contactUs:
-        return fadeRoute(const ContactUsScreen());
+      GoRoute(
+        path: onboarding,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const OnboardingScreen(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
 
-      default:
-        return fadeRoute(
-          const Scaffold(body: Center(child: Text(AppStrings.unknownRoute))),
-        );
-    }
+      GoRoute(
+        path: language,
+        redirect: (context, state) => signIn, // Redirect to sign in
+      ),
+
+      // ============ Auth Routes ============
+      GoRoute(
+        path: signIn,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SingIn(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: signUp,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SingIn(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: otp,
+        pageBuilder: (context, state) {
+          final phoneNumber = state.extra as String? ?? '+974XXXXXXXX';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: OtpScreen(phoneNumber: phoneNumber),
+            transitionsBuilder: _fadeTransition,
+          );
+        },
+      ),
+
+      GoRoute(
+        path: completeProfile,
+        pageBuilder: (context, state) {
+          final phoneNumber = state.extra as String? ?? '';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CompleteProfileScreen(phoneNumber: phoneNumber),
+            transitionsBuilder: _fadeTransition,
+          );
+        },
+      ),
+
+      GoRoute(
+        path: forgetPassword,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ForgetScreen(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: verifyResetCode,
+        pageBuilder: (context, state) {
+          final email = state.extra as String? ?? 'example@email.com';
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: VerifyResetCodeScreen(email: email),
+            transitionsBuilder: _fadeTransition,
+          );
+        },
+      ),
+
+      GoRoute(
+        path: setNewPassword,
+        pageBuilder: (context, state) {
+          final args = state.extra as Map<String, String>?;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: SetNewPasswordScreen(
+              email: args?['email'] ?? '',
+              code: args?['code'] ?? '',
+            ),
+            transitionsBuilder: _fadeTransition,
+          );
+        },
+      ),
+
+      // Main App Routes
+      GoRoute(
+        path: home,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const HomePage(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+    ],
+  );
+
+  // Transition Buildeer
+  static Widget _fadeTransition(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return FadeTransition(opacity: animation, child: child);
+  }
+}
+
+/// AppRoutes - Backward compatibility class
+/// Provides old route names and references to AppRouter
+@Deprecated('Use AppRouter instead')
+class AppRoutes {
+  // Core Routes
+  static const String splash = AppRouter.splash;
+  static const String onboarding = AppRouter.onboarding;
+  static const String language = AppRouter.language;
+
+  // Auth Routes (with aliases)
+  static const String login = AppRouter.signIn; // Alias
+  static const String signIn = AppRouter.signIn;
+  static const String signUp = AppRouter.signUp;
+  static const String emailLogin = AppRouter.signIn; // Alias
+  static const String otp = AppRouter.otp;
+  static const String completeProfile = AppRouter.completeProfile;
+  static const String forgetPassword = AppRouter.forgetPassword;
+  static const String verifyResetCode = AppRouter.verifyResetCode;
+  static const String setNewPassword = AppRouter.setNewPassword;
+}
+
+Route<dynamic> onGenerateRoute(RouteSettings settings) {
+  // smooth fade transition for all routes
+  Route<dynamic> fadeRoute(Widget page) {
+    return PageRouteBuilder(
+      settings: settings,
+      transitionDuration: const Duration(milliseconds: 350),
+      pageBuilder: (context, animation, _) => page,
+      transitionsBuilder: (context, animation, _, child) =>
+          FadeTransition(opacity: animation, child: child),
+    );
+  }
+
+  switch (settings.name) {
+    // ── Core flow ─────────────────────────────────────────
+    case AppRouter.splash:
+      return fadeRoute(const SplashScreen());
+    case AppRouter.profile:
+      return fadeRoute(const ProfileScreen());
+    case AppRouter.setting:
+      return fadeRoute(const SettingsScreen());
+    case AppRouter.deleteAccount:
+      return fadeRoute(const DeleteAccountScreen());
+    case AppRouter.editProfile:
+      return fadeRoute(const EditProfileScreen());
+    case AppRouter.favorites:
+      return fadeRoute(const FavoritesScreen());
+    case AppRouter.helpCenter:
+      return fadeRoute(const HelpCenterScreen());
+    case AppRouter.updatePassword:
+      return fadeRoute(const UpdatePasswordScreen());
+    case AppRouter.legalAndPolicies:
+      return fadeRoute(const LegalAndPoliciesScreen());
+    case AppRouter.privacyPolicy:
+      return fadeRoute(const PrivacyPolicyScreen());
+    case AppRouter.termsAndConditions:
+      return fadeRoute(const TermsAndConditionsScreen());
+    case AppRouter.faq:
+      return fadeRoute(const FAQScreen());
+    case AppRouter.chatDetail:
+      return fadeRoute(const ChatDetailScreen());
+    case AppRouter.savedAddresses:
+      return fadeRoute(const SavedAddressesScreen());
+    case AppRouter.paymentMethods:
+      return fadeRoute(const PaymentMethodsScreen());
+    case AppRouter.subscriptions:
+      return fadeRoute(const SubscriptionsScreen());
+    case AppRouter.subscriptionDetail:
+      final subscription = settings.arguments as SubscriptionModel;
+      return fadeRoute(SubscriptionDetailScreen(subscription: subscription));
+    case AppRouter.myVisits:
+      return fadeRoute(const MyVisitsScreen());
+
+    case AppRouter.onboarding:
+      return fadeRoute(const OnboardingScreen());
+
+    case AppRouter.language:
+      return fadeRoute(const LanguageSelectionScreen());
+
+    case AppRouter.signIn:
+      return fadeRoute(const SingIn());
+
+    // ── Auth flow ──────────────────────────────────────────
+    case AppRouter.otp:
+      final phone = settings.arguments is String
+          ? settings.arguments as String
+          : '+974XXXXXXXX';
+      return fadeRoute(OtpScreen(phoneNumber: phone));
+
+    case AppRouter.completeProfile:
+      final phone = settings.arguments is String
+          ? settings.arguments as String
+          : '';
+      return fadeRoute(CompleteProfileScreen(phoneNumber: phone));
+
+    case AppRouter.forgetPassword:
+      return fadeRoute(const ForgetScreen());
+
+    case AppRouter.verifyResetCode:
+      final email = settings.arguments is String
+          ? settings.arguments as String
+          : 'example@email.com';
+      return fadeRoute(VerifyResetCodeScreen(email: email));
+
+    case AppRouter.setNewPassword:
+      final args = settings.arguments as Map<String, String>;
+      return fadeRoute(
+        SetNewPasswordScreen(
+          email: args['email'] ?? '',
+          code: args['code'] ?? '',
+        ),
+      );
+
+    // ── Main app ───────────────────────────────────────────
+    case AppRouter.home:
+      return fadeRoute(const HomePage());
+    case AppRouter.contactUs:
+      return fadeRoute(const ContactUsScreen());
+
+    default:
+      return fadeRoute(
+        const Scaffold(body: Center(child: Text(AppStrings.unknownRoute))),
+      );
   }
 }

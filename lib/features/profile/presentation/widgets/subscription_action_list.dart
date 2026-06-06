@@ -31,7 +31,7 @@ class SubscriptionActionList extends StatelessWidget {
             title: AppStrings.viewVisits,
             subtitle: AppStrings.viewVisitsDesc,
             icon: IconsPath.timeBlue,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.myVisits),
+            onTap: () => Navigator.pushNamed(context, AppRouter.myVisits),
           ),
           const Divider(height: 1),
           SubscriptionActionTile(

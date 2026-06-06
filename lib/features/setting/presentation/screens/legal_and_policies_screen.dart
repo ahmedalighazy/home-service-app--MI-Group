@@ -25,7 +25,7 @@ class LegalAndPoliciesScreen extends StatelessWidget {
 
             title: AppStrings.privacyPolicyLabel,
             onTap: () {
-              context.pushName(AppRoutes.privacyPolicy);
+              context.pushName(AppRouter.privacyPolicy);
             },
           ),
           const Divider(height: 1, thickness: 1, color: AppColors.dividerGrey),
@@ -35,7 +35,7 @@ class LegalAndPoliciesScreen extends StatelessWidget {
             icon: IconsPath.ell,
             title: AppStrings.termsAndConditionsLabel,
             onTap: () {
-              context.pushName(AppRoutes.termsAndConditions);
+              context.pushName(AppRouter.termsAndConditions);
             },
           ),
           const Divider(height: 1, thickness: 1, color: AppColors.dividerGrey),

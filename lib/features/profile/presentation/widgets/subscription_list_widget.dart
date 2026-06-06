@@ -42,7 +42,7 @@ class SubscriptionListWidget extends StatelessWidget {
               if (subscription.status == SubscriptionStatus.active) {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes.subscriptionDetail,
+                  AppRouter.subscriptionDetail,
                   arguments: subscription,
                 );
               }

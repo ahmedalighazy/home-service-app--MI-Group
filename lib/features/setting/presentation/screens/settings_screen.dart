@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorPassword,
             title: AppStrings.changePassword,
-            onTap: () => context.pushName(AppRoutes.updatePassword),
+            onTap: () => context.pushName(AppRouter.updatePassword),
           ),
           const SettingsDivider(),
           SettingListItem(
@@ -58,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorWhat,
             title: AppStrings.helpCenter,
-            onTap: () => context.pushName(AppRoutes.helpCenter),
+            onTap: () => context.pushName(AppRouter.helpCenter),
           ),
           const SettingsDivider(),
           SettingListItem(
@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.group2,
             title: AppStrings.policiesAndRules,
-            onTap: () => context.pushName(AppRoutes.legalAndPolicies),
+            onTap: () => context.pushName(AppRouter.legalAndPolicies),
           ),
           const SettingsDivider(),
           SettingListItem(

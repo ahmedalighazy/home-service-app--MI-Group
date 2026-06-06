@@ -872,7 +872,7 @@ getIt.registerFactory<ProductBloc>(
 
 ```dart
 // core/routes/app_routes.dart
-class AppRoutes {
+class AppRouter {
   static const String products = '/products';
   
   static Route<dynamic> generateRoute(RouteSettings settings) {

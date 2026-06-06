@@ -39,35 +39,35 @@ class ProfileScreen extends StatelessWidget {
                             icon: IconsPath.vectorPerson,
                             title: AppStrings.editProfile,
                             onTap: () {
-                              context.pushName(AppRoutes.editProfile);
+                              context.pushName(AppRouter.editProfile);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorFavorite,
                             title: AppStrings.favorites,
                             onTap: () {
-                              context.pushName(AppRoutes.favorites);
+                              context.pushName(AppRouter.favorites);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorLocation,
                             title: AppStrings.myAddresses,
                             onTap: () {
-                              context.pushName(AppRoutes.savedAddresses);
+                              context.pushName(AppRouter.savedAddresses);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorSub,
                             title: AppStrings.mySubscriptions,
                             onTap: () {
-                              context.pushName(AppRoutes.subscriptions);
+                              context.pushName(AppRouter.subscriptions);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.group,
                             title: AppStrings.paymentMethods,
                             onTap: () {
-                              context.pushName(AppRoutes.paymentMethods);
+                              context.pushName(AppRouter.paymentMethods);
                             },
                           ),
                         ],
@@ -87,14 +87,14 @@ class ProfileScreen extends StatelessWidget {
                             icon: IconsPath.vectorSetting,
                             title: AppStrings.settings,
                             onTap: () {
-                              context.pushName(AppRoutes.setting);
+                              context.pushName(AppRouter.setting);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.iconLang,
                             title: AppStrings.contactUs,
                             onTap: () {
-                              context.pushName(AppRoutes.contactUs);
+                              context.pushName(AppRouter.contactUs);
                             },
                           ),
                         ],

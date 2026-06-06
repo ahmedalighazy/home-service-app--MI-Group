@@ -12,7 +12,7 @@ This document defines the permanent development rules and standards for the **Ho
 *   **Core Dependencies**:
     *   **State Management**: `flutter_bloc` (Cubit)
     *   **Dependency Injection**: `get_it`
-    *   **Routing**: Native `onGenerateRoute` with centralized `AppRoutes` in `lib/core/routes/app_routes.dart`.
+    *   **Routing**: Native `onGenerateRoute` with centralized `AppRouter` in `lib/core/routes/app_routes.dart`.
     *   **Design System**: `flutter_screenutil` (responsive), `google_fonts` (IBM Plex Sans Arabic & Inter).
     *   **Icons/SVG**: `iconsax_flutter`, `flutter_svg`.
 
@@ -86,7 +86,7 @@ Checklist for creating new features:
 
 ### Required Integration
 *   **DI**: Register in `lib/core/di/injection.dart`.
-*   **Navigation**: Use `context.pushName(AppRoutes.featureName)`.
+*   **Navigation**: Use `context.pushName(AppRouter.featureName)`.
 *   **Theme**: Use `AppColors` and `AppText`.
 *   **Responsiveness**: Always use `flutter_screenutil` extensions (`.h`, `.w`, `.sp`, `.r`).
 

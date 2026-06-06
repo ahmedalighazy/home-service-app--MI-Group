@@ -44,7 +44,7 @@ class EmptyStateWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             if (buttonLabel != null && onButtonPressed != null) ...[
-              SizedBox(height: AppSizes.spacingXL.h),
+              SizedBox(height: 10),
               CustomButtom(
                 onTap: onButtonPressed!,
                 text: buttonLabel!,
