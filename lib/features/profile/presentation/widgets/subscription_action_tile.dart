@@ -39,7 +39,12 @@ class SubscriptionActionTile extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(icon, color: tileColor, height: 19.w, width: 19.h),
+          SvgPicture.asset(
+            icon,
+            colorFilter: ColorFilter.mode(tileColor, BlendMode.srcIn),
+            height: 19.w,
+            width: 19.h,
+          ),
 
           SizedBox(width: 12.w),
 

@@ -326,11 +326,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           : '+974XXXXXXXX';
       return fadeRoute(OtpScreen(phoneNumber: phone));
 
-  // Main App Routes
-  static const String home = AppRouter.home;
-
-  // search App Routes
-  static const String search = AppRouter.home;
     case AppRouter.completeProfile:
       final phone = settings.arguments is String
           ? settings.arguments as String
