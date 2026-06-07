@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
+import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 
 // ============ Core Screens ============
 import '../../features/splash/presentation/screens/splash_screen.dart';
@@ -39,6 +41,8 @@ class AppRouter {
 
   // Main App Routes
   static const String home = '/home';
+  static const String search = '/search';
+  static const String notification = '/notification';
 
   // GoRouter Configuration
   static final GoRouter router = GoRouter(
@@ -169,6 +173,25 @@ class AppRouter {
           transitionsBuilder: _fadeTransition,
         ),
       ),
+
+      // search App Routes
+      GoRoute(
+        path: search,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SearchPage(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: notification,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const NotificationPage(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
     ],
   );
 
@@ -205,4 +228,7 @@ class AppRoutes {
 
   // Main App Routes
   static const String home = AppRouter.home;
+
+  // search App Routes
+  static const String search = AppRouter.home;
 }

@@ -107,8 +107,12 @@ class AppStrings {
   static const String youMightBeLookingFor = 'ربما تبحث عن';
   static const String categories = 'تصنيفات';
   static const String noResultsFound = 'لم يتم العثور على نتائج';
+  static const String noResultsFoundDescription =
+      'لم نتمكن من العثور على أي خدمات تطابق ببحثك عن';
   static const String browseServices = 'تصفح الخدمات';
   static const String tryOtherWords = 'جرب كلمات أخرى';
+  static const String insectsInHouse = ' وجود حشرات في المنزل';
+  static const String insectsInHouseDis = 'حلول فورية لمكافحة الآفات';
 
   //Service Cards
   static const String deepFurnitureCleaning = 'تنظيف أثاث عميق';
@@ -117,14 +121,18 @@ class AppStrings {
 
   // --- Addresses Bottom Sheet ---
   static const String chooseYourAddress = 'اختر عنوانك';
+  static const String addYourAddress = 'إضافة عنوان جديد';
   static const String addNewAddress = '+ إضافة عنوان جديد';
   static const String addressHome = 'المنزل';
   static const String addressWork = 'العمل';
   static const String streetNameOrNumber = 'اسم الشارع/الرقم';
+  static const String companyName = 'اسم الشركة';
   static const String buildingNumber = 'رقم المبنى';
   static const String floorNumber = 'الدور';
   static const String officeOrFloorNumber = 'رقم المكتب / الدور';
+  static const String apartmentNumber = 'رقم الشقة';
   static const String additionalNotes = 'ملاحظات إضافية';
+  static const String saveAddress = 'حفظ العنوان';
   static const String editAddressHint =
       'لتعديل عنوان، اذهب إلى حسابي -> العناوين .';
 

@@ -14,6 +14,9 @@ class AppAssets {
   static const String message = 'assets/images/illustration-message.png';
   static const String banner = 'assets/images/banner.png';
   static const String glassCleaning = 'assets/images/glassCleaning.png';
+  static const String searchIcon = 'assets/images/searchIcon.png';
+  static const String insectsInHouse = 'assets/images/insects_in_house.png';
+  static const String notificationIcon = 'assets/images/notification_icon.png';
   static const String pestControlService =
       'assets/images/pestControlService.png';
   static const String deepFurnitureCleaning =

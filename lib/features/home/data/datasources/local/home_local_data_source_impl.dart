@@ -7,6 +7,6 @@ import 'package:injectable/injectable.dart';
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   @override
   Future<HomeDataModel> getHomeData() async {
-    return HomeDummyData.homeData;
+    return HomeDummyData.getHomeData();
   }
 }

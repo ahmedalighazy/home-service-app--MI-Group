@@ -26,7 +26,7 @@ class HomeDummyData {
     ),
   ];
 
-  static const List<ServiceModel> popularServices = [
+  static List<ServiceModel> popularServices = [
     ServiceModel(
       title: AppStrings.deepFurnitureCleaning,
       imagePath: AppAssets.deepFurnitureCleaning,
@@ -45,17 +45,37 @@ class HomeDummyData {
     ),
   ];
 
-  static const BannerModel promoBanner = BannerModel(
-    title: AppStrings.bestCleaningWork,
-    subTitle: AppStrings.hourlyClean,
-    price: AppStrings.price120,
-    offerPrice: AppStrings.startingPrice,
-    promoCode: AppStrings.promoCode,
-    imagePath: AppAssets.banner,
-  );
-  static final HomeDataModel homeData = HomeDataModel(
-    banner: promoBanner,
-    categories: categories,
-    services: popularServices,
-  );
+  static List<BannerModel> banners = [
+    BannerModel(
+      title: AppStrings.bestCleaningWork,
+      subTitle: AppStrings.hourlyClean,
+      price: AppStrings.price120,
+      offerPrice: AppStrings.startingPrice,
+      promoCode: AppStrings.promoCode,
+      imagePath: AppAssets.banner,
+    ),
+    BannerModel(
+      title: AppStrings.bestCleaningWork,
+      subTitle: AppStrings.hourlyClean,
+      price: AppStrings.price120,
+      offerPrice: AppStrings.startingPrice,
+      promoCode: AppStrings.promoCode,
+      imagePath: AppAssets.banner,
+    ),
+    BannerModel(
+      title: AppStrings.bestCleaningWork,
+      subTitle: AppStrings.hourlyClean,
+      price: AppStrings.price120,
+      offerPrice: AppStrings.startingPrice,
+      promoCode: AppStrings.promoCode,
+      imagePath: AppAssets.banner,
+    ),
+  ];
+  static HomeDataModel getHomeData() {
+    return HomeDataModel(
+      banners: banners,
+      categories: categories,
+      services: popularServices,
+    );
+  }
 }

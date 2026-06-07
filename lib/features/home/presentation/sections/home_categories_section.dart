@@ -10,25 +10,18 @@ class HomeCategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: AppSizes.padding),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        reverse: true,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: AppSizes.paddingXLargeHeight),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: categories
               .map(
-                (category) => Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: AppSizes.spacingMedium,
-                  ),
-                  child: ServiceCategoryCard(
-                    iconPath: category.iconPath,
-                    title: category.title,
-                    onTap: () {},
-                  ),
+                (category) => ServiceCategoryCard(
+                  iconPath: category.iconPath,
+                  title: category.title,
+                  onTap: () {},
                 ),
               )
               .toList(),

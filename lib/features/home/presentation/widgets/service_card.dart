@@ -25,7 +25,7 @@ class ServiceCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsetsDirectional.only(bottom: AppSizes.paddingLarge),
+        alignment: AlignmentDirectional.centerStart,
         width: AppSizes.cardWidth,
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -44,7 +44,6 @@ class ServiceCard extends StatelessWidget {
             // title
             Padding(
               padding: EdgeInsetsDirectional.only(
-                start: AppSizes.paddingSmall,
                 bottom: AppSizes.paddinMinHeight,
               ),
               child: Text(title, style: AppText.ibmFieldLabel12()),
@@ -63,6 +62,7 @@ class ServiceCard extends StatelessWidget {
                 ),
                 child: Text(badge!, style: AppTextStyles.badgeText),
               ),
+
             SizedBox(height: AppSizes.spacingMin),
 
             // Image Section

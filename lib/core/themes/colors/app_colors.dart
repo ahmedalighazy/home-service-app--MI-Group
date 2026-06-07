@@ -13,6 +13,7 @@ class AppColors {
   static const Color greenDarker = Color(0xFF08363F);
   static const Color greenPrimary = Color(0xFF189AB4); // Main green/cyan
   static const Color greenNormalActive = Color(0xFF137B90);
+  static const Color iconDisabled = Color(0xFF949494);
   static const Color select = Color(
     0x40189AB4,
   ); // 25% opacity greenPrimary (fixed from 0xFF189AB440)

@@ -26,7 +26,7 @@ class AuthBackButton extends StatelessWidget {
           color: AppColors.white,
         ),
         child: Icon(
-          Icons.arrow_forward_ios_rounded,
+          Icons.arrow_back,
           size: 15.sp,
           color: AppColors.primaryText,
         ),

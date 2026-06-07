@@ -23,11 +23,10 @@ class ServiceCategoryCard extends StatelessWidget {
       child: SizedBox(
         width: AppSizes.categoryCardWidth,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: AppSizes.categoryIconContainerSize,
-              height: AppSizes.categoryIconContainerSize,
+              height: AppSizes.categoryIconContainerSizeHeight,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColors.grayWhite,
@@ -43,12 +42,12 @@ class ServiceCategoryCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: AppSizes.spacingSmall),
+
+            SizedBox(height: AppSizes.spacingMin),
+
             Text(
               title,
               textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               style: AppText.mediumIbm(
                 color: AppColors.primaryText,
                 fontSize: 10,
