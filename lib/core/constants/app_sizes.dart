@@ -32,11 +32,13 @@ class AppSizes {
   static double get paddingHeight => 16.h;
   static double get paddingLarge => 24.w;
   static double get paddingXLarge => 32.w;
+  static double get paddingXLargeHeight => 32.h;
   static double get paddingXXLarge => 60.w;
 
   // ============ Spacing ============
   static double get spacingMin => 4.h;
   static double get spacingSmall => 8.h;
+  static double get spacingSmallWidth => 8.w;
   static double get spacingMedium => 12.h;
   static double get spacing => 16.h;
   static double get spacingLarge => 20.h;
@@ -53,20 +55,27 @@ class AppSizes {
   // ============ Specific Component Sizes ============
   static double get notificationBellSize => 48.w;
   static double get dialogWidth => 450.w;
+  static double get searchIConWidth => 200.w;
+  static double get searchIConHeight => 265.w;
 
   // ============ Home Screen Specific ============
   static double get homeHeaderHeight => 180.h;
 
   static const double sectionOffset = 60;
 
+  static double get pageIndicatorWidth => 8.w;
+
   static double get cardWidth => 130.w;
-  static double get cardImageHeight => 120.h;
+  static double get cardImageHeight => 90.h;
+  static double get addressTypeSelectorWidth => 90.w;
 
   static double get arrowIconHeight => 32.h;
   static double get arrowIconWidth => 32.w;
 
-  static const double categoryCardWidth = 85;
-  static const double categoryIconContainerSize = 70;
+  static const double categoryCardWidth = 100;
+  static const double categoryIconContainerSize = 90;
+  static const double searchCategoriesIconHight = 110;
+  static const double categoryIconContainerSizeHeight = 74;
 
   static double get bannerCardHeight => 165.h;
   static double get homeToBoxAdapterHeight => 24.h;

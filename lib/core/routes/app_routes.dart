@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
+import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
@@ -52,6 +54,8 @@ class AppRouter {
   static const String verifyResetCode = '/verify-reset-code';
   static const String setNewPassword = '/set-new-password';
   static const String home = '/home';
+  static const String search = '/search';
+  static const String notification = '/notification';
   static const String profile = '/profile';
   static const String editProfile = '/edit-profile';
   static const String deleteAccount = '/delete-account';
@@ -200,6 +204,25 @@ class AppRouter {
           transitionsBuilder: _fadeTransition,
         ),
       ),
+
+      // search App Routes
+      GoRoute(
+        path: search,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const SearchPage(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: notification,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const NotificationPage(),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
     ],
   );
 
@@ -303,6 +326,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           : '+974XXXXXXXX';
       return fadeRoute(OtpScreen(phoneNumber: phone));
 
+  // Main App Routes
+  static const String home = AppRouter.home;
+
+  // search App Routes
+  static const String search = AppRouter.home;
     case AppRouter.completeProfile:
       final phone = settings.arguments is String
           ? settings.arguments as String

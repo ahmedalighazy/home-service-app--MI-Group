@@ -12,37 +12,33 @@ class HomePopularServicesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
-      child: Column(
-        children: [
-          const SectionHeader(title: AppStrings.mostRequested),
+    return Column(
+      children: [
+        const SectionHeader(title: AppStrings.mostRequested),
 
-          SizedBox(height: AppSizes.spacingMedium),
-
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            reverse: true,
-            child: Row(
-              children: services
-                  .map(
-                    (service) => Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        end: AppSizes.spacingMedium,
-                      ),
-                      child: ServiceCard(
-                        title: service.title,
-                        imagePath: service.imagePath,
-                        badge: service.badge,
-                        onTap: () {},
-                      ),
+        SizedBox(height: AppSizes.spacingMedium),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: services
+                .map(
+                  (service) => Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      end: AppSizes.paddingMedium,
+                      bottom: AppSizes.paddingXLargeHeight,
                     ),
-                  )
-                  .toList(),
-            ),
+                    child: ServiceCard(
+                      title: service.title,
+                      imagePath: service.imagePath,
+                      badge: service.badge,
+                      onTap: () {},
+                    ),
+                  ),
+                )
+                .toList(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

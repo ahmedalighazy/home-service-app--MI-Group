@@ -5,14 +5,14 @@ import 'service_model.dart';
 
 class HomeDataModel extends HomeDataEntity {
   const HomeDataModel({
-    required super.banner,
+    required super.banners,
     required super.categories,
     required super.services,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'banner': (banner as BannerModel).toJson(),
+      'banners': banners.map((e) => (e as BannerModel).toJson()).toList(),
       'categories': categories
           .map((e) => (e as CategoryModel).toJson())
           .toList(),
@@ -22,9 +22,10 @@ class HomeDataModel extends HomeDataEntity {
 
   factory HomeDataModel.fromJson(Map<String, dynamic> json) {
     return HomeDataModel(
-      banner: BannerModel.fromJson(
-        json['banner'] as Map<String, dynamic>? ?? {},
-      ),
+      banners: (json['banners'] as List<dynamic>? ?? [])
+          .map((e) => BannerModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+
       categories: (json['categories'] as List<dynamic>? ?? [])
           .map((e) => CategoryModel.fromJson(e))
           .toList(),

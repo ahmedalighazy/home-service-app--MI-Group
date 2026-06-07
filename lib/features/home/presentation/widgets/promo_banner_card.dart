@@ -25,85 +25,80 @@ class PromoBannerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
-      child: Container(
-        width: double.infinity,
-        height: AppSizes.bannerCardHeight,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSizes.radius),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: .05),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
+    return Container(
+      width: double.infinity,
+      height: AppSizes.bannerCardHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSizes.radius),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withValues(alpha: .05),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSizes.radius),
+        child: Stack(
+          children: [
+            Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
+
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                top: AppSizes.paddingLarge,
+                start: AppSizes.padding,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.right,
+                    style: AppText.ibmFieldLabel14(color: AppColors.secondary),
+                  ),
+
+                  SizedBox(height: AppSizes.spacingMin),
+
+                  Text(
+                    subTitle,
+                    textAlign: TextAlign.right,
+                    style: AppText.ibmPlexSansArabic12SemiBold,
+                  ),
+
+                  SizedBox(height: AppSizes.spacingSmall),
+
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: AppSizes.paddingXXLarge,
+                    ),
+                    child: OldPrice(price: price),
+                  ),
+
+                  SizedBox(height: AppSizes.spacingMin),
+
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: AppSizes.padding,
+                    ),
+                    child: Text(
+                      offerPrice,
+                      style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
+                        fontSize: 20.sp,
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: PromoCodeBadge(promoCode: promoCode),
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSizes.radius),
-          child: Stack(
-            children: [
-              Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
-
-              Padding(
-                padding: EdgeInsetsDirectional.only(
-                  top: AppSizes.paddingLarge,
-                  start: AppSizes.padding,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      textAlign: TextAlign.right,
-                      style: AppText.ibmFieldLabel14(
-                        color: AppColors.secondary,
-                      ),
-                    ),
-
-                    SizedBox(height: AppSizes.spacingMin),
-
-                    Text(
-                      subTitle,
-                      textAlign: TextAlign.right,
-                      style: AppText.ibmPlexSansArabic12SemiBold,
-                    ),
-
-                    SizedBox(height: AppSizes.spacingSmall),
-
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.paddingXXLarge,
-                      ),
-                      child: OldPrice(price: price),
-                    ),
-
-                    SizedBox(height: AppSizes.spacingMin),
-
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        start: AppSizes.padding,
-                      ),
-                      child: Text(
-                        offerPrice,
-                        style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
-                          fontSize: 20.sp,
-                        ),
-                      ),
-                    ),
-
-                    const Spacer(),
-
-                    Align(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      child: PromoCodeBadge(promoCode: promoCode),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
