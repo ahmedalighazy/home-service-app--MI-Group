@@ -72,7 +72,7 @@ Welcome to the project! This guide will help you contribute effectively while ma
 
 2. **Create a feature branch**:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b service_details/your-service_details-name
    ```
 
 3. **Make your changes** following the guidelines below
@@ -87,7 +87,7 @@ Welcome to the project! This guide will help you contribute effectively while ma
    ```bash
    git add .
    git commit -m "feat: add user authentication"
-   git push origin feature/your-feature-name
+   git push origin service_details/your-service_details-name
    ```
 
 6. **Create a Pull Request**
