@@ -7,13 +7,13 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 class ServiceCategoryCard extends StatelessWidget {
   final String iconPath;
   final String title;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   const ServiceCategoryCard({
     super.key,
     required this.iconPath,
     required this.title,
-    this.onTap,
+     required this.onTap,
   });
 
   @override

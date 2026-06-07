@@ -164,7 +164,7 @@ refactor(core): migrate to GetIt for dependency injection
 
 - Replace manual singleton pattern with GetIt
 - Create injection.dart configuration
-- Update all features to use GetIt
+- Update all service_details to use GetIt
 - Add tests for dependency injection
 
 Breaking Change: Old DI pattern no longer supported
@@ -512,7 +512,7 @@ class LocalUserRepository implements UserRepository {
 #### 1. Create Feature Structure
 
 ```bash
-lib/features/my_feature/
+lib/service_details/my_feature/
 ├── data/
 │   ├── datasources/
 │   │   ├── my_feature_remote_datasource.dart
@@ -900,7 +900,7 @@ class AppRouter {
 #### 1. Unit Test Example
 
 ```dart
-// test/features/product/domain/usecases/get_products_usecase_test.dart
+// test/service_details/product/domain/usecases/get_products_usecase_test.dart
 void main() {
   late GetProductsUseCase useCase;
   late MockProductRepository mockRepository;
@@ -948,7 +948,7 @@ void main() {
 #### 2. BLoC Test Example
 
 ```dart
-// test/features/product/presentation/bloc/product_bloc_test.dart
+// test/service_details/product/presentation/bloc/product_bloc_test.dart
 void main() {
   late ProductBloc bloc;
   late MockGetProductsUseCase mockGetProductsUseCase;
@@ -1004,7 +1004,7 @@ void main() {
 #### 3. Widget Test Example
 
 ```dart
-// test/features/product/presentation/pages/product_page_test.dart
+// test/service_details/product/presentation/pages/product_page_test.dart
 void main() {
   late MockProductBloc mockBloc;
   
