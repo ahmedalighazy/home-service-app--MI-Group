@@ -54,7 +54,10 @@ class SettingListItem extends StatelessWidget {
       ),
       leading: SvgPicture.asset(
         icon,
-        color: logout! ? AppColors.red : AppColors.greenPrimary,
+        colorFilter: ColorFilter.mode(
+          logout! ? AppColors.red : AppColors.greenPrimary,
+          BlendMode.srcIn,
+        ),
       ),
     );
   }

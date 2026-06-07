@@ -40,7 +40,10 @@ class CustomPopupMenu extends StatelessWidget {
                 IconsPath.editLocation,
                 width: 18,
                 height: 18,
-                color: AppColors.primaryText,
+                colorFilter: ColorFilter.mode(
+                  AppColors.primaryText,
+                  BlendMode.srcIn,
+                ),
               ),
               const SizedBox(width: 8),
               const Text('Edit'),

@@ -400,6 +400,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           ? settings.arguments as String
           : '+974XXXXXXXX';
       return fadeRoute(OtpScreen(phoneNumber: phone));
+
     case AppRouter.completeProfile:
       final phone = settings.arguments is String
           ? settings.arguments as String
