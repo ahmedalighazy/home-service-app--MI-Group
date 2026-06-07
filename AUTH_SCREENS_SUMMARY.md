@@ -286,29 +286,29 @@
 
 ## 🎯 App Routes
 
-All screens accessible via `AppRoutes`:
+All screens accessible via `AppRouter`:
 
 ```dart
 // Core
-AppRoutes.splash          // '/'
-AppRoutes.onboarding      // '/onboarding'
-AppRoutes.language        // '/language'
+AppRouter.splash          // '/'
+AppRouter.onboarding      // '/onboarding'
+AppRouter.language        // '/language'
 
 // Auth - Sign Up Flow
-AppRoutes.login           // '/sign up screens' → SingUp
-AppRoutes.otp             // '/otp' → OtpScreen
-AppRoutes.completeProfile // '/complete-profile' → CompleteProfileScreen
+AppRouter.login           // '/sign up screens' → SingUp
+AppRouter.otp             // '/otp' → OtpScreen
+AppRouter.completeProfile // '/complete-profile' → CompleteProfileScreen
 
 // Auth - Sign In
-AppRoutes.emailLogin      // '/email-sign up screens' → SingIn
+AppRouter.emailLogin      // '/email-sign up screens' → SingIn
 
 // Auth - Reset Password Flow
-AppRoutes.forgetPassword  // '/forget-password' → ForgetScreen
-AppRoutes.verifyResetCode // '/verify-reset-code' → VerifyResetCodeScreen
-AppRoutes.setNewPassword  // '/set-new-password' → SetNewPasswordScreen
+AppRouter.forgetPassword  // '/forget-password' → ForgetScreen
+AppRouter.verifyResetCode // '/verify-reset-code' → VerifyResetCodeScreen
+AppRouter.setNewPassword  // '/set-new-password' → SetNewPasswordScreen
 
 // Main App
-AppRoutes.home            // '/home' → HomePage
+AppRouter.home            // '/home' → HomePage
 ```
 
 ---

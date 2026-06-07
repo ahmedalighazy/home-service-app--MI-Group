@@ -5,7 +5,8 @@ import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart'
 import 'package:home_service_app/features/booking/presentation/pages/bookings_content.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_cotent.dart';
-import 'package:home_service_app/features/profile/screen/profile_screen.dart';
+
+import '../../../profile/presentation/screens/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,17 +29,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _pages[_currentIndex],
-        bottomNavigationBar: CustomBottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
+    return Scaffold(
+      body: _pages[_currentIndex],
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }

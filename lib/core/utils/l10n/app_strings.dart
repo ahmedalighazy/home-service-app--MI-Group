@@ -2,10 +2,58 @@ class AppStrings {
   // Private constructor to prevent instantiation
   AppStrings._();
 
+  static const String profileName = 'Ahmed Ibrahim';
+  static const String phoneNumber = '+974 5123 4567';
+
+  // content profile
+  static const String save = 'حفظ';
+  static const String completeProfileSubtitle =
+      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
+
+  static const String editProfile = ' الملف الشخصي';
+  static const String nameLabel = 'الاسم';
+  static const String phoneLabel = 'الهاتف';
+  static const String emailLabel = 'البريد الإلكتروني';
+  static const String emailValue = 'ahmed.m@gmail.com';
+  static const String deleteAccountBtn = 'حذف الحساب';
+  static const String footerHint =
+      'سيتم استخدام هذه المعلومات للتواصل معك بشأن حجوزاتك والخدمات المتاحة، ولن يتم مشاركتها بشكل عام.';
+
+  // Delete Account Screens
+  static const String deleteAccountHeader = 'حذف الحساب';
+  static const String deleteWarningTitle = 'حذف الحساب نهائياً!';
+  static const String deleteWarningDesc =
+      'سيؤدي حذف حسابك إلى إزالة بياناتك الشخصية والعناوين المحفوظة وسجل الطلبات والإحصاءات بشكل نهائي.';
+
+  static const String rule1Title = 'لا يمكن التراجع عن هذا الإجراء بعد التأكيد';
+  static const String rule1Desc = 'سيتم حذف حسابك وجميع بياناتك بشكل دائم.';
+  static const String rule2Title = 'يجب إنهاء أو إلغاء جميع الطلبات النشطة';
+  static const String rule2Desc =
+      'لا يمكنك حذف الحساب ولديك طلبات قيد التنفيذ.';
+  static const String rule3Title = 'سيتم إلغاء أي اشتراكات أو باقات مفعولة';
+  static const String rule3Desc =
+      'جميع الاشتراكات أو الباقات المدفوعة المرتبطة بحسابك سيتم إلغاؤها.';
+  static const String rule4Title =
+      'قد يتم الاحتفاظ ببعض البيانات لأغراض قانونية';
+  static const String rule4Desc =
+      'مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.';
+
+  static const String confirmDeleteHint = 'لتأكيد حذف الحساب يرجى كتابة كلمة (';
+  static const String deleteConfirmWord = 'حذف';
+  static const String confirmFieldHint = 'كلمة التأكيد غير صحيحة';
+  static const String deleteConfirmBtn = 'حذف الحساب نهائياً';
+  static const String cancelBtn = 'إلغاء';
+
+  // Pop-ups
+  static const String cannotDeleteTitle = 'لا يمكن حذف الحساب';
+  static const String cannotDeleteDesc =
+      'لديك طلبات أو باقات نشطة، يرجى إنهاء أو إلغاء المعاملات النشطة أولاً ثم إعادة المحاولة.';
+  static const String okBtn = 'حسناً';
+
+  // --- General & Shared ---\
   // --- General & Shared ---
   static const String confirm = 'تأكيد';
   static const String sendCode = 'أرسل الكود';
-  static const String emailLabel = 'البريد الإلكتروني';
   static const String emailPlaceholder = 'أدخل البريد الإلكتروني';
   static const String passwordLabel = 'كلمة المرور';
   static const String passwordPlaceholder = 'أدخل كلمة المرور';
@@ -47,10 +95,7 @@ class AppStrings {
 
   // --- Complete Profile Screen ---
   static const String completeProfile = 'أكمل ملفك الشخصي';
-  static const String profileName = 'اسم الملف الشخصي';
-  static const String completeProfileSubtitle =
-      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
-  static const String nameLabel = 'الاسم';
+
   static const String namePlaceholder = 'أدخل اسمك بالكامل';
   static const String completeRegistration = 'إكمال التسجيل';
 
@@ -70,9 +115,12 @@ class AppStrings {
       'تم تغيير كلمة المرور بنجاح';
   static const String loginWithNewPassword =
       'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة';
+  static const String newPassword = 'كلمة المرور الجديدة';
 
   // --- Location & Map Screens ---
   static const String setYourLocation = 'حدد موقعك';
+
+  // --- Location & Map Screens ---
   static const String locationPermissionDescription =
       'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك';
   static const String setCurrentLocation = 'تحديد الموقع الحالي';
@@ -191,6 +239,8 @@ class AppStrings {
   static const String dateAndTimeTitle = 'التاريخ والوقت';
   static const String chooseDay = 'اختر اليوم';
   static const String chooseTime = 'اختر وقت';
+  static const String start = ' مقدمه';
+
   static const String cancellationPolicy =
       'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل';
   static const String saturday = 'السبت';
@@ -319,4 +369,207 @@ class AppStrings {
   static const String errorIncorrectPassword = 'كلمة مرور غير صحيحة';
   static const String errorPasswordsDoNotMatch = 'كلمتا المرور غير متطابقتين';
   static const String errorOutOfZone = 'عذراً لا نقدم خدمة في هذه المنطقة';
+
+  // --- Favorites ---
+  static const String favorites = 'المفضلات';
+  static const String noFavoritesYet = 'لا توجد خدمات مفضلة حتى الآن';
+  static const String saveServicesToAccessLater =
+      'قم بحفظ الخدمات التي تعجبك للوصول إليها بسرعة لاحقًا.';
+
+  // --- Help Center ---
+  static const String helpCenter = 'مركز المساعدة';
+  static const String faq = 'الاسئلة الشائعة';
+  static const String technicalSupport = 'الدعم الفني';
+  static const String newIssue = 'مشكلة جديدة  +';
+  static const String open = 'مفتوح';
+  static const String resolved = 'تم الحل';
+  static const String ticketPrefix = 'TKT.';
+
+  // --- Profile Sections ---
+  static const String myAddresses = 'العناوين';
+  static const String mySubscriptions = 'اشتراكاتي';
+  static const String paymentMethods = 'طرق الدفع';
+  static const String settings = 'الاعدادات';
+  static const String contactUs = 'تواصل معنا';
+
+  // --- Help Center Examples ---
+  static const String ticketTitle1 = 'مشكلة في خدمه التنظيف';
+  static const String ticketDesc1 =
+      'المطبخ والحمام الرئيسي لم يتم تنضيفهما يشكل جيد';
+  static const String ticketTitle2 = 'سعر خدمة مكافحة الحشرات';
+  static const String ticketDesc2 = 'شكرا لكم هذا واضح';
+  static const String timeOneDayAgo = 'منذ ١ يوم';
+
+  // --- Setting Screen ---
+  static const String changePassword = 'تغيير كلمة المرور';
+  static const String privacy = 'الخصوصية';
+  static const String help = 'المساعدة';
+  static const String unknownRoute = 'العنوان غير معروف';
+
+  // --- Setting Screen ---
+  static const String language = 'اللغة';
+  static const String arabic = 'العربية';
+  static const String bookingNotifications = 'إشعارات الحجز';
+  static const String logout = 'تسجيل الخروج';
+  static const String logoutContent =
+      'هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟ ';
+
+  // --- Legal & Policies ---
+  static const String policiesAndRules = 'القوانيين والسياسات';
+  static const String privacyPolicyLabel = 'سياسة الخصوصية';
+  static const String termsAndConditionsLabel = 'الشروط والاحكام';
+
+  // --- FAQ Section ---
+  static const String faqIntro =
+      'يمكنك اختيار الخدمة المناسبة، تحديد العنوان والموعد، ثم تأكيد الطلب والدفع مباشرة من التطبيق او اطلب معاينة وسيتواصل معك الفريق المختص مجانا.';
+  static const String faqModifyBooking = 'هل يمكن تعديل أو إلغاء الحجز؟';
+  static const String faqOrderStatus = 'كيف أعرف حالة طلبي؟';
+  static const String faqPaymentMethods = 'ما طرق الدفع المتوفرة؟';
+  static const String faqProblemDuringService =
+      'ماذا أفعل إذا واجهت مشكلة أثناء الخدمة؟';
+
+  // --- Privacy Policy Content ---
+  static const String privacyPolicyIntro =
+      'في خدمتنا، خصوصيتك تأتي أولًا. توضح هذه السياسة كيفية جمع بياناتك الشخصية واستخدامها وحمايتها عند استخدامك لتطبيق حجز الخدمات المنزلية. نلتزم بحماية خصوصيتك والشفافية الكاملة حول بياناتك.';
+  static const String collectedData = 'البيانات التي نجمعها';
+  static const String dataUsage = 'كيفية استخدام البيانات';
+  static const String dataProtection = 'حماية البيانات';
+  static const String dataSharing = 'مشاركة البيانات';
+  static const String data = 'القبول بالشروط';
+
+  static const String policyModifications = 'التعديلات على السياسة';
+
+  // --- Terms & Conditions Content ---
+  static const String termsIntro =
+      'باستخدامك لتطبيق وخدمات منصة الخدمات المنزلية، فإنك تقر وتوافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي جزء من هذه الشروط، يرجى عدم استخدام الخدمة.';
+  static const String services = 'الخدمات';
+  static const String bookings = 'الحجوزات';
+  static const String serviceCancellation = 'إلغاء الخدمة';
+  static const String responsibility = 'المسؤولية';
+  static const String companyResponsibilities = 'مسؤوليات الشركة';
+  static const String accounts = 'الحسابات';
+  static const String modifications = 'التعديلات';
+
+  // --- Chat & Ticket Details ---
+  static const String readOnlyChat = 'هذة المحادثة للقراة فقط';
+  static const String reopenTicket = 'اعادة فتح التذكرة';
+  static const String writeYourMessage = 'اكتب رسالتك...';
+
+  // --- New Issue Bottom Sheet ---
+  static const String newIssueTitle = 'مشكلة جديدة';
+  static const String issueTitleLabel = 'عنوان المشكلة*';
+  static const String issueTitleHint = 'مثال : مشكلة في خدمة التنظيف';
+  static const String orderNumberLabel = 'رقم الطلب (اختياري)';
+  static const String issueDescLabel = 'وصف المشكلة *';
+  static const String issueDescHint = 'اشرح مشكلتك بالتفصيل.....';
+  static const String send = 'ارسال';
+
+  // --- Auth Screen (Set New Password) ---
+  static const String createNewPassDescription =
+      'يرجى إدخال كلمة مرور جديدة قوية وسهلة التذكر.';
+  static const String editNewPassDescription =
+      'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمه المرور السابقة ';
+
+  static const String password = 'كلمة المرور';
+  static const String passwordNow = ' كلمة المرور الحالية';
+
+  static const String enterPassword = 'أدخل كلمة المرور';
+  static const String confirmPassword = 'تأكيد كلمة المرور';
+  static const String reEnterPassword = 'أعد إدخال كلمة المرور';
+
+  // --- FAQ Section ---
+  static const String faqQ1 = 'كيف يمكنني حجز خدمة؟';
+  static const String faqQ2 = 'هل يمكنني تعديل أو إلغاء الحجز؟';
+  static const String faqQ3 = 'ما هي طرق الدفع المتاحة؟';
+  static const String faqQ4 = 'كيف يمكنني التواصل مع الدعم الفني؟';
+  static const String faqQ5 = 'ماذا أفعل إذا لم أكن راضياً عن الخدمة؟';
+
+  // --- Chat & Support ---
+  static const String active = 'نشط';
+  static const String online = 'متصل';
+  static const String typeMessageHint = 'اكتب رسالتك...';
+  static const String supportMsg1 = 'مرحباً أحمد، كيف يمكننا مساعدتك اليوم؟';
+  static const String userMsg1 = 'أريد الاستفسار عن موعد الزيارة القادم.';
+
+  // --- Saved Addresses ---
+  static const String noAddressesYet = 'لا توجد عناوين أخرى';
+  static const String addFavoriteAddressesDesc =
+      'أضف عناوينك المفضلة للوصول السريع إليها أثناء الحجز.';
+  static const String addAddressBtn = 'اضافة عنوان';
+  static const String savedAddressesHeader = 'العناوين';
+  static const String homeAddress = 'المنزل';
+  static const String workAddress = 'العمل';
+  static const String deleteAddressTitle = 'حذف العنوان';
+  static const String deleteDefaultAddressDesc =
+      'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
+
+  // --- Payment Methods ---
+  static const String noSavedPaymentMethods = 'لا توجد طرق دفع محفوظة';
+  static const String addPaymentMethodDesc =
+      'قم بإضافة وسيلة دفع لتسهيل إتمام الطلبات بسرعة وأمان.';
+  static const String addPaymentMethodBtn = 'اضافة وسيلة دفع';
+  static const String defaultPaymentNotice =
+      'سيتم استخدام وسيلة الدفع الافتراضية تلقائياً لجميع الحجوزات القادمة. يمكنك تغيير هذا الإعداد في أي وقت قبل إتمام عملية الدفع.';
+  static const String cardNumberLabel = 'رقم البطاقه';
+  static const String cardHolderLabel = 'اسم حامل البطاقة';
+  static const String cardHolderPlaceholder = 'ادخل الاسم كما هوا علي البطاقة';
+  static const String expiryDateLabel = 'تاريخ الانتهاء';
+  static const String cvvLabel = 'رمز الامان';
+  static const String saveCardForLater = 'حفظ البطاقة لاستخدام لاحقا';
+
+  // --- Help Center Extra ---
+  static const String contactInfoLabel = 'معلومات التواصل';
+  static const String customerServiceNumberLabel = 'رقم خدمة العملاء';
+  static const String customerServiceNumber = '+974 3000 0000';
+  static const String emailAddressLabel = 'البريد الالكتروني';
+  static const String supportEmailAddress = 'support@migroup.com';
+  static const String privacyConfidentialityNote =
+      'جميع بياناتك وارائك تعامل بسرية تامة ولا تشارك مع اي طرف ثالت .';
+
+  // --- Subscriptions ---
+  static const String currentSubscriptions = 'الحالية';
+  static const String previousSubscriptions = 'السابقة';
+  static const String noActiveSubscriptions = 'لا توجد اشتراكات نشطة';
+  static const String subscribePackagesDesc =
+      'اشترك في إحدى الباقات لتوفير الوقت والحصول على زيارات منتظمة بسهولة.';
+  static const String browsePackagesBtn = 'استعراض الباقات';
+  static const String manageSubscription = 'إدارة الاشتراك';
+  static const String activeStatus = 'نشط';
+  static const String pausedStatus = 'موقوف';
+  static const String endedStatus = 'منتهي';
+  static const String weeklyCleaning = 'تنظيف منزلي أسبوعي';
+  static const String subscriptionTypeLabel = 'نوع الاشتراك';
+  static const String nextVisitLabel = 'الزيارة القادمة';
+  static const String expiryDateLabelTitle = 'ميعاد الانتهاء';
+  static const String timeLabel = 'الوقت';
+  static const String priceLabel = 'السعر';
+  static const String monthlyPriceSuffix = 'ر.ق / شهرياً';
+  static const String viewVisits = 'عرض الزيارات';
+  static const String viewVisitsDesc = 'عرض المواعيد القادمة وسجل الزيارات';
+  static const String pauseTemporarily = 'إيقاف مؤقت';
+  static const String pauseTemporarilyDesc = 'إيقاف الاشتراك لفترة مؤقتة';
+  static const String changePackage = 'تغيير الباقة';
+  static const String changePackageDesc = 'تغيير الباقة الحالية لباقة أخرى';
+  static const String cancelSubscription = 'إلغاء الاشتراك';
+  static const String cancelSubscriptionDesc = 'إيقاف الاشتراك نهائياً';
+  static const String reactivateBtn = 'إعادة التفعيل';
+  static const String subscribeAgainBtn = 'اشترك مرة أخرى';
+  static const String subscriptionPausedMsg = 'تم إيقاف الاشتراك مؤقتاً';
+
+  // --- Visits ---
+  static const String myVisits = 'زياراتي';
+  static const String upcomingVisits = 'القادمة';
+  static const String scheduledStatus = 'مجدولة';
+  static const String inProgressStatus = 'قيد التنفيذ';
+
+  // --- Subscription Popups ---
+  static const String pausePopupTitle = 'إيقاف الاشتراك مؤقتاً';
+  static const String pausePopupDesc =
+      'لن يتم جدولة أي زيارات أثناء فترة الإيقاف يمكنك إعادة تفعيلة في أي وقت';
+  static const String confirmPauseBtn = 'تأكيد الإيقاف';
+  static const String cancelPopupTitle = 'إلغاء الاشتراك';
+  static const String cancelPopupDesc =
+      'سيتم إلغاء جميع الزيارات القادمة لن تتمكن من استئناف الاشتراك بعد إلغائه';
+  static const String confirmCancelBtn = 'تأكيد الإلغاء';
+  static const String backBtn = 'رجوع';
 }
