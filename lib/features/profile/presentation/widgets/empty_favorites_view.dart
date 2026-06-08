@@ -47,7 +47,7 @@ class EmptyFavoritesView extends StatelessWidget {
           CustomButtom(
             text: AppStrings.browseServices,
             onTap: () {
-              // TODO: Navigate to services
+              //  Navigate to services
             },
             startColor: AppColors.greenPrimary,
             endColor: AppColors.dark,

@@ -14,7 +14,7 @@ class MyVisitsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Replace with real data from Cubit
+    // Replace with real data from Cubit
     final upcomingVisits = [
       VisitModel(
         id: '1',

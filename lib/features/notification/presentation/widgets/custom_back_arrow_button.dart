@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 
-class BackArrow extends StatelessWidget {
-  const BackArrow({super.key, this.onPressed});
+class CustomBackArrowButton extends StatelessWidget {
+  const CustomBackArrowButton({super.key, this.onPressed});
   final Function()? onPressed;
 
   @override

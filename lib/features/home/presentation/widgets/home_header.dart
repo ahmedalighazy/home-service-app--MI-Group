@@ -35,30 +35,35 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // User Avatar
-          UserAvatar(
-            imageUrl: avatarImageUrl,
-            assetPath: avatarPlaceholder,
-            onTap: onAvatarTap,
-          ),
-
-          //Location Block (center)
-          Expanded(
-            child: LocationBlock(
-              label: locationLabel,
-              address: locationAddress,
-              onTap: onLocationTap,
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppSizes.padding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // User Avatar
+            UserAvatar(
+              imageUrl: avatarImageUrl,
+              assetPath: avatarPlaceholder,
+              onTap: onAvatarTap,
             ),
-          ),
-          // Notification Bell
-          NotificationBell(count: notificationCount, onTap: onNotificationTap),
-        ],
+
+            //Location Block (center)
+            Expanded(
+              child: LocationBlock(
+                label: locationLabel,
+                address: locationAddress,
+                onTap: onLocationTap,
+              ),
+            ),
+            // Notification Bell
+            NotificationBell(
+              count: notificationCount,
+              onTap: onNotificationTap,
+            ),
+          ],
+        ),
       ),
     );
   }

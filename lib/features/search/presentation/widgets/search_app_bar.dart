@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/features/search/presentation/widgets/back_arrow.dart';
+import 'package:home_service_app/features/notification/presentation/widgets/custom_back_arrow_button.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
@@ -18,7 +18,7 @@ class SearchAppBar extends StatelessWidget {
       padding: EdgeInsets.all(AppSizes.padding),
       child: Row(
         children: [
-          BackArrow(),
+          CustomBackArrowButton(),
 
           SizedBox(width: AppSizes.spacingMedium),
 
