@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
@@ -235,7 +236,10 @@ class AppRouter {
         path: notification,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const NotificationPage(),
+          child: BlocProvider(
+            create: (_) => NotificationCubit(),
+            child: const NotificationPage(),
+          ),
           transitionsBuilder: _fadeTransition,
         ),
       ),

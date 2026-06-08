@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/features/notification/data/dummy/notification_dummy_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_state.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_empty_section.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_list_section.dart';
 import 'package:home_service_app/features/notification/presentation/widgets/notification_app_bar.dart';
@@ -9,8 +11,6 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifications = NotificationDummyData.notifications;
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -18,9 +18,17 @@ class NotificationPage extends StatelessWidget {
             const NotificationAppBar(),
 
             Expanded(
-              child: notifications.isEmpty
-                  ? const NotificationsEmptySection()
-                  : NotificationsListSection(notifications: notifications),
+              child: BlocBuilder<NotificationCubit, NotificationState>(
+                builder: (context, state) {
+                  if (state.notifications.isEmpty) {
+                    return const NotificationsEmptySection();
+                  }
+
+                  return NotificationsListSection(
+                    notifications: state.notifications,
+                  );
+                },
+              ),
             ),
           ],
         ),

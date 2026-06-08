@@ -17,6 +17,24 @@ class NotificationEntity extends Equatable {
     this.isRead = false,
   });
 
+  NotificationEntity copyWith({
+    String? title,
+    String? description,
+    String? time,
+    String? group,
+    String? iconPath,
+    bool? isRead,
+  }) {
+    return NotificationEntity(
+      title: title ?? this.title,
+      description: description ?? this.description,
+      time: time ?? this.time,
+      group: group ?? this.group,
+      iconPath: iconPath ?? this.iconPath,
+      isRead: isRead ?? this.isRead,
+    );
+  }
+
   @override
   List<Object?> get props => [
     title,

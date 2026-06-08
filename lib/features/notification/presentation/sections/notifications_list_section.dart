@@ -32,8 +32,10 @@ class NotificationsListSection extends StatelessWidget {
 
             SizedBox(height: AppSizes.spacingMedium),
 
-            ...entry.value.map(
-              (notification) => Padding(
+            ...entry.value.asMap().entries.map((entryItem) {
+              final notification = entryItem.value;
+
+              return Padding(
                 padding: EdgeInsets.only(bottom: AppSizes.spacingMedium),
                 child: NotificationCard(
                   title: notification.title,
@@ -41,9 +43,10 @@ class NotificationsListSection extends StatelessWidget {
                   time: notification.time,
                   iconPath: notification.iconPath,
                   isRead: notification.isRead,
+                  onTap: () {},
                 ),
-              ),
-            ),
+              );
+            }),
 
             SizedBox(height: AppSizes.spacingLarge),
           ],
