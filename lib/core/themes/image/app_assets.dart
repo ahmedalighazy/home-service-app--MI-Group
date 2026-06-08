@@ -23,4 +23,9 @@ class AppAssets {
       'assets/images/deepFurnitureCleaning.png';
   static const String specialOfferBanner =
       'assets/images/special_offer_img.png';
+  static const String pestControlCover = 'assets/images/مكافحة الحشرات.png';
+  static const String furnitureCleaningCover = 'assets/images/تنظيف اثاث.png';
+  static const String serviceItem = 'assets/images/Rectangle 46.png';
+  static const String corporateServicesHero =
+      'assets/images/corporate_services_hero.png';
 }

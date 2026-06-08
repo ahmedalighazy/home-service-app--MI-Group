@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/search/presentation/widgets/back_arrow.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 class NotificationAppBar extends StatelessWidget {
   const NotificationAppBar({super.key});
@@ -13,7 +13,7 @@ class NotificationAppBar extends StatelessWidget {
       padding: EdgeInsets.all(AppSizes.padding),
       child: Row(
         children: [
-          BackArrow(),
+          CustomBackArrowButton(),
 
           Expanded(
             child: Center(

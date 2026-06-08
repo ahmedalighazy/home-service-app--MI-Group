@@ -4,7 +4,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/search/presentation/widgets/custom_button.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
 class NotificationsEmptySection extends StatelessWidget {
   const NotificationsEmptySection({super.key});
@@ -27,12 +27,14 @@ class NotificationsEmptySection extends StatelessWidget {
             ),
 
             SizedBox(height: AppSizes.spacingLarge),
-
-            CustomButton(
+            CustomButtom(
               text: AppStrings.browseServices,
-              textColor: AppColors.white,
-              backGroundColor: const [AppColors.greenPrimary, AppColors.dark],
-              onPressed: () {},
+              startColor: AppColors.greenPrimary,
+              endColor: AppColors.dark,
+              textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                color: AppColors.white,
+              ),
+              onTap: () {},
             ),
           ],
         ),

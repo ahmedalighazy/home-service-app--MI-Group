@@ -135,6 +135,30 @@ class AppText {
     );
   }
 
+  static TextStyle ibmHeading20({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle ibmHeading16({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle ibmHeading14({Color color = AppColors.headingText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+    );
+  }
+
   /// Subheading or description style
   ///
   /// **Arabic UI Examples:**
@@ -156,6 +180,24 @@ class AppText {
     return GoogleFonts.ibmPlexSansArabic(
       color: color,
       fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle ibmDescription12({Color color = AppColors.secondaryText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle ibmDescription10({Color color = AppColors.secondaryText}) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 10.sp,
       fontWeight: FontWeight.w500,
       height: 1.5,
     );
@@ -300,5 +342,85 @@ class AppText {
     fontWeight: FontWeight.w400,
     fontFamily: 'IBM Plex Sans Arabic',
     color: AppColors.secondary,
+  );
+  // Regular styles
+  static TextStyle regular10Grey = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.body,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle regular12Grey = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.body,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle regular14Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+
+  // Semi-bold styles
+  static TextStyle semiBold12Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle semiBold14Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle semiBold16Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle semiBold18Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle semiBold20Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle semiBold14White = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+
+  // Bold styles
+  static TextStyle bold10Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle bold12Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle bold14Black = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle bold16Cyan = GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.primary,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
   );
 }

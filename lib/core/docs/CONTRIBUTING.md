@@ -72,7 +72,7 @@ Welcome to the project! This guide will help you contribute effectively while ma
 
 2. **Create a feature branch**:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b service_details/your-service_details-name
    ```
 
 3. **Make your changes** following the guidelines below
@@ -87,7 +87,7 @@ Welcome to the project! This guide will help you contribute effectively while ma
    ```bash
    git add .
    git commit -m "feat: add user authentication"
-   git push origin feature/your-feature-name
+   git push origin service_details/your-service_details-name
    ```
 
 6. **Create a Pull Request**
@@ -164,7 +164,7 @@ refactor(core): migrate to GetIt for dependency injection
 
 - Replace manual singleton pattern with GetIt
 - Create injection.dart configuration
-- Update all features to use GetIt
+- Update all service_details to use GetIt
 - Add tests for dependency injection
 
 Breaking Change: Old DI pattern no longer supported
@@ -512,7 +512,7 @@ class LocalUserRepository implements UserRepository {
 #### 1. Create Feature Structure
 
 ```bash
-lib/features/my_feature/
+lib/service_details/my_feature/
 ├── data/
 │   ├── datasources/
 │   │   ├── my_feature_remote_datasource.dart
@@ -872,7 +872,7 @@ getIt.registerFactory<ProductBloc>(
 
 ```dart
 // core/routes/app_routes.dart
-class AppRoutes {
+class AppRouter {
   static const String products = '/products';
   
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -900,7 +900,7 @@ class AppRoutes {
 #### 1. Unit Test Example
 
 ```dart
-// test/features/product/domain/usecases/get_products_usecase_test.dart
+// test/service_details/product/domain/usecases/get_products_usecase_test.dart
 void main() {
   late GetProductsUseCase useCase;
   late MockProductRepository mockRepository;
@@ -948,7 +948,7 @@ void main() {
 #### 2. BLoC Test Example
 
 ```dart
-// test/features/product/presentation/bloc/product_bloc_test.dart
+// test/service_details/product/presentation/bloc/product_bloc_test.dart
 void main() {
   late ProductBloc bloc;
   late MockGetProductsUseCase mockGetProductsUseCase;
@@ -1004,7 +1004,7 @@ void main() {
 #### 3. Widget Test Example
 
 ```dart
-// test/features/product/presentation/pages/product_page_test.dart
+// test/service_details/product/presentation/pages/product_page_test.dart
 void main() {
   late MockProductBloc mockBloc;
   
