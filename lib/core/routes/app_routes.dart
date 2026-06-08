@@ -36,7 +36,6 @@ import '../../features/setting/presentation/screens/set_new_password_screen.dart
 import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
-import '../utils/l10n/app_strings.dart';
 
 import '../../features/auth/sing_in/sing_in.dart';
 import '../../features/auth/ Forget Password/forget_screen.dart';
@@ -54,10 +53,10 @@ class AppRouter {
 
   static const String onboarding = '/onboarding';
   static const String language = '/language';
-  static const String login = '/sign up screens';
+  static const String login = '/login';
   static const String otp = '/otp';
   static const String completeProfile = '/complete-profile';
-  static const String emailLogin = '/email-sign up screens';
+  static const String emailLogin = '/email-login';
   static const String forgetPassword = '/forget-password';
   static const String verifyResetCode = '/verify-reset-code';
   static const String setNewPassword = '/set-new-password';
@@ -405,6 +404,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case AppRouter.signIn:
       return fadeRoute(const SingIn());
 
+    case AppRouter.contactUs:
+      return fadeRoute(const ContactUsScreen());
+
     // ── Auth flow ──────────────────────────────────────────
     case AppRouter.otp:
       final phone = settings.arguments is String
@@ -412,9 +414,57 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           : '+974XXXXXXXX';
       return fadeRoute(OtpScreen(phoneNumber: phone));
 
-    // Main App Routes
-    //  static const String home = AppRouter.home;
+    case AppRouter.completeProfile:
+      final phoneNumber = settings.arguments is String
+          ? settings.arguments as String
+          : '';
+      return fadeRoute(CompleteProfileScreen(phoneNumber: phoneNumber));
 
-  // search App Routes
-  static const String search = AppRouter.search;
+    case AppRouter.forgetPassword:
+      return fadeRoute(const ForgetScreen());
+
+    case AppRouter.verifyResetCode:
+      final email = settings.arguments is String
+          ? settings.arguments as String
+          : 'example@email.com';
+      return fadeRoute(VerifyResetCodeScreen(email: email));
+
+    case AppRouter.setNewPassword:
+      final args = settings.arguments as Map<String, String>?;
+      return fadeRoute(
+        SetNewPasswordScreen(
+          email: args?['email'] ?? '',
+          code: args?['code'] ?? '',
+        ),
+      );
+
+    case AppRouter.home:
+      return fadeRoute(
+        BlocProvider(
+          create: (_) => getIt<HomeCubit>()..getHomeData(),
+          child: const HomePage(),
+        ),
+      );
+
+    case AppRouter.search:
+      return fadeRoute(
+        BlocProvider(create: (_) => SearchCubit(), child: const SearchPage()),
+      );
+
+    case AppRouter.notification:
+      return fadeRoute(const NotificationPage());
+
+    // Default case - return error page
+    default:
+      return fadeRoute(
+        const Scaffold(
+          body: Center(
+            child: Text(
+              'صفحة غير موجودة',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      );
+  }
 }
