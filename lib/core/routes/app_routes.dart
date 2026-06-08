@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
@@ -19,6 +20,10 @@ import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/profile/presentation/screens/saved_addresses_screen.dart';
 import '../../features/profile/presentation/screens/subscription_detail_screen.dart';
 import '../../features/profile/presentation/screens/subscriptions_screen.dart';
+import '../../features/service_details/presentation/cubit/feature_cubit.dart';
+import '../../features/service_details/presentation/views/corporate_services_view.dart';
+import '../../features/service_details/presentation/views/service_details_view.dart';
+import '../../features/service_details/presentation/views/worker_filter_view.dart';
 import '../../features/setting/presentation/screens/chat_detail_screen.dart';
 import '../../features/setting/presentation/screens/faq_screen.dart';
 import '../../features/setting/presentation/screens/help_center_screen.dart';
@@ -74,6 +79,9 @@ class AppRouter {
   static const String subscriptionDetail = '/subscription-detail';
   static const String myVisits = '/my-visits';
   static const String contactUs = '/contact-us';
+  static const String serviceDetailsScreen = '/service_details_screen.dart';
+  static const String workerFilter = '/worker_filter_card.dart';
+  static const String corporateServices = '/corporate_services_screen.dart';
 
   // GoRouter Configuration
   static final GoRouter router = GoRouter(
@@ -223,8 +231,54 @@ class AppRouter {
           transitionsBuilder: _fadeTransition,
         ),
       ),
+
+      GoRoute(
+        path: serviceDetailsScreen,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => FeatureCubit(),
+            child: const ServiceDetailsScreen(),
+          ),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: workerFilter,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => FeatureCubit(),
+            child: WorkerFilterCard(
+              cartTotal: _cartTotalFromExtra(state.extra),
+            ),
+          ),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
+
+      GoRoute(
+        path: corporateServices,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => FeatureCubit(),
+            child: const CorporateServicesScreen(),
+          ),
+          transitionsBuilder: _fadeTransition,
+        ),
+      ),
     ],
   );
+
+  static double _cartTotalFromExtra(Object? extra) {
+    if (extra is num) return extra.toDouble();
+    if (extra is Map && extra['cartTotal'] is num) {
+      return (extra['cartTotal'] as num).toDouble();
+    }
+    return 0;
+  }
 
   // Transition Buildeer
   static Widget _fadeTransition(
@@ -309,6 +363,29 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return fadeRoute(SubscriptionDetailScreen(subscription: subscription));
     case AppRouter.myVisits:
       return fadeRoute(const MyVisitsScreen());
+    case AppRouter.serviceDetailsScreen:
+      return fadeRoute(
+        BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: const ServiceDetailsScreen(),
+        ),
+      );
+    case AppRouter.workerFilter:
+      return fadeRoute(
+        BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: WorkerFilterCard(
+            cartTotal: AppRouter._cartTotalFromExtra(settings.arguments),
+          ),
+        ),
+      );
+    case AppRouter.corporateServices:
+      return fadeRoute(
+        BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: const CorporateServicesScreen(),
+        ),
+      );
 
     case AppRouter.onboarding:
       return fadeRoute(const OnboardingScreen());
@@ -330,7 +407,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     //  static const String home = AppRouter.home;
 
     //  // search App Routes
-    //  static const String search = AppRouter.home;
     case AppRouter.completeProfile:
       final phone = settings.arguments is String
           ? settings.arguments as String
@@ -358,6 +434,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // ── Main app ───────────────────────────────────────────
     case AppRouter.home:
       return fadeRoute(const HomePage());
+    case AppRouter.search:
+      return fadeRoute(const SearchPage());
     case AppRouter.contactUs:
       return fadeRoute(const ContactUsScreen());
 

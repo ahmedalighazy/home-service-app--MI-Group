@@ -41,6 +41,12 @@ class AppColors {
     0x40189AB4,
   ); // 25% opacity greenPrimary (fixed from 0xFF189AB440)
 
+
+  static const Color border = Color(0xffE0E0E0);
+  static const Color lightGrey = Color(0xffD9D9D9);
+  static const Color scaffoldBg = Color(0xffFAFAFA);
+
+
   // Light shades
   static const Color light = Color(0xFFE8F5F8);
   static const Color lightHover = Color(0xFFDCF0F4);
