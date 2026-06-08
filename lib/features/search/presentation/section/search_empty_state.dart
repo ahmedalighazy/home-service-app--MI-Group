@@ -4,7 +4,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/search/presentation/widgets/custom_button.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
 class SearchEmptyState extends StatelessWidget {
   const SearchEmptyState({super.key, required this.searchInputText});
@@ -44,18 +44,26 @@ class SearchEmptyState extends StatelessWidget {
 
               SizedBox(height: AppSizes.spacing),
 
-              CustomButton(
+              CustomButtom(
                 text: AppStrings.browseServices,
-                textColor: AppColors.white,
-                backGroundColor: [AppColors.greenPrimary, AppColors.dark],
+                onTap: () {},
+                textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                  color: AppColors.white,
+                ),
+                startColor: AppColors.greenPrimary,
+                endColor: AppColors.dark,
               ),
 
               SizedBox(height: AppSizes.spacingMedium),
 
-              CustomButton(
+              CustomButtom(
                 text: AppStrings.tryOtherWords,
-                textColor: AppColors.gray,
-                backGroundColor: [AppColors.white],
+                onTap: () {},
+                textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                  color: AppColors.gray,
+                ),
+                startColor: AppColors.white,
+                endColor: AppColors.white,
               ),
             ],
           ),

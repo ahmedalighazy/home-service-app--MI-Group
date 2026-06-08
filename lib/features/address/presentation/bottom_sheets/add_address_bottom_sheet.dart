@@ -4,12 +4,12 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_text_field.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_type_selector.dart';
 import 'package:home_service_app/features/address/presentation/widgets/bottom_sheet_handle.dart';
 import 'package:home_service_app/features/address/presentation/widgets/home_address_fields.dart';
 import 'package:home_service_app/features/address/presentation/widgets/work_address_fields.dart';
-import 'package:home_service_app/features/search/presentation/widgets/custom_button.dart';
 
 class AddAddressBottomSheet extends StatefulWidget {
   const AddAddressBottomSheet({super.key});
@@ -118,10 +118,14 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
 
               SizedBox(height: AppSizes.spacingXLarge),
 
-              CustomButton(
-                textColor: AppColors.white,
-                backGroundColor: [AppColors.greenPrimary],
+              CustomButtom(
                 text: AppStrings.saveAddress,
+                startColor: AppColors.greenPrimary,
+                endColor: AppColors.greenPrimary,
+                textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                  color: AppColors.white,
+                ),
+                onTap: () {},
               ),
             ],
           ),
