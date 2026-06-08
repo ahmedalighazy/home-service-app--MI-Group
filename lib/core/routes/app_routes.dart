@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
+import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
 
@@ -208,7 +211,10 @@ class AppRouter {
         path: home,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const HomePage(),
+          child: BlocProvider(
+            create: (_) => getIt<HomeCubit>()..getHomeData(),
+            child: const HomePage(),
+          ),
           transitionsBuilder: _fadeTransition,
         ),
       ),
@@ -218,7 +224,10 @@ class AppRouter {
         path: search,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const SearchPage(),
+          child: BlocProvider(
+            create: (_) => SearchCubit(),
+            child: const SearchPage(),
+          ),
           transitionsBuilder: _fadeTransition,
         ),
       ),
@@ -406,42 +415,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // Main App Routes
     //  static const String home = AppRouter.home;
 
-    //  // search App Routes
-    case AppRouter.completeProfile:
-      final phone = settings.arguments is String
-          ? settings.arguments as String
-          : '';
-      return fadeRoute(CompleteProfileScreen(phoneNumber: phone));
-
-    case AppRouter.forgetPassword:
-      return fadeRoute(const ForgetScreen());
-
-    case AppRouter.verifyResetCode:
-      final email = settings.arguments is String
-          ? settings.arguments as String
-          : 'example@email.com';
-      return fadeRoute(VerifyResetCodeScreen(email: email));
-
-    case AppRouter.setNewPassword:
-      final args = settings.arguments as Map<String, String>;
-      return fadeRoute(
-        SetNewPasswordScreen(
-          email: args['email'] ?? '',
-          code: args['code'] ?? '',
-        ),
-      );
-
-    // ── Main app ───────────────────────────────────────────
-    case AppRouter.home:
-      return fadeRoute(const HomePage());
-    case AppRouter.search:
-      return fadeRoute(const SearchPage());
-    case AppRouter.contactUs:
-      return fadeRoute(const ContactUsScreen());
-
-    default:
-      return fadeRoute(
-        const Scaffold(body: Center(child: Text(AppStrings.unknownRoute))),
-      );
-  }
+  // search App Routes
+  static const String search = AppRouter.search;
 }
