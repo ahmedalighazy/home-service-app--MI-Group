@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -42,30 +44,93 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         vertical: AppSizes.padding,
         horizontal: AppSizes.paddingMedium,
       ),
+
+      // icon bottom
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(iconPath: IconsPath.home, label: 'الرئيسية', index: 0),
+          _buildNavItem(
+            iconPath: IconsPath.home,
+            label: AppStrings.navHome,
+            index: 0,
+          ),
           _buildNavItem(
             iconPath: IconsPath.calendar,
-            label: 'حجوزاتي',
+            label: AppStrings.navBookings,
             index: 1,
           ),
-          _buildNavItem(iconPath: IconsPath.profile, label: 'حسابي', index: 2),
+          _buildNavItem(
+            iconPath: IconsPath.profile,
+            label: AppStrings.navAccount,
+            index: 2,
+          ),
         ],
       ),
     );
   }
 
+  // Widget _buildNavItem({
+  //   required String iconPath,
+  //   required String label,
+  //   required int index,
+  // }) {
+  //   final isSelected = widget.currentIndex == index;
+  //   final color = isSelected
+  //       ? AppColors.greenPrimary.withValues(alpha: 0.5)
+  //       : AppColors.secondaryGrey;
+  //   final backgroundColor = isSelected
+  //       ? AppColors.lightActive.withValues(alpha: 0.5)
+  //       : Colors.transparent;
+
+  //   return Expanded(
+  //     child: GestureDetector(
+  //       onTap: () => widget.onTap(index),
+  //       behavior: HitTestBehavior.opaque,
+  //       child: AnimatedContainer(
+  //         duration: const Duration(milliseconds: 300),
+  //         curve: Curves.easeInOut,
+  //         padding: EdgeInsets.symmetric(
+  //           horizontal: AppSizes.paddingMedium,
+  //           vertical: AppSizes.paddingMedium,
+  //         ),
+  //         decoration: BoxDecoration(
+  //           color: backgroundColor,
+  //           borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
+  //         ),
+  //         child: Row(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             SvgPicture.asset(
+  //               iconPath,
+  //               width: AppSizes.iconSize,
+  //               height: AppSizes.iconSize,
+  //               colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+  //             ),
+  //             SizedBox(width: AppSizes.spacingSmall),
+  //             Text(
+  //               label,
+  //               style: TextStyle(
+  //                 fontSize: 14,
+  //                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+  //                 color: color,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
   Widget _buildNavItem({
     required String iconPath,
     required String label,
     required int index,
   }) {
     final isSelected = widget.currentIndex == index;
-    final color = isSelected ? AppColors.greenPrimary : AppColors.secondaryGrey;
+
     final backgroundColor = isSelected
-        ? AppColors.lightActive.withValues(alpha: 0.5)
+        ? AppColors.lightActive
         : Colors.transparent;
 
     return Expanded(
@@ -73,7 +138,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         onTap: () => widget.onTap(index),
         behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 0),
           curve: Curves.easeInOut,
           padding: EdgeInsets.symmetric(
             horizontal: AppSizes.paddingMedium,
@@ -83,27 +148,61 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             color: backgroundColor,
             borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset(
-                iconPath,
-                width: AppSizes.iconSize,
-                height: AppSizes.iconSize,
-                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-              ),
-              SizedBox(width: AppSizes.spacingSmall),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
-                  color: color,
+          child: isSelected
+              ? ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) {
+                    return const LinearGradient(
+                      begin: Alignment.bottomRight,
+                      end: Alignment.centerLeft,
+                      colors: [AppColors.dark, AppColors.greenPrimary],
+                    ).createShader(bounds);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        iconPath,
+                        width: AppSizes.iconSize,
+                        height: AppSizes.iconSize,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      SizedBox(width: AppSizes.spacingSmall),
+                      Text(
+                        label,
+                        style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      iconPath,
+                      width: AppSizes.iconSize,
+                      height: AppSizes.iconSize,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.secondaryGrey,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    SizedBox(width: AppSizes.spacingSmall),
+                    Text(
+                      label,
+                      style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                        color: AppColors.bgDisabled,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );
