@@ -13,6 +13,20 @@ class AddressEntity extends Equatable {
     this.isSelected = false,
   });
 
+  AddressEntity copyWith({
+    String? title,
+    String? address,
+    String? iconPath,
+    bool? isSelected,
+  }) {
+    return AddressEntity(
+      title: title ?? this.title,
+      address: address ?? this.address,
+      iconPath: iconPath ?? this.iconPath,
+      isSelected: isSelected ?? this.isSelected,
+    );
+  }
+
   @override
   List<Object?> get props => [title, address, iconPath, isSelected];
 }

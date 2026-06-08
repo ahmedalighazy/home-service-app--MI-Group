@@ -15,6 +15,8 @@ import 'package:home_service_app/core/di/register_module.dart' as _i866;
 import 'package:home_service_app/core/network/dio_client.dart' as _i953;
 import 'package:home_service_app/core/network/network_info.dart' as _i702;
 import 'package:home_service_app/core/network/network_info_impl.dart' as _i799;
+import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart'
+    as _i565;
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart'
     as _i694;
 import 'package:home_service_app/features/home/data/datasources/local/home_local_data_source.dart'
@@ -33,6 +35,10 @@ import 'package:home_service_app/features/home/domain/usecases/get_home_data_use
     as _i1057;
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart'
     as _i829;
+import 'package:home_service_app/features/search/domain/repositories/search_repository.dart'
+    as _i200;
+import 'package:home_service_app/features/search/domain/usecases/search_usecase.dart'
+    as _i406;
 import 'package:injectable/injectable.dart' as _i526;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -43,6 +49,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
+    gh.factory<_i565.AddressCubit>(() => _i565.AddressCubit());
     gh.factory<_i694.AuthCubit>(() => _i694.AuthCubit());
     gh.lazySingleton<_i895.Connectivity>(() => registerModule.connectivity);
     gh.lazySingleton<_i953.DioClient>(() => _i953.DioClient());
@@ -51,6 +58,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i702.NetworkInfo>(
       () => _i799.NetworkInfoImpl(gh<_i895.Connectivity>()),
+    );
+    gh.lazySingleton<_i406.SearchUseCase>(
+      () => _i406.SearchUseCase(gh<_i200.SearchRepository>()),
     );
     gh.lazySingleton<_i3.HomeRemoteDataSource>(
       () => _i1023.HomeRemoteDataSourceImpl(gh<_i953.DioClient>()),
