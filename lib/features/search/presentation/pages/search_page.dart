@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/themes/image/app_assets.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/home/domain/entities/category_entity.dart';
-import 'package:home_service_app/features/search/domain/entities/search_suggestion_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
+import 'package:home_service_app/features/search/presentation/cubit/search_state.dart';
 import 'package:home_service_app/features/search/presentation/section/popular_searches_section.dart';
 import 'package:home_service_app/features/search/presentation/section/recent_searches_section.dart';
 import 'package:home_service_app/features/search/presentation/section/search_categories_section.dart';
@@ -40,90 +38,61 @@ class _SearchPageState extends State<SearchPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SearchAppBar(controller: _searchController, onChanged: (_) {}),
+            SearchAppBar(
+              controller: _searchController,
+              onChanged: (value) {
+                context.read<SearchCubit>().search(value);
+              },
+            ),
 
             Expanded(
-              child: ValueListenableBuilder<TextEditingValue>(
-                valueListenable: _searchController,
-                builder: (context, value, _) {
-                  final query = value.text.trim();
+              child: BlocBuilder<SearchCubit, SearchState>(
+                builder: (context, state) {
+                  final query = state.query;
 
                   // Empty Search
                   if (query.isEmpty) {
-                    return const SingleChildScrollView(
+                    return SingleChildScrollView(
                       child: Column(
                         children: [
-                          RecentSearchesSection(),
-                          PopularSearchesSection(
-                            searches: [
-                              'تنظيف منزل',
-                              'تنظيف أثاث',
-                              'تنظيف بعد التشطيب',
-                              'مكافحة حشرات',
-                            ],
+                          RecentSearchesSection(
+                            recentSearches: state.recentSearches,
+                            onClearAll: () {
+                              context.read<SearchCubit>().clearRecentSearches();
+                            },
                           ),
+
+                          PopularSearchesSection(
+                            searches: state.popularSearches,
+                          ),
+
                           SearchMaybeLookingForSection(
-                            items: [
-                              SearchSuggestionEntity(
-                                title: AppStrings.insectsInHouse,
-                                description: AppStrings.insectsInHouseDis,
-                                imagePath: AppAssets.insectsInHouse,
-                              ),
-                              SearchSuggestionEntity(
-                                title: AppStrings.insectsInHouse,
-                                description: AppStrings.insectsInHouseDis,
-                                imagePath: AppAssets.insectsInHouse,
-                              ),
-                              SearchSuggestionEntity(
-                                title: AppStrings.insectsInHouse,
-                                description: AppStrings.insectsInHouseDis,
-                                imagePath: AppAssets.insectsInHouse,
-                              ),
-                            ],
+                            items: state.suggestions,
                           ),
                         ],
                       ),
                     );
                   }
 
-                  final results = [
-                    'تنظيف منزل',
-                    'تنظيف أثاث',
-                    'تنظيف بعد التشطيب',
-                    'مكافحة حشرات',
-                  ].where((item) => item.contains(query)).toList();
-
                   // No Results
-                  if (results.isEmpty) {
+                  if (state.results.isEmpty) {
                     return SearchEmptyState(searchInputText: '"$query"');
                   }
 
-                  // Results + Categories
+                  // Results
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                        SearchResultsSection(results: results),
-
-                        SearchCategoriesSection(
-                          categories: const [
-                            CategoryEntity(
-                              title: 'تنظيف مطابخ',
-                              iconPath: IconsPath.cleanerIcon,
-                            ),
-                            CategoryEntity(
-                              title: 'تنظيف عادي',
-                              iconPath: IconsPath.manualCleanerIcon,
-                            ),
-                            CategoryEntity(
-                              title: 'تنظيف سجاد',
-                              iconPath: IconsPath.bugIcon,
-                            ),
-                            CategoryEntity(
-                              title: 'تنظيف كتب',
-                              iconPath: IconsPath.institutionsIcon,
-                            ),
-                          ],
+                        SearchResultsSection(
+                          results: state.results,
+                          onResultTap: (result) {
+                            context.read<SearchCubit>().addRecentSearch(
+                              result.title,
+                            );
+                          },
                         ),
+
+                        SearchCategoriesSection(categories: state.categories),
                       ],
                     ),
                   );

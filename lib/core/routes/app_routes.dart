@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
+import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 
 // ============ Core Screens ============
@@ -169,7 +173,10 @@ class AppRouter {
         path: home,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const HomePage(),
+          child: BlocProvider(
+            create: (_) => getIt<HomeCubit>()..getHomeData(),
+            child: const HomePage(),
+          ),
           transitionsBuilder: _fadeTransition,
         ),
       ),
@@ -179,7 +186,10 @@ class AppRouter {
         path: search,
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const SearchPage(),
+          child: BlocProvider(
+            create: (_) => SearchCubit(),
+            child: const SearchPage(),
+          ),
           transitionsBuilder: _fadeTransition,
         ),
       ),
@@ -230,5 +240,5 @@ class AppRoutes {
   static const String home = AppRouter.home;
 
   // search App Routes
-  static const String search = AppRouter.home;
+  static const String search = AppRouter.search;
 }
