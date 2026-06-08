@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/features/notification/presentation/widgets/custom_back_arrow_button.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/themes/colors/app_colors.dart';

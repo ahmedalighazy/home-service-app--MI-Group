@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/notification/presentation/widgets/custom_back_arrow_button.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 class NotificationAppBar extends StatelessWidget {
   const NotificationAppBar({super.key});
