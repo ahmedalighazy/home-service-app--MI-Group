@@ -98,6 +98,8 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {
                           context.read<AddressCubit>().selectAddress(index);
+
+                          Navigator.pop(context);
                         },
                         child: AddressCard(
                           title: address.title,

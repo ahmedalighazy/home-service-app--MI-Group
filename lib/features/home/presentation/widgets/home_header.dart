@@ -9,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
     this.locationLabel = AppStrings.currentLocation,
-    this.locationAddress = '18، شارع الوعب، الدوحة',
+    required this.locationAddress,
     this.avatarImageUrl,
     this.avatarPlaceholder,
     this.notificationCount = 0,
