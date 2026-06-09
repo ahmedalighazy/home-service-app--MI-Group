@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
@@ -209,14 +210,20 @@ class AppRouter {
       // Main App Routes
       GoRoute(
         path: home,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
-            create: (_) => getIt<HomeCubit>()..getHomeData(),
-            child: const HomePage(),
-          ),
-          transitionsBuilder: _fadeTransition,
-        ),
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => getIt<HomeCubit>()..getHomeData()),
+
+                BlocProvider(create: (_) => getIt<AddressCubit>()),
+              ],
+              child: const HomePage(),
+            ),
+            transitionsBuilder: _fadeTransition,
+          );
+        },
       ),
 
       // search App Routes
