@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import '../../../../core/extensions/extention_navigator.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
@@ -39,35 +39,35 @@ class ProfileScreen extends StatelessWidget {
                             icon: IconsPath.vectorPerson,
                             title: AppStrings.editProfile,
                             onTap: () {
-                              context.pushName(AppRouter.editProfile);
+                              context.pushNamed(AppRouter.editProfile);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorFavorite,
                             title: AppStrings.favorites,
                             onTap: () {
-                              context.pushName(AppRouter.favorites);
+                              context.pushNamed(AppRouter.favorites);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorLocation,
                             title: AppStrings.myAddresses,
                             onTap: () {
-                              context.pushName(AppRouter.savedAddresses);
+                              context.pushNamed(AppRouter.savedAddresses);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.vectorSub,
                             title: AppStrings.mySubscriptions,
                             onTap: () {
-                              context.pushName(AppRouter.subscriptions);
+                              context.pushNamed(AppRouter.subscriptions);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.group,
                             title: AppStrings.paymentMethods,
                             onTap: () {
-                              context.pushName(AppRouter.paymentMethods);
+                              context.pushNamed(AppRouter.paymentMethods);
                             },
                           ),
                         ],
@@ -87,14 +87,14 @@ class ProfileScreen extends StatelessWidget {
                             icon: IconsPath.vectorSetting,
                             title: AppStrings.settings,
                             onTap: () {
-                              context.pushName(AppRouter.setting);
+                              context.pushNamed(AppRouter.setting);
                             },
                           ),
                           SettingListItem(
                             icon: IconsPath.iconLang,
                             title: AppStrings.contactUs,
                             onTap: () {
-                              context.pushName(AppRouter.contactUs);
+                              context.pushNamed(AppRouter.contactUs);
                             },
                           ),
                         ],

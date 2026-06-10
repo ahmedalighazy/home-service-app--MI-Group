@@ -9,10 +9,18 @@ import 'package:home_service_app/features/notification/presentation/pages/notifi
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
+import '../../features/booking/data/repositories/booking_repository.dart';
+import '../../features/booking/presentation/screens/booking_screen.dart';
+import '../../features/booking/presentation/screens/booking_details_screen.dart';
+import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
+import '../../features/booking/presentation/screens/cancel_booking_screen.dart';
+import '../../features/booking/data/models/booking_model.dart';
+import '../../features/booking/logic/cubit/booking_cubit.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
+import '../../features/auth/sing_up_screens/sing_up.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/data/models/subscription_model.dart';
 import '../../features/profile/presentation/screens/contact_us_screen.dart';
@@ -45,23 +53,25 @@ import '../../features/auth/ Forget Password/verify_reset_code_screen.dart';
 import '../../features/auth/set_new_pass/set_new_pass.dart';
 
 class AppRouter {
-  // Private constructor to prevent instantiation
+  // Private constructor
   AppRouter._();
+
+  // ============ Route Names Constants ============
+  // Core Routes
   static const String splash = '/';
+  static const String onboarding = '/onboarding';
+  static const String language = '/language';
 
   // Auth Routes
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
-
-  static const String onboarding = '/onboarding';
-  static const String language = '/language';
-  static const String login = '/login';
   static const String otp = '/otp';
   static const String completeProfile = '/complete-profile';
-  static const String emailLogin = '/email-login';
   static const String forgetPassword = '/forget-password';
   static const String verifyResetCode = '/verify-reset-code';
   static const String setNewPassword = '/set-new-password';
+
+  // Main App Routes
   static const String home = '/home';
   static const String search = '/search';
   static const String notification = '/notification';
@@ -71,7 +81,7 @@ class AppRouter {
   static const String setting = '/setting';
   static const String favorites = '/favorites';
   static const String helpCenter = '/help-center';
-  static const String updatePassword = '/updatePassword';
+  static const String updatePassword = '/update-password';
   static const String legalAndPolicies = '/legal-and-policies';
   static const String privacyPolicy = '/privacy-policy';
   static const String termsAndConditions = '/terms-and-conditions';
@@ -83,126 +93,107 @@ class AppRouter {
   static const String subscriptionDetail = '/subscription-detail';
   static const String myVisits = '/my-visits';
   static const String contactUs = '/contact-us';
-  static const String serviceDetailsScreen = '/service_details_screen.dart';
-  static const String workerFilter = '/worker_filter_card.dart';
-  static const String corporateServices = '/corporate_services_screen.dart';
+  static const String serviceDetails = '/service-details';
+  static const String workerFilter = '/worker-filter';
+  static const String corporateServices = '/corporate-services';
+  static const String bookings = '/bookings';
+  static const String bookingDetails = '/booking-details';
+  static const String rescheduleBooking = '/reschedule-booking';
+  static const String cancelBooking = '/cancel-booking';
 
-  // GoRouter Configuration
+  // ============ GoRouter Configuration ============
   static final GoRouter router = GoRouter(
-    initialLocation: splash,
+    initialLocation: home,
     debugLogDiagnostics: true,
-    errorPageBuilder: (context, state) => CustomTransitionPage(
-      key: state.pageKey,
-      child: const Scaffold(
-        body: Center(
-          child: Text(
-            'صفحة غير موجودة',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-      transitionsBuilder: _fadeTransition,
-    ),
+    errorBuilder: (context, state) => const ErrorScreen(),
     routes: [
       // Core Routes
       GoRoute(
         path: splash,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const SplashScreen(),
-          transitionsBuilder: _fadeTransition,
-        ),
+        name: splash,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const SplashScreen(), state),
       ),
 
       GoRoute(
         path: onboarding,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const OnboardingScreen(),
-          transitionsBuilder: _fadeTransition,
-        ),
+        name: onboarding,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const OnboardingScreen(), state),
       ),
 
       GoRoute(
         path: language,
-        redirect: (context, state) => signIn, // Redirect to sign in
+        name: language,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const LanguageSelectionScreen(), state),
       ),
 
-      // ============ Auth Routes ============
+      // Auth Routes
       GoRoute(
         path: signIn,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const SingIn(),
-          transitionsBuilder: _fadeTransition,
-        ),
+        name: signIn,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const SingIn(), state),
       ),
 
       GoRoute(
         path: signUp,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const SingIn(),
-          transitionsBuilder: _fadeTransition,
+        name: signUp,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          const SingUp(), // تأكد من أن هذا موجود
+          state,
         ),
       ),
 
       GoRoute(
         path: otp,
+        name: otp,
         pageBuilder: (context, state) {
           final phoneNumber = state.extra as String? ?? '+974XXXXXXXX';
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: OtpScreen(phoneNumber: phoneNumber),
-            transitionsBuilder: _fadeTransition,
-          );
+          return _buildPageWithFade(OtpScreen(phoneNumber: phoneNumber), state);
         },
       ),
 
       GoRoute(
         path: completeProfile,
+        name: completeProfile,
         pageBuilder: (context, state) {
           final phoneNumber = state.extra as String? ?? '';
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: CompleteProfileScreen(phoneNumber: phoneNumber),
-            transitionsBuilder: _fadeTransition,
+          return _buildPageWithFade(
+            CompleteProfileScreen(phoneNumber: phoneNumber),
+            state,
           );
         },
       ),
 
       GoRoute(
         path: forgetPassword,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: const ForgetScreen(),
-          transitionsBuilder: _fadeTransition,
-        ),
+        name: forgetPassword,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const ForgetScreen(), state),
       ),
 
       GoRoute(
         path: verifyResetCode,
+        name: verifyResetCode,
         pageBuilder: (context, state) {
           final email = state.extra as String? ?? 'example@email.com';
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: VerifyResetCodeScreen(email: email),
-            transitionsBuilder: _fadeTransition,
-          );
+          return _buildPageWithFade(VerifyResetCodeScreen(email: email), state);
         },
       ),
 
       GoRoute(
         path: setNewPassword,
+        name: setNewPassword,
         pageBuilder: (context, state) {
           final args = state.extra as Map<String, String>?;
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: SetNewPasswordScreen(
+          return _buildPageWithFade(
+            SetNewPasswordScreen(
               email: args?['email'] ?? '',
               code: args?['code'] ?? '',
             ),
-            transitionsBuilder: _fadeTransition,
+            state,
           );
         },
       ),
@@ -210,86 +201,250 @@ class AppRouter {
       // Main App Routes
       GoRoute(
         path: home,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
-            key: state.pageKey,
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (_) => getIt<HomeCubit>()..getHomeData()),
-
-                BlocProvider(create: (_) => getIt<AddressCubit>()),
-              ],
-              child: const HomePage(),
-            ),
-            transitionsBuilder: _fadeTransition,
-          );
-        },
+        name: home,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => getIt<HomeCubit>()..getHomeData()),
+              BlocProvider(create: (_) => getIt<AddressCubit>()),
+            ],
+            child: const HomePage(),
+          ),
+          state,
+        ),
       ),
 
-      // search App Routes
       GoRoute(
         path: search,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
-            create: (_) => SearchCubit(),
-            child: const SearchPage(),
-          ),
-          transitionsBuilder: _fadeTransition,
+        name: search,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          BlocProvider(create: (_) => SearchCubit(), child: const SearchPage()),
+          state,
         ),
       ),
 
       GoRoute(
         path: notification,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
+        name: notification,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          BlocProvider(
             create: (_) => NotificationCubit(),
             child: const NotificationPage(),
           ),
-          transitionsBuilder: _fadeTransition,
+          state,
         ),
       ),
 
       GoRoute(
-        path: serviceDetailsScreen,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
+        path: profile,
+        name: profile,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const ProfileScreen(), state),
+      ),
+
+      GoRoute(
+        path: editProfile,
+        name: editProfile,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const EditProfileScreen(), state),
+      ),
+
+      GoRoute(
+        path: deleteAccount,
+        name: deleteAccount,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const DeleteAccountScreen(), state),
+      ),
+
+      GoRoute(
+        path: setting,
+        name: setting,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const SettingsScreen(), state),
+      ),
+
+      GoRoute(
+        path: favorites,
+        name: favorites,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const FavoritesScreen(), state),
+      ),
+
+      GoRoute(
+        path: helpCenter,
+        name: helpCenter,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const HelpCenterScreen(), state),
+      ),
+
+      GoRoute(
+        path: updatePassword,
+        name: updatePassword,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const UpdatePasswordScreen(), state),
+      ),
+
+      GoRoute(
+        path: legalAndPolicies,
+        name: legalAndPolicies,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const LegalAndPoliciesScreen(), state),
+      ),
+
+      GoRoute(
+        path: privacyPolicy,
+        name: privacyPolicy,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const PrivacyPolicyScreen(), state),
+      ),
+
+      GoRoute(
+        path: termsAndConditions,
+        name: termsAndConditions,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const TermsAndConditionsScreen(), state),
+      ),
+
+      GoRoute(
+        path: faq,
+        name: faq,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const FAQScreen(), state),
+      ),
+
+      GoRoute(
+        path: chatDetail,
+        name: chatDetail,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const ChatDetailScreen(), state),
+      ),
+
+      GoRoute(
+        path: savedAddresses,
+        name: savedAddresses,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const SavedAddressesScreen(), state),
+      ),
+
+      GoRoute(
+        path: paymentMethods,
+        name: paymentMethods,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const PaymentMethodsScreen(), state),
+      ),
+
+      GoRoute(
+        path: subscriptions,
+        name: subscriptions,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const SubscriptionsScreen(), state),
+      ),
+
+      GoRoute(
+        path: subscriptionDetail,
+        name: subscriptionDetail,
+        pageBuilder: (context, state) {
+          final subscription = state.extra as SubscriptionModel?;
+          return _buildPageWithFade(
+            SubscriptionDetailScreen(subscription: subscription!),
+            state,
+          );
+        },
+      ),
+
+      GoRoute(
+        path: myVisits,
+        name: myVisits,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const MyVisitsScreen(), state),
+      ),
+
+      GoRoute(
+        path: contactUs,
+        name: contactUs,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const ContactUsScreen(), state),
+      ),
+
+      GoRoute(
+        path: serviceDetails,
+        name: serviceDetails,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          BlocProvider(
             create: (_) => FeatureCubit(),
             child: const ServiceDetailsScreen(),
           ),
-          transitionsBuilder: _fadeTransition,
+          state,
         ),
       ),
 
       GoRoute(
         path: workerFilter,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
+        name: workerFilter,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          BlocProvider(
             create: (_) => FeatureCubit(),
             child: WorkerFilterCard(
               cartTotal: _cartTotalFromExtra(state.extra),
             ),
           ),
-          transitionsBuilder: _fadeTransition,
+          state,
         ),
       ),
 
       GoRoute(
         path: corporateServices,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: BlocProvider(
+        name: corporateServices,
+        pageBuilder: (context, state) => _buildPageWithFade(
+          BlocProvider(
             create: (_) => FeatureCubit(),
             child: const CorporateServicesScreen(),
           ),
-          transitionsBuilder: _fadeTransition,
+          state,
         ),
+      ),
+      GoRoute(
+        path: bookings,
+        name: bookings,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(BookingScreen(), state),
+      ),
+      GoRoute(
+        path: bookingDetails,
+        name: bookingDetails,
+        pageBuilder: (context, state) {
+          final booking = state.extra as BookingModel;
+          return _buildPageWithFade(
+            BookingDetailsScreen(booking: booking),
+            state,
+          );
+        },
+      ),
+      GoRoute(
+        path: rescheduleBooking,
+        name: rescheduleBooking,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const RescheduleBookingScreen(), state),
+      ),
+      GoRoute(
+        path: cancelBooking,
+        name: cancelBooking,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const CancelBookingScreen(), state),
       ),
     ],
   );
+
+  // Helper method to build page with fade transition
+  static Page<void> _buildPageWithFade(Widget child, GoRouterState state) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(opacity: animation, child: child);
+      },
+    );
+  }
 
   static double _cartTotalFromExtra(Object? extra) {
     if (extra is num) return extra.toDouble();
@@ -298,184 +453,38 @@ class AppRouter {
     }
     return 0;
   }
-
-  // Transition Buildeer
-  static Widget _fadeTransition(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
-    return FadeTransition(opacity: animation, child: child);
-  }
 }
 
-/// AppRoutes - Backward compatibility class
-/// Provides old route names and references to AppRouter
-@Deprecated('Use AppRouter instead')
-class AppRoutes {
-  // Core Routes
-  static const String splash = AppRouter.splash;
-  static const String onboarding = AppRouter.onboarding;
-  static const String language = AppRouter.language;
+// Error Screen Widget
+class ErrorScreen extends StatelessWidget {
+  const ErrorScreen({super.key});
 
-  // Auth Routes (with aliases)
-  static const String login = AppRouter.signIn; // Alias
-  static const String signIn = AppRouter.signIn;
-  static const String signUp = AppRouter.signUp;
-  static const String emailLogin = AppRouter.signIn; // Alias
-  static const String otp = AppRouter.otp;
-  static const String completeProfile = AppRouter.completeProfile;
-  static const String forgetPassword = AppRouter.forgetPassword;
-  static const String verifyResetCode = AppRouter.verifyResetCode;
-  static const String setNewPassword = AppRouter.setNewPassword;
-}
-
-Route<dynamic> onGenerateRoute(RouteSettings settings) {
-  // smooth fade transition for all routes
-  Route<dynamic> fadeRoute(Widget page) {
-    return PageRouteBuilder(
-      settings: settings,
-      transitionDuration: const Duration(milliseconds: 350),
-      pageBuilder: (context, animation, _) => page,
-      transitionsBuilder: (context, animation, _, child) =>
-          FadeTransition(opacity: animation, child: child),
-    );
-  }
-
-  switch (settings.name) {
-    // ── Core flow ─────────────────────────────────────────
-    case AppRouter.splash:
-      return fadeRoute(const SplashScreen());
-    case AppRouter.profile:
-      return fadeRoute(const ProfileScreen());
-    case AppRouter.setting:
-      return fadeRoute(const SettingsScreen());
-    case AppRouter.deleteAccount:
-      return fadeRoute(const DeleteAccountScreen());
-    case AppRouter.editProfile:
-      return fadeRoute(const EditProfileScreen());
-    case AppRouter.favorites:
-      return fadeRoute(const FavoritesScreen());
-    case AppRouter.helpCenter:
-      return fadeRoute(const HelpCenterScreen());
-    case AppRouter.updatePassword:
-      return fadeRoute(const UpdatePasswordScreen());
-    case AppRouter.legalAndPolicies:
-      return fadeRoute(const LegalAndPoliciesScreen());
-    case AppRouter.privacyPolicy:
-      return fadeRoute(const PrivacyPolicyScreen());
-    case AppRouter.termsAndConditions:
-      return fadeRoute(const TermsAndConditionsScreen());
-    case AppRouter.faq:
-      return fadeRoute(const FAQScreen());
-    case AppRouter.chatDetail:
-      return fadeRoute(const ChatDetailScreen());
-    case AppRouter.savedAddresses:
-      return fadeRoute(const SavedAddressesScreen());
-    case AppRouter.paymentMethods:
-      return fadeRoute(const PaymentMethodsScreen());
-    case AppRouter.subscriptions:
-      return fadeRoute(const SubscriptionsScreen());
-    case AppRouter.subscriptionDetail:
-      final subscription = settings.arguments as SubscriptionModel;
-      return fadeRoute(SubscriptionDetailScreen(subscription: subscription));
-    case AppRouter.myVisits:
-      return fadeRoute(const MyVisitsScreen());
-    case AppRouter.serviceDetailsScreen:
-      return fadeRoute(
-        BlocProvider(
-          create: (_) => FeatureCubit(),
-          child: const ServiceDetailsScreen(),
-        ),
-      );
-    case AppRouter.workerFilter:
-      return fadeRoute(
-        BlocProvider(
-          create: (_) => FeatureCubit(),
-          child: WorkerFilterCard(
-            cartTotal: AppRouter._cartTotalFromExtra(settings.arguments),
-          ),
-        ),
-      );
-    case AppRouter.corporateServices:
-      return fadeRoute(
-        BlocProvider(
-          create: (_) => FeatureCubit(),
-          child: const CorporateServicesScreen(),
-        ),
-      );
-
-    case AppRouter.onboarding:
-      return fadeRoute(const OnboardingScreen());
-
-    case AppRouter.language:
-      return fadeRoute(const LanguageSelectionScreen());
-
-    case AppRouter.signIn:
-      return fadeRoute(const SingIn());
-
-    case AppRouter.contactUs:
-      return fadeRoute(const ContactUsScreen());
-
-    // ── Auth flow ──────────────────────────────────────────
-    case AppRouter.otp:
-      final phone = settings.arguments is String
-          ? settings.arguments as String
-          : '+974XXXXXXXX';
-      return fadeRoute(OtpScreen(phoneNumber: phone));
-
-    case AppRouter.completeProfile:
-      final phoneNumber = settings.arguments is String
-          ? settings.arguments as String
-          : '';
-      return fadeRoute(CompleteProfileScreen(phoneNumber: phoneNumber));
-
-    case AppRouter.forgetPassword:
-      return fadeRoute(const ForgetScreen());
-
-    case AppRouter.verifyResetCode:
-      final email = settings.arguments is String
-          ? settings.arguments as String
-          : 'example@email.com';
-      return fadeRoute(VerifyResetCodeScreen(email: email));
-
-    case AppRouter.setNewPassword:
-      final args = settings.arguments as Map<String, String>?;
-      return fadeRoute(
-        SetNewPasswordScreen(
-          email: args?['email'] ?? '',
-          code: args?['code'] ?? '',
-        ),
-      );
-
-    case AppRouter.home:
-      return fadeRoute(
-        BlocProvider(
-          create: (_) => getIt<HomeCubit>()..getHomeData(),
-          child: const HomePage(),
-        ),
-      );
-
-    case AppRouter.search:
-      return fadeRoute(
-        BlocProvider(create: (_) => SearchCubit(), child: const SearchPage()),
-      );
-
-    case AppRouter.notification:
-      return fadeRoute(const NotificationPage());
-
-    // Default case - return error page
-    default:
-      return fadeRoute(
-        const Scaffold(
-          body: Center(
-            child: Text(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, size: 80, color: Colors.grey[400]),
+            const SizedBox(height: 16),
+            const Text(
               'صفحة غير موجودة',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-          ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () {
+                context.go(AppRouter.home);
+              },
+              child: const Text('الرجوع للرئيسية'),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
+
+// ============ Delete onGenerateRoute completely ============
+// لا تحتاج إلى onGenerateRoute بعد الآن، كل شيء في GoRouter

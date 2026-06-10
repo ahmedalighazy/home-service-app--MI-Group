@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
@@ -45,7 +46,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         title: AppStrings.paymentMethods,
-        onBack: () => Navigator.pop(context),
+        onBack: () => context.pop(),
       ),
       body: Column(
         children: [

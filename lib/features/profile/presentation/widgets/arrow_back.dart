@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../../core/routes/navigation_extensions.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 
 class ArrowBack extends StatelessWidget {
@@ -9,11 +9,9 @@ class ArrowBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:
-          onTap ??
-          () {
-            Navigator.pop(context);
-          },
+      onTap: () {
+        context.pop();
+      },
       child: Padding(
         padding: const EdgeInsets.only(right: 3),
         child: Container(

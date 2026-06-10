@@ -6,6 +6,7 @@ import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'subscription_card_widget.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class SubscriptionListWidget extends StatelessWidget {
   final List<SubscriptionModel> subscriptions;
@@ -40,8 +41,7 @@ class SubscriptionListWidget extends StatelessWidget {
             subscription: subscription,
             onTap: () {
               if (subscription.status == SubscriptionStatus.active) {
-                Navigator.pushNamed(
-                  context,
+                context.pushNamed(
                   AppRouter.subscriptionDetail,
                   arguments: subscription,
                 );

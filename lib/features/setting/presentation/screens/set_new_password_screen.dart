@@ -56,7 +56,7 @@ class UpdatePasswordScreen extends StatelessWidget {
                 onTap: () {},
                 startColor: AppColors.bgDisabled,
                 endColor: AppColors.bgDisabled,
-                textStyle: AppText.ibmButton16(color: AppColors.secondaryGrey),
+                textStyle: AppText.ibmButton16(color: AppColors.softWhite),
               ),
               verticalSpace(20),
             ],

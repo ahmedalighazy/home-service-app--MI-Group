@@ -4,6 +4,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import '../../../../core/widgets/custom_buttom.dart';
 
@@ -54,7 +55,7 @@ class NewIssueBottomSheet extends StatelessWidget {
             width: double.infinity,
             child: CustomButtom(
               text: AppStrings.send,
-              onTap: () => Navigator.pop(context),
+              onTap: () => context.pop(),
               startColor: AppColors.greenPrimary,
               endColor: AppColors.dark,
               textStyle: AppText.ibmButton16(color: AppColors.white),

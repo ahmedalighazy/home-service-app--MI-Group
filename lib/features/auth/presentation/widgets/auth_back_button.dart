@@ -6,7 +6,7 @@ import '../../../../core/themes/colors/app_colors.dart';
 ///
 /// Usage:
 /// ```dart
-/// AuthBackButton(onTap: () => Navigator.pop(context))
+/// AuthBackButton(onTap: () =>context.pop())
 /// ```
 class AuthBackButton extends StatelessWidget {
   final VoidCallback onTap;

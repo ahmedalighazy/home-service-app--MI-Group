@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/extention_navigator.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorPassword,
             title: AppStrings.changePassword,
-            onTap: () => context.pushName(AppRouter.updatePassword),
+            onTap: () => context.pushNamed(AppRouter.updatePassword),
           ),
           const SettingsDivider(),
           SettingListItem(
@@ -58,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorWhat,
             title: AppStrings.helpCenter,
-            onTap: () => context.pushName(AppRouter.helpCenter),
+            onTap: () => context.pushNamed(AppRouter.helpCenter),
           ),
           const SettingsDivider(),
           SettingListItem(
@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.group2,
             title: AppStrings.policiesAndRules,
-            onTap: () => context.pushName(AppRouter.legalAndPolicies),
+            onTap: () => context.pushNamed(AppRouter.legalAndPolicies),
           ),
           const SettingsDivider(),
           SettingListItem(

@@ -125,4 +125,12 @@ class IconsPath {
   static const String kitchenCleaning = 'assets/icons/Kitchen_cleaning.svg';
   static const String carpetCleaning = 'assets/icons/carpet_cleaning.svg';
   static const String trendingUp = 'assets/icons/trending_up.svg';
+  //booking
+  static const String enlargement = "assets/icons/enlargement.svg";
+  static const String rectangle = "assets/icons/Rectangle 48.svg";
+  static const String rectanglepng = "assets/icons/Rectangle 48.png";
+  static const String paid = "assets/icons/paid.svg";
+  static const String notBooking = "assets/icons/not_booking.svg";
+  static const String notBookingPng = "assets/icons/not_booking_png.png"; //
+  static const String logOutDilaog = "assets/icons/log_out_dilaog.svg";
 }

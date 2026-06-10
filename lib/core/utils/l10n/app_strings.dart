@@ -140,6 +140,36 @@ class AppStrings {
   static const String navBookings = 'حجوزاتي';
   static const String navAccount = 'حسابي';
 
+  // --- Booking Statuses & Tabs ---
+  static const String upcoming = 'القادمة';
+  static const String previous = 'السابقة';
+  static const String scheduled = 'مجدولة';
+  static const String inProgress = 'قيد التنفيذ';
+  static const String completed = 'مكتمله';
+  static const String cancelled = 'ملغاة';
+  static const String viewDetails = 'عرض التفاصيل';
+  static const String reschedule = 'إعادة جدولة';
+  static const String cancelBooking = 'إلغاء الحجز';
+  static const String confirmcancel = ' تاكيد الالغاء';
+
+  static const String notFindbooking = ' لا توجد حجوزات قادمة';
+  static const String bookdesc =
+      ' احجز خدمتك الآن وحدد الموعد المناسب لك بكل سهولة.';
+
+  static const String rebookNow = 'اعادة حجز';
+  static const String confirmReschedule = ' اعادة الجدولة';
+  static const String confirmReschedule2 = 'تأكيد  اعادة الجدولة';
+
+  static const String specialNotesOptional =
+      'ملاحظات او تعليمات خاصه ( اختياري )';
+  static const String exampleHomeLocation = 'مثال : المنزل أمام المسجد..';
+  static const String areYouSureCancel = 'هل انت متاكد من الغاي الحجز';
+  static const String cancelWarning =
+      'سيتم الغاء الحجز ولن يتم تنفيذ الخدمة في الوقت المحدد لها';
+  static const String cancelReasonOptional = 'سبب الالغاء';
+  static const String mentionCancelReason = 'اذكر سبب الغاء الحجز';
+  static const String goBack = 'رجوع';
+
   // Promo Banner
   static const String bestCleaningWork = 'أنس أعمال التنظيف بعد العمل';
   static const String hourlyClean = 'تنظيف بالساعة';
@@ -335,6 +365,8 @@ class AppStrings {
   // --- Rating ---
   static const String serviceRating = 'تقييم الخدمة';
   static const String teamRating = 'تقييم الفريق';
+  static const String rating = ' ملاحظاتك';
+
   static const String teamRatingQuestion =
       'كيف كانت تجربتك مع فريق "ابراهيم محمد" اليوم؟';
   static const String addYourNotesHere = 'أضف ملاحظاتك هنا...';
@@ -405,6 +437,7 @@ class AppStrings {
   static const String privacy = 'الخصوصية';
   static const String help = 'المساعدة';
   static const String unknownRoute = 'العنوان غير معروف';
+  static const String dettailsbooking = '  تفاصيل الحجز';
 
   // --- Setting Screen ---
   static const String language = 'اللغة';
@@ -499,6 +532,8 @@ class AppStrings {
   static const String savedAddressesHeader = 'العناوين';
   static const String homeAddress = 'المنزل';
   static const String workAddress = 'العمل';
+  static const String totalprice = 'السعر الاجمالي';
+
   static const String deleteAddressTitle = 'حذف العنوان';
   static const String deleteDefaultAddressDesc =
       'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
@@ -515,6 +550,8 @@ class AppStrings {
   static const String cardHolderPlaceholder = 'ادخل الاسم كما هوا علي البطاقة';
   static const String expiryDateLabel = 'تاريخ الانتهاء';
   static const String cvvLabel = 'رمز الامان';
+  static const String paid = ' وسيلة الدفع';
+
   static const String saveCardForLater = 'حفظ البطاقة لاستخدام لاحقا';
 
   // --- Help Center Extra ---

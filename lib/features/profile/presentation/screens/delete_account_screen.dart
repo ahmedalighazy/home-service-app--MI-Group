@@ -4,6 +4,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/show_dialog.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import '../widgets/custom_buttom.dart';
 import '../widgets/custom_widget_delete.dart';
@@ -79,7 +80,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               backgroundColor: AppColors.gray,
               textColor: AppColors.gray,
               isOutlined: true,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
             ),
           ],
         ),

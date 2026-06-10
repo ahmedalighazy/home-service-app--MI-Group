@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? onTogglePasswordVisibility;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final int? maxLines;
 
   const CustomTextField({
     super.key,
@@ -38,6 +39,7 @@ class CustomTextField extends StatelessWidget {
     this.onTogglePasswordVisibility,
     this.validator,
     this.keyboardType,
+    this.maxLines = 1,
   });
 
   @override
@@ -56,6 +58,8 @@ class CustomTextField extends StatelessWidget {
           SizedBox(height: 6.h),
         ],
         TextFormField(
+          maxLines: maxLines,
+
           obscureText: obscureText,
           controller: controller,
           initialValue: controller == null ? initialValue : null,

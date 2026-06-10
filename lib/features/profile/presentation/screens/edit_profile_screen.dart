@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/extensions/extention_navigator.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
@@ -42,7 +42,7 @@ class EditProfileScreen extends StatelessWidget {
               textColor: AppColors.redDanger,
               isOutlined: true,
               onPressed: () {
-                context.pushName(AppRouter.deleteAccount);
+                context.pushNamed(AppRouter.deleteAccount);
               },
             ),
             SizedBox(height: 24.h),

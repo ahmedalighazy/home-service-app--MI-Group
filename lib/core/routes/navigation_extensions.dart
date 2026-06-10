@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 extension NavigationExtensions on BuildContext {
   /// Push named route with optional arguments
   void pushNamed(String routeName, {Object? arguments}) {
-    go(routeName, extra: arguments);
+    GoRouter.of(this).push(routeName, extra: arguments);
   }
 
   /// Push replacement named route with optional arguments
@@ -15,13 +15,17 @@ extension NavigationExtensions on BuildContext {
   }
 
   /// Push named and remove until with optional arguments
-  void pushNamedAndRemoveUntil(
+  void pushNameddAndRemoveUntil(
     String routeName,
     bool Function(Route<dynamic>) predicate, {
     Object? arguments,
   }) {
     // With GoRouter, we use go() which replaces the entire stack
     go(routeName, extra: arguments);
+  }
+
+  void pop() {
+    GoRouter.of(this).pop();
   }
 }
 
@@ -38,7 +42,7 @@ extension NavigatorStateExtensions on NavigatorState {
   }
 
   /// Push named and remove until with optional arguments
-  void pushNamedAndRemoveUntil(
+  void pushNameddAndRemoveUntil(
     String routeName,
     bool Function(Route<dynamic>) predicate, {
     Object? arguments,
