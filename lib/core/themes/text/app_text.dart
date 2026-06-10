@@ -24,6 +24,7 @@ class AppText {
       color: color,
       fontSize: fontSize.sp,
       fontWeight: FontWeight.w500,
+      height: 1.20,
     );
   }
 

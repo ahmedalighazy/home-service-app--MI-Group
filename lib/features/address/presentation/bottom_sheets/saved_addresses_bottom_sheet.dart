@@ -9,6 +9,7 @@ import 'package:home_service_app/features/address/presentation/cubit/address_cub
 import 'package:home_service_app/features/address/presentation/cubit/address_state.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_card.dart';
 import 'package:home_service_app/features/address/presentation/widgets/bottom_sheet_handle.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class SavedAddressesBottomSheet extends StatelessWidget {
   const SavedAddressesBottomSheet({super.key});
@@ -47,7 +48,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
 
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      context.pop();
 
                       showModalBottomSheet(
                         context: context,
@@ -99,7 +100,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                         onTap: () {
                           context.read<AddressCubit>().selectAddress(index);
 
-                          Navigator.pop(context);
+                          context.pop();
                         },
                         child: AddressCard(
                           title: address.title,

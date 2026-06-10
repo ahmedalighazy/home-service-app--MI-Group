@@ -64,12 +64,6 @@ class ProfileCard extends StatelessWidget {
 
           const SizedBox(width: 20),
 
-          CircleAvatar(
-            backgroundColor: AppColors.white,
-            radius: 40,
-            child: Image.asset(AppAssets.cleaningGuy, fit: BoxFit.cover),
-          ),
-
           const Spacer(),
         ],
       ),

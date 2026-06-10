@@ -5,6 +5,7 @@ import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import '../../../../core/utils/helpers/show_dialog.dart';
 import '../widgets/subscription_action_list.dart';
@@ -27,7 +28,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
       // ,
       appBar: CustomAppBar(
         title: AppStrings.manageSubscription,
-        onBack: () => Navigator.pop(context),
+        onBack: () => context.pop(),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(AppSizes.paddingM.r),

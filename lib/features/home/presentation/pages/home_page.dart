@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart';
-import 'package:home_service_app/features/booking/presentation/pages/bookings_content.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_cotent.dart';
 
+import '../../../booking/presentation/screens/booking_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const HomeContent(),
-    const BookingsContent(),
+    const BookingScreen(),
     const ProfileScreen(),
   ];
 

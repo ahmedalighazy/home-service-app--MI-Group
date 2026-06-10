@@ -158,7 +158,7 @@ void showCannotDeleteDialog(
               ),
               SizedBox(height: 24.h),
               CustomButtom(
-                onTap: () => Navigator.pop(context),
+                onTap: () => context.pop(),
                 text: AppStrings.okBtn,
                 textStyle: AppText.ibmButton16(),
                 startColor: AppColors.primary,

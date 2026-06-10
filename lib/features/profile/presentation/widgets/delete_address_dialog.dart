@@ -7,6 +7,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class DeleteAddressDialog extends StatelessWidget {
   final bool isDefault;
@@ -61,7 +62,7 @@ class DeleteAddressDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => context.pop(),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.borderGrey),
                       shape: RoundedRectangleBorder(
@@ -80,7 +81,7 @@ class DeleteAddressDialog extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       onDelete();
-                      Navigator.pop(context);
+                      context.pop();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.red,

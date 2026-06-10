@@ -52,7 +52,7 @@ dependencies:
   equatable: ^2.0.8
   injectable: ^2.6.0
   dartz: ^0.10.1
-  connectivity_plus: ^7.1.1
+  connectivity_plus:
 
 dev_dependencies:
   flutter_test:

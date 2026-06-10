@@ -9,6 +9,13 @@ import 'package:home_service_app/features/notification/presentation/pages/notifi
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
+import '../../features/booking/data/repositories/booking_repository.dart';
+import '../../features/booking/presentation/screens/booking_screen.dart';
+import '../../features/booking/presentation/screens/booking_details_screen.dart';
+import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
+import '../../features/booking/presentation/screens/cancel_booking_screen.dart';
+import '../../features/booking/data/models/booking_model.dart';
+import '../../features/booking/logic/cubit/booking_cubit.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
@@ -89,10 +96,14 @@ class AppRouter {
   static const String serviceDetails = '/service-details';
   static const String workerFilter = '/worker-filter';
   static const String corporateServices = '/corporate-services';
+  static const String bookings = '/bookings';
+  static const String bookingDetails = '/booking-details';
+  static const String rescheduleBooking = '/reschedule-booking';
+  static const String cancelBooking = '/cancel-booking';
 
   // ============ GoRouter Configuration ============
   static final GoRouter router = GoRouter(
-    initialLocation: splash,
+    initialLocation: home,
     debugLogDiagnostics: true,
     errorBuilder: (context, state) => const ErrorScreen(),
     routes: [
@@ -330,7 +341,7 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: '$subscriptionDetail/:id',
+        path: subscriptionDetail,
         name: subscriptionDetail,
         pageBuilder: (context, state) {
           final subscription = state.extra as SubscriptionModel?;
@@ -391,6 +402,35 @@ class AppRouter {
           ),
           state,
         ),
+      ),
+      GoRoute(
+        path: bookings,
+        name: bookings,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(BookingScreen(), state),
+      ),
+      GoRoute(
+        path: bookingDetails,
+        name: bookingDetails,
+        pageBuilder: (context, state) {
+          final booking = state.extra as BookingModel;
+          return _buildPageWithFade(
+            BookingDetailsScreen(booking: booking),
+            state,
+          );
+        },
+      ),
+      GoRoute(
+        path: rescheduleBooking,
+        name: rescheduleBooking,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const RescheduleBookingScreen(), state),
+      ),
+      GoRoute(
+        path: cancelBooking,
+        name: cancelBooking,
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const CancelBookingScreen(), state),
       ),
     ],
   );

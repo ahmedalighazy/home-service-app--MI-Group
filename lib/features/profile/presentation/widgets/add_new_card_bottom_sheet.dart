@@ -7,6 +7,7 @@ import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class AddNewCardBottomSheet extends StatefulWidget {
   const AddNewCardBottomSheet({super.key});
@@ -117,7 +118,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             ),
             verticalSpace(24),
             CustomButtom(
-              onTap: () => Navigator.pop(context),
+              onTap: () => context.pop(),
               text: AppStrings.save,
               textStyle: AppText.ibmButton16(),
               startColor: AppColors.primary,

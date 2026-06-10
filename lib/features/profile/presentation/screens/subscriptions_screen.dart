@@ -3,6 +3,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 import '../widgets/subscription_list_widget.dart';
@@ -45,7 +46,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
       child: Scaffold(
         appBar: CustomAppBar(
           title: AppStrings.mySubscriptions,
-          onBack: () => Navigator.pop(context),
+          onBack: () => context.pop(),
           bottom: TabBar(
             labelStyle: AppText.ibmHeading14(),
             unselectedLabelStyle: AppText.ibmDescription14(),

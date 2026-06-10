@@ -16,7 +16,7 @@ class CustomPopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuAction>(
       icon: const Icon(Icons.more_vert),
-      color: AppColors.bgDisabled,
+      color: AppColors.white,
       shadowColor: AppColors.bgDisabled,
       surfaceTintColor: AppColors.bgDisabled,
       style: const ButtonStyle(),

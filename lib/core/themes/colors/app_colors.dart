@@ -6,6 +6,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color black100 = Color(0x0A000000);
+  static const Color bluegreen = Color(0x8EE8FBFF);
 
   // UI Specific Colors
   static const Color backgroundGrey = Color(0xFFF9FAFB);
@@ -41,11 +42,9 @@ class AppColors {
     0x40189AB4,
   ); // 25% opacity greenPrimary (fixed from 0xFF189AB440)
 
-
   static const Color border = Color(0xffE0E0E0);
   static const Color lightGrey = Color(0xffD9D9D9);
   static const Color scaffoldBg = Color(0xffFAFAFA);
-
 
   // Light shades
   static const Color light = Color(0xFFE8F5F8);
@@ -99,6 +98,8 @@ class AppColors {
 
   // Text Colors
   static const Color primaryText = Color(0xFF313131);
+  static const Color gry = Color(0xFFF8FBFF);
+
   static const Color secondaryText = Color(0xFF6B7280);
   static const Color headingText = Color(0xFF2F3E4E);
   static const Color placeholder = Color(0xFFBFBFBF);
