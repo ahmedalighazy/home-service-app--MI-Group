@@ -30,10 +30,15 @@ class PasswordChangedSuccessfullyScreen extends StatelessWidget {
                 // البطاقة البيضاء الرئيسية
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 36,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(32), // حواف دائرية كبيرة للبطاقة
+                    borderRadius: BorderRadius.circular(
+                      32,
+                    ), // حواف دائرية كبيرة للبطاقة
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.15),
@@ -97,10 +102,14 @@ class PasswordChangedSuccessfullyScreen extends StatelessWidget {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                           ),
-                          borderRadius: BorderRadius.circular(50), // حواف دائرية كاملة للزر
+                          borderRadius: BorderRadius.circular(
+                            50,
+                          ), // حواف دائرية كاملة للزر
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF033C48).withValues(alpha: 0.3),
+                              color: const Color(
+                                0xFF033C48,
+                              ).withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -110,7 +119,7 @@ class PasswordChangedSuccessfullyScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              AppRoutes.login,
+                              AppRouter.signIn,
                               (route) => false,
                             );
                           },

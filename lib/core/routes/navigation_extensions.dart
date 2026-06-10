@@ -15,7 +15,7 @@ extension NavigationExtensions on BuildContext {
   }
 
   /// Push named and remove until with optional arguments
-  void pushNamedAndRemoveUntil(
+  void pushNameddAndRemoveUntil(
     String routeName,
     bool Function(Route<dynamic>) predicate, {
     Object? arguments,
@@ -38,11 +38,16 @@ extension NavigatorStateExtensions on NavigatorState {
   }
 
   /// Push named and remove until with optional arguments
-  void pushNamedAndRemoveUntil(
+  void pushNameddAndRemoveUntil(
     String routeName,
     bool Function(Route<dynamic>) predicate, {
     Object? arguments,
   }) {
     context.go(routeName, extra: arguments);
+  }
+
+  /// pop
+  void pop() {
+    context.pop();
   }
 }

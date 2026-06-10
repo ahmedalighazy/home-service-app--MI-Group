@@ -4,6 +4,7 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import 'subscription_action_tile.dart';
 
@@ -31,7 +32,7 @@ class SubscriptionActionList extends StatelessWidget {
             title: AppStrings.viewVisits,
             subtitle: AppStrings.viewVisitsDesc,
             icon: IconsPath.timeBlue,
-            onTap: () => Navigator.pushNamed(context, AppRouter.myVisits),
+            onTap: () => context.pushNamed(AppRouter.myVisits),
           ),
           const Divider(height: 1),
           SubscriptionActionTile(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/extention_navigator.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../themes/colors/app_colors.dart';

@@ -15,7 +15,7 @@ class HomeCategoriesSection extends StatelessWidget {
     void navigateToCategory(int index) {
       switch (index) {
         case 0:
-          context.push(AppRouter.serviceDetailsScreen);
+          context.push(AppRouter.serviceDetails);
           break;
         case 1:
           context.push(AppRouter.workerFilter);
