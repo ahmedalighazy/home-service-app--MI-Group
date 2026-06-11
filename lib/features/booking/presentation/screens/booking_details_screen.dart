@@ -88,7 +88,7 @@ class _DetailsCard extends StatelessWidget {
           BookingDetailsRow(
             label: AppStrings.rating,
             value: booking.notes ?? "",
-            icon: IconsPath.location,
+            icon: IconsPath.editGry,
           ),
           const Divider(height: 1),
           // if (booking.notes != null) ...[

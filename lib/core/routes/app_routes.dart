@@ -9,13 +9,11 @@ import 'package:home_service_app/features/notification/presentation/pages/notifi
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
-import '../../features/booking/data/repositories/booking_repository.dart';
 import '../../features/booking/presentation/screens/booking_screen.dart';
 import '../../features/booking/presentation/screens/booking_details_screen.dart';
 import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
 import '../../features/booking/presentation/screens/cancel_booking_screen.dart';
 import '../../features/booking/data/models/booking_model.dart';
-import '../../features/booking/logic/cubit/booking_cubit.dart';
 
 import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
 import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
@@ -104,7 +102,7 @@ class AppRouter {
   // ============ GoRouter Configuration ============
   static final GoRouter router = GoRouter(
     initialLocation: home,
-    debugLogDiagnostics: true,
+    // debugLogDiagnostics: true,
     errorBuilder: (context, state) => const ErrorScreen(),
     routes: [
       // Core Routes

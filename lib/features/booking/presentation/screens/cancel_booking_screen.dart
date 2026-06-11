@@ -122,6 +122,7 @@ class _ActionButtons extends StatelessWidget {
           textColor: AppColors.primaryGrey,
           onPressed: () {},
         ),
+        verticalSpace(5),
       ],
     );
   }

@@ -75,7 +75,7 @@ class _ValueSection extends StatelessWidget {
         Row(
           children: [
             Column(
-              spacing: 5,
+              spacing: 10,
               children: [
                 SvgPicture.asset(
                   icon,

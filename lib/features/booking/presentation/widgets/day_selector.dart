@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
+import '../../logic/cubit/booking_cubit.dart';
+import '../../logic/cubit/booking_state.dart';
 
 class DaySelector extends StatelessWidget {
   final int selectedDayIndex;
@@ -27,8 +30,7 @@ class DaySelector extends StatelessWidget {
             itemBuilder: (context, index) => _DayItem(
               dayName: _getDayName(index),
               dayNumber: (index + 1).toString(),
-              isSelected: selectedDayIndex == index,
-              onTap: () => onDaySelected(index),
+              index: index,
             ),
           ),
         ),
@@ -53,51 +55,55 @@ class DaySelector extends StatelessWidget {
 class _DayItem extends StatelessWidget {
   final String dayName;
   final String dayNumber;
-  final bool isSelected;
-  final VoidCallback onTap;
+  final int index;
 
   const _DayItem({
     required this.dayName,
     required this.dayNumber,
-    required this.isSelected,
-    required this.onTap,
+    required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          dayName,
-          style: AppText.mediumText(color: Colors.black, fontSize: 14),
-        ),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            margin: EdgeInsets.all(5.r),
-            width: 40.w,
-            height: 40.h,
-            padding: const EdgeInsets.all(10),
-            decoration: ShapeDecoration(
-              color: isSelected ? AppColors.primary : AppColors.inputBg,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(44),
-              ),
+    return BlocConsumer<BookingCubit, BookingState>(
+      buildWhen: (previous, current) => current is BookingDaySelected,
+      listener: (context, state) {},
+      builder: (context, state) {
+        var isSelected = context.read<BookingCubit>().selectedDayIndex == index;
+        return Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              dayName,
+              style: AppText.mediumText(color: Colors.black, fontSize: 14),
             ),
-            child: Center(
-              child: Text(
-                dayNumber,
-                style: AppText.ibmHeading14(
-                  color: isSelected ? AppColors.white : AppColors.black,
+            GestureDetector(
+              onTap: () => context.read<BookingCubit>().selectDay(index),
+
+              child: Container(
+                margin: EdgeInsets.all(5.r),
+                width: 40.w,
+                height: 40.h,
+                padding: const EdgeInsets.all(10),
+                decoration: ShapeDecoration(
+                  color: isSelected ? AppColors.primary : AppColors.inputBg,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(44),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    dayNumber,
+                    style: AppText.ibmHeading14(
+                      color: isSelected ? AppColors.white : AppColors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-
-          // color: isSelected ? AppColors.primary : AppColors.inputBg,
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
