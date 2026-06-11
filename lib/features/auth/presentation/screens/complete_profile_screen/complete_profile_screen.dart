@@ -137,10 +137,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       ),
       body: BlocListener<AuthCubitV2, AuthState>(
         listenWhen: (previous, current) =>
-            current is AuthSuccessState && current.action == 'profile_completed' ||
+            current is AuthAuthenticated ||
             current is AuthErrorState,
         listener: (context, state) {
-          if (state is AuthSuccessState && state.action == 'profile_completed') {
+          if (state is AuthAuthenticated) {
             _showSuccess(AuthStrings.profileCompletionSuccess);
             // Navigate to home (update with your actual home route)
             context.go('/');

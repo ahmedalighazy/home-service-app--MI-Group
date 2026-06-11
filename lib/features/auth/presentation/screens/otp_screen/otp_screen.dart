@@ -131,13 +131,13 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
       body: BlocListener<AuthCubitV2, AuthState>(
         listenWhen: (previous, current) =>
-            current is AuthSuccessState ||
+            current is AuthAuthenticated ||
             current is OtpSentState ||
             current is OtpInvalidCodeState ||
             current is OtpExpiredState ||
             current is OtpErrorState,
         listener: (context, state) {
-          if (state is AuthSuccessState && state.action == 'otp_verified') {
+          if (state is AuthAuthenticated) {
             _showSuccess(AuthStrings.otpVerifiedSuccess);
             // Navigate to complete profile
             context.push('/complete_profile', extra: widget.phoneNumber);

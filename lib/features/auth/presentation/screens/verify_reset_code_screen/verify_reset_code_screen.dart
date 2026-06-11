@@ -127,13 +127,13 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen> {
       ),
       body: BlocListener<AuthCubitV2, AuthState>(
         listenWhen: (previous, current) =>
-            current is AuthSuccessState ||
+            current is AuthAuthenticated ||
             current is ResetCodeSentState ||
             current is ResetCodeInvalidState ||
             current is ResetCodeExpiredState ||
             current is PasswordResetErrorState,
         listener: (context, state) {
-          if (state is AuthSuccessState && state.action == 'reset_code_verified') {
+          if (state is AuthAuthenticated) {
             // Navigate to set new password
             context.push('/set_new_password', extra: widget.email);
           } else if (state is ResetCodeSentState) {

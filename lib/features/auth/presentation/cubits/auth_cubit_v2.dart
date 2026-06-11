@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../states/auth_state.dart';
 import 'package:home_service_app/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:home_service_app/features/auth/domain/usecases/send_otp_usecase.dart';
 import 'package:home_service_app/features/auth/domain/usecases/verify_otp_usecase.dart';
@@ -8,7 +9,7 @@ import 'package:home_service_app/features/auth/domain/usecases/verify_reset_code
 import 'package:home_service_app/features/auth/domain/usecases/reset_password_usecase.dart';
 import 'package:home_service_app/features/auth/domain/usecases/sign_in_with_google_usecase.dart';
 import 'package:home_service_app/features/auth/domain/usecases/sign_in_with_apple_usecase.dart';
-import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Auth Cubit (Improved Version) - Presentation Layer
 /// 
@@ -53,6 +54,7 @@ class AuthCubitV2 extends Cubit<AuthState> {
   Future<void> signIn({
     required String email,
     required String password,
+    required bool rememberMe,
   }) async {
     emit(const AuthLoadingState());
 
@@ -63,14 +65,15 @@ class AuthCubitV2 extends Cubit<AuthState> {
 
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (token) => emit(AuthSuccessState(
-        action: 'sign_in',
-        data: {
-          'userId': 'user_123',
-          'email': email,
-          'token': token.accessToken,
-        },
-      )),
+      (token) async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('rememberMe', rememberMe);
+        // Persist email in SharedPreferences
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', email);
+        await prefsAuth.remove('displayName'); // clear if any
+        emit(AuthAuthenticated(email: email));
+      },
     );
   }
 
@@ -112,12 +115,12 @@ class AuthCubitV2 extends Cubit<AuthState> {
           emit(OtpErrorState(failure.message));
         }
       },
-      (token) => emit(AuthSuccessState(
-        action: 'otp_verified',
-        data: {
-          'phoneNumber': phoneNumber,
-        },
-      )),
+      (token) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', phoneNumber);
+        await prefsAuth.remove('displayName');
+        emit(AuthAuthenticated(email: phoneNumber));
+      },
     );
   }
 
@@ -146,14 +149,14 @@ class AuthCubitV2 extends Cubit<AuthState> {
 
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (user) => emit(AuthSuccessState(
-        action: 'profile_completed',
-        data: {
-          'userId': user.id,
-          'email': user.email,
-          'name': user.name ?? '',
-        },
-      )),
+      (user) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', user.email);
+        if (user.name != null) {
+          await prefsAuth.setString('displayName', user.name!);
+        }
+        emit(AuthAuthenticated(email: user.email, displayName: user.name));
+      },
     );
   }
 
@@ -195,12 +198,12 @@ class AuthCubitV2 extends Cubit<AuthState> {
           emit(PasswordResetErrorState(failure.message));
         }
       },
-      (_) => emit(AuthSuccessState(
-        action: 'reset_code_verified',
-        data: {
-          'email': email,
-        },
-      )),
+      (_) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', email);
+        await prefsAuth.remove('displayName');
+        emit(AuthAuthenticated(email: email));
+      },
     );
   }
 
@@ -217,52 +220,48 @@ class AuthCubitV2 extends Cubit<AuthState> {
 
     result.fold(
       (failure) => emit(PasswordResetErrorState(failure.message)),
-      (_) => emit(AuthSuccessState(
-        action: 'password_reset',
-        data: {
-          'email': email,
-        },
-      )),
+      (_) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', email);
+      },
     );
   }
+
+  
 
   // ════════════════════════════════════════════════════════════════
   // Social Sign In
   // ════════════════════════════════════════════════════════════════
 
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle({bool rememberMe = false}) async {
     emit(const AuthLoadingState());
 
     final result = await _signInWithGoogleUseCase();
 
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (token) => emit(AuthSuccessState(
-        action: 'social_sign_in',
-        data: {
-          'userId': 'user_123',
-          'email': 'user@gmail.com',
-          'provider': 'google',
-        },
-      )),
+      (token) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', 'user@gmail.com');
+        await prefsAuth.remove('displayName');
+        emit(AuthAuthenticated(email: 'user@gmail.com', displayName: null));
+      },
     );
   }
 
-  Future<void> signInWithApple() async {
+  Future<void> signInWithApple({bool rememberMe = false}) async {
     emit(const AuthLoadingState());
 
     final result = await _signInWithAppleUseCase();
 
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (token) => emit(AuthSuccessState(
-        action: 'social_sign_in',
-        data: {
-          'userId': 'user_123',
-          'email': 'user@icloud.com',
-          'provider': 'apple',
-        },
-      )),
+      (token) async {
+        final prefsAuth = await SharedPreferences.getInstance();
+        await prefsAuth.setString('email', 'user@icloud.com');
+        await prefsAuth.remove('displayName');
+        emit(AuthAuthenticated(email: 'user@icloud.com', displayName: null));
+      },
     );
   }
 }

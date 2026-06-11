@@ -98,10 +98,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
       ),
       body: BlocListener<AuthCubitV2, AuthState>(
         listenWhen: (previous, current) =>
-            current is AuthSuccessState && current.action == 'password_reset' ||
+            current is AuthAuthenticated ||
             current is PasswordResetErrorState,
         listener: (context, state) {
-          if (state is AuthSuccessState && state.action == 'password_reset') {
+          if (state is AuthAuthenticated) {
             showPasswordSuccessDialog(context, () {
               context.go('/sign_in');
             });

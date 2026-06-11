@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:home_service_app/features/onboarding/presentation/screens/onboarding_screen.dart';
@@ -44,6 +45,20 @@ class AppRouter {
         ),
       ),
     ],
+    redirect: (context, state) async {
+      final prefs = await SharedPreferences.getInstance();
+      final email = prefs.getString('email');
+      final loggedIn = email != null && email.isNotEmpty;
+      // Redirect unauthenticated users from protected routes to sign in
+      if (!loggedIn && (state.matchedLocation == home)) {
+        return signIn;
+      }
+      // Prevent authenticated users from accessing sign-in or sign-up screens
+      if (loggedIn && (state.matchedLocation == signIn || state.matchedLocation == signUp)) {
+        return home;
+      }
+      return null;
+    },
   );
 }
 

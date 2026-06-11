@@ -13,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await Future.delayed(const Duration(seconds: 2));
-      emit(AuthSuccess());
+      emit(AuthAuthenticated());
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -84,7 +84,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await Future.delayed(const Duration(seconds: 2));
       // Accept any email and password for testing
-      emit(AuthSuccess());
+      emit(AuthAuthenticated(email: email, displayName: null));
     } catch (e) {
       emit(AuthError('حدث خطأ في الاتصال، يرجى المحاولة مرة أخرى'));
     }

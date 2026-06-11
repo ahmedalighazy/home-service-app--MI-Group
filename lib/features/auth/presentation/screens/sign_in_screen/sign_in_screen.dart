@@ -70,6 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
     _authCubit.signIn(
       email: _emailCtrl.text.trim(),
       password: _passwordCtrl.text.trim(),
+      rememberMe: _rememberMe,
     );
   }
 
@@ -109,13 +110,12 @@ class _SignInScreenState extends State<SignInScreen> {
         listeners: [
           BlocListener<AuthCubitV2, AuthState>(
             listenWhen: (previous, current) =>
-                current is AuthSuccessState ||
+                current is AuthAuthenticated ||
                 current is AuthErrorState,
             listener: (context, state) {
-              if (state is AuthSuccessState && state.action == 'sign_in') {
+              if (state is AuthAuthenticated) {
                 _showSuccess(AuthStrings.successSignIn);
-                // Navigate to home
-                // context.go('/home');
+                context.go('/home');
               } else if (state is AuthErrorState) {
                 _showError(state.message);
               }
@@ -175,10 +175,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: 24.h),
                   SocialSignInButtons(
                     onGoogleTap: () {
-                      if (!isLoading) _authCubit.signInWithGoogle();
+                      if (!isLoading) _authCubit.signInWithGoogle(rememberMe: _rememberMe);
                     },
                     onAppleTap: () {
-                      if (!isLoading) _authCubit.signInWithApple();
+                      if (!isLoading) _authCubit.signInWithApple(rememberMe: _rememberMe);
                     },
                   ),
                   SizedBox(height: 32.h),

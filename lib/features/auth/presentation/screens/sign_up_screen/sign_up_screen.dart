@@ -31,6 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late final AuthCubitV2 _authCubit;
   bool _phoneError = false;
   bool _isFocused = false;
+  bool _rememberMe = false;
   static const _countryCode = '+974';
 
   @override
@@ -149,10 +150,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: 24.h),
                   SocialSignUpButtons(
                     onGoogleTap: () {
-                      if (!isLoading) _authCubit.signInWithGoogle();
+                      if (!isLoading) _authCubit.signInWithGoogle(rememberMe: _rememberMe);
                     },
                     onAppleTap: () {
-                      if (!isLoading) _authCubit.signInWithApple();
+                      if (!isLoading) _authCubit.signInWithApple(rememberMe: _rememberMe);
                     },
                   ),
                   SizedBox(height: 32.h),

@@ -4,7 +4,7 @@
 /// Using sealed class pattern for type safety
 /// State واحدة للـ Success: AuthSuccessState
 
-sealed class AuthState {
+abstract class AuthState {
   const AuthState();
 }
 
@@ -25,6 +25,14 @@ class AuthErrorState extends AuthState {
   final String message;
   const AuthErrorState(this.message);
 }
+
+/// Represents a successful authentication with email and optional displayName
+class AuthAuthenticated extends AuthState {
+  final String email;
+  final String? displayName;
+  const AuthAuthenticated({required this.email, this.displayName});
+}
+
 
 // ════════════════════════════════════════════════════════════════
 // Unified Success State
