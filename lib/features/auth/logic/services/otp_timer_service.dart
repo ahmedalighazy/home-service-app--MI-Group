@@ -9,15 +9,15 @@ import 'dart:async';
 /// 
 /// @override
 /// void initState() {
-///   _timerService = OtpTimerService();
-///   _timerService.startTimer(
+///   _timerService = OtpTimerService(
 ///     onTick: (remaining) {
 ///       setState(() => _timeRemaining = remaining);
 ///     },
-///     onCanResend: () {
-///       setState(() {}); // Update UI when can resend
+///     onExpired: () {
+///       setState(() => _canResend = true);
 ///     },
 ///   );
+///   _timerService.start();
 /// }
 /// 
 /// @override
@@ -34,30 +34,28 @@ class OtpTimerService {
   /// Callback when timer ticks
   void Function(int)? _onTick;
 
-  /// Callback when timer completes and user can resend
-  void Function()? _onCanResend;
+  /// Callback when timer expires
+  void Function()? _onExpired;
+
+  /// Constructor with callbacks
+  OtpTimerService({
+    void Function(int)? onTick,
+    void Function()? onExpired,
+  }) {
+    _onTick = onTick;
+    _onExpired = onExpired;
+  }
 
   /// Start the countdown timer
-  /// 
-  /// [duration]: The duration for the timer (default: 59 seconds)
-  /// [onTick]: Called each second with remaining seconds
-  /// [onCanResend]: Called when timer completes
-  void startTimer({
-    Duration duration = const Duration(seconds: 59),
-    void Function(int)? onTick,
-    void Function()? onCanResend,
-  }) {
-    _secondsRemaining = duration.inSeconds;
+  void start() {
+    _secondsRemaining = 59;
     _canResend = false;
-    _onTick = onTick;
-    _onCanResend = onCanResend;
-
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_secondsRemaining == 0) {
         _canResend = true;
         _timer?.cancel();
-        _onCanResend?.call();
+        _onExpired?.call();
       } else {
         _secondsRemaining--;
         _onTick?.call(_secondsRemaining);
@@ -78,7 +76,7 @@ class OtpTimerService {
   bool canResend() => _canResend;
 
   /// Get the number of seconds remaining
-  int getSecondsRemaining() => _secondsRemaining;
+  int get remainingSeconds => _secondsRemaining;
 
   /// Reset timer for resend
   /// 
@@ -98,6 +96,6 @@ class OtpTimerService {
   void dispose() {
     _timer?.cancel();
     _onTick = null;
-    _onCanResend = null;
+    _onExpired = null;
   }
 }

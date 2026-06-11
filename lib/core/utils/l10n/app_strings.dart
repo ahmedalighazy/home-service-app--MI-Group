@@ -384,4 +384,6 @@ class AppStrings {
   static String get onboardingStep2Description => _isArabic 
       ? 'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة'
       : 'Professional services delivered by a trusted, carefully trained team to ensure quality and comfort on every visit';
+
+  static String get appTitle => _isArabic ? 'تطبيق الخدمات المنزلية' : 'Home Service App';
 }

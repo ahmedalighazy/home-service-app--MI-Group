@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/constants/auth_strings.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../core/themes/text/app_text.dart';
 
@@ -23,23 +24,23 @@ class TermsAndPrivacy extends StatelessWidget {
           style: AppText.ibmCaption11(color: AppColors.secondaryText),
           children: [
             const TextSpan(
-              text: 'تسجيل الدخول أنت توافق على ',
+              text: AuthStrings.termsAgreePrefix,
             ),
             WidgetSpan(
               child: GestureDetector(
                 onTap: onTermsTap,
                 child: Text(
-                  'الشروط والأحكام',
+                  AuthStrings.termsOfService,
                   style: AppText.ibmLink13(color: AppColors.greenPrimary),
                 ),
               ),
             ),
-            const TextSpan(text: ' و '),
+            const TextSpan(text: AuthStrings.andSeparator),
             WidgetSpan(
               child: GestureDetector(
                 onTap: onPrivacyTap,
                 child: Text(
-                  'سياسة الخصوصية',
+                  AuthStrings.privacyPolicy,
                   style: AppText.ibmLink13(color: AppColors.greenPrimary),
                 ),
               ),
