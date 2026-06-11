@@ -108,18 +108,12 @@ class ProfileCompletionHelper {
     DateTime? dateOfBirth,
   }) {
     return UserProfile(
-      name: fullName,
-      email: email,
-      phone: phoneNumber,
-      password: '',
       phoneNumber: phoneNumber,
       fullName: fullName,
       gender: gender,
       profileImageUrl: profileImageUrl,
       address: address,
       bio: bio,
-      dateOfBirth: dateOfBirth?.toString(),
-      profileCompletionStatus: true,
     );
   }
 
