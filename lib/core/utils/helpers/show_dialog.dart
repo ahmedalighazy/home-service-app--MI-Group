@@ -15,6 +15,7 @@ void showCannotDeleteDialogred(
   String title,
   String content, [
   String? titleButtom,
+  bool isImageLgout = false,
 ]) {
   showDialog(
     context: context,
@@ -31,7 +32,9 @@ void showCannotDeleteDialogred(
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(IconsPath.group40383Svg),
+              SvgPicture.asset(
+                isImageLgout ? IconsPath.logOutDilaog : IconsPath.group40383Svg,
+              ),
               Text(
                 title,
                 style: AppText.boldIbm(color: AppColors.black, fontSize: 16),

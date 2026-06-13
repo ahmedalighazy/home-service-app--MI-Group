@@ -133,4 +133,5 @@ class IconsPath {
   static const String notBooking = "assets/icons/not_booking.svg";
   static const String notBookingPng = "assets/icons/not_booking_png.png"; //
   static const String logOutDilaog = "assets/icons/log_out_dilaog.svg";
+  static const String editGry = "assets/icons/edit_gry.svg";
 }

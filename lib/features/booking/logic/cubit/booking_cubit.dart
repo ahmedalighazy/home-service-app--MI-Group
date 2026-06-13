@@ -20,4 +20,17 @@ class BookingCubit extends Cubit<BookingState> {
       emit(BookingError(e.toString()));
     }
   }
+
+  int selectedDayIndex = 0;
+  int selectedTimeIndex = 0;
+
+  void selectDay(int index) {
+    selectedDayIndex = index;
+    emit(BookingDaySelected(index));
+  }
+
+  void selectTime(int index) {
+    selectedTimeIndex = index;
+    emit(BookingTimeSelected(index));
+  }
 }

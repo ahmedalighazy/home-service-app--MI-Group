@@ -82,6 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 AppStrings.logout,
                 AppStrings.logoutContent,
                 AppStrings.logout,
+                true,
               );
             },
           ),

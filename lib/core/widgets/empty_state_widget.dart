@@ -12,6 +12,7 @@ class EmptyStateWidget extends StatelessWidget {
   final String subtitle;
   final String? buttonLabel;
   final VoidCallback? onButtonPressed;
+  final bool? isscreenBooking;
 
   const EmptyStateWidget({
     super.key,
@@ -20,6 +21,7 @@ class EmptyStateWidget extends StatelessWidget {
     required this.subtitle,
     this.buttonLabel,
     this.onButtonPressed,
+    this.isscreenBooking = false,
   });
 
   @override
@@ -28,9 +30,13 @@ class EmptyStateWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL.w),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
-            SvgPicture.asset(iconPath, width: 200.w, height: 200.h),
+            SvgPicture.asset(
+              iconPath,
+              width: isscreenBooking! ? 150.w : 200.w,
+              height: isscreenBooking! ? 150.h : 200.h,
+            ),
             SizedBox(height: AppSizes.spacingMedium.h),
             Text(
               title,

@@ -29,3 +29,19 @@ class BookingError extends BookingState {
   @override
   List<Object?> get props => [message];
 }
+
+class BookingDaySelected extends BookingState {
+  final int index;
+  const BookingDaySelected(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
+
+class BookingTimeSelected extends BookingState {
+  final int index;
+  const BookingTimeSelected(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
