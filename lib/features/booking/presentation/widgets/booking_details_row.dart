@@ -80,13 +80,19 @@ class _ValueSection extends StatelessWidget {
                 SvgPicture.asset(
                   icon,
                   width: 16.w,
-                  color: AppColors.secondaryText,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.secondaryText,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 if (icon2 != null)
                   SvgPicture.asset(
                     icon2!,
                     width: 16.w,
-                    color: AppColors.secondaryText,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.secondaryText,
+                      BlendMode.srcIn,
+                    ),
                   ),
               ],
             ),

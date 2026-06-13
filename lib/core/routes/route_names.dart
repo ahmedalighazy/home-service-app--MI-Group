@@ -1,5 +1,5 @@
-/// Route Names - Keep old route names for backward compatibility
-/// These are aliases to AppRouter paths to minimize code changes
+// Route Names - Keep old route names for backward compatibility
+// These are aliases to AppRouter paths to minimize code changes
 // class RouteNames {
 //   // Core Routes
 //   static const String splash = '/';

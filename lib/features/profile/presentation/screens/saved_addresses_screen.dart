@@ -11,7 +11,6 @@ import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/show_dialog.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
-import '../widgets/add_address_dashed_button.dart';
 import '../widgets/address_card_widget.dart';
 
 class SavedAddressesScreen extends StatefulWidget {

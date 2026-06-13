@@ -148,7 +148,14 @@ class _InfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(icon, width: 14.w, color: AppColors.textLightGrey),
+        SvgPicture.asset(
+          icon,
+          width: 14.w,
+          colorFilter: ColorFilter.mode(
+            AppColors.textLightGrey,
+            BlendMode.srcIn,
+          ),
+        ),
         horizontalSpace(6),
 
         Expanded(
