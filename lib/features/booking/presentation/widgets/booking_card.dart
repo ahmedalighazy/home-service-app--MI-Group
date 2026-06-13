@@ -31,21 +31,41 @@ class BookingCard extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     _BookingImage(imageUrl: booking.imageUrl),
+          //     horizontalSpace(8),
+          //     _BookingInfo(booking: booking),
+          //     const Spacer(),
+          //     Column(
+          //       crossAxisAlignment: CrossAxisAlignment.end,
+
+          //       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         BookingStatusBadge(status: booking.status),
+          //         verticalSpace(40),
+
+          //         _BookingActions(onViewDetails: onViewDetails),
+          //       ],
+          //     ),
+          //   ],
+          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _BookingImage(imageUrl: booking.imageUrl),
               horizontalSpace(8),
-              _BookingInfo(booking: booking),
-              const Spacer(),
+
+              Expanded(child: _BookingInfo(booking: booking)),
+
+              horizontalSpace(8),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
-
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BookingStatusBadge(status: booking.status),
                   verticalSpace(40),
-
                   _BookingActions(onViewDetails: onViewDetails),
                 ],
               ),
@@ -102,9 +122,26 @@ class _BookingInfo extends StatelessWidget {
   }
 }
 
+// class _InfoRow extends StatelessWidget {
+//   final String icon;
+//   final String text;
+//   const _InfoRow({required this.icon, required this.text});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         SvgPicture.asset(icon, width: 14.w, color: AppColors.textLightGrey),
+//         horizontalSpace(6),
+//         Text(text, style: AppText.ibmDescription12()),
+//       ],
+//     );
+//   }
+// }
 class _InfoRow extends StatelessWidget {
   final String icon;
   final String text;
+
   const _InfoRow({required this.icon, required this.text});
 
   @override
@@ -113,7 +150,15 @@ class _InfoRow extends StatelessWidget {
       children: [
         SvgPicture.asset(icon, width: 14.w, color: AppColors.textLightGrey),
         horizontalSpace(6),
-        Text(text, style: AppText.ibmDescription12()),
+
+        Expanded(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppText.ibmDescription12(),
+          ),
+        ),
       ],
     );
   }
@@ -125,39 +170,43 @@ class _BookingActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onViewDetails,
-      child: Container(
-        height: 33.h,
-        padding: EdgeInsets.only(left: 8.r, right: 8.r),
-        decoration: ShapeDecoration(
-          gradient: LinearGradient(
-            begin: Alignment(0.00, 0.50),
-            end: Alignment(1.00, 0.50),
-            colors: [const Color(0xFF189AB4), const Color(0xFF0A424E)],
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(44),
-          ),
-          shadows: [
-            BoxShadow(
-              color: Color(0x14000000),
-              blurRadius: 10,
-              offset: Offset(0, 7),
-              spreadRadius: 0,
+    return FittedBox(
+      child: GestureDetector(
+        onTap: onViewDetails,
+        child: Container(
+          height: 33.h,
+          padding: EdgeInsets.only(left: 8.r, right: 8.r),
+          decoration: ShapeDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(0.00, 0.50),
+              end: Alignment(1.00, 0.50),
+              colors: [const Color(0xFF189AB4), const Color(0xFF0A424E)],
             ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            AppStrings.viewDetails,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontFamily: 'IBM Plex Sans Arabic',
-              fontWeight: FontWeight.w600,
-              height: 1.40,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(44),
+            ),
+            shadows: [
+              BoxShadow(
+                color: Color(0x14000000),
+                blurRadius: 10,
+                offset: Offset(0, 7),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: Center(
+            child: FittedBox(
+              child: Text(
+                AppStrings.viewDetails,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12.sp,
+                  fontFamily: 'IBM Plex Sans Arabic',
+                  fontWeight: FontWeight.w600,
+                  height: 1.40,
+                ),
+              ),
             ),
           ),
         ),

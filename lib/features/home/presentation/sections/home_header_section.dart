@@ -29,6 +29,7 @@ class HomeHeaderSection extends StatelessWidget {
               );
 
               return HomeHeader(
+                onAvatarTap: () => context.push(AppRouter.editProfile),
                 locationAddress: selectedAddress.address,
                 notificationCount: NotificationDummyData.notifications.length,
                 onLocationTap: () {

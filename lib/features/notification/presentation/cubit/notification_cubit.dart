@@ -9,11 +9,13 @@ class NotificationCubit extends Cubit<NotificationState> {
         NotificationState(notifications: NotificationDummyData.notifications),
       );
 
-  void markAsRead(int index) {
-    final notifications = List<NotificationEntity>.from(state.notifications);
+  void markAsRead(NotificationEntity notification) {
+    final updatedNotifications = state.notifications
+        .map(
+          (item) => item == notification ? item.copyWith(isRead: true) : item,
+        )
+        .toList();
 
-    notifications[index] = notifications[index].copyWith(isRead: true);
-
-    emit(state.copyWith(notifications: notifications));
+    emit(state.copyWith(notifications: updatedNotifications));
   }
 }

@@ -4,12 +4,12 @@ import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'package:home_service_app/features/address/presentation/bottom_sheets/add_address_bottom_sheet.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_state.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_card.dart';
 import 'package:home_service_app/features/address/presentation/widgets/bottom_sheet_handle.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
+import 'package:home_service_app/features/address/presentation/widgets/custom_add_buttom_sheet.dart';
 
 class SavedAddressesBottomSheet extends StatelessWidget {
   const SavedAddressesBottomSheet({super.key});
@@ -46,44 +46,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
 
                   SizedBox(height: AppSizes.spacingLarge),
 
-                  InkWell(
-                    onTap: () {
-                      context.pop();
-
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) {
-                          return const AddAddressBottomSheet();
-                        },
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(AppSizes.radius),
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(vertical: AppSizes.padding),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSizes.radius),
-                        border: Border.all(color: AppColors.borderInputs),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.add, color: AppColors.greenPrimary),
-
-                          SizedBox(width: AppSizes.spacingSmall),
-
-                          Text(
-                            AppStrings.addYourAddress,
-                            style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
-                              color: AppColors.greenPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  CustomAddButtomSheet(),
 
                   SizedBox(height: AppSizes.spacingLarge),
 
