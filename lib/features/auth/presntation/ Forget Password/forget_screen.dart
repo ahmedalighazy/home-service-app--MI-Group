@@ -4,15 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/image/app_assets.dart';
-import '../../../core/themes/text/app_text.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../presentation/widgets/auth_back_button.dart';
-import '../presentation/widgets/auth_primary_button.dart';
-import '../presentation/widgets/auth_text_field.dart';
+
+import '../../../../core/di/injection.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/image/app_assets.dart';
+import '../../../../core/themes/text/app_text.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../widgets/auth_back_button.dart';
+import '../widgets/auth_primary_button.dart';
+import '../widgets/auth_text_field.dart';
+
 
 class ForgetScreen extends StatefulWidget {
   const ForgetScreen({super.key});

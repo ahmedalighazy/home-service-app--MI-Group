@@ -5,15 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/themes/colors/app_colors.dart';
-import '../../../core/themes/image/app_assets.dart';
-import '../../../core/themes/text/app_text.dart';
-import '../../../core/utils/l10n/app_strings.dart';
-import '../presentation/widgets/auth_back_button.dart';
-import '../presentation/widgets/otp_confirm_button.dart';
-import '../presentation/widgets/otp_input_row.dart';
+
+import '../../../../core/di/injection.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/themes/colors/app_colors.dart';
+import '../../../../core/themes/image/app_assets.dart';
+import '../../../../core/themes/text/app_text.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
+import '../widgets/auth_back_button.dart';
+import '../widgets/otp_confirm_button.dart';
+import '../widgets/otp_input_row.dart';
+
 
 class VerifyResetCodeScreen extends StatefulWidget {
   final String email;

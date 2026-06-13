@@ -11,9 +11,10 @@ import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/l10n/app_strings.dart';
 import '../../logic/cubits/auth_cubit.dart';
 import '../../logic/states/auth_state.dart';
-import '../../presentation/widgets/auth_back_button.dart';
-import '../../presentation/widgets/otp_confirm_button.dart';
-import '../../presentation/widgets/otp_input_row.dart';
+import '../widgets/auth_back_button.dart';
+import '../widgets/otp_confirm_button.dart';
+import '../widgets/otp_input_row.dart';
+
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;

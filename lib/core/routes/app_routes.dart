@@ -9,16 +9,18 @@ import 'package:home_service_app/features/notification/presentation/pages/notifi
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
+import '../../features/auth/presntation/ Forget Password/forget_screen.dart';
+import '../../features/auth/presntation/complete_profile_screen/complete_profile_screen.dart';
+import '../../features/auth/presntation/otp_screen/otp_screen.dart';
+import '../../features/auth/presntation/set_new_pass/set_new_pass.dart';
+import '../../features/auth/presntation/sing_in/sing_in.dart';
+import '../../features/auth/presntation/sing_up_screens/sing_up.dart';
+import '../../features/auth/presntation/verify_reset_code_screen/verify_reset_code_screen.dart';
 import '../../features/booking/presentation/screens/booking_screen.dart';
 import '../../features/booking/presentation/screens/booking_details_screen.dart';
 import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
 import '../../features/booking/presentation/screens/cancel_booking_screen.dart';
 import '../../features/booking/data/models/booking_model.dart';
-
-import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
-import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
-import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
-import '../../features/auth/sing_up_screens/sing_up.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/data/models/subscription_model.dart';
 import '../../features/profile/presentation/screens/contact_us_screen.dart';
@@ -45,10 +47,6 @@ import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
-import '../../features/auth/sing_in/sing_in.dart';
-import '../../features/auth/ Forget Password/forget_screen.dart';
-import '../../features/auth/ Forget Password/verify_reset_code_screen.dart';
-import '../../features/auth/set_new_pass/set_new_pass.dart';
 
 class AppRouter {
   // Private constructor
@@ -120,12 +118,7 @@ class AppRouter {
             _buildPageWithFade(const OnboardingScreen(), state),
       ),
 
-      GoRoute(
-        path: language,
-        name: language,
-        pageBuilder: (context, state) =>
-            _buildPageWithFade(const LanguageSelectionScreen(), state),
-      ),
+
 
       // Auth Routes
       GoRoute(

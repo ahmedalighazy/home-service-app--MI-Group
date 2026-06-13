@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/logic/states/auth_state.dart';
-import '../../../core/di/injection.dart';
-import '../../../core/routes/app_routes.dart';
+
+import '../../../../core/di/injection.dart';
+import '../../../../core/routes/app_routes.dart';
+
 
 class SetNewPasswordScreen extends StatefulWidget {
   final String email;
