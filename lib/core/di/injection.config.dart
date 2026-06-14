@@ -17,7 +17,7 @@ import 'package:home_service_app/core/network/network_info.dart' as _i702;
 import 'package:home_service_app/core/network/network_info_impl.dart' as _i799;
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart'
     as _i565;
-import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart'
+import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart'
     as _i694;
 import 'package:home_service_app/features/home/data/datasources/local/home_local_data_source.dart'
     as _i516;

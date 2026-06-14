@@ -9,13 +9,13 @@ import 'package:home_service_app/features/notification/presentation/pages/notifi
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
-import '../../features/auth/presntation/ Forget Password/forget_screen.dart';
-import '../../features/auth/presntation/complete_profile_screen/complete_profile_screen.dart';
-import '../../features/auth/presntation/otp_screen/otp_screen.dart';
-import '../../features/auth/presntation/set_new_pass/set_new_pass.dart';
-import '../../features/auth/presntation/sing_in/sing_in.dart';
-import '../../features/auth/presntation/sing_up_screens/sing_up.dart';
-import '../../features/auth/presntation/verify_reset_code_screen/verify_reset_code_screen.dart';
+import '../../features/auth/presentation/screens/forget_password/forget_password_screen.dart';
+import '../../features/auth/presentation/screens/complete_profile/complete_profile_screen.dart';
+import '../../features/auth/presentation/screens/otp/otp_screen.dart';
+import '../../features/auth/presentation/screens/set_new_password/set_new_password_screen.dart';
+import '../../features/auth/presentation/screens/sign_in/sign_in_screen.dart';
+import '../../features/auth/presentation/screens/sign_up/sign_up_screen.dart';
+import '../../features/auth/presentation/screens/verify_reset_code/verify_reset_code_screen.dart';
 import '../../features/booking/presentation/screens/booking_screen.dart';
 import '../../features/booking/presentation/screens/booking_details_screen.dart';
 import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
@@ -46,7 +46,6 @@ import '../../features/setting/presentation/screens/set_new_password_screen.dart
 import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
-
 
 class AppRouter {
   // Private constructor
@@ -118,21 +117,19 @@ class AppRouter {
             _buildPageWithFade(const OnboardingScreen(), state),
       ),
 
-
-
       // Auth Routes
       GoRoute(
         path: signIn,
         name: signIn,
         pageBuilder: (context, state) =>
-            _buildPageWithFade(const SingIn(), state),
+            _buildPageWithFade(const SignInScreen(), state),
       ),
 
       GoRoute(
         path: signUp,
         name: signUp,
         pageBuilder: (context, state) => _buildPageWithFade(
-          const SingUp(), // تأكد من أن هذا موجود
+          const SignUpScreen(), // تأكد من أن هذا موجود
           state,
         ),
       ),
