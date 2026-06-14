@@ -71,12 +71,16 @@ class AppStrings {
   // --- Sign Up / Login Screen ---
   static const String welcomeBack = 'أهلاً بعودتك';
   static const String welcomeBackAlt = 'مرحباً بعودتك';
+  static const String welcomeSignUp = 'أنشئ حساب جديد';
+  static const String signUpSubtitle =
+      'أدخل رقم هاتفك للتسجيل والحصول على رمز التحقق';
   static const String verificationMethodInfo =
       'سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول';
   static const String signUpWithGoogle = 'تسجيل عبر Google';
   static const String signUpWithApple = 'تسجيل عبر Apple';
   static const String continueAsGuest = 'المتابعة كضيف';
   static const String alreadyHaveAccount = 'لديك حساب بالفعل؟ ';
+  static const String signInAction = 'تسجيل الدخول';
   static const String dontHaveAccount = 'ليس لديك حساب ؟ ';
   static const String createAccount = 'إنشاء حساب';
   static const String forgotPassword = 'نسيت كلمة المرور؟';

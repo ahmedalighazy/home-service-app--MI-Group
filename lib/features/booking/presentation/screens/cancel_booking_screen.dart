@@ -52,7 +52,7 @@ class _CancelIcon extends StatelessWidget {
         IconsPath.delete,
         width: 50.w,
         height: 50.h,
-        color: AppColors.redDanger,
+        colorFilter: ColorFilter.mode(AppColors.redDanger, BlendMode.srcIn),
       ),
     );
   }

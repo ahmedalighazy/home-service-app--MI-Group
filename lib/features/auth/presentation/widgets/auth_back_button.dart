@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 
-/// A circular RTL-style back button used across auth screens.
-///
-/// Usage:
-/// ```dart
-/// AuthBackButton(onTap: () =>context.pop())
-/// ```
+
 class AuthBackButton extends StatelessWidget {
   final VoidCallback onTap;
 

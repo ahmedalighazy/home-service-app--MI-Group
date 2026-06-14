@@ -3,18 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 
-/// A reusable labeled text field for auth screens.
-///
-/// Usage example:
-/// ```dart
-/// AuthTextField(
-///   label: AppStrings.emailLabel,
-///   hint: AppStrings.emailPlaceholder,
-///   controller: _emailController,
-///   prefixIcon: Icons.mail_outline,
-///   keyboardType: TextInputType.emailAddress,
-/// )
-/// ```
+
 class AuthTextField extends StatefulWidget {
   final String label;
   final String hint;

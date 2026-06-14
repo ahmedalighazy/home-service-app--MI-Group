@@ -8,7 +8,7 @@ import '../../../../core/constants/icons_path.dart';
 import '../../../../core/themes/text/app_text.dart';
 
 class CancelChat extends StatelessWidget {
-  const CancelChat({Key? key}) : super(key: key);
+  const CancelChat({super.key});
 
   @override
   Widget build(BuildContext context) {

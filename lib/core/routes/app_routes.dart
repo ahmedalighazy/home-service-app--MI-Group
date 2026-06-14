@@ -4,21 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_page.dart';
+import '../../features/auth/presentation/screens/forget_password/forget_password_screen.dart';
+import '../../features/auth/presentation/screens/complete_profile/complete_profile_screen.dart';
+import '../../features/auth/presentation/screens/otp/otp_screen.dart';
+import '../../features/auth/presentation/screens/set_new_password/set_new_password_screen.dart';
+import '../../features/auth/presentation/screens/sign_in/sign_in_screen.dart';
+import '../../features/auth/presentation/screens/sign_up/sign_up_screen.dart';
+import '../../features/auth/presentation/screens/verify_reset_code/verify_reset_code_screen.dart';
 import '../../features/booking/presentation/screens/booking_screen.dart';
 import '../../features/booking/presentation/screens/booking_details_screen.dart';
 import '../../features/booking/presentation/screens/reschedule_booking_screen.dart';
 import '../../features/booking/presentation/screens/cancel_booking_screen.dart';
 import '../../features/booking/data/models/booking_model.dart';
-
-import '../../features/auth/presentation/screens/language_selection/language_selection_screen.dart';
-import '../../features/auth/sing_up_screens/complete_profile_screen/complete_profile_screen.dart';
-import '../../features/auth/sing_up_screens/otp_screen/otp_screen.dart';
-import '../../features/auth/sing_up_screens/sing_up.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/data/models/subscription_model.dart';
 import '../../features/profile/presentation/screens/contact_us_screen.dart';
@@ -44,11 +45,6 @@ import '../../features/setting/presentation/screens/set_new_password_screen.dart
 import '../../features/setting/presentation/screens/settings_screen.dart';
 import '../../features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
-
-import '../../features/auth/sing_in/sing_in.dart';
-import '../../features/auth/ Forget Password/forget_screen.dart';
-import '../../features/auth/ Forget Password/verify_reset_code_screen.dart';
-import '../../features/auth/set_new_pass/set_new_pass.dart';
 
 class AppRouter {
   // Private constructor
@@ -120,26 +116,19 @@ class AppRouter {
             _buildPageWithFade(const OnboardingScreen(), state),
       ),
 
-      GoRoute(
-        path: language,
-        name: language,
-        pageBuilder: (context, state) =>
-            _buildPageWithFade(const LanguageSelectionScreen(), state),
-      ),
-
       // Auth Routes
       GoRoute(
         path: signIn,
         name: signIn,
         pageBuilder: (context, state) =>
-            _buildPageWithFade(const SingIn(), state),
+            _buildPageWithFade(const SignInScreen(), state),
       ),
 
       GoRoute(
         path: signUp,
         name: signUp,
         pageBuilder: (context, state) => _buildPageWithFade(
-          const SingUp(), // تأكد من أن هذا موجود
+          const SignUpScreen(), // تأكد من أن هذا موجود
           state,
         ),
       ),
@@ -224,13 +213,8 @@ class AppRouter {
       GoRoute(
         path: notification,
         name: notification,
-        pageBuilder: (context, state) => _buildPageWithFade(
-          BlocProvider(
-            create: (_) => NotificationCubit(),
-            child: const NotificationPage(),
-          ),
-          state,
-        ),
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const NotificationPage(), state),
       ),
 
       GoRoute(

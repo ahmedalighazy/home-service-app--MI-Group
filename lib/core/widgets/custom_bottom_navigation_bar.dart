@@ -69,59 +69,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     );
   }
 
-  // Widget _buildNavItem({
-  //   required String iconPath,
-  //   required String label,
-  //   required int index,
-  // }) {
-  //   final isSelected = widget.currentIndex == index;
-  //   final color = isSelected
-  //       ? AppColors.greenPrimary.withValues(alpha: 0.5)
-  //       : AppColors.secondaryGrey;
-  //   final backgroundColor = isSelected
-  //       ? AppColors.lightActive.withValues(alpha: 0.5)
-  //       : Colors.transparent;
-
-  //   return Expanded(
-  //     child: GestureDetector(
-  //       onTap: () => widget.onTap(index),
-  //       behavior: HitTestBehavior.opaque,
-  //       child: AnimatedContainer(
-  //         duration: const Duration(milliseconds: 300),
-  //         curve: Curves.easeInOut,
-  //         padding: EdgeInsets.symmetric(
-  //           horizontal: AppSizes.paddingMedium,
-  //           vertical: AppSizes.paddingMedium,
-  //         ),
-  //         decoration: BoxDecoration(
-  //           color: backgroundColor,
-  //           borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),
-  //         ),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             SvgPicture.asset(
-  //               iconPath,
-  //               width: AppSizes.iconSize,
-  //               height: AppSizes.iconSize,
-  //               colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-  //             ),
-  //             SizedBox(width: AppSizes.spacingSmall),
-  //             Text(
-  //               label,
-  //               style: TextStyle(
-  //                 fontSize: 14,
-  //                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
-  //                 color: color,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   Widget _buildNavItem({
     required String iconPath,
     required String label,
@@ -158,6 +105,32 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       colors: [AppColors.dark, AppColors.greenPrimary],
                     ).createShader(bounds);
                   },
+                  child: FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          iconPath,
+                          width: AppSizes.iconSize,
+                          height: AppSizes.iconSize,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        SizedBox(width: AppSizes.spacingSmall),
+                        Text(
+                          label,
+                          style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : FittedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
@@ -167,7 +140,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         width: AppSizes.iconSize,
                         height: AppSizes.iconSize,
                         colorFilter: const ColorFilter.mode(
-                          Colors.white,
+                          AppColors.secondaryGrey,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -175,33 +148,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       Text(
                         label,
                         style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
-                          color: AppColors.white,
+                          color: AppColors.bgDisabled,
                         ),
                       ),
                     ],
                   ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      iconPath,
-                      width: AppSizes.iconSize,
-                      height: AppSizes.iconSize,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.secondaryGrey,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                    SizedBox(width: AppSizes.spacingSmall),
-                    Text(
-                      label,
-                      style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
-                        color: AppColors.bgDisabled,
-                      ),
-                    ),
-                  ],
                 ),
         ),
       ),

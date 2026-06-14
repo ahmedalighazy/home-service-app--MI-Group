@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/features/notification/domain/entities/notification_entity.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/widgets/notification_card.dart';
 import 'package:home_service_app/features/notification/presentation/widgets/notification_group_header.dart';
 
@@ -43,7 +45,9 @@ class NotificationsListSection extends StatelessWidget {
                   time: notification.time,
                   iconPath: notification.iconPath,
                   isRead: notification.isRead,
-                  onTap: () {},
+                  onTap: () {
+                    context.read<NotificationCubit>().markAsRead(notification);
+                  },
                 ),
               );
             }),

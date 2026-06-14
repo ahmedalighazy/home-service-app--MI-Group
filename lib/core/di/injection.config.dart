@@ -17,7 +17,7 @@ import 'package:home_service_app/core/network/network_info.dart' as _i702;
 import 'package:home_service_app/core/network/network_info_impl.dart' as _i799;
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart'
     as _i565;
-import 'package:home_service_app/features/auth/logic/cubits/auth_cubit.dart'
+import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart'
     as _i694;
 import 'package:home_service_app/features/home/data/datasources/local/home_local_data_source.dart'
     as _i516;
@@ -35,6 +35,8 @@ import 'package:home_service_app/features/home/domain/usecases/get_home_data_use
     as _i1057;
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart'
     as _i829;
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart'
+    as _i745;
 import 'package:home_service_app/features/search/domain/repositories/search_repository.dart'
     as _i200;
 import 'package:home_service_app/features/search/domain/usecases/search_usecase.dart'
@@ -53,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i694.AuthCubit>(() => _i694.AuthCubit());
     gh.lazySingleton<_i895.Connectivity>(() => registerModule.connectivity);
     gh.lazySingleton<_i953.DioClient>(() => _i953.DioClient());
+    gh.lazySingleton<_i745.NotificationCubit>(() => _i745.NotificationCubit());
     gh.lazySingleton<_i516.HomeLocalDataSource>(
       () => _i678.HomeLocalDataSourceImpl(),
     );

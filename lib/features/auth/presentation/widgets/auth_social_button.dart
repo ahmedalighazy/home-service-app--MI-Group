@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// A reusable social login button (Google, Apple, etc.) for auth screens.
-/// Supports both icon images (assets) and IconData.
-///
-/// Usage with IconData:
-/// ```dart
-/// AuthSocialButton(
-///   icon: Icons.g_mobiledata,
-///   text: 'تسجيل عبر Google',
-///   onTap: () => _handleGoogleLogin(),
-/// )
-/// ```
-///
-/// Usage with image asset:
-/// ```dart
-/// AuthSocialButton(
-///   iconPath: AppAssets.iconGoogle,
-///   text: 'تسجيل عبر Google',
-///   onTap: () => _handleGoogleLogin(),
-/// )
-/// ```
+
 class AuthSocialButton extends StatelessWidget {
   final IconData? icon;
   final String? iconPath;
