@@ -144,7 +144,7 @@ class _OtpScreenState extends State<OtpScreen>
                           children: [
                             SizedBox(height: 16.h),
 
-                            // ── Back button ──────────────────────────
+
                             Align(
                               alignment: Alignment.centerRight,
                               child: AuthBackButton(onTap: () => context.pop()),
@@ -152,7 +152,6 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 40.h),
 
-                            // ── Title ────────────────────────────────
                             Text(
                               AppStrings.confirmCode,
                               textAlign: TextAlign.center,
@@ -192,7 +191,7 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 44.h),
 
-                            // ── OTP circles ──────────────────────────
+
                             OtpInputRow(
                               digits: _digits,
                               length: _length,
@@ -203,7 +202,7 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 20.h),
 
-                            // ── Countdown timer ──────────────────────
+
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: !_canResend
@@ -223,7 +222,6 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 10.h),
 
-                            // ── Resend row ───────────────────────────
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -258,7 +256,7 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 32.h),
 
-                            // ── Inline error message ─────────────────
+
                             if (_fieldState == OtpFieldState.error)
                               Padding(
                                 padding: EdgeInsets.only(bottom: 12.h),
@@ -272,7 +270,6 @@ class _OtpScreenState extends State<OtpScreen>
                                 ),
                               ),
 
-                            // ── Confirm button ───────────────────────
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: _digits.length == _length
@@ -298,7 +295,7 @@ class _OtpScreenState extends State<OtpScreen>
                       ),
                     ),
 
-                    // ── Hidden text input ────────────────────────────
+
                     SizedBox(
                       width: 1,
                       height: 1,

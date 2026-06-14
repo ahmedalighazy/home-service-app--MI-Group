@@ -66,7 +66,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
       if (_fieldState == OtpFieldState.error) {
         setState(() => _fieldState = OtpFieldState.idle);
       } else {
-        setState(() {}); // rebuild to reflect new digit count
+        setState(() {});
       }
     });
 
@@ -99,8 +99,6 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
     context.read<AuthCubit>().sendResetCode(widget.email);
     _focusNode.requestFocus();
   }
-
-  /// Truncate long email: ahmed...@gmail.com
   String _truncateEmail(String email) {
     final atIndex = email.indexOf('@');
     if (atIndex <= 5) return email;

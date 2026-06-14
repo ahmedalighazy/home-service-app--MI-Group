@@ -3,21 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 
-/// The visual state of each OTP digit circle.
 enum OtpFieldState { idle, error, success }
 
-/// A reusable animated OTP digit row with shake-on-error support.
-///
-/// Usage:
-/// ```dart
-/// OtpInputRow(
-///   digits: _ctrl.text,
-///   length: 6,
-///   fieldState: _fieldState,
-///   shakeAnimation: _shakeAnim,
-///   onTap: () => _focusNode.requestFocus(),
-/// )
-/// ```
+
 class OtpInputRow extends StatelessWidget {
   final String digits;
   final int length;
@@ -139,7 +127,6 @@ class OtpInputRow extends StatelessWidget {
   }
 }
 
-/// A blinking cursor shown in the active OTP digit cell.
 class OtpBlinkingCursor extends StatefulWidget {
   const OtpBlinkingCursor({super.key});
 

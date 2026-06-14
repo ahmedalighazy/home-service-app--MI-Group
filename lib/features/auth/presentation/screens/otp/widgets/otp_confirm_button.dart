@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// A reusable OTP confirm button with loading and success states.
-///
-/// Usage:
-/// ```dart
-/// OtpConfirmButton(
-///   label: 'تأكيد',
-///   isLoading: isLoading,
-///   isSuccess: _isSuccess,
-///   onPressed: () => _onVerify(context),
-/// )
-/// ```
 class OtpConfirmButton extends StatelessWidget {
   final String label;
   final bool isLoading;

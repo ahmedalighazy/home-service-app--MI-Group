@@ -5,8 +5,8 @@ import '../../../../../core/di/injection.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../cubits/auth_cubit.dart';
 import '../../cubits/auth_state.dart';
-import 'sign_in_logic.dart';
-import 'widgets/sign_in_app_bar.dart';
+import '../../widgets/sign_up_app_bar.dart';
+import 'logic/sign_in_logic.dart';
 import 'widgets/sign_in_body.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
       create: (_) => getIt<AuthCubit>(),
       child: Scaffold(
         backgroundColor: AppColors.white,
-        appBar: const SignInAppBar(),
+        appBar:  SignUpAppBar(),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: handleState,
           builder: (context, state) {
