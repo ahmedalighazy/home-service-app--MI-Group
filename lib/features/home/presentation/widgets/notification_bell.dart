@@ -38,8 +38,8 @@ class NotificationBell extends StatelessWidget {
             ),
             if (count > 0)
               Positioned(
-                top: 10,
-                right: 10,
+                top: 15,
+                right: 15,
                 child: SvgPicture.asset(
                   IconsPath.notificationDot,
                   colorFilter: const ColorFilter.mode(

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/pages/notification_page.dart';
 import 'package:home_service_app/features/search/presentation/cubit/search_cubit.dart';
 import 'package:home_service_app/features/search/presentation/pages/search_page.dart';
@@ -214,13 +213,8 @@ class AppRouter {
       GoRoute(
         path: notification,
         name: notification,
-        pageBuilder: (context, state) => _buildPageWithFade(
-          BlocProvider(
-            create: (_) => NotificationCubit(),
-            child: const NotificationPage(),
-          ),
-          state,
-        ),
+        pageBuilder: (context, state) =>
+            _buildPageWithFade(const NotificationPage(), state),
       ),
 
       GoRoute(
