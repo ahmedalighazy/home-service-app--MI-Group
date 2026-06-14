@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/routes/app_routes.dart';
-import '../../../../../../core/themes/colors/app_colors.dart';
-import '../../../../../../core/themes/text/app_text.dart';
-import '../../../../../../core/utils/l10n/app_strings.dart';
-import '../../../cubits/auth_cubit.dart';
-import '../../../cubits/auth_state.dart';
+import '../../../../../core/routes/app_routes.dart';
+import '../../../../../core/themes/colors/app_colors.dart';
+import '../../../../../core/themes/text/app_text.dart';
+import '../../../../../core/utils/l10n/app_strings.dart';
+import '../../cubits/auth_cubit.dart';
+import '../../cubits/auth_state.dart';
 
 mixin SignInLogic<T extends StatefulWidget> on State<T> {
   // Controllers

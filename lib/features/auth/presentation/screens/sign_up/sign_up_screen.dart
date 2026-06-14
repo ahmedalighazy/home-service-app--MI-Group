@@ -5,7 +5,7 @@ import '../../../../../core/di/injection.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../cubits/auth_cubit.dart';
 import '../../cubits/auth_state.dart';
-import 'logic/sign_up_logic.dart';
+import 'sign_up_logic.dart';
 import 'widgets/sign_up_app_bar.dart';
 import 'widgets/sign_up_body.dart';
 
@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
       create: (_) => getIt<AuthCubit>(),
       child: Scaffold(
         backgroundColor: AppColors.white,
-        appBar: SignUpAppBar(),
+        appBar: const SignUpAppBar(),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: handleState,
           builder: (context, state) {

@@ -5,7 +5,7 @@ import '../../../../../core/di/injection.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../cubits/auth_cubit.dart';
 import '../../cubits/auth_state.dart';
-import 'lofic/sign_in_logic.dart';
+import 'sign_in_logic.dart';
 import 'widgets/sign_in_app_bar.dart';
 import 'widgets/sign_in_body.dart';
 
