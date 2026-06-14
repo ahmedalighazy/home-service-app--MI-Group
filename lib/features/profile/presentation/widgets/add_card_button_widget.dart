@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-import 'add_new_card_bottom_sheet.dart';
 
 class AddCardButtonWidget extends StatelessWidget {
-  const AddCardButtonWidget({super.key});
-
-  void _showAddCardBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => const AddNewCardBottomSheet(),
-    );
-  }
+  final VoidCallback? onTap;
+  const AddCardButtonWidget({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _showAddCardBottomSheet(context),
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppSizes.radiusXL.r),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 14.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.r),
+          borderRadius: BorderRadius.circular(AppSizes.radiusXL.r),
           border: Border.all(
             color: AppColors.primary.withValues(alpha: 0.3),
             style: BorderStyle.solid,
@@ -34,14 +27,13 @@ class AddCardButtonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.add, color: AppColors.primary, size: 18.r),
-            horizontalSpace(5),
-
+            Icon(Icons.add, color: AppColors.primary, size: 20.r),
+            horizontalSpace(8),
             Text(
               AppStrings.addNewCard,
-              style: AppText.semiBoldText(
+              style: AppText.semiBoldIbm(
                 color: AppColors.primary,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ],

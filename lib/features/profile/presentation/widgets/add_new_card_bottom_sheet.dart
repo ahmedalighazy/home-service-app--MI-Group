@@ -8,9 +8,17 @@ import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
+import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
 
 class AddNewCardBottomSheet extends StatefulWidget {
-  const AddNewCardBottomSheet({super.key});
+  final PaymentMethodModel? paymentMethod;
+  final bool isEdit;
+
+  const AddNewCardBottomSheet({
+    super.key,
+    this.paymentMethod,
+    this.isEdit = false,
+  });
 
   @override
   State<AddNewCardBottomSheet> createState() => _AddNewCardBottomSheetState();
@@ -18,6 +26,29 @@ class AddNewCardBottomSheet extends StatefulWidget {
 
 class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
   bool _saveForLater = false;
+  final _cardNumberController = TextEditingController();
+  final _cardHolderController = TextEditingController();
+  final _cvvController = TextEditingController();
+  final _expiryDateController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.paymentMethod != null) {
+      _cardNumberController.text = '**** **** **** ${widget.paymentMethod!.lastFourDigits}';
+      _cardHolderController.text = widget.paymentMethod!.cardHolderName;
+      _expiryDateController.text = widget.paymentMethod!.expiryDate;
+    }
+  }
+
+  @override
+  void dispose() {
+    _cardNumberController.dispose();
+    _cardHolderController.dispose();
+    _cvvController.dispose();
+    _expiryDateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +56,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
       padding: EdgeInsets.all(AppSizes.paddingM.r),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSizes.radiusLarge)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -42,26 +73,33 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                 ),
               ),
             ),
-
             verticalSpace(24),
+            Text(
+              widget.isEdit ? AppStrings.editCard : AppStrings.addCard,
+              style: AppText.ibmHeading20(color: AppColors.black),
+            ),
+        verticalSpace(24),
             CustomTextField(
+              controller: _cardNumberController,
               hintText: '0000 0000 0000 0000',
               label: AppStrings.cardNumberLabel,
               fillColor: AppColors.white,
               textStyle: AppText.regularIbm(
-                color: AppColors.placeholder,
+                color: AppColors.primaryText,
                 fontSize: 14,
               ),
               borderColor: AppColors.textLightGrey,
+              keyboardType: TextInputType.number,
             ),
             verticalSpace(16),
             CustomTextField(
+              controller: _cardHolderController,
               hintText: AppStrings.cardHolderPlaceholder,
               label: AppStrings.cardHolderLabel,
               fillColor: AppColors.white,
               borderColor: AppColors.textLightGrey,
               textStyle: AppText.regularIbm(
-                color: AppColors.placeholder,
+                color: AppColors.primaryText,
                 fontSize: 14,
               ),
             ),
@@ -70,14 +108,16 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
               children: [
                 Expanded(
                   child: CustomTextField(
+                    controller: _cvvController,
                     hintText: '000',
                     label: AppStrings.cvvLabel,
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
                     textStyle: AppText.regularIbm(
-                      color: AppColors.placeholder,
+                      color: AppColors.primaryText,
                       fontSize: 14,
                     ),
+                    keyboardType: TextInputType.number,
                     suffixIcon: Icon(
                       Icons.help_outline,
                       size: 20.r,
@@ -86,17 +126,18 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                   ),
                 ),
                 horizontalSpace(16),
-
                 Expanded(
                   child: CustomTextField(
+                    controller: _expiryDateController,
                     hintText: 'MM/YY',
                     textStyle: AppText.regularIbm(
-                      color: AppColors.placeholder,
+                      color: AppColors.primaryText,
                       fontSize: 14,
                     ),
                     label: AppStrings.expiryDateLabel,
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
+                    keyboardType: TextInputType.datetime,
                   ),
                 ),
               ],

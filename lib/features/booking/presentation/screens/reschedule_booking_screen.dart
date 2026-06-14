@@ -42,7 +42,7 @@ class RescheduleBookingScreen extends StatelessWidget {
               CustomTextField(
                 hintText: AppStrings.exampleHomeLocation,
                 maxLines: 4,
-                fillColor: AppColors.gry,
+                fillColor: AppColors.bgSecondary,
                 borderColor: AppColors.borderGrey,
               ),
               verticalSpace(5),

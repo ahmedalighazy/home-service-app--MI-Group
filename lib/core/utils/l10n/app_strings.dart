@@ -411,6 +411,22 @@ class AppStrings {
   static const String noFavoritesYet = 'لا توجد خدمات مفضلة حتى الآن';
   static const String saveServicesToAccessLater =
       'قم بحفظ الخدمات التي تعجبك للوصول إليها بسرعة لاحقًا.';
+  static const String edit = 'تعديل';
+  static const String delete = 'حذف';
+  static const String deletecard = 'حذف البطاقة';
+  static const String deletecardwaring =
+      ' هل انت متاكد انك تريد خذف هذة البطاقة';
+
+  static const String defaultText = 'افتراضي';
+  static const String mySavedAddresses = 'عناويني المحفوظة';
+  static const String deleteAddressConfirmation =
+      'هل أنت متأكد أنك تريد حذف هذا العنوان؟';
+  static const String editAddress = 'تعديل العنوان';
+  static const String addAddress = 'إضافة عنوان';
+  static const String expiresIn = 'تنتهي في';
+  static const String card = 'بطاقة';
+  static const String addCard = 'إضافة بطاقة';
+  static const String editCard = 'تعديل البطاقة';
 
   // --- Help Center ---
   static const String helpCenter = 'مركز المساعدة';

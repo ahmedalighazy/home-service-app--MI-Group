@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
-
 import 'popup_menu_button.dart';
 
 class PaymentCardWidget extends StatelessWidget {
   final PaymentMethodModel paymentMethod;
-  final VoidCallback onMoreTap;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const PaymentCardWidget({
     super.key,
     required this.paymentMethod,
-    required this.onMoreTap,
+    required this.onEdit,
+    required this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.r),
+      padding: EdgeInsets.all(AppSizes.paddingSmall.r),
       decoration: ShapeDecoration(
-        color: const Color(0xFFF8FBFF),
+        color: AppColors.bgSecondary,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: Color(0xFFF1F5F9)),
-          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(width: 1, color: AppColors.borderCards),
+          borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
         ),
       ),
       child: Row(
@@ -36,44 +40,39 @@ class PaymentCardWidget extends StatelessWidget {
             child: CustomPopupMenu(
               onSelected: (action) {
                 switch (action) {
-                  case MenuAction.favorite:
-                    break;
                   case MenuAction.edit:
+                    onEdit();
                     break;
                   case MenuAction.delete:
+                    onDelete();
+                    break;
+                  case MenuAction.favorite:
                     break;
                 }
               },
             ),
           ),
-
-          SizedBox(width: 8.w),
-
+          horizontalSpace(8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    if (paymentMethod.isDefault) _buildDefaultBadge(),
-
+                    if (paymentMethod.isDefault) const _DefaultBadge(),
                     const Spacer(),
-
                     Text(
                       '**** ${paymentMethod.lastFourDigits}',
                       style: AppText.ibmHeading14(color: AppColors.black),
                     ),
                   ],
                 ),
-
-                SizedBox(height: 8.h),
-
-                /// تركنا الـ Row كما هو
+                verticalSpace(8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'تنتهي في ${paymentMethod.expiryDate}',
+                      '${AppStrings.expiresIn} ${paymentMethod.expiryDate}',
                       style: AppText.ibmDescription12(
                         color: AppColors.textLightGrey,
                       ),
@@ -93,12 +92,10 @@ class PaymentCardWidget extends StatelessWidget {
               ],
             ),
           ),
-
-          SizedBox(width: 8.w),
-
+          horizontalSpace(8),
           SizedBox(
-            width: 32.w,
-            height: 32.h,
+            width: 24.w,
+            height: 24.h,
             child: Center(
               child: SvgPicture.asset(
                 paymentMethod.iconPath,
@@ -112,16 +109,21 @@ class PaymentCardWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDefaultBadge() {
+class _DefaultBadge extends StatelessWidget {
+  const _DefaultBadge();
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: const Color(0xFF53AABF),
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.badgeCyan,
+        borderRadius: BorderRadius.circular(AppSizes.radiusSmall.r),
       ),
       child: Text(
-        'افتراضي',
+        AppStrings.defaultText,
         style: AppText.ibmDescription12(
           color: AppColors.white,
         ).copyWith(fontWeight: FontWeight.w600),

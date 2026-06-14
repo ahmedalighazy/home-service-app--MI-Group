@@ -89,7 +89,7 @@ class _ReasonField extends StatelessWidget {
         verticalSpace(12),
         CustomTextField(
           hintText: AppStrings.mentionCancelReason,
-          fillColor: AppColors.gry,
+          fillColor: AppColors.bgSecondary,
           borderColor: AppColors.borderGrey,
         ),
       ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 class FavoriteItemCard extends StatelessWidget {
   final String title;
@@ -20,14 +20,12 @@ class FavoriteItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.r),
+      padding: EdgeInsets.all(AppSizes.paddingSmall.r),
       decoration: ShapeDecoration(
+        color: AppColors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            width: 1,
-            color: const Color(0xFFF1F5F9) /* border-cards */,
-          ),
-          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(width: 1, color: AppColors.borderCards),
+          borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
         ),
       ),
       child: Row(
@@ -44,7 +42,7 @@ class FavoriteItemCard extends StatelessWidget {
                   title,
                   style: AppText.mediumIbm(
                     color: AppColors.primaryText,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
                 verticalSpace(4),
@@ -52,7 +50,7 @@ class FavoriteItemCard extends StatelessWidget {
                   category,
                   style: AppText.regularIbm(
                     color: AppColors.secondaryText,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
                 verticalSpace(8),
@@ -88,14 +86,13 @@ class FavoriteItemCard extends StatelessWidget {
   Widget _buildItemImage() {
     return Container(
       width: 72.w,
-      height: 69.h,
+      height: 72.h,
       decoration: BoxDecoration(
-        color: AppColors.inputBg,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.bgSecondary,
+        borderRadius: BorderRadius.circular(AppSizes.radiusMedium.r),
       ),
-      // In a real app, use Image.network or Image.asset
       child: Icon(
-        Icons.cleaning_services,
+        Icons.cleaning_services_outlined,
         color: AppColors.primary,
         size: 30.r,
       ),
@@ -104,13 +101,13 @@ class FavoriteItemCard extends StatelessWidget {
 
   Widget _buildFavoriteButton() {
     return Container(
-      padding: EdgeInsets.all(10.r),
+      padding: EdgeInsets.all(8.r),
       decoration: BoxDecoration(
         color: AppColors.white,
         shape: BoxShape.circle,
         border: Border.all(color: AppColors.borderGrey),
       ),
-      child: Icon(Icons.favorite, color: AppColors.redDanger, size: 16.r),
+      child: Icon(Icons.favorite, color: AppColors.red, size: 16.r),
     );
   }
 }
