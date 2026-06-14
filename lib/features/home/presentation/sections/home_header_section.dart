@@ -9,7 +9,7 @@ import 'package:home_service_app/features/address/presentation/cubit/address_cub
 import 'package:home_service_app/features/address/presentation/cubit/address_state.dart';
 import 'package:home_service_app/features/home/presentation/widgets/home_header.dart';
 import 'package:home_service_app/features/home/presentation/widgets/home_search_bar.dart';
-import 'package:home_service_app/features/notification/data/dummy/notification_dummy_data.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 class HomeHeaderSection extends StatelessWidget {
   const HomeHeaderSection({super.key});
@@ -23,6 +23,12 @@ class HomeHeaderSection extends StatelessWidget {
           SizedBox(height: AppSizes.spacingMedium),
           BlocBuilder<AddressCubit, AddressState>(
             builder: (context, state) {
+              final unreadCount = context
+                  .watch<NotificationCubit>()
+                  .state
+                  .notifications
+                  .where((notification) => !notification.isRead)
+                  .length;
               final selectedAddress = state.addresses.firstWhere(
                 (address) => address.isSelected,
                 orElse: () => state.addresses.first,
@@ -30,8 +36,12 @@ class HomeHeaderSection extends StatelessWidget {
 
               return HomeHeader(
                 onAvatarTap: () => context.push(AppRouter.editProfile),
+
                 locationAddress: selectedAddress.address,
-                notificationCount: NotificationDummyData.notifications.length,
+
+                notificationCount: unreadCount,
+
+                //  Location
                 onLocationTap: () {
                   showModalBottomSheet(
                     context: context,
