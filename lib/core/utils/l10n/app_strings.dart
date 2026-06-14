@@ -303,7 +303,7 @@ class AppStrings {
 
   static const String savedCards = 'البطاقات المحفوظة';
   static const String defaultCard = 'افتراضي';
-  static const String addNewCard = '+ اضافة بطاقه جديد';
+  static const String addNewCard = 'اضافة بطاقه جديد';
 
   // --- Booking Flow: Order Summary ---
   static const String bookingSummary = 'ملخص الحجز';

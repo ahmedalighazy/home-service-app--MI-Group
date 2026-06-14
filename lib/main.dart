@@ -58,31 +58,6 @@ class HomeServiceApp extends StatelessWidget {
             },
           ),
         );
-        // MaterialApp.router(
-        //   title: 'Home Service App',
-        //   debugShowCheckedModeBanner: false,
-        //   theme: AppTheme.lightTheme,
-        //   darkTheme: AppTheme.darkTheme,
-        //   themeMode: ThemeMode.light,
-
-        //   // ============ GoRouter Configuration ============
-        //   routerConfig: AppRouter.router,
-
-        //   // ============ Localization ============
-        //   locale: const Locale(appLanguage),
-        //   supportedLocales: const [Locale('en', ''), Locale('ar', '')],
-        //   localizationsDelegates: const [
-        //     GlobalMaterialLocalizations.delegate,
-        //     GlobalWidgetsLocalizations.delegate,
-        //     GlobalCupertinoLocalizations.delegate,
-        //   ],
-        //   localeResolutionCallback: (locale, supportedLocales) {
-        //     // Use device locale if supported, otherwise fallback to first supported locale
-        //     return supportedLocales.contains(locale)
-        //         ? locale
-        //         : supportedLocales.first;
-        //   },
-        // );
       },
     );
   }

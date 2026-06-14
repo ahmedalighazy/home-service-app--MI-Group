@@ -34,6 +34,9 @@ class AddCardButtonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(Icons.add, color: AppColors.primary, size: 18.r),
+            horizontalSpace(5),
+
             Text(
               AppStrings.addNewCard,
               style: AppText.semiBoldText(
@@ -41,8 +44,6 @@ class AddCardButtonWidget extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            horizontalSpace(8),
-            Icon(Icons.add, color: AppColors.primary, size: 24.r),
           ],
         ),
       ),

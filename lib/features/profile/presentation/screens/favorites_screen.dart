@@ -16,17 +16,15 @@ class FavoritesScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: AppColors.softWhite,
       appBar: const CustomAppBar(title: AppStrings.favorites),
-      body: SafeArea(
-        child: hasFavorites
-            ? const FavoritesListWidget()
-            : EmptyStateWidget(
-                iconPath: IconsPath.illustrationSvg,
-                title: AppStrings.noFavoritesYet,
-                subtitle: AppStrings.saveServicesToAccessLater,
-                onButtonPressed: () {},
-                buttonLabel: AppStrings.browseServices,
-              ),
-      ),
+      body: hasFavorites
+          ? const FavoritesListWidget()
+          : EmptyStateWidget(
+              iconPath: IconsPath.illustrationSvg,
+              title: AppStrings.noFavoritesYet,
+              subtitle: AppStrings.saveServicesToAccessLater,
+              onButtonPressed: () {},
+              buttonLabel: AppStrings.browseServices,
+            ),
     );
   }
 }

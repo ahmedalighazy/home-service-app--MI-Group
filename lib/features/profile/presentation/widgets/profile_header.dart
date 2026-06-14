@@ -45,24 +45,11 @@ class ProfileHeader extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: AppText.semiBoldIbm(
                         color: AppColors.headingText,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                     ),
                     const Spacer(),
-                    // Container(
-                    //   padding: const EdgeInsets.all(8),
-                    //   decoration: ShapeDecoration(
-                    //     color: const Color(0xFFD4E8ED) /* green-l-light */,
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(44),
-                    //     ),
-                    //   ),
-                    //   child: SvgPicture.asset(
-                    //     IconsPath.notificationNew,
-                    //     width: 25.w,
-                    //     height: 25.h,
-                    //   ),
-                    // ),
+
                     NotificationBell(
                       onTap: () => context.push(AppRouter.notification),
                       count: NotificationDummyData.notifications.length,

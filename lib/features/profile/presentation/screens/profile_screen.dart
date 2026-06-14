@@ -36,6 +36,8 @@ class ProfileScreen extends StatelessWidget {
                       SettingGroupWidget(
                         items: [
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.vectorPerson,
                             title: AppStrings.editProfile,
                             onTap: () {
@@ -43,6 +45,8 @@ class ProfileScreen extends StatelessWidget {
                             },
                           ),
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.vectorFavorite,
                             title: AppStrings.favorites,
                             onTap: () {
@@ -50,6 +54,7 @@ class ProfileScreen extends StatelessWidget {
                             },
                           ),
                           SettingListItem(
+                            seetingScreen: true,
                             icon: IconsPath.vectorLocation,
                             title: AppStrings.myAddresses,
                             onTap: () {
@@ -57,6 +62,8 @@ class ProfileScreen extends StatelessWidget {
                             },
                           ),
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.vectorSub,
                             title: AppStrings.mySubscriptions,
                             onTap: () {
@@ -64,6 +71,8 @@ class ProfileScreen extends StatelessWidget {
                             },
                           ),
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.group,
                             title: AppStrings.paymentMethods,
                             onTap: () {
@@ -84,13 +93,18 @@ class ProfileScreen extends StatelessWidget {
                       SettingGroupWidget(
                         items: [
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.vectorSetting,
                             title: AppStrings.settings,
                             onTap: () {
                               context.pushNamed(AppRouter.setting);
                             },
                           ),
+
                           SettingListItem(
+                            seetingScreen: true,
+
                             icon: IconsPath.iconLang,
                             title: AppStrings.contactUs,
                             onTap: () {
