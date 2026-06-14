@@ -35,6 +35,8 @@ import 'package:home_service_app/features/home/domain/usecases/get_home_data_use
     as _i1057;
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart'
     as _i829;
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart'
+    as _i745;
 import 'package:home_service_app/features/search/domain/repositories/search_repository.dart'
     as _i200;
 import 'package:home_service_app/features/search/domain/usecases/search_usecase.dart'
@@ -53,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i694.AuthCubit>(() => _i694.AuthCubit());
     gh.lazySingleton<_i895.Connectivity>(() => registerModule.connectivity);
     gh.lazySingleton<_i953.DioClient>(() => _i953.DioClient());
+    gh.lazySingleton<_i745.NotificationCubit>(() => _i745.NotificationCubit());
     gh.lazySingleton<_i516.HomeLocalDataSource>(
       () => _i678.HomeLocalDataSourceImpl(),
     );

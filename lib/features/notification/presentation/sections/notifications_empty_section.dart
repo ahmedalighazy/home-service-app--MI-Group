@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -34,7 +36,7 @@ class NotificationsEmptySection extends StatelessWidget {
               textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                 color: AppColors.white,
               ),
-              onTap: () {},
+              onTap: () => context.go(AppRouter.home),
             ),
           ],
         ),

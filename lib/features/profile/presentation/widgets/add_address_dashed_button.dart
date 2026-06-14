@@ -24,7 +24,7 @@ class AddAddressDashedButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
           border: Border.all(
-            color: AppColors.primary.withValues(alpha: 0.1),
+            color: AppColors.borderGrey,
             width: 1.5,
             style: BorderStyle
                 .solid, // For real dashed border, CustomPainter or package like dotted_border is needed.

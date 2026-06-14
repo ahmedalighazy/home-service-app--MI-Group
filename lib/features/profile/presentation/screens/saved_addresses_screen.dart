@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
+import 'package:home_service_app/features/address/presentation/widgets/custom_add_buttom_sheet.dart';
 import 'package:home_service_app/features/profile/data/models/address_model.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
@@ -10,7 +11,6 @@ import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/show_dialog.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
-import '../widgets/add_address_dashed_button.dart';
 import '../widgets/address_card_widget.dart';
 
 class SavedAddressesScreen extends StatefulWidget {
@@ -82,10 +82,11 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
                     },
                   ),
                   verticalSpace(24),
-                  AddAddressDashedButton(
-                    label: 'اضافة عنوان جديد',
-                    onTap: () {},
-                  ),
+                  CustomAddButtomSheet(isProfileScreen: true),
+                  // AddAddressDashedButton(
+                  //   label: 'اضافة عنوان جديد',
+                  //   onTap: () {},
+                  // ),
                 ],
               ),
             ),

@@ -23,7 +23,7 @@ class SearchCubit extends Cubit<SearchState> {
     final updatedSearches = [
       trimmedValue,
       ...state.recentSearches.where((item) => item != trimmedValue),
-    ];
+    ].take(10).toList();
 
     emit(state.copyWith(recentSearches: updatedSearches));
   }
@@ -33,14 +33,16 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void search(String query) {
+    final normalizedQuery = query.trim().toLowerCase();
+
     final filteredResults = SearchDummyData.results
-        .where((item) => item.title.contains(query))
+        .where((item) => item.title.toLowerCase().contains(normalizedQuery))
         .toList();
 
     emit(state.copyWith(query: query, results: filteredResults));
   }
 
   void clearSearch() {
-    emit(_buildInitialState());
+    emit(state.copyWith(query: '', results: []));
   }
 }
