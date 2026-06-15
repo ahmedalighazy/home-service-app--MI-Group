@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/visit_model.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -35,7 +36,7 @@ class MyVisitsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
-          title: AppStrings.myVisits,
+          title: context.tr(LocaleKeys.profileMyVisits),
           onBack: () => context.pop(),
           bottom: TabBar(
             labelStyle: AppText.ibmHeading14(),
@@ -44,16 +45,15 @@ class MyVisitsScreen extends StatelessWidget {
             unselectedLabelColor: AppColors.primaryText,
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
-            tabs: const [
-              Tab(text: AppStrings.upcomingVisits),
-
-              Tab(text: AppStrings.previousSubscriptions),
+            tabs: [
+              Tab(text: context.tr(LocaleKeys.profileUpcomingVisits)),
+              Tab(text: context.tr(LocaleKeys.profilePreviousVisits)),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            const Center(child: Text('لا توجد زيارات سابقة')),
+            Center(child: Text(context.tr(LocaleKeys.profileNoPreviousVisits))),
             ListView.builder(
               padding: EdgeInsets.all(AppSizes.paddingM.r),
               itemCount: upcomingVisits.length,

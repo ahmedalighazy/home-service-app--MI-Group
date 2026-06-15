@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../logic/cubit/booking_cubit.dart';
 import '../../logic/cubit/booking_state.dart';
 
@@ -17,17 +19,18 @@ class TimeSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('اختر وقت', style: AppText.ibmHeading14()),
+        Text(context.tr(LocaleKeys.bookingChooseTime), style: AppText.ibmHeading14()),
         verticalSpace(12),
         SizedBox(
-          height: 80.h,
+          height: 100.h,
+
 
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
 
             itemCount: 6,
             itemBuilder: (context, index) => _TimeItem(
-              time: '08:00 ص\n-09:00 ص',
+              time: '08:00 ${context.tr(LocaleKeys.bookingAm)}\n-09:00 ${context.tr(LocaleKeys.bookingAm)}',
               index: index,
               onTap: () => context.read<BookingCubit>().selectTime(index),
             ),

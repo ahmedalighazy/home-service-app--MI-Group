@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
 import '../../data/repositories/booking_repository.dart';
 import '../widgets/booking_card.dart';
@@ -56,17 +57,18 @@ class _BookingContent extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 10.h),
+
               child: Row(
                 children: [
                   Text(
-                    AppStrings.navBookings,
+                    context.tr(LocaleKeys.bookingUpcoming),
                     style: AppText.boldIbm(
                       color: AppColors.black,
                       fontSize: 18,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   SvgPicture.asset(
                     IconsPath.notificationNew,
                     width: 23.w,
@@ -83,11 +85,10 @@ class _BookingContent extends StatelessWidget {
               unselectedLabelColor: AppColors.primaryText,
               indicatorColor: AppColors.primary,
 
-              // automaticIndicatorColorAdjustment: false,
-              indicatorSize: TabBarIndicatorSize.tab, // dividerHeight: 59,
-              tabs: const [
-                Tab(text: AppStrings.currentSubscriptions),
-                Tab(text: AppStrings.previousSubscriptions),
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(text: context.tr(LocaleKeys.bookingUpcoming)),
+                Tab(text: context.tr(LocaleKeys.bookingPrevious)),
               ],
             ),
             Expanded(
@@ -107,10 +108,10 @@ class _BookingContent extends StatelessWidget {
                       : EmptyStateWidget(
                           isscreenBooking: true,
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.notFindbooking,
-                          subtitle: AppStrings.bookdesc,
+                          title: context.tr(LocaleKeys.bookingNotFound),
+                          subtitle: context.tr(LocaleKeys.bookingDescription),
                           onButtonPressed: () {},
-                          buttonLabel: AppStrings.bookNow,
+                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
                         ),
 
                   bookings.isEmpty
@@ -128,10 +129,10 @@ class _BookingContent extends StatelessWidget {
                           isscreenBooking: true,
 
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.notFindbooking,
-                          subtitle: AppStrings.bookdesc,
+                          title: context.tr(LocaleKeys.bookingNotFound),
+                          subtitle: context.tr(LocaleKeys.bookingDescription),
                           onButtonPressed: () {},
-                          buttonLabel: AppStrings.bookNow,
+                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
                         ),
                 ],
               ),

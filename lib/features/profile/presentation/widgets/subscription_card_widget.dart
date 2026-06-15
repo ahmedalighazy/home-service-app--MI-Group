@@ -6,7 +6,8 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 
@@ -48,12 +49,12 @@ class SubscriptionCardWidget extends StatelessWidget {
                     horizontalSpace(8),
 
                     Text(
-                      subscription.title,
+                      context.tr(subscription.title),
                       style: AppText.ibmHeading14(color: AppColors.black),
                     ),
                   ],
                 ),
-                _buildStatusBadge(),
+                _buildStatusBadge(context),
               ],
             ),
           ),
@@ -64,14 +65,14 @@ class SubscriptionCardWidget extends StatelessWidget {
             child: Column(
               children: [
                 _buildDetailRow(
-                  AppStrings.subscriptionTypeLabel,
-                  subscription.type,
+                  context.tr(LocaleKeys.profileSubscriptionTypeLabel),
+                  context.tr(subscription.type),
                   IconsPath.loadingDark,
                 ),
                 if (subscription.nextVisitDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.nextVisitLabel,
+                    context.tr(LocaleKeys.profileNextVisitLabel),
                     subscription.nextVisitDate!,
                     IconsPath.calenderBlack,
                   ),
@@ -79,7 +80,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                 if (subscription.nextVisitTime != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.timeLabel,
+                    context.tr(LocaleKeys.profileTimeLabel),
                     subscription.nextVisitTime!,
                     IconsPath.time,
                   ),
@@ -87,21 +88,21 @@ class SubscriptionCardWidget extends StatelessWidget {
                 if (subscription.expiryDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.expiryDateLabelTitle,
+                    context.tr(LocaleKeys.profileExpiryDateLabel),
                     subscription.expiryDate!,
                     IconsPath.group,
                   ),
                 ],
                 verticalSpace(12),
-                _buildPriceRow(),
+                _buildPriceRow(context),
                 verticalSpace(16),
                 CustomButtom(
                   onTap: onTap,
                   text: subscription.status == SubscriptionStatus.active
-                      ? AppStrings.manageSubscription
+                      ? context.tr(LocaleKeys.profileManageSubscription)
                       : (subscription.status == SubscriptionStatus.paused
-                            ? AppStrings.reactivateBtn
-                            : AppStrings.subscribeAgainBtn),
+                            ? context.tr(LocaleKeys.profileReactivateBtn)
+                            : context.tr(LocaleKeys.profileSubscribeAgainBtn)),
                   textStyle: AppText.ibmButton16(color: AppColors.white),
                   startColor: AppColors.primary,
                   endColor: AppColors.dark,
@@ -114,28 +115,24 @@ class SubscriptionCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge() {
-    Color bgColor;
-    Color textColor;
-    String label;
-
-    switch (subscription.status) {
-      case SubscriptionStatus.active:
-        bgColor = const Color(0xFFECFDF5);
-        textColor = const Color(0xFF059669);
-        label = AppStrings.activeStatus;
-        break;
-      case SubscriptionStatus.paused:
-        bgColor = const Color(0xFFFFFBEB);
-        textColor = const Color(0xFFD97706);
-        label = AppStrings.pausedStatus;
-        break;
-      case SubscriptionStatus.ended:
-        bgColor = const Color(0xFFFEF2F2);
-        textColor = const Color(0xFFDC2626);
-        label = AppStrings.endedStatus;
-        break;
-    }
+  Widget _buildStatusBadge(BuildContext context) {
+    final (Color bgColor, Color textColor, String key) = switch (subscription.status) {
+      SubscriptionStatus.active => (
+        const Color(0xFFECFDF5),
+        const Color(0xFF059669),
+        LocaleKeys.profileSubscriptionStatusActive,
+      ),
+      SubscriptionStatus.paused => (
+        const Color(0xFFFFFBEB),
+        const Color(0xFFD97706),
+        LocaleKeys.profileSubscriptionStatusPaused,
+      ),
+      SubscriptionStatus.ended => (
+        const Color(0xFFFEF2F2),
+        const Color(0xFFDC2626),
+        LocaleKeys.profileSubscriptionStatusEnded,
+      ),
+    };
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -144,7 +141,7 @@ class SubscriptionCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radiusCircular.r),
       ),
       child: Text(
-        label,
+        context.tr(key),
         style: AppText.ibmDescription12(
           color: textColor,
         ).copyWith(fontWeight: FontWeight.w600),
@@ -178,7 +175,7 @@ class SubscriptionCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow() {
+  Widget _buildPriceRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -189,13 +186,13 @@ class SubscriptionCardWidget extends StatelessWidget {
             horizontalSpace(8),
 
             Text(
-              AppStrings.priceLabel,
+              context.tr(LocaleKeys.profilePriceLabel),
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
             ),
           ],
         ),
         Text(
-          '${subscription.price.toInt()} ${AppStrings.monthlyPriceSuffix}',
+          '${subscription.price.toInt()} ${context.tr(LocaleKeys.profileMonthlyPriceSuffix)}',
           style: AppText.ibmHeading14(color: AppColors.primary),
         ),
       ],

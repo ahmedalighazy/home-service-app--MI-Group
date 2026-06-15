@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -38,21 +38,21 @@ class ProfileCard extends StatelessWidget {
             radius: 35,
             child: Image.asset(AppAssets.cleaningGuy, fit: BoxFit.cover),
           ),
-          SizedBox(width: 20.w),
+          horizontalSpace(20),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.profileName,
+                context.tr(LocaleKeys.profileName),
                 style: AppText.semiBoldText(
                   color: AppColors.headingText,
                   fontSize: 12,
                 ),
               ),
-              SizedBox(height: 5.h),
+              verticalSpace(5),
               Text(
-                AppStrings.phoneNumber,
+                context.tr(LocaleKeys.profilePhoneNumber),
                 textDirection: TextDirection.ltr,
                 style: AppText.regularText(
                   color: AppColors.secondaryText,
@@ -61,9 +61,7 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-
-          const SizedBox(width: 20),
-
+          horizontalSpace(20),
           const Spacer(),
         ],
       ),

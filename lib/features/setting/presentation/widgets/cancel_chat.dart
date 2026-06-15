@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart'
     show AppColors;
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../core/constants/icons_path.dart';
 import '../../../../core/themes/text/app_text.dart';
@@ -42,7 +44,7 @@ class CancelChat extends StatelessWidget {
               children: [
                 SvgPicture.asset(IconsPath.exit, width: 15.w, height: 15.h),
                 Text(
-                  'اعادة فتح التذكرة',
+                  context.tr(LocaleKeys.helpCenterReopenTicket),
                   textAlign: TextAlign.center,
                   style: AppText.ibmHeading14(color: AppColors.greenPrimary),
                 ),
@@ -51,7 +53,7 @@ class CancelChat extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            'هذة المحادثة للقراة فقط',
+            context.tr(LocaleKeys.helpCenterReadOnlyChat),
             style: AppText.ibmHeading14(
               color: AppColors.textLightGrey,
             ).copyWith(fontWeight: FontWeight.w400),

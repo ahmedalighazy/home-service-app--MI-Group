@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../setting/presentation/widgets/setting_list_item.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.vectorPerson,
-                            title: AppStrings.editProfile,
+                            title: context.tr(LocaleKeys.profileEdit),
                             onTap: () {
                               context.pushNamed(AppRouter.editProfile);
                             },
@@ -48,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.vectorFavorite,
-                            title: AppStrings.favorites,
+                            title: context.tr(LocaleKeys.profileFavorites),
                             onTap: () {
                               context.pushNamed(AppRouter.favorites);
                             },
@@ -56,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                           SettingListItem(
                             seetingScreen: true,
                             icon: IconsPath.vectorLocation,
-                            title: AppStrings.myAddresses,
+                            title: context.tr(LocaleKeys.profileMyAddresses),
                             onTap: () {
                               context.pushNamed(AppRouter.savedAddresses);
                             },
@@ -65,7 +66,9 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.vectorSub,
-                            title: AppStrings.mySubscriptions,
+                            title: context.tr(
+                              LocaleKeys.profileMySubscriptions,
+                            ),
                             onTap: () {
                               context.pushNamed(AppRouter.subscriptions);
                             },
@@ -74,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.group,
-                            title: AppStrings.paymentMethods,
+                            title: context.tr(LocaleKeys.profilePaymentMethods),
                             onTap: () {
                               context.pushNamed(AppRouter.paymentMethods);
                             },
@@ -96,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.vectorSetting,
-                            title: AppStrings.settings,
+                            title: context.tr(LocaleKeys.settingsTitle),
                             onTap: () {
                               context.pushNamed(AppRouter.setting);
                             },
@@ -106,9 +109,11 @@ class ProfileScreen extends StatelessWidget {
                             seetingScreen: true,
 
                             icon: IconsPath.iconLang,
-                            title: AppStrings.contactUs,
+                            title: context.tr(LocaleKeys.profileHelpCenter),
                             onTap: () {
                               context.pushNamed(AppRouter.contactUs);
+
+                              // context.pushNamed(AppRouter.helpCenter);
                             },
                           ),
                         ],

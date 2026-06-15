@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../data/models/message_model.dart';
 
@@ -40,7 +41,7 @@ class ChatMessageBubble extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 4.h),
+          verticalSpace(4),
           Text(
             '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
             style: AppText.regularText(

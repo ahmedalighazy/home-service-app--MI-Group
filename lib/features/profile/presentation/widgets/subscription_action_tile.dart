@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 /// A single action tile row inside the SubscriptionDetailScreen action list.
@@ -46,7 +47,7 @@ class SubscriptionActionTile extends StatelessWidget {
             width: 19.h,
           ),
 
-          SizedBox(width: 12.w),
+          horizontalSpace(12),
 
           Expanded(
             child: Column(
@@ -58,7 +59,7 @@ class SubscriptionActionTile extends StatelessWidget {
                   style: AppText.ibmDescription12(
                     color: AppColors.textLightGrey,
                   ),
-                  textAlign: TextAlign.right,
+                  // textAlign: TextAlign.end,
                 ),
               ],
             ),

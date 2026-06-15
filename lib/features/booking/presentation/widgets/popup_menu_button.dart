@@ -3,6 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../core/routes/app_routes.dart';
 
@@ -32,8 +35,8 @@ class CustomPopupMenuBooking extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(IconsPath.enlargement, width: 18, height: 18),
-              const SizedBox(width: 8),
-              const Text(' اعادة جدولة '),
+              horizontalSpace(8),
+              Text(context.tr(LocaleKeys.bookingReschedule)),
             ],
           ),
         ),
@@ -46,8 +49,11 @@ class CustomPopupMenuBooking extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(IconsPath.delete, width: 18, height: 18),
-              const SizedBox(width: 8),
-              const Text('Delete', style: TextStyle(color: AppColors.red)),
+              horizontalSpace(8),
+              Text(
+                context.tr(LocaleKeys.bookingCancel),
+                style: const TextStyle(color: AppColors.red),
+              ),
             ],
           ),
         ),

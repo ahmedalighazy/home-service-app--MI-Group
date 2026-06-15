@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/constants/icons_path.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -182,17 +183,17 @@ class _BookingActions extends StatelessWidget {
         onTap: onViewDetails,
         child: Container(
           height: 33.h,
-          padding: EdgeInsets.only(left: 8.r, right: 8.r),
+          padding: EdgeInsetsDirectional.only(start: 8.r, end: 8.r),
           decoration: ShapeDecoration(
             gradient: LinearGradient(
-              begin: Alignment(0.00, 0.50),
-              end: Alignment(1.00, 0.50),
+              begin: const Alignment(0.00, 0.50),
+              end: const Alignment(1.00, 0.50),
               colors: [const Color(0xFF189AB4), const Color(0xFF0A424E)],
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(44),
             ),
-            shadows: [
+            shadows: const [
               BoxShadow(
                 color: Color(0x14000000),
                 blurRadius: 10,
@@ -204,7 +205,7 @@ class _BookingActions extends StatelessWidget {
           child: Center(
             child: FittedBox(
               child: Text(
-                AppStrings.viewDetails,
+                context.tr(LocaleKeys.bookingViewDetails),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,

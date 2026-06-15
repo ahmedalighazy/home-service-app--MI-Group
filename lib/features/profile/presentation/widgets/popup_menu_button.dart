@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 enum MenuAction { favorite, edit, delete }
 
@@ -26,8 +28,8 @@ class CustomPopupMenu extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(IconsPath.star, width: 18.r, height: 18.r),
-              const SizedBox(width: 8),
-              const Text(AppStrings.defaultText),
+              horizontalSpace(8),
+              Text(context.tr(LocaleKeys.profileDefault)),
             ],
           ),
         ),
@@ -44,8 +46,8 @@ class CustomPopupMenu extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
-              const SizedBox(width: 8),
-              const Text(AppStrings.edit),
+              horizontalSpace(8),
+              Text(context.tr(LocaleKeys.profileEditAction)),
             ],
           ),
         ),
@@ -62,8 +64,11 @@ class CustomPopupMenu extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
-              const SizedBox(width: 8),
-              const Text(AppStrings.delete, style: TextStyle(color: AppColors.red)),
+              horizontalSpace(8),
+              Text(
+                context.tr(LocaleKeys.profileDeleteAction),
+                style: const TextStyle(color: AppColors.red),
+              ),
             ],
           ),
         ),

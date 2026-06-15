@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/profile/data/models/visit_model.dart';
 
 class VisitCard extends StatelessWidget {
@@ -38,7 +40,7 @@ class VisitCard extends StatelessWidget {
               width: 20,
             ),
           ),
-          SizedBox(width: 12.w),
+          horizontalSpace(12),
 
           Row(
             children: [
@@ -76,21 +78,21 @@ class _VisitStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (Color bg, Color text, String label) = switch (status) {
+    final (Color bg, Color text, String key) = switch (status) {
       VisitStatus.scheduled => (
         AppColors.primary,
         AppColors.white,
-        AppStrings.scheduledStatus,
+        LocaleKeys.profileVisitStatusScheduled,
       ),
       VisitStatus.inProgress => (
         const Color(0xFFFFFBEB),
         const Color(0xFFD97706),
-        AppStrings.inProgressStatus,
+        LocaleKeys.profileVisitStatusInProgress,
       ),
       VisitStatus.completed => (
         const Color(0xFFECFDF5),
         const Color(0xFF059669),
-        AppStrings.resolved,
+        LocaleKeys.profileVisitStatusCompleted,
       ),
     };
 
@@ -101,7 +103,7 @@ class _VisitStatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(44.r),
       ),
       child: Text(
-        label,
+        context.tr(key),
         style: AppText.ibmDescription12(
           color: text,
         ).copyWith(fontWeight: FontWeight.w600),

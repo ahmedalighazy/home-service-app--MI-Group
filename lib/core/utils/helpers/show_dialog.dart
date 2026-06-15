@@ -4,12 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../themes/colors/app_colors.dart';
 import '../../themes/text/app_text.dart';
 import '../../widgets/custom_action_buttom.dart';
 import '../../widgets/custom_buttom.dart';
-import '../l10n/app_strings.dart';
 
 void showCannotDeleteDialogred(
   BuildContext context,
@@ -22,10 +23,9 @@ void showCannotDeleteDialogred(
     context: context,
     builder: (BuildContext context) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: context.isRtl ? TextDirection.rtl : TextDirection.ltr,
         child: AlertDialog(
           backgroundColor: AppColors.white,
-
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
@@ -36,39 +36,46 @@ void showCannotDeleteDialogred(
               SvgPicture.asset(
                 isImageLgout ? IconsPath.logOutDilaog : IconsPath.group40383Svg,
               ),
+              verticalSpace(12),
               Text(
                 title,
-                style: AppText.boldIbm(color: AppColors.black, fontSize: 16),
+                style: AppText.boldIbm(color: AppColors.black, fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 12.h),
+              verticalSpace(12),
               Text(
                 content,
                 style: AppText.regularIbm(
                   color: AppColors.textLightGrey,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24.h),
+              verticalSpace(24),
               Row(
                 children: [
-                  CustomActionButton(
-                    text: 'حذف',
-                    backgroundColor: const Color(0xFFD2503C),
-                    textColor: AppColors.white,
-                    onTap: () {
-                      // delete action
-                    },
+                  Expanded(
+                    child: CustomActionButton(
+                      text: context.tr(LocaleKeys.profileDeleteAction),
+                      backgroundColor: AppColors.red,
+                      textColor: AppColors.white,
+                      onTap: () {
+                        // delete action
+                      },
+                    ),
                   ),
                   horizontalSpace(10),
-                  CustomActionButton(
-                    text: 'تعديل',
-                    backgroundColor: AppColors.white,
-                    textColor: AppColors.primaryGrey,
-                    onTap: () {
-                      // edit action
-                    },
+                  Expanded(
+                    child: CustomActionButton(
+                      text: context.tr(
+                        LocaleKeys.profileDeleteAddressCancelBtn,
+                      ),
+                      backgroundColor: AppColors.white,
+                      textColor: AppColors.primaryGrey,
+                      onTap: () {
+                        // edit action
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -89,10 +96,9 @@ void showCannotDeleteDialog(
     context: context,
     builder: (BuildContext context) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: context.isRtl ? TextDirection.rtl : TextDirection.ltr,
         child: AlertDialog(
           backgroundColor: AppColors.white,
-
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
@@ -102,22 +108,22 @@ void showCannotDeleteDialog(
             children: [
               Text(
                 title,
-                style: AppText.boldIbm(color: AppColors.black, fontSize: 16),
+                style: AppText.boldIbm(color: AppColors.black, fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 12.h),
+              verticalSpace(12),
               Text(
                 content,
                 style: AppText.regularIbm(
                   color: AppColors.textLightGrey,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24.h),
+              verticalSpace(24),
               CustomButtom(
                 onTap: () => context.pop(),
-                text: AppStrings.okBtn,
+                text: context.tr(LocaleKeys.ok),
                 textStyle: AppText.ibmButton16(),
                 startColor: AppColors.primary,
                 endColor: AppColors.primaryActive,

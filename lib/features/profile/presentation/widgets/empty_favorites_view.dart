@@ -5,7 +5,8 @@ import '../../../../core/constants/icons_path.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/spacing.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import '../../../../core/utils/l10n/locale_keys.dart';
+import '../../../../core/utils/l10n/localization_extension.dart';
 import '../../../../core/widgets/custom_buttom.dart';
 
 class EmptyFavoritesView extends StatelessWidget {
@@ -30,7 +31,7 @@ class EmptyFavoritesView extends StatelessWidget {
           ),
           verticalSpace(16),
           Text(
-            AppStrings.noFavoritesYet,
+            context.tr(LocaleKeys.profileNoFavoritesYetTitle),
             textAlign: TextAlign.center,
             style: AppText.semiBoldIbm(
               color: AppColors.primaryText,
@@ -39,13 +40,13 @@ class EmptyFavoritesView extends StatelessWidget {
           ),
           verticalSpace(8),
           Text(
-            AppStrings.saveServicesToAccessLater,
+            context.tr(LocaleKeys.profileSaveServicesToAccessLater),
             textAlign: TextAlign.center,
             style: AppText.ibmDescription14(color: AppColors.secondaryText),
           ),
           verticalSpace(24),
           CustomButtom(
-            text: AppStrings.browseServices,
+            text: context.tr(LocaleKeys.profileBrowseServicesBtn),
             onTap: () {
               //  Navigate to services
             },

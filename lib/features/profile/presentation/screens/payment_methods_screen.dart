@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
@@ -23,28 +24,6 @@ class PaymentMethodsScreen extends StatefulWidget {
 }
 
 class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
-  // This will be replaced by BLoC state in the future
-  final List<PaymentMethodModel> _paymentMethods = [
-    PaymentMethodModel(
-      id: '1',
-      cardHolderName: 'Ahmed Ibrahim',
-      lastFourDigits: '1234',
-      expiryDate: '12/26',
-      brand: 'Visa',
-      isDefault: true,
-      iconPath: IconsPath.visaCard,
-    ),
-    PaymentMethodModel(
-      id: '2',
-      cardHolderName: 'Ahmed Ibrahim',
-      lastFourDigits: '5678',
-      expiryDate: '09/25',
-      brand: 'Mastercard',
-      isDefault: false,
-      iconPath: IconsPath.logosMastercardSvg,
-    ),
-  ];
-
   void _onAddPaymentMethod() {
     showModalBottomSheet(
       context: context,
@@ -65,36 +44,60 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   }
 
   void _onDeletePaymentMethod(PaymentMethodModel method) {
-    // Implement delete logic or show confirmation
     showCannotDeleteDialogred(
       context,
-      AppStrings.deletecard,
-      AppStrings.deletecardwaring,
+      context.tr(LocaleKeys.profileDeleteCardTitle),
+      context.tr(LocaleKeys.profileDeleteCardWarning),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<PaymentMethodModel> paymentMethods = [
+      PaymentMethodModel(
+        id: '1',
+        cardHolderName: 'Ahmed Ibrahim',
+        lastFourDigits: '1234',
+        expiryDate: '12/26',
+        brand: 'Visa',
+        isDefault: true,
+        iconPath: IconsPath.visaCard,
+      ),
+      PaymentMethodModel(
+        id: '2',
+        cardHolderName: 'Ahmed Ibrahim',
+        lastFourDigits: '5678',
+        expiryDate: '09/25',
+        brand: 'Mastercard',
+        isDefault: false,
+        iconPath: IconsPath.logosMastercardSvg,
+      ),
+    ];
+
     return Scaffold(
       appBar: CustomAppBar(
-        title: AppStrings.paymentMethods,
+        title: context.tr(LocaleKeys.profilePaymentMethods),
         onBack: () => context.pop(),
       ),
       body: Column(
         children: [
           Expanded(
-            child: _paymentMethods.isEmpty
+            child: paymentMethods.isEmpty
                 ? EmptyStateWidget(
                     iconPath: IconsPath.wallet05Svg,
-                    title: AppStrings.noSavedPaymentMethods,
-                    subtitle: AppStrings.addPaymentMethodDesc,
-                    buttonLabel: AppStrings.addPaymentMethodBtn,
+                    title: context.tr(LocaleKeys.profileNoSavedPaymentMethods),
+                    subtitle: context.tr(
+                      LocaleKeys.profileAddPaymentMethodDesc,
+                    ),
+                    buttonLabel: context.tr(
+                      LocaleKeys.profileAddPaymentMethodBtn,
+                    ),
                     onButtonPressed: _onAddPaymentMethod,
                   )
                 : ListView(
                     padding: EdgeInsets.all(AppSizes.padding.r),
                     children: [
-                      ..._paymentMethods.map(
+                      ...paymentMethods.map(
                         (method) => Padding(
                           padding: EdgeInsets.only(bottom: 12.h),
                           child: PaymentCardWidget(
@@ -109,7 +112,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                     ],
                   ),
           ),
-          if (_paymentMethods.isNotEmpty) const PaymentFooterInfoWidget(),
+          if (paymentMethods.isNotEmpty) const PaymentFooterInfoWidget(),
         ],
       ),
     );

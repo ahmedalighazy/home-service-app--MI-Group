@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../themes/colors/app_colors.dart';
 import '../themes/text/app_text.dart';
@@ -31,7 +32,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(5.r),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         decoration: BoxDecoration(
@@ -49,20 +50,24 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
                 });
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 12.r),
                 child: Row(
                   children: [
-                    Text(
-                      widget.title,
-                      style: AppText.regularIbm(
-                        color: AppColors.primaryText,
-                        fontSize: 14,
-                      ).copyWith(height: 1.6),
+                    Expanded(
+                      child: Text(
+                        widget.title,
+                        overflow: TextOverflow.ellipsis,
+                        style:
+                            AppText.regularIbm(
+                              color: AppColors.primaryText,
+                              fontSize: 14,
+                            ).copyWith(
+                              height: 1.6,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                      ),
                     ),
-                    const Spacer(),
+                    // const Spacer(),
                     AnimatedRotation(
                       turns: isExpanded ? 0.5 : 0,
                       duration: const Duration(milliseconds: 250),

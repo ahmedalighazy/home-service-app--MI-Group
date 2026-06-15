@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingListItem extends StatelessWidget {
   final String icon;
@@ -18,13 +19,11 @@ class SettingListItem extends StatelessWidget {
     super.key,
     required this.icon,
     required this.title,
-
     required this.onTap,
     this.seetingScreen = false,
     this.settingColorIcon,
     this.titleColor,
     this.logout = false,
-
     this.trailing,
   });
 
@@ -33,17 +32,16 @@ class SettingListItem extends StatelessWidget {
     return ListTile(
       splashColor: AppColors.white,
       onTap: onTap,
-
-      contentPadding: const EdgeInsets.symmetric(horizontal: 13.0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
       trailing:
           trailing ??
           Icon(
-            seetingScreen! ? Icons.chevron_right : Icons.chevron_left,
+            Icons.chevron_right,
             color: settingColorIcon ?? AppColors.greenPrimary,
-            size: 28,
+            size: 24.sp,
           ),
       title: Align(
-        alignment: Alignment.topRight,
+        alignment: AlignmentDirectional.centerStart,
         child: Text(
           title,
           style: AppText.mediumIbm(
@@ -54,8 +52,10 @@ class SettingListItem extends StatelessWidget {
       ),
       leading: SvgPicture.asset(
         icon,
+        width: 20.w,
+        height: 20.h,
         colorFilter: ColorFilter.mode(
-          logout! ? AppColors.red : AppColors.greenPrimary,
+          logout == true ? AppColors.redDanger : AppColors.primary,
           BlendMode.srcIn,
         ),
       ),

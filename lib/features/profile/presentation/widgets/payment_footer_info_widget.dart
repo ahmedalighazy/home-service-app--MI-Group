@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class PaymentFooterInfoWidget extends StatelessWidget {
   const PaymentFooterInfoWidget({super.key});
@@ -28,12 +29,11 @@ class PaymentFooterInfoWidget extends StatelessWidget {
             horizontalSpace(12),
             Expanded(
               child: Text(
-                AppStrings.defaultPaymentNotice,
+                context.tr(LocaleKeys.profileDefaultPaymentNotice),
                 style: AppText.regularText(
                   color: AppColors.textLightGrey,
                   fontSize: 14,
                 ).copyWith(height: 1.5),
-                textAlign: TextAlign.right,
               ),
             ),
           ],

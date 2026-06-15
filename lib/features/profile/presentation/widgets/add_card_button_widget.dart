@@ -4,7 +4,8 @@ import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class AddCardButtonWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -30,7 +31,7 @@ class AddCardButtonWidget extends StatelessWidget {
             Icon(Icons.add, color: AppColors.primary, size: 20.r),
             horizontalSpace(8),
             Text(
-              AppStrings.addNewCard,
+              context.tr(LocaleKeys.profileAddNewCard),
               style: AppText.semiBoldIbm(
                 color: AppColors.primary,
                 fontSize: 16.sp,

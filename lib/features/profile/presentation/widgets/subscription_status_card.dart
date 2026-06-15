@@ -5,7 +5,8 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 
 class SubscriptionStatusCard extends StatelessWidget {
@@ -31,7 +32,7 @@ class SubscriptionStatusCard extends StatelessWidget {
               horizontalSpace(8),
 
               Text(
-                subscription.title,
+                context.tr(subscription.title),
                 style: AppText.ibmHeading14(color: AppColors.black),
               ),
               // Icon(Iconsax.calendar_tick, size: 24.r, color: AppColors.primary),
@@ -64,7 +65,7 @@ class _ActiveStatusBadge extends StatelessWidget {
         ],
       ),
       child: Text(
-        AppStrings.activeStatus,
+        context.tr(LocaleKeys.profileSubscriptionStatusActive),
         style: AppText.ibmDescription12(
           color: const Color(0xFF059669),
         ).copyWith(fontWeight: FontWeight.w600),

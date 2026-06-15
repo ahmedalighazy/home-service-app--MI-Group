@@ -5,7 +5,8 @@ import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/profile/data/models/address_model.dart';
 
 import '../../../../core/constants/icons_path.dart';
@@ -71,14 +72,14 @@ class AddressCardWidget extends StatelessWidget {
           Row(
             children: [
               _ActionButton(
-                label: AppStrings.edit,
+                label: context.tr(LocaleKeys.profileEditAction),
                 icon: IconsPath.editLocation,
                 color: AppColors.primary,
                 onTap: onEdit,
               ),
               horizontalSpace(16),
               _ActionButton(
-                label: AppStrings.delete,
+                label: context.tr(LocaleKeys.profileDeleteAction),
                 icon: IconsPath.delete,
                 color: AppColors.red,
                 onTap: onDelete,
@@ -103,7 +104,7 @@ class _DefaultBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radiusXL.r),
       ),
       child: Text(
-        AppStrings.defaultText,
+        context.tr(LocaleKeys.profileDefault),
         style: AppText.semiBoldIbm(color: AppColors.white, fontSize: 13.sp),
       ),
     );

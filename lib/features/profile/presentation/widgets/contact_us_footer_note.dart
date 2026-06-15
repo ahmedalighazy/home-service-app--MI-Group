@@ -4,8 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class ContactUsFooterNote extends StatelessWidget {
   const ContactUsFooterNote({super.key});
@@ -30,16 +32,16 @@ class ContactUsFooterNote extends StatelessWidget {
             width: 20.r,
             height: 20.r,
           ),
-          SizedBox(width: 12.w),
+          horizontalSpace(12),
           Expanded(
             child: Text(
-              AppStrings.privacyConfidentialityNote,
+              context.tr(LocaleKeys.profilePrivacyConfidentialityNote),
               style: AppText.ibmDescription14(
                 color: AppColors.textLightGrey,
               ).copyWith(height: 1.5),
-              textAlign: TextAlign.right,
             ),
           ),
+
         ],
       ),
     );

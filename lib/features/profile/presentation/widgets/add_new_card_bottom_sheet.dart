@@ -4,7 +4,8 @@ import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -75,14 +76,16 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             ),
             verticalSpace(24),
             Text(
-              widget.isEdit ? AppStrings.editCard : AppStrings.addCard,
+              widget.isEdit
+                  ? context.tr(LocaleKeys.profileEditCard)
+                  : context.tr(LocaleKeys.profileAddCard),
               style: AppText.ibmHeading20(color: AppColors.black),
             ),
-        verticalSpace(24),
+            verticalSpace(24),
             CustomTextField(
               controller: _cardNumberController,
               hintText: '0000 0000 0000 0000',
-              label: AppStrings.cardNumberLabel,
+              label: context.tr(LocaleKeys.profileCardNumberLabel),
               fillColor: AppColors.white,
               textStyle: AppText.regularIbm(
                 color: AppColors.primaryText,
@@ -94,8 +97,8 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             verticalSpace(16),
             CustomTextField(
               controller: _cardHolderController,
-              hintText: AppStrings.cardHolderPlaceholder,
-              label: AppStrings.cardHolderLabel,
+              hintText: context.tr(LocaleKeys.profileCardHolderPlaceholder),
+              label: context.tr(LocaleKeys.profileCardHolderLabel),
               fillColor: AppColors.white,
               borderColor: AppColors.textLightGrey,
               textStyle: AppText.regularIbm(
@@ -110,7 +113,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                   child: CustomTextField(
                     controller: _cvvController,
                     hintText: '000',
-                    label: AppStrings.cvvLabel,
+                    label: context.tr(LocaleKeys.profileCvvLabel),
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
                     textStyle: AppText.regularIbm(
@@ -134,7 +137,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                       color: AppColors.primaryText,
                       fontSize: 14,
                     ),
-                    label: AppStrings.expiryDateLabel,
+                    label: context.tr(LocaleKeys.profileCardExpiryDateLabel),
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
                     keyboardType: TextInputType.datetime,
@@ -152,7 +155,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                   activeColor: AppColors.primary,
                 ),
                 Text(
-                  AppStrings.saveCardForLater,
+                  context.tr(LocaleKeys.profileSaveCardForLater),
                   style: AppText.ibmDescription14(color: AppColors.primaryText),
                 ),
               ],
@@ -160,7 +163,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             verticalSpace(24),
             CustomButtom(
               onTap: () => context.pop(),
-              text: AppStrings.save,
+              text: context.tr(LocaleKeys.profileSave),
               textStyle: AppText.ibmButton16(),
               startColor: AppColors.primary,
               endColor: AppColors.primaryActive,

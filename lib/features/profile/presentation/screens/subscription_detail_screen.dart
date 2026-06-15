@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -27,7 +28,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
     return Scaffold(
       // ,
       appBar: CustomAppBar(
-        title: AppStrings.manageSubscription,
+        title: context.tr(LocaleKeys.profileManageSubscription),
         onBack: () => context.pop(),
       ),
       body: SingleChildScrollView(
@@ -49,18 +50,18 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
   void _showPauseConfirmation() {
     showCannotDeleteDialogred(
       context,
-      AppStrings.pausePopupTitle,
-      AppStrings.pausePopupDesc,
-      AppStrings.confirmPauseBtn,
+      context.tr(LocaleKeys.profilePausePopupTitle),
+      context.tr(LocaleKeys.profilePausePopupDesc),
+      context.tr(LocaleKeys.profileConfirmPauseBtn),
     );
   }
 
   void _showCancelConfirmation() {
     showCannotDeleteDialogred(
       context,
-      AppStrings.cancelPopupTitle,
-      AppStrings.cancelPopupDesc,
-      AppStrings.confirmCancelBtn,
+      context.tr(LocaleKeys.profileCancelPopupTitle),
+      context.tr(LocaleKeys.profileCancelPopupDesc),
+      context.tr(LocaleKeys.profileConfirmCancelBtn),
     );
   }
 }
