@@ -318,6 +318,39 @@ class AppText {
     );
   }
 
+  /// Heading style for large titles
+  static TextStyle ibmHeading20({
+    Color color = AppColors.dark,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  /// Heading style for medium titles
+  static TextStyle ibmHeading16({
+    Color color = AppColors.dark,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  /// Heading style for small titles
+  static TextStyle ibmHeading14({
+    Color color = AppColors.dark,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   /// Description style for smaller text
   static TextStyle ibmDescription12({
     Color color = AppColors.secondaryText,
@@ -327,6 +360,105 @@ class AppText {
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
       height: 1.4,
+    );
+  }
+
+  // --- Additional Missing Text Styles ---
+  static TextStyle get ibmPlexSansArabic16SemiBold => GoogleFonts.ibmPlexSansArabic(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get ibmPlexSansArabic12SemiBold => GoogleFonts.ibmPlexSansArabic(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get semiBold16Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get semiBold14Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get regular12Grey => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.gray,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle get semiBold14White => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.white,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get bold14Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle get semiBold18Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get semiBold12Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get regular14Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle get regular10Grey => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.gray,
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle get bold12Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle get semiBold20Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle get bold10Black => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.dark,
+    fontSize: 10.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle get bold16Cyan => GoogleFonts.ibmPlexSansArabic(
+    color: AppColors.greenPrimary,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle ibmFieldLabel12({
+    Color color = AppColors.dark,
+  }) {
+    return GoogleFonts.ibmPlexSansArabic(
+      color: color,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w600,
     );
   }
 }

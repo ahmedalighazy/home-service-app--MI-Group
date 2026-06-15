@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/routing/app_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'core/routes/app_routes.dart';
 import 'core/themes/theming/app_theme.dart';
 import 'core/di/injection.dart';
 import 'core/utils/helpers/cache_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Use locally bundled fonts — no internet needed
+  GoogleFonts.config.allowRuntimeFetching = false;
   await CacheHelper.init();
   await setupGetIt();
   runApp(const HomeServiceApp());

@@ -4,8 +4,7 @@ import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
-/// A simple "── أو باستخدام ──" divider used between
-/// primary login and social login options.
+
 class AuthOrDivider extends StatelessWidget {
   const AuthOrDivider({super.key});
 

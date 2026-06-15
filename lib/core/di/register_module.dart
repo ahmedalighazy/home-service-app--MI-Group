@@ -11,3 +11,8 @@ void registerCoreModules(GetIt getIt) {
   // Register NetworkInfo implementation
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt<Connectivity>()));
 }
+
+/// Module class for dependency injection
+class RegisterModule {
+  Connectivity get connectivity => Connectivity();
+}

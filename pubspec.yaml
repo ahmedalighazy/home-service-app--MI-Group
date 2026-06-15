@@ -53,6 +53,8 @@ dependencies:
   connectivity_plus: ^6.0.2
   google_sign_in: ^6.2.0
   sign_in_with_apple: ^7.0.1
+  animated_toggle_switch: ^0.8.7
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -67,3 +69,15 @@ flutter:
 
   assets:
     - assets/images/
+
+  fonts:
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 700

@@ -9,6 +9,10 @@ class BookingModel {
   final String address;
   final double totalPrice;
   final BookingStatus status;
+  final String? imageUrl;
+  final String? notes;
+  final String? paymentMethod;
+  final double? price;
 
   BookingModel({
     required this.id,
@@ -19,5 +23,9 @@ class BookingModel {
     required this.address,
     required this.totalPrice,
     required this.status,
+    this.imageUrl,
+    this.notes,
+    this.paymentMethod,
+    this.price,
   });
 }

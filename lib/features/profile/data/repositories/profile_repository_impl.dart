@@ -7,8 +7,8 @@ import '../datasources/profile_remote_datasource.dart';
 import '../datasources/profile_local_datasource.dart';
 import '../models/address_model.dart';
 import '../models/payment_method_model.dart';
-import '../models/subscription_model.dart';
-import '../models/visit_model.dart';
+import '../models/subscription_model.dart' as sub_model;
+import '../models/visit_model.dart' as visit_model;
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;
@@ -188,7 +188,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     );
   }
 
-  SubscriptionEntity _toSubscriptionEntity(SubscriptionModel model) {
+  SubscriptionEntity _toSubscriptionEntity(sub_model.SubscriptionModel model) {
     return SubscriptionEntity(
       id: model.id,
       title: model.planName,
@@ -215,7 +215,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     }
   }
 
-  VisitEntity _toVisitEntity(VisitModel model) {
+  VisitEntity _toVisitEntity(visit_model.VisitModel model) {
     return VisitEntity(
       id: model.id,
       date: "${model.date.year}-${model.date.month.toString().padLeft(2, '0')}-${model.date.day.toString().padLeft(2, '0')}",

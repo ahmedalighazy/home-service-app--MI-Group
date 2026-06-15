@@ -1,4 +1,4 @@
-import 'package:home_service_app/core/utils/validation/auth_validation.dart';
+import 'package:home_service_app/core/utils/validation/validators_helper.dart';
 
 /// Validates Complete Profile form data
 /// 
@@ -31,58 +31,40 @@ class ProfileValidator {
   /// 
   /// Returns null if name is valid, error message otherwise.
   static String? validateName(String name) {
-    if (name.isEmpty) {
-      return 'Name is required';
-    }
-    if (name.trim().length < 2) {
-      return 'Name must be at least 2 characters';
-    }
-    return null;
+    final err = ValidatorsHelper.getNameErrorMessage(name);
+    return err.isEmpty ? null : err;
   }
 
   /// Validate email field
   /// 
   /// Returns null if email is valid, error message otherwise.
   static String? validateEmail(String email) {
-    if (email.isEmpty) {
-      return 'Email is required';
-    }
-    if (!AuthValidation.isValidEmail(email)) {
-      return 'Invalid email format';
-    }
-    return null;
+    final err = ValidatorsHelper.getEmailErrorMessage(email);
+    return err.isEmpty ? null : err;
   }
 
   /// Validate gender field
   /// 
   /// Returns null if gender is valid, error message otherwise.
   static String? validateGender(String gender) {
-    if (gender.isEmpty) {
-      return 'Gender is required';
-    }
-    return null;
+    final err = ValidatorsHelper.getGenderErrorMessage(gender);
+    return err.isEmpty ? null : err;
   }
 
   /// Validate optional address field
   /// 
   /// Returns null if address is valid, error message otherwise.
   static String? validateAddress(String? address) {
-    // Address is optional, so only validate length if provided
-    if (address != null && address.isNotEmpty && address.length > 200) {
-      return 'Address must be less than 200 characters';
-    }
-    return null;
+    final err = ValidatorsHelper.getAddressErrorMessage(address);
+    return err.isEmpty ? null : err;
   }
 
   /// Validate optional bio field
   /// 
   /// Returns null if bio is valid, error message otherwise.
   static String? validateBio(String? bio) {
-    // Bio is optional, so only validate length if provided
-    if (bio != null && bio.isNotEmpty && bio.length > 500) {
-      return 'Bio must be less than 500 characters';
-    }
-    return null;
+    final err = ValidatorsHelper.getBioErrorMessage(bio);
+    return err.isEmpty ? null : err;
   }
 
   /// Check if entire form is valid

@@ -28,7 +28,7 @@ class SearchRepositoryImpl implements SearchRepository {
         final entities = cached.map((model) => _toSearchResultEntity(model)).toList();
         return Right(entities);
       }
-      return Left(ServerFailure(message: 'Search failed: $e'));
+      return Left(ServerFailure('Search failed: $e'));
     }
   }
 
