@@ -1,34 +1,22 @@
-
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import '../error/auth_exceptions.dart';
 
-// ════════════════════════════════════════════════════════════════
-// Retry Configuration
-// ════════════════════════════════════════════════════════════════
-
-/// Configuration for retry behavior
 class RetryConfig {
-  /// Maximum number of retry attempts
+
   final int maxRetries;
-  
-  /// Initial delay between retries
+
   final Duration initialDelay;
-  
-  /// Maximum delay between retries (caps exponential backoff)
+
   final Duration maxDelay;
-  
-  /// Multiplier for exponential backoff
+
   final double backoffMultiplier;
-  
-  /// Random jitter to add (0.0 to 1.0)
+
   final double jitter;
-  
-  /// Exceptions that should trigger retry
+
   final List<Type> retryableExceptions;
-  
-  /// HTTP status codes that should trigger retry
+
   final List<int> retryableStatusCodes;
 
   const RetryConfig({
@@ -48,7 +36,6 @@ class RetryConfig {
     this.retryableStatusCodes = const [408, 429, 500, 502, 503, 504],
   });
 
-  /// Aggressive retry for critical operations
   static const aggressive = RetryConfig(
     maxRetries: 5,
     initialDelay: Duration(milliseconds: 200),
@@ -56,7 +43,6 @@ class RetryConfig {
     backoffMultiplier: 1.5,
   );
 
-  /// Conservative retry for less critical operations
   static const conservative = RetryConfig(
     maxRetries: 2,
     initialDelay: Duration(milliseconds: 1000),
@@ -64,29 +50,19 @@ class RetryConfig {
     backoffMultiplier: 2.0,
   );
 
-  /// No retry - fail immediately
   static const noRetry = RetryConfig(maxRetries: 0);
 }
 
-// ════════════════════════════════════════════════════════════════
-// Retry Result
-// ════════════════════════════════════════════════════════════════
-
-/// Result of retry operation
 class RetryResult<T> {
-  /// Success result
+
   final T? result;
-  
-  /// Final exception if failed
+
   final AuthException? exception;
-  
-  /// Number of attempts made
+
   final int attempts;
-  
-  /// Total time spent retrying
+
   final Duration totalTime;
-  
-  /// Whether succeeded
+
   final bool isSuccess;
 
   RetryResult({
@@ -97,10 +73,8 @@ class RetryResult<T> {
     required this.isSuccess,
   });
 
-  /// Check if successful
   bool get succeeded => isSuccess;
 
-  /// Check if failed
   bool get failed => !isSuccess;
 
   @override
@@ -113,18 +87,12 @@ RetryResult {
 }''';
 }
 
-// ════════════════════════════════════════════════════════════════
-// Retry Policy
-// ════════════════════════════════════════════════════════════════
-
-/// Implements retry logic with exponential backoff
 class AuthRetryPolicy {
   final RetryConfig config;
 
-  AuthRetryPolicy({RetryConfig? config}) 
+  AuthRetryPolicy({RetryConfig? config})
       : config = config ?? const RetryConfig();
 
-  /// Execute operation with retries
   Future<RetryResult<T>> execute<T>(
     Future<T> Function() operation, {
     String? operationName,
@@ -144,7 +112,7 @@ class AuthRetryPolicy {
         );
 
         final result = await operation();
-        
+
         _logRetrySuccess(
           operationName: operationName,
           attempts: attempts,
@@ -164,7 +132,6 @@ class AuthRetryPolicy {
           stackTrace: stackTrace,
         );
 
-        // Check if retryable
         if (!_isRetryable(lastException)) {
           _logRetryFailed(
             operationName: operationName,
@@ -182,7 +149,6 @@ class AuthRetryPolicy {
           );
         }
 
-        // Check if max retries reached
         if (attempts >= config.maxRetries + 1) {
           _logRetryFailed(
             operationName: operationName,
@@ -200,7 +166,6 @@ class AuthRetryPolicy {
           );
         }
 
-        // Calculate delay
         final delay = _calculateDelay(attempts);
         _logRetryDelay(
           operationName: operationName,
@@ -208,12 +173,10 @@ class AuthRetryPolicy {
           attempt: attempts,
         );
 
-        // Wait before retry
         await Future.delayed(delay);
       }
     }
 
-    // Should not reach here, but just in case
     return RetryResult(
       result: null,
       exception: lastException ?? UnknownAuthException(),
@@ -223,7 +186,6 @@ class AuthRetryPolicy {
     );
   }
 
-  /// Execute with stream response
   Stream<T> executeStream<T>(
     Stream<T> Function() operation, {
     String? operationName,
@@ -246,7 +208,7 @@ class AuthRetryPolicy {
       } catch (error, stackTrace) {
         lastException = _handleException(error, stackTrace: stackTrace);
 
-        if (!_isRetryable(lastException) || 
+        if (!_isRetryable(lastException) ||
             attempts >= config.maxRetries + 1) {
           throw lastException;
         }
@@ -257,17 +219,12 @@ class AuthRetryPolicy {
     }
   }
 
-  // ══════════════════════════════════════════════════════════════
-  // Private Methods
-  // ══════════════════════════════════════════════════════════════
-
   bool _isRetryable(AuthException exception) {
-    // Check if exception type is retryable
+
     if (config.retryableExceptions.contains(exception.runtimeType)) {
       return true;
     }
 
-    // Check if exception has retry flag
     if (exception.isRetryable) {
       return true;
     }
@@ -287,18 +244,16 @@ class AuthRetryPolicy {
   }
 
   Duration _calculateDelay(int attemptNumber) {
-    // Calculate exponential backoff: initialDelay * (multiplier ^ (attempt - 1))
-    final exponentialDelay = config.initialDelay * 
+
+    final exponentialDelay = config.initialDelay *
         pow(config.backoffMultiplier, attemptNumber - 1) as double;
 
-    // Cap at max delay
     final cappedDelay = Duration(
       milliseconds: exponentialDelay
           .toInt()
           .clamp(0, config.maxDelay.inMilliseconds),
     );
 
-    // Add jitter
     final jitterMs = (cappedDelay.inMilliseconds * config.jitter).toInt();
     final randomJitter = (jitterMs * (0.5 + _random.nextDouble())).toInt();
 
@@ -358,13 +313,8 @@ class AuthRetryPolicy {
   }
 }
 
-// ════════════════════════════════════════════════════════════════
-// Global Retry Policies
-// ════════════════════════════════════════════════════════════════
-
-/// Global retry policies for different scenarios
 class AuthRetryPolicies {
-  /// Login operations - moderate retry
+
   static final login = AuthRetryPolicy(
     config: const RetryConfig(
       maxRetries: 2,
@@ -373,12 +323,10 @@ class AuthRetryPolicies {
     ),
   );
 
-  /// OTP operations - aggressive retry
   static final otp = AuthRetryPolicy(
     config: RetryConfig.aggressive,
   );
 
-  /// Token operations - conservative retry
   static final token = AuthRetryPolicy(
     config: const RetryConfig(
       maxRetries: 1,
@@ -386,12 +334,10 @@ class AuthRetryPolicies {
     ),
   );
 
-  /// Network operations - aggressive retry
   static final network = AuthRetryPolicy(
     config: RetryConfig.aggressive,
   );
 
-  /// SMS operations - moderate retry
   static final sms = AuthRetryPolicy(
     config: const RetryConfig(
       maxRetries: 3,
@@ -400,7 +346,6 @@ class AuthRetryPolicies {
     ),
   );
 
-  /// Local storage operations - conservative, quick fail
   static final storage = AuthRetryPolicy(
     config: const RetryConfig(
       maxRetries: 1,
@@ -409,7 +354,6 @@ class AuthRetryPolicies {
   );
 }
 
-// Math helper for pow function
 double pow(double base, double exponent) {
   return base * (exponent - 1 <= 0 ? 1 : pow(base, exponent - 1));
 }

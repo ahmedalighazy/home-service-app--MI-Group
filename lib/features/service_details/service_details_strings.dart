@@ -1,0 +1,238 @@
+import 'package:easy_localization/easy_localization.dart';
+
+/// Localization keys for the service_details feature.
+/// All strings are loaded from assets/translations/{locale}.json via easy_localization.
+class SdStrings {
+  const SdStrings._();
+
+  static String get add => 'sd_add'.tr();
+  static String get addDiscountCode => 'sd_addDiscountCode'.tr();
+  static String get addCard => 'sd_addCard'.tr();
+  static String get addNotesHere => 'sd_addNotesHere'.tr();
+  static String get addressLocation => 'sd_addressLocation'.tr();
+  static String get codePrefix => 'sd_codePrefix'.tr();
+  static String get afterCompletionService => 'sd_afterCompletionService'.tr();
+  static String get allPaymentsEncrypted => 'sd_allPaymentsEncrypted'.tr();
+  static String get applyCode => 'sd_applyCode'.tr();
+  static String get areaPlace => 'sd_areaPlace'.tr();
+  static String get cancelBookingBefore5h => 'sd_cancelBookingBefore5h'.tr();
+  static String get cardCreditMada => 'sd_cardCreditMada'.tr();
+  static String get cardsSaved => 'sd_cardsSaved'.tr();
+  static String get changeMethodPayment => 'sd_changeMethodPayment'.tr();
+  static String get chooseTime => 'sd_chooseTime'.tr();
+  static String get chooseDay => 'sd_chooseDay'.tr();
+  static String get companiesMosques => 'sd_companiesMosques'.tr();
+  static String get company => 'sd_company'.tr();
+  static String get confirm => 'sd_confirm'.tr();
+  static String get copy => 'sd_copy'.tr();
+  static String get countRoomsKitchens => 'sd_countRoomsKitchens'.tr();
+  static String get countTimesInWeek => 'sd_countTimesInWeek'.tr();
+  static String get countWorkersWorkers => 'sd_countWorkersWorkers'.tr();
+  static String get dateTime => 'sd_dateTime'.tr();
+  static String get defaultCard => 'sd_defaultCard'.tr();
+  static String get detailsAdditionalOptional => 'sd_detailsAdditionalOptional'.tr();
+  static String get detailsFloors => 'sd_detailsFloors'.tr();
+  static String get determineFinalAfterOnly => 'sd_determineFinalAfterOnly'.tr();
+  static String get doneConfirmBooking => 'sd_doneConfirmBooking'.tr();
+  static String get doneConfirmYourBookingSuccessfully => 'sd_doneConfirmBookingSuccessfully'.tr();
+  static String get doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit => 'sd_doneConfirmBookingReminder'.tr();
+  static String get doneCopyNumberBooking => 'sd_doneCopyNumberBooking'.tr();
+  static String get doneFinished => 'sd_doneFinished'.tr();
+  static String get donePerformedCleaningDeepYourHomeSuccessfullyWeHope => 'sd_donePerformedCleaningSuccessfully'.tr();
+  static String get doneReceivedRequest => 'sd_doneReceivedRequest'.tr();
+  static String get extras => 'sd_extras'.tr();
+  static String get extras2 => 'sd_extras'.tr();
+  static String get failedPayment => 'sd_failedPayment'.tr();
+  static String get female => 'sd_female'.tr();
+  static String get from => 'sd_from'.tr();
+  static String get forChoosingUs => 'sd_forChoosingUs'.tr();
+  static String get forRating => 'sd_forRating'.tr();
+  static String get furniture => 'sd_furniture'.tr();
+  static String get furnitureCleaning => 'sd_furnitureCleaning'.tr();
+  static String get home => 'sd_home'.tr();
+  static String get backToHome => 'sd_backToHome'.tr();
+  static String get hourCleaning => 'sd_hourCleaning'.tr();
+  static String get hourRegularCleaning => 'sd_hourCleaning'.tr();
+  static String get howWasExperienceWithIbrahimMohamedToday => 'sd_howWasExperienceTeam'.tr();
+  static String get howWasExperienceWithLevelServiceToday => 'sd_howWasExperienceService'.tr();
+  static String get includesService => 'sd_includesService'.tr();
+  static String get requestInspectionCta => 'sd_requestInspectionCta'.tr();
+  static String get inspectionFreeFully => 'sd_inspectionFreeFully'.tr();
+  static String get inWay => 'sd_inWay'.tr();
+  static String get male => 'sd_male'.tr();
+  static String get methodPayment => 'sd_methodPayment'.tr();
+  static String get mosque => 'sd_mosque'.tr();
+  static String get most => 'sd_most'.tr();
+  static String get namePlace => 'sd_namePlace'.tr();
+  static String get next => 'sd_next'.tr();
+  static String get not => 'sd_not'.tr();
+  static String get sharingUnavailable => 'sd_sharingUnavailable'.tr();
+  static String get notesBeforeBooking => 'sd_notesBeforeBooking'.tr();
+  static String get notesOptional => 'sd_notesOptional'.tr();
+  static String get notExistsAnyCommitmentAfter => 'sd_notExistsAnyCommitmentAfter'.tr();
+  static String get notSureGetFreeInspection => 'sd_notSureGetFreeInspection'.tr();
+  static String get numberBooking => 'sd_numberBooking'.tr();
+  static String get onceOne => 'sd_onceOne'.tr();
+  static String get payment => 'sd_payment'.tr();
+  static String get paymentOnService => 'sd_paymentOnService'.tr();
+  static String get qar => 'sd_qar'.tr();
+  static String get riyalQar => 'sd_riyalQar'.tr();
+  static String get pestControl => 'sd_pestControl'.tr();
+  static String get pestControlPests => 'sd_pestControlPests'.tr();
+  static String get preferenceTeam => 'sd_preferenceTeam'.tr();
+  static String get provideCleaningSanitizationOfficesMosquesDetermine => 'sd_provideCleaningSanitization'.tr();
+  static String get rateExperience => 'sd_rateExperience'.tr();
+  static String get ratingService => 'sd_ratingService'.tr();
+  static String get ratingTeam => 'sd_ratingTeam'.tr();
+  static String get rebookBooking => 'sd_rebookBooking'.tr();
+  static String get rebookRetry => 'sd_rebookRetry'.tr();
+  static String get repeatService => 'sd_repeatService'.tr();
+  static String get requestInspection => 'sd_requestInspection'.tr();
+  static String get savedAddressesTitle => 'sd_savedAddressesTitle'.tr();
+  static String get serviceInProgressExecution => 'sd_serviceInProgressExecution'.tr();
+  static String get share => 'sd_share'.tr();
+  static String get showDetails => 'sd_showDetails'.tr();
+  static String get showDetailsService => 'sd_showDetailsService'.tr();
+  static String get sizePlace => 'sd_sizePlace'.tr();
+  static String get sorryCouldNotFromProcessProcessPaymentYour => 'sd_sorryCouldNotProcessPayment'.tr();
+  static String get timeSpent => 'sd_timeSpent'.tr();
+  static String get statusService => 'sd_statusService'.tr();
+  static String get step => 'sd_step'.tr();
+  static String get summaryBooking => 'sd_summaryBooking'.tr();
+  static String get summaryWorkCompleted => 'sd_summaryWorkCompleted'.tr();
+  static String get teamInWayToYou => 'sd_teamInWayToYou'.tr();
+  static String get total => 'sd_total'.tr();
+  static String get totalCurrent => 'sd_totalCurrent'.tr();
+  static String get trackingBooking => 'sd_trackingBooking'.tr();
+  static String get trackingOrder => 'sd_trackingOrder'.tr();
+  static String get typePlace => 'sd_typePlace'.tr();
+  static String get typeService => 'sd_typeService'.tr();
+  static String get typeServiceRequired => 'sd_typeServiceRequired'.tr();
+  static String get villa => 'sd_villa'.tr();
+  static String get work => 'sd_work'.tr();
+  static String get writeAnyNotesHelpUsUnderstandYourNeed => 'sd_writeAnyNotes'.tr();
+  static String get writeLocationInDetail => 'sd_writeLocationInDetail'.tr();
+  static String get writeNameCompanyOrMosque => 'sd_writeNameCompanyOrMosque'.tr();
+  static String get yourOpinionHelpsUsOnImproveService => 'sd_yourOpinionHelpsImprove'.tr();
+
+  // Missing translation keys
+  static String get tenPercentDiscount => 'sd_tenPercentDiscount'.tr();
+  static String get fivePercentDiscount => 'sd_fivePercentDiscount'.tr();
+  static String get seventyPercentDiscount => 'sd_seventyPercentDiscount'.tr();
+  static String get smallNumber100Number200 => 'sd_smallNumber100Number200'.tr();
+  static String get mediumSize150By275 => 'sd_mediumSize150By275'.tr();
+  static String get largeSize250By345 => 'sd_largeSize250By345'.tr();
+  static String get addNewAddress => 'sd_addNewAddress'.tr();
+  static String get exampleHomeFrontMosque => 'sd_exampleHomeFrontMosque'.tr();
+  static String get chooseToday => 'sd_chooseToday'.tr();
+  static String get sevenPercentDiscount => 'sd_sevenPercentDiscount'.tr();
+  static String get weekly => 'sd_weekly'.tr();
+  static String get discountUpToTwelvePercent => 'sd_discountUpToTwelvePercent'.tr();
+  static String get discountUpToTwentyFivePercent => 'sd_discountUpToTwentyFivePercent'.tr();
+  static String get cancelBookingOrModifyBeforeNumber5 => 'sd_cancelBookingOrModifyBeforeNumber5'.tr();
+  static String get caseBeforeLessFromNumber5HourWillBe => 'sd_caseBeforeLessFromNumber5HourWillBe'.tr();
+  static String get ourTeamReadyHelpYouInChooseServiceSuitableEasily => 'sd_ourTeamReadyHelpYouInChooseServiceSuitableEasily'.tr();
+  static String get services => 'sd_services'.tr();
+  static String get add2 => 'sd_add2'.tr();
+  static String get allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy => 'sd_allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy'.tr();
+  static String get addHere => 'sd_addHere'.tr();
+  static String get cleaningFull => 'sd_cleaningFull'.tr();
+
+  // Kept as static data (mock/demo values — should come from API in production)
+  static const String ibrahimMohamed = 'Ibrahim Mohamed';
+  static const String ibrahimInitial = 'I';
+  static const String tenTwentyEightAm = '10:28 AM';
+  static const String within18Minutes = 'In 18 min';
+  static const String twelveThousandBookings = '12,000 bookings';
+  static const String homeAddressSubtitle = '18, Al-Nageeb St, Doha';
+  static const String workAddressSubtitle = 'Al-Muraqab Tower - 8th Floor';
+
+  static String get apartment => 'sd_apartment'.tr();
+  static String get apartment2 => 'sd_apartment2'.tr();
+  static String get apartmentSmall => 'sd_apartmentSmall'.tr();
+  static String get studio => 'sd_studio'.tr();
+  static String get ground => 'sd_ground'.tr();
+  static const String cleaningDeepThatWasWaitingForYourSofa =
+      'The deep cleaning your sofa has been waiting for';
+  static const String cleaningSimpleSofaVacuumThingButDustGrains =
+      'Simple vacuuming is one thing, but the dust, sand grains, and hidden stains accumulating inside sofa fabric are a completely different matter.\n\nOur certified cleaning specialists come fully equipped and work on every layer of your sofa to restore its freshness, color, and comfort.';
+  static const String inspectSofaDetermineTypeFabricDetermineNeedsCleaning =
+      'Inspect sofa to determine fabric type\nDetermine cleaning needs\nDry vacuum to remove dust, hair, and debris\nWet shampooing using specialized products\nStain extraction during shampooing process\nSpot treatment for stubborn stains';
+  static const String mayRemainSofaWetDurationUpToToNumber12 =
+      'The sofa may remain wet for up to 12 hours after cleaning.\nDrying time depends on fabric type and room ventilation.\nSome very stubborn stains (pets, blood, oils) may be difficult to remove.\nThe specialist will advise if some cleaning methods are unsuitable for certain fabrics.\nPlease cover items not included in the service or that cannot be cleaned.';
+
+  // Pest control labels
+  static const String ants = 'Ants';
+  static const String cockroaches = 'Cockroaches';
+  static const String bedbugs = 'Bed Bugs';
+  static const String mice = 'Mice';
+  static const String carpets = 'Carpets';
+  static const String carpetsCategory = 'Carpets';
+  static const String sofas = 'Sofas';
+  static const String chairsDining = 'Dining Chairs';
+  static const String pillowsDecorative = 'Decorative Pillows';
+  static const String pillowsSleeping = 'Sleeping Pillows';
+  static const String sports = 'Sports';
+  static const String mada = 'Mada';
+
+  // Service name labels
+  static const String cleaningBathroom = 'Bathroom Cleaning';
+  static const String cleaningKitchen = 'Kitchen Cleaning';
+  static const String cleaningOven = 'Oven Cleaning';
+  static const String cleaningWindows = 'Window Cleaning';
+  static const String cleaningHome = 'Home Cleaning';
+  static const String cleaningHome2 = 'Home Cleaning';
+  static const String polishingFloors = 'Floor Polishing';
+  static const String washingCurtains = 'Curtain Washing';
+  static const String furnitureCleaning2 = 'Furniture Cleaning';
+  static const String cleaningInsideHome = 'Professional carpet cleaning inside home';
+  static const String cleaningInsideHome2 = 'Professional sofa cleaning inside home';
+  static const String cleaningSofa = 'Sofa Cleaning';
+  static const String cleaningSofaOnL = 'L-shaped Sofa Cleaning';
+  static const String cleaningOnL = 'Deep cleaning for L-shaped sofa';
+  static const String pestControlAntsApartment = 'Ant Control - Apartment';
+  static const String pestControlAntsVilla = 'Ant Control - Villa';
+  static const String pestControlApartment = 'Cockroach Control - Apartment';
+  static const String pestControlVilla = 'Cockroach Control - Villa';
+  static const String pestControlBedbugsApartment = 'Bed Bug Control - Apartment';
+  static const String pestControlBedbugsVilla = 'Bed Bug Control - Villa';
+  static const String pestControlMiceApartment = 'Mouse Control - Apartment';
+  static const String pestControlMiceVilla = 'Mouse Control - Villa';
+  static const String sprayFullAntsInApartment = 'Full spray for ant control in apartment';
+  static const String sprayFullAntsInVilla = 'Full spray for ant control in villa';
+  static const String sprayFullInApartment = 'Full spray for cockroach control in apartment';
+  static const String sprayFullInVilla = 'Full spray for cockroach control in villa';
+  static const String sprayFullBedbugsInApartment = 'Full spray for bed bug control in apartment';
+  static const String sprayFullBedbugsInVilla = 'Full spray for bed bug control in villa';
+  static const String sprayFullMiceInApartment = 'Full spray for mouse control in apartment';
+  static const String sprayFullMiceInVilla = 'Full spray for mouse control in villa';
+
+  // Numeric/time display values
+  static const String morning = 'AM';
+  static const String oneRoom = '1 Room';
+  static const String twoRooms = '2 Rooms';
+  static const String threeRooms = '3 Rooms';
+  static const String fourRooms = '4 Rooms';
+  static const String eightRoomsCompleted = '8 rooms completed';
+  static const String oneHundredEightyMinutes = '180 min';
+  static const String first = 'First';
+  static const String second = 'Second';
+  static const String hour = 'Hour';
+  static const String hours = 'Hours';
+  static const String regular = 'Regular';
+  static const String regularWithCleaningAddOn = 'Regular + Cleaning Add-on';
+  static const String twoWeekly = '2x Weekly';
+  static const String twoWeeks = '2 Weeks';
+  static const String fullLivingRoomKitchenBedroomsWithCleaningComplete =
+      'Including living room, kitchen, and bedrooms with full cleaning.';
+  static const String completedService = 'Service Completed';
+  static const String namePlace2 = 'Place Name';
+  static const String text132 = 'Monthly';
+  static const String text150 = 'Care Technician';
+  static const String text161 = 'Discount Code';
+  static const String text18 = 'Submit Rating';
+  static const String text20 = 'Weekly';
+  static const String text51 = 'Address';
+  static const String text59 = 'ETA';
+  static const String stepNumber1FromNumber5 = 'Step 1 of 5';
+}

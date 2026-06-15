@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 /// A reusable labeled form field for auth screens that require validation.
 /// Uses [TextFormField] with validator support — use this inside a [Form] widget.
@@ -11,8 +12,8 @@ import '../../../../core/themes/text/app_text.dart';
 /// Usage:
 /// ```dart
 /// AuthFormField(
-///   label: AppStrings.nameLabel,
-///   hint: AppStrings.namePlaceholder,
+///   label: context.tr('nameLabel'),
+///   hint: context.tr('namePlaceholder'),
 ///   controller: _nameCtrl,
 ///   prefixIcon: Icons.person_outline_rounded,
 ///   validator: (v) => v!.isEmpty ? 'مطلوب' : null,

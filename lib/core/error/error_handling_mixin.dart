@@ -1,21 +1,8 @@
-/// Error Handling Mixin - Reusable Error Management Across Auth
-/// 
-/// Provides common error handling patterns for cubits and repositories
-
 import 'auth_exceptions.dart';
 import '../utils/auth_error_logger.dart';
 
-/// Mixin for handling errors in auth features
 mixin ErrorHandlingMixin {
-  /// Safe execution wrapper with error handling
-  /// 
-  /// Usage:
-  /// ```dart
-  /// final result = await executeWithErrorHandling(
-  ///   operation: () => authRepo.signIn(email, password),
-  ///   onError: (error) => emit(AuthErrorState(error.message)),
-  /// );
-  /// ```
+
   Future<T?> executeWithErrorHandling<T>({
     required Future<T> Function() operation,
     required void Function(AuthException) onError,
@@ -50,7 +37,6 @@ mixin ErrorHandlingMixin {
     }
   }
 
-  /// Handle validation errors
   Map<String, String> validateAndCollectErrors({
     required Map<String, String?> validationResults,
   }) {
@@ -63,15 +49,6 @@ mixin ErrorHandlingMixin {
     return errors;
   }
 
-  /// Retry operation with exponential backoff
-  /// 
-  /// Usage:
-  /// ```dart
-  /// final result = await retryWithBackoff(
-  ///   operation: () => authRepo.sendOtp(phone),
-  ///   maxRetries: 3,
-  /// );
-  /// ```
   Future<T> retryWithBackoff<T>({
     required Future<T> Function() operation,
     int maxRetries = 3,
@@ -111,16 +88,6 @@ mixin ErrorHandlingMixin {
     }
   }
 
-  /// Chain multiple operations with error handling
-  /// 
-  /// Usage:
-  /// ```dart
-  /// await chainOperations([
-  ///   () => validateInput(),
-  ///   () => fetchUserData(),
-  ///   () => updateProfile(),
-  /// ]);
-  /// ```
   Future<void> chainOperations(
     List<Future<void> Function()> operations, {
     required void Function(AuthException) onError,
@@ -143,7 +110,6 @@ mixin ErrorHandlingMixin {
     }
   }
 
-  /// Handle error with recovery strategy
   void handleErrorWithRecovery(
     AuthException exception, {
     required void Function() onRetry,
@@ -167,7 +133,6 @@ mixin ErrorHandlingMixin {
     }
   }
 
-  /// Private helper to handle auth exceptions
   void _handleAuthException(
     AuthException exception, {
     required void Function(AuthException) onError,
@@ -186,11 +151,8 @@ mixin ErrorHandlingMixin {
   }
 }
 
-/// Cubit Error Handling Mixin - Specific to BLoC/Cubit pattern
-/// NOTE: This mixin requires AuthState and AuthErrorState to be imported in the using class
 mixin CubitErrorHandling<T> {
-  /// Safe emit with error handling
-  /// The using class must provide an emit function
+
   Future<void> safeExecute(
     Future<void> Function() operation, {
     required void Function(String errorMessage) onError,
@@ -221,7 +183,6 @@ mixin CubitErrorHandling<T> {
   }
 }
 
-/// Response wrapper for consistent error handling
 class ErrorHandledResult<T> {
   final T? data;
   final AuthException? error;
@@ -232,10 +193,8 @@ class ErrorHandledResult<T> {
     this.error,
   }) : isSuccess = error == null;
 
-  /// Check if result is success
   bool get isError => !isSuccess;
 
-  /// Get data or throw error
   T getOrThrow() {
     if (isSuccess && data != null) {
       return data!;
@@ -243,7 +202,6 @@ class ErrorHandledResult<T> {
     throw error ?? UnknownAuthException(message: 'Unknown error occurred');
   }
 
-  /// Map success result
   ErrorHandledResult<U> map<U>(U Function(T) mapper) {
     if (isSuccess && data != null) {
       try {
@@ -259,7 +217,6 @@ class ErrorHandledResult<T> {
     return ErrorHandledResult(error: error);
   }
 
-  /// Fold pattern for handling success/error
   R fold<R>(
     R Function(AuthException) onError,
     R Function(T) onSuccess,
@@ -276,26 +233,21 @@ class ErrorHandledResult<T> {
       : 'Error: ${error?.errorCode} - ${error?.message}';
 }
 
-/// Extension methods for error handling
 extension AuthExceptionExtension on AuthException {
-  /// Check if error is network related
+
   bool get isNetworkError => this is NetworkException || this is TimeoutException;
 
-  /// Check if error is authentication related
   bool get isAuthError =>
       this is InvalidCredentialsException ||
       this is UnauthorizedException ||
       this is TokenExpiredException;
 
-  /// Check if error is validation related
   bool get isValidationError => this is ValidationException;
 
-  /// Get user-friendly message
   String getUserMessage() {
     return message;
   }
 
-  /// Get technical details for logs
   String getTechnicalDetails() {
     return '''
 Error Code: $errorCode
@@ -307,9 +259,8 @@ Stack Trace: $stackTrace
   }
 }
 
-/// Extension for Result pattern
 extension ResultExtension<T> on Future<T> {
-  /// Convert future to ErrorHandledResult
+
   Future<ErrorHandledResult<T>> toErrorHandledResult() async {
     try {
       final result = await this;

@@ -82,7 +82,6 @@ class SettingRepositoryImpl implements SettingRepository {
     await localDataSource.clearCache();
   }
 
-  // Mapping methods
   MessageEntity _toMessageEntity(MessageModel model) {
     return MessageEntity(
       id: model.id,

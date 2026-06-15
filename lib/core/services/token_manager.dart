@@ -1,48 +1,30 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Token Manager - Security Layer
-/// 
-/// مسؤول عن:
-/// - حفظ الـ Token (بشكل آمن)
-/// - تحميل الـ Token
-/// - حذف الـ Token (Logout)
-/// - التحقق من صلاحية الـ Token
 abstract class TokenManager {
-  /// حفظ الـ Token
+
   Future<void> saveToken(String token);
 
-  /// حفظ الـ Refresh Token
   Future<void> saveRefreshToken(String refreshToken);
 
-  /// تحميل الـ Token
   Future<String?> getToken();
 
-  /// تحميل الـ Refresh Token
   Future<String?> getRefreshToken();
 
-  /// التحقق من وجود الـ Token
   Future<bool> hasToken();
 
-  /// حذف الـ Token (Logout)
   Future<void> deleteToken();
 
-  /// حذف جميع البيانات المتعلقة بـ Auth
   Future<void> clearAll();
 
-  /// حفظ بيانات المستخدم
   Future<void> saveUserData(Map<String, dynamic> userData);
 
-  /// تحميل بيانات المستخدم
   Future<Map<String, dynamic>?> getUserData();
 
-  /// حفظ وقت انتهاء الـ Token
   Future<void> saveTokenExpiry(DateTime expiryTime);
 
-  /// التحقق من صلاحية الـ Token
   Future<bool> isTokenValid();
 }
 
-/// Token Manager Implementation
 class TokenManagerImpl implements TokenManager {
   static const String _tokenKey = 'auth_token';
   static const String _refreshTokenKey = 'refresh_token';
@@ -162,7 +144,7 @@ class TokenManagerImpl implements TokenManager {
       if (token == null || token.isEmpty) return false;
 
       final expiryString = _preferences.getString(_tokenExpiryKey);
-      if (expiryString == null) return true; // If no expiry, assume valid
+      if (expiryString == null) return true;
 
       final expiry = DateTime.parse(expiryString);
       return DateTime.now().isBefore(expiry);
@@ -171,20 +153,16 @@ class TokenManagerImpl implements TokenManager {
     }
   }
 
-  /// Helper: تحويل Map إلى JSON string
   String _mapToJson(Map<String, dynamic> map) {
-    // استخدم jsonEncode من dart:convert
-    // هنا نستخدم طريقة بسيطة للـ demonstration
+
     final entries = map.entries
         .map((e) => '"${e.key}":"${e.value}"')
         .join(',');
     return '{$entries}';
   }
 
-  /// Helper: تحويل JSON string إلى Map
   Map<String, dynamic> _jsonToMap(String jsonString) {
-    // استخدم jsonDecode من dart:convert
-    // هنا نستخدم طريقة بسيطة للـ demonstration
+
     final result = <String, dynamic>{};
     final content = jsonString.substring(1, jsonString.length - 1);
     final pairs = content.split(',');
@@ -199,7 +177,6 @@ class TokenManagerImpl implements TokenManager {
   }
 }
 
-/// Token Manager Exception
 class TokenManagerException implements Exception {
   final String message;
 

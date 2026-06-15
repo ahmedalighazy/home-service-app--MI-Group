@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
-/// A simple "── أو باستخدام ──" divider used between
-/// primary login and social login options.
+
 class AuthOrDivider extends StatelessWidget {
   const AuthOrDivider({super.key});
 
@@ -17,7 +16,7 @@ class AuthOrDivider extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
-            AppStrings.orUsing,
+            context.tr('orUsing'),
             style: AppText.ibmCaption11(color: AppColors.gray),
           ),
         ),

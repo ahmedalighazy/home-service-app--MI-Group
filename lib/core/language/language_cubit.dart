@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../utils/helpers/cache_helper.dart';
 
 part 'language_state.dart';
@@ -12,27 +13,26 @@ class LanguageCubit extends Cubit<LanguageState> {
     final saved = CacheHelper.getData(key: _langKey);
     if (saved == 'ar') return const LanguageState(isArabic: true);
     if (saved == 'en') return const LanguageState(isArabic: false);
-    // Default to Arabic
     return const LanguageState(isArabic: true);
   }
 
   bool get isArabic => state.isArabic;
 
-  void setArabic() {
-    CacheHelper.saveData(key: _langKey, value: 'ar');
+  Future<void> setArabic() async {
+    await CacheHelper.saveData(key: _langKey, value: 'ar');
     emit(const LanguageState(isArabic: true));
   }
 
-  void setEnglish() {
-    CacheHelper.saveData(key: _langKey, value: 'en');
+  Future<void> setEnglish() async {
+    await CacheHelper.saveData(key: _langKey, value: 'en');
     emit(const LanguageState(isArabic: false));
   }
 
-  void toggleLanguage() {
+  Future<void> toggleLanguage() async {
     if (state.isArabic) {
-      setEnglish();
+      await setEnglish();
     } else {
-      setArabic();
+      await setArabic();
     }
   }
 }

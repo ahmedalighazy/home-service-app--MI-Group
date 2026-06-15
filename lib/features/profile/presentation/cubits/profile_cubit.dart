@@ -23,11 +23,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.profileRepository,
   }) : super(ProfileInitial());
 
-  // Profile operations
   Future<void> loadProfile() async {
     emit(ProfileLoading());
     try {
-      // This would typically fetch user profile data
+
       emit(ProfileLoaded({}));
     } catch (e) {
       emit(ProfileError(e.toString()));
@@ -54,7 +53,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  // Address operations
   Future<void> loadAddresses() async {
     emit(AddressesLoading());
     try {
@@ -101,7 +99,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  // Payment method operations
   Future<void> loadPaymentMethods() async {
     emit(PaymentMethodsLoading());
     try {
@@ -139,7 +136,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  // Subscription operations
   Future<void> loadSubscriptions() async {
     emit(SubscriptionsLoading());
     try {
@@ -159,7 +155,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  // Visit operations
   Future<void> loadVisits() async {
     emit(VisitsLoading());
     try {

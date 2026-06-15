@@ -1,9 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-/// Secure Token Manager - Enhanced Version
-/// 
-/// مع استخدام dart:convert للـ JSON handling
 class SecureTokenManager {
   static const String _tokenKey = 'secure_auth_token';
   static const String _refreshTokenKey = 'secure_refresh_token';
@@ -15,7 +12,6 @@ class SecureTokenManager {
   SecureTokenManager({required SharedPreferences preferences})
       : _preferences = preferences;
 
-  /// حفظ الـ Token
   Future<void> saveToken(String token) async {
     try {
       await _preferences.setString(_tokenKey, token);
@@ -24,7 +20,6 @@ class SecureTokenManager {
     }
   }
 
-  /// حفظ الـ Refresh Token
   Future<void> saveRefreshToken(String refreshToken) async {
     try {
       await _preferences.setString(_refreshTokenKey, refreshToken);
@@ -33,7 +28,6 @@ class SecureTokenManager {
     }
   }
 
-  /// تحميل الـ Token
   Future<String?> getToken() async {
     try {
       return _preferences.getString(_tokenKey);
@@ -42,7 +36,6 @@ class SecureTokenManager {
     }
   }
 
-  /// تحميل الـ Refresh Token
   Future<String?> getRefreshToken() async {
     try {
       return _preferences.getString(_refreshTokenKey);
@@ -51,7 +44,6 @@ class SecureTokenManager {
     }
   }
 
-  /// التحقق من وجود الـ Token
   Future<bool> hasToken() async {
     try {
       final token = await getToken();
@@ -61,7 +53,6 @@ class SecureTokenManager {
     }
   }
 
-  /// حذف الـ Token (Logout)
   Future<void> deleteToken() async {
     try {
       await _preferences.remove(_tokenKey);
@@ -71,7 +62,6 @@ class SecureTokenManager {
     }
   }
 
-  /// حذف جميع البيانات
   Future<void> clearAll() async {
     try {
       await _preferences.remove(_tokenKey);
@@ -83,7 +73,6 @@ class SecureTokenManager {
     }
   }
 
-  /// حفظ بيانات المستخدم
   Future<void> saveUserData(Map<String, dynamic> userData) async {
     try {
       final jsonString = jsonEncode(userData);
@@ -93,12 +82,11 @@ class SecureTokenManager {
     }
   }
 
-  /// تحميل بيانات المستخدم
   Future<Map<String, dynamic>?> getUserData() async {
     try {
       final jsonString = _preferences.getString(_userDataKey);
       if (jsonString == null) return null;
-      
+
       final decoded = jsonDecode(jsonString);
       if (decoded is Map) {
         return Map<String, dynamic>.from(decoded);
@@ -109,7 +97,6 @@ class SecureTokenManager {
     }
   }
 
-  /// حفظ وقت انتهاء الـ Token
   Future<void> saveTokenExpiry(DateTime expiryTime) async {
     try {
       await _preferences.setString(
@@ -121,7 +108,6 @@ class SecureTokenManager {
     }
   }
 
-  /// التحقق من صلاحية الـ Token
   Future<bool> isTokenValid() async {
     try {
       final token = await getToken();
@@ -137,7 +123,6 @@ class SecureTokenManager {
     }
   }
 
-  /// الحصول على عدد الثواني المتبقية قبل انتهاء الـ Token
   Future<Duration?> getTimeUntilExpiry() async {
     try {
       final expiryString = _preferences.getString(_tokenExpiryKey);
@@ -154,7 +139,6 @@ class SecureTokenManager {
     }
   }
 
-  /// الحصول على الـ Token مع الـ Bearer prefix
   Future<String?> getBearerToken() async {
     try {
       final token = await getToken();
@@ -164,26 +148,23 @@ class SecureTokenManager {
     }
   }
 
-  /// التحقق من انتهاء صلاحية الـ Token قريباً (خلال دقيقة)
   Future<bool> isTokenExpiringSoon() async {
     try {
       final timeLeft = await getTimeUntilExpiry();
       if (timeLeft == null) return false;
-      
-      return timeLeft.inSeconds < 60; // انتهاء خلال دقيقة
+
+      return timeLeft.inSeconds < 60;
     } catch (e) {
       throw _handleException('Failed to check if token expiring soon', e);
     }
   }
 
-  /// Helper: معالجة الـ Exceptions
   Exception _handleException(String message, Object error) {
     final errorMessage = '$message: $error';
     return TokenManagerSecureException(errorMessage);
   }
 }
 
-/// Secure Token Manager Exception
 class TokenManagerSecureException implements Exception {
   final String message;
 

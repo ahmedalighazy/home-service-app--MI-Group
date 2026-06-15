@@ -43,7 +43,6 @@ class NotificationRepositoryImpl implements NotificationRepository {
     await remoteDataSource.deleteNotification(notificationId);
   }
 
-  // Mapping methods
   NotificationEntity _toNotificationEntity(NotificationModel model) {
     return NotificationEntity(
       id: model.title,

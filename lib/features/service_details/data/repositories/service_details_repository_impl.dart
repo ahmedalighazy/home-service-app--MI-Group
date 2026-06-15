@@ -65,7 +65,6 @@ class ServiceDetailsRepositoryImpl implements ServiceDetailsRepository {
     await remoteDataSource.removeFavoriteService(serviceId);
   }
 
-  // Mapping methods
   ServicePageEntity _toServicePageEntity(ServicePageModel model) {
     return ServicePageEntity(
       coverImage: model.coverImage,

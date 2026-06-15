@@ -1,25 +1,15 @@
-
 import '../constants/auth_strings.dart';
 
-// ════════════════════════════════════════════════════════════════
-// Base Exception
-// ════════════════════════════════════════════════════════════════
-
-/// Base exception for all auth-related errors
 abstract class AuthException implements Exception {
-  /// Error message to display to user
+
   final String message;
-  
-  /// Original exception/error that caused this
+
   final dynamic originalError;
-  
-  /// Stack trace for debugging
+
   final StackTrace? stackTrace;
-  
-  /// Error code for categorization and analytics
+
   final String errorCode;
-  
-  /// Whether error is recoverable with retry
+
   final bool isRetryable;
 
   AuthException({
@@ -34,11 +24,6 @@ abstract class AuthException implements Exception {
   String toString() => 'AuthException: [$errorCode] $message';
 }
 
-// ════════════════════════════════════════════════════════════════
-// Network Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// Network connectivity error - no internet connection
 class NetworkException extends AuthException {
   NetworkException({
     dynamic originalError,
@@ -52,7 +37,6 @@ class NetworkException extends AuthException {
   );
 }
 
-/// Request timeout - server took too long to respond
 class TimeoutException extends AuthException {
   final Duration? timeout;
 
@@ -69,11 +53,6 @@ class TimeoutException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Server Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// Server error - 5xx status codes
 class ServerException extends AuthException {
   final int? statusCode;
 
@@ -91,7 +70,6 @@ class ServerException extends AuthException {
   );
 }
 
-/// Bad request - 400 status code
 class BadRequestException extends AuthException {
   final int? statusCode;
 
@@ -109,11 +87,6 @@ class BadRequestException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Authentication Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// Invalid credentials - wrong email/password
 class InvalidCredentialsException extends AuthException {
   InvalidCredentialsException({
     dynamic originalError,
@@ -127,7 +100,6 @@ class InvalidCredentialsException extends AuthException {
   );
 }
 
-/// Account not found - email not registered
 class AccountNotFoundException extends AuthException {
   AccountNotFoundException({
     dynamic originalError,
@@ -141,7 +113,6 @@ class AccountNotFoundException extends AuthException {
   );
 }
 
-/// Account disabled/locked - too many login attempts
 class AccountLockedException extends AuthException {
   final int? remainingMinutes;
 
@@ -160,7 +131,6 @@ class AccountLockedException extends AuthException {
   );
 }
 
-/// Token expired - needs refresh or re-login
 class TokenExpiredException extends AuthException {
   TokenExpiredException({
     dynamic originalError,
@@ -174,7 +144,6 @@ class TokenExpiredException extends AuthException {
   );
 }
 
-/// Unauthorized - 401 status or invalid token
 class UnauthorizedException extends AuthException {
   UnauthorizedException({
     dynamic originalError,
@@ -188,7 +157,6 @@ class UnauthorizedException extends AuthException {
   );
 }
 
-/// Forbidden - 403 status
 class ForbiddenException extends AuthException {
   ForbiddenException({
     dynamic originalError,
@@ -202,11 +170,6 @@ class ForbiddenException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// OTP/SMS Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// OTP code invalid
 class InvalidOtpException extends AuthException {
   final int? attemptsRemaining;
 
@@ -225,7 +188,6 @@ class InvalidOtpException extends AuthException {
   );
 }
 
-/// OTP code expired
 class OtpExpiredException extends AuthException {
   OtpExpiredException({
     dynamic originalError,
@@ -239,7 +201,6 @@ class OtpExpiredException extends AuthException {
   );
 }
 
-/// SMS sending failed
 class SmsSendingException extends AuthException {
   SmsSendingException({
     String? message,
@@ -254,11 +215,6 @@ class SmsSendingException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Validation Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// Validation error - input validation failed
 class ValidationException extends AuthException {
   final String? fieldName;
   final dynamic invalidValue;
@@ -278,7 +234,6 @@ class ValidationException extends AuthException {
   );
 }
 
-/// Email already exists
 class EmailAlreadyExistsException extends AuthException {
   EmailAlreadyExistsException({
     dynamic originalError,
@@ -292,7 +247,6 @@ class EmailAlreadyExistsException extends AuthException {
   );
 }
 
-/// Phone already registered
 class PhoneAlreadyRegisteredException extends AuthException {
   PhoneAlreadyRegisteredException({
     dynamic originalError,
@@ -306,11 +260,6 @@ class PhoneAlreadyRegisteredException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Local Storage Related Exceptions
-// ════════════════════════════════════════════════════════════════
-
-/// Failed to read from local storage
 class LocalStorageReadException extends AuthException {
   final String? key;
 
@@ -327,7 +276,6 @@ class LocalStorageReadException extends AuthException {
   );
 }
 
-/// Failed to write to local storage
 class LocalStorageWriteException extends AuthException {
   final String? key;
 
@@ -344,7 +292,6 @@ class LocalStorageWriteException extends AuthException {
   );
 }
 
-/// Corrupted data in local storage
 class CorruptedDataException extends AuthException {
   final String? dataType;
 
@@ -361,11 +308,6 @@ class CorruptedDataException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Generic Exception
-// ════════════════════════════════════════════════════════════════
-
-/// Unknown/unhandled exception
 class UnknownAuthException extends AuthException {
   UnknownAuthException({
     String? message,
@@ -380,13 +322,8 @@ class UnknownAuthException extends AuthException {
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-// Exception Factory/Helper Methods
-// ════════════════════════════════════════════════════════════════
-
-/// Helper class for converting exceptions
 class AuthExceptionFactory {
-  /// Convert any exception to AuthException
+
   static AuthException fromException(
     dynamic error, {
     StackTrace? stackTrace,
@@ -394,7 +331,6 @@ class AuthExceptionFactory {
   }) {
     if (error is AuthException) return error;
 
-    // Network errors
     if (error.toString().contains('SocketException') ||
         error.toString().contains('network unreachable')) {
       return NetworkException(
@@ -403,7 +339,6 @@ class AuthExceptionFactory {
       );
     }
 
-    // Timeout errors
     if (error.toString().contains('TimeoutException') ||
         error.toString().contains('deadline exceeded')) {
       return TimeoutException(
@@ -412,7 +347,6 @@ class AuthExceptionFactory {
       );
     }
 
-    // JSON parsing errors
     if (error.toString().contains('FormatException') ||
         error.toString().contains('JSON')) {
       return CorruptedDataException(
@@ -429,7 +363,6 @@ class AuthExceptionFactory {
     );
   }
 
-  /// Convert HTTP status code to appropriate exception
   static AuthException fromHttpStatusCode(
     int statusCode, {
     String? message,

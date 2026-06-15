@@ -1,193 +1,181 @@
-/// Auth Feature Strings
-/// 
-/// All static strings used in Auth feature screens and widgets
-/// This prevents hardcoding strings and makes translations easier
+import 'package:get_it/get_it.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
+
 class AuthStrings {
-  // Private constructor to prevent instantiation
   AuthStrings._();
 
-  // === Sign In Screen ===
-  static const String signInTitle = 'تسجيل الدخول';
-  static const String welcomeBackAlt = 'مرحباً بعودتك';
-  static const String emailLabel = 'البريد الإلكتروني';
-  static const String emailPlaceholder = 'أدخل البريد الإلكتروني';
-  static const String passwordLabel = 'كلمة المرور';
-  static const String passwordPlaceholder = 'أدخل كلمة المرور';
-  static const String login = 'تسجيل الدخول';
-  static const String rememberMe = 'تذكرني';
-  static const String forgotPassword = 'نسيت كلمة المرور؟';
-  static const String orUsing = 'أو باستخدام';
-  static const String signInWithGoogle = 'تسجيل عبر Google';
-  static const String signInWithApple = 'تسجيل عبر Apple';
-  static const String dontHaveAccount = 'ليس لديك حساب ؟ ';
-  static const String createAccount = 'إنشاء حساب';
-  
-  // Terms and Privacy granular strings for RichText
-  static const String termsAndPrivacy = 'بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية';
-  static const String termsAgreePrefix = 'بتسجيل الدخول أنت توافق على ';
-  static const String termsOfService = 'الشروط والأحكام';
-  static const String andSeparator = ' و ';
-  static const String privacyPolicy = 'سياسة الخصوصية';
+  static String _tr(String key) => GetIt.I<LocalizationService>().translate(key);
 
-  static const String loginWithNewPassword = 'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة';
-  static const String errorFieldRequired = 'جميع الحقول مطلوبة';
-  static const String invalidEmail = 'البريد الإلكتروني غير صحيح';
-  static const String passwordTooShort = 'كلمة المرور قصيرة جداً (6 أحرف على الأقل)';
-  
-  // Others
-  static const String continueAsGuest = 'المتابعة كضيف';
-
-  // === Sign Up Screen ===
-  static const String signUpTitle = 'إنشاء حساب';
-  static const String welcomeBack = 'أهلاً بعودتك';
-  static const String phoneLabel = 'الهاتف';
-  static const String phonePlaceholder = '5123 4567';
-  static const String phoneRequired = 'رقم الهاتف مطلوب';
-  static const String sendCode = 'أرسل الكود';
-  static const String signUpOtpMessage =
-      'سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول';
-  static const String socialSignUpButtons = 'أو باستخدام';
-  static const String alreadyHaveAccount = 'لديك حساب بالفعل؟ ';
-  static const String signIn = 'تسجيل الدخول';
-  static const String signUpWithGoogle = 'تسجيل عبر Google';
-  static const String signUpWithApple = 'تسجيل عبر Apple';
-  static const String defaultCountryCode = '+974';
-  static const String countryCodeQatar = '+974';
-  static const String flagQatar = '🇶🇦';
-
-  // === OTP Verification Screen ===
-  static const String otpVerificationTitle = 'التحقق من الرمز';
-  static const String otpVerificationSubtitle =
-      'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى';
-  static const String otpCodeHint = 'أدخل الرمز';
-  static const String confirm = 'تأكيد';
-  static const String otpVerifiedSuccess = 'تم التحقق من الرمز بنجاح';
-  static const String resendCodePromptAlt = 'لم تتلقى الكود بعد ؟ ';
-  static const String resendCodeLink = 'إعادة إرسال الكود';
-  static const String otpTimer = '0:59';
-
-  // === Complete Profile Screen ===
-  static const String completeProfileTitle = 'أكمل ملفك الشخصي';
-  static const String completeProfileSubtitle =
-      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
-  static const String nameLabel = 'الاسم';
-  static const String namePlaceholder = 'أدخل اسمك بالكامل';
-  static const String nameRequired = 'الاسم مطلوب';
-  static const String nameInvalid = 'الاسم قصير جداً (حد أدنى حرفين)';
-  static const String genderLabel = 'النوع';
-  static const String genderPlaceholder = 'اختر النوع';
-  static const String genderRequired = 'النوع مطلوب';
-  static const String genderMale = 'ذكر';
-  static const String genderFemale = 'أنثى';
-  static const String addressLabel = 'العنوان (اختياري)';
-  static const String bioLabel = 'نبذة عنك (اختياري)';
-  static const String bioHint = 'اكتب نبذة عن نفسك';
-  static const String genderSelectError = 'الرجاء اختيار النوع';
-  static const String completeRegistration = 'إكمال التسجيل';
-  static const String profileCompletionSuccess = 'تم إكمال الملف الشخصي بنجاح';
-  static const String profileCompletionError = 'فشل إكمال الملف الشخصي';
-
-  // === Forgot Password Screen ===
-  static const String forgotPasswordTitle = 'إعادة تعيين كلمة المرور';
-  static const String forgotPasswordDescription =
-      'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر';
-  static const String sendResetCode = 'أرسل رمز التحقق';
-
-  // === Check Your Email Screen ===
-  static const String checkEmailTitle = 'تحقق من بريدك الإلكتروني';
-  static const String checkEmailDescription =
-      'تم إرسال رابط إعادة تعيين إلى البريد الإلكتروني الخاص بك';
-  static const String backToSignIn = 'العودة للدخول';
-
-  // === Verify Reset Code Screen ===
-  static const String verifyResetCodeTitle = 'تحقق من الرمز';
-  static const String verifyResetCodeDescription =
-      'أدخل الرمز المكون من 6 أرقام المرسل إلى بريدك الإلكتروني';
-  static const String resetCodeError = 'الرمز غير صحيح أو منتهي الصلاحية';
-  static const String resetCodeExpired = 'انتهت صلاحية الرمز';
-
-  // === Set New Password Screen ===
-  static const String setNewPasswordTitle = 'تعيين كلمة مرور جديدة';
-  static const String setNewPasswordDescription =
-      'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمة المرور السابقة';
-  static const String newPasswordLabel = 'كلمة المرور الجديدة';
-  static const String newPasswordPlaceholder = 'أدخل كلمة المرور الجديدة';
-  static const String confirmPasswordLabel = 'تأكيد كلمة المرور';
-  static const String confirmPasswordPlaceholder = 'أعد إدخال كلمة المرور';
-  static const String passwordMismatch = 'كلمتا المرور غير متطابقتين';
-  static const String updatePassword = 'تحديث كلمة المرور';
-  static const String passwordUpdated = 'تم تحديث كلمة المرور بنجاح';
-
-  // === Success/Generic Messages ===
-  static const String errorNetwork = 'خطأ في الاتصال بالإنترنت';
-  static const String errorUserNotFound = 'المستخدم غير مسجل';
-  static const String errorAccountDisabled = 'الحساب معطل';
-  static const String errorTooManyAttempts = 'محاولات كثيرة جداً، حاول لاحقاً';
-
-  // === Success Messages ===
-  static const String successSignIn = 'تم تسجيل الدخول بنجاح';
-  static const String successSignUp = 'تم التسجيل بنجاح';
-  static const String successOtpSent = 'تم إرسال الرمز بنجاح';
-  static const String successResetCodeSent = 'تم إرسال رمز التحقق إلى بريدك الإلكتروني';
-  static const String successPasswordReset = 'تم إعادة تعيين كلمة المرور بنجاح';
-  static const String successProfileComplete = 'تم إكمال الملف الشخصي بنجاح';
-
-  // === Buttons ===
-  static const String continueBtn = 'متابعة';
-  static const String nextBtn = 'التالي';
-  static const String backBtn = 'رجوع';
-  static const String saveBtn = 'حفظ';
-  static const String cancelBtn = 'إلغاء';
-  static const String skipBtn = 'تخطي';
-
-  // === Validation Messages ===
-  // Already defined above in Sign In/Up sections
-
-  // === Error Messages for Exceptions ===
-  // Network errors
-  static const String errorNetworkNoInternet = 'لا يوجد اتصال بالإنترنت. تحقق من الاتصال وحاول مجددًا.';
-  static const String errorNetworkTimeout = 'انتهت مهلة الاتصال. يرجى المحاولة مجددًا.';
-  static const String errorNetworkUnreachable = 'الخادم غير متاح حالياً. يرجى المحاولة لاحقًا.';
-  
-  // Server errors
-  static const String errorServer = 'حدث خطأ في الخادم. يرجى المحاولة لاحقًا.';
-  static const String errorBadRequest = 'بيانات غير صحيحة. يرجى التحقق والمحاولة مجددًا.';
-  static const String errorServerGeneric = 'خطأ في الخادم. حاول لاحقاً';
-
-  // Authentication errors
-  static const String errorInvalidCredentials = 'بريد إلكتروني أو كلمة مرور غير صحيحة.';
-  static const String errorAccountNotFound = 'الحساب غير موجود. يرجى التسجيل أولاً.';
-  static const String errorUnauthorized = 'غير مصرح. يرجى تسجيل الدخول مجددًا.';
-  static const String errorTokenExpired = 'انتهت صلاحية الجلسة. يرجى تسجيل الدخول مجددًا.';
-  static const String errorAccountLocked = 'الحساب مقفول. الرجاء المحاولة لاحقًا.';
-  static const String errorAccountLockedWithTime = 'الحساب مقفول. حاول مجددًا بعد {minutes} دقيقة.';
-  static const String errorForbidden = 'ليس لديك صلاحية للوصول إلى هذا المورد.';
-  
-  // OTP & Reset Code errors
-  static const String invalidOtp = 'الرمز غير صحيح.';
-  static const String otpExpired = 'انتهت صلاحية كود التحقق. يرجى طلب كود جديد.';
-  static const String smsSendingFailed = 'فشل إرسال رسالة التحقق. يرجى المحاولة مجددًا.';
-  static const String emailAlreadyExists = 'هذا البريد الإلكتروني مسجل بالفعل.';
-  static const String phoneAlreadyRegistered = 'هذا الرقم مسجل بالفعل.';
-  static const String localStorageError = 'فشل الوصول إلى البيانات المحلية.';
-  static const String unknownError = 'حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.';
-
-  // OTP/SMS errors
-  static const String errorInvalidOtp = 'كود التحقق غير صحيح.';
-  static const String errorInvalidOtpWithAttempts = 'كود التحقق غير صحيح. لديك {attempts} محاولات متبقية.';
-  static const String errorOtpExpired = 'انتهت صلاحية كود التحقق. يرجى طلب كود جديد.';
-  static const String errorSmsSendingFailed = 'فشل إرسال رسالة التحقق. يرجى المحاولة مجددًا.';
-
-  // Validation errors
-  static const String errorValidationGeneric = 'حدث خطأ في التحقق من البيانات.';
-  static const String errorEmailAlreadyExists = 'هذا البريد الإلكتروني مسجل بالفعل.';
-  static const String errorPhoneAlreadyExists = 'هذا الرقم مسجل بالفعل.';
-
-  // Storage errors
-  static const String errorStorageRead = 'فشل قراءة البيانات من التخزين المحلي.';
-  static const String errorStorageWrite = 'فشل حفظ البيانات في التخزين المحلي.';
-  static const String errorStorageCorrupted = 'بيانات تالفة في التخزين المحلي.';
-
-  // Generic errors
-  static const String errorUnknown = 'حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.';
+  static String get confirm => _tr('confirm');
+  static String get reset_code_invalid => _tr('reset_code_invalid');
+  static String get signInTitle => _tr('signInTitle');
+  static String get welcomeBackAlt => _tr('welcomeBackAlt');
+  static String get emailLabel => _tr('emailLabel');
+  static String get emailPlaceholder => _tr('emailPlaceholder');
+  static String get passwordLabel => _tr('passwordLabel');
+  static String get passwordPlaceholder => _tr('passwordPlaceholder');
+  static String get login => _tr('login');
+  static String get rememberMe => _tr('rememberMe');
+  static String get forgotPassword => _tr('forgotPassword');
+  static String get orUsing => _tr('orUsing');
+  static String get signInWithGoogle => _tr('signInWithGoogle');
+  static String get signInWithApple => _tr('signInWithApple');
+  static String get createAccount => _tr('createAccount');
+  static String get termsAndPrivacy => _tr('termsAndPrivacy');
+  static String get termsAgreePrefix => _tr('termsAgreePrefix');
+  static String get termsOfService => _tr('termsOfService');
+  static String get andSeparator => _tr('andSeparator');
+  static String get privacyPolicy => _tr('privacyPolicy');
+  static String get loginWithNewPassword => _tr('loginWithNewPassword');
+  static String get errorFieldRequired => _tr('errorFieldRequired');
+  static String get invalidEmail => _tr('invalidEmail');
+  static String get passwordTooShort => _tr('passwordTooShort');
+  static String get continueAsGuest => _tr('continueAsGuest');
+  static String get signUpTitle => _tr('signUpTitle');
+  static String get welcomeBack => _tr('welcomeBack');
+  static String get phoneLabel => _tr('phoneLabel');
+  static String get phonePlaceholder => _tr('phonePlaceholder');
+  static String get phoneRequired => _tr('phoneRequired');
+  static String get sendCode => _tr('sendCode');
+  static String get signUpOtpMessage => _tr('signUpOtpMessage');
+  static String get socialSignUpButtons => _tr('socialSignUpButtons');
+  static String get alreadyHaveAccount => _tr('alreadyHaveAccount');
+  static String get signIn => _tr('signIn');
+  static String get signUpWithGoogle => _tr('signUpWithGoogle');
+  static String get signUpWithApple => _tr('signUpWithApple');
+  static String get defaultCountryCode => _tr('defaultCountryCode');
+  static String get countryCodeQatar => _tr('countryCodeQatar');
+  static String get flagQatar => _tr('flagQatar');
+  static String get otpVerificationTitle => _tr('otpVerificationTitle');
+  static String get otpVerificationSubtitle => _tr('otpVerificationSubtitle');
+  static String get otpCodeHint => _tr('otpCodeHint');
+  static String get otpVerifiedSuccess => _tr('otpVerifiedSuccess');
+  static String get resendCodeLink => _tr('resendCodeLink');
+  static String get otpTimer => _tr('otpTimer');
+  static String get completeProfileTitle => _tr('completeProfileTitle');
+  static String get completeProfileSubtitle => _tr('completeProfileSubtitle');
+  static String get nameLabel => _tr('nameLabel');
+  static String get namePlaceholder => _tr('namePlaceholder');
+  static String get nameRequired => _tr('nameRequired');
+  static String get nameInvalid => _tr('nameInvalid');
+  static String get genderLabel => _tr('genderLabel');
+  static String get genderPlaceholder => _tr('genderPlaceholder');
+  static String get genderRequired => _tr('genderRequired');
+  static String get genderMale => _tr('genderMale');
+  static String get genderFemale => _tr('genderFemale');
+  static String get addressLabel => _tr('addressLabel');
+  static String get bioLabel => _tr('bioLabel');
+  static String get bioHint => _tr('bioHint');
+  static String get genderSelectError => _tr('genderSelectError');
+  static String get completeRegistration => _tr('completeRegistration');
+  static String get profileCompletionSuccess => _tr('profileCompletionSuccess');
+  static String get profileCompletionError => _tr('profileCompletionError');
+  static String get forgotPasswordTitle => _tr('forgotPasswordTitle');
+  static String get forgotPasswordDescription => _tr('forgotPasswordDescription');
+  static String get sendResetCode => _tr('sendResetCode');
+  static String get checkEmailTitle => _tr('checkEmailTitle');
+  static String get checkEmailDescription => _tr('checkEmailDescription');
+  static String get backToSignIn => _tr('backToSignIn');
+  static String get verifyResetCodeTitle => _tr('verifyResetCodeTitle');
+  static String get verifyResetCodeDescription => _tr('verifyResetCodeDescription');
+  static String get resetCodeError => _tr('resetCodeError');
+  static String get resetCodeExpired => _tr('resetCodeExpired');
+  static String get setNewPasswordTitle => _tr('setNewPasswordTitle');
+  static String get setNewPasswordDescription => _tr('setNewPasswordDescription');
+  static String get newPasswordLabel => _tr('newPasswordLabel');
+  static String get newPasswordPlaceholder => _tr('newPasswordPlaceholder');
+  static String get confirmPasswordLabel => _tr('confirmPasswordLabel');
+  static String get confirmPasswordPlaceholder => _tr('confirmPasswordPlaceholder');
+  static String get passwordMismatch => _tr('passwordMismatch');
+  static String get updatePassword => _tr('updatePassword');
+  static String get passwordUpdated => _tr('passwordUpdated');
+  static String get errorNetwork => _tr('errorNetwork');
+  static String get errorUserNotFound => _tr('errorUserNotFound');
+  static String get errorAccountDisabled => _tr('errorAccountDisabled');
+  static String get errorTooManyAttempts => _tr('errorTooManyAttempts');
+  static String get successSignIn => _tr('successSignIn');
+  static String get successSignUp => _tr('successSignUp');
+  static String get successOtpSent => _tr('successOtpSent');
+  static String get successResetCodeSent => _tr('successResetCodeSent');
+  static String get successPasswordReset => _tr('successPasswordReset');
+  static String get successProfileComplete => _tr('successProfileComplete');
+  static String get continueBtn => _tr('continueBtn');
+  static String get nextBtn => _tr('nextBtn');
+  static String get backBtn => _tr('backBtn');
+  static String get saveBtn => _tr('saveBtn');
+  static String get cancelBtn => _tr('cancelBtn');
+  static String get skipBtn => _tr('skipBtn');
+  static String get errorNetworkNoInternet => _tr('errorNetworkNoInternet');
+  static String get errorNetworkTimeout => _tr('errorNetworkTimeout');
+  static String get errorNetworkUnreachable => _tr('errorNetworkUnreachable');
+  static String get errorServer => _tr('errorServer');
+  static String get errorBadRequest => _tr('errorBadRequest');
+  static String get errorServerGeneric => _tr('errorServerGeneric');
+  static String get errorInvalidCredentials => _tr('errorInvalidCredentials');
+  static String get errorAccountNotFound => _tr('errorAccountNotFound');
+  static String get errorUnauthorized => _tr('errorUnauthorized');
+  static String get errorTokenExpired => _tr('errorTokenExpired');
+  static String get errorAccountLocked => _tr('errorAccountLocked');
+  static String get errorAccountLockedWithTime => _tr('errorAccountLockedWithTime');
+  static String get errorForbidden => _tr('errorForbidden');
+  static String get invalidOtp => _tr('invalidOtp');
+  static String get otpExpired => _tr('otpExpired');
+  static String get smsSendingFailed => _tr('smsSendingFailed');
+  static String get emailAlreadyExists => _tr('emailAlreadyExists');
+  static String get phoneAlreadyRegistered => _tr('phoneAlreadyRegistered');
+  static String get localStorageError => _tr('localStorageError');
+  static String get unknownError => _tr('unknownError');
+  static String get errorInvalidOtp => _tr('errorInvalidOtp');
+  static String get errorInvalidOtpWithAttempts => _tr('errorInvalidOtpWithAttempts');
+  static String get errorOtpExpired => _tr('errorOtpExpired');
+  static String get errorSmsSendingFailed => _tr('errorSmsSendingFailed');
+  static String get errorValidationGeneric => _tr('errorValidationGeneric');
+  static String get errorEmailAlreadyExists => _tr('errorEmailAlreadyExists');
+  static String get errorPhoneAlreadyExists => _tr('errorPhoneAlreadyExists');
+  static String get errorStorageRead => _tr('errorStorageRead');
+  static String get errorStorageWrite => _tr('errorStorageWrite');
+  static String get errorStorageCorrupted => _tr('errorStorageCorrupted');
+  static String get errorUnknown => _tr('errorUnknown');
+  static String get resendCodeSuccess => _tr('resendCodeSuccess');
+  static String get otpInvalidTryAgain => _tr('otpInvalidTryAgain');
+  static String get passwordResetSuccessTitle => _tr('passwordResetSuccessTitle');
+  static String get passwordMinLength6 => _tr('passwordMinLength6');
+  static String get confirmPasswordRequired => _tr('confirmPasswordRequired');
+  static String get emailRequired => _tr('emailRequired');
+  static String get passwordRequired => _tr('passwordRequired');
+  static String get googleSignInFailed => _tr('googleSignInFailed');
+  static String get appleSignInFailed => _tr('appleSignInFailed');
+  static String get otpSendFailed => _tr('otpSendFailed');
+  static String get otpVerificationFailed => _tr('otpVerificationFailed');
+  static String get googleSignUpFailed => _tr('googleSignUpFailed');
+  static String get appleSignUpFailed => _tr('appleSignUpFailed');
+  static String get guestLoginFailed => _tr('guestLoginFailed');
+  static String get emailSentMessage => _tr('emailSentMessage');
+  static String get enter4DigitCode => _tr('enter4DigitCode');
+  static String get passwordMinLengthError => _tr('passwordMinLengthError');
+  static String get passwordMaxLengthError => _tr('passwordMaxLengthError');
+  static String get passwordUppercaseError => _tr('passwordUppercaseError');
+  static String get passwordLowercaseError => _tr('passwordLowercaseError');
+  static String get passwordDigitError => _tr('passwordDigitError');
+  static String get passwordSpecialCharError => _tr('passwordSpecialCharError');
+  static String get passwordConsecutiveRepeatsError => _tr('passwordConsecutiveRepeatsError');
+  static String get passwordCommonPatternError => _tr('passwordCommonPatternError');
+  static String get nameMinLengthError => _tr('nameMinLengthError');
+  static String get nameMinLength3Error => _tr('nameMinLength3Error');
+  static String get nameMaxLengthError => _tr('nameMaxLengthError');
+  static String get nameContainsNumbersError => _tr('nameContainsNumbersError');
+  static String get nameConsecutiveSpacesError => _tr('nameConsecutiveSpacesError');
+  static String get nameLettersOnlyError => _tr('nameLettersOnlyError');
+  static String get phoneInvalid => _tr('phoneInvalid');
+  static String get phoneLengthError => _tr('phoneLengthError');
+  static String get phoneStartDigitError => _tr('phoneStartDigitError');
+  static String get addressMinLengthError => _tr('addressMinLengthError');
+  static String get addressMaxLengthError => _tr('addressMaxLengthError');
+  static String get addressInvalidCharactersError => _tr('addressInvalidCharactersError');
+  static String get genderInvalid => _tr('genderInvalid');
+  static String get otpRequired => _tr('otpRequired');
+  static String get otpInvalid => _tr('otpInvalid');
+  static String get bioMaxLengthError => _tr('bioMaxLengthError');
+  static String get bioInvalidCharactersError => _tr('bioInvalidCharactersError');
+  static String get passwordsRequired => _tr('passwordsRequired');
 }

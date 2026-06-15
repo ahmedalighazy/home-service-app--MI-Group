@@ -1,11 +1,6 @@
-/// Error Interceptor - Global Error Management Layer
-/// 
-/// Handles errors across the application with consistent patterns
-
 import '../error/auth_exceptions.dart';
 import '../utils/auth_error_logger.dart';
 
-/// Global error interceptor for auth operations
 class AuthErrorInterceptor {
   static final AuthErrorInterceptor _instance = AuthErrorInterceptor._internal();
 
@@ -17,53 +12,44 @@ class AuthErrorInterceptor {
 
   final List<ErrorInterceptorHandler> _handlers = [];
 
-  /// Register error handler
   void registerHandler(ErrorInterceptorHandler handler) {
     _handlers.add(handler);
   }
 
-  /// Remove error handler
   void removeHandler(ErrorInterceptorHandler handler) {
     _handlers.remove(handler);
   }
 
-  /// Intercept and process error
   Future<void> intercept(
     AuthException exception, {
     String? userId,
     Map<String, dynamic>? context,
   }) async {
-    // Log error
+
     AuthErrorLogger().logException(
       exception,
       userId: userId,
       context: context,
     );
 
-    // Notify all handlers
     for (final handler in _handlers) {
       final shouldContinue = await handler.handle(exception);
       if (!shouldContinue) break;
     }
   }
 
-  /// Clear all handlers
   void clearHandlers() {
     _handlers.clear();
   }
 
-  /// Get number of registered handlers
   int get handlerCount => _handlers.length;
 }
 
-/// Abstract error handler
 abstract class ErrorInterceptorHandler {
-  /// Handle error
-  /// Returns true to continue processing, false to stop
+
   Future<bool> handle(AuthException exception);
 }
 
-/// Error handler implementations
 class NetworkErrorHandler extends ErrorInterceptorHandler {
   final void Function()? onNetworkError;
 
@@ -73,13 +59,12 @@ class NetworkErrorHandler extends ErrorInterceptorHandler {
   Future<bool> handle(AuthException exception) async {
     if (exception is NetworkException || exception is TimeoutException) {
       onNetworkError?.call();
-      return false; // Stop processing
+      return false;
     }
-    return true; // Continue
+    return true;
   }
 }
 
-/// Authentication error handler
 class AuthenticationErrorHandler extends ErrorInterceptorHandler {
   final void Function()? onUnauthorized;
   final void Function()? onTokenExpired;
@@ -105,7 +90,6 @@ class AuthenticationErrorHandler extends ErrorInterceptorHandler {
   }
 }
 
-/// Validation error handler
 class ValidationErrorHandler extends ErrorInterceptorHandler {
   final void Function(ValidationException)? onValidationError;
 
@@ -121,7 +105,6 @@ class ValidationErrorHandler extends ErrorInterceptorHandler {
   }
 }
 
-/// Account state error handler
 class AccountStateErrorHandler extends ErrorInterceptorHandler {
   final void Function()? onAccountLocked;
   final void Function()? onAccountNotFound;
@@ -147,7 +130,6 @@ class AccountStateErrorHandler extends ErrorInterceptorHandler {
   }
 }
 
-/// Error recovery executor
 class ErrorRecoveryExecutor {
   static final ErrorRecoveryExecutor _instance = ErrorRecoveryExecutor._internal();
 
@@ -157,7 +139,6 @@ class ErrorRecoveryExecutor {
 
   ErrorRecoveryExecutor._internal();
 
-  /// Execute recovery strategy
   Future<void> executeRecovery(
     AuthException exception, {
     required void Function() onRetry,
@@ -179,7 +160,6 @@ class ErrorRecoveryExecutor {
   }
 }
 
-/// Error context - tracks error state during operations
 class ErrorContext {
   final List<AuthException> errors = [];
   AuthException? lastError;
@@ -187,7 +167,6 @@ class ErrorContext {
   DateTime? firstErrorTime;
   DateTime? lastErrorTime;
 
-  /// Record error
   void recordError(AuthException exception) {
     errors.add(exception);
     lastError = exception;
@@ -196,12 +175,10 @@ class ErrorContext {
     firstErrorTime ??= DateTime.now();
   }
 
-  /// Check if too many errors
   bool hasTooManyErrors({int threshold = 5}) {
     return totalErrorCount >= threshold;
   }
 
-  /// Get error frequency
   double getErrorFrequency() {
     if (errors.isEmpty || firstErrorTime == null || lastErrorTime == null) {
       return 0.0;
@@ -211,7 +188,6 @@ class ErrorContext {
     return errors.length / duration;
   }
 
-  /// Check if circuit should be broken
   bool shouldBreakCircuit({
     int errorThreshold = 5,
     Duration timeWindow = const Duration(minutes: 1),
@@ -219,13 +195,12 @@ class ErrorContext {
     if (lastErrorTime == null) return false;
 
     final recentErrors = errors.where((error) {
-      return true; // In real implementation, check timestamp
+      return true;
     }).length;
 
     return recentErrors >= errorThreshold;
   }
 
-  /// Clear errors
   void clear() {
     errors.clear();
     lastError = null;
@@ -234,7 +209,6 @@ class ErrorContext {
     lastErrorTime = null;
   }
 
-  /// Get error summary
   Map<String, dynamic> getSummary() {
     return {
       'totalErrors': totalErrorCount,
@@ -246,7 +220,6 @@ class ErrorContext {
   }
 }
 
-/// Error circuit breaker - prevents cascading failures
 class ErrorCircuitBreaker {
   static final ErrorCircuitBreaker _instance = ErrorCircuitBreaker._internal();
 
@@ -258,18 +231,15 @@ class ErrorCircuitBreaker {
 
   final Map<String, CircuitBreakerState> _states = {};
 
-  /// Check if operation should be allowed
   bool canExecute(String operationKey) {
     final state = _states[operationKey] ?? CircuitBreakerState.closed;
     return state != CircuitBreakerState.open;
   }
 
-  /// Record success
   void recordSuccess(String operationKey) {
     _states[operationKey] = CircuitBreakerState.closed;
   }
 
-  /// Record failure
   void recordFailure(String operationKey, {int failureThreshold = 5}) {
     final current = _states[operationKey] ?? CircuitBreakerState.closed;
 
@@ -280,67 +250,53 @@ class ErrorCircuitBreaker {
     }
   }
 
-  /// Reset circuit breaker
   void reset(String operationKey) {
     _states.remove(operationKey);
   }
 
-  /// Get state
   CircuitBreakerState getState(String operationKey) {
     return _states[operationKey] ?? CircuitBreakerState.closed;
   }
 
-  /// Clear all states
   void clearAll() {
     _states.clear();
   }
 
-  /// Get all states summary
   Map<String, String> getAllStates() {
     return _states.map((key, state) => MapEntry(key, state.name));
   }
 }
 
-/// Circuit breaker states
 enum CircuitBreakerState {
-  /// Normal operation
+
   closed,
 
-  /// Blocking requests temporarily
   open,
 
-  /// Testing if service recovered
   halfOpen;
 
-  /// Check if circuit is broken
   bool get isBroken => this == open;
 
-  /// Check if testing
   bool get isTesting => this == halfOpen;
 }
 
-/// Error aggregator - collects related errors
 class ErrorAggregator {
   final Map<String, List<AuthException>> _errorGroups = {};
 
-  /// Add error to group
   void addError(String groupKey, AuthException exception) {
     _errorGroups.putIfAbsent(groupKey, () => []).add(exception);
   }
 
-  /// Get errors by group
   List<AuthException> getErrors(String groupKey) {
     return _errorGroups[groupKey] ?? [];
   }
 
-  /// Get all errors
   List<AuthException> getAllErrors() {
     final allErrors = <AuthException>[];
     _errorGroups.values.forEach(allErrors.addAll);
     return allErrors;
   }
 
-  /// Get most common error
   AuthException? getMostCommonError() {
     if (_errorGroups.isEmpty) return null;
 
@@ -359,12 +315,10 @@ class ErrorAggregator {
     return allErrors.firstWhere((e) => e.errorCode == mostCommonCode);
   }
 
-  /// Clear aggregated errors
   void clear() {
     _errorGroups.clear();
   }
 
-  /// Get summary
   Map<String, dynamic> getSummary() {
     return {
       'groupCount': _errorGroups.length,

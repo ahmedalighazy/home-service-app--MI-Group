@@ -3,17 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 
-/// A reusable primary action button for auth screens.
-/// Supports loading state and enabled/disabled states.
-///
-/// Usage example:
-/// ```dart
-/// AuthPrimaryButton(
-///   label: AppStrings.login,
-///   isLoading: isLoading,
-///   onPressed: () => _login(context),
-/// )
-/// ```
+
 class AuthPrimaryButton extends StatelessWidget {
   final String label;
   final bool isLoading;

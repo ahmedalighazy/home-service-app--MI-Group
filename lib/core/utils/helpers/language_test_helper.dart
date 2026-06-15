@@ -1,16 +1,10 @@
-/// Language Test Helper
-/// 
-/// هذا الملف يساعد في اختبار دعم اللغات في التطبيق
-/// This file helps test language support in the application
 library;
 
 import 'package:flutter/material.dart';
 import '../l10n/app_strings.dart';
 
-/// فئة مساعدة للتحقق من الترجمات والدعم اللغوي
 class LanguageTestHelper {
-  /// قائمة جميع المفاتيح الموجودة في AppStrings
-  /// List of all keys in AppStrings
+
   static const List<String> translationKeys = [
     'confirm',
     'sendCode',
@@ -25,7 +19,7 @@ class LanguageTestHelper {
     'orUsing',
     'viewAll',
     'bookNow',
-    // --- Sign Up / Login Screen ---
+
     'welcomeBack',
     'welcomeBackAlt',
     'verificationMethodInfo',
@@ -39,42 +33,40 @@ class LanguageTestHelper {
     'rememberMe',
     'phonePlaceholder',
     'defaultCountryCode',
-    // --- OTP Verification Screen ---
+
     'confirmCode',
     'enterVerificationCode',
     'resendCodePrompt',
     'resendCodePromptAlt',
     'resendCodeLink',
     'defaultOtpTimer',
-    // --- Complete Profile Screen ---
+
     'completeProfile',
     'completeProfileSubtitle',
     'nameLabel',
     'namePlaceholder',
     'completeRegistration',
-    // --- Reset Password & Verification ---
+
     'resetPassword',
     'resetPasswordDescription',
     'checkEmail',
     'emailSentDescription',
-    // --- Set New Password Screen ---
+
     'setNewPassword',
     'setNewPasswordDescription',
     'passwordChangedSuccessfully',
     'loginWithNewPassword',
-    // --- Bookings ---
+
     'bookingSummary',
     'paymentSummary',
     'totalIncludingVat',
     'totalLabel',
-    // --- Errors ---
+
     'errorIncorrectPassword',
     'errorPasswordsDoNotMatch',
     'errorOutOfZone',
   ];
 
-  /// اختبر ما إذا كانت جميع الترجمات موجودة
-  /// Test if all translations are available
   static Map<String, dynamic> validateAllTranslations() {
     final results = <String, dynamic>{
       'total_checked': translationKeys.length,
@@ -84,7 +76,7 @@ class LanguageTestHelper {
 
     for (var key in translationKeys) {
       try {
-        // محاولة الوصول إلى كل ترجمة
+
         _getTranslationByKey(key);
       } catch (e) {
         (results['missing_translations'] as List<String>).add(key);
@@ -95,8 +87,6 @@ class LanguageTestHelper {
     return results;
   }
 
-  /// الحصول على ترجمة باستخدام المفتاح
-  /// Get translation by key
   static String _getTranslationByKey(String key) {
     switch (key) {
       case 'confirm':
@@ -124,8 +114,6 @@ class LanguageTestHelper {
     }
   }
 
-  /// طباعة جميع الترجمات للتحقق
-  /// Print all translations for verification
   static void debugPrintAllTranslations() {
     debugPrint('╔════════════════════════════════════════╗');
     debugPrint('║  Language Support Test Report          ║');
@@ -174,8 +162,6 @@ class LanguageTestHelper {
     debugPrint('\n═══════════════════════════════════════════');
   }
 
-  /// اختبر دعم RTL/LTR
-  /// Test RTL/LTR Support
   static Future<void> testRtlLtrSupport(BuildContext context) async {
     final locale = Localizations.localeOf(context);
     final isArabic = locale.languageCode == 'ar';
@@ -198,8 +184,6 @@ class LanguageTestHelper {
     debugPrint('\n═══════════════════════════════════════════');
   }
 
-  /// اختبر جميع الشاشات
-  /// Test all screens language support
   static List<Map<String, String>> getScreenLanguageSupportStatus() {
     return [
       {
@@ -255,8 +239,6 @@ class LanguageTestHelper {
     ];
   }
 
-  /// اطبع حالة دعم اللغات لجميع الشاشات
-  /// Print language support status for all screens
   static void debugPrintScreenStatus() {
     debugPrint('\n╔════════════════════════════════════════╗');
     debugPrint('║  Screen Language Support Status        ║');

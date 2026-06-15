@@ -1,3 +1,5 @@
+import 'package:home_service_app/core/constants/auth_strings.dart';
+
 class AuthValidation {
   static bool isValidEmail(String email) {
     if (email.isEmpty) return false;
@@ -25,50 +27,50 @@ class AuthValidation {
 
   static String getEmailErrorMessage(String email) {
     if (email.isEmpty) {
-      return 'Email is required';
+      return AuthStrings.emailRequired;
     }
     if (!isValidEmail(email)) {
-      return 'Invalid email format';
+      return AuthStrings.invalidEmail;
     }
     return '';
   }
 
   static String getResetCodeErrorMessage(String code) {
     if (code.isEmpty) {
-      return 'Verification code is required';
+      return AuthStrings.otpRequired;
     }
     if (!isValidResetCode(code)) {
-      return 'Code must be 6 digits';
+      return AuthStrings.otpInvalid;
     }
     return '';
   }
 
   static String getOtpErrorMessage(String code) {
     if (code.isEmpty) {
-      return 'OTP code is required';
+      return AuthStrings.otpRequired;
     }
     if (!isValidOtpCode(code)) {
-      return 'OTP code must be 6 digits';
+      return AuthStrings.otpInvalid;
     }
     return '';
   }
 
   static String getPasswordErrorMessage(String password) {
     if (password.isEmpty) {
-      return 'Password is required';
+      return AuthStrings.passwordRequired;
     }
     if (password.length < 6) {
-      return 'Password must be at least 6 characters';
+      return AuthStrings.passwordMinLength6;
     }
     return '';
   }
 
   static String getPhoneErrorMessage(String phone) {
     if (phone.isEmpty) {
-      return 'Phone number is required';
+      return AuthStrings.phoneRequired;
     }
     if (phone.length < 7) {
-      return 'Invalid phone number';
+      return AuthStrings.phoneInvalid;
     }
     return '';
   }
@@ -77,11 +79,6 @@ class AuthValidation {
     return phone.isNotEmpty && phone.length >= 7;
   }
 
-  /// Validate Qatar phone number (8 digits, starting with 3-9)
-  /// 
-  /// Qatar phone numbers consist of 8 digits.
-  /// The first digit must be between 3 and 9.
-  /// Example: 30123456, 50987654, 77654321
   static bool isValidQatarPhone(String phone) {
     final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
     if (cleaned.length != 8) return false;
@@ -89,25 +86,22 @@ class AuthValidation {
     return firstDigit >= 3 && firstDigit <= 9;
   }
 
-  /// Get error message for invalid Qatar phone number
-  /// 
-  /// Returns appropriate error message based on validation failure reason.
   static String getQatarPhoneErrorMessage(String phone) {
     final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
-    
+
     if (cleaned.isEmpty) {
-      return 'Phone number is required';
+      return AuthStrings.phoneRequired;
     }
-    
+
     if (cleaned.length != 8) {
-      return 'Phone number must be 8 digits';
+      return AuthStrings.phoneLengthError;
     }
-    
+
     final firstDigit = int.parse(cleaned[0]);
     if (firstDigit < 3 || firstDigit > 9) {
-      return 'Phone number must start with a digit between 3 and 9';
+      return AuthStrings.phoneStartDigitError;
     }
-    
+
     return '';
   }
 }

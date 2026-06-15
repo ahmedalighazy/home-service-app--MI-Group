@@ -50,7 +50,6 @@ class BookingRepositoryImpl implements BookingRepository {
     await remoteDataSource.updateBookingStatus(bookingId, status);
   }
 
-  // Mapping methods
   BookingEntity _toBookingEntity(BookingModel model) {
     return BookingEntity(
       id: model.id,
