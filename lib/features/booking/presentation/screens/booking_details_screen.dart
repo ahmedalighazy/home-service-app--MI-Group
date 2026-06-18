@@ -20,7 +20,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: AppStrings.dettailsbooking,
+        title: AppStrings.bookingDetails,
         actions: CustomPopupMenuBooking(onSelected: (MenuAction value) {}),
       ),
       body: SingleChildScrollView(
@@ -100,7 +100,7 @@ class _DetailsCard extends StatelessWidget {
           //   const Divider(height: 1),
           // ],
           BookingDetailsRow(
-            label: AppStrings.paid,
+            label: AppStrings.paymentMethodLabel,
             value: booking.paymentMethod ?? 'N/A',
             icon: IconsPath.paid,
           ),
@@ -112,7 +112,7 @@ class _DetailsCard extends StatelessWidget {
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: AppStrings.totalprice,
+            label: AppStrings.totalPrice,
             value: booking.price,
             icon: IconsPath.group,
           ),

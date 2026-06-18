@@ -19,6 +19,7 @@ class FavoritesScreen extends StatelessWidget {
       body: SafeArea(
         child: hasFavorites
             ? const FavoritesListWidget()
+            // ignore: dead_code
             : EmptyStateWidget(
                 iconPath: IconsPath.illustrationSvg,
                 title: AppStrings.noFavoritesYet,

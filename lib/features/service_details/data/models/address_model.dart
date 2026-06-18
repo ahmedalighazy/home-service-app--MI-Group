@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
-
 /// Represents a saved delivery address.
 class AddressModel {
   final String title;
@@ -28,4 +27,3 @@ class AddressModel {
     ),
   ];
 }
-

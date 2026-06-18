@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,7 +7,7 @@ import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/features/home/presentation/widgets/notification_bell.dart';
-import 'package:home_service_app/features/notification/data/dummy/notification_dummy_data.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/buttom_curve_clipper.dart';
@@ -17,6 +18,12 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final unreadCount = context
+        .watch<NotificationCubit>()
+        .state
+        .notifications
+        .where((notification) => !notification.isRead)
+        .length;
     return Column(
       children: [
         ClipPath(
@@ -49,23 +56,9 @@ class ProfileHeader extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    // Container(
-                    //   padding: const EdgeInsets.all(8),
-                    //   decoration: ShapeDecoration(
-                    //     color: const Color(0xFFD4E8ED) /* green-l-light */,
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(44),
-                    //     ),
-                    //   ),
-                    //   child: SvgPicture.asset(
-                    //     IconsPath.notificationNew,
-                    //     width: 25.w,
-                    //     height: 25.h,
-                    //   ),
-                    // ),
                     NotificationBell(
                       onTap: () => context.push(AppRouter.notification),
-                      count: NotificationDummyData.notifications.length,
+                      count: unreadCount,
                     ),
                   ],
                 ),

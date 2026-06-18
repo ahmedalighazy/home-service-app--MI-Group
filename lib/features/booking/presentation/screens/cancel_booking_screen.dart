@@ -108,7 +108,7 @@ class _ActionButtons extends StatelessWidget {
       children: [
         CustomButton(
           flex: 44,
-          text: AppStrings.confirmcancel,
+          text: AppStrings.confirmCancel,
           backgroundColor: AppColors.red,
 
           textColor: AppColors.white,

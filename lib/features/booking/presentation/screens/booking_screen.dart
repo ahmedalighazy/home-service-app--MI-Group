@@ -107,8 +107,8 @@ class _BookingContent extends StatelessWidget {
                       : EmptyStateWidget(
                           isscreenBooking: true,
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.notFindbooking,
-                          subtitle: AppStrings.bookdesc,
+                          title: AppStrings.noUpcomingBookings,
+                          subtitle: AppStrings.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
                           buttonLabel: AppStrings.bookNow,
                         ),
@@ -128,8 +128,8 @@ class _BookingContent extends StatelessWidget {
                           isscreenBooking: true,
 
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.notFindbooking,
-                          subtitle: AppStrings.bookdesc,
+                          title: AppStrings.noUpcomingBookings,
+                          subtitle: AppStrings.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
                           buttonLabel: AppStrings.bookNow,
                         ),
