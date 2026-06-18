@@ -7,8 +7,6 @@ import '../../data/models/payment_method.dart';
 import '../../data/models/repeat_type.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
-
-
 @immutable
 sealed class FeatureState {
   const FeatureState();
@@ -203,4 +201,3 @@ final class FeatureLoaded extends FeatureState {
     );
   }
 }
-

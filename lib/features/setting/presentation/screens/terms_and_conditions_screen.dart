@@ -20,7 +20,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
           children: [
             SizedBox(height: 16.h),
             const CustomExpansionTile(
-              title: AppStrings.data,
+              title: AppStrings.acceptanceOfTerms,
               content: AppStrings.termsIntro,
             ),
             const CustomExpansionTile(

@@ -19,7 +19,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
         child: const Column(
           children: [
             CustomExpansionTile(
-              title: AppStrings.start,
+              title: AppStrings.advancePaymentLabel,
               content: AppStrings.privacyPolicyIntro,
             ),
             CustomExpansionTile(

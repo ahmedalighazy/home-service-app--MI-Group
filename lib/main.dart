@@ -2,7 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:home_service_app/core/utils/l10n/app_localizations.dart';
 import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 import 'core/routes/app_routes.dart';
@@ -45,44 +45,10 @@ class HomeServiceApp extends StatelessWidget {
             themeMode: ThemeMode.light,
             routerConfig: AppRouter.router,
             locale: const Locale(appLanguage),
-            supportedLocales: const [Locale('en', ''), Locale('ar', '')],
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            localeResolutionCallback: (locale, supportedLocales) {
-              return supportedLocales.contains(locale)
-                  ? locale
-                  : supportedLocales.first;
-            },
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
           ),
         );
-        // MaterialApp.router(
-        //   title: 'Home Service App',
-        //   debugShowCheckedModeBanner: false,
-        //   theme: AppTheme.lightTheme,
-        //   darkTheme: AppTheme.darkTheme,
-        //   themeMode: ThemeMode.light,
-
-        //   // ============ GoRouter Configuration ============
-        //   routerConfig: AppRouter.router,
-
-        //   // ============ Localization ============
-        //   locale: const Locale(appLanguage),
-        //   supportedLocales: const [Locale('en', ''), Locale('ar', '')],
-        //   localizationsDelegates: const [
-        //     GlobalMaterialLocalizations.delegate,
-        //     GlobalWidgetsLocalizations.delegate,
-        //     GlobalCupertinoLocalizations.delegate,
-        //   ],
-        //   localeResolutionCallback: (locale, supportedLocales) {
-        //     // Use device locale if supported, otherwise fallback to first supported locale
-        //     return supportedLocales.contains(locale)
-        //         ? locale
-        //         : supportedLocales.first;
-        //   },
-        // );
       },
     );
   }

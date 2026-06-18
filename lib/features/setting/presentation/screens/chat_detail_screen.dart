@@ -24,7 +24,9 @@ class ChatDetailScreen extends StatelessWidget {
         body: Column(
           children: [
             Expanded(child: ChatMessagesList()),
+            // ignore: dead_code
             bool ? ChatInputBar() : CancelChat(),
+            // ignore: dead_code
             bool ? SizedBox.shrink() : verticalSpace(10),
           ],
         ),

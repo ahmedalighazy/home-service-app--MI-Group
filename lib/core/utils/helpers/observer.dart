@@ -3,16 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MyBlocObserver implements BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
+    // ignore: avoid_print
     print("---------onChange ${bloc.runtimeType},$change");
   }
 
   @override
   void onClose(BlocBase bloc) {
+    // ignore: avoid_print
     print("---------onClose ${bloc.runtimeType}");
   }
 
   @override
   void onCreate(BlocBase bloc) {
+    // ignore: avoid_print
     print("---------oncreate ${bloc.runtimeType}");
   }
 
