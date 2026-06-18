@@ -3,9 +3,8 @@ import 'package:home_service_app/features/auth/presentation/screens/check_your_e
 import '../../../../profile/presentation/widgets/custom_buttom.dart';
 import 'logic/check_your_email_logic.dart';
 
-
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({Key? key}) : super(key: key);
+  const VerificationScreen({super.key});
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -47,16 +46,20 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey.withOpacity(0.2)),
+                      border: Border.all(
+                        color: Colors.grey.withValues(alpha: 0.2),
+                      ),
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.arrow_forward, color: Colors.black87),
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black87,
+                      ),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),
                 ),
                 const Spacer(flex: 1),
-
 
                 Center(
                   child: Stack(
@@ -67,7 +70,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         child: Icon(
                           Icons.mail_outline_rounded,
                           size: 100,
-                          color: const Color(0xFF1B85A6).withOpacity(0.8),
+                          color: const Color(0xFF1B85A6).withValues(alpha: 0.8),
                         ),
                       ),
                       Positioned(
@@ -78,7 +81,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           backgroundColor: const Color(0xFF1B85A6),
                           child: Transform.rotate(
                             angle: -0.5,
-                            child: const Icon(Icons.send_rounded, size: 18, color: Colors.white),
+                            child: const Icon(
+                              Icons.send_rounded,
+                              size: 18,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -101,20 +108,29 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: const TextSpan(
-                      style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.5),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                        height: 1.5,
+                      ),
                       children: [
                         TextSpan(text: "تم إرسال رابط إعادة تعيين إلى "),
                         TextSpan(
                           text: "ahmed...@gmail.com",
-                          style: TextStyle(color: Color(0xFF1B85A6), fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Color(0xFF1B85A6),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        TextSpan(text: "\nأدخل الرمز المكون من 4 أرقام المذكور في البريد الإلكتروني"),
+                        TextSpan(
+                          text:
+                              "\nأدخل الرمز المكون من 4 أرقام المذكور في البريد الإلكتروني",
+                        ),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 32),
-
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -122,7 +138,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     return OtpCircleField(
                       controller: _controller.controllers[index],
                       focusNode: _controller.focusNodes[index],
-                      onChanged: (value) => _controller.handleOtpChange(value, index),
+                      onChanged: (value) =>
+                          _controller.handleOtpChange(value, index),
                     );
                   }),
                 ),
@@ -150,7 +167,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ],
                 ),
                 const Spacer(flex: 2),
-
 
                 CustomButton(
                   backgroundColor: const Color(0xFF1B85A6),

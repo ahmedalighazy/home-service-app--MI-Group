@@ -7,11 +7,11 @@ class OtpCircleField extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const OtpCircleField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.focusNode,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class OtpCircleField extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colors.grey.withOpacity(0.3),
+          color: Colors.grey.withValues(alpha: 0.3),
           width: 1.5,
         ),
       ),
