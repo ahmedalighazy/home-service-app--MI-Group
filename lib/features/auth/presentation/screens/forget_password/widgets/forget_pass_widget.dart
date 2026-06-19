@@ -24,9 +24,7 @@ class ForgetHeader extends StatelessWidget {
         SizedBox(height: 16.h),
         Align(
           alignment: Alignment.centerLeft,
-          child: AuthBackButton(
-            onTap: () => context.pop(),
-          ),
+          child: AuthBackButton(onTap: () => context.pop()),
         ),
         SizedBox(height: 32.h),
         Center(
@@ -54,7 +52,6 @@ class ForgetHeader extends StatelessWidget {
   }
 }
 
-
 class ForgetEmailField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
@@ -68,7 +65,9 @@ class ForgetEmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
-      buildWhen: (previous, current) => current is ForgetPasswordInitial || current is ForgetPasswordState,
+      buildWhen: (previous, current) =>
+          // ignore: unnecessary_type_check
+          current is ForgetPasswordInitial || current is ForgetPasswordState,
       builder: (context, state) {
         final cubit = context.read<ForgetPasswordCubit>();
         return AuthTextField(
@@ -89,10 +88,7 @@ class ForgetEmailField extends StatelessWidget {
 class ForgetSubmitButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const ForgetSubmitButton({
-    super.key,
-    required this.onPressed,
-  });
+  const ForgetSubmitButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

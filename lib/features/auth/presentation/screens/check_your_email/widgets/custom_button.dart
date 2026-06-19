@@ -6,11 +6,11 @@ class CustomButton extends StatelessWidget {
   final bool isEnabled;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     required this.isEnabled,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,9 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isEnabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isEnabled ? const Color(0xFF1B85A6) : const Color(0xFFEFF3F8),
+          backgroundColor: isEnabled
+              ? const Color(0xFF1B85A6)
+              : const Color(0xFFEFF3F8),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
@@ -29,7 +31,9 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: isEnabled ? Colors.white : const Color(0xFF90A4AE).withOpacity(0.6),
+            color: isEnabled
+                ? Colors.white
+                : const Color(0xFF90A4AE).withValues(alpha: 0.6),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),

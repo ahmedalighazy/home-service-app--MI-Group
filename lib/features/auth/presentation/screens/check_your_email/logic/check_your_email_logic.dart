@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class VerificationController extends ChangeNotifier {
-  final List<TextEditingController> controllers = List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> controllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
   final List<FocusNode> focusNodes = List.generate(4, (_) => FocusNode());
   bool isButtonEnabled = false;
 
@@ -42,16 +45,16 @@ class VerificationController extends ChangeNotifier {
   }
 
   void _checkCompletion() {
-    bool completed = controllers.every((controller) => controller.text.isNotEmpty);
+    bool completed = controllers.every(
+      (controller) => controller.text.isNotEmpty,
+    );
     if (completed != isButtonEnabled) {
       isButtonEnabled = completed;
       notifyListeners();
     }
   }
 
-
   String get otpCode => controllers.map((c) => c.text).join();
-
 
   void handleOtpChange(String value, int index) {
     if (value.length == 1 && index < 3) {
@@ -63,6 +66,7 @@ class VerificationController extends ChangeNotifier {
 
   void resendCode() {
     if (!isTimerActive) {
+      // ignore: avoid_print
       print("إعادة إرسال الكود...");
       startTimer();
     }
@@ -70,6 +74,7 @@ class VerificationController extends ChangeNotifier {
 
   void verifyCode() {
     if (isButtonEnabled) {
+      // ignore: avoid_print
       print("جاري التحقق من الكود: $otpCode");
     }
   }

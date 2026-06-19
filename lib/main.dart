@@ -1,8 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/utils/l10n/app_localizations.dart';
 import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 import 'core/routes/app_routes.dart';
@@ -70,6 +71,8 @@ class HomeServiceApp extends StatelessWidget {
               }
               return supportedLocales.first;
             },
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
           ),
         );
       },
