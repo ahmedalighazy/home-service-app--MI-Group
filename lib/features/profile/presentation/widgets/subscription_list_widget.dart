@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'subscription_card_widget.dart';
@@ -23,9 +24,9 @@ class SubscriptionListWidget extends StatelessWidget {
     if (subscriptions.isEmpty) {
       return EmptyStateWidget(
         iconPath: 'assets/icons/Group 590.svg',
-        title: AppStrings.noActiveSubscriptions,
-        subtitle: AppStrings.subscribePackagesDesc,
-        buttonLabel: AppStrings.browsePackagesBtn,
+        title: context.tr(LocaleKeys.profileNoActiveSubscriptions),
+        subtitle: context.tr(LocaleKeys.profileSubscribePackagesDesc),
+        buttonLabel: context.tr(LocaleKeys.profileBrowsePackagesBtn),
         onButtonPressed: () {},
       );
     }

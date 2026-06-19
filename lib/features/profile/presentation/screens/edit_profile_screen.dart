@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import '../../../../core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../widgets/custom_buttom.dart';
 import '../widgets/profile_image_edit_widget.dart';
@@ -16,16 +18,16 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: AppStrings.editProfile),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.profileEdit)),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           children: [
-            SizedBox(height: 16.h),
+            verticalSpace(16),
             const ProfileImageEditWidget(),
-            SizedBox(height: 24.h),
+            verticalSpace(24),
             const EditProfileForm(),
-            SizedBox(height: 24.h),
+            verticalSpace(24),
             CustomButton(
               backgroundColor: AppColors.bgDisabled,
               onPressed: () {
@@ -33,11 +35,11 @@ class EditProfileScreen extends StatelessWidget {
               },
               textColor: AppColors.whitecancel,
               isOutlined: false,
-              text: AppStrings.save,
+              text: context.tr(LocaleKeys.profileSave),
             ),
-            SizedBox(height: 24.h),
+            verticalSpace(24),
             CustomButton(
-              text: AppStrings.deleteAccountBtn,
+              text: context.tr(LocaleKeys.profileDeleteAccount),
               backgroundColor: AppColors.redDangerBg,
               textColor: AppColors.redDanger,
               isOutlined: true,
@@ -45,7 +47,7 @@ class EditProfileScreen extends StatelessWidget {
                 context.pushNamed(AppRouter.deleteAccount);
               },
             ),
-            SizedBox(height: 24.h),
+            verticalSpace(24),
             const ProfileFooterHintWidget(),
           ],
         ),

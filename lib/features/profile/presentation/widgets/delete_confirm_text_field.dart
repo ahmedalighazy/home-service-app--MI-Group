@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 
 import '../../../../core/themes/text/app_text.dart';
@@ -13,7 +14,7 @@ class DeleteConfirmTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCorrect = controller.text.trim() == AppStrings.deleteConfirmWord;
+    final isCorrect = controller.text.trim().toLowerCase() == context.tr(LocaleKeys.profileDeleteConfirmWord).toLowerCase();
     final hasError = controller.text.isNotEmpty && !isCorrect;
 
     return Column(
@@ -22,15 +23,15 @@ class DeleteConfirmTextField extends StatelessWidget {
         CustomTextField(
           centerText: true,
           controller: controller,
-          hintText: AppStrings.confirmDeleteHint,
+          hintText: context.tr(LocaleKeys.profileDeleteConfirmHint),
           fillColor: AppColors.white,
           borderColor: hasError ? AppColors.redBorder : AppColors.borderGrey,
         ),
         if (hasError) ...[
-          SizedBox(height: 4.h),
+          verticalSpace(4),
 
           Text(
-            AppStrings.confirmFieldHint,
+            context.tr(LocaleKeys.profileDeleteConfirmFieldHint),
             style: AppText.regularIbm(color: AppColors.redDanger, fontSize: 12),
           ),
         ],

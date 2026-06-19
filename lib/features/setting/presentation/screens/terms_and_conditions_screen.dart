@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
 import '../../../../core/widgets/custom_expansion_tile.dart';
@@ -13,43 +15,45 @@ class TermsAndConditionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CustomAppBar(title: AppStrings.termsAndConditionsLabel),
+      appBar: CustomAppBar(
+        title: context.tr(LocaleKeys.legalTermsAndConditions),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            SizedBox(height: 16.h),
-            const CustomExpansionTile(
-              title: AppStrings.acceptanceOfTerms,
-              content: AppStrings.termsIntro,
+            verticalSpace(16),
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsAcceptance),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.services,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsServices),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.bookings,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsBookings),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.serviceCancellation,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsCancellation),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.responsibility,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsResponsibility),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.companyResponsibilities,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsCompanyResp),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.accounts,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsAccounts),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
-            const CustomExpansionTile(
-              title: AppStrings.modifications,
-              content: AppStrings.termsIntro,
+            CustomExpansionTile(
+              title: context.tr(LocaleKeys.legalTermsModifications),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
           ],
         ),

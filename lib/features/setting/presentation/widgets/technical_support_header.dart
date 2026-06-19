@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import 'new_issue_bottom_sheet.dart';
 
@@ -15,7 +16,7 @@ class TechnicalSupportHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          AppStrings.technicalSupport,
+          context.tr(LocaleKeys.helpCenterTechnicalSupport),
           style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 16),
         ),
         ElevatedButton(
@@ -30,7 +31,7 @@ class TechnicalSupportHeader extends StatelessWidget {
             minimumSize: Size(118.w, 36.h),
           ),
           child: Text(
-            AppStrings.newIssue,
+            context.tr(LocaleKeys.helpCenterNewIssue),
             style: AppText.ibmButton16(
               color: AppColors.greenPrimary,
             ).copyWith(fontSize: 14.sp),

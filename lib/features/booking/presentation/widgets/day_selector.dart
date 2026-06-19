@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../logic/cubit/booking_cubit.dart';
 import '../../logic/cubit/booking_state.dart';
 
@@ -22,13 +24,14 @@ class DaySelector extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 70.h,
+          height: 90.h,
+
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             // reverse: true, // For RTL
             itemCount: 7,
             itemBuilder: (context, index) => _DayItem(
-              dayName: _getDayName(index),
+              dayName: _getDayName(context, index),
               dayNumber: (index + 1).toString(),
               index: index,
             ),
@@ -38,15 +41,15 @@ class DaySelector extends StatelessWidget {
     );
   }
 
-  String _getDayName(int index) {
-    const days = [
-      'السبت',
-      'الاحد',
-      'الاثنين',
-      'الثلاثاء',
-      'الاربعاء',
-      'الخميس',
-      'الجمعة',
+  String _getDayName(BuildContext context, int index) {
+    final days = [
+      context.tr(LocaleKeys.bookingSaturday),
+      context.tr(LocaleKeys.bookingSunday),
+      context.tr(LocaleKeys.bookingMonday),
+      context.tr(LocaleKeys.bookingTuesday),
+      context.tr(LocaleKeys.bookingWednesday),
+      context.tr(LocaleKeys.bookingThursday),
+      context.tr(LocaleKeys.bookingFriday),
     ];
     return days[index];
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 
@@ -20,10 +22,10 @@ class ProfileFooterHintWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(Icons.info_outline, size: 18.r, color: AppColors.textLightGrey),
-          SizedBox(width: 8.w),
+          horizontalSpace(8),
           Expanded(
             child: Text(
-              AppStrings.footerHint,
+              context.tr(LocaleKeys.profileFooterHint),
               style: AppText.ibmDescription14(),
             ),
           ),

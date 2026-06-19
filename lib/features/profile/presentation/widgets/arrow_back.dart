@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import '../../../../core/routes/navigation_extensions.dart';
-import '../../../../core/themes/colors/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+
+import '../../../../core/utils/l10n/localization_extension.dart';
 
 class ArrowBack extends StatelessWidget {
   const ArrowBack({super.key, this.onTap});
@@ -8,24 +13,27 @@ class ArrowBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.pop();
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(right: 3),
+    return Transform.translate(
+      // الإزاحة الآن ستكون دقيقة لأن الاتجاه مفروض من الـ builder في main.dart
+      offset: Offset(context.isRtl ? -15.w : 15.w, 0),
+      child: GestureDetector(
+        onTap: onTap ?? () => context.pop(),
         child: Container(
-          width: 44,
-          height: 44,
-
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(8.r),
           decoration: ShapeDecoration(
+            color: AppColors.white,
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 1, color: AppColors.borderInputs),
-              borderRadius: BorderRadius.circular(44),
+              borderRadius: BorderRadius.circular(100.r),
             ),
           ),
-          child: const Icon(Icons.arrow_back, size: 30, color: AppColors.black),
+          child: Icon(
+            // في RTL (AR) السهم يشير لليمين (Icons.arrow_forward)
+            // في LTR (EN) السهم يشير لليسار (Icons.arrow_back)
+            Icons.arrow_back,
+            size: 22.sp,
+            color: AppColors.black,
+          ),
         ),
       ),
     );

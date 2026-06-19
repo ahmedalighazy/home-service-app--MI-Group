@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import 'chat_status_badge.dart';
 
@@ -15,7 +16,7 @@ class ChatAppBarTitle extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            AppStrings.ticketTitle1,
+            context.tr(LocaleKeys.helpCenterTicketTitle1),
             style: AppText.semiBoldText(
               color: AppColors.headingText,
               fontSize: 15,
@@ -24,9 +25,9 @@ class ChatAppBarTitle extends StatelessWidget {
           ),
         ),
         const ChatStatusBadge(),
-        SizedBox(width: 8.w),
+        horizontalSpace(8),
         Text(
-          'TKT.1001',
+          '${context.tr(LocaleKeys.helpCenterTicketPrefix)}1001',
           style: AppText.regularText(
             color: AppColors.secondaryText,
             fontSize: 12,

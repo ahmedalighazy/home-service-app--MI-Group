@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 import '../../../../core/widgets/custom_buttom.dart';
@@ -35,26 +36,26 @@ class NewIssueBottomSheet extends StatelessWidget {
           ),
           verticalSpace(20),
           Text(
-            AppStrings.newIssueTitle,
+            context.tr(LocaleKeys.helpCenterNewIssueTitle),
             style: AppText.boldIbm(color: AppColors.primaryText, fontSize: 18),
           ),
           verticalSpace(24),
-          _buildFieldLabel(AppStrings.issueTitleLabel),
+          _buildFieldLabel(context.tr(LocaleKeys.helpCenterIssueTitleLabel)),
           verticalSpace(8),
-          _buildTextField(AppStrings.issueTitleHint),
+          _buildTextField(context.tr(LocaleKeys.helpCenterIssueTitleHint)),
           verticalSpace(16),
-          _buildFieldLabel(AppStrings.orderNumberLabel),
+          _buildFieldLabel(context.tr(LocaleKeys.helpCenterOrderNumberLabel)),
           verticalSpace(8),
-          _buildTextField(AppStrings.issueTitleHint),
+          _buildTextField(context.tr(LocaleKeys.helpCenterOrderNumberHint)),
           verticalSpace(16),
-          _buildFieldLabel(AppStrings.issueDescLabel),
+          _buildFieldLabel(context.tr(LocaleKeys.helpCenterIssueDescLabel)),
           verticalSpace(8),
-          _buildTextField(AppStrings.issueDescHint, maxLines: 4),
+          _buildTextField(context.tr(LocaleKeys.helpCenterIssueDescHint), maxLines: 4),
           verticalSpace(24),
           SizedBox(
             width: double.infinity,
             child: CustomButtom(
-              text: AppStrings.send,
+              text: context.tr(LocaleKeys.helpCenterSend),
               onTap: () => context.pop(),
               startColor: AppColors.greenPrimary,
               endColor: AppColors.dark,
@@ -77,8 +78,8 @@ class NewIssueBottomSheet extends StatelessWidget {
   Widget _buildTextField(String hint, {int maxLines = 1}) {
     return TextField(
       maxLines: maxLines,
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
+
         hintText: hint,
         hintStyle: AppText.regularIbm(
           color: AppColors.textLightGrey,

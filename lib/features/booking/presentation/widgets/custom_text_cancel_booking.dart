@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class CustomTextCancelBooking extends StatelessWidget {
   const CustomTextCancelBooking({super.key});
@@ -14,10 +15,10 @@ class CustomTextCancelBooking extends StatelessWidget {
       TextSpan(
         style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 14),
         children: [
-          const TextSpan(text: AppStrings.cancelReasonOptional),
+          TextSpan(text: context.tr(LocaleKeys.bookingCancelReasonOptional)),
 
           TextSpan(
-            text: '( اختياري )',
+            text: ' ( ${context.tr(LocaleKeys.profileOptional)} )',
             style: TextStyle(
               color: const Color(0xFF6B7280) /* Secondary-text */,
               fontSize: 13.sp,

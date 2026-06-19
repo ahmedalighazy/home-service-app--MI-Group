@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
@@ -25,7 +26,7 @@ class DeleteRuleItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPicture.asset(icon),
-          SizedBox(width: 12.w),
+          horizontalSpace(12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +38,7 @@ class DeleteRuleItem extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                SizedBox(height: 4.h),
+                verticalSpace(4),
                 Text(
                   description,
                   style: AppText.regularIbm(

@@ -6,7 +6,8 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class DeleteAddressDialog extends StatelessWidget {
@@ -46,13 +47,13 @@ class DeleteAddressDialog extends StatelessWidget {
             ),
             verticalSpace(20),
             Text(
-              AppStrings.deleteAddressTitle,
+              context.tr(LocaleKeys.profileDeleteAddressTitle),
               style: AppText.ibmHeading20(color: AppColors.primaryText),
             ),
             if (isDefault) ...[
               verticalSpace(8),
               Text(
-                AppStrings.deleteDefaultAddressDesc,
+                context.tr(LocaleKeys.profileDeleteAddressDefaultDesc),
                 textAlign: TextAlign.center,
                 style: AppText.ibmDescription14(color: AppColors.textLightGrey),
               ),
@@ -71,7 +72,7 @@ class DeleteAddressDialog extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
-                      AppStrings.cancelBtn,
+                      context.tr(LocaleKeys.profileDeleteAddressCancelBtn),
                       style: AppText.ibmButton16(color: AppColors.primaryText),
                     ),
                   ),
@@ -91,7 +92,7 @@ class DeleteAddressDialog extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
-                      AppStrings.deleteConfirmWord,
+                      context.tr(LocaleKeys.profileDeleteAddressConfirmBtn),
                       style: AppText.ibmButton16(color: AppColors.white),
                     ),
                   ),

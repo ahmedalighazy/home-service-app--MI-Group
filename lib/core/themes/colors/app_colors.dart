@@ -98,7 +98,7 @@ class AppColors {
 
   // Text Colors
   static const Color primaryText = Color(0xFF313131);
-  static const Color gry = Color(0xFFF8FBFF);
+  static const Color bgSecondary = Color(0xFFF8FBFF);
 
   static const Color secondaryText = Color(0xFF6B7280);
   static const Color headingText = Color(0xFF2F3E4E);
@@ -142,5 +142,6 @@ class AppColors {
 
   // UI Specific Badges/Buttons
   static const Color badgeBlue = Color(0xFF4DA3BF);
+  static const Color badgeCyan = Color(0xFF53AABF);
   static const Color lightIndigo = Color(0xFFEDF1FA);
 }

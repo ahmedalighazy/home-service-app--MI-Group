@@ -4,139 +4,128 @@ import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
-
 import 'popup_menu_button.dart';
 
 class PaymentCardWidget extends StatelessWidget {
   final PaymentMethodModel paymentMethod;
-  final VoidCallback onMoreTap;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const PaymentCardWidget({
     super.key,
     required this.paymentMethod,
-    required this.onMoreTap,
+    required this.onEdit,
+    required this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.r),
+      padding: EdgeInsets.all(12.r),
+      margin: EdgeInsets.only(bottom: 12.h),
       decoration: ShapeDecoration(
-        color: const Color(0xFFF8FBFF) /* bg-secondary */,
+        color: AppColors.bgSecondary,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            width: 1,
-            color: Color(0xFFF1F5F9) /* border-cards */,
-          ),
-          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(width: 1, color: AppColors.borderCards),
+          borderRadius: BorderRadius.circular(12.r),
         ),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomPopupMenu(
-                onSelected: (action) {
-                  switch (action) {
-                    case MenuAction.favorite:
-                      // Favorite
-                      break;
-
-                    case MenuAction.edit:
-                      // Edit
-                      break;
-
-                    case MenuAction.delete:
-                      // Delete
-                      break;
-                  }
-                },
-              ),
-              // const Icon(Icons.power)
-              verticalSpace(40),
-            ],
+          Transform.translate(
+            offset: Offset(context.isRtl ? 8.w : -8.w, -8.h),
+            child: CustomPopupMenu(
+              onSelected: (action) {
+                switch (action) {
+                  case MenuAction.edit:
+                    onEdit();
+                    break;
+                  case MenuAction.delete:
+                    onDelete();
+                    break;
+                  case MenuAction.favorite:
+                    break;
+                }
+              },
+            ),
           ),
-          // SizedBox(
-          //   width: 48.w,
-          //   child: SvgPicture.asset(
-          //     paymentMethod.iconPath,
-          //     fit: BoxFit.contain,
-          //   ),
-          // ),
-          horizontalSpace(12),
-          // Details
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    // const Icon(Icons.power),
-                    if (paymentMethod.isDefault) _buildDefaultBadge(),
+                    if (paymentMethod.isDefault) const _DefaultBadge(),
                     const Spacer(),
-
                     Text(
                       '**** ${paymentMethod.lastFourDigits}',
-                      style: AppText.ibmHeading14(color: AppColors.black),
+                      style: AppText.boldIbm(
+                        color: AppColors.black,
+                        fontSize: 14.sp,
+                      ),
                     ),
                   ],
                 ),
-                verticalSpace(8),
+                verticalSpace(12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'تنتهي في ${paymentMethod.expiryDate}',
-                      style: AppText.ibmDescription12(
+                      '${context.tr(LocaleKeys.profileExpiresIn)} ${paymentMethod.expiryDate}',
+                      style: AppText.regularIbm(
                         color: AppColors.textLightGrey,
+                        fontSize: 12.sp,
                       ),
                     ),
-                    Text(
-                      paymentMethod.cardHolderName,
-                      style: AppText.ibmDescription12(
-                        color: AppColors.textLightGrey,
-                      ).copyWith(overflow: TextOverflow.ellipsis),
+                    Flexible(
+                      child: Text(
+                        paymentMethod.cardHolderName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppText.mediumIbm(
+                          color: AppColors.black,
+                          fontSize: 12.sp,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          horizontalSpace(8),
-          InkWell(
-            onTap: onMoreTap,
+          horizontalSpace(12),
+          Center(
             child: SvgPicture.asset(
               paymentMethod.iconPath,
-
-              width: 18.w,
-              height: 18.h,
-              // colorFilter: const ColorFilter.mode(
-              //   AppColors.black,
-              //   BlendMode.srcIn,
-              // ),
+              width: 32.w,
+              height: 20.h,
+              fit: BoxFit.contain,
             ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildDefaultBadge() {
+class _DefaultBadge extends StatelessWidget {
+  const _DefaultBadge();
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: const Color(0xFF53AABF), // The teal color from image
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.badgeCyan,
+        borderRadius: BorderRadius.circular(100.r),
       ),
       child: Text(
-        'افتراضي',
-        style: AppText.ibmDescription12(
-          color: AppColors.white,
-        ).copyWith(fontWeight: FontWeight.w600),
+        context.tr(LocaleKeys.profileDefault),
+        style: AppText.mediumIbm(color: AppColors.white, fontSize: 10.sp),
       ),
     );
   }

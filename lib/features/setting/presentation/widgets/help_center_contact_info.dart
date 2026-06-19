@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class HelpCenterContactInfo extends StatelessWidget {
   const HelpCenterContactInfo({super.key});
@@ -13,18 +15,18 @@ class HelpCenterContactInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.contactUs,
+          context.tr(LocaleKeys.settingsContactUs),
           style: AppText.ibmHeading16(color: AppColors.primaryText),
         ),
-        SizedBox(height: 16.h),
-        const _ContactRow(
+        verticalSpace(16),
+        _ContactRow(
           icon: Icons.phone_outlined,
-          value: AppStrings.customerServiceNumber,
+          value: context.tr(LocaleKeys.settingsCustomerServiceNumber),
         ),
-        SizedBox(height: 12.h),
-        const _ContactRow(
+        verticalSpace(12),
+        _ContactRow(
           icon: Icons.email_outlined,
-          value: AppStrings.supportEmailAddress,
+          value: context.tr(LocaleKeys.settingsSupportEmailAddress),
         ),
       ],
     );
@@ -42,7 +44,7 @@ class _ContactRow extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, color: AppColors.greenPrimary, size: 20.r),
-        SizedBox(width: 12.w),
+        horizontalSpace(12),
         Text(
           value,
           style: AppText.ibmDescription14(color: AppColors.primaryText),

@@ -428,6 +428,19 @@ class AppStrings {
   static const String addressTitle = 'العنوان';
   static const String specialInstructions = 'ملاحظات او تعليمات خاصة (اختياري)';
 
+  // --- Booking Flow: Step 5 (Payment) ---
+  static const String paymentTitle = 'الدفع';
+  static const String paymentMethod = 'طريقة الدفع';
+  static const String payAfterService = 'الدفع عند الخدمة';
+  static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
+  static const String discountCode = 'كود الخصم';
+  static const String enterDiscountCode = 'ادخل كود الخصم';
+  static const String securePaymentNote =
+      'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
+
+  static const String savedCards = 'البطاقات المحفوظة';
+  static const String defaultCard = 'افتراضي';
+  static const String addNewCard = 'اضافة بطاقه جديد';
   // Typo fixed: 'امام' -> 'أمام'
   static const String specialInstructionsHint = 'مثال: اتصل أمام المسجد..';
 
@@ -508,35 +521,35 @@ class AppStrings {
 
   // ==================================================
   // PAYMENT
-  // ==================================================
-  static const String paymentTitle = 'الدفع';
+  // // ==================================================
+  // static const String paymentTitle = 'الدفع';
 
-  //  Merge duplicate semantic keys in future cleanup
-  // paymentMethod duplicates paymentMethodLabel
-  static const String paymentMethod = 'طريقة الدفع';
+  // //  Merge duplicate semantic keys in future cleanup
+  // // paymentMethod duplicates paymentMethodLabel
+  // static const String paymentMethod = 'طريقة الدفع';
 
-  //  Merge duplicate semantic keys in future cleanup
-  // payAfterService duplicates paymentOnService ('الدفع عند الخدمة')
-  static const String payAfterService = 'الدفع عند الخدمة';
+  // //  Merge duplicate semantic keys in future cleanup
+  // // payAfterService duplicates paymentOnService ('الدفع عند الخدمة')
+  // static const String payAfterService = 'الدفع عند الخدمة';
 
-  //  Merge duplicate semantic keys in future cleanup
-  // payAfterServiceDesc duplicates afterCompletionService
-  static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
+  // //  Merge duplicate semantic keys in future cleanup
+  // // payAfterServiceDesc duplicates afterCompletionService
+  // static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
 
-  static const String discountCode = 'كود الخصم';
-  static const String enterDiscountCode = 'ادخل كود الخصم';
+  // static const String discountCode = 'كود الخصم';
+  // static const String enterDiscountCode = 'ادخل كود الخصم';
 
-  //  Merge duplicate semantic keys in future cleanup
-  // securePaymentNote duplicates securePaymentNoteAlt
-  static const String securePaymentNote =
-      'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
+  // //  Merge duplicate semantic keys in future cleanup
+  // // securePaymentNote duplicates securePaymentNoteAlt
+  // static const String securePaymentNote =
+  //     'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
 
-  //  Merge duplicate semantic keys in future cleanup
-  // savedCards duplicates cardsSaved ('البطاقات المحفوظة')
-  static const String savedCards = 'البطاقات المحفوظة';
+  // //  Merge duplicate semantic keys in future cleanup
+  // // savedCards duplicates cardsSaved ('البطاقات المحفوظة')
+  // static const String savedCards = 'البطاقات المحفوظة';
 
-  static const String defaultCard = 'افتراضي';
-  static const String addNewCard = '+ اضافة بطاقه جديد';
+  // static const String defaultCard = 'افتراضي';
+  // static const String addNewCard = '+ اضافة بطاقه جديد';
 
   // --- Order Summary ---
   static const String paymentSummary = 'ملخص الدفع';
@@ -760,6 +773,22 @@ class AppStrings {
   static const String noFavoritesYet = 'لا توجد خدمات مفضلة حتى الآن';
   static const String saveServicesToAccessLater =
       'قم بحفظ الخدمات التي تعجبك للوصول إليها بسرعة لاحقًا.';
+  static const String edit = 'تعديل';
+  static const String delete = 'حذف';
+  static const String deletecard = 'حذف البطاقة';
+  static const String deletecardwaring =
+      ' هل انت متاكد انك تريد خذف هذة البطاقة';
+
+  static const String defaultText = 'افتراضي';
+  static const String mySavedAddresses = 'عناويني المحفوظة';
+  static const String deleteAddressConfirmation =
+      'هل أنت متأكد أنك تريد حذف هذا العنوان؟';
+  static const String editAddress = 'تعديل العنوان';
+  static const String addAddress = 'إضافة عنوان';
+  static const String expiresIn = 'تنتهي في';
+  static const String card = 'بطاقة';
+  static const String addCard = 'إضافة بطاقة';
+  static const String editCard = 'تعديل البطاقة';
 
   // ==================================================
   // PROFILE

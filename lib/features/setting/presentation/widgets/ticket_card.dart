@@ -42,8 +42,9 @@ class TicketCard extends StatelessWidget {
           ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             Row(
               children: [
                 Text(
@@ -68,8 +69,8 @@ class TicketCard extends StatelessWidget {
             ),
             verticalSpace(6),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+
                 Text(
                   ticketCode,
                   style: AppText.regularIbm(
@@ -91,8 +92,8 @@ class TicketCard extends StatelessWidget {
             ),
             verticalSpace(12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+
                 Icon(
                   Icons.messenger_outline_sharp,
                   color: AppColors.primaryText,
@@ -103,8 +104,8 @@ class TicketCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     description,
-                    textAlign: TextAlign.right,
                     style: AppText.regularIbm(
+
                       color: AppColors.secondaryText,
                       fontSize: 13,
                     ),

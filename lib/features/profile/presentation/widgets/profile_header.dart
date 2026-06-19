@@ -11,7 +11,8 @@ import 'package:home_service_app/features/notification/presentation/cubit/notifi
 
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/buttom_curve_clipper.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -48,14 +49,15 @@ class ProfileHeader extends StatelessWidget {
                   spacing: 10,
                   children: [
                     Text(
-                      AppStrings.navAccount,
+                      context.tr(LocaleKeys.profileAccount),
                       textAlign: TextAlign.center,
                       style: AppText.semiBoldIbm(
                         color: AppColors.headingText,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                     ),
                     const Spacer(),
+
                     NotificationBell(
                       onTap: () => context.push(AppRouter.notification),
                       count: unreadCount,

@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
@@ -26,33 +27,33 @@ class UpdatePasswordScreen extends StatelessWidget {
             children: [
               verticalSpace(24),
               Text(
-                AppStrings.setNewPassword,
+                context.tr(LocaleKeys.settingsSetNewPassword),
                 style: AppText.ibmHeading20(color: AppColors.primaryText),
               ),
               verticalSpace(8),
               Text(
-                AppStrings.editNewPassDescription,
+                context.tr(LocaleKeys.settingsEditPassDescription),
                 style: AppText.ibmDescription14(color: AppColors.body),
               ),
               verticalSpace(32),
-              const PasswordTextField(
-                label: AppStrings.passwordNow,
-                hintText: AppStrings.enterPassword,
+              PasswordTextField(
+                label: context.tr(LocaleKeys.settingsPasswordNow),
+                hintText: context.tr(LocaleKeys.settingsEnterPassword),
               ),
               const ForgetPasswordLink(),
               verticalSpace(16),
-              const PasswordTextField(
-                label: AppStrings.newPassword,
-                hintText: AppStrings.enterPassword,
+              PasswordTextField(
+                label: context.tr(LocaleKeys.settingsNewPassword),
+                hintText: context.tr(LocaleKeys.settingsEnterPassword),
               ),
               verticalSpace(16),
-              const PasswordTextField(
-                label: AppStrings.confirmPassword,
-                hintText: AppStrings.reEnterPassword,
+              PasswordTextField(
+                label: context.tr(LocaleKeys.settingsConfirmPassword),
+                hintText: context.tr(LocaleKeys.settingsReEnterPassword),
               ),
               const Spacer(),
               CustomButtom(
-                text: AppStrings.confirm,
+                text: context.tr(LocaleKeys.settingsConfirm),
                 onTap: () {},
                 startColor: AppColors.bgDisabled,
                 endColor: AppColors.bgDisabled,

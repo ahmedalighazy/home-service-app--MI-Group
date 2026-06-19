@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../logic/cubit/chat_cubit.dart';
 
@@ -59,7 +61,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
               ),
             ),
           ),
-          SizedBox(width: 12.w),
+          horizontalSpace(12),
 
           Expanded(
             child: Container(
@@ -71,7 +73,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText: AppStrings.writeYourMessage,
+                  hintText: context.tr(LocaleKeys.helpCenterChatWriteMessage),
                   hintStyle: AppText.regularText(
                     color: AppColors.secondaryText,
                     fontSize: 14,

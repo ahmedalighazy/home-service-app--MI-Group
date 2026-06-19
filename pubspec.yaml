@@ -70,3 +70,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - lib/features/booking/localization/
+    - lib/features/profile/localization/
+    - lib/features/setting/localization/

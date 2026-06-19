@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
 import '../../../../core/constants/icons_path.dart';
@@ -26,14 +27,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CustomAppBar(title: AppStrings.settings),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.settingsTitle)),
       body: Column(
         children: [
           SettingListItem(
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorPassword,
-            title: AppStrings.changePassword,
+            title: context.tr(LocaleKeys.settingsChangePassword),
             onTap: () => context.pushNamed(AppRouter.updatePassword),
           ),
           const SettingsDivider(),
@@ -41,14 +42,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             seetingScreen: true,
 
             icon: IconsPath.iconLang,
-            title: AppStrings.language,
+            title: context.tr(LocaleKeys.settingsLanguage),
             trailing: const LanguageTrailingText(),
             onTap: () {},
           ),
           const SettingsDivider(),
           SettingsToggleItem(
             icon: Icons.notifications_none_outlined,
-            title: AppStrings.bookingNotifications,
+            title: context.tr(LocaleKeys.settingsNotifications),
             value: _notificationsEnabled,
             onChanged: (val) => setState(() => _notificationsEnabled = val),
           ),
@@ -57,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorWhat,
-            title: AppStrings.helpCenter,
+            title: context.tr(LocaleKeys.profileHelpCenter),
             onTap: () => context.pushNamed(AppRouter.helpCenter),
           ),
           const SettingsDivider(),
@@ -65,13 +66,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             seetingScreen: true,
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.group2,
-            title: AppStrings.policiesAndRules,
+            title: context.tr(LocaleKeys.settingsPolicies),
             onTap: () => context.pushNamed(AppRouter.legalAndPolicies),
           ),
           const SettingsDivider(),
           SettingListItem(
             icon: IconsPath.iconLogout,
-            title: AppStrings.logout,
+            title: context.tr(LocaleKeys.settingsLogout),
             logout: true,
             seetingScreen: true,
             settingColorIcon: AppColors.red,
@@ -79,9 +80,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () {
               showCannotDeleteDialogred(
                 context,
-                AppStrings.logout,
-                AppStrings.logoutContent,
-                AppStrings.logout,
+                context.tr(LocaleKeys.settingsLogout),
+                context.tr(LocaleKeys.settingsLogoutConfirm),
+                context.tr(LocaleKeys.settingsLogout),
                 true,
               );
             },

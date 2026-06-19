@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -19,8 +20,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   final List<SubscriptionModel> _currentSubscriptions = [
     SubscriptionModel(
       id: '1',
-      title: AppStrings.weeklyCleaning,
-      type: AppStrings.weekly,
+      title: LocaleKeys.profileWeeklyCleaning,
+      type: LocaleKeys.profileWeekly,
       nextVisitDate: 'الأحد، 15 مايو 2026',
       nextVisitTime: '9:00 ص',
       price: 350.0,
@@ -31,8 +32,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   final List<SubscriptionModel> _previousSubscriptions = [
     SubscriptionModel(
       id: '2',
-      title: AppStrings.weeklyCleaning,
-      type: AppStrings.weekly,
+      title: LocaleKeys.profileWeeklyCleaning,
+      type: LocaleKeys.profileWeekly,
       expiryDate: 'الأحد، 15 مايو 2026',
       price: 350.0,
       status: SubscriptionStatus.ended,
@@ -45,7 +46,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
-          title: AppStrings.mySubscriptions,
+          title: context.tr(LocaleKeys.profileMySubscriptions),
           onBack: () => context.pop(),
           bottom: TabBar(
             labelStyle: AppText.ibmHeading14(),
@@ -54,9 +55,9 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             unselectedLabelColor: AppColors.primaryText,
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
-            tabs: const [
-              Tab(text: AppStrings.currentSubscriptions),
-              Tab(text: AppStrings.previousSubscriptions),
+            tabs: [
+              Tab(text: context.tr(LocaleKeys.profileCurrentSubscriptions)),
+              Tab(text: context.tr(LocaleKeys.profilePreviousSubscriptions)),
             ],
           ),
         ),

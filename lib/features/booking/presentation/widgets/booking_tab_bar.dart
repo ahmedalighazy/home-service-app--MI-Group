@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class BookingTabBar extends StatelessWidget {
   final int selectedIndex;
@@ -26,12 +27,12 @@ class BookingTabBar extends StatelessWidget {
       child: Row(
         children: [
           _TabItem(
-            title: AppStrings.upcoming,
+            title: context.tr(LocaleKeys.bookingUpcoming),
             isSelected: selectedIndex == 0,
             onTap: () => onTabSelected(0),
           ),
           _TabItem(
-            title: AppStrings.previous,
+            title: context.tr(LocaleKeys.bookingPrevious),
             isSelected: selectedIndex == 1,
             onTap: () => onTabSelected(1),
           ),

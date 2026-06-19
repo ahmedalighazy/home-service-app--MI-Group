@@ -10,7 +10,8 @@ import '../widgets/day_selector.dart';
 import '../widgets/time_selector.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 
 class RescheduleBookingScreen extends StatelessWidget {
@@ -21,28 +22,28 @@ class RescheduleBookingScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => BookingCubit(BookingRepository()),
       child: Scaffold(
-        appBar: CustomAppBar(title: AppStrings.confirmReschedule),
+        appBar: CustomAppBar(title: context.tr(LocaleKeys.bookingReschedule)),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('اختر اليوم', style: AppText.ibmHeading14()),
+              Text(context.tr(LocaleKeys.bookingChooseDay), style: AppText.ibmHeading14()),
               verticalSpace(12),
               DaySelector(selectedDayIndex: 0, onDaySelected: (idx) {}),
               verticalSpace(24),
               TimeSelector(onTimeSelected: (idx) {}),
               verticalSpace(24),
               Text(
-                AppStrings.specialNotesOptional,
+                context.tr(LocaleKeys.bookingSpecialNotesLabel),
                 style: AppText.ibmHeading14(),
               ),
               verticalSpace(12),
               CustomTextField(
-                hintText: AppStrings.exampleHomeLocation,
+                hintText: context.tr(LocaleKeys.bookingExampleLocation),
                 maxLines: 4,
-                fillColor: AppColors.gry,
+                fillColor: AppColors.bgSecondary,
                 borderColor: AppColors.borderGrey,
               ),
               verticalSpace(5),
@@ -65,7 +66,7 @@ class RescheduleBookingScreen extends StatelessWidget {
               Spacer(),
               CustomButtom(
                 onTap: () {},
-                text: AppStrings.confirmReschedule2,
+                text: context.tr(LocaleKeys.bookingRescheduleConfirm),
                 textStyle: AppText.ibmButton16(color: AppColors.white),
                 startColor: AppColors.primary,
                 endColor: AppColors.dark,
