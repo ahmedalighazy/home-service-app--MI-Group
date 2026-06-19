@@ -25,54 +25,60 @@ class RescheduleBookingScreen extends StatelessWidget {
         appBar: CustomAppBar(title: context.tr(LocaleKeys.bookingReschedule)),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(context.tr(LocaleKeys.bookingChooseDay), style: AppText.ibmHeading14()),
-              verticalSpace(12),
-              DaySelector(selectedDayIndex: 0, onDaySelected: (idx) {}),
-              verticalSpace(24),
-              TimeSelector(onTimeSelected: (idx) {}),
-              verticalSpace(24),
-              Text(
-                context.tr(LocaleKeys.bookingSpecialNotesLabel),
-                style: AppText.ibmHeading14(),
-              ),
-              verticalSpace(12),
-              CustomTextField(
-                hintText: context.tr(LocaleKeys.bookingExampleLocation),
-                maxLines: 4,
-                fillColor: AppColors.bgSecondary,
-                borderColor: AppColors.borderGrey,
-              ),
-              verticalSpace(5),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.tr(LocaleKeys.bookingChooseDay),
+                  style: AppText.ibmHeading14(),
+                ),
+                verticalSpace(12),
+                DaySelector(selectedDayIndex: 0, onDaySelected: (idx) {}),
+                verticalSpace(24),
+                TimeSelector(onTimeSelected: (idx) {}),
+                verticalSpace(24),
+                Text(
+                  context.tr(LocaleKeys.bookingSpecialNotesLabel),
+                  style: AppText.ibmHeading14(),
+                ),
+                verticalSpace(12),
+                CustomTextField(
+                  hintText: context.tr(LocaleKeys.bookingExampleLocation),
+                  maxLines: 4,
+                  fillColor: AppColors.bgSecondary,
+                  borderColor: AppColors.borderGrey,
+                ),
+                verticalSpace(5),
 
-              Row(
-                children: [
-                  Spacer(),
-                  Text(
-                    '300/0',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color(0xFF1D265C) /* secondary */,
-                      fontSize: 14.sp,
-                      fontFamily: 'IBM Plex Sans Arabic',
-                      fontWeight: FontWeight.w500,
+                Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      '300/0',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFF1D265C) /* secondary */,
+                        fontSize: 14.sp,
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              CustomButtom(
-                onTap: () {},
-                text: context.tr(LocaleKeys.bookingRescheduleConfirm),
-                textStyle: AppText.ibmButton16(color: AppColors.white),
-                startColor: AppColors.primary,
-                endColor: AppColors.dark,
-              ),
-              verticalSpace(12),
-            ],
+                  ],
+                ),
+                verticalSpace(height(context) * 0.11),
+                // Spacer(),
+                CustomButtom(
+                  onTap: () {},
+                  text: context.tr(LocaleKeys.bookingRescheduleConfirm),
+                  textStyle: AppText.ibmButton16(color: AppColors.white),
+                  startColor: AppColors.primary,
+                  endColor: AppColors.dark,
+                ),
+                verticalSpace(12),
+              ],
+            ),
           ),
         ),
       ),

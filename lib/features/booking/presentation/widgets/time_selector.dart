@@ -19,18 +19,20 @@ class TimeSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(context.tr(LocaleKeys.bookingChooseTime), style: AppText.ibmHeading14()),
+        Text(
+          context.tr(LocaleKeys.bookingChooseTime),
+          style: AppText.ibmHeading14(),
+        ),
         verticalSpace(12),
         SizedBox(
-          height: 100.h,
-
-
+          height: 85.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
 
             itemCount: 6,
             itemBuilder: (context, index) => _TimeItem(
-              time: '08:00 ${context.tr(LocaleKeys.bookingAm)}\n-09:00 ${context.tr(LocaleKeys.bookingAm)}',
+              time:
+                  '08:00 ${context.tr(LocaleKeys.bookingAm)}\n-09:00 ${context.tr(LocaleKeys.bookingAm)}',
               index: index,
               onTap: () => context.read<BookingCubit>().selectTime(index),
             ),

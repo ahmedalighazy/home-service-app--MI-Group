@@ -16,10 +16,10 @@ class FavoritesScreen extends StatelessWidget {
         true; // Changed to false to test empty state or leave as variable
 
     return Scaffold(
-      // backgroundColor: AppColors.softWhite,
       appBar: CustomAppBar(title: context.tr(LocaleKeys.profileFavorites)),
       body: hasFavorites
           ? const FavoritesListWidget()
+          // ignore: dead_code
           : EmptyStateWidget(
               iconPath: IconsPath.illustrationSvg,
               title: context.tr(LocaleKeys.profileNoFavoritesYet),

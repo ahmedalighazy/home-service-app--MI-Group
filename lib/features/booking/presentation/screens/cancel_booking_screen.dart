@@ -32,8 +32,7 @@ class CancelBookingScreen extends StatelessWidget {
               _WarningSection(),
               verticalSpace(32),
               _ReasonField(),
-              // Spacer(),
-              verticalSpace(32),
+              verticalSpace(40),
 
               _ActionButtons(context: context),
             ],

@@ -22,6 +22,7 @@ class DaySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
           height: 90.h,
@@ -74,11 +75,14 @@ class _DayItem extends StatelessWidget {
       builder: (context, state) {
         var isSelected = context.read<BookingCubit>().selectedDayIndex == index;
         return Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              dayName,
-              style: AppText.mediumText(color: Colors.black, fontSize: 14),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                dayName,
+                style: AppText.mediumText(color: Colors.black, fontSize: 14),
+              ),
             ),
             GestureDetector(
               onTap: () => context.read<BookingCubit>().selectDay(index),

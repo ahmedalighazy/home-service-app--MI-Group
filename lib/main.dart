@@ -10,8 +10,8 @@ import 'core/routes/app_routes.dart';
 import 'core/themes/theming/app_theme.dart';
 import 'core/di/injection.dart';
 import 'core/utils/helpers/cache_helper.dart';
-import 'core/utils/l10n/app_localizations.dart';
 import 'core/utils/helpers/observer.dart';
+import 'core/utils/l10n/app_locallization_setting.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() async {
 
   configureDependencies();
   runApp(
-    DevicePreview(enabled: false, builder: (context) => const HomeServiceApp()),
+    DevicePreview(enabled: true, builder: (context) => const HomeServiceApp()),
   );
 }
 
@@ -29,7 +29,7 @@ class HomeServiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appLanguage = 'en';
+    const String appLanguage = 'ar';
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -59,10 +59,12 @@ class HomeServiceApp extends StatelessWidget {
             supportedLocales: const [Locale('en', ''), Locale('ar', '')],
             localizationsDelegates: const [
               AppLocalizations.delegate,
+              AppLocalizationsSetting.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+
             localeResolutionCallback: (locale, supportedLocales) {
               for (var supportedLocale in supportedLocales) {
                 if (supportedLocale.languageCode == locale?.languageCode) {
@@ -71,8 +73,6 @@ class HomeServiceApp extends StatelessWidget {
               }
               return supportedLocales.first;
             },
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
           ),
         );
       },
