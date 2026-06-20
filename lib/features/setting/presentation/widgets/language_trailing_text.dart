@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-
 import '../../../../core/themes/text/app_text.dart';
 
 class LanguageTrailingText extends StatelessWidget {
@@ -13,7 +12,7 @@ class LanguageTrailingText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          AppStrings.arabic,
+          context.l10n.arabic,
           style: AppText.ibmDescription14().copyWith(
             color: AppColors.textLightGrey,
             fontSize: 15,

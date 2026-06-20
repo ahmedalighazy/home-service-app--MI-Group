@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class PromoApplyButton extends StatelessWidget {
   const PromoApplyButton({super.key});
@@ -25,8 +24,7 @@ class PromoApplyButton extends StatelessWidget {
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
-      child: Text(AppStrings.applyCode, style: AppText.semiBold14White),
+      child: Text(context.l10n.applyCode, style: AppText.semiBold14White),
     );
   }
 }
-

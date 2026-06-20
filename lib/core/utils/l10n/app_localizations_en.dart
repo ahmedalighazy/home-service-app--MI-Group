@@ -9,1292 +9,1593 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get add => 'add';
+  String get save => 'Save';
 
   @override
-  String get arabic => 'arabic';
+  String get cancelBtn => 'Cancel';
 
   @override
-  String get bookNow => 'bookNow';
+  String get okBtn => 'OK';
 
   @override
-  String get cancelBtn => 'cancelBtn';
+  String get confirm => 'Confirm';
 
   @override
-  String get categories => 'categories';
+  String get viewAll => 'View All';
 
   @override
-  String get clearAll => 'clearAll';
+  String get bookNow => 'Book Now';
 
   @override
-  String get code => 'code';
+  String get goBack => 'Back';
 
   @override
-  String get confirm => 'confirm';
+  String get next => 'Next';
 
   @override
-  String get copy => 'copy';
+  String get currency => 'QAR';
 
   @override
-  String get currency => 'currency';
+  String get code => 'Code';
 
   @override
-  String get defaultCard => 'defaultCard';
+  String get copy => 'Copy';
 
   @override
-  String get discount => 'discount';
+  String get share => 'Share';
 
   @override
-  String get earlier => 'earlier';
+  String get retry => 'Retry';
 
   @override
-  String get goBack => 'goBack';
+  String get send => 'Send';
 
   @override
-  String get language => 'language';
+  String get regular => 'Regular';
 
   @override
-  String get login => 'login';
+  String get backToHome => 'Back to Home';
 
   @override
-  String get logout => 'logout';
+  String get unknownRoute => 'Unknown Route';
 
   @override
-  String get logoutContent => 'logoutContent';
+  String get sendCode => 'Send Code';
 
   @override
-  String get monthly => 'monthly';
+  String get emailPlaceholder => 'Enter your email address';
 
   @override
-  String get next => 'next';
+  String get passwordLabel => 'Password';
 
   @override
-  String get ofText => 'ofText';
+  String get passwordPlaceholder => 'Enter your password';
 
   @override
-  String get okBtn => 'okBtn';
+  String get confirmPasswordLabel => 'Confirm Password';
 
   @override
-  String get once => 'once';
+  String get confirmPasswordPlaceholder => 'Re-enter your password';
 
   @override
-  String get online => 'online';
+  String get login => 'Log In';
 
   @override
-  String get open => 'open';
+  String get termsAndPrivacy =>
+      'By logging in, you agree to the Terms & Conditions and Privacy Policy';
 
   @override
-  String get orUsing => 'orUsing';
+  String get orUsing => 'Or using';
 
   @override
-  String get previous => 'previous';
+  String get welcomeBack => 'Welcome Back';
 
   @override
-  String get rebook => 'rebook';
+  String get welcomeSignUp => 'Create a New Account';
 
   @override
-  String get rebookNow => 'rebookNow';
+  String get signUpSubtitle =>
+      'Enter your phone number to sign up and receive a verification code';
 
   @override
-  String get resolved => 'resolved';
+  String get verificationMethodInfo =>
+      'We\'ll call you or send a verification code to complete your login';
 
   @override
-  String get retry => 'retry';
+  String get signUpWithGoogle => 'Sign up with Google';
 
   @override
-  String get save => 'save';
+  String get signUpWithApple => 'Sign up with Apple';
 
   @override
-  String get send => 'send';
+  String get continueAsGuest => 'Continue as Guest';
 
   @override
-  String get serviceAvailable24h => 'serviceAvailable24h';
+  String get alreadyHaveAccount => 'Already have an account? ';
 
   @override
-  String get share => 'share';
+  String get signInAction => 'Log In';
 
   @override
-  String get specialOfferTitle => 'specialOfferTitle';
+  String get dontHaveAccount => 'Don\'t have an account? ';
 
   @override
-  String get start => 'start';
+  String get createAccount => 'Create Account';
 
   @override
-  String get step => 'step';
+  String get forgotPassword => 'Forgot your password?';
 
   @override
-  String get today => 'today';
+  String get rememberMe => 'Remember Me';
 
   @override
-  String get upcoming => 'upcoming';
+  String get phonePlaceholder => '5123 4567';
 
   @override
-  String get viewAll => 'viewAll';
+  String get defaultCountryCode => '+974';
 
   @override
-  String get viewDetails => 'viewDetails';
+  String get errorIncorrectPassword => 'Incorrect password';
 
   @override
-  String get weekly => 'weekly';
+  String get errorPasswordsDoNotMatch => 'Passwords do not match';
 
   @override
-  String get confirmFieldHint => 'confirmFieldHint';
+  String get password => 'Password';
 
   @override
-  String get errorIncorrectPassword => 'errorIncorrectPassword';
+  String get passwordNow => 'Current Password';
 
   @override
-  String get errorOutOfZone => 'errorOutOfZone';
+  String get enterPassword => 'Enter your password';
 
   @override
-  String get errorPasswordsDoNotMatch => 'errorPasswordsDoNotMatch';
+  String get confirmCode => 'Confirm Code';
 
   @override
-  String get applyCode => 'applyCode';
+  String get enterVerificationCode =>
+      'Enter the 6-digit verification code sent to';
 
   @override
-  String get backBtn => 'backBtn';
+  String get resendCodePrompt => 'Didn\'t receive the code? ';
 
   @override
-  String get backToHome => 'backToHome';
+  String get resendCodeLink => 'Resend Code';
 
   @override
-  String get browsePackagesBtn => 'browsePackagesBtn';
+  String get defaultOtpTimer => '0:59';
 
   @override
-  String get browseServices => 'browseServices';
+  String get completeProfile => 'Complete Your Profile';
 
   @override
-  String get changePaymentMethod => 'changePaymentMethod';
+  String get completeProfileSubtitle =>
+      'Add some information to personalize your experience in the app';
 
   @override
-  String get contactUs => 'contactUs';
+  String get namePlaceholder => 'Enter your full name';
 
   @override
-  String get createAccount => 'createAccount';
+  String get completeRegistration => 'Complete Registration';
 
   @override
-  String get writeYourMessage => 'writeYourMessage';
+  String get resetPassword => 'Reset Password';
 
   @override
-  String get noAppointmentsAvailable => 'noAppointmentsAvailable';
+  String get resetPasswordDescription =>
+      'Please enter your email to reset your password';
 
   @override
-  String get noAppointmentsDesc => 'noAppointmentsDesc';
+  String get checkEmail => 'Check Your Email';
 
   @override
-  String get noResultsFound => 'noResultsFound';
+  String get emailSentDescription =>
+      'A reset link has been sent to ahmed...‌@gmail.com. Enter the 4-digit code to confirm your email';
 
   @override
-  String get noResultsFoundDescription => 'noResultsFoundDescription';
+  String get setNewPassword => 'Set a New Password';
 
   @override
-  String get paymentFailed => 'paymentFailed';
+  String get setNewPasswordDescription =>
+      'Create a new password, and make sure it\'s different from your previous one.';
 
   @override
-  String get paymentFailedDesc => 'paymentFailedDesc';
+  String get passwordChangedSuccessfully => 'Password changed successfully';
 
   @override
-  String get unknownRoute => 'unknownRoute';
+  String get loginWithNewPassword =>
+      'You can now log in with your new password';
 
   @override
-  String get bookingConfirmedPopupDesc => 'bookingConfirmedPopupDesc';
+  String get newPassword => 'New Password';
 
   @override
-  String get bookingConfirmedSuccess => 'bookingConfirmedSuccess';
+  String get setYourLocation => 'Set Your Location';
 
   @override
-  String get passwordChangedSuccessfully => 'passwordChangedSuccessfully';
+  String get locationPermissionDescription =>
+      'We need your location to show available services near you';
 
   @override
-  String get ratingHelpsImprove => 'ratingHelpsImprove';
+  String get setCurrentLocation => 'Use Current Location';
 
   @override
-  String get thankYouForRating => 'thankYouForRating';
+  String get chooseLocationManually => 'Choose Location Manually';
 
   @override
-  String get alreadyHaveAccount => 'alreadyHaveAccount';
+  String get searchLocationPlaceholder => 'Search for an area or address...';
 
   @override
-  String get continueAsGuest => 'continueAsGuest';
+  String get confirmLocation => 'Confirm Location';
 
   @override
-  String get defaultCountryCode => 'defaultCountryCode';
+  String get errorOutOfZone => 'Sorry, we don\'t provide service in this area';
 
   @override
-  String get dontHaveAccount => 'dontHaveAccount';
+  String get mosque => 'Mosque';
 
   @override
-  String get emailLabel => 'emailLabel';
+  String get company => 'Company';
 
   @override
-  String get emailPlaceholder => 'emailPlaceholder';
+  String get currentLocation => 'Current Location';
 
   @override
-  String get emailValue => 'emailValue';
+  String get searchServiceOrProblem => 'Search for a service or problem...';
 
   @override
-  String get forgotPassword => 'forgotPassword';
+  String get deepCleaning => 'Deep Cleaning';
 
   @override
-  String get password => 'password';
+  String get cleaningFull => 'Full Cleaning';
 
   @override
-  String get passwordLabel => 'passwordLabel';
+  String get houseCleaning => 'House Cleaning';
 
   @override
-  String get passwordNow => 'passwordNow';
+  String get pestControl => 'Pest Control';
 
   @override
-  String get passwordPlaceholder => 'passwordPlaceholder';
+  String get corporateServices => 'Corporate Services';
 
   @override
-  String get phonePlaceholder => 'phonePlaceholder';
+  String get mostRequested => 'Most Requested';
 
   @override
-  String get rememberMe => 'rememberMe';
+  String get navHome => 'Home';
 
   @override
-  String get signInAction => 'signInAction';
+  String get navBookings => 'My Bookings';
 
   @override
-  String get signUpWithApple => 'signUpWithApple';
+  String get navAccount => 'My Account';
 
   @override
-  String get signUpWithGoogle => 'signUpWithGoogle';
+  String get specialOfferTitle =>
+      'Exclusive offers for companies and institutions';
 
   @override
-  String get termsAndPrivacy => 'termsAndPrivacy';
+  String get serviceAvailable24h => 'Fast service within 24 hours';
 
   @override
-  String get welcomeBack => 'welcomeBack';
+  String get bestCleaningWork => 'Forget about cleaning after work';
 
   @override
-  String get welcomeBackAlt => 'welcomeBackAlt';
+  String get hourlyClean => 'Hourly Cleaning';
 
   @override
-  String get signUpSubtitle => 'signUpSubtitle';
+  String get startingPrice => 'Prices start from QAR 100';
 
   @override
-  String get verificationMethodInfo => 'verificationMethodInfo';
+  String get recentSearches => 'Recent Searches';
 
   @override
-  String get welcomeSignUp => 'welcomeSignUp';
+  String get clearAll => 'Clear All';
 
   @override
-  String get completeProfile => 'completeProfile';
+  String get popularServices => 'Popular Services';
 
   @override
-  String get completeProfileSubtitle => 'completeProfileSubtitle';
+  String get youMightBeLookingFor => 'You might be looking for';
 
   @override
-  String get completeRegistration => 'completeRegistration';
+  String get categories => 'Categories';
 
   @override
-  String get namePlaceholder => 'namePlaceholder';
+  String get noResultsFound => 'No Results Found';
 
   @override
-  String get confirmCode => 'confirmCode';
+  String get noResultsFoundDescription =>
+      'We couldn\'t find any services matching your search for';
 
   @override
-  String get defaultOtpTimer => 'defaultOtpTimer';
+  String get browseServices => 'Browse Services';
 
   @override
-  String get enterVerificationCode => 'enterVerificationCode';
+  String get tryOtherWords => 'Try other words';
 
   @override
-  String get resendCodeLink => 'resendCodeLink';
+  String get insectsInHouse => 'Insects in the house';
 
   @override
-  String get resendCodePrompt => 'resendCodePrompt';
+  String get insectsInHouseDis => 'Instant solutions for pest control';
 
   @override
-  String get resendCodePromptAlt => 'resendCodePromptAlt';
+  String get chooseYourAddress => 'Choose Your Address';
 
   @override
-  String get sendCode => 'sendCode';
+  String get addNewAddress => '+ Add New Address';
 
   @override
-  String get checkEmail => 'checkEmail';
+  String get streetNameOrNumber => 'Street Name/Number';
 
   @override
-  String get emailSentDescription => 'emailSentDescription';
+  String get companyName => 'Company Name';
 
   @override
-  String get resetPassword => 'resetPassword';
+  String get buildingNumber => 'Building Number';
 
   @override
-  String get resetPasswordDescription => 'resetPasswordDescription';
+  String get floorNumber => 'Floor';
 
   @override
-  String get confirmPassword => 'confirmPassword';
+  String get officeOrFloorNumber => 'Office/Floor Number';
 
   @override
-  String get confirmPasswordLabel => 'confirmPasswordLabel';
+  String get apartmentNumber => 'Apartment Number';
 
   @override
-  String get confirmPasswordPlaceholder => 'confirmPasswordPlaceholder';
+  String get additionalNotes => 'Additional Notes';
 
   @override
-  String get createNewPassDescription => 'createNewPassDescription';
+  String get saveAddress => 'Save Address';
 
   @override
-  String get editNewPassDescription => 'editNewPassDescription';
+  String get editAddressHint =>
+      'To edit an address, go to My Account -> Addresses.';
 
   @override
-  String get enterPassword => 'enterPassword';
+  String get savedAddresses => 'My Saved Addresses';
 
   @override
-  String get loginWithNewPassword => 'loginWithNewPassword';
+  String get noAddressesYet => 'No other addresses yet';
 
   @override
-  String get newPassword => 'newPassword';
+  String get addFavoriteAddressesDesc =>
+      'Add your favorite addresses for quick access during booking.';
 
   @override
-  String get reEnterPassword => 'reEnterPassword';
+  String get homeAddress => 'Home';
 
   @override
-  String get setNewPassword => 'setNewPassword';
+  String get workAddress => 'Work';
 
   @override
-  String get setNewPasswordDescription => 'setNewPasswordDescription';
+  String get addressLocation => 'Address Location';
 
   @override
-  String get chooseLocationManually => 'chooseLocationManually';
+  String get writeLocationInDetail => 'Write the location in detail';
 
   @override
-  String get locationPermissionDescription => 'locationPermissionDescription';
+  String get writeNameCompanyOrMosque =>
+      'Write the name of the company or mosque';
 
   @override
-  String get setCurrentLocation => 'setCurrentLocation';
+  String get deleteAddressTitle => 'Delete Address';
 
   @override
-  String get setYourLocation => 'setYourLocation';
+  String get deleteDefaultAddressDesc =>
+      'This is your current default address. Another address will be automatically selected as default.';
 
   @override
-  String get confirmLocation => 'confirmLocation';
+  String get notifications => 'Notifications';
 
   @override
-  String get currentLocation => 'currentLocation';
+  String get noNewNotifications => 'No new notifications';
 
   @override
-  String get searchLocationPlaceholder => 'searchLocationPlaceholder';
+  String get newNotifications => 'New';
 
   @override
-  String get bestCleaningWork => 'bestCleaningWork';
+  String get today => 'Today';
 
   @override
-  String get corporateServices => 'corporateServices';
+  String get earlier => 'Earlier';
 
   @override
-  String get deepCleaning => 'deepCleaning';
+  String get serviceCompletedDesc =>
+      'We hope you enjoyed our carpet cleaning service. Your feedback matters to us, please rate the team.';
 
   @override
-  String get hourlyClean => 'hourlyClean';
+  String get serviceStarted => 'Service Started';
 
   @override
-  String get houseCleaning => 'houseCleaning';
+  String get serviceStartedDesc =>
+      'Our team is now carrying out your requested service to the highest standard.';
 
   @override
-  String get mostRequested => 'mostRequested';
+  String get serviceReminder => 'Service Appointment Reminder';
 
   @override
-  String get pestControl => 'pestControl';
+  String get serviceReminderDesc =>
+      'Your service appointment is today at 5:00 PM';
 
   @override
-  String get price120 => 'price120';
+  String get bookingConfirmed => 'Your booking has been confirmed successfully';
 
   @override
-  String get promoCode => 'promoCode';
+  String get bookingConfirmedDesc =>
+      'Your service appointment has been confirmed for Tuesday at 4:00 PM.';
 
   @override
-  String get searchServiceOrProblem => 'searchServiceOrProblem';
+  String get appointmentModified => 'Service Appointment Modified';
 
   @override
-  String get startingPrice => 'startingPrice';
+  String get appointmentModifiedDesc =>
+      'Your booking time has been updated to 6:00 PM as requested.';
 
   @override
-  String get navAccount => 'navAccount';
+  String get rebookPrompt => 'Would you like to rebook?';
 
   @override
-  String get navBookings => 'navBookings';
+  String get rebookPromptDesc => 'Book the same service again in seconds.';
 
   @override
-  String get navHome => 'navHome';
+  String get specialDiscount => 'Limited-Time Special Discount';
 
   @override
-  String get discountUpTo10 => 'discountUpTo10';
+  String get specialDiscountDesc =>
+      'Enjoy a 20% discount on sofa cleaning services with code clean20.';
 
   @override
-  String get discountUpTo20 => 'discountUpTo20';
+  String get reviewsCount => 'reviews';
 
   @override
-  String get discountUpTo70 => 'discountUpTo70';
+  String get discount => 'Discount';
 
   @override
-  String get deepFurnitureCleaning => 'deepFurnitureCleaning';
+  String get applyCode => 'Apply Code';
 
   @override
-  String get glassCleaning => 'glassCleaning';
+  String get viewServiceDetails => 'View Service Details';
 
   @override
-  String get insectsInHouse => 'insectsInHouse';
+  String get serviceIncludes => 'Service Includes:';
 
   @override
-  String get insectsInHouseDis => 'insectsInHouseDis';
+  String get notesBeforeBooking => 'Notes Before Booking:';
 
   @override
-  String get pestControlService => 'pestControlService';
+  String get add => 'Add +';
 
   @override
-  String get popularServices => 'popularServices';
+  String get codePrefix => 'Code';
 
   @override
-  String get recentSearches => 'recentSearches';
+  String get addCard => '+ Add New Card';
 
   @override
-  String get tryOtherWords => 'tryOtherWords';
+  String get furniture => 'Furniture';
 
   @override
-  String get youMightBeLookingFor => 'youMightBeLookingFor';
+  String get deepFurnitureCleaning => 'Deep Furniture Cleaning';
 
   @override
-  String get addAddressBtn => 'addAddressBtn';
+  String get pestControlService => 'Pest Elimination';
 
   @override
-  String get addFavoriteAddressesDesc => 'addFavoriteAddressesDesc';
+  String get glassCleaning => 'Glass Cleaning';
 
   @override
-  String get deleteAddressTitle => 'deleteAddressTitle';
+  String get pestControlAntsApartment => 'Ant Control - Apartment';
 
   @override
-  String get deleteDefaultAddressDesc => 'deleteDefaultAddressDesc';
+  String get pestControlAntsVilla => 'Ant Control - Villa';
 
   @override
-  String get editAddressHint => 'editAddressHint';
+  String get pestControlApartment => 'Cockroach Control - Apartment';
 
   @override
-  String get homeAddress => 'homeAddress';
+  String get pestControlBedbugsApartment => 'Bedbug Control - Apartment';
 
   @override
-  String get myAddresses => 'myAddresses';
+  String get pestControlBedbugsVilla => 'Bedbug Control - Villa';
 
   @override
-  String get noAddressesYet => 'noAddressesYet';
+  String get pestControlMiceApartment => 'Mice Control - Apartment';
 
   @override
-  String get savedAddresses => 'savedAddresses';
+  String get pestControlMiceVilla => 'Mice Control - Villa';
 
   @override
-  String get savedAddressesHeader => 'savedAddressesHeader';
+  String get pestControlPests => 'Pest Control';
 
   @override
-  String get workAddress => 'workAddress';
+  String get pestControlVilla => 'Cockroach Control - Villa';
 
   @override
-  String get addNewAddress => 'addNewAddress';
+  String get sprayFullAntsInApartment =>
+      'Full Spray for Ant Control in Apartment';
 
   @override
-  String get addYourAddress => 'addYourAddress';
+  String get sprayFullAntsInVilla => 'Full Spray for Ant Control in Villa';
 
   @override
-  String get additionalNotes => 'additionalNotes';
+  String get sprayFullBedbugsInApartment =>
+      'Full Spray for Bedbug Control in Apartment';
 
   @override
-  String get addressHome => 'addressHome';
+  String get sprayFullBedbugsInVilla =>
+      'Full Spray for Bedbug Control in Villa';
 
   @override
-  String get addressTitle => 'addressTitle';
+  String get sprayFullInApartment =>
+      'Full Spray for Cockroach Control in Apartment';
 
   @override
-  String get addressWork => 'addressWork';
+  String get sprayFullInVilla => 'Full Spray for Cockroach Control in Villa';
 
   @override
-  String get apartmentNumber => 'apartmentNumber';
+  String get sprayFullMiceInApartment =>
+      'Full Spray for Mice Control in Apartment';
 
   @override
-  String get buildingNumber => 'buildingNumber';
+  String get sprayFullMiceInVilla => 'Full Spray for Mice Control in Villa';
 
   @override
-  String get chooseYourAddress => 'chooseYourAddress';
+  String get sofaDeepCleaningTagline =>
+      'The deep clean your sofa has been waiting for';
 
   @override
-  String get companyName => 'companyName';
+  String get sofaCleaningDetailedDescription =>
+      'A quick vacuum is one thing, but the dust, grit, and hidden stains that build up inside your sofa\'s fabric are something else entirely.\n\nOur certified cleaning specialists arrive fully equipped and work through every layer of your sofa to restore its freshness, color, and comfort.';
 
   @override
-  String get floorNumber => 'floorNumber';
+  String get inspectionFreeFully => 'Completely Free Inspection';
 
   @override
-  String get officeOrFloorNumber => 'officeOrFloorNumber';
+  String get sofaInspectionSteps =>
+      'Inspect the sofa to determine fabric type\nIdentify cleaning needs\nInspect the sofa to determine fabric type\nDry vacuum to remove dust, hair, and debris\nWet shampoo cleaning using specialized materials\nStain extraction during the shampoo process for treatment\nSpot treatment for stubborn stains';
 
   @override
-  String get saveAddress => 'saveAddress';
+  String get postCleaningSofaDryingNotes =>
+      'The sofa may remain damp for up to 12 hours after cleaning.\nDrying time depends on the fabric type and ventilation in the area.\nSome very stubborn stains, such as pet, blood, or oil stains, may be hard to fully remove.\nThe specialist will let you know if certain cleaning methods aren\'t suitable for some fabric types.\nPlease cover any items not included in the service or that cannot be cleaned.';
 
   @override
-  String get streetNameOrNumber => 'streetNameOrNumber';
+  String get noCommitmentAfterInspection =>
+      'No commitment after the inspection';
 
   @override
-  String get appointmentModified => 'appointmentModified';
+  String get notSureGetFreeInspection => 'Not sure? Get a free inspection';
 
   @override
-  String get appointmentModifiedDesc => 'appointmentModifiedDesc';
+  String get doneReceivedRequest => 'Inspection request received';
 
   @override
-  String get bookingConfirmed => 'bookingConfirmed';
+  String get companiesMosques => 'Services for Companies & Mosques';
 
   @override
-  String get bookingConfirmedDesc => 'bookingConfirmedDesc';
+  String get provideCleaningSanitizationOfficesMosquesDetermine =>
+      'We provide cleaning and sanitization services for offices and mosques, tailored precisely to your needs, with a clear price quote and no commitment.';
 
   @override
-  String get bookingNotifications => 'bookingNotifications';
+  String get determineFinalAfterOnly =>
+      'The final price is determined only after the inspection';
 
   @override
-  String get newNotifications => 'newNotifications';
+  String get upcoming => 'Upcoming';
 
   @override
-  String get noNewNotifications => 'noNewNotifications';
+  String get previous => 'Previous';
 
   @override
-  String get notifications => 'notifications';
+  String get scheduled => 'Scheduled';
 
   @override
-  String get rebookPrompt => 'rebookPrompt';
+  String get inProgress => 'In Progress';
 
   @override
-  String get rebookPromptDesc => 'rebookPromptDesc';
+  String get completed => 'Completed';
 
   @override
-  String get serviceCompleted => 'serviceCompleted';
+  String get cancelled => 'Cancelled';
 
   @override
-  String get serviceCompletedDesc => 'serviceCompletedDesc';
+  String get viewDetails => 'View Details';
 
   @override
-  String get serviceReminder => 'serviceReminder';
+  String get reschedule => 'Reschedule';
 
   @override
-  String get serviceReminderDesc => 'serviceReminderDesc';
+  String get cancelBooking => 'Cancel Booking';
 
   @override
-  String get serviceStarted => 'serviceStarted';
+  String get confirmCancel => 'Confirm Cancellation';
 
   @override
-  String get serviceStartedDesc => 'serviceStartedDesc';
+  String get noUpcomingBookings => 'No Upcoming Bookings';
 
   @override
-  String get specialDiscount => 'specialDiscount';
+  String get noUpcomingBookingsDescription =>
+      'Book your service now and easily set a time that works for you.';
 
   @override
-  String get specialDiscountDesc => 'specialDiscountDesc';
+  String get rebookNow => 'Rebook';
 
   @override
-  String get addonsTitle => 'addonsTitle';
+  String get confirmReschedule => 'Confirm Reschedule';
 
   @override
-  String get cancellationPolicy => 'cancellationPolicy';
+  String get specialNotesOptional => 'Special notes or instructions (optional)';
 
   @override
-  String get chooseDay => 'chooseDay';
+  String get exampleHomeLocation =>
+      'Example: The house in front of the mosque..';
 
   @override
-  String get chooseTime => 'chooseTime';
+  String get areYouSureCancel => 'Are you sure you want to cancel the booking?';
 
   @override
-  String get currentTotal => 'currentTotal';
+  String get cancelWarning =>
+      'The booking will be cancelled and the service will not be performed at the scheduled time';
 
   @override
-  String get dateAndTimeTitle => 'dateAndTimeTitle';
+  String get cancelReasonOptional => 'Cancellation Reason';
 
   @override
-  String get exampleHomeLocation => 'exampleHomeLocation';
+  String get mentionCancelReason =>
+      'State the reason for cancelling the booking';
 
   @override
-  String get femaleTeam => 'femaleTeam';
+  String get step => 'Step';
 
   @override
-  String get friday => 'friday';
+  String get ofText => 'of';
 
   @override
-  String get hours3 => 'hours3';
+  String get currentTotal => 'Current Total';
 
   @override
-  String get hours4 => 'hours4';
+  String get sharingUnavailable => 'Sharing is currently unavailable';
 
   @override
-  String get hours5 => 'hours5';
+  String get addonsTitle => 'Add-ons';
 
   @override
-  String get houseCleaningTitle => 'houseCleaningTitle';
+  String get inspectionDescription =>
+      'Our team is ready to help you choose the right service with ease';
 
   @override
-  String get howManyHours => 'howManyHours';
+  String get requestInspection => 'Request Inspection';
 
   @override
-  String get howManyWorkers => 'howManyWorkers';
+  String get dateAndTimeTitle => 'Date & Time';
 
   @override
-  String get inspectionDescription => 'inspectionDescription';
+  String get chooseDay => 'Choose Day';
 
   @override
-  String get largeApartment => 'largeApartment';
+  String get chooseTime => 'Choose Time';
 
   @override
-  String get maleTeam => 'maleTeam';
+  String get advancePaymentLabel => 'Deposit';
 
   @override
-  String get mediumApartment => 'mediumApartment';
+  String get cancellationPolicy =>
+      'You can cancel or modify the booking for free up to 5 hours before the scheduled time. If cancelled less than 5 hours before, a 25% cancellation fee will apply. View Details';
 
   @override
-  String get monday => 'monday';
+  String get saturday => 'Saturday';
 
   @override
-  String get noPreference => 'noPreference';
+  String get sunday => 'Sunday';
 
   @override
-  String get notSureFreeInspection => 'notSureFreeInspection';
+  String get monday => 'Monday';
 
   @override
-  String get oneHour => 'oneHour';
+  String get tuesday => 'Tuesday';
 
   @override
-  String get placeSize => 'placeSize';
+  String get wednesday => 'Wednesday';
 
   @override
-  String get requestInspection => 'requestInspection';
+  String get thursday => 'Thursday';
 
   @override
-  String get saturday => 'saturday';
+  String get friday => 'Friday';
 
   @override
-  String get serviceFrequency => 'serviceFrequency';
+  String get addressTitle => 'Address';
 
   @override
-  String get smallApartment => 'smallApartment';
+  String get specialInstructions => 'Special notes or instructions (optional)';
 
   @override
-  String get specialInstructions => 'specialInstructions';
+  String get savedAddressesTitle => 'My Saved Addresses';
 
   @override
-  String get specialInstructionsHint => 'specialInstructionsHint';
+  String get detailsAdditionalOptional => 'Additional details (optional)';
 
   @override
-  String get specialNotesOptional => 'specialNotesOptional';
+  String get specialInstructionsHint =>
+      'Example: Call upon arrival in front of the mosque..';
 
   @override
-  String get sunday => 'sunday';
+  String get bookingSummary => 'Booking Summary';
 
   @override
-  String get teamPreference => 'teamPreference';
+  String get houseCleaningTitle => 'House Cleaning';
 
   @override
-  String get thursday => 'thursday';
+  String get howManyHours =>
+      'How many hours would you like the cleaner(s) for?';
 
   @override
-  String get tuesday => 'tuesday';
+  String get regularWithCleaningAddOn => 'Regular + Cleaning Add-on';
 
   @override
-  String get twoHours => 'twoHours';
+  String get oneHour => 'hour';
 
   @override
-  String get villa => 'villa';
+  String get hours => 'hours';
 
   @override
-  String get wednesday => 'wednesday';
+  String get twoHours => 'two hours';
 
   @override
-  String get worker => 'worker';
+  String get hours3 => '3 hours';
 
   @override
-  String get bookdesc => 'bookdesc';
+  String get hours4 => '4 hours';
 
   @override
-  String get cancelled => 'cancelled';
+  String get hours5 => '5 hours';
 
   @override
-  String get completed => 'completed';
+  String get howManyWorkers => 'How many workers?';
 
   @override
-  String get confirmReschedule => 'confirmReschedule';
+  String get countRoomsKitchens => 'How many rooms/kitchens?';
 
   @override
-  String get confirmReschedule2 => 'confirmReschedule2';
+  String get oneRoom => '1 room';
 
   @override
-  String get confirmcancel => 'confirmcancel';
+  String get twoRooms => '2 rooms';
 
   @override
-  String get inProgress => 'inProgress';
+  String get threeRooms => '3 rooms';
 
   @override
-  String get notFindbooking => 'notFindbooking';
+  String get fourRooms => '4 rooms';
 
   @override
-  String get reschedule => 'reschedule';
+  String get worker => 'Worker';
 
   @override
-  String get scheduled => 'scheduled';
+  String get placeSize => 'Place Size?';
 
   @override
-  String get areYouSureCancel => 'areYouSureCancel';
+  String get smallApartment => 'Small Apartment';
 
   @override
-  String get cancelBooking => 'cancelBooking';
+  String get mediumApartment => 'Medium Apartment';
 
   @override
-  String get cancelReasonOptional => 'cancelReasonOptional';
+  String get largeApartment => 'Large Apartment';
 
   @override
-  String get cancelWarning => 'cancelWarning';
+  String get villa => 'Villa';
 
   @override
-  String get mentionCancelReason => 'mentionCancelReason';
+  String get studio => 'Studio';
 
   @override
-  String get bookingNumber => 'bookingNumber';
+  String get teamPreference => 'Team Preference?';
 
   @override
-  String get bookingSummary => 'bookingSummary';
+  String get femaleTeam => 'Female';
 
   @override
-  String get dettailsbooking => 'dettailsbooking';
+  String get maleTeam => 'Male';
 
   @override
-  String get trackBooking => 'trackBooking';
+  String get noPreference => 'No Preference';
 
   @override
-  String get viewAllAppointments => 'viewAllAppointments';
+  String get detailsFloors => 'Floor Details?';
 
   @override
-  String get notesBeforeBooking => 'notesBeforeBooking';
+  String get ground => 'Ground';
 
   @override
-  String get reviewsCount => 'reviewsCount';
+  String get first => 'First';
 
   @override
-  String get serviceIncludes => 'serviceIncludes';
+  String get second => 'Second';
 
   @override
-  String get serviceType => 'serviceType';
+  String get sports => 'Sport';
 
   @override
-  String get viewServiceDetails => 'viewServiceDetails';
+  String get cleaningKitchen => 'Kitchen Cleaning';
 
   @override
-  String get addNewCard => 'addNewCard';
+  String get cleaningWindows => 'Window Cleaning';
 
   @override
-  String get addPaymentMethodBtn => 'addPaymentMethodBtn';
+  String get cleaningBathroom => 'Bathroom Cleaning';
 
   @override
-  String get addPaymentMethodDesc => 'addPaymentMethodDesc';
+  String get polishingFloors => 'Floor Polishing';
 
   @override
-  String get cardHolderLabel => 'cardHolderLabel';
+  String get washingCurtains => 'Curtain Washing';
 
   @override
-  String get cardHolderPlaceholder => 'cardHolderPlaceholder';
+  String get cleaningOven => 'Oven Cleaning';
 
   @override
-  String get cardNumberLabel => 'cardNumberLabel';
+  String get pillowsSleeping => 'Sleeping Pillows';
 
   @override
-  String get cvvLabel => 'cvvLabel';
+  String get chairsDining => 'Dining Chairs';
 
   @override
-  String get defaultPaymentNotice => 'defaultPaymentNotice';
+  String get pillowsDecorative => 'Decorative Pillows';
 
   @override
-  String get expiryDateLabel => 'expiryDateLabel';
+  String get cockroaches => 'Cockroaches';
 
   @override
-  String get noSavedPaymentMethods => 'noSavedPaymentMethods';
+  String get ants => 'Ants';
 
   @override
-  String get paid => 'paid';
+  String get bedbugs => 'Bedbugs';
 
   @override
-  String get paymentMethod => 'paymentMethod';
+  String get mice => 'Mice';
 
   @override
-  String get paymentMethods => 'paymentMethods';
+  String get sofas => 'Sofas';
 
   @override
-  String get saveCardForLater => 'saveCardForLater';
+  String get carpets => 'Carpets';
 
   @override
-  String get savedCards => 'savedCards';
+  String get cleaningSofa => 'Sofa Cleaning';
 
   @override
-  String get discountCode => 'discountCode';
+  String get cleaningSofaOnL => 'L-Shaped Sofa Cleaning';
 
   @override
-  String get enterDiscountCode => 'enterDiscountCode';
+  String get cleaningInsideHomeForCarpets =>
+      'Professional In-Home Carpet Cleaning';
 
   @override
-  String get payAfterService => 'payAfterService';
+  String get cleaningInsideHomeForSofas => 'Professional In-Home Sofa Cleaning';
 
   @override
-  String get payAfterServiceDesc => 'payAfterServiceDesc';
+  String get serviceFrequency => 'Service Frequency';
 
   @override
-  String get paymentSummary => 'paymentSummary';
+  String get once => 'One-Time';
 
   @override
-  String get paymentTitle => 'paymentTitle';
+  String get weekly => 'Weekly';
 
   @override
-  String get securePaymentNote => 'securePaymentNote';
+  String get twoWeeks => 'Every Two Weeks';
 
   @override
-  String get totalIncludingVat => 'totalIncludingVat';
+  String get monthly => 'Monthly';
 
   @override
-  String get totalLabel => 'totalLabel';
+  String get countTimesInWeek => 'Number of times per week';
 
   @override
-  String get totalprice => 'totalprice';
+  String get discountUpTo10 => 'Up to 10% discount';
 
   @override
-  String get bookingConfirmedStatus => 'bookingConfirmedStatus';
+  String get discountUpTo20 => 'Up to 20% discount';
 
   @override
-  String get eta5Mins => 'eta5Mins';
+  String get discountUpTo70 => 'Up to 70% discount';
 
   @override
-  String get onTheWay => 'onTheWay';
+  String get fivePercentDiscount => '5% discount';
 
   @override
-  String get serviceCompletedStatus => 'serviceCompletedStatus';
+  String get sevenPercentDiscount => '7% discount';
 
   @override
-  String get serviceInProgress => 'serviceInProgress';
+  String get discountUpToTwelvePercent => 'Up to 12% discount';
 
   @override
-  String get serviceStatus => 'serviceStatus';
+  String get discountUpToTwentyFivePercent => 'Up to 25% discount';
 
   @override
-  String get teamLeader => 'teamLeader';
+  String get noAppointmentsAvailable => 'No Appointments Available';
 
   @override
-  String get teamOnTheWay => 'teamOnTheWay';
+  String get noAppointmentsDesc =>
+      'Sorry, all appointments are booked for the selected day. Here are some alternative suggestions:';
 
   @override
-  String get trackOrder => 'trackOrder';
+  String get viewAllAppointments => 'View All Appointments';
 
   @override
-  String get addYourNotesHere => 'addYourNotesHere';
+  String get bookingConfirmedPopupDesc =>
+      'Your booking has been confirmed and you\'ll be reminded an hour before the visit';
 
   @override
-  String get levelOfServiceRatingQuestion => 'levelOfServiceRatingQuestion';
+  String get bookingNumber => 'Booking Number';
 
   @override
-  String get minutes45 => 'minutes45';
+  String get bookingDetails => 'Booking Details';
 
   @override
-  String get rateExperience => 'rateExperience';
+  String get doneConfirmBooking => 'Booking Confirmed';
 
   @override
-  String get rating => 'rating';
+  String get doneCopyNumberBooking => 'Booking number copied';
 
   @override
-  String get roomsCompleted => 'roomsCompleted';
+  String get payment => 'Payment';
 
   @override
-  String get roomsCompletedDesc => 'roomsCompletedDesc';
+  String get discountCode => 'Discount Code';
 
   @override
-  String get serviceCompletedScreenTitle => 'serviceCompletedScreenTitle';
+  String get enterDiscountCode => 'Enter Discount Code';
 
   @override
-  String get serviceExecutedSuccessfully => 'serviceExecutedSuccessfully';
+  String get securePaymentNote =>
+      'All payments are encrypted to ensure the highest levels of security and privacy.';
 
   @override
-  String get serviceRating => 'serviceRating';
+  String get defaultCard => 'Default';
 
   @override
-  String get submitRating => 'submitRating';
+  String get addNewCard => '+ Add New Card';
 
   @override
-  String get teamRating => 'teamRating';
+  String get paymentSummary => 'Payment Summary';
 
   @override
-  String get teamRatingQuestion => 'teamRatingQuestion';
+  String get totalIncludingVat => 'Total (including VAT)';
 
   @override
-  String get thankYouForChoosingUs => 'thankYouForChoosingUs';
+  String get totalLabel => 'Total';
 
   @override
-  String get timeTaken => 'timeTaken';
+  String get totalPrice => 'Total Price';
 
   @override
-  String get workSummary => 'workSummary';
+  String get afterCompletionService =>
+      'Pay cash after the service is completed';
 
   @override
-  String get favorites => 'favorites';
+  String get cardCreditMada => 'Credit Card / Mada';
 
   @override
-  String get noFavoritesYet => 'noFavoritesYet';
+  String get cardsSaved => 'Saved Cards';
 
   @override
-  String get saveServicesToAccessLater => 'saveServicesToAccessLater';
+  String get mada => 'Mada';
 
   @override
-  String get cannotDeleteDesc => 'cannotDeleteDesc';
+  String get paymentOnService => 'Pay on Service';
 
   @override
-  String get cannotDeleteTitle => 'cannotDeleteTitle';
+  String get changeMethodPayment => 'Change Payment Method';
 
   @override
-  String get confirmDeleteHint => 'confirmDeleteHint';
+  String get paymentFailedDescriptionAlt =>
+      'Sorry, we couldn\'t process your payment. Please check your card details or try again.';
 
   @override
-  String get deleteAccountBtn => 'deleteAccountBtn';
+  String get noSavedPaymentMethods => 'No Saved Payment Methods';
 
   @override
-  String get deleteAccountHeader => 'deleteAccountHeader';
+  String get addPaymentMethodDesc =>
+      'Add a payment method to complete your orders quickly and securely.';
 
   @override
-  String get deleteConfirmBtn => 'deleteConfirmBtn';
+  String get addPaymentMethodBtn => 'Add Payment Method';
 
   @override
-  String get deleteConfirmWord => 'deleteConfirmWord';
+  String get defaultPaymentNotice =>
+      'Your default payment method will be used automatically for all upcoming bookings. You can change this setting anytime before completing payment.';
 
   @override
-  String get deleteWarningDesc => 'deleteWarningDesc';
+  String get cardNumberLabel => 'Card Number';
 
   @override
-  String get deleteWarningTitle => 'deleteWarningTitle';
+  String get cardHolderLabel => 'Cardholder Name';
 
   @override
-  String get editProfile => 'editProfile';
+  String get cardHolderPlaceholder => 'Enter the name as shown on the card';
 
   @override
-  String get footerHint => 'footerHint';
+  String get expiryDateLabel => 'Expiry Date';
 
   @override
-  String get mySubscriptions => 'mySubscriptions';
+  String get cvvLabel => 'CVV';
 
   @override
-  String get nameLabel => 'nameLabel';
+  String get saveCardForLater => 'Save card for later use';
 
   @override
-  String get phoneLabel => 'phoneLabel';
+  String get paymentFailed => 'Payment Failed';
 
   @override
-  String get phoneNumber => 'phoneNumber';
+  String get trackOrder => 'Track Order';
 
   @override
-  String get profileName => 'profileName';
+  String get onTheWay => 'On the Way';
 
   @override
-  String get rule1Desc => 'rule1Desc';
+  String get eta5Mins => 'Estimated arrival in 5 minutes';
 
   @override
-  String get rule1Title => 'rule1Title';
+  String get serviceStatus => 'Service Status';
 
   @override
-  String get rule2Desc => 'rule2Desc';
+  String get bookingConfirmedStatus => 'Booking Confirmed';
 
   @override
-  String get rule2Title => 'rule2Title';
+  String get teamOnTheWay => 'Team is on the way to you';
 
   @override
-  String get rule3Desc => 'rule3Desc';
+  String get serviceInProgress => 'Service in Progress';
 
   @override
-  String get rule3Title => 'rule3Title';
+  String get serviceCompletedStatus => 'Completed';
 
   @override
-  String get rule4Desc => 'rule4Desc';
+  String get teamLeader => 'Team Leader';
 
   @override
-  String get rule4Title => 'rule4Title';
+  String get completedService => 'Service Completed';
 
   @override
-  String get settings => 'settings';
+  String get summaryWorkCompleted => 'Work Summary';
 
   @override
-  String get changePassword => 'changePassword';
+  String get timeSpent => 'Time Spent';
 
   @override
-  String get help => 'help';
+  String get expectedArrival => 'Expected Arrival';
 
   @override
-  String get privacy => 'privacy';
+  String get thankYouForChoosingUs => 'Thank You for Choosing Us';
 
   @override
-  String get faq => 'faq';
+  String get serviceExecutedSuccessfully =>
+      'Your deep cleaning service has been completed successfully. We hope you\'re happy with the quality of service provided.';
 
   @override
-  String get faqIntro => 'faqIntro';
+  String get serviceType => 'Service Type';
 
   @override
-  String get faqModifyBooking => 'faqModifyBooking';
+  String get typePlace => 'Place Type';
 
   @override
-  String get faqOrderStatus => 'faqOrderStatus';
+  String get namePlace => 'Place Name';
 
   @override
-  String get faqPaymentMethods => 'faqPaymentMethods';
+  String get areaPlace => 'Place Area';
 
   @override
-  String get faqProblemDuringService => 'faqProblemDuringService';
+  String get roomsCompletedDesc =>
+      'Includes the living room, kitchen, and bedrooms with full sanitization.';
 
   @override
-  String get faqQ1 => 'faqQ1';
+  String get trackBooking => 'Track Booking';
 
   @override
-  String get faqQ2 => 'faqQ2';
+  String get rateExperience => 'Rate Your Experience';
 
   @override
-  String get faqQ3 => 'faqQ3';
+  String get serviceRating => 'Service Rating';
 
   @override
-  String get faqQ4 => 'faqQ4';
+  String get teamRating => 'Team Rating';
 
   @override
-  String get faqQ5 => 'faqQ5';
+  String get rating => 'Your Feedback';
 
   @override
-  String get active => 'active';
+  String get teamRatingQuestion =>
+      'How was your experience with the \"Ibrahim Mohamed\" team today?';
 
   @override
-  String get helpCenter => 'helpCenter';
+  String get addYourNotesHere => 'Add your notes here...';
 
   @override
-  String get issueDescHint => 'issueDescHint';
+  String get levelOfServiceRatingQuestion =>
+      'How was your experience with the service level today?';
 
   @override
-  String get issueDescLabel => 'issueDescLabel';
+  String get submitRating => 'Submit Rating';
 
   @override
-  String get issueTitleHint => 'issueTitleHint';
+  String get forRating => 'Thank You for Your Rating';
 
   @override
-  String get issueTitleLabel => 'issueTitleLabel';
+  String get ratingHelpsImprove => 'Your feedback helps us improve our service';
 
   @override
-  String get newIssue => 'newIssue';
+  String get favorites => 'Favorites';
 
   @override
-  String get newIssueTitle => 'newIssueTitle';
+  String get noFavoritesYet => 'No favorite services yet';
 
   @override
-  String get orderNumberLabel => 'orderNumberLabel';
+  String get saveServicesToAccessLater =>
+      'Save the services you like for quick access later.';
 
   @override
-  String get readOnlyChat => 'readOnlyChat';
+  String get editProfile => 'Profile';
 
   @override
-  String get reopenTicket => 'reopenTicket';
+  String get nameLabel => 'Name';
 
   @override
-  String get supportMsg1 => 'supportMsg1';
+  String get phoneLabel => 'Phone';
 
   @override
-  String get technicalSupport => 'technicalSupport';
+  String get emailLabel => 'Email';
 
   @override
-  String get ticketDesc1 => 'ticketDesc1';
+  String get deleteAccountBtn => 'Delete Account';
 
   @override
-  String get ticketDesc2 => 'ticketDesc2';
+  String get footerHint =>
+      'This information will be used to contact you about your bookings and available services, and will not be shared publicly.';
 
   @override
-  String get ticketPrefix => 'ticketPrefix';
+  String get deleteAccountHeader => 'Delete Account';
 
   @override
-  String get ticketTitle1 => 'ticketTitle1';
+  String get deleteWarningTitle => 'Permanently Delete Account!';
 
   @override
-  String get ticketTitle2 => 'ticketTitle2';
+  String get deleteWarningDesc =>
+      'Deleting your account will permanently remove your personal data, saved addresses, order history, and statistics.';
 
   @override
-  String get timeOneDayAgo => 'timeOneDayAgo';
+  String get rule1Title => 'This action cannot be undone once confirmed';
 
   @override
-  String get typeMessageHint => 'typeMessageHint';
+  String get rule1Desc =>
+      'Your account and all your data will be permanently deleted.';
 
   @override
-  String get userMsg1 => 'userMsg1';
+  String get rule2Title => 'All active orders must be completed or cancelled';
 
   @override
-  String get contactInfoLabel => 'contactInfoLabel';
+  String get rule2Desc =>
+      'You cannot delete your account while you have orders in progress.';
 
   @override
-  String get customerServiceNumber => 'customerServiceNumber';
+  String get rule3Title =>
+      'Any active subscriptions or packages will be cancelled';
 
   @override
-  String get customerServiceNumberLabel => 'customerServiceNumberLabel';
+  String get rule3Desc =>
+      'All paid subscriptions or packages linked to your account will be cancelled.';
 
   @override
-  String get emailAddressLabel => 'emailAddressLabel';
+  String get rule4Title => 'Some data may be retained for legal purposes';
 
   @override
-  String get privacyConfidentialityNote => 'privacyConfidentialityNote';
+  String get rule4Desc =>
+      'Such as billing and transaction data, in accordance with applicable laws and regulations.';
 
   @override
-  String get supportEmailAddress => 'supportEmailAddress';
+  String get confirmDeleteHint =>
+      'To confirm account deletion, please type the word (';
 
   @override
-  String get cancelSubscription => 'cancelSubscription';
+  String get deleteConfirmWord => 'Delete';
 
   @override
-  String get cancelSubscriptionDesc => 'cancelSubscriptionDesc';
+  String get confirmFieldHint => 'Confirmation word is incorrect';
 
   @override
-  String get changePackage => 'changePackage';
+  String get deleteConfirmBtn => 'Permanently Delete Account';
 
   @override
-  String get changePackageDesc => 'changePackageDesc';
+  String get cannotDeleteTitle => 'Cannot Delete Account';
 
   @override
-  String get manageSubscription => 'manageSubscription';
+  String get cannotDeleteDesc =>
+      'You have active orders or packages. Please complete or cancel active transactions first, then try again.';
 
   @override
-  String get noActiveSubscriptions => 'noActiveSubscriptions';
+  String get myAddresses => 'Addresses';
 
   @override
-  String get subscribeAgainBtn => 'subscribeAgainBtn';
+  String get mySubscriptions => 'My Subscriptions';
 
   @override
-  String get subscribePackagesDesc => 'subscribePackagesDesc';
+  String get paymentMethods => 'Payment Methods';
 
   @override
-  String get activeStatus => 'activeStatus';
+  String get settings => 'Settings';
 
   @override
-  String get cancelPopupDesc => 'cancelPopupDesc';
+  String get contactUs => 'Contact Us';
 
   @override
-  String get cancelPopupTitle => 'cancelPopupTitle';
+  String get changePassword => 'Change Password';
 
   @override
-  String get confirmCancelBtn => 'confirmCancelBtn';
+  String get privacy => 'Privacy';
 
   @override
-  String get confirmPauseBtn => 'confirmPauseBtn';
+  String get help => 'Help';
 
   @override
-  String get currentSubscriptions => 'currentSubscriptions';
+  String get language => 'Language';
 
   @override
-  String get endedStatus => 'endedStatus';
+  String get arabic => 'Arabic';
 
   @override
-  String get expiryDateLabelTitle => 'expiryDateLabelTitle';
+  String get bookingNotifications => 'Booking Notifications';
 
   @override
-  String get inProgressStatus => 'inProgressStatus';
+  String get logout => 'Log Out';
 
   @override
-  String get monthlyPriceSuffix => 'monthlyPriceSuffix';
+  String get logoutContent =>
+      'Are you sure you want to log out of your account? ';
 
   @override
-  String get myVisits => 'myVisits';
+  String get helpCenter => 'Help Center';
 
   @override
-  String get nextVisitLabel => 'nextVisitLabel';
+  String get faq => 'FAQ';
 
   @override
-  String get pausePopupDesc => 'pausePopupDesc';
+  String get technicalSupport => 'Technical Support';
 
   @override
-  String get pausePopupTitle => 'pausePopupTitle';
+  String get newIssue => 'New Issue  +';
 
   @override
-  String get pauseTemporarily => 'pauseTemporarily';
+  String get open => 'Open';
 
   @override
-  String get pauseTemporarilyDesc => 'pauseTemporarilyDesc';
+  String get resolved => 'Resolved';
 
   @override
-  String get pausedStatus => 'pausedStatus';
+  String get ticketPrefix => 'TKT.';
 
   @override
-  String get previousSubscriptions => 'previousSubscriptions';
+  String get careTechnician => 'Care Technician';
 
   @override
-  String get priceLabel => 'priceLabel';
+  String get faqIntro =>
+      'You can choose the right service, set the address and time, then confirm the order and pay directly from the app, or request an inspection and our specialized team will contact you for free.';
 
   @override
-  String get reactivateBtn => 'reactivateBtn';
+  String get faqModifyBooking => 'Can I modify or cancel my booking?';
 
   @override
-  String get scheduledStatus => 'scheduledStatus';
+  String get faqOrderStatus => 'How do I know the status of my order?';
 
   @override
-  String get subscriptionPausedMsg => 'subscriptionPausedMsg';
+  String get faqPaymentMethods => 'What payment methods are available?';
 
   @override
-  String get subscriptionTypeLabel => 'subscriptionTypeLabel';
+  String get faqProblemDuringService =>
+      'What should I do if I run into a problem during the service?';
 
   @override
-  String get timeLabel => 'timeLabel';
+  String get faqQ1 => 'How can I book a service?';
 
   @override
-  String get upcomingVisits => 'upcomingVisits';
+  String get faqQ4 => 'How can I contact technical support?';
 
   @override
-  String get viewVisits => 'viewVisits';
+  String get readOnlyChat => 'This conversation is read-only';
 
   @override
-  String get viewVisitsDesc => 'viewVisitsDesc';
+  String get reopenTicket => 'Reopen Ticket';
 
   @override
-  String get weeklyCleaning => 'weeklyCleaning';
+  String get writeYourMessage => 'Write your message...';
 
   @override
-  String get collectedData => 'collectedData';
+  String get newIssueTitle => 'New Issue';
 
   @override
-  String get data => 'data';
+  String get issueTitleLabel => 'Issue Title*';
 
   @override
-  String get dataProtection => 'dataProtection';
+  String get issueTitleHint => 'Example: Issue with the cleaning service';
 
   @override
-  String get dataSharing => 'dataSharing';
+  String get orderNumberLabel => 'Order Number (optional)';
 
   @override
-  String get dataUsage => 'dataUsage';
+  String get issueDescLabel => 'Issue Description *';
 
   @override
-  String get policiesAndRules => 'policiesAndRules';
+  String get issueDescHint => 'Explain your issue in detail.....';
 
   @override
-  String get policyModifications => 'policyModifications';
+  String get writeAnyNotesHelpUsUnderstandYourNeed =>
+      'Write any notes to help us understand your needs...';
 
   @override
-  String get privacyPolicyIntro => 'privacyPolicyIntro';
+  String get active => 'Active';
 
   @override
-  String get privacyPolicyLabel => 'privacyPolicyLabel';
+  String get online => 'Online';
 
   @override
-  String get accounts => 'accounts';
+  String get contactInfoLabel => 'Contact Information';
 
   @override
-  String get bookings => 'bookings';
+  String get customerServiceNumberLabel => 'Customer Service Number';
 
   @override
-  String get companyResponsibilities => 'companyResponsibilities';
+  String get emailAddressLabel => 'Email Address';
 
   @override
-  String get modifications => 'modifications';
+  String get privacyConfidentialityNote =>
+      'All your data and feedback are treated with complete confidentiality and are not shared with any third party.';
 
   @override
-  String get responsibility => 'responsibility';
+  String get currentSubscriptions => 'Current';
 
   @override
-  String get serviceCancellation => 'serviceCancellation';
+  String get previousSubscriptions => 'Previous';
 
   @override
-  String get services => 'services';
+  String get noActiveSubscriptions => 'No Active Subscriptions';
 
   @override
-  String get termsAndConditionsLabel => 'termsAndConditionsLabel';
+  String get subscribePackagesDesc =>
+      'Subscribe to one of our packages to save time and enjoy regular visits with ease.';
 
   @override
-  String get termsIntro => 'termsIntro';
+  String get browsePackagesBtn => 'Browse Packages';
+
+  @override
+  String get manageSubscription => 'Manage Subscription';
+
+  @override
+  String get activeStatus => 'Active';
+
+  @override
+  String get pausedStatus => 'Paused';
+
+  @override
+  String get endedStatus => 'Ended';
+
+  @override
+  String get subscriptionTypeLabel => 'Subscription Type';
+
+  @override
+  String get nextVisitLabel => 'Next Visit';
+
+  @override
+  String get timeLabel => 'Time';
+
+  @override
+  String get priceLabel => 'Price';
+
+  @override
+  String get monthlyPriceSuffix => 'QAR / month';
+
+  @override
+  String get viewVisits => 'View Visits';
+
+  @override
+  String get viewVisitsDesc => 'View upcoming appointments and visit history';
+
+  @override
+  String get pauseTemporarily => 'Pause Temporarily';
+
+  @override
+  String get pauseTemporarilyDesc => 'Temporarily pause the subscription';
+
+  @override
+  String get changePackage => 'Change Package';
+
+  @override
+  String get changePackageDesc => 'Switch to a different package';
+
+  @override
+  String get cancelSubscription => 'Cancel Subscription';
+
+  @override
+  String get cancelSubscriptionDesc => 'Permanently stop the subscription';
+
+  @override
+  String get reactivateBtn => 'Reactivate';
+
+  @override
+  String get subscribeAgainBtn => 'Subscribe Again';
+
+  @override
+  String get subscriptionPausedMsg => 'Subscription paused temporarily';
+
+  @override
+  String get pausePopupTitle => 'Pause Subscription Temporarily';
+
+  @override
+  String get pausePopupDesc =>
+      'No visits will be scheduled during the pause period. You can reactivate it at any time';
+
+  @override
+  String get confirmPauseBtn => 'Confirm Pause';
+
+  @override
+  String get cancelPopupTitle => 'Cancel Subscription';
+
+  @override
+  String get cancelPopupDesc =>
+      'All upcoming visits will be cancelled. You won\'t be able to resume the subscription after cancelling it';
+
+  @override
+  String get myVisits => 'My Visits';
+
+  @override
+  String get policiesAndRules => 'Policies & Rules';
+
+  @override
+  String get privacyPolicyLabel => 'Privacy Policy';
+
+  @override
+  String get termsAndConditionsLabel => 'Terms & Conditions';
+
+  @override
+  String get privacyPolicyIntro =>
+      'At our service, your privacy comes first. This policy explains how we collect, use, and protect your personal data when you use the home services booking app. We are committed to protecting your privacy and being fully transparent about your data.';
+
+  @override
+  String get collectedData => 'Data We Collect';
+
+  @override
+  String get dataUsage => 'How We Use Data';
+
+  @override
+  String get dataProtection => 'Data Protection';
+
+  @override
+  String get dataSharing => 'Data Sharing';
+
+  @override
+  String get acceptanceOfTerms => 'Acceptance of Terms';
+
+  @override
+  String get policyModifications => 'Policy Modifications';
+
+  @override
+  String get termsIntro =>
+      'By using the application and services of the home services platform, you acknowledge and agree to be bound by these Terms & Conditions. If you do not agree to any part of these terms, please do not use the service.';
+
+  @override
+  String get services => 'Services';
+
+  @override
+  String get bookings => 'Bookings';
+
+  @override
+  String get serviceCancellation => 'Service Cancellation';
+
+  @override
+  String get responsibility => 'Responsibility';
+
+  @override
+  String get companyResponsibilities => 'Company Responsibilities';
+
+  @override
+  String get accounts => 'Accounts';
+
+  @override
+  String get modifications => 'Modifications';
+
+  @override
+  String get profileName => 'Ahmed Ibrahim';
+
+  @override
+  String get phoneNumber => '+974 5123 4567';
+
+  @override
+  String get emailValue => 'ahmed.m@gmail.com';
+
+  @override
+  String get ibrahimMohamed => 'Ibrahim Mohamed';
+
+  @override
+  String get ibrahimInitial => 'I';
+
+  @override
+  String get promoCode => 'CLEAN15';
+
+  @override
+  String get price120 => '120';
+
+  @override
+  String get customerServiceNumber => '+974 3000 0000';
+
+  @override
+  String get supportEmailAddress => 'support@migroup.com';
+
+  @override
+  String get ticketTitle1 => 'Issue with the cleaning service';
+
+  @override
+  String get ticketDesc1 =>
+      'The kitchen and main bathroom were not cleaned properly';
+
+  @override
+  String get ticketTitle2 => 'Pest control service price';
+
+  @override
+  String get ticketDesc2 => 'Thank you, that\'s clear';
+
+  @override
+  String get timeOneDayAgo => '1 day ago';
+
+  @override
+  String get supportMsg1 => 'Hello Ahmed, how can we help you today?';
+
+  @override
+  String get userMsg1 => 'I\'d like to ask about the next visit appointment.';
+
+  @override
+  String get exampleHomeFrontMosque =>
+      'Example: The house in front of the mosque';
+
+  @override
+  String get homeAddressSubtitle => '18, Al Nughaib Street, Doha, Doha';
+
+  @override
+  String get workAddressSubtitle => 'Al Muraqqab Tower - 8th Floor';
+
+  @override
+  String get eightRoomsCompleted => '8 rooms completed';
+
+  @override
+  String get within18Minutes => 'Within 18 min';
+
+  @override
+  String get minutes45 => '45 minutes';
+
+  @override
+  String get oneHundredEightyMinutes => '180 minutes';
+
+  @override
+  String get roomsCompleted => '4 rooms completed';
+
+  @override
+  String get weeklyCleaning => 'Weekly Home Cleaning';
+
+  @override
+  String get twelveThousandBookings => '12,000 bookings';
+
+  @override
+  String get smallNumber100Number200 => 'Small Size (100 * 200 m)';
+
+  @override
+  String get mediumSize150By275 => 'Medium Size (150 * 275 m)';
+
+  @override
+  String get largeSize250By345 => 'Large Size (250 * 345 m)';
+
+  @override
+  String get morning => 'AM';
+
+  @override
+  String get tenTwentyEightAm => '10:28 AM';
 }

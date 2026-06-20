@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/auth/presentation/screens/complete_profile/widgets/complete_profile_widget.dart';
 
 import '../../../../../core/di/injection.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../../../core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_state.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
@@ -14,7 +14,6 @@ import 'package:home_service_app/features/auth/presentation/widgets/auth_form_fi
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
 
 import 'logic/complete_profile_logic.dart';
-
 
 class CompleteProfileScreen extends StatefulWidget {
   final String? phoneNumber;
@@ -78,7 +77,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                   position: _slideAnim,
                   child: SafeArea(
                     child: SingleChildScrollView(
-                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       padding: EdgeInsets.symmetric(horizontal: 24.w),
                       child: Form(
                         key: _logic.formKey,
@@ -103,8 +103,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                             SizedBox(height: 28.h),
 
                             AuthFormField(
-                              label: AppStrings.nameLabel,
-                              hint: AppStrings.namePlaceholder,
+                              label: context.l10n.nameLabel,
+                              hint: context.l10n.namePlaceholder,
                               controller: _logic.nameCtrl,
                               prefixIcon: Icons.person_outline_rounded,
                               validator: (v) {
@@ -117,10 +117,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
 
                             SizedBox(height: 16.h),
 
-
                             AuthFormField(
-                              label: AppStrings.emailLabel,
-                              hint: AppStrings.emailPlaceholder,
+                              label: context.l10n.emailLabel,
+                              hint: context.l10n.emailPlaceholder,
                               controller: _logic.emailCtrl,
                               prefixIcon: Icons.email_outlined,
                               keyboardType: TextInputType.emailAddress,
@@ -138,8 +137,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                             SizedBox(height: 16.h),
 
                             AuthFormField(
-                              label: AppStrings.passwordLabel,
-                              hint: AppStrings.passwordPlaceholder,
+                              label: context.l10n.passwordLabel,
+                              hint: context.l10n.passwordPlaceholder,
                               controller: _logic.passCtrl,
                               prefixIcon: Icons.lock_outline_rounded,
                               isPassword: true,
@@ -158,10 +157,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
 
                             SizedBox(height: 16.h),
 
-
                             AuthFormField(
-                              label: AppStrings.confirmPasswordLabel,
-                              hint: AppStrings.confirmPasswordPlaceholder,
+                              label: context.l10n.confirmPasswordLabel,
+                              hint: context.l10n.confirmPasswordPlaceholder,
                               controller: _logic.confirmPassCtrl,
                               prefixIcon: Icons.lock_outline_rounded,
                               isPassword: true,
@@ -172,7 +170,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                                   return 'تأكيد كلمة المرور مطلوب';
                                 }
                                 if (v != _logic.passCtrl.text) {
-                                  return AppStrings.errorPasswordsDoNotMatch;
+                                  return context.l10n.errorPasswordsDoNotMatch;
                                 }
                                 return null;
                               },
@@ -181,7 +179,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                             SizedBox(height: 32.h),
 
                             AuthPrimaryButton(
-                              label: AppStrings.completeRegistration,
+                              label: context.l10n.completeRegistration,
                               isLoading: isLoading,
                               onPressed: () => _logic.onComplete(
                                 context: context,

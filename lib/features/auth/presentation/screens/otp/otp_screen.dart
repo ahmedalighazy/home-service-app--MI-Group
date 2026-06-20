@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../../core/di/injection.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../../../core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_state.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
@@ -144,7 +144,6 @@ class _OtpScreenState extends State<OtpScreen>
                           children: [
                             SizedBox(height: 16.h),
 
-
                             Align(
                               alignment: Alignment.centerRight,
                               child: AuthBackButton(onTap: () => context.pop()),
@@ -153,7 +152,7 @@ class _OtpScreenState extends State<OtpScreen>
                             SizedBox(height: 40.h),
 
                             Text(
-                              AppStrings.confirmCode,
+                              context.l10n.confirmCode,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.dark,
@@ -165,7 +164,7 @@ class _OtpScreenState extends State<OtpScreen>
                             SizedBox(height: 10.h),
 
                             Text(
-                              AppStrings.enterVerificationCode,
+                              context.l10n.enterVerificationCode,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.ibmPlexSansArabic(
                                 color: AppColors.secondaryText,
@@ -191,7 +190,6 @@ class _OtpScreenState extends State<OtpScreen>
 
                             SizedBox(height: 44.h),
 
-
                             OtpInputRow(
                               digits: _digits,
                               length: _length,
@@ -201,7 +199,6 @@ class _OtpScreenState extends State<OtpScreen>
                             ),
 
                             SizedBox(height: 20.h),
-
 
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
@@ -230,7 +227,7 @@ class _OtpScreenState extends State<OtpScreen>
                                       ? () => _onResend(context)
                                       : null,
                                   child: Text(
-                                    AppStrings.resendCodeLink,
+                                    context.l10n.resendCodeLink,
                                     style: GoogleFonts.ibmPlexSansArabic(
                                       color: _canResend
                                           ? AppColors.greenPrimary
@@ -245,7 +242,7 @@ class _OtpScreenState extends State<OtpScreen>
                                   ),
                                 ),
                                 Text(
-                                  ' ${AppStrings.resendCodePrompt}',
+                                  ' ${context.l10n.resendCodePrompt}',
                                   style: GoogleFonts.ibmPlexSansArabic(
                                     color: AppColors.gray,
                                     fontSize: 13.sp,
@@ -255,7 +252,6 @@ class _OtpScreenState extends State<OtpScreen>
                             ),
 
                             SizedBox(height: 32.h),
-
 
                             if (_fieldState == OtpFieldState.error)
                               Padding(
@@ -275,7 +271,7 @@ class _OtpScreenState extends State<OtpScreen>
                               child: _digits.length == _length
                                   ? OtpConfirmButton(
                                       key: const ValueKey('btn'),
-                                      label: AppStrings.confirm,
+                                      label: context.l10n.confirm,
                                       isLoading: isLoading,
                                       isSuccess:
                                           _fieldState == OtpFieldState.success,
@@ -294,7 +290,6 @@ class _OtpScreenState extends State<OtpScreen>
                         ),
                       ),
                     ),
-
 
                     SizedBox(
                       width: 1,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../cubit/feature_cubit.dart';
 import '../cubit/feature_state.dart';
@@ -7,8 +8,6 @@ import '../widgets/booking_tracking/booking_flow_scaffold.dart';
 import '../widgets/booking_tracking/booking_gradient_button.dart';
 import '../widgets/booking_tracking/rating_input_card.dart';
 import '../widgets/dialogs/rating_success_dialog.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class BookingRatingScreen extends StatefulWidget {
   const BookingRatingScreen({super.key});
@@ -56,16 +55,16 @@ class _BookingRatingScreenState extends State<BookingRatingScreen> {
         final cubit = context.read<FeatureCubit>();
 
         return BookingFlowScaffold(
-          title: AppStrings.ratingService,
+          title: context.l10n.serviceRating,
           bottomButton: BookingGradientButton(
-            label: AppStrings.text18,
+            label: context.l10n.submitRating,
             onPressed: _submitRating,
           ),
           child: ListView(
             children: [
               RatingInputCard(
-                title: AppStrings.ratingTeam,
-                question: AppStrings.howWasExperienceWithIbrahimMohamedToday,
+                title: context.l10n.teamRating,
+                question: context.l10n.teamRatingQuestion,
                 rating: loaded.teamRating,
                 controller: _teamCommentController,
                 onRatingChanged: cubit.updateTeamRating,
@@ -73,8 +72,8 @@ class _BookingRatingScreenState extends State<BookingRatingScreen> {
               ),
               const SizedBox(height: 20),
               RatingInputCard(
-                title: AppStrings.ratingService,
-                question: AppStrings.howWasExperienceWithLevelServiceToday,
+                title: context.l10n.serviceRating,
+                question: context.l10n.levelOfServiceRatingQuestion,
                 rating: loaded.serviceRating,
                 controller: _serviceCommentController,
                 onRatingChanged: cubit.updateServiceRating,
@@ -87,4 +86,3 @@ class _BookingRatingScreenState extends State<BookingRatingScreen> {
     );
   }
 }
-

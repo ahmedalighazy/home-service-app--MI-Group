@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
 import '../widgets/favorites_list_widget.dart';
 
@@ -15,17 +15,17 @@ class FavoritesScreen extends StatelessWidget {
 
     return Scaffold(
       // backgroundColor: AppColors.softWhite,
-      appBar: const CustomAppBar(title: AppStrings.favorites),
+      appBar: CustomAppBar(title: context.l10n.favorites),
       body: SafeArea(
         child: hasFavorites
             ? const FavoritesListWidget()
             // ignore: dead_code
             : EmptyStateWidget(
                 iconPath: IconsPath.illustrationSvg,
-                title: AppStrings.noFavoritesYet,
-                subtitle: AppStrings.saveServicesToAccessLater,
+                title: context.l10n.noFavoritesYet,
+                subtitle: context.l10n.saveServicesToAccessLater,
                 onButtonPressed: () {},
-                buttonLabel: AppStrings.browseServices,
+                buttonLabel: context.l10n.browseServices,
               ),
       ),
     );

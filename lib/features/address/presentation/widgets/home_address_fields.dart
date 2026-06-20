@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_text_field.dart';
 
 class HomeAddressFields extends StatelessWidget {
@@ -22,7 +22,7 @@ class HomeAddressFields extends StatelessWidget {
     return Column(
       children: [
         AddressTextField(
-          hintText: AppStrings.streetNameOrNumber,
+          hintText: context.l10n.streetNameOrNumber,
           controller: streetController,
         ),
 
@@ -32,7 +32,7 @@ class HomeAddressFields extends StatelessWidget {
           children: [
             Expanded(
               child: AddressTextField(
-                hintText: AppStrings.buildingNumber,
+                hintText: context.l10n.buildingNumber,
                 controller: buildingController,
               ),
             ),
@@ -41,7 +41,7 @@ class HomeAddressFields extends StatelessWidget {
 
             Expanded(
               child: AddressTextField(
-                hintText: AppStrings.apartmentNumber,
+                hintText: context.l10n.apartmentNumber,
                 controller: apartmentController,
               ),
             ),
@@ -50,7 +50,7 @@ class HomeAddressFields extends StatelessWidget {
 
             Expanded(
               child: AddressTextField(
-                hintText: AppStrings.floorNumber,
+                hintText: context.l10n.floorNumber,
                 controller: floorController,
               ),
             ),

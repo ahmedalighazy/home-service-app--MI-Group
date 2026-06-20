@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class DeleteAccountWarning extends StatelessWidget {
   const DeleteAccountWarning({super.key});
@@ -28,7 +28,7 @@ class DeleteAccountWarning extends StatelessWidget {
             ),
             horizontalSpace(12),
             Text(
-              AppStrings.deleteWarningTitle,
+              context.l10n.deleteWarningTitle,
               style: AppText.boldIbm(
                 color: AppColors.primaryText,
                 fontSize: 16,
@@ -39,7 +39,7 @@ class DeleteAccountWarning extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 34),
           child: Text(
-            AppStrings.deleteWarningDesc,
+            context.l10n.deleteWarningDesc,
             style: AppText.regularIbm(
               color: AppColors.textDarkGrey,
               fontSize: 13,

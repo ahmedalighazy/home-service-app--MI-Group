@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -46,7 +46,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             verticalSpace(24),
             CustomTextField(
               hintText: '0000 0000 0000 0000',
-              label: AppStrings.cardNumberLabel,
+              label: context.l10n.cardNumberLabel,
               fillColor: AppColors.white,
               textStyle: AppText.regularIbm(
                 color: AppColors.placeholder,
@@ -56,8 +56,8 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             ),
             verticalSpace(16),
             CustomTextField(
-              hintText: AppStrings.cardHolderPlaceholder,
-              label: AppStrings.cardHolderLabel,
+              hintText: context.l10n.cardHolderPlaceholder,
+              label: context.l10n.cardHolderLabel,
               fillColor: AppColors.white,
               borderColor: AppColors.textLightGrey,
               textStyle: AppText.regularIbm(
@@ -71,7 +71,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                 Expanded(
                   child: CustomTextField(
                     hintText: '000',
-                    label: AppStrings.cvvLabel,
+                    label: context.l10n.cvvLabel,
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
                     textStyle: AppText.regularIbm(
@@ -94,7 +94,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                       color: AppColors.placeholder,
                       fontSize: 14,
                     ),
-                    label: AppStrings.expiryDateLabel,
+                    label: context.l10n.expiryDateLabel,
                     fillColor: AppColors.white,
                     borderColor: AppColors.textLightGrey,
                   ),
@@ -111,7 +111,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                   activeColor: AppColors.primary,
                 ),
                 Text(
-                  AppStrings.saveCardForLater,
+                  context.l10n.saveCardForLater,
                   style: AppText.ibmDescription14(color: AppColors.primaryText),
                 ),
               ],
@@ -119,7 +119,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
             verticalSpace(24),
             CustomButtom(
               onTap: () => context.pop(),
-              text: AppStrings.save,
+              text: context.l10n.save,
               textStyle: AppText.ibmButton16(),
               startColor: AppColors.primary,
               endColor: AppColors.primaryActive,

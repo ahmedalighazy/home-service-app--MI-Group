@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 
@@ -23,7 +23,7 @@ class ProfileFooterHintWidget extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
-              AppStrings.footerHint,
+              context.l10n.footerHint,
               style: AppText.ibmDescription14(),
             ),
           ),

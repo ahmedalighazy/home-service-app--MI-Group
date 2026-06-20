@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/visit_model.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -35,7 +35,7 @@ class MyVisitsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
-          title: AppStrings.myVisits,
+          title: context.l10n.myVisits,
           onBack: () => context.pop(),
           bottom: TabBar(
             labelStyle: AppText.ibmHeading14(),
@@ -44,10 +44,10 @@ class MyVisitsScreen extends StatelessWidget {
             unselectedLabelColor: AppColors.primaryText,
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
-            tabs: const [
-              Tab(text: AppStrings.upcomingVisits),
+            tabs: [
+              Tab(text: context.l10n.upcoming),
 
-              Tab(text: AppStrings.previousSubscriptions),
+              Tab(text: context.l10n.previousSubscriptions),
             ],
           ),
         ),

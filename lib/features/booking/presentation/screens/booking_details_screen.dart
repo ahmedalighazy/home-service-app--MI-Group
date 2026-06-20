@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../widgets/booking_details_header.dart';
 import '../widgets/booking_details_row.dart';
 import '../../data/models/booking_model.dart';
 import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/constants/icons_path.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 
@@ -20,7 +20,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: AppStrings.bookingDetails,
+        title: context.l10n.bookingDetails,
         actions: CustomPopupMenuBooking(onSelected: (MenuAction value) {}),
       ),
       body: SingleChildScrollView(
@@ -74,45 +74,45 @@ class _DetailsCard extends StatelessWidget {
         children: [
           BookingDetailsRow(
             value2: booking.time,
-            label: AppStrings.dateAndTimeTitle,
+            label: context.l10n.dateAndTimeTitle,
             value: booking.date,
             icon: IconsPath.calendar,
             icon2: IconsPath.time,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: AppStrings.addressTitle,
+            label: context.l10n.addressTitle,
             value: booking.address,
             icon: IconsPath.location,
           ),
           BookingDetailsRow(
-            label: AppStrings.rating,
+            label: context.l10n.rating,
             value: booking.notes ?? "",
             icon: IconsPath.editGry,
           ),
           const Divider(height: 1),
           // if (booking.notes != null) ...[
           //   BookingDetailsRow(
-          //     label: AppStrings.specialInstructions,
+          //     label: context.l10n.specialInstructions,
           //     value: booking.notes!,
           //     icon: IconsPath.infoCircle,
           //   ),
           //   const Divider(height: 1),
           // ],
           BookingDetailsRow(
-            label: AppStrings.paymentMethodLabel,
+            label: context.l10n.paymentMethods,
             value: booking.paymentMethod ?? 'N/A',
             icon: IconsPath.paid,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: AppStrings.bookingNumber,
+            label: context.l10n.bookingNumber,
             value: booking.id,
             icon: IconsPath.enlargement,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: AppStrings.totalPrice,
+            label: context.l10n.totalPrice,
             value: booking.price,
             icon: IconsPath.group,
           ),

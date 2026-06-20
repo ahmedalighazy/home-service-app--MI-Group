@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class ContactCard extends StatelessWidget {
   final String title;
@@ -98,7 +98,7 @@ class _CopyButton extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              AppStrings.copy,
+              context.l10n.copy,
               style: AppText.ibmDescription12(color: AppColors.primary),
             ),
             SizedBox(width: 4.w),

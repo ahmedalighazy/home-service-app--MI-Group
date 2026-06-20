@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 
 class SubscriptionStatusCard extends StatelessWidget {
@@ -64,7 +64,7 @@ class _ActiveStatusBadge extends StatelessWidget {
         ],
       ),
       child: Text(
-        AppStrings.activeStatus,
+        context.l10n.activeStatus,
         style: AppText.ibmDescription12(
           color: const Color(0xFF059669),
         ).copyWith(fontWeight: FontWeight.w600),

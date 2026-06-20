@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/home/domain/entities/category_entity.dart';
 import 'package:home_service_app/features/home/presentation/widgets/service_category_card.dart';
 
@@ -23,7 +23,7 @@ class SearchCategoriesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppStrings.categories,
+            context.l10n.categories,
             style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
               color: AppColors.primaryText,
             ),

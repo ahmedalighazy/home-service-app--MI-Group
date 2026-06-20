@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../data/models/corporate_place_type.dart';
@@ -7,9 +8,6 @@ import 'corporate_choice_chip.dart';
 import 'corporate_section_label.dart';
 import 'corporate_submit_button.dart';
 import 'corporate_text_field.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class CorporateFormCard extends StatelessWidget {
   final PlaceType placeType;
@@ -55,19 +53,19 @@ class CorporateFormCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          CorporateSectionLabel(text: AppStrings.typePlace),
+          CorporateSectionLabel(text: context.l10n.typePlace),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               CorporateChoiceChip(
-                label: AppStrings.mosque,
+                label: context.l10n.mosque,
                 isSelected: placeType == PlaceType.mosque,
                 onTap: () => onPlaceTypeChanged(PlaceType.mosque),
               ),
               const SizedBox(width: 8),
               CorporateChoiceChip(
-                label: AppStrings.company,
+                label: context.l10n.company,
                 isSelected: placeType == PlaceType.company,
                 onTap: () => onPlaceTypeChanged(PlaceType.company),
               ),
@@ -75,28 +73,28 @@ class CorporateFormCard extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           CorporateTextField(
-            label: AppStrings.namePlace,
-            hintText: AppStrings.writeNameCompanyOrMosque,
+            label: context.l10n.namePlace,
+            hintText: context.l10n.writeNameCompanyOrMosque,
             controller: placeNameController,
             onChanged: onPlaceNameChanged,
           ),
           const SizedBox(height: 16),
           CorporateTextField(
-            label: AppStrings.addressLocation,
-            hintText: AppStrings.writeLocationInDetail,
+            label: context.l10n.addressLocation,
+            hintText: context.l10n.writeLocationInDetail,
             controller: locationController,
             onChanged: onLocationChanged,
           ),
           const SizedBox(height: 16),
           CorporateTextField(
-            label: AppStrings.areaPlace,
-            hintText: AppStrings.areaPlace,
+            label: context.l10n.areaPlace,
+            hintText: context.l10n.areaPlace,
             controller: areaController,
             keyboardType: TextInputType.number,
             onChanged: onAreaChanged,
           ),
           const SizedBox(height: 18),
-          CorporateSectionLabel(text: AppStrings.typeServiceRequired),
+          CorporateSectionLabel(text: context.l10n.serviceType),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8,
@@ -104,19 +102,19 @@ class CorporateFormCard extends StatelessWidget {
             alignment: WrapAlignment.end,
             children: [
               CorporateChoiceChip(
-                label: AppStrings.cleaningFull,
+                label: context.l10n.cleaningFull,
                 isSelected: serviceType == CorporateServiceType.cleaning,
                 onTap: () =>
                     onServiceTypeChanged(CorporateServiceType.cleaning),
               ),
               CorporateChoiceChip(
-                label: AppStrings.pestControlPests,
+                label: context.l10n.pestControlPests,
                 isSelected: serviceType == CorporateServiceType.pestControl,
                 onTap: () =>
                     onServiceTypeChanged(CorporateServiceType.pestControl),
               ),
               CorporateChoiceChip(
-                label: AppStrings.furniture,
+                label: context.l10n.furniture,
                 isSelected:
                     serviceType == CorporateServiceType.furnitureCleaning,
                 onTap: () => onServiceTypeChanged(
@@ -127,8 +125,8 @@ class CorporateFormCard extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           CorporateTextField(
-            label: AppStrings.detailsAdditionalOptional,
-            hintText: AppStrings.writeAnyNotesHelpUsUnderstandYourNeed,
+            label: context.l10n.detailsAdditionalOptional,
+            hintText: context.l10n.writeAnyNotesHelpUsUnderstandYourNeed,
             controller: detailsController,
             maxLines: 3,
             onChanged: onDetailsChanged,
@@ -142,4 +140,3 @@ class CorporateFormCard extends StatelessWidget {
     );
   }
 }
-

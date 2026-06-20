@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 
 class BookingTabBar extends StatelessWidget {
   final int selectedIndex;
@@ -26,12 +26,12 @@ class BookingTabBar extends StatelessWidget {
       child: Row(
         children: [
           _TabItem(
-            title: AppStrings.upcoming,
+            title: context.l10n.upcoming,
             isSelected: selectedIndex == 0,
             onTap: () => onTabSelected(0),
           ),
           _TabItem(
-            title: AppStrings.previous,
+            title: context.l10n.previous,
             isSelected: selectedIndex == 1,
             onTap: () => onTabSelected(1),
           ),

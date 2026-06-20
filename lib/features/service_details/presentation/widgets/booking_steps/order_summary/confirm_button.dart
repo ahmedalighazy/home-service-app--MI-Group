@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class ConfirmButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -27,7 +26,7 @@ class ConfirmButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          AppStrings.confirm,
+          context.l10n.confirm,
           style: AppText.semiBold18Black.copyWith(
             color: AppColors.white,
             fontWeight: FontWeight.w700,
@@ -37,4 +36,3 @@ class ConfirmButton extends StatelessWidget {
     );
   }
 }
-

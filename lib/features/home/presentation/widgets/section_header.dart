@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({super.key, required this.title, this.onViewAll});
@@ -21,7 +21,7 @@ class SectionHeader extends StatelessWidget {
         TextButton(
           onPressed: onViewAll,
           child: Text(
-            AppStrings.viewAll,
+            context.l10n.viewAll,
             style: AppText.ibmLink13(color: AppColors.secondaryGrey),
           ),
         ),

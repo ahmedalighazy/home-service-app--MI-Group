@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/payment/saved_card_tile.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/saved_card_model.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class SavedCardsAccordion extends StatelessWidget {
   final List<SavedCard> cards;
@@ -46,7 +44,7 @@ class SavedCardsAccordion extends StatelessWidget {
                   color: AppColors.body,
                   size: 20,
                 ),
-                Text(AppStrings.cardsSaved, style: AppText.semiBold14Black),
+                Text(context.l10n.cardsSaved, style: AppText.semiBold14Black),
               ],
             ),
           ),
@@ -73,7 +71,7 @@ class SavedCardsAccordion extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {},
                 child: Text(
-                  AppStrings.addCard,
+                  context.l10n.addCard,
                   style: AppText.semiBold14Black.copyWith(
                     color: AppColors.primary,
                   ),
@@ -86,4 +84,3 @@ class SavedCardsAccordion extends StatelessWidget {
     );
   }
 }
-

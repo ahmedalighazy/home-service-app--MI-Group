@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class HelpCenterContactInfo extends StatelessWidget {
   const HelpCenterContactInfo({super.key});
@@ -13,18 +13,18 @@ class HelpCenterContactInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.contactUs,
+          context.l10n.contactUs,
           style: AppText.ibmHeading16(color: AppColors.primaryText),
         ),
         SizedBox(height: 16.h),
-        const _ContactRow(
+        _ContactRow(
           icon: Icons.phone_outlined,
-          value: AppStrings.customerServiceNumber,
+          value: context.l10n.customerServiceNumber,
         ),
         SizedBox(height: 12.h),
-        const _ContactRow(
+        _ContactRow(
           icon: Icons.email_outlined,
-          value: AppStrings.supportEmailAddress,
+          value: context.l10n.supportEmailAddress,
         ),
       ],
     );

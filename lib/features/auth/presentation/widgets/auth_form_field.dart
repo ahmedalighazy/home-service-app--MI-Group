@@ -11,8 +11,8 @@ import '../../../../core/themes/text/app_text.dart';
 /// Usage:
 /// ```dart
 /// AuthFormField(
-///   label: AppStrings.nameLabel,
-///   hint: AppStrings.namePlaceholder,
+///   label: context.l10n.nameLabel,
+///   hint: context.l10n.namePlaceholder,
 ///   controller: _nameCtrl,
 ///   prefixIcon: Icons.person_outline_rounded,
 ///   validator: (v) => v!.isEmpty ? 'مطلوب' : null,
@@ -79,9 +79,7 @@ class _AuthFormFieldState extends State<AuthFormField> {
               prefixIcon: Icon(
                 widget.prefixIcon,
                 size: 20.sp,
-                color: _isFocused
-                    ? AppColors.greenPrimary
-                    : AppColors.gray,
+                color: _isFocused ? AppColors.greenPrimary : AppColors.gray,
               ),
               suffixIcon: widget.isPassword
                   ? IconButton(
@@ -103,23 +101,25 @@ class _AuthFormFieldState extends State<AuthFormField> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
-                borderSide:
-                    const BorderSide(color: AppColors.borderInputs),
+                borderSide: const BorderSide(color: AppColors.borderInputs),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
                 borderSide: const BorderSide(
-                    color: AppColors.greenPrimary, width: 1.5),
+                  color: AppColors.greenPrimary,
+                  width: 1.5,
+                ),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
-                borderSide:
-                    const BorderSide(color: AppColors.errorRed),
+                borderSide: const BorderSide(color: AppColors.errorRed),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
                 borderSide: const BorderSide(
-                    color: AppColors.errorRed, width: 1.5),
+                  color: AppColors.errorRed,
+                  width: 1.5,
+                ),
               ),
               errorStyle: AppText.ibmError12(),
             ),

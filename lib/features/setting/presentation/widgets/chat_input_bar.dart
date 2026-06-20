@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 import '../../logic/cubit/chat_cubit.dart';
 
@@ -71,7 +71,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText: AppStrings.writeYourMessage,
+                  hintText: context.l10n.writeYourMessage,
                   hintStyle: AppText.regularText(
                     color: AppColors.secondaryText,
                     fontSize: 14,

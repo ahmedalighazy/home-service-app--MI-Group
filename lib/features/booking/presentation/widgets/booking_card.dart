@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/constants/icons_path.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -204,7 +204,7 @@ class _BookingActions extends StatelessWidget {
           child: Center(
             child: FittedBox(
               child: Text(
-                AppStrings.viewDetails,
+                context.l10n.viewDetails,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,

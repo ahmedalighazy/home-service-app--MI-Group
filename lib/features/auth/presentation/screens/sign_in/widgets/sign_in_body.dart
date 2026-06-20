@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/image/app_assets.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import '../../../../../../core/utils/l10n/app_strings.dart';
 import '../../../widgets/auth_footer_link.dart';
 import '../../../widgets/auth_or_divider.dart';
 import '../../../widgets/auth_primary_button.dart';
@@ -54,7 +54,7 @@ class SignInBody extends StatelessWidget {
           SizedBox(height: 20.h),
 
           Text(
-            AppStrings.welcomeBackAlt,
+            context.l10n.welcomeBack,
             textAlign: TextAlign.right,
             style: AppText.ibmHeading22(color: AppColors.dark),
           ),
@@ -62,8 +62,8 @@ class SignInBody extends StatelessWidget {
           SizedBox(height: 32.h),
 
           AuthTextField(
-            label: AppStrings.emailLabel,
-            hint: AppStrings.emailPlaceholder,
+            label: context.l10n.emailLabel,
+            hint: context.l10n.emailPlaceholder,
             controller: emailController,
             prefixIcon: Icons.mail_outline_rounded,
             keyboardType: TextInputType.emailAddress,
@@ -73,20 +73,20 @@ class SignInBody extends StatelessWidget {
           SizedBox(height: 16.h),
 
           AuthTextField(
-            label: AppStrings.passwordLabel,
-            hint: AppStrings.passwordPlaceholder,
+            label: context.l10n.passwordLabel,
+            hint: context.l10n.passwordPlaceholder,
             controller: passwordController,
             prefixIcon: Icons.lock_outline_rounded,
             isPassword: true,
             hasError: hasError,
-            errorMessage: AppStrings.errorIncorrectPassword,
+            errorMessage: context.l10n.errorIncorrectPassword,
             onChanged: onFieldChanged,
           ),
 
           SizedBox(height: 24.h),
 
           AuthPrimaryButton(
-            label: AppStrings.login,
+            label: context.l10n.login,
             isLoading: isLoading,
             onPressed: onLogin,
           ),
@@ -107,7 +107,7 @@ class SignInBody extends StatelessWidget {
 
           AuthSocialButton(
             iconPath: AppAssets.iconGoogle,
-            text: AppStrings.signUpWithGoogle,
+            text: context.l10n.signUpWithGoogle,
             onTap: onGoogleSignIn,
           ),
 
@@ -115,15 +115,15 @@ class SignInBody extends StatelessWidget {
 
           AuthSocialButton(
             iconPath: AppAssets.iconApple,
-            text: AppStrings.signUpWithApple,
+            text: context.l10n.signUpWithApple,
             onTap: onAppleSignIn,
           ),
 
           SizedBox(height: 32.h),
 
           AuthFooterLink(
-            questionText: AppStrings.dontHaveAccount,
-            actionText: AppStrings.createAccount,
+            questionText: context.l10n.dontHaveAccount,
+            actionText: context.l10n.createAccount,
             onTap: onSignUp,
           ),
 

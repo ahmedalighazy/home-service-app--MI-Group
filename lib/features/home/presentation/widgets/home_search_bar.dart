@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({super.key, required this.onTap});
@@ -37,7 +37,7 @@ class HomeSearchBar extends StatelessWidget {
 
               Expanded(
                 child: Text(
-                  AppStrings.searchServiceOrProblem,
+                  context.l10n.searchServiceOrProblem,
                   style: AppText.ibmDescription14(color: AppColors.placeholder),
                 ),
               ),

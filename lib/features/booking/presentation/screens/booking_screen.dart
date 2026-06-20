@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
 import '../../data/repositories/booking_repository.dart';
 import '../widgets/booking_card.dart';
@@ -60,7 +60,7 @@ class _BookingContent extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    AppStrings.navBookings,
+                    context.l10n.navBookings,
                     style: AppText.boldIbm(
                       color: AppColors.black,
                       fontSize: 18,
@@ -85,9 +85,9 @@ class _BookingContent extends StatelessWidget {
 
               // automaticIndicatorColorAdjustment: false,
               indicatorSize: TabBarIndicatorSize.tab, // dividerHeight: 59,
-              tabs: const [
-                Tab(text: AppStrings.currentSubscriptions),
-                Tab(text: AppStrings.previousSubscriptions),
+              tabs: [
+                Tab(text: context.l10n.currentSubscriptions),
+                Tab(text: context.l10n.previousSubscriptions),
               ],
             ),
             Expanded(
@@ -107,10 +107,10 @@ class _BookingContent extends StatelessWidget {
                       : EmptyStateWidget(
                           isscreenBooking: true,
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.noUpcomingBookings,
-                          subtitle: AppStrings.noUpcomingBookingsDescription,
+                          title: context.l10n.noUpcomingBookings,
+                          subtitle: context.l10n.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
-                          buttonLabel: AppStrings.bookNow,
+                          buttonLabel: context.l10n.bookNow,
                         ),
 
                   bookings.isEmpty
@@ -128,10 +128,10 @@ class _BookingContent extends StatelessWidget {
                           isscreenBooking: true,
 
                           iconPath: IconsPath.notBooking,
-                          title: AppStrings.noUpcomingBookings,
-                          subtitle: AppStrings.noUpcomingBookingsDescription,
+                          title: context.l10n.noUpcomingBookings,
+                          subtitle: context.l10n.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
-                          buttonLabel: AppStrings.bookNow,
+                          buttonLabel: context.l10n.bookNow,
                         ),
                 ],
               ),

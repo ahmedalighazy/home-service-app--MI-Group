@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
@@ -11,7 +12,6 @@ import 'package:home_service_app/features/notification/presentation/cubit/notifi
 
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/buttom_curve_clipper.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -48,7 +48,7 @@ class ProfileHeader extends StatelessWidget {
                   spacing: 10,
                   children: [
                     Text(
-                      AppStrings.navAccount,
+                      context.l10n.navAccount,
                       textAlign: TextAlign.center,
                       style: AppText.semiBoldIbm(
                         color: AppColors.headingText,

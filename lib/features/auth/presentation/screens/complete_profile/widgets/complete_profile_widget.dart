@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import '../../../../../../core/utils/l10n/app_strings.dart';
-
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
@@ -19,10 +18,7 @@ class ProfileAvatar extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.light,
-              border: Border.all(
-                color: AppColors.borderInputs,
-                width: 1.5,
-              ),
+              border: Border.all(color: AppColors.borderInputs, width: 1.5),
             ),
             child: Icon(
               Icons.person_outline_rounded,
@@ -39,9 +35,7 @@ class ProfileAvatar extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.white,
-                border: Border.all(
-                  color: AppColors.borderInputs,
-                ),
+                border: Border.all(color: AppColors.borderInputs),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.08),
@@ -70,19 +64,15 @@ class CompleteProfileHeader extends StatelessWidget {
     return Column(
       children: [
         Text(
-          AppStrings.completeProfile,
+          context.l10n.completeProfile,
           textAlign: TextAlign.center,
-          style: AppText.ibmHeading22(
-            color: AppColors.dark,
-          ),
+          style: AppText.ibmHeading22(color: AppColors.dark),
         ),
         SizedBox(height: 6.h),
         Text(
-          AppStrings.completeProfileSubtitle,
+          context.l10n.completeProfileSubtitle,
           textAlign: TextAlign.center,
-          style: AppText.ibmDescription14(
-            color: AppColors.secondaryText,
-          ),
+          style: AppText.ibmDescription14(color: AppColors.secondaryText),
         ),
       ],
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class HomeSpecialOfferSection extends StatelessWidget {
   const HomeSpecialOfferSection({
@@ -109,7 +109,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
                         vertical: AppSizes.paddingSmallHeight,
                       ),
                       child: Text(
-                        AppStrings.bookNow,
+                        context.l10n.bookNow,
                         style: AppText.ibmFieldLabel14(color: AppColors.white),
                       ),
                     ),

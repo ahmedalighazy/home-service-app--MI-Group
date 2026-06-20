@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../widgets/custom_buttom.dart';
 import '../widgets/profile_image_edit_widget.dart';
@@ -16,7 +16,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: AppStrings.editProfile),
+      appBar: CustomAppBar(title: context.l10n.editProfile),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -33,11 +33,11 @@ class EditProfileScreen extends StatelessWidget {
               },
               textColor: AppColors.whitecancel,
               isOutlined: false,
-              text: AppStrings.save,
+              text: context.l10n.save,
             ),
             SizedBox(height: 24.h),
             CustomButton(
-              text: AppStrings.deleteAccountBtn,
+              text: context.l10n.deleteAccountBtn,
               backgroundColor: AppColors.redDangerBg,
               textColor: AppColors.redDanger,
               isOutlined: true,

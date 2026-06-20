@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 
 import '../../../../core/widgets/custom_text_field.dart';
@@ -18,7 +18,7 @@ class CancelBookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: AppStrings.cancelBooking),
+      appBar: CustomAppBar(title: context.l10n.cancelBooking),
       body: Padding(
         padding: const EdgeInsets.all(11.0),
         child: Column(
@@ -64,13 +64,13 @@ class _WarningSection extends StatelessWidget {
     return Column(
       children: [
         Text(
-          AppStrings.areYouSureCancel,
+          context.l10n.areYouSureCancel,
           style: AppText.ibmHeading20(color: AppColors.black),
           textAlign: TextAlign.center,
         ),
         verticalSpace(8),
         Text(
-          AppStrings.cancelWarning,
+          context.l10n.cancelWarning,
           style: AppText.ibmDescription14(),
           textAlign: TextAlign.center,
         ),
@@ -88,7 +88,7 @@ class _ReasonField extends StatelessWidget {
         CustomTextCancelBooking(),
         verticalSpace(12),
         CustomTextField(
-          hintText: AppStrings.mentionCancelReason,
+          hintText: context.l10n.mentionCancelReason,
           fillColor: AppColors.gry,
           borderColor: AppColors.borderGrey,
         ),
@@ -108,7 +108,7 @@ class _ActionButtons extends StatelessWidget {
       children: [
         CustomButton(
           flex: 44,
-          text: AppStrings.confirmCancel,
+          text: context.l10n.confirmCancel,
           backgroundColor: AppColors.red,
 
           textColor: AppColors.white,
@@ -116,7 +116,7 @@ class _ActionButtons extends StatelessWidget {
         ),
         CustomButton(
           flex: 44,
-          text: AppStrings.goBack,
+          text: context.l10n.goBack,
           backgroundColor: AppColors.white,
 
           textColor: AppColors.primaryGrey,

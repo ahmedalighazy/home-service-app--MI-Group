@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 
 class EditProfileForm extends StatelessWidget {
@@ -15,8 +15,8 @@ class EditProfileForm extends StatelessWidget {
       children: [
         CustomTextField(
           fillColor: AppColors.dark300,
-          label: AppStrings.nameLabel,
-          initialValue: AppStrings.profileName,
+          label: context.l10n.nameLabel,
+          initialValue: context.l10n.profileName,
           hintText: '',
           icon: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -26,8 +26,8 @@ class EditProfileForm extends StatelessWidget {
         SizedBox(height: 16.h),
         CustomTextField(
           fillColor: AppColors.dark300,
-          label: AppStrings.phoneLabel,
-          initialValue: AppStrings.phoneNumber,
+          label: context.l10n.phoneLabel,
+          initialValue: context.l10n.phoneNumber,
           hintText: '',
           icon: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -42,8 +42,8 @@ class EditProfileForm extends StatelessWidget {
         SizedBox(height: 16.h),
         CustomTextField(
           fillColor: AppColors.dark300,
-          label: AppStrings.emailLabel,
-          initialValue: AppStrings.emailValue,
+          label: context.l10n.emailLabel,
+          initialValue: context.l10n.emailValue,
           hintText: '',
           icon: Padding(
             padding: const EdgeInsets.all(8.0),

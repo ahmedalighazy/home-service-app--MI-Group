@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
@@ -27,7 +27,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
     return Scaffold(
       // ,
       appBar: CustomAppBar(
-        title: AppStrings.manageSubscription,
+        title: context.l10n.manageSubscription,
         onBack: () => context.pop(),
       ),
       body: SingleChildScrollView(
@@ -49,18 +49,18 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
   void _showPauseConfirmation() {
     showCannotDeleteDialogred(
       context,
-      AppStrings.pausePopupTitle,
-      AppStrings.pausePopupDesc,
-      AppStrings.confirmPauseBtn,
+      context.l10n.pausePopupTitle,
+      context.l10n.pausePopupDesc,
+      context.l10n.confirmPauseBtn,
     );
   }
 
   void _showCancelConfirmation() {
     showCannotDeleteDialogred(
       context,
-      AppStrings.cancelPopupTitle,
-      AppStrings.cancelPopupDesc,
-      AppStrings.confirmCancelBtn,
+      context.l10n.cancelPopupTitle,
+      context.l10n.cancelPopupDesc,
+      context.l10n.confirmCancel,
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/payment_method_model.dart';
@@ -45,18 +45,18 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: AppStrings.paymentMethods,
+        title: context.l10n.paymentMethods,
         onBack: () => context.pop(),
       ),
       body: Column(
         children: [
           Expanded(
             child: _paymentMethods.isEmpty
-                ? const EmptyStateWidget(
+                ? EmptyStateWidget(
                     iconPath: IconsPath.wallet05Svg,
-                    title: AppStrings.noSavedPaymentMethods,
-                    subtitle: AppStrings.addPaymentMethodDesc,
-                    buttonLabel: AppStrings.addPaymentMethodBtn,
+                    title: context.l10n.noSavedPaymentMethods,
+                    subtitle: context.l10n.addPaymentMethodDesc,
+                    buttonLabel: context.l10n.addPaymentMethodBtn,
                     // onButtonPressed: _showAddCardBottomSheet,
                   )
                 : ListView(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'add_new_card_bottom_sheet.dart';
 
 class AddCardButtonWidget extends StatelessWidget {
@@ -35,7 +35,7 @@ class AddCardButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppStrings.addNewCard,
+              context.l10n.addNewCard,
               style: AppText.semiBoldText(
                 color: AppColors.primary,
                 fontSize: 16,

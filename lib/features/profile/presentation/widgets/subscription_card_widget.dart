@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 
@@ -53,7 +53,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                _buildStatusBadge(),
+                _buildStatusBadge(context),
               ],
             ),
           ),
@@ -64,14 +64,14 @@ class SubscriptionCardWidget extends StatelessWidget {
             child: Column(
               children: [
                 _buildDetailRow(
-                  AppStrings.subscriptionTypeLabel,
+                  context.l10n.subscriptionTypeLabel,
                   subscription.type,
                   IconsPath.loadingDark,
                 ),
                 if (subscription.nextVisitDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.nextVisitLabel,
+                    context.l10n.nextVisitLabel,
                     subscription.nextVisitDate!,
                     IconsPath.calenderBlack,
                   ),
@@ -79,7 +79,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                 if (subscription.nextVisitTime != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.timeLabel,
+                    context.l10n.timeLabel,
                     subscription.nextVisitTime!,
                     IconsPath.time,
                   ),
@@ -87,21 +87,21 @@ class SubscriptionCardWidget extends StatelessWidget {
                 if (subscription.expiryDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.expiryDateLabelTitle,
+                    context.l10n.expiryDateLabel,
                     subscription.expiryDate!,
                     IconsPath.group,
                   ),
                 ],
                 verticalSpace(12),
-                _buildPriceRow(),
+                _buildPriceRow(context),
                 verticalSpace(16),
                 CustomButtom(
                   onTap: onTap,
                   text: subscription.status == SubscriptionStatus.active
-                      ? AppStrings.manageSubscription
+                      ? context.l10n.manageSubscription
                       : (subscription.status == SubscriptionStatus.paused
-                            ? AppStrings.reactivateBtn
-                            : AppStrings.subscribeAgainBtn),
+                            ? context.l10n.reactivateBtn
+                            : context.l10n.subscribeAgainBtn),
                   textStyle: AppText.ibmButton16(color: AppColors.white),
                   startColor: AppColors.primary,
                   endColor: AppColors.dark,
@@ -114,7 +114,7 @@ class SubscriptionCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge() {
+  Widget _buildStatusBadge(BuildContext context) {
     Color bgColor;
     Color textColor;
     String label;
@@ -123,17 +123,17 @@ class SubscriptionCardWidget extends StatelessWidget {
       case SubscriptionStatus.active:
         bgColor = const Color(0xFFECFDF5);
         textColor = const Color(0xFF059669);
-        label = AppStrings.activeStatus;
+        label = context.l10n.activeStatus;
         break;
       case SubscriptionStatus.paused:
         bgColor = const Color(0xFFFFFBEB);
         textColor = const Color(0xFFD97706);
-        label = AppStrings.pausedStatus;
+        label = context.l10n.pausedStatus;
         break;
       case SubscriptionStatus.ended:
         bgColor = const Color(0xFFFEF2F2);
         textColor = const Color(0xFFDC2626);
-        label = AppStrings.endedStatus;
+        label = context.l10n.endedStatus;
         break;
     }
 
@@ -178,7 +178,7 @@ class SubscriptionCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow() {
+  Widget _buildPriceRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -189,13 +189,13 @@ class SubscriptionCardWidget extends StatelessWidget {
             horizontalSpace(8),
 
             Text(
-              AppStrings.priceLabel,
+              context.l10n.priceLabel,
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
             ),
           ],
         ),
         Text(
-          '${subscription.price.toInt()} ${AppStrings.monthlyPriceSuffix}',
+          '${subscription.price.toInt()} ${context.l10n.monthlyPriceSuffix}',
           style: AppText.ibmHeading14(color: AppColors.primary),
         ),
       ],

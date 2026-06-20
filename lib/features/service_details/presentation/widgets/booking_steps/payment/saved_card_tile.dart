@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/payment/radio_dot.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/saved_card_model.dart';
 import 'card_brand_logo.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class SavedCardTile extends StatelessWidget {
   final SavedCard card;
@@ -61,17 +60,14 @@ class SavedCardTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          AppStrings.defaultCard,
+                          context.l10n.defaultCard,
                           style: AppText.regular10Grey.copyWith(
                             color: AppColors.white,
                           ),
                         ),
                       ),
                     ],
-                    Text(
-                      '**** ${card.last4}',
-                      style: AppText.semiBold14Black,
-                    ),
+                    Text('**** ${card.last4}', style: AppText.semiBold14Black),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -94,4 +90,3 @@ class SavedCardTile extends StatelessWidget {
     );
   }
 }
-

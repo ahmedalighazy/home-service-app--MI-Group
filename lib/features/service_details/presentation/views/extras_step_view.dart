@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/views/repeat_type_selector_view.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
@@ -11,9 +12,6 @@ import '../widgets/booking_steps/extras/worker_promo_card.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'date_time_step_view.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class ExtrasStepScreen extends StatelessWidget {
   final double cartTotal;
@@ -81,7 +79,7 @@ class ExtrasStepScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           appBar: StepAppBar(
-            title: AppStrings.extras2,
+            title: context.l10n.addonsTitle,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
@@ -131,4 +129,3 @@ class ExtrasStepScreen extends StatelessWidget {
     );
   }
 }
-

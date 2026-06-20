@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../themes/colors/app_colors.dart';
 import '../../themes/text/app_text.dart';
 import '../../widgets/custom_buttom.dart';
-import '../l10n/app_strings.dart';
 
 void showCannotDeleteDialogred(
   BuildContext context,
@@ -162,7 +162,7 @@ void showCannotDeleteDialog(
               SizedBox(height: 24.h),
               CustomButtom(
                 onTap: () => context.pop(),
-                text: AppStrings.okBtn,
+                text: context.l10n.okBtn,
                 textStyle: AppText.ibmButton16(),
                 startColor: AppColors.primary,
                 endColor: AppColors.primaryActive,

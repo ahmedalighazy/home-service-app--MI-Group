@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_state.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_card.dart';
@@ -39,7 +39,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      AppStrings.chooseYourAddress,
+                      context.l10n.chooseYourAddress,
                       style: AppText.ibmPlexSansArabic16SemiBold,
                     ),
                   ),
@@ -80,7 +80,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      AppStrings.editAddressHint,
+                      context.l10n.editAddressHint,
                       style: AppText.ibmCaption11(
                         color: AppColors.greenPrimary,
                       ),

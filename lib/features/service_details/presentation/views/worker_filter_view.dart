@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../cubit/feature_cubit.dart';
 import '../cubit/feature_state.dart';
 import '../widgets/booking_steps/home_clean/filter_section.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'extras_step_view.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class WorkerFilterCard extends StatelessWidget {
   final double cartTotal;
@@ -25,13 +24,22 @@ class WorkerFilterCard extends StatelessWidget {
 
   static const hours = [1, 2, 3, 4, 5];
   static const workers = [1, 2, 3, 4, 5, 6, 7, 8];
-  static const apartmentSizes = [
-    AppStrings.apartmentSmall,
-    AppStrings.apartment2,
-    AppStrings.apartment,
-    AppStrings.villa,
-  ];
-  static const genders = [AppStrings.female, AppStrings.male, AppStrings.not];
+  List<String> apartmentSizes(BuildContext context) {
+    return [
+      context.l10n.smallApartment,
+      context.l10n.mediumApartment,
+      context.l10n.largeApartment,
+      context.l10n.villa,
+    ];
+  }
+
+  List<String> genders(BuildContext context) {
+    return [
+      context.l10n.femaleTeam,
+      context.l10n.maleTeam,
+      context.l10n.noPreference,
+    ];
+  }
 
   void _goToExtrasStep(BuildContext context) {
     final featureCubit = context.read<FeatureCubit>();
@@ -68,7 +76,7 @@ class WorkerFilterCard extends StatelessWidget {
 
         return Scaffold(
           appBar: StepAppBar(
-            title: AppStrings.cleaningHome,
+            title: context.l10n.houseCleaningTitle,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
@@ -80,15 +88,17 @@ class WorkerFilterCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FilterSection<int>(
-                  title: AppStrings.hourCleaning,
+                  title: context.l10n.howManyHours,
                   items: hours,
                   selectedItem: loaded.selectedHours,
-                  labelBuilder: (value) => value == 1 ? AppStrings.hour : '$value ${AppStrings.hours}',
+                  labelBuilder: (value) => value == 1
+                      ? context.l10n.oneHour
+                      : '$value ${context.l10n.hours}',
                   onSelected: cubit.selectHours,
                 ),
                 const SizedBox(height: 24),
                 FilterSection<int>(
-                  title: AppStrings.countWorkersWorkers,
+                  title: context.l10n.howManyWorkers,
                   items: workers,
                   selectedItem: loaded.selectedWorkers,
                   labelBuilder: (value) => '$value',
@@ -96,16 +106,16 @@ class WorkerFilterCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 FilterSection<String>(
-                  title: AppStrings.sizePlace,
-                  items: apartmentSizes,
+                  title: context.l10n.placeSize,
+                  items: apartmentSizes(context),
                   selectedItem: loaded.selectedSize,
                   labelBuilder: (value) => value,
                   onSelected: cubit.selectHomeSize,
                 ),
                 const SizedBox(height: 24),
                 FilterSection<String>(
-                  title: AppStrings.preferenceTeam,
-                  items: genders,
+                  title: context.l10n.teamPreference,
+                  items: genders(context),
                   selectedItem: loaded.selectedGender,
                   labelBuilder: (value) => value,
                   onSelected: cubit.selectWorkerGender,
@@ -122,5 +132,3 @@ class WorkerFilterCard extends StatelessWidget {
     );
   }
 }
-
-

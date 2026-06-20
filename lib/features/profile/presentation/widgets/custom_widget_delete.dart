@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 
 class CustomWidgetDelete extends StatelessWidget {
   const CustomWidgetDelete({super.key});
@@ -13,7 +13,7 @@ class CustomWidgetDelete extends StatelessWidget {
       TextSpan(
         style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 14),
         children: [
-          const TextSpan(text: AppStrings.confirmDeleteHint),
+          TextSpan(text: context.l10n.confirmDeleteHint),
           TextSpan(
             text: 'حذف',
             style: AppText.mediumIbm(color: AppColors.redDanger, fontSize: 14),

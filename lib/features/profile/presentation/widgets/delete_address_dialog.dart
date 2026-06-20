@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
 class DeleteAddressDialog extends StatelessWidget {
@@ -46,13 +46,13 @@ class DeleteAddressDialog extends StatelessWidget {
             ),
             verticalSpace(20),
             Text(
-              AppStrings.deleteAddressTitle,
+              context.l10n.deleteAddressTitle,
               style: AppText.ibmHeading20(color: AppColors.primaryText),
             ),
             if (isDefault) ...[
               verticalSpace(8),
               Text(
-                AppStrings.deleteDefaultAddressDesc,
+                context.l10n.deleteDefaultAddressDesc,
                 textAlign: TextAlign.center,
                 style: AppText.ibmDescription14(color: AppColors.textLightGrey),
               ),
@@ -71,7 +71,7 @@ class DeleteAddressDialog extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
-                      AppStrings.cancelBtn,
+                      context.l10n.cancelBtn,
                       style: AppText.ibmButton16(color: AppColors.primaryText),
                     ),
                   ),
@@ -91,7 +91,7 @@ class DeleteAddressDialog extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
-                      AppStrings.deleteConfirmWord,
+                      context.l10n.deleteConfirmWord,
                       style: AppText.ibmButton16(color: AppColors.white),
                     ),
                   ),

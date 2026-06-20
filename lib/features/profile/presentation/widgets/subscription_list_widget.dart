@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/empty_state_widget.dart';
 import 'package:home_service_app/features/profile/data/models/subscription_model.dart';
 import 'subscription_card_widget.dart';
@@ -23,9 +23,9 @@ class SubscriptionListWidget extends StatelessWidget {
     if (subscriptions.isEmpty) {
       return EmptyStateWidget(
         iconPath: 'assets/icons/Group 590.svg',
-        title: AppStrings.noActiveSubscriptions,
-        subtitle: AppStrings.subscribePackagesDesc,
-        buttonLabel: AppStrings.browsePackagesBtn,
+        title: context.l10n.noActiveSubscriptions,
+        subtitle: context.l10n.subscribePackagesDesc,
+        buttonLabel: context.l10n.browsePackagesBtn,
         onButtonPressed: () {},
       );
     }

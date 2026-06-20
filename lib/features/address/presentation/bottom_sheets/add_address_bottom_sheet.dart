@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_text_field.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_type_selector.dart';
@@ -60,7 +60,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               SizedBox(height: AppSizes.spacingLarge),
 
               Text(
-                AppStrings.addYourAddress,
+                context.l10n.addNewAddress,
                 style: AppText.ibmPlexSansArabic16SemiBold,
               ),
 
@@ -69,7 +69,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               Row(
                 children: [
                   AddressTypeSelector(
-                    title: AppStrings.addressWork,
+                    title: context.l10n.workAddress,
                     iconsPath: IconsPath.institutionsIcon,
                     isSelected: isWorkSelected,
                     onTap: () {
@@ -83,7 +83,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
 
                   AddressTypeSelector(
                     iconsPath: IconsPath.home,
-                    title: AppStrings.addressHome,
+                    title: context.l10n.homeAddress,
                     isSelected: !isWorkSelected,
                     onTap: () {
                       setState(() {
@@ -111,7 +111,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               SizedBox(height: AppSizes.spacingMedium),
 
               AddressTextField(
-                hintText: AppStrings.additionalNotes,
+                hintText: context.l10n.additionalNotes,
                 controller: notesController,
                 maxLines: 1,
               ),
@@ -119,7 +119,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               SizedBox(height: AppSizes.spacingXLarge),
 
               CustomButtom(
-                text: AppStrings.saveAddress,
+                text: context.l10n.saveAddress,
                 startColor: AppColors.greenPrimary,
                 endColor: AppColors.greenPrimary,
                 textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(

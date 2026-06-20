@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
 import '../widgets/contact_card.dart';
@@ -16,29 +16,29 @@ class ContactUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: const CustomAppBar(title: AppStrings.helpCenter),
+      appBar: CustomAppBar(title: context.l10n.helpCenter),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppStrings.contactInfoLabel,
+              context.l10n.contactInfoLabel,
               style: AppText.ibmHeading16(color: AppColors.black),
             ),
             SizedBox(height: 4.h),
             Container(width: 60.w, height: 2.h, color: AppColors.primary),
             SizedBox(height: 24.h),
             ContactCard(
-              title: AppStrings.customerServiceNumberLabel,
-              value: AppStrings.customerServiceNumber,
+              title: context.l10n.customerServiceNumberLabel,
+              value: context.l10n.customerServiceNumber,
               icon: IconsPath.phone,
               onCopy: () {},
             ),
             SizedBox(height: 16.h),
             ContactCard(
-              title: AppStrings.emailAddressLabel,
-              value: AppStrings.supportEmailAddress,
+              title: context.l10n.emailAddressLabel,
+              value: context.l10n.supportEmailAddress,
               icon: IconsPath.email,
               onCopy: () {},
             ),

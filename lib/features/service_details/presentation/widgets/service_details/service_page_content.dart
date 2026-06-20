@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/promo_code_widget.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_details_bottom_sheet.dart';
@@ -7,10 +8,6 @@ import 'package:home_service_app/features/service_details/presentation/widgets/s
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../data/models/service_group_model.dart';
 import '../../../data/models/service_page_model.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
-
 
 class ServicePageContent extends StatelessWidget {
   final ServicePageModel data;
@@ -67,7 +64,10 @@ class ServicePageContent extends StatelessWidget {
               onTap: () {
                 showServiceBottomSheet(context);
               },
-              child: Text(AppStrings.showDetailsService, style: AppText.bold16Cyan),
+              child: Text(
+                context.l10n.viewServiceDetails,
+                style: AppText.bold16Cyan,
+              ),
             ),
           ),
         ],
@@ -88,4 +88,3 @@ void showServiceBottomSheet(BuildContext context) {
     },
   );
 }
-

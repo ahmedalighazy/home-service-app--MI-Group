@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/widgets/custom_text_field.dart';
 import 'package:home_service_app/features/booking/logic/cubit/booking_cubit.dart';
@@ -10,7 +11,6 @@ import '../widgets/day_selector.dart';
 import '../widgets/time_selector.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/utils/helpers/spacing.dart';
 
 class RescheduleBookingScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class RescheduleBookingScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => BookingCubit(BookingRepository()),
       child: Scaffold(
-        appBar: CustomAppBar(title: AppStrings.confirmReschedule),
+        appBar: CustomAppBar(title: context.l10n.confirmReschedule),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -35,12 +35,12 @@ class RescheduleBookingScreen extends StatelessWidget {
               TimeSelector(onTimeSelected: (idx) {}),
               verticalSpace(24),
               Text(
-                AppStrings.specialNotesOptional,
+                context.l10n.specialNotesOptional,
                 style: AppText.ibmHeading14(),
               ),
               verticalSpace(12),
               CustomTextField(
-                hintText: AppStrings.exampleHomeLocation,
+                hintText: context.l10n.exampleHomeLocation,
                 maxLines: 4,
                 fillColor: AppColors.gry,
                 borderColor: AppColors.borderGrey,
@@ -65,7 +65,7 @@ class RescheduleBookingScreen extends StatelessWidget {
               Spacer(),
               CustomButtom(
                 onTap: () {},
-                text: AppStrings.confirmReschedule2,
+                text: context.l10n.confirmReschedule,
                 textStyle: AppText.ibmButton16(color: AppColors.white),
                 startColor: AppColors.primary,
                 endColor: AppColors.dark,

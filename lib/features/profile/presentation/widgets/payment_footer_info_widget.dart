@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class PaymentFooterInfoWidget extends StatelessWidget {
   const PaymentFooterInfoWidget({super.key});
@@ -28,7 +28,7 @@ class PaymentFooterInfoWidget extends StatelessWidget {
             horizontalSpace(12),
             Expanded(
               child: Text(
-                AppStrings.defaultPaymentNotice,
+                context.l10n.defaultPaymentNotice,
                 style: AppText.regularText(
                   color: AppColors.textLightGrey,
                   fontSize: 14,

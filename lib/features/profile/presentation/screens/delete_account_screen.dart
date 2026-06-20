@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/show_dialog.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 
@@ -38,14 +38,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   void _onTextChanged() {
     setState(
       () => _isTextCorrect =
-          _confirmController.text.trim() == AppStrings.deleteConfirmWord,
+          _confirmController.text.trim() == context.l10n.deleteConfirmWord,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: AppStrings.deleteAccountHeader),
+      appBar: CustomAppBar(title: context.l10n.deleteAccountHeader),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -61,7 +61,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             SizedBox(height: 32.h),
             CustomButton(
               flex: 44,
-              text: AppStrings.deleteConfirmBtn,
+              text: context.l10n.deleteConfirmBtn,
               backgroundColor: _isTextCorrect
                   ? AppColors.redDanger
                   : AppColors.red,
@@ -69,14 +69,14 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               onPressed: _isTextCorrect
                   ? () => showCannotDeleteDialog(
                       context,
-                      AppStrings.cannotDeleteTitle,
-                      AppStrings.cannotDeleteDesc,
+                      context.l10n.cannotDeleteTitle,
+                      context.l10n.cannotDeleteDesc,
                     )
                   : () {},
             ),
             SizedBox(height: 12.h),
             CustomButton(
-              text: AppStrings.cancelBtn,
+              text: context.l10n.cancelBtn,
               backgroundColor: AppColors.gray,
               textColor: AppColors.gray,
               isOutlined: true,

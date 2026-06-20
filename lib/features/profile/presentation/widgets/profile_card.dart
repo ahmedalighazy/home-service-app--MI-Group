@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -44,7 +44,7 @@ class ProfileCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.profileName,
+                context.l10n.profileName,
                 style: AppText.semiBoldText(
                   color: AppColors.headingText,
                   fontSize: 12,
@@ -52,7 +52,7 @@ class ProfileCard extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               Text(
-                AppStrings.phoneNumber,
+                context.l10n.phoneNumber,
                 textDirection: TextDirection.ltr,
                 style: AppText.regularText(
                   color: AppColors.secondaryText,

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/image/app_assets.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import '../../../../../../core/utils/l10n/app_strings.dart';
 import '../../../cubits/auth_cubit.dart';
 import '../../../cubits/auth_state.dart';
 import '../../../cubits/forget_password_cubit.dart';
@@ -37,13 +37,13 @@ class ForgetHeader extends StatelessWidget {
         ),
         SizedBox(height: 32.h),
         Text(
-          AppStrings.resetPassword,
+          context.l10n.resetPassword,
           textAlign: TextAlign.center,
           style: AppText.ibmHeading22(color: AppColors.dark),
         ),
         SizedBox(height: 10.h),
         Text(
-          AppStrings.resetPasswordDescription,
+          context.l10n.resetPasswordDescription,
           textAlign: TextAlign.center,
           style: AppText.ibmDescription14(color: AppColors.secondaryText),
         ),
@@ -71,8 +71,8 @@ class ForgetEmailField extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<ForgetPasswordCubit>();
         return AuthTextField(
-          label: AppStrings.emailLabel,
-          hint: AppStrings.emailPlaceholder,
+          label: context.l10n.emailLabel,
+          hint: context.l10n.emailPlaceholder,
           controller: controller,
           prefixIcon: Icons.email_outlined,
           keyboardType: TextInputType.emailAddress,
@@ -99,7 +99,7 @@ class ForgetSubmitButton extends StatelessWidget {
           builder: (context, authState) {
             final isLoading = authState is AuthLoading;
             return AuthPrimaryButton(
-              label: AppStrings.sendCode,
+              label: context.l10n.sendCode,
               isLoading: isLoading,
               isEnabled: cubit.isValid,
               onPressed: onPressed,

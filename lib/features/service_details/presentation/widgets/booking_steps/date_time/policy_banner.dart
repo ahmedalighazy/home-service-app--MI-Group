@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class PolicyBanner extends StatelessWidget {
   const PolicyBanner({super.key});
-
-  static const String _policyText =
-      AppStrings.cancelBookingOrModifyBeforeNumber5 +
-      AppStrings.caseBeforeLessFromNumber5HourWillBe;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +35,7 @@ class PolicyBanner extends StatelessWidget {
               SizedBox(width: size.width * 0.025),
               Expanded(
                 child: Text(
-                  _policyText,
+                  context.l10n.cancellationPolicy,
                   style: AppText.regular12Grey,
                   textAlign: TextAlign.end,
                   textDirection: TextDirection.rtl,
@@ -51,13 +46,13 @@ class PolicyBanner extends StatelessWidget {
 
           SizedBox(height: size.height * 0.01),
 
-          // AppStrings.showDetails link
+          // context.l10n.showDetails link
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
               onTap: () {},
               child: Text(
-                AppStrings.showDetails,
+                context.l10n.viewDetails,
                 style: AppText.semiBold12Black.copyWith(
                   color: AppColors.primary,
                   decoration: TextDecoration.underline,
@@ -71,4 +66,3 @@ class PolicyBanner extends StatelessWidget {
     );
   }
 }
-
