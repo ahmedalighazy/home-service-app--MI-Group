@@ -29,7 +29,7 @@ class HomeServiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appLanguage = 'ar';
+    const String appLanguage = 'en';
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),

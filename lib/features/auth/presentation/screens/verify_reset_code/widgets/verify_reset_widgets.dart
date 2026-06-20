@@ -26,7 +26,7 @@
 //         ),
 //         SizedBox(height: 40.h),
 //         Text(
-//           AppStrings.confirmCode,
+//           context.l10n.confirmCode,
 //           textAlign: TextAlign.center,
 //           style: GoogleFonts.ibmPlexSansArabic(
 //             color: AppColors.dark,
@@ -36,7 +36,7 @@
 //         ),
 //         SizedBox(height: 10.h),
 //         Text(
-//           AppStrings.enterVerificationCode,
+//           context.l10n.enterVerificationCode,
 //           textAlign: TextAlign.center,
 //           style: GoogleFonts.ibmPlexSansArabic(
 //             color: AppColors.secondaryText,
@@ -100,7 +100,7 @@
 //             GestureDetector(
 //               onTap: onResendPressed,
 //               child: Text(
-//                 AppStrings.resendCodeLink,
+//                 context.l10n.resendCodeLink,
 //                 style: GoogleFonts.ibmPlexSansArabic(
 //                   color: canResend ? AppColors.greenPrimary : AppColors.placeholder,
 //                   fontSize: 13.sp,
@@ -111,7 +111,7 @@
 //               ),
 //             ),
 //             Text(
-//               ' ${AppStrings.resendCodePrompt}',
+//               ' ${context.l10n.resendCodePrompt}',
 //               style: GoogleFonts.ibmPlexSansArabic(
 //                 color: AppColors.gray,
 //                 fontSize: 13.sp,
@@ -162,7 +162,7 @@
 //           child: digits.length == length
 //               ? OtpConfirmButton(
 //             key: const ValueKey('btn'),
-//             label: AppStrings.confirm,
+//             label: context.l10n.confirm,
 //             isLoading: isLoading,
 //             isSuccess: fieldState == OtpFieldState.success,
 //             isEnabled: fieldState != OtpFieldState.error,

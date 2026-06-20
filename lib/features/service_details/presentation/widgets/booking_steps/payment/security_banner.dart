@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class SecurityBanner extends StatelessWidget {
   const SecurityBanner({super.key});
@@ -32,7 +31,7 @@ class SecurityBanner extends StatelessWidget {
           SizedBox(width: size.width * 0.03),
           Expanded(
             child: Text(
-              AppStrings.allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy,
+              context.l10n.securePaymentNote,
               style: AppText.regular12Grey,
               textAlign: TextAlign.end,
             ),
@@ -42,4 +41,3 @@ class SecurityBanner extends StatelessWidget {
     );
   }
 }
-

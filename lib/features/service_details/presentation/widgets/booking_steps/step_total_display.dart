@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class StepTotalDisplay extends StatelessWidget {
   final double total;
@@ -24,12 +23,12 @@ class StepTotalDisplay extends StatelessWidget {
               size: 18,
             ),
             const SizedBox(width: 2),
-            Text(AppStrings.totalCurrent, style: AppText.regular12Grey),
+            Text(context.l10n.currentTotal, style: AppText.regular12Grey),
           ],
         ),
         const SizedBox(height: 1),
         Text(
-          '${total.toStringAsFixed(0)} ${AppStrings.qar}',
+          '${total.toStringAsFixed(0)} ${context.l10n.currency}',
           style: AppText.semiBold20Black.copyWith(
             fontWeight: FontWeight.w800,
             fontSize: 20,
@@ -39,5 +38,3 @@ class StepTotalDisplay extends StatelessWidget {
     );
   }
 }
-
-

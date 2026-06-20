@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../booking_tracking/booking_gradient_button.dart';
 import '../booking_tracking/success_mark.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class RatingSuccessDialog extends StatelessWidget {
   final VoidCallback onBackToHome;
@@ -32,19 +31,19 @@ class RatingSuccessDialog extends StatelessWidget {
                 const SuccessMark(size: 56),
                 const SizedBox(height: 24),
                 Text(
-                  AppStrings.forRating,
+                  context.l10n.forRating,
                   style: AppText.semiBold16Black.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppStrings.yourOpinionHelpsUsOnImproveService,
+                  context.l10n.ratingHelpsImprove,
                   style: AppText.regular12Grey,
                 ),
                 const SizedBox(height: 22),
                 BookingGradientButton(
-                  label: AppStrings.backToHome,
+                  label: context.l10n.backToHome,
                   onPressed: onBackToHome,
                 ),
               ],
@@ -55,4 +54,3 @@ class RatingSuccessDialog extends StatelessWidget {
     );
   }
 }
-

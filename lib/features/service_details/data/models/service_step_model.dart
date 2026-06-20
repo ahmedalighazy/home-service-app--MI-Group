@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class ServiceStepModel {
   final String title;
@@ -17,4 +16,3 @@ class ServiceStepModel {
     // required this.onBack,
   });
 }
-

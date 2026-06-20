@@ -36,7 +36,8 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
   void initState() {
     super.initState();
     if (widget.paymentMethod != null) {
-      _cardNumberController.text = '**** **** **** ${widget.paymentMethod!.lastFourDigits}';
+      _cardNumberController.text =
+          '**** **** **** ${widget.paymentMethod!.lastFourDigits}';
       _cardHolderController.text = widget.paymentMethod!.cardHolderName;
       _expiryDateController.text = widget.paymentMethod!.expiryDate;
     }
@@ -57,7 +58,9 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
       padding: EdgeInsets.all(AppSizes.paddingM.r),
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSizes.radiusLarge)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppSizes.radiusLarge),
+        ),
       ),
       child: SingleChildScrollView(
         child: Column(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_state.dart';
 
@@ -11,7 +12,6 @@ import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../core/themes/image/app_assets.dart';
 import '../../../../../core/themes/text/app_text.dart';
-import '../../../../../core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_confirm_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_input_row.dart';
@@ -99,6 +99,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
     context.read<AuthCubit>().sendResetCode(widget.email);
     _focusNode.requestFocus();
   }
+
   String _truncateEmail(String email) {
     final atIndex = email.indexOf('@');
     if (atIndex <= 5) return email;
@@ -178,7 +179,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
 
                             // ── Title ────────────────────────────────
                             Text(
-                              AppStrings.checkEmail,
+                              context.l10n.checkEmail,
                               textAlign: TextAlign.center,
                               style: AppText.ibmHeading22(
                                 color: AppColors.dark,
@@ -244,7 +245,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${AppStrings.resendCodePromptAlt} ',
+                                  '${context.l10n.resendCodePrompt} ',
                                   style: AppText.ibmDescription14(
                                     color: AppColors.secondaryText,
                                   ),
@@ -254,7 +255,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                                       ? null
                                       : () => _onResend(context),
                                   child: Text(
-                                    AppStrings.resendCodeLink,
+                                    context.l10n.resendCodeLink,
                                     style:
                                         AppText.ibmLink13(
                                           color: isLoading
@@ -280,7 +281,7 @@ class _VerifyResetCodeScreenState extends State<VerifyResetCodeScreen>
                     Padding(
                       padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
                       child: OtpConfirmButton(
-                        label: AppStrings.confirm,
+                        label: context.l10n.confirm,
                         isLoading: isLoading,
                         isSuccess: _fieldState == OtpFieldState.success,
                         onPressed: _digits.length == _length

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+
 import '../../../../core/utils/helpers/spacing.dart';
 
 import '../../../../core/widgets/custom_text_field.dart';
@@ -19,7 +19,8 @@ class CancelBookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: context.tr(LocaleKeys.bookingCancel)),
+      // appBar: CustomAppBar(title: context.tr(LocaleKeys.bookingCancel)),
+      appBar: CustomAppBar(title: context.l10n.cancelBooking),
       body: Padding(
         padding: const EdgeInsets.all(11.0),
         child: SingleChildScrollView(
@@ -68,13 +69,15 @@ class _WarningSection extends StatelessWidget {
     return Column(
       children: [
         Text(
-          context.tr(LocaleKeys.bookingAreYouSureCancel),
+          // context.tr(LocaleKeys.bookingAreYouSureCancel),
+          context.l10n.areYouSureCancel,
           style: AppText.ibmHeading20(color: AppColors.black),
           textAlign: TextAlign.center,
         ),
         verticalSpace(8),
         Text(
-          context.tr(LocaleKeys.bookingCancelWarning),
+          //context.tr(LocaleKeys.bookingCancelWarning),
+          context.l10n.cancelWarning,
           style: AppText.ibmDescription14(),
           textAlign: TextAlign.center,
         ),
@@ -92,8 +95,10 @@ class _ReasonField extends StatelessWidget {
         CustomTextCancelBooking(),
         verticalSpace(12),
         CustomTextField(
-          hintText: context.tr(LocaleKeys.bookingMentionCancelReason),
+          //hintText: context.tr(LocaleKeys.bookingMentionCancelReason),
           fillColor: AppColors.bgSecondary,
+          hintText: context.l10n.mentionCancelReason,
+          // fillColor: AppColors.gry,
           borderColor: AppColors.borderGrey,
         ),
       ],
@@ -112,7 +117,8 @@ class _ActionButtons extends StatelessWidget {
       children: [
         CustomButton(
           flex: 44,
-          text: context.tr(LocaleKeys.bookingConfirmCancel),
+          //text: context.tr(LocaleKeys.bookingConfirmCancel),
+          text: context.l10n.confirmCancel,
           backgroundColor: AppColors.red,
 
           textColor: AppColors.white,
@@ -120,7 +126,8 @@ class _ActionButtons extends StatelessWidget {
         ),
         CustomButton(
           flex: 44,
-          text: context.tr(LocaleKeys.bookingGoBack),
+          //text: context.tr(LocaleKeys.bookingGoBack),
+          text: context.l10n.goBack,
           backgroundColor: AppColors.white,
 
           textColor: AppColors.primaryGrey,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -51,17 +51,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: [
           _buildNavItem(
             iconPath: IconsPath.home,
-            label: AppStrings.navHome,
+            label: context.l10n.navHome,
             index: 0,
           ),
           _buildNavItem(
             iconPath: IconsPath.calendar,
-            label: AppStrings.navBookings,
+            label: context.l10n.navBookings,
             index: 1,
           ),
           _buildNavItem(
             iconPath: IconsPath.profile,
-            label: AppStrings.navAccount,
+            label: context.l10n.navAccount,
             index: 2,
           ),
         ],

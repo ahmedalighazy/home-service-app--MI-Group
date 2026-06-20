@@ -50,7 +50,10 @@ class NewIssueBottomSheet extends StatelessWidget {
           verticalSpace(16),
           _buildFieldLabel(context.tr(LocaleKeys.helpCenterIssueDescLabel)),
           verticalSpace(8),
-          _buildTextField(context.tr(LocaleKeys.helpCenterIssueDescHint), maxLines: 4),
+          _buildTextField(
+            context.tr(LocaleKeys.helpCenterIssueDescHint),
+            maxLines: 4,
+          ),
           verticalSpace(24),
           SizedBox(
             width: double.infinity,
@@ -79,7 +82,6 @@ class NewIssueBottomSheet extends StatelessWidget {
     return TextField(
       maxLines: maxLines,
       decoration: InputDecoration(
-
         hintText: hint,
         hintStyle: AppText.regularIbm(
           color: AppColors.textLightGrey,

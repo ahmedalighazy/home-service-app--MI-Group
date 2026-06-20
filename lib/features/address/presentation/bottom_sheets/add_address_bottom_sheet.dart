@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
@@ -17,11 +18,7 @@ class AddAddressBottomSheet extends StatefulWidget {
   final AddressModel? address;
   final bool isEdit;
 
-  const AddAddressBottomSheet({
-    super.key,
-    this.address,
-    this.isEdit = false,
-  });
+  const AddAddressBottomSheet({super.key, this.address, this.isEdit = false});
 
   @override
   State<AddAddressBottomSheet> createState() => _AddAddressBottomSheetState();
@@ -43,11 +40,13 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
   @override
   void initState() {
     super.initState();
-    isWorkSelected = widget.address == null || widget.address!.label == AppStrings.addressWork;
-    
+    isWorkSelected =
+        widget.address == null ||
+        widget.address!.label == AppStrings.workAddress;
+
     if (widget.address != null) {
       notesController.text = widget.address!.details;
-      // Ideally we'd have more fields in AddressModel to map correctly. 
+      // Ideally we'd have more fields in AddressModel to map correctly.
       // For now, we'll just set notes as a placeholder.
     }
   }
@@ -83,14 +82,15 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
               const BottomSheetHandle(),
               SizedBox(height: AppSizes.spacingLarge),
               Text(
-                widget.isEdit ? AppStrings.editAddress : AppStrings.addYourAddress,
+                // widget.isEdit ? AppStrings.editAddress : AppStrings.addYourAddress,
+                context.l10n.addNewAddress,
                 style: AppText.ibmPlexSansArabic16SemiBold,
               ),
               SizedBox(height: AppSizes.spacingLarge),
               Row(
                 children: [
                   AddressTypeSelector(
-                    title: AppStrings.addressWork,
+                    title: context.l10n.workAddress,
                     iconsPath: IconsPath.institutionsIcon,
                     isSelected: isWorkSelected,
                     onTap: () {
@@ -102,7 +102,7 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
                   SizedBox(width: AppSizes.spacingMedium),
                   AddressTypeSelector(
                     iconsPath: IconsPath.home,
-                    title: AppStrings.addressHome,
+                    title: context.l10n.homeAddress,
                     isSelected: !isWorkSelected,
                     onTap: () {
                       setState(() {
@@ -127,13 +127,14 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
                     ),
               SizedBox(height: AppSizes.spacingMedium),
               AddressTextField(
-                hintText: AppStrings.additionalNotes,
+                hintText: context.l10n.additionalNotes,
                 controller: notesController,
                 maxLines: 1,
               ),
               SizedBox(height: AppSizes.spacingXLarge),
               CustomButtom(
-                text: widget.isEdit ? AppStrings.save : AppStrings.saveAddress,
+                //text: widget.isEdit ? AppStrings.save : AppStrings.saveAddress,
+                text: context.l10n.saveAddress,
                 startColor: AppColors.greenPrimary,
                 endColor: AppColors.greenPrimary,
                 textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(

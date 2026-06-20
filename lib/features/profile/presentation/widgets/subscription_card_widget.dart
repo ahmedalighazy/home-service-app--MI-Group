@@ -116,7 +116,11 @@ class SubscriptionCardWidget extends StatelessWidget {
   }
 
   Widget _buildStatusBadge(BuildContext context) {
-    final (Color bgColor, Color textColor, String key) = switch (subscription.status) {
+    final (
+      Color bgColor,
+      Color textColor,
+      String key,
+    ) = switch (subscription.status) {
       SubscriptionStatus.active => (
         const Color(0xFFECFDF5),
         const Color(0xFF059669),

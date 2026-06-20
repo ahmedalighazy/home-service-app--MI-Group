@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/timeline_step.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/timeline_step_state.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class TrackingStatusCard extends StatelessWidget {
   final VoidCallback onCompletedTap;
@@ -24,26 +23,26 @@ class TrackingStatusCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(AppStrings.statusService, style: AppText.semiBold12Black),
+          Text(context.l10n.serviceStatus, style: AppText.semiBold12Black),
           const SizedBox(height: 12),
-          const TimelineStep(
-            title: AppStrings.doneConfirmBooking,
-            time: AppStrings.tenTwentyEightAm,
+          TimelineStep(
+            title: context.l10n.doneConfirmBooking,
+            time: context.l10n.tenTwentyEightAm,
             state: TimelineStepState.done,
           ),
-          const TimelineStep(
-            title: AppStrings.teamInWayToYou,
+          TimelineStep(
+            title: context.l10n.teamOnTheWay,
             state: TimelineStepState.active,
           ),
-          const TimelineStep(
-            title: AppStrings.serviceInProgressExecution,
+          TimelineStep(
+            title: context.l10n.serviceInProgress,
             state: TimelineStepState.pending,
           ),
           InkWell(
             onTap: onCompletedTap,
             borderRadius: BorderRadius.circular(8),
-            child: const TimelineStep(
-              title: AppStrings.doneFinished,
+            child: TimelineStep(
+              title: context.l10n.serviceCompletedStatus,
               state: TimelineStepState.pending,
               isLast: true,
             ),
@@ -53,4 +52,3 @@ class TrackingStatusCard extends StatelessWidget {
     );
   }
 }
-

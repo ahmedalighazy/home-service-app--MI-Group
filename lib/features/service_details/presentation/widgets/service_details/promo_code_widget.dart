@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/promo_apply_button.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class PromoCodeWidget extends StatelessWidget {
   final String promoCode;
@@ -39,7 +39,10 @@ class PromoCodeWidget extends StatelessWidget {
           // Discount info row
           Column(
             children: [
-              Text('${AppStrings.codePrefix} $promoCode', style: AppText.semiBold14Black),
+              Text(
+                '${context.l10n.codePrefix} $promoCode',
+                style: AppText.semiBold14Black,
+              ),
               SizedBox(width: size.width * 0.02),
               Row(
                 children: [
@@ -59,5 +62,3 @@ class PromoCodeWidget extends StatelessWidget {
     );
   }
 }
-
-

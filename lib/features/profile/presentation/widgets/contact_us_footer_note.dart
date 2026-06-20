@@ -41,7 +41,6 @@ class ContactUsFooterNote extends StatelessWidget {
               ).copyWith(height: 1.5),
             ),
           ),
-
         ],
       ),
     );

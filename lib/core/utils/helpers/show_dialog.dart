@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
 import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
@@ -123,7 +124,8 @@ void showCannotDeleteDialog(
               verticalSpace(24),
               CustomButtom(
                 onTap: () => context.pop(),
-                text: context.tr(LocaleKeys.ok),
+                // text: context.tr(LocaleKeys.ok),
+                text: context.l10n.okBtn,
                 textStyle: AppText.ibmButton16(),
                 startColor: AppColors.primary,
                 endColor: AppColors.primaryActive,

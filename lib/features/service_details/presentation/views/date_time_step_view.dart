@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/helpers/booking_date_utils.dart';
 import '../../data/models/extra_item_model.dart';
@@ -13,9 +14,6 @@ import '../widgets/booking_steps/date_time/time_slot_grid.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'address_step_view.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class DateTimeStepScreen extends StatelessWidget {
   final double cartTotal;
@@ -71,7 +69,7 @@ class DateTimeStepScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           appBar: StepAppBar(
-            title: AppStrings.dateTime,
+            title: context.l10n.dateAndTimeTitle,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
@@ -82,7 +80,7 @@ class DateTimeStepScreen extends StatelessWidget {
               bottom: size.height * 0.16,
             ),
             children: [
-              SectionLabel(label: AppStrings.chooseToday),
+              SectionLabel(label: context.l10n.chooseDay),
               SizedBox(height: size.height * 0.008),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
@@ -93,7 +91,7 @@ class DateTimeStepScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: size.height * 0.028),
-              SectionLabel(label: AppStrings.chooseTime),
+              SectionLabel(label: context.l10n.chooseTime),
               SizedBox(height: size.height * 0.008),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
@@ -119,4 +117,3 @@ class DateTimeStepScreen extends StatelessWidget {
     );
   }
 }
-

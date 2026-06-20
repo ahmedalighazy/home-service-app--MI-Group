@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
 class SearchEmptyState extends StatelessWidget {
@@ -23,7 +23,7 @@ class SearchEmptyState extends StatelessWidget {
               SizedBox(height: AppSizes.spacingLarge),
 
               Text(
-                AppStrings.noResultsFound,
+                context.l10n.noResultsFound,
                 style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                   color: AppColors.primaryText,
                 ),
@@ -32,7 +32,7 @@ class SearchEmptyState extends StatelessWidget {
               SizedBox(height: AppSizes.spacingSmall),
 
               Text(
-                AppStrings.noResultsFoundDescription,
+                context.l10n.noResultsFoundDescription,
                 textAlign: TextAlign.center,
                 style: AppText.ibmDescription14(color: AppColors.placeholder),
               ),
@@ -45,7 +45,7 @@ class SearchEmptyState extends StatelessWidget {
               SizedBox(height: AppSizes.spacing),
 
               CustomButtom(
-                text: AppStrings.browseServices,
+                text: context.l10n.browseServices,
                 onTap: () {},
                 textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                   color: AppColors.white,
@@ -57,7 +57,7 @@ class SearchEmptyState extends StatelessWidget {
               SizedBox(height: AppSizes.spacingMedium),
 
               CustomButtom(
-                text: AppStrings.tryOtherWords,
+                text: context.l10n.tryOtherWords,
                 onTap: () {},
                 textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                   color: AppColors.gray,

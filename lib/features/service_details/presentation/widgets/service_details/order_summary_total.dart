@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class OrderSummaryTotal extends StatelessWidget {
   final double total;
@@ -26,12 +24,12 @@ class OrderSummaryTotal extends StatelessWidget {
               size: 20,
             ),
             const SizedBox(width: 4),
-            Text(AppStrings.totalCurrent, style: AppText.regular12Grey),
+            Text(context.l10n.currentTotal, style: AppText.regular12Grey),
           ],
         ),
         const SizedBox(height: 2),
         Text(
-          '${total.toStringAsFixed(0)} ${AppStrings.qar}',
+          '${total.toStringAsFixed(0)} ${context.l10n.currency}',
           style: AppText.semiBold20Black.copyWith(
             fontWeight: FontWeight.w800,
             fontSize: 22,
@@ -41,5 +39,3 @@ class OrderSummaryTotal extends StatelessWidget {
     );
   }
 }
-
-

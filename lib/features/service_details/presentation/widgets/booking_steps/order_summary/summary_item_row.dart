@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/summary_item.dart';
 import '../counter_row.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class SummaryItemRow extends StatelessWidget {
   final SummaryItem item;
@@ -38,7 +37,7 @@ class SummaryItemRow extends StatelessWidget {
             children: [
               Text(item.title, style: AppText.semiBold14Black),
               Text(
-                '${item.totalPrice.toStringAsFixed(0)} ${AppStrings.qar}',
+                '${item.totalPrice.toStringAsFixed(0)} ${context.l10n.currency}',
                 style: AppText.regular12Grey,
               ),
             ],
@@ -48,5 +47,3 @@ class SummaryItemRow extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../data/models/extra_item_model.dart';
 import '../../data/models/repeat_type.dart';
@@ -10,9 +11,6 @@ import '../widgets/booking_steps/frequency/repeat_option_card.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'date_time_step_view.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class RepeatTypeSelector extends StatelessWidget {
   final double cartTotal;
@@ -30,25 +28,27 @@ class RepeatTypeSelector extends StatelessWidget {
     this.selectedExtras = const [],
   });
 
-  static const options = [
-    RepeatOption(type: RepeatType.once, title: AppStrings.onceOne),
-    RepeatOption(
-      type: RepeatType.twoWeeks,
-      title: AppStrings.twoWeeks,
-      discount: AppStrings.sevenPercentDiscount,
-      recommended: true,
-    ),
-    RepeatOption(
-      type: RepeatType.weekly,
-      title: AppStrings.weekly,
-      discount: AppStrings.discountUpToTwelvePercent,
-    ),
-    RepeatOption(
-      type: RepeatType.multipleTimes,
-      title: AppStrings.countTimesInWeek,
-      discount: AppStrings.discountUpToTwentyFivePercent,
-    ),
-  ];
+  List<RepeatOption> _options(BuildContext context) {
+    return [
+      RepeatOption(type: RepeatType.once, title: context.l10n.once),
+      RepeatOption(
+        type: RepeatType.twoWeeks,
+        title: context.l10n.twoWeeks,
+        discount: context.l10n.sevenPercentDiscount,
+        recommended: true,
+      ),
+      RepeatOption(
+        type: RepeatType.weekly,
+        title: context.l10n.weekly,
+        discount: context.l10n.discountUpToTwelvePercent,
+      ),
+      RepeatOption(
+        type: RepeatType.multipleTimes,
+        title: context.l10n.countTimesInWeek,
+        discount: context.l10n.discountUpToTwentyFivePercent,
+      ),
+    ];
+  }
 
   void _goToDateTimeStep(BuildContext context) {
     final featureCubit = context.read<FeatureCubit>();
@@ -79,13 +79,13 @@ class RepeatTypeSelector extends StatelessWidget {
 
         return Scaffold(
           appBar: StepAppBar(
-            title: AppStrings.repeatService,
+            title: context.l10n.serviceFrequency,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
           ),
           body: Column(
-            children: options.map((option) {
+            children: _options(context).map((option) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: RepeatOptionCard(
@@ -105,4 +105,3 @@ class RepeatTypeSelector extends StatelessWidget {
     );
   }
 }
-

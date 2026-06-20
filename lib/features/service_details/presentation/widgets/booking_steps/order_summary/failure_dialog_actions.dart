@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import 'dialog_filled_button.dart';
 import 'dialog_outlined_button.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class FailureDialogActions extends StatelessWidget {
   final VoidCallback onRetry;
@@ -21,14 +20,14 @@ class FailureDialogActions extends StatelessWidget {
       children: [
         Expanded(
           child: DialogOutlinedButton(
-            label: AppStrings.changeMethodPayment,
+            label: context.l10n.changeMethodPayment,
             onPressed: onChangePaymentMethod,
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: DialogFilledButton(
-            label: AppStrings.rebookRetry,
+            label: context.l10n.retry,
             onPressed: onRetry,
             hasShadow: true,
           ),
@@ -37,4 +36,3 @@ class FailureDialogActions extends StatelessWidget {
     );
   }
 }
-

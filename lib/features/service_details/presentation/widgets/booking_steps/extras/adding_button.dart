@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class AddingButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -29,7 +27,7 @@ class AddingButton extends StatelessWidget {
             const Icon(Icons.add, color: AppColors.white, size: 15),
             const SizedBox(width: 4),
             Text(
-              AppStrings.add,
+              context.l10n.add,
               style: AppText.semiBold14White.copyWith(fontSize: 13),
             ),
           ],
@@ -38,4 +36,3 @@ class AddingButton extends StatelessWidget {
     );
   }
 }
-

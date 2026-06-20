@@ -39,7 +39,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
 
   void _onTextChanged() {
     setState(
-      () => _isTextCorrect = _confirmController.text.trim().toLowerCase() ==
+      () => _isTextCorrect =
+          _confirmController.text.trim().toLowerCase() ==
           context.tr(LocaleKeys.profileDeleteConfirmWord).toLowerCase(),
     );
   }
@@ -48,7 +49,8 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          title: context.tr(LocaleKeys.profileDeleteAccountHeader)),
+        title: context.tr(LocaleKeys.profileDeleteAccountHeader),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
@@ -64,15 +66,16 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             verticalSpace(32),
             CustomButton(
               text: context.tr(LocaleKeys.profileDeleteConfirmBtn),
-              backgroundColor:
-                  _isTextCorrect ? AppColors.redDanger : AppColors.borderGrey,
+              backgroundColor: _isTextCorrect
+                  ? AppColors.redDanger
+                  : AppColors.borderGrey,
               textColor: AppColors.white,
               onPressed: _isTextCorrect
                   ? () => showCannotDeleteDialog(
-                        context,
-                        context.tr(LocaleKeys.profileCannotDeleteTitle),
-                        context.tr(LocaleKeys.profileCannotDeleteDesc),
-                      )
+                      context,
+                      context.tr(LocaleKeys.profileCannotDeleteTitle),
+                      context.tr(LocaleKeys.profileCannotDeleteDesc),
+                    )
                   : () {},
             ),
             verticalSpace(12),

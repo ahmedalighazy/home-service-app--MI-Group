@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/star_rating.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class RatingInputCard extends StatelessWidget {
   final String title;
@@ -53,7 +51,7 @@ class RatingInputCard extends StatelessWidget {
             maxLines: 3,
             textAlign: TextAlign.right,
             decoration: InputDecoration(
-              hintText: AppStrings.addHere,
+              hintText: context.l10n.addYourNotesHere,
               hintStyle: AppText.regular12Grey,
               filled: true,
               fillColor: AppColors.white,
@@ -73,4 +71,3 @@ class RatingInputCard extends StatelessWidget {
     );
   }
 }
-

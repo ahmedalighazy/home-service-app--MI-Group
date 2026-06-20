@@ -1,23 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 import 'models/extra_item_model.dart';
 import 'models/home_clean_question_model.dart';
 import 'models/service_frequency_model.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class HomeCleanMockData {
   // Step 1: Requirements questions
 
   static List<HomeCleanQuestion> get questions => [
     HomeCleanQuestion(
-      label: AppStrings.hourRegularCleaning,
+      label: AppStrings.howManyHours,
       type: QuestionType.pill,
       options: const [AppStrings.regular, AppStrings.regularWithCleaningAddOn],
     ),
     HomeCleanQuestion(
-      label: AppStrings.hourRegularCleaning,
+      label: AppStrings.howManyHours,
       type: QuestionType.pill,
       options: const ['1', '2', '3', '4', '5', '6', '7'],
       selectedOptionIndex: 3,
@@ -29,15 +27,26 @@ class HomeCleanMockData {
       selectedOptionIndex: 1,
     ),
     HomeCleanQuestion(
-      label: AppStrings.sizePlace,
+      label: AppStrings.placeSize,
       type: QuestionType.pill,
-      options: const [AppStrings.studio, AppStrings.oneRoom, AppStrings.twoRooms, AppStrings.threeRooms, AppStrings.fourRooms],
+      options: const [
+        AppStrings.studio,
+        AppStrings.oneRoom,
+        AppStrings.twoRooms,
+        AppStrings.threeRooms,
+        AppStrings.fourRooms,
+      ],
       selectedOptionIndex: 1,
     ),
     HomeCleanQuestion(
       label: AppStrings.detailsFloors,
       type: QuestionType.pill,
-      options: const [AppStrings.ground, AppStrings.first, AppStrings.second, AppStrings.sports],
+      options: const [
+        AppStrings.ground,
+        AppStrings.first,
+        AppStrings.second,
+        AppStrings.sports,
+      ],
       selectedOptionIndex: 0,
     ),
   ];
@@ -79,23 +88,22 @@ class HomeCleanMockData {
 
   //Step 3: Service frequency
 
-  static const List<ServiceFrequency> frequencies = [
-    ServiceFrequency(title: AppStrings.onceOne),
+  static List<ServiceFrequency> frequencies = [
+    ServiceFrequency(title: AppStrings.once),
     ServiceFrequency(
-      title: AppStrings.text20,
-      badge: AppStrings.most,
-      badgeColor: Color(0xff189AB4),
+      title: AppStrings.weekly,
+      badge: AppStrings.mostRequested,
+      badgeColor: AppColors.greenPrimary,
     ),
     ServiceFrequency(
-      title: AppStrings.twoWeekly,
-      discount: AppStrings.tenPercentDiscount,
-      badgeColor: Color(0xff27AE60),
+      title: AppStrings.twoWeeks,
+      discount: AppStrings.discountUpTo10,
+      badgeColor: AppColors.greenLight,
     ),
     ServiceFrequency(
-      title: AppStrings.text132,
+      title: AppStrings.monthly,
       discount: AppStrings.fivePercentDiscount,
-      badgeColor: Color(0xff27AE60),
+      badgeColor: AppColors.greenLight,
     ),
   ];
 }
-

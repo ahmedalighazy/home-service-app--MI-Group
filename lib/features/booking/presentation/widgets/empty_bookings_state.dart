@@ -67,7 +67,7 @@
 //           padding: EdgeInsets.symmetric(vertical: 14.h),
 //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44.r)),
 //         ),
-//         child: Text(AppStrings.bookNow, style: AppText.ibmButton16(color: AppColors.white)),
+//         child: Text(context.l10n.bookNow, style: AppText.ibmButton16(color: AppColors.white)),
 //       ),
 //     );
 //   }

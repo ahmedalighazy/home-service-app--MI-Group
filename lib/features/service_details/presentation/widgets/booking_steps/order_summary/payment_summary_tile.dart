@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/extra_item_model.dart';
 import 'extra_summary_row.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class PaymentSummaryTile extends StatelessWidget {
   final List<ExtraItem> selectedExtras;
@@ -28,7 +27,7 @@ class PaymentSummaryTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            AppStrings.services,
+            context.l10n.services,
             style: AppText.semiBold14Black,
             textAlign: TextAlign.end,
           ),
@@ -39,4 +38,3 @@ class PaymentSummaryTile extends StatelessWidget {
     );
   }
 }
-

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/l10n/app_strings.dart';
 
 class SearchAppBar extends StatelessWidget {
   const SearchAppBar({super.key, required this.controller, this.onChanged});
@@ -35,7 +35,7 @@ class SearchAppBar extends StatelessWidget {
                   textInputAction: TextInputAction.search,
                   onChanged: onChanged,
                   decoration: InputDecoration(
-                    hintText: AppStrings.searchServiceOrProblem,
+                    hintText: context.l10n.searchServiceOrProblem,
 
                     hintStyle: AppText.ibmDescription14(
                       color: AppColors.placeholder,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class WorkerPromoCard extends StatelessWidget {
   const WorkerPromoCard({super.key});
@@ -31,13 +30,13 @@ class WorkerPromoCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      AppStrings.notSureGetFreeInspection,
+                      context.l10n.notSureGetFreeInspection,
                       style: AppText.semiBold14Black,
                       textAlign: TextAlign.end,
                     ),
                     SizedBox(height: size.height * 0.007),
                     Text(
-                      AppStrings.ourTeamReadyHelpYouInChooseServiceSuitableEasily,
+                      context.l10n.inspectionDescription,
                       style: AppText.regular12Grey,
                       textAlign: TextAlign.end,
                       maxLines: 3,
@@ -81,7 +80,7 @@ class WorkerPromoCard extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              AppStrings.requestInspectionCta,
+              context.l10n.requestInspection,
               style: AppText.semiBold14Black.copyWith(color: AppColors.primary),
             ),
           ),
@@ -90,4 +89,3 @@ class WorkerPromoCard extends StatelessWidget {
     );
   }
 }
-

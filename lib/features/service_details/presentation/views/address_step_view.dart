@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/views/payment_step_view.dart';
 import '../../../../core/themes/colors/app_colors.dart';
@@ -11,9 +12,6 @@ import '../widgets/booking_steps/address/address_card.dart';
 import '../widgets/booking_steps/address/step_text_field.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class AddressStepScreen extends StatelessWidget {
   final double cartTotal;
@@ -62,7 +60,7 @@ class AddressStepScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           appBar: StepAppBar(
-            title: AppStrings.text51,
+            title: context.l10n.addressTitle,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
@@ -76,7 +74,7 @@ class AddressStepScreen extends StatelessWidget {
             ),
             children: [
               Text(
-                AppStrings.savedAddressesTitle,
+                context.l10n.savedAddressesTitle,
                 style: AppText.semiBold16Black,
                 textAlign: TextAlign.end,
               ),
@@ -97,7 +95,7 @@ class AddressStepScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {},
                   child: Text(
-                    AppStrings.addNewAddress,
+                    context.l10n.addNewAddress,
                     style: AppText.semiBold14Black.copyWith(
                       color: AppColors.primary,
                     ),
@@ -106,8 +104,8 @@ class AddressStepScreen extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.028),
               StepTextField(
-                label: AppStrings.notesOptional,
-                hint: AppStrings.exampleHomeFrontMosque,
+                label: context.l10n.specialInstructions,
+                hint: context.l10n.exampleHomeFrontMosque,
                 maxLines: 4,
                 maxLength: 300,
               ),
@@ -122,4 +120,3 @@ class AddressStepScreen extends StatelessWidget {
     );
   }
 }
-

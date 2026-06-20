@@ -1,25 +1,31 @@
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+
 import '../../../core/themes/image/app_assets.dart';
 import 'models/service_category_model.dart';
 import 'models/service_group_model.dart';
 import 'models/service_item_model.dart';
 import 'models/service_page_model.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class ServiceMockData {
   static const List<ServicePageModel> pages = [
     ServicePageModel(
       coverImage: AppAssets.furnitureCleaningCover,
-      mainTitle: AppStrings.furnitureCleaning,
+      mainTitle: AppStrings.deepFurnitureCleaning,
       rate: '4.7',
       reviews: AppStrings.twelveThousandBookings,
       totalSteps: '5',
       currentStep: '1',
       promoCode: 'CLEAN15',
-      promoDiscount: AppStrings.seventyPercentDiscount,
+      promoDiscount: AppStrings.discountUpTo70,
       categories: [
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.sofas),
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.carpets),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.sofas,
+        ),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.carpets,
+        ),
       ],
       serviceGroups: [
         ServiceGroupModel(
@@ -28,42 +34,42 @@ class ServiceMockData {
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.cleaningSofa,
-              description: AppStrings.cleaningInsideHome2,
+              description: AppStrings.cleaningInsideHomeForSofas,
               price: 50,
             ),
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.cleaningSofaOnL,
-              description: AppStrings.cleaningOnL,
+              description: AppStrings.cleaningSofaOnL,
               price: 150,
             ),
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.cleaningSofa,
-              description: AppStrings.cleaningInsideHome2,
+              description: AppStrings.cleaningInsideHomeForSofas,
               price: 50,
             ),
           ],
         ),
         ServiceGroupModel(
-          categoryTitle: AppStrings.carpetsCategory,
+          categoryTitle: AppStrings.carpets,
           items: [
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.smallNumber100Number200,
-              description: AppStrings.cleaningInsideHome,
+              description: AppStrings.cleaningInsideHomeForCarpets,
               price: 150,
             ),
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.mediumSize150By275,
-              description: AppStrings.cleaningInsideHome,
+              description: AppStrings.cleaningInsideHomeForCarpets,
               price: 200,
             ),
             ServiceItemModel(
               image: AppAssets.serviceItem,
               title: AppStrings.largeSize250By345,
-              description: AppStrings.cleaningInsideHome,
+              description: AppStrings.cleaningInsideHomeForCarpets,
               price: 300,
             ),
           ],
@@ -78,12 +84,24 @@ class ServiceMockData {
       totalSteps: '5',
       currentStep: '1',
       promoCode: 'CLEAN15',
-      promoDiscount: AppStrings.seventyPercentDiscount,
+      promoDiscount: AppStrings.discountUpTo70,
       categories: [
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.cockroaches),
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.ants),
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.bedbugs),
-        ServiceCategoryModel(image: AppAssets.serviceItem, title: AppStrings.mice),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.cockroaches,
+        ),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.ants,
+        ),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.bedbugs,
+        ),
+        ServiceCategoryModel(
+          image: AppAssets.serviceItem,
+          title: AppStrings.mice,
+        ),
       ],
       serviceGroups: [
         ServiceGroupModel(
@@ -158,4 +176,3 @@ class ServiceMockData {
     ),
   ];
 }
-

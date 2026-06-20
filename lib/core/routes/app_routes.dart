@@ -97,7 +97,7 @@ class AppRouter {
 
   // ============ GoRouter Configuration ============
   static final GoRouter router = GoRouter(
-    initialLocation: home,
+    initialLocation: splash,
     // debugLogDiagnostics: true,
     errorBuilder: (context, state) => const ErrorScreen(),
     routes: [

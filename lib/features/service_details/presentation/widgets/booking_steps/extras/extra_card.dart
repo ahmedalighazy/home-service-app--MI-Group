@@ -1,4 +1,4 @@
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
@@ -59,7 +59,7 @@ class ExtraCard extends StatelessWidget {
 
                 // Price
                 Text(
-                  '${item.price.toStringAsFixed(0)} ${AppStrings.riyalQar}',
+                  '${item.price.toStringAsFixed(0)} ${context.l10n.currency}',
                   style: AppText.regular10Grey,
                   textAlign: TextAlign.end,
                 ),
@@ -80,5 +80,3 @@ class ExtraCard extends StatelessWidget {
     );
   }
 }
-
-

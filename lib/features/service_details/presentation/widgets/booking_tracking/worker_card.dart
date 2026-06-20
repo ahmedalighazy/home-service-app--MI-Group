@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class WorkerCard extends StatelessWidget {
   const WorkerCard({super.key});
@@ -36,7 +35,7 @@ class WorkerCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(AppStrings.ibrahimMohamed, style: AppText.semiBold12Black),
+              Text(context.l10n.ibrahimMohamed, style: AppText.semiBold12Black),
               const SizedBox(height: 2),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -50,7 +49,10 @@ class WorkerCard extends StatelessWidget {
                   const SizedBox(width: 3),
                   const Icon(Icons.star, color: AppColors.yellow, size: 12),
                   const SizedBox(width: 3),
-                  Text(AppStrings.text150, style: AppText.regular10Grey),
+                  Text(
+                    context.l10n.careTechnician,
+                    style: AppText.regular10Grey,
+                  ),
                 ],
               ),
             ],
@@ -60,7 +62,7 @@ class WorkerCard extends StatelessWidget {
             radius: 18,
             backgroundColor: const Color(0xffEAFBFF),
             child: Text(
-              AppStrings.ibrahimInitial,
+              context.l10n.ibrahimInitial,
               style: AppText.bold14Black.copyWith(color: AppColors.primary),
             ),
           ),
@@ -69,4 +71,3 @@ class WorkerCard extends StatelessWidget {
     );
   }
 }
-

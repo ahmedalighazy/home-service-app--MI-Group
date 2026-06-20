@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
@@ -62,7 +61,8 @@ class _BookingContent extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    context.tr(LocaleKeys.bookingUpcoming),
+                    //context.tr(LocaleKeys.bookingUpcoming),
+                    context.l10n.navBookings,
                     style: AppText.boldIbm(
                       color: AppColors.black,
                       fontSize: 18,
@@ -85,10 +85,15 @@ class _BookingContent extends StatelessWidget {
               unselectedLabelColor: AppColors.primaryText,
               indicatorColor: AppColors.primary,
 
-              indicatorSize: TabBarIndicatorSize.tab,
+              // indicatorSize: TabBarIndicatorSize.tab,
+              // tabs: [
+              //   Tab(text: context.tr(LocaleKeys.bookingUpcoming)),
+              //   Tab(text: context.tr(LocaleKeys.bookingPrevious)),
+              // automaticIndicatorColorAdjustment: false,
+              indicatorSize: TabBarIndicatorSize.tab, // dividerHeight: 59,
               tabs: [
-                Tab(text: context.tr(LocaleKeys.bookingUpcoming)),
-                Tab(text: context.tr(LocaleKeys.bookingPrevious)),
+                Tab(text: context.l10n.currentSubscriptions),
+                Tab(text: context.l10n.previousSubscriptions),
               ],
             ),
             Expanded(
@@ -108,10 +113,14 @@ class _BookingContent extends StatelessWidget {
                       : EmptyStateWidget(
                           isscreenBooking: true,
                           iconPath: IconsPath.notBooking,
-                          title: context.tr(LocaleKeys.bookingNotFound),
-                          subtitle: context.tr(LocaleKeys.bookingDescription),
+                          // title: context.tr(LocaleKeys.bookingNotFound),
+                          // subtitle: context.tr(LocaleKeys.bookingDescription),
+                          //onButtonPressed: () {},
+                          //buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
+                          title: context.l10n.noUpcomingBookings,
+                          subtitle: context.l10n.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
-                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
+                          buttonLabel: context.l10n.bookNow,
                         ),
 
                   bookings.isEmpty
@@ -129,10 +138,14 @@ class _BookingContent extends StatelessWidget {
                           isscreenBooking: true,
 
                           iconPath: IconsPath.notBooking,
-                          title: context.tr(LocaleKeys.bookingNotFound),
-                          subtitle: context.tr(LocaleKeys.bookingDescription),
+                          // title: context.tr(LocaleKeys.bookingNotFound),
+                          // subtitle: context.tr(LocaleKeys.bookingDescription),
+                          // onButtonPressed: () {},
+                          // buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
+                          title: context.l10n.noUpcomingBookings,
+                          subtitle: context.l10n.noUpcomingBookingsDescription,
                           onButtonPressed: () {},
-                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
+                          buttonLabel: context.l10n.bookNow,
                         ),
                 ],
               ),

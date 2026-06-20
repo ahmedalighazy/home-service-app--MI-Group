@@ -1,4 +1,5 @@
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+
 /// Represents an optional add-on service the user can add to their booking.
 class ExtraItem {
   final String title;
@@ -34,4 +35,3 @@ class ExtraItem {
     ),
   ];
 }
-

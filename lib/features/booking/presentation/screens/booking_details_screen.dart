@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../widgets/booking_details_header.dart';
 import '../widgets/booking_details_row.dart';
@@ -21,7 +21,8 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: context.tr(LocaleKeys.bookingDetails),
+        // title: context.tr(LocaleKeys.bookingDetails),
+        title: context.l10n.bookingDetails,
         actions: CustomPopupMenuBooking(onSelected: (MenuAction value) {}),
       ),
       body: SingleChildScrollView(
@@ -73,37 +74,52 @@ class _DetailsCard extends StatelessWidget {
         children: [
           BookingDetailsRow(
             value2: booking.time,
-            label: context.tr(LocaleKeys.bookingDateAndTime),
+            //label: context.tr(LocaleKeys.bookingDateAndTime),
+            label: context.l10n.dateAndTimeTitle,
             value: booking.date,
             icon: IconsPath.calendar,
             icon2: IconsPath.time,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: context.tr(LocaleKeys.bookingAddress),
+            //label: context.tr(LocaleKeys.bookingAddress),
+            label: context.l10n.addressTitle,
             value: booking.address,
             icon: IconsPath.location,
           ),
           BookingDetailsRow(
-            label: context.tr(LocaleKeys.bookingRating),
+            //label: context.tr(LocaleKeys.bookingRating),
+            label: context.l10n.rating,
             value: booking.notes ?? "",
             icon: IconsPath.editGry,
           ),
           const Divider(height: 1),
+          // BookingDetailsRow(
+          //   label: context.tr(LocaleKeys.bookingPaid),
+          // if (booking.notes != null) ...[
+          //   BookingDetailsRow(
+          //     label: context.l10n.specialInstructions,
+          //     value: booking.notes!,
+          //     icon: IconsPath.infoCircle,
+          //   ),
+          //   const Divider(height: 1),
+          // ],
           BookingDetailsRow(
-            label: context.tr(LocaleKeys.bookingPaid),
+            label: context.l10n.paymentMethods,
             value: booking.paymentMethod ?? 'N/A',
             icon: IconsPath.paid,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: context.tr(LocaleKeys.bookingNumber),
+            //label: context.tr(LocaleKeys.bookingNumber),
+            label: context.l10n.bookingNumber,
             value: booking.id,
             icon: IconsPath.enlargement,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: context.tr(LocaleKeys.bookingTotalPrice),
+            // label: context.tr(LocaleKeys.bookingTotalPrice),
+            label: context.l10n.totalPrice,
             value: booking.price,
             icon: IconsPath.group,
           ),

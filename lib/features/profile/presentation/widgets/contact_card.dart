@@ -62,7 +62,10 @@ class ContactCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppText.ibmHeading14(color: AppColors.black)),
+                Text(
+                  title,
+                  style: AppText.ibmHeading14(color: AppColors.black),
+                ),
                 verticalSpace(4),
                 Text(
                   value,

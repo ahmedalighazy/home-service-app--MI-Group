@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
@@ -16,9 +17,6 @@ import '../widgets/booking_steps/payment/security_banner.dart';
 import '../widgets/booking_steps/payment/step_radio_tile.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class PaymentStepScreen extends StatefulWidget {
   final double cartTotal;
@@ -84,7 +82,7 @@ class _PaymentStepScreenState extends State<PaymentStepScreen> {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           appBar: StepAppBar(
-            title: AppStrings.payment,
+            title: context.l10n.payment,
             currentStep: widget.currentStep,
             totalSteps: widget.totalSteps,
             onBack: widget.onBack ?? () => Navigator.maybePop(context),
@@ -98,14 +96,14 @@ class _PaymentStepScreenState extends State<PaymentStepScreen> {
             ),
             children: [
               Text(
-                AppStrings.methodPayment,
+                context.l10n.paymentMethods,
                 style: AppText.semiBold16Black,
                 textAlign: TextAlign.end,
               ),
               SizedBox(height: size.height * 0.014),
               StepRadioTile(
-                label: AppStrings.paymentOnService,
-                subtitle: AppStrings.afterCompletionService,
+                label: context.l10n.paymentOnService,
+                subtitle: context.l10n.afterCompletionService,
                 isSelected: loaded.paymentMethod == PaymentMethod.cash,
                 onTap: () => cubit.selectPaymentMethod(PaymentMethod.cash),
                 leading: const Icon(
@@ -133,17 +131,17 @@ class _PaymentStepScreenState extends State<PaymentStepScreen> {
               ),
               SizedBox(height: size.height * 0.01),
               StepRadioTile(
-                label: AppStrings.cardCreditMada,
+                label: context.l10n.cardCreditMada,
                 isSelected: loaded.paymentMethod == PaymentMethod.card,
                 onTap: () => cubit.selectPaymentMethod(PaymentMethod.card),
-                leading: const Row(
+                leading: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CardBrandBadge(brand: 'VISA'),
                     SizedBox(width: 4),
                     CardBrandBadge(brand: 'MC'),
                     SizedBox(width: 4),
-                    CardBrandBadge(brand: AppStrings.mada),
+                    CardBrandBadge(brand: context.l10n.mada),
                   ],
                 ),
               ),
@@ -157,7 +155,7 @@ class _PaymentStepScreenState extends State<PaymentStepScreen> {
               ],
               SizedBox(height: size.height * 0.025),
               Text(
-                AppStrings.text161,
+                context.l10n.discountCode,
                 style: AppText.semiBold14Black,
                 textAlign: TextAlign.end,
               ),
@@ -179,4 +177,3 @@ class _PaymentStepScreenState extends State<PaymentStepScreen> {
     );
   }
 }
-

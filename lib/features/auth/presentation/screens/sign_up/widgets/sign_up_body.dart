@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/image/app_assets.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import '../../../../../../core/utils/l10n/app_strings.dart';
 import '../../../widgets/auth_footer_link.dart';
 import '../../../widgets/auth_or_divider.dart';
 import '../../../widgets/auth_primary_button.dart';
@@ -53,12 +53,12 @@ class SignUpBody extends StatelessWidget {
           SizedBox(height: 20.h),
 
           // ── Title ────────────────────────────────────
-          _buildTitle(),
+          _buildTitle(context),
 
           SizedBox(height: 8.h),
 
           // ── Subtitle ─────────────────────────────────
-          _buildSubtitle(),
+          _buildSubtitle(context),
 
           SizedBox(height: 32.h),
 
@@ -74,7 +74,7 @@ class SignUpBody extends StatelessWidget {
 
           // ── Send code button ─────────────────────────
           AuthPrimaryButton(
-            label: AppStrings.sendCode,
+            label: context.l10n.sendCode,
             isLoading: isLoading,
             isEnabled: phoneController.text.isNotEmpty,
             onPressed: onSendCode,
@@ -88,7 +88,7 @@ class SignUpBody extends StatelessWidget {
           SizedBox(height: 24.h),
 
           // ── Social buttons ───────────────────────────
-          _buildSocialButtons(),
+          _buildSocialButtons(context),
 
           SizedBox(height: 24.h),
 
@@ -99,8 +99,8 @@ class SignUpBody extends StatelessWidget {
 
           // ── Sign in link ─────────────────────────────
           AuthFooterLink(
-            questionText: AppStrings.alreadyHaveAccount,
-            actionText: AppStrings.signInAction,
+            questionText: context.l10n.alreadyHaveAccount,
+            actionText: context.l10n.signInAction,
             onTap: onSignIn,
           ),
 
@@ -115,34 +115,34 @@ class SignUpBody extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(BuildContext context) {
     return Text(
-      AppStrings.welcomeSignUp,
+      context.l10n.welcomeSignUp,
       textAlign: TextAlign.center,
       style: AppText.ibmHeading22(color: AppColors.dark),
     );
   }
 
-  Widget _buildSubtitle() {
+  Widget _buildSubtitle(BuildContext context) {
     return Text(
-      AppStrings.signUpSubtitle,
+      context.l10n.signUpSubtitle,
       textAlign: TextAlign.center,
       style: AppText.ibmDescription14(color: AppColors.secondaryText),
     );
   }
 
-  Widget _buildSocialButtons() {
+  Widget _buildSocialButtons(BuildContext context) {
     return Column(
       children: [
         AuthSocialButton(
           iconPath: AppAssets.iconGoogle,
-          text: AppStrings.signUpWithGoogle,
+          text: context.l10n.signUpWithGoogle,
           onTap: onGoogleSignUp,
         ),
         SizedBox(height: 12.h),
         AuthSocialButton(
           iconPath: AppAssets.iconApple,
-          text: AppStrings.signUpWithApple,
+          text: context.l10n.signUpWithApple,
           onTap: onAppleSignUp,
         ),
       ],

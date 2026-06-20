@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../booking_steps/order_summary/failure_dialog_actions.dart';
 import '../booking_steps/order_summary/failure_icon.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
-
 
 class BookingFailureDialog extends StatelessWidget {
   final VoidCallback onRetry;
@@ -39,7 +37,7 @@ class BookingFailureDialog extends StatelessWidget {
                 const FailureIcon(),
                 const SizedBox(height: 18),
                 Text(
-                  AppStrings.failedPayment,
+                  context.l10n.paymentFailed,
                   textAlign: TextAlign.center,
                   style: AppText.semiBold20Black.copyWith(
                     fontWeight: FontWeight.w700,
@@ -47,7 +45,7 @@ class BookingFailureDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppStrings.sorryCouldNotFromProcessProcessPaymentYour,
+                  context.l10n.paymentFailedDescriptionAlt,
                   textAlign: TextAlign.center,
                   style: AppText.regular12Grey.copyWith(height: 1.45),
                 ),
@@ -64,4 +62,3 @@ class BookingFailureDialog extends StatelessWidget {
     );
   }
 }
-

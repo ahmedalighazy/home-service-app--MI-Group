@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/order_summary/reference_action_button.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
-
 
 class BookingReferenceCard extends StatelessWidget {
   final String bookingReference;
@@ -29,7 +28,7 @@ class BookingReferenceCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    AppStrings.numberBooking,
+                    context.l10n.bookingNumber,
                     style: AppText.regular10Grey.copyWith(fontSize: 9),
                   ),
                   const SizedBox(height: 4),
@@ -47,7 +46,7 @@ class BookingReferenceCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ReferenceActionButton(
-                      label: AppStrings.copy,
+                      label: context.l10n.copy,
                       icon: Icons.copy_outlined,
                       onPressed: () => _copyReference(context),
                     ),
@@ -55,7 +54,7 @@ class BookingReferenceCard extends StatelessWidget {
                   const VerticalDivider(color: AppColors.border, width: 1),
                   Expanded(
                     child: ReferenceActionButton(
-                      label: AppStrings.share,
+                      label: context.l10n.share,
                       icon: Icons.reply_rounded,
                       onPressed: () => _showUnavailableMessage(context),
                     ),
@@ -77,7 +76,7 @@ class BookingReferenceCard extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          AppStrings.doneCopyNumberBooking,
+          context.l10n.doneCopyNumberBooking,
           textAlign: TextAlign.center,
           style: AppText.semiBold14White,
         ),
@@ -91,7 +90,7 @@ class BookingReferenceCard extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          AppStrings.sharingUnavailable,
+          context.l10n.sharingUnavailable,
           textAlign: TextAlign.center,
           style: AppText.semiBold14White,
         ),
@@ -101,4 +100,3 @@ class BookingReferenceCard extends StatelessWidget {
     );
   }
 }
-

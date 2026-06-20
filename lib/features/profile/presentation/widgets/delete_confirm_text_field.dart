@@ -14,7 +14,9 @@ class DeleteConfirmTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCorrect = controller.text.trim().toLowerCase() == context.tr(LocaleKeys.profileDeleteConfirmWord).toLowerCase();
+    final isCorrect =
+        controller.text.trim().toLowerCase() ==
+        context.tr(LocaleKeys.profileDeleteConfirmWord).toLowerCase();
     final hasError = controller.text.isNotEmpty && !isCorrect;
 
     return Column(
