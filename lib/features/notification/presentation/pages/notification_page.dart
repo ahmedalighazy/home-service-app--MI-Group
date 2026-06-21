@@ -31,6 +31,11 @@ class _NotificationPageState extends State<NotificationPage>
                     return const NotificationsEmptySection();
                   }
 
+                  // Note: NotificationsListSection handles onTap internally
+                  // via NotificationCard → markAsRead. The mixin's
+                  // markNotificationAsRead(context, notification) is ready
+                  // for use if NotificationsListSection exposes an onTap
+                  // callback in the future.
                   return NotificationsListSection(
                     notifications: state.notifications,
                   );

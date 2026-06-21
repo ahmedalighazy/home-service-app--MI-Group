@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
+
+mixin SplashLogic<T extends StatefulWidget> on State<T> {
+  late final AnimationController splashAnimCtrl;
+  late final Animation<double> splashFadeAnim;
+
+  void initSplashAnimation(TickerProvider vsync) {
+    splashAnimCtrl = AnimationController(
+      vsync: vsync,
+      duration: const Duration(milliseconds: 2000),
+    );
+    splashFadeAnim = CurvedAnimation(
+      parent: splashAnimCtrl,
+      curve: Curves.easeIn,
+    );
+    splashAnimCtrl.forward();
+  }
+
+  void navigateFromSplash() {
+    if (!mounted) return;
+    final bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+    final String? email = CacheHelper.getData(key: 'email');
+    final bool loggedIn = email != null && email.isNotEmpty;
+
+    if (loggedIn) {
+      GoRouter.of(context).go(AppRouter.home);
+    } else {
+      final route = (onBoarding != null && onBoarding)
+          ? AppRouter.signUp
+          : AppRouter.onboarding;
+      GoRouter.of(context).go(route);
+    }
+  }
+
+  @override
+  void dispose() {
+    splashAnimCtrl.dispose();
+    super.dispose();
+  }
+}
