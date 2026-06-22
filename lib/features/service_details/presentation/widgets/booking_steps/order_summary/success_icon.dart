@@ -20,4 +20,3 @@ class SuccessIcon extends StatelessWidget {
     );
   }
 }
-

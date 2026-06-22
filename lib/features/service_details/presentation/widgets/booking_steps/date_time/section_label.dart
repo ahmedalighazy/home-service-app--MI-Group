@@ -24,4 +24,3 @@ class SectionLabel extends StatelessWidget {
     );
   }
 }
-

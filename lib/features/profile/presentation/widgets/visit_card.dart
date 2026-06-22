@@ -25,11 +25,11 @@ class VisitCard extends StatelessWidget {
         border: Border.all(color: AppColors.borderGrey),
       ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
         children: [
           Container(
             decoration: ShapeDecoration(
-              color: const Color(0x00e9fbff) /* green-56% */,
+              color: const Color(0x00e9fbff) ,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(9999),
               ),
@@ -48,26 +48,44 @@ class VisitCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    visit.date,
+                    visit.date.toIso8601String().split('T')[0],
                     style: AppText.ibmHeading14(color: AppColors.primaryText),
                   ),
                   Text(
-                    visit.time,
+                    visit.time ?? '',
                     style: AppText.ibmDescription12(
                       color: AppColors.textLightGrey,
                     ),
                   ),
                 ],
               ),
-              // Icon(Iconsax.calendar_1, size: 32.r, color: AppColors.primary),
+
             ],
           ),
           const Spacer(),
 
-          _VisitStatusBadge(status: visit.status),
+          _VisitStatusBadge(status: _parseVisitStatus(visit.status)),
         ],
       ),
     );
+  }
+
+  VisitStatus _parseVisitStatus(String status) {
+    switch (status.toLowerCase()) {
+      case 'scheduled':
+      case 'pending':
+        return VisitStatus.scheduled;
+      case 'inprogress':
+      case 'in_progress':
+        return VisitStatus.inProgress;
+      case 'completed':
+      case 'finished':
+        return VisitStatus.completed;
+      case 'cancelled':
+        return VisitStatus.cancelled;
+      default:
+        return VisitStatus.scheduled;
+    }
   }
 }
 
@@ -93,6 +111,11 @@ class _VisitStatusBadge extends StatelessWidget {
         const Color(0xFFECFDF5),
         const Color(0xFF059669),
         LocaleKeys.profileVisitStatusCompleted,
+      ),
+      VisitStatus.cancelled => (
+        const Color(0xFFFEF2F2),
+        const Color(0xFFDC2626),
+        AppStrings.cancelledStatus,
       ),
     };
 

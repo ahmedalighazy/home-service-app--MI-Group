@@ -45,7 +45,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         horizontal: AppSizes.paddingMedium,
       ),
 
-      // icon bottom
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -19,13 +19,10 @@ class HomeHeader extends StatelessWidget {
   final String locationLabel;
   final String locationAddress;
 
-  /// Remote image URL for the user avatar.
   final String? avatarImageUrl;
 
-  /// Local asset path fallback (e.g. 'assets/images/avatar.png').
   final String? avatarPlaceholder;
 
-  /// Badge count shown on the bell icon. Pass 0 to hide the badge.
   final int notificationCount;
 
   final VoidCallback? onNotificationTap;
@@ -41,14 +38,13 @@ class HomeHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // User Avatar
+
             UserAvatar(
               imageUrl: avatarImageUrl,
               assetPath: avatarPlaceholder,
               onTap: onAvatarTap,
             ),
 
-            //Location Block (center)
             Expanded(
               child: LocationBlock(
                 label: locationLabel,
@@ -56,7 +52,7 @@ class HomeHeader extends StatelessWidget {
                 onTap: onLocationTap,
               ),
             ),
-            // Notification Bell
+
             NotificationBell(
               count: notificationCount,
               onTap: onNotificationTap,

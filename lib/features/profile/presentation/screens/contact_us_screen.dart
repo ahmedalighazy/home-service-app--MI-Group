@@ -18,7 +18,7 @@ class ContactUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: context.tr(LocaleKeys.profileHelpCenter)),
+      appBar: CustomAppBar(title: AppStrings.helpCenter),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(

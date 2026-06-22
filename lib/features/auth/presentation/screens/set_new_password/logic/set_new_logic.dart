@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_state.dart';
+import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
+import '../../../../../../core/di/injection.dart';
 
 class SetNewPasswordLogic {
   final VoidCallback onStateChanged;
@@ -12,19 +13,14 @@ class SetNewPasswordLogic {
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
 
-  String password = "";
-  String confirmPassword = "";
+  String password = '';
+  String confirmPassword = '';
 
   SetNewPasswordLogic({required this.onStateChanged}) {
-    _init();
-  }
-
-  void _init() {
     passwordController.addListener(() {
       password = passwordController.text;
       onStateChanged();
     });
-
     confirmPasswordController.addListener(() {
       confirmPassword = confirmPasswordController.text;
       onStateChanged();
@@ -36,9 +32,9 @@ class SetNewPasswordLogic {
   bool get isSuccess => !isEmpty && password == confirmPassword;
 
   Color getBorderColor() {
-    if (isError) return const Color(0xFFE05C5C);
-    if (isSuccess) return const Color(0xFF3B8766);
-    return const Color(0xFFE2E8F0);
+    if (isError) return AppColors.errorRed;
+    if (isSuccess) return AppColors.greenPrimary;
+    return AppColors.borderInputs;
   }
 
   void toggleObscurePassword() {
@@ -57,7 +53,7 @@ class SetNewPasswordLogic {
     required String code,
   }) {
     if (password.isEmpty || password != confirmPassword) return;
-    context.read<AuthCubit>().resetPassword(
+    getIt<AuthCubit>().resetPassword(
       email: email,
       code: code,
       newPassword: password,
@@ -69,30 +65,27 @@ class SetNewPasswordLogic {
     required AuthState state,
     required VoidCallback onSuccess,
   }) {
-    if (state is ResetPasswordSuccess) {
+    if (state is AuthSuccessState && state.action == 'password_reset') {
       onSuccess();
-    } else {
-      String? errorMsg;
-      if (state is ResetPasswordError) {
-        errorMsg = state.message;
-      } else if (state is AuthError) {
-        errorMsg = state.message;
-      }
+      return;
+    }
 
-      if (errorMsg != null) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(
-              content: Text(errorMsg),
-              backgroundColor: const Color(0xFFE05C5C),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          );
-      }
+    String? errorMsg;
+    if (state is PasswordResetErrorState) {
+      errorMsg = state.message;
+    } else if (state is AuthErrorState) {
+      errorMsg = state.message;
+    }
+
+    if (errorMsg != null) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(errorMsg),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
     }
   }
 

@@ -13,4 +13,3 @@ class StepScreenModel {
     this.onNext,
   });
 }
-

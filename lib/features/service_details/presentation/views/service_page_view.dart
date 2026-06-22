@@ -12,7 +12,6 @@ import '../widgets/service_details/service_page_content.dart';
 import '../widgets/service_details/title_section.dart';
 import 'extras_step_view.dart';
 
-
 class ServicePage extends StatelessWidget {
   final ServicePageModel data;
   final PageController pageController;
@@ -140,4 +139,3 @@ class ServicePage extends StatelessWidget {
     );
   }
 }
-

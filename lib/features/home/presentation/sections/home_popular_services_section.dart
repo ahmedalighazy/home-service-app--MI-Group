@@ -14,7 +14,7 @@ class HomePopularServicesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionHeader(title: context.l10n.mostRequested),
+        SectionHeader(title: AppStrings.mostRequested),
 
         SizedBox(height: AppSizes.spacingMedium),
         SingleChildScrollView(

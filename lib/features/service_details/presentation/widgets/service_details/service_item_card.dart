@@ -6,14 +6,13 @@ import 'package:home_service_app/features/service_details/presentation/widgets/s
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_item_thumbnail.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../data/models/service_item_model.dart';
+import '../../../data/models/service_page_model.dart';
 import '../../cubit/feature_cubit.dart';
 import '../../cubit/feature_state.dart';
 
-
 class ServiceItemCard extends StatelessWidget {
   final String itemKey;
-  final ServiceItemModel item;
+  final ServicePageItemModel item;
 
   const ServiceItemCard({super.key, required this.itemKey, required this.item});
 
@@ -85,4 +84,3 @@ class ServiceItemCard extends StatelessWidget {
     );
   }
 }
-

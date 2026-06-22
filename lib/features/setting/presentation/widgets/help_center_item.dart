@@ -26,11 +26,11 @@ class HelpCenterItem extends StatelessWidget {
         padding: EdgeInsets.all(16.r),
 
         decoration: ShapeDecoration(
-          color: Colors.white /* bg-app */,
+          color: Colors.white ,
           shape: RoundedRectangleBorder(
             side: const BorderSide(
               width: 1,
-              color: Color(0xFFF1F5F9) /* border-cards */,
+              color: Color(0xFFF1F5F9) ,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
@@ -47,7 +47,7 @@ class HelpCenterItem extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(
-              IconsPath.vectorBook, // Arrow forward
+              IconsPath.vectorBook,
               width: 18.w,
               height: 18.h,
             ),
@@ -63,16 +63,7 @@ class HelpCenterItem extends StatelessWidget {
             const Spacer(),
 
             Icon(Icons.chevron_right, color: AppColors.primaryText, size: 24.r),
-            // SvgPicture.asset(
-            //   icon,
-            //   width: 24.w,
-            //   height: 24.h,
-            //   errorBuilder: (context, error, stackTrace) => Icon(
-            //     Icons.help_outline,
-            //     color: AppColors.primaryText,
-            //     size: 24.r,
-            //   ),
-            // ),
+
           ],
         ),
       ),

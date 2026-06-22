@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
-/// Represents a saved delivery address.
 class AddressModel {
   final String title;
   final String subtitle;
@@ -13,16 +12,15 @@ class AddressModel {
     required this.icon,
   });
 
-  /// Mock saved addresses shown on the Address step.
-  static const List<AddressModel> savedAddresses = [
+  static final List<AddressModel> savedAddresses = [
     AddressModel(
-      title: AppStrings.homeAddress,
-      subtitle: AppStrings.homeAddressSubtitle,
+      title: SdStrings.home,
+      subtitle: SdStrings.homeAddressSubtitle,
       icon: Icons.home_outlined,
     ),
     AddressModel(
-      title: AppStrings.workAddress,
-      subtitle: AppStrings.workAddressSubtitle,
+      title: SdStrings.work,
+      subtitle: SdStrings.workAddressSubtitle,
       icon: Icons.business_center_outlined,
     ),
   ];

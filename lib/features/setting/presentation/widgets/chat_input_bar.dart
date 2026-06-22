@@ -54,10 +54,7 @@ class _ChatInputBarState extends State<ChatInputBar> {
               ),
               child: SvgPicture.asset(
                 IconsPath.vectorSendDark,
-                // colorFilter: const ColorFilter.mode(
-                //   // AppColors.white,
-                //   BlendMode.srcIn,
-                // ),
+
               ),
             ),
           ),

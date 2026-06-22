@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
-
-enum OtpFieldState { idle, error, success }
-
+import '../logic/otp_logic.dart' show OtpFieldState;
 
 class OtpInputRow extends StatelessWidget {
   final String digits;
@@ -37,68 +35,59 @@ class OtpInputRow extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: onTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(length, (i) {
+        behavior: HitTestBehavior.opaque,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(length, (i) {
             final hasDigit = i < digits.length;
-            final isCurrent = i == digits.length;
+            final isCurrent =
+                i == digits.length && fieldState == OtpFieldState.idle;
 
+            // ── Colors per state ──────────────────────────────────────
             Color borderColor;
             Color fillColor;
             Color textColor;
 
-            switch (fieldState) {
-              case OtpFieldState.error:
-                if (hasDigit) {
-                  borderColor = AppColors.errorRed;
-                  fillColor = AppColors.bgError;
-                  textColor = AppColors.errorRed;
-                } else {
-                  borderColor = AppColors.borderInputs;
-                  fillColor = AppColors.white;
-                  textColor = AppColors.primaryText;
-                }
-                break;
-              case OtpFieldState.success:
-                if (hasDigit) {
-                  borderColor = AppColors.greenPrimary;
-                  fillColor = AppColors.light;
-                  textColor = AppColors.greenPrimary;
-                } else {
-                  borderColor = AppColors.borderInputs;
-                  fillColor = AppColors.white;
-                  textColor = AppColors.primaryText;
-                }
-                break;
-              case OtpFieldState.idle:
-                if (hasDigit || isCurrent) {
-                  borderColor = AppColors.greenPrimary;
-                  fillColor = AppColors.white;
-                  textColor = AppColors.primaryText;
-                } else {
-                  borderColor = AppColors.borderInputs;
-                  fillColor = AppColors.white;
-                  textColor = AppColors.primaryText;
-                }
+            if (fieldState == OtpFieldState.error && hasDigit) {
+              borderColor = AppColors.errorRed;
+              fillColor = AppColors.errorRed.withValues(alpha: 0.08);
+              textColor = AppColors.errorRed;
+            } else if (fieldState == OtpFieldState.success && hasDigit) {
+              borderColor = AppColors.greenPrimary;
+              fillColor = AppColors.greenPrimary.withValues(alpha: 0.08);
+              textColor = AppColors.greenPrimary;
+            } else if (isCurrent) {
+              borderColor = const Color(0xFF1B85A6);
+              fillColor = Colors.white;
+              textColor = AppColors.dark;
+            } else if (hasDigit) {
+              borderColor = const Color(0xFF1B85A6);
+              fillColor = Colors.white;
+              textColor = AppColors.dark;
+            } else {
+              borderColor = const Color(0xFFDDE3EC);
+              fillColor = Colors.white;
+              textColor = AppColors.dark;
             }
 
             return AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              margin: EdgeInsets.symmetric(horizontal: 4.w),
-              width: 44.w,
-              height: 44.w,
+              duration: const Duration(milliseconds: 180),
+              margin: EdgeInsets.symmetric(horizontal: 5.w),
+              width: 46.w,
+              height: 46.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: fillColor,
-                border: Border.all(color: borderColor, width: 1.5),
-                boxShadow: (hasDigit || isCurrent)
+                border: Border.all(
+                  color: borderColor,
+                  width: isCurrent || hasDigit ? 1.8 : 1.2,
+                ),
+                boxShadow: (isCurrent || hasDigit)
                     ? [
                         BoxShadow(
-                          color:
-                              (fieldState == OtpFieldState.error
-                                      ? AppColors.errorRed
-                                      : AppColors.greenPrimary)
-                                  .withValues(alpha: 0.12),
+                          color: borderColor.withValues(alpha: 0.15),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -112,29 +101,31 @@ class OtpInputRow extends StatelessWidget {
                         style: GoogleFonts.ibmPlexSansArabic(
                           color: textColor,
                           fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       )
                     : isCurrent
-                    ? const OtpBlinkingCursor()
-                    : null,
+                        ? const _BlinkingCursor()
+                        : null,
               ),
             );
           }),
         ),
       ),
-    );
+    ),
+  );
   }
 }
 
-class OtpBlinkingCursor extends StatefulWidget {
-  const OtpBlinkingCursor({super.key});
+// ── Blinking cursor shown on the active (empty) cell ──────────────────────────
+class _BlinkingCursor extends StatefulWidget {
+  const _BlinkingCursor();
 
   @override
-  State<OtpBlinkingCursor> createState() => _OtpBlinkingCursorState();
+  State<_BlinkingCursor> createState() => _BlinkingCursorState();
 }
 
-class _OtpBlinkingCursorState extends State<OtpBlinkingCursor>
+class _BlinkingCursorState extends State<_BlinkingCursor>
     with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
 
@@ -158,9 +149,12 @@ class _OtpBlinkingCursorState extends State<OtpBlinkingCursor>
     return FadeTransition(
       opacity: _ctrl,
       child: Container(
-        width: 1.5.w,
-        height: 18.h,
-        color: AppColors.greenPrimary,
+        width: 2.w,
+        height: 20.h,
+        decoration: BoxDecoration(
+          color: const Color(0xFF1B85A6),
+          borderRadius: BorderRadius.circular(2),
+        ),
       ),
     );
   }

@@ -13,4 +13,3 @@ class RepeatOption {
     this.recommended = false,
   });
 }
-

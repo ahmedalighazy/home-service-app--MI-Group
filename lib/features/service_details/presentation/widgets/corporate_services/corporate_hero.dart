@@ -6,7 +6,6 @@ import '../../cubit/feature_cubit.dart';
 import '../../cubit/feature_state.dart';
 import 'corporate_hero_icon_button.dart';
 
-
 class CorporateHero extends StatelessWidget {
   final String imagePath;
   final VoidCallback onBack;
@@ -66,4 +65,3 @@ class CorporateHero extends StatelessWidget {
     );
   }
 }
-

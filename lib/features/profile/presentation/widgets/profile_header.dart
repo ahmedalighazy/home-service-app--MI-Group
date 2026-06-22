@@ -31,7 +31,7 @@ class ProfileHeader extends StatelessWidget {
           clipper: BottomCurveClipper(),
           child: Container(
             height:
-                height(context) * 0.28, // Takes up roughly 28% of the screen
+                height(context) * 0.28,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,

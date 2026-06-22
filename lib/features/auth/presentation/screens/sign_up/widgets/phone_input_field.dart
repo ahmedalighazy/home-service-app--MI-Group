@@ -56,9 +56,8 @@ class PhoneInputField extends StatelessWidget {
                     SizedBox(width: 4.w),
                     Text(
                       countryCode,
-                      style: AppText.ibmDescription14(
-                        color: AppColors.dark,
-                      ).copyWith(fontWeight: FontWeight.bold),
+                      style: AppText.ibmDescription14(color: AppColors.dark)
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 8.w),
                     Text(countryFlag, style: TextStyle(fontSize: 18.sp)),
@@ -66,7 +65,6 @@ class PhoneInputField extends StatelessWidget {
                 ),
               ),
               Container(height: 30.h, width: 1, color: AppColors.borderInputs),
-
               Expanded(
                 child: Directionality(
                   textDirection: TextDirection.ltr,
@@ -77,9 +75,7 @@ class PhoneInputField extends StatelessWidget {
                     style: AppText.ibmDescription14(color: AppColors.dark),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(
-                        8,
-                      ), // Qatar phone = 8 
+                      LengthLimitingTextInputFormatter(8),
                     ],
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -96,7 +92,6 @@ class PhoneInputField extends StatelessWidget {
                   ),
                 ),
               ),
-
               if (controller.text.isNotEmpty)
                 Padding(
                   padding: EdgeInsets.only(right: 8.w),
@@ -115,7 +110,6 @@ class PhoneInputField extends StatelessWidget {
             ],
           ),
         ),
-
         if (hasError && errorMessage != null) ...[
           SizedBox(height: 6.h),
           Text(

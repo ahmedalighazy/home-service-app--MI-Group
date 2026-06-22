@@ -16,7 +16,7 @@ class LegalAndPoliciesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: context.tr(LocaleKeys.legalPoliciesAndRules)),
+      appBar: CustomAppBar(title: AppStrings.policiesAndRules),
       body: Column(
         children: [
           SettingListItem(

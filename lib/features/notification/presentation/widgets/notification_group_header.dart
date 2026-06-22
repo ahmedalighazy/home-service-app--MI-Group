@@ -13,7 +13,7 @@ class NotificationGroupHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSmall),
       child: Align(
-        alignment: Alignment.centerRight,
+        alignment: AlignmentDirectional.centerStart,
         child: Text(
           title,
           style: AppText.ibmPlexSansArabic16SemiBold.copyWith(

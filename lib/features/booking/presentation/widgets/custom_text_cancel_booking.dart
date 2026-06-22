@@ -15,12 +15,12 @@ class CustomTextCancelBooking extends StatelessWidget {
       TextSpan(
         style: AppText.mediumIbm(color: AppColors.primaryText, fontSize: 14),
         children: [
-          TextSpan(text: context.tr(LocaleKeys.bookingCancelReasonOptional)),
+          TextSpan(text: AppStrings.cancelReasonOptional),
 
           TextSpan(
             text: ' ( ${context.tr(LocaleKeys.profileOptional)} )',
             style: TextStyle(
-              color: const Color(0xFF6B7280) /* Secondary-text */,
+              color: Color(0xFF6B7280) ,
               fontSize: 13.sp,
               fontFamily: 'IBM Plex Sans Arabic',
               fontWeight: FontWeight.w400,

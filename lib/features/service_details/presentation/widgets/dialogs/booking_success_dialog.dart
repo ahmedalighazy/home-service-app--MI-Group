@@ -6,6 +6,8 @@ import '../../../../../core/themes/colors/app_colors.dart';
 import '../booking_steps/order_summary/booking_reference_card.dart';
 import '../booking_steps/order_summary/success_dialog_actions.dart';
 import '../booking_steps/order_summary/success_icon.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class BookingSuccessDialog extends StatelessWidget {
   final String bookingReference;
@@ -25,7 +27,7 @@ class BookingSuccessDialog extends StatelessWidget {
     final dialogWidth = size.width.clamp(0, 330).toDouble();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         backgroundColor: AppColors.white,
@@ -40,7 +42,7 @@ class BookingSuccessDialog extends StatelessWidget {
                 const SuccessIcon(),
                 const SizedBox(height: 14),
                 Text(
-                  context.l10n.bookingConfirmed,
+                  SdStrings.doneConfirmYourBookingSuccessfully,
                   textAlign: TextAlign.center,
                   style: AppText.semiBold18Black.copyWith(
                     fontWeight: FontWeight.w700,
@@ -48,7 +50,7 @@ class BookingSuccessDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  context.l10n.bookingConfirmedPopupDesc,
+                  SdStrings.doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit,
                   textAlign: TextAlign.center,
                   style: AppText.regular12Grey.copyWith(height: 1.35),
                 ),

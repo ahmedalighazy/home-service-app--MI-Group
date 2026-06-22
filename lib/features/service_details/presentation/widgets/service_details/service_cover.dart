@@ -28,10 +28,9 @@ class ServiceCover extends StatelessWidget {
       height: size.height * 0.30,
       child: Stack(
         children: [
-          // Background image
+
           Image.asset(coverImage, fit: BoxFit.cover, width: double.infinity),
 
-          //  Action buttons row
           Positioned(
             top: size.height * 0.015,
             left: size.width * 0.04,
@@ -68,7 +67,6 @@ class ServiceCover extends StatelessWidget {
             ),
           ),
 
-          // SmoothPageIndicator
           Positioned(
             bottom: size.height * 0.012,
             left: 0,
@@ -95,4 +93,3 @@ class ServiceCover extends StatelessWidget {
     );
   }
 }
-

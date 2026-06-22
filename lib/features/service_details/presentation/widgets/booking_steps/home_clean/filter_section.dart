@@ -49,4 +49,3 @@ class FilterSection<T> extends StatelessWidget {
     );
   }
 }
-

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class OrderSummaryNextButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -28,7 +28,7 @@ class OrderSummaryNextButton extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Text(
-          context.l10n.next,
+          SdStrings.next,
           style: AppText.semiBold18Black.copyWith(
             color: AppColors.white,
             fontWeight: FontWeight.w700,

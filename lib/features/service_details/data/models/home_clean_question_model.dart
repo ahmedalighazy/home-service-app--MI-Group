@@ -1,5 +1,3 @@
-/// A question shown on the Requirements step.
-/// Each question has a label and a list of selectable [options].
 class HomeCleanQuestion {
   final String label;
   final List<String> options;
@@ -15,10 +13,8 @@ class HomeCleanQuestion {
 }
 
 enum QuestionType {
-  /// Row of pill buttons — one selected at a time.
+
   pill,
 
-  /// Single numeric value incremented / decremented with +/- buttons.
   stepper,
 }
-

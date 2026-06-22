@@ -4,7 +4,6 @@ import 'package:home_service_app/features/service_details/presentation/widgets/s
 
 import '../../../../../core/themes/colors/app_colors.dart';
 
-
 class ServiceItemQuantityCounter extends StatelessWidget {
   final int quantity;
   final VoidCallback onIncrement;
@@ -39,4 +38,3 @@ class ServiceItemQuantityCounter extends StatelessWidget {
     );
   }
 }
-

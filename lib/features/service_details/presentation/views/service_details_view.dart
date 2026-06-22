@@ -4,7 +4,6 @@ import 'package:home_service_app/features/service_details/presentation/views/ser
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../data/service_mock_data.dart';
 
-
 class ServiceDetailsScreen extends StatefulWidget {
   const ServiceDetailsScreen({super.key});
 
@@ -41,4 +40,3 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
     );
   }
 }
-

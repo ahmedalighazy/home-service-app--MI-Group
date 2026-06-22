@@ -5,7 +5,6 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
-/// A single action tile row inside the SubscriptionDetailScreen action list.
 class SubscriptionActionTile extends StatelessWidget {
   final String title;
   final String subtitle;

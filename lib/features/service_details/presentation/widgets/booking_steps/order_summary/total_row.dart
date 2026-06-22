@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class TotalRow extends StatelessWidget {
   final double total;
@@ -15,13 +15,15 @@ class TotalRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${total.toStringAsFixed(0)} ${context.l10n.currency}',
-          style: AppText.semiBold20Black.copyWith(fontWeight: FontWeight.w800),
+          '${total.toStringAsFixed(0)} ${SdStrings.qar}',
+          style: AppText.semiBold20Black.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
         ),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(context.l10n.totalLabel, style: AppText.regular12Grey),
+            Text(SdStrings.total, style: AppText.regular12Grey),
             const SizedBox(width: 2),
             const Icon(
               Icons.keyboard_arrow_down_rounded,

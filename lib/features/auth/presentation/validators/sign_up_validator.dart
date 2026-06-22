@@ -1,4 +1,4 @@
-import 'package:home_service_app/core/utils/validation/auth_validation.dart';
+import 'package:home_service_app/core/utils/validation/validators_helper.dart';
 
 /// Validates Sign Up form data (Phone verification step)
 /// 
@@ -15,13 +15,8 @@ class SignUpValidator {
   /// 
   /// Returns null if phone is valid, error message otherwise.
   static String? validatePhone(String phone) {
-    if (phone.isEmpty) {
-      return 'Phone number is required';
-    }
-    if (!AuthValidation.isValidQatarPhone(phone)) {
-      return AuthValidation.getQatarPhoneErrorMessage(phone);
-    }
-    return null;
+    final err = ValidatorsHelper.getQatarPhoneErrorMessage(phone);
+    return err.isEmpty ? null : err;
   }
 
   /// Check if phone number is valid

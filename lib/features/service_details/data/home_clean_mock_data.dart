@@ -1,109 +1,93 @@
-import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+﻿import 'package:flutter/material.dart';
 
 import 'models/extra_item_model.dart';
 import 'models/home_clean_question_model.dart';
 import 'models/service_frequency_model.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class HomeCleanMockData {
-  // Step 1: Requirements questions
 
   static List<HomeCleanQuestion> get questions => [
     HomeCleanQuestion(
-      label: AppStrings.howManyHours,
+      label: SdStrings.hourRegularCleaning,
       type: QuestionType.pill,
-      options: const [AppStrings.regular, AppStrings.regularWithCleaningAddOn],
+      options: [SdStrings.regular, SdStrings.regularWithCleaningAddOn],
     ),
     HomeCleanQuestion(
-      label: AppStrings.howManyHours,
+      label: SdStrings.hourRegularCleaning,
       type: QuestionType.pill,
       options: const ['1', '2', '3', '4', '5', '6', '7'],
       selectedOptionIndex: 3,
     ),
     HomeCleanQuestion(
-      label: AppStrings.countRoomsKitchens,
+      label: SdStrings.countRoomsKitchens,
       type: QuestionType.stepper,
       options: const [],
       selectedOptionIndex: 1,
     ),
     HomeCleanQuestion(
-      label: AppStrings.placeSize,
+      label: SdStrings.sizePlace,
       type: QuestionType.pill,
-      options: const [
-        AppStrings.studio,
-        AppStrings.oneRoom,
-        AppStrings.twoRooms,
-        AppStrings.threeRooms,
-        AppStrings.fourRooms,
-      ],
+      options: [SdStrings.studio, SdStrings.oneRoom, SdStrings.twoRooms, SdStrings.threeRooms, SdStrings.fourRooms],
       selectedOptionIndex: 1,
     ),
     HomeCleanQuestion(
-      label: AppStrings.detailsFloors,
+      label: SdStrings.detailsFloors,
       type: QuestionType.pill,
-      options: const [
-        AppStrings.ground,
-        AppStrings.first,
-        AppStrings.second,
-        AppStrings.sports,
-      ],
+      options: [SdStrings.ground, SdStrings.first, SdStrings.second, SdStrings.sports],
       selectedOptionIndex: 0,
     ),
   ];
 
-  // Step 2: Extras
-
   static List<ExtraItem> get extras => [
     ExtraItem(
-      title: AppStrings.cleaningKitchen,
+      title: SdStrings.cleaningKitchen,
       price: 30,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.cleaningWindows,
+      title: SdStrings.cleaningWindows,
       price: 25,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.cleaningBathroom,
+      title: SdStrings.cleaningBathroom,
       price: 20,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.polishingFloors,
+      title: SdStrings.polishingFloors,
       price: 35,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.washingCurtains,
+      title: SdStrings.washingCurtains,
       price: 40,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.cleaningOven,
+      title: SdStrings.cleaningOven,
       price: 28,
       image: 'assets/images/Rectangle 46.png',
     ),
   ];
 
-  //Step 3: Service frequency
-
-  static List<ServiceFrequency> frequencies = [
-    ServiceFrequency(title: AppStrings.once),
+  static final List<ServiceFrequency> frequencies = [
+    ServiceFrequency(title: SdStrings.onceOne),
     ServiceFrequency(
-      title: AppStrings.weekly,
-      badge: AppStrings.mostRequested,
-      badgeColor: AppColors.greenPrimary,
+      title: SdStrings.text20,
+      badge: SdStrings.most,
+      badgeColor: Color(0xff189AB4),
     ),
     ServiceFrequency(
-      title: AppStrings.twoWeeks,
-      discount: AppStrings.discountUpTo10,
-      badgeColor: AppColors.greenLight,
+      title: SdStrings.twoWeekly,
+      discount: SdStrings.tenPercentDiscount,
+      badgeColor: Color(0xff27AE60),
     ),
     ServiceFrequency(
-      title: AppStrings.monthly,
-      discount: AppStrings.fivePercentDiscount,
-      badgeColor: AppColors.greenLight,
+      title: SdStrings.text132,
+      discount: SdStrings.fivePercentDiscount,
+      badgeColor: Color(0xff27AE60),
     ),
   ];
 }

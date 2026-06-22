@@ -1,838 +1,563 @@
+import '../helpers/cache_helper.dart';
+
 class AppStrings {
-  // Private constructor to prevent instantiation
+
   AppStrings._();
 
-  // ==================================================
-  // GENERAL
-  // ==================================================
-  static const String save = 'حفظ';
-  static const String cancelBtn = 'إلغاء';
-  static const String okBtn = 'حسناً';
-  static const String confirm = 'تأكيد';
-  static const String viewAll = 'عرض الكل';
-  static const String bookNow = 'احجز الآن';
-  static const String goBack = 'رجوع';
-  static const String next = 'التالي';
-  static const String currency = 'ر.ق';
-  static const String code = 'الكود';
-  static const String copy = 'نسخ';
-  static const String share = 'مشاركة';
-  static const String retry = 'إعادة المحاولة';
-  static const String send = 'إرسال';
-  static const String regular = 'عادة';
-  static const String backToHome = 'العودة للرئيسية';
-  static const String unknownRoute = 'العنوان غير معروف';
-
-  // ==================================================
-  // AUTHENTICATION
-  // ==================================================
-  static const String sendCode = 'أرسل الكود';
-  static const String emailPlaceholder = 'أدخل البريد الإلكتروني';
-  static const String passwordLabel = 'كلمة المرور';
-  static const String passwordPlaceholder = 'أدخل كلمة المرور';
-  static const String confirmPasswordLabel = 'تأكيد كلمة المرور';
-  static const String confirmPasswordPlaceholder = 'أعد إدخال كلمة المرور';
-  static const String login = 'تسجيل الدخول';
-  static const String termsAndPrivacy =
-      'بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية';
-  static const String orUsing = 'أو باستخدام';
-
-  // --- Sign Up / Login Screen ---
-  static const String welcomeBack = 'أهلاً بعودتك';
-
-  static const String welcomeSignUp = 'أنشئ حساب جديد';
-  static const String signUpSubtitle =
-      'أدخل رقم هاتفك للتسجيل والحصول على رمز التحقق';
-  static const String verificationMethodInfo =
-      'سنتصل بك أو سنرسل لك رمز التحقق لإكمال تسجيل الدخول';
-  static const String signUpWithGoogle = 'تسجيل عبر Google';
-  static const String signUpWithApple = 'تسجيل عبر Apple';
-  static const String continueAsGuest = 'المتابعة كضيف';
-  static const String alreadyHaveAccount = 'لديك حساب بالفعل؟ ';
-  static const String signInAction = 'تسجيل الدخول';
-  static const String dontHaveAccount = 'ليس لديك حساب ؟ ';
-  static const String createAccount = 'إنشاء حساب';
-  static const String forgotPassword = 'نسيت كلمة المرور؟';
-  static const String rememberMe = 'تذكرني';
-  static const String phonePlaceholder = '5123 4567';
-  static const String defaultCountryCode = '+974';
-
-  // --- Auth Errors ---
-  static const String errorIncorrectPassword = 'كلمة مرور غير صحيحة';
-  static const String errorPasswordsDoNotMatch = 'كلمتا المرور غير متطابقتين';
-
-  // --- Auth Screen (Set New Password) ---
-  static const String password = 'كلمة المرور';
-  static const String passwordNow = ' كلمة المرور الحالية';
-  static const String enterPassword = 'أدخل كلمة المرور';
-
-  // ==================================================
-  // OTP VERIFICATION
-  // ==================================================
-  static const String confirmCode = 'تأكيد الرمز';
-  static const String enterVerificationCode =
-      'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى';
-  static const String resendCodePrompt = 'لم تتلقى الكود بعد؟ ';
-
-  static const String resendCodeLink = 'إعادة إرسال الكود';
-  static const String defaultOtpTimer = '0:59';
-
-  // ==================================================
-  // COMPLETE PROFILE
-  // ==================================================
-  static const String completeProfile = 'أكمل ملفك الشخصي';
-  static const String completeProfileSubtitle =
-      'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق';
-  static const String namePlaceholder = 'أدخل اسمك بالكامل';
-  static const String completeRegistration = 'إكمال التسجيل';
-
-  // ==================================================
-  // RESET PASSWORD
-  // ==================================================
-  static const String resetPassword = 'إعادة تعيين كلمة المرور';
-  static const String resetPasswordDescription =
-      'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر';
-  static const String checkEmail = 'تحقق من بريدك الإلكتروني';
-  static const String emailSentDescription =
-      'تم إرسال رابط إعادة تعيين إلى ahmed...‌@gmail.com أدخل الرمز المتكون من 4 أرقام لتأكيد البريد الإلكتروني';
-
-  // --- Set New Password Screen ---
-  static const String setNewPassword = 'تعيين كلمة مرور جديدة';
-  static const String setNewPasswordDescription =
-      'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمة المرور السابقة .';
-  static const String passwordChangedSuccessfully =
-      'تم تغيير كلمة المرور بنجاح';
-  static const String loginWithNewPassword =
-      'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة';
-  static const String newPassword = 'كلمة المرور الجديدة';
-
-  // ==================================================
-  // LOCATION
-  // ==================================================
-  static const String setYourLocation = 'حدد موقعك';
-  static const String locationPermissionDescription =
-      'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك';
-  static const String setCurrentLocation = 'تحديد الموقع الحالي';
-  static const String chooseLocationManually = 'اختيار الموقع يدويا';
-  static const String searchLocationPlaceholder = 'ابحث عن منطقة أو عنوان...';
-  static const String confirmLocation = 'تأكيد الموقع';
-  static const String errorOutOfZone = 'عذراً لا نقدم خدمة في هذه المنطقة';
-  static const String mosque = 'مسجد';
-  static const String company = 'شركة';
-
-  // ==================================================
-  // HOME
-  // ==================================================
-  static const String currentLocation = 'الموقع الحالي';
-  static const String searchServiceOrProblem = 'ابحث عن خدمة أو مشكلة...';
-  static const String deepCleaning = 'تنظيف عميق';
-  static const String cleaningFull = 'تنظيف شامل';
-  static const String houseCleaning = 'تنظيف منزل';
-  static const String pestControl = 'مكافحة حشرات';
-  static const String corporateServices = 'خدمات المؤسسات';
-  static const String mostRequested = 'الأكثر طلباً';
-  static const String navHome = 'الرئيسية';
-  static const String navBookings = 'حجوزاتي';
-  static const String navAccount = 'حسابي';
-  static const String specialOfferTitle = 'عروض مخصصة للشركات والمؤسسات';
-  static const String serviceAvailable24h = 'خدمة سريعة خلال 24 ساعة';
-
-  // --- Promo Banner ---
-  static const String bestCleaningWork = 'أنس أعمال التنظيف بعد العمل';
-  static const String hourlyClean = 'تنظيف بالساعة';
-  static const String startingPrice = 'تبدأ الأسعار من 100 ريال';
-
-  // ==================================================
-  // SEARCH
-  // ==================================================
-  static const String recentSearches = 'عمليات البحث الأخيرة';
-  static const String clearAll = 'مسح الكل';
-  static const String popularServices = 'خدمات شائعة';
-  static const String youMightBeLookingFor = 'ربما تبحث عن';
-  static const String categories = 'تصنيفات';
-  static const String noResultsFound = 'لم يتم العثور على نتائج';
-  static const String noResultsFoundDescription =
-      'لم نتمكن من العثور على أي خدمات تطابق ببحثك عن';
-  static const String browseServices = 'تصفح الخدمات';
-  static const String tryOtherWords = 'جرب كلمات أخرى';
-  static const String insectsInHouse = ' وجود حشرات في المنزل';
-  static const String insectsInHouseDis = 'حلول فورية لمكافحة الآفات';
-
-  // ==================================================
-  // ADDRESS
-  // ==================================================
-  static const String chooseYourAddress = 'اختر عنوانك';
-  static const String addNewAddress = '+ إضافة عنوان جديد';
-  static const String streetNameOrNumber = 'اسم الشارع/الرقم';
-  static const String companyName = 'اسم الشركة';
-  static const String buildingNumber = 'رقم المبنى';
-  static const String floorNumber = 'الدور';
-  static const String officeOrFloorNumber = 'رقم المكتب / الدور';
-  static const String apartmentNumber = 'رقم الشقة';
-  static const String additionalNotes = 'ملاحظات إضافية';
-  static const String saveAddress = 'حفظ العنوان';
-  static const String editAddressHint =
-      'لتعديل عنوان، اذهب إلى حسابي -> العناوين .';
-
-  // --- Saved Addresses ---
-  static const String savedAddresses = 'عناويني المحفوظة';
-  static const String noAddressesYet = 'لا توجد عناوين أخرى';
-  static const String addFavoriteAddressesDesc =
-      'أضف عناوينك المفضلة للوصول السريع إليها أثناء الحجز.';
-  static const String homeAddress = 'المنزل';
-  static const String workAddress = 'العمل';
-  static const String addressLocation = 'عنوان الموقع';
-  static const String writeLocationInDetail = 'اكتب الموقع بالتفصيل';
-  static const String writeNameCompanyOrMosque = 'اكتب اسم الشركة أو المسجد';
-
-  static const String deleteAddressTitle = 'حذف العنوان';
-  static const String deleteDefaultAddressDesc =
-      'هذا هو العنوان الافتراضي الحالي. سيتم اختيار عنوان آخر كافتراضي تلقائيًا.';
-
-  // ==================================================
-  // NOTIFICATIONS
-  // ==================================================
-  static const String notifications = 'الإشعارات';
-  static const String noNewNotifications = 'لا توجد تنبيهات جديدة';
-  static const String newNotifications = 'جديد';
-  static const String today = 'اليوم';
-  static const String earlier = 'سابقا';
-  static const String serviceCompletedDesc =
-      'نأمل أن تكون قد استمتعت بخدمة تنظيف السجاد، رأيك يهمنا، يرجى تقييم الفريق.';
-  static const String serviceStarted = 'بدء الخدمة';
-  static const String serviceStartedDesc =
-      'يعمل فريقنا الآن على تنفيذ خدمتك المطلوبة بأعلى جودة.';
-
-  static const String serviceReminder = 'تذكير بموعد الخدمة';
-  static const String serviceReminderDesc =
-      'موعد خدمتك اليوم الساعة 5:00 مساءً';
-  static const String bookingConfirmed = 'تم تأكيد حجزك بنجاح';
-  static const String bookingConfirmedDesc =
-      'تم تأكيد موعد الخدمة يوم الثلاثاء الساعة 4:00 مساءً.';
-
-  static const String appointmentModified = 'تم تعديل موعد الخدمة';
-  static const String appointmentModifiedDesc =
-      'تم تحديث موعد الحجز إلى الساعة 6:00 مساءً بناءً على طلبك.';
-
-  static const String rebookPrompt = 'هل ترغب بإعادة الحجز؟';
-  static const String rebookPromptDesc = 'احجز نفس الخدمة مرة أخرى خلال ثواني.';
-
-  static const String specialDiscount = 'خصم خاص لفترة محدودة';
-  static const String specialDiscountDesc =
-      'استمتع بخصم 20٪ على خدمات تنظيف الكنب كود الخصم clean20.';
-
-  // ==================================================
-  // SERVICE DETAILS
-  // ==================================================
-  static const String reviewsCount = 'تقييم';
-  static const String discount = 'خصم';
-  static const String applyCode = 'تطبيق الكود';
-  static const String viewServiceDetails = 'عرض تفاصيل الخدمة';
-  static const String serviceIncludes = 'تشمل الخدمة:';
-  static const String notesBeforeBooking = 'ملاحظات قبل الحجز:';
-  static const String add = 'أضف +';
-  static const String codePrefix = 'الكود';
-  static const String addCard = '+ إضافة بطاقة جديدة';
-
-  // --- Service Cards ---
-  static const String furniture = 'الأثاث';
-  static const String deepFurnitureCleaning = 'تنظيف أثاث عميق';
-  static const String pestControlService = 'القضاء على الحشرات';
-  static const String glassCleaning = 'تنظيف الزجاج';
-  static const String pestControlAntsApartment = 'مكافحة نمل - شقة';
-  static const String pestControlAntsVilla = 'مكافحة نمل - فيلا';
-  static const String pestControlApartment = 'مكافحة الصراصير - شقة';
-  static const String pestControlBedbugsApartment = 'مكافحة بق - شقة';
-  static const String pestControlBedbugsVilla = 'مكافحة بق - فيلا';
-  static const String pestControlMiceApartment = 'مكافحة فئران - شقة';
-  static const String pestControlMiceVilla = 'مكافحة فئران - فيلا';
-  static const String pestControlPests = 'مكافحة حشرات';
-  static const String pestControlVilla = 'مكافحة الصراصير - فيلا';
-  static const String sprayFullAntsInApartment = 'رش شامل لمكافحة نمل في الشقة';
-  static const String sprayFullAntsInVilla = 'رش شامل لمكافحة نمل في الفيلا';
-  static const String sprayFullBedbugsInApartment =
-      'رش شامل لمكافحة بق في الشقة';
-  static const String sprayFullBedbugsInVilla = 'رش شامل لمكافحة بق في الفيلا';
-  static const String sprayFullInApartment =
-      'رش شامل لمكافحة الصراصير في الشقة';
-  static const String sprayFullInVilla = 'رش شامل لمكافحة الصراصير في الفيلا';
-  static const String sprayFullMiceInApartment =
-      'رش شامل لمكافحة فئران في الشقة';
-  static const String sprayFullMiceInVilla = 'رش شامل لمكافحة فئران في الفيلا';
-  // --- Sofa Cleaning Service Content ---
-  static const String sofaDeepCleaningTagline =
-      'التنظيف العميق الذي كانت تنتظره كنبتك';
-
-  static const String sofaCleaningDetailedDescription =
-      'تنظيف بسيط للكنبة بالمكنسة شيء، لكن الغبار وحبيبات الرمل والبقع المخفية التي تتراكم داخل نسيج الكنبة شيء مختلف تماماً.\n\nيقوم متخصصو التنظيف المعتمدون لدينا بالوصول إليك مجهزين بالكامل والعمل على كل طبقة من الكنبة لإعادة الانتعاش واللون والراحة إليها.';
-
-  static const String inspectionFreeFully = 'معاينة مجانية بالكامل';
-
-  static const String sofaInspectionSteps =
-      'فحص الكنبة لتحديد نوع القماش\nتحديد احتياجات التنظيف\nفحص الكنبة لتحديد نوع القماش\nتنظيف جاف بالمكنسة لإزالة الغبار والشعر والمخلفات\nتنظيف رطب بالشامبو باستخدام مواد متخصصة\nاستخراج البقع أثناء عملية الشامبو لمعالجتها\nمعالجة موضعية لاستخراج البقع العنيدة';
-
-  static const String postCleaningSofaDryingNotes =
-      'قد تظل الكنبة رطبة لمدة تصل إلى 12 ساعة بعد التنظيف.\nيعتمد وقت التجفيف على نوع القماش ودرجة التهوية في المكان.\nقد يصعب إزالة بعض البقع العنيدة جداً مثل بقع الحيوانات أو الدم أو الزيوت.\nسيقوم المختص بإرشادك إذا كانت بعض طرق التنظيف غير مناسبة لبعض أنواع الأقمشة.\nيرجى تغطية العناصر التي لا تشملها الخدمة أو لا يمكن تنظيفها.';
-
-  static const String noCommitmentAfterInspection =
-      'لا يوجد أي التزام بعد المعاينة';
-  static const String notSureGetFreeInspection =
-      'لست واثقاً! احصل على معاينة مجانية';
-
-  static const String doneReceivedRequest = 'تم استلام طلب المعاينة';
-  static const String companiesMosques = 'خدمات الشركات والمساجد';
-  static const String provideCleaningSanitizationOfficesMosquesDetermine =
-      'نقدم خدمات تنظيف وتعقيم للمكاتب والمساجد وفقاً لتحديد احتياجك بدقة وتقديم عرض سعر واضح بدون التزام.';
-  static const String determineFinalAfterOnly =
-      'يتم تحديد السعر النهائي بعد المعاينة فقط';
-
-  // ==================================================
-  // BOOKING
-  // ==================================================
-  static const String upcoming = 'القادمة';
-  static const String previous = 'السابقة';
-  static const String scheduled = 'مجدولة';
-  static const String inProgress = 'قيد التنفيذ';
-  static const String completed = 'مكتملة';
-  static const String cancelled = 'ملغاة';
-  static const String viewDetails = 'عرض التفاصيل';
-  static const String reschedule = 'إعادة جدولة';
-  static const String cancelBooking = 'إلغاء الحجز';
-  static const String confirmCancel = 'تأكيد الإلغاء';
-  static const String noUpcomingBookings = 'لا توجد حجوزات قادمة';
-  static const String noUpcomingBookingsDescription =
-      'احجز خدمتك الآن وحدد الموعد المناسب لك بكل سهولة.';
-  static const String rebookNow = 'إعادة حجز';
-  static const String confirmReschedule = 'إعادة الجدولة';
-  static const String specialNotesOptional =
-      'ملاحظات أو تعليمات خاصة (اختياري)';
-  static const String exampleHomeLocation = 'مثال : المنزل أمام المسجد..';
-  static const String areYouSureCancel = 'هل أنت متأكد من إلغاء الحجز؟';
-  static const String cancelWarning =
-      'سيتم إلغاء الحجز ولن يتم تنفيذ الخدمة في الوقت المحدد لها';
-  static const String cancelReasonOptional = 'سبب الإلغاء';
-  static const String mentionCancelReason = 'اذكر سبب إلغاء الحجز';
-  // --- Booking Flow: Shared ---
-  static const String step = 'الخطوة';
-  static const String ofText = 'من';
-  static const String currentTotal = 'المجموع الحالي';
-  static const String sharingUnavailable = 'المشاركة غير متاحة حالياً';
-
-  // --- Booking Flow: Step 2 (Add-ons) ---
-  static const String addonsTitle = 'الإضافات';
-
-  static const String inspectionDescription =
-      'فريقنا جاهز لمساعدتك في اختيار الخدمة المناسبة بسهولة';
-  static const String requestInspection = 'اطلب معاينة';
-
-  // --- Booking Flow: Step 3 (Date & Time) ---
-  static const String dateAndTimeTitle = 'التاريخ والوقت';
-  static const String chooseDay = 'اختر اليوم';
-  static const String chooseTime = 'اختر وقت';
-  static const String advancePaymentLabel = 'مقدمة';
-  static const String cancellationPolicy =
-      'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل';
-  static const String saturday = 'السبت';
-  static const String sunday = 'الأحد';
-  static const String monday = 'الاثنين';
-  static const String tuesday = 'الثلاثاء';
-  static const String wednesday = 'الأربعاء';
-  static const String thursday = 'الخميس';
-  static const String friday = 'الجمعة';
-
-  // --- Booking Flow: Step 4 (Address) ---
-  static const String addressTitle = 'العنوان';
-  static const String specialInstructions = 'ملاحظات أو تعليمات خاصة (اختياري)';
-  static const String savedAddressesTitle = 'عناويني المحفوظة';
-  static const String detailsAdditionalOptional = 'تفاصيل إضافية (اختياري)';
-
-  // --- Booking Flow: Step 5 (Payment) ---
-  static const String paymentTitle = 'الدفع';
-  static const String paymentMethod = 'طريقة الدفع';
-  static const String payAfterService = 'الدفع عند الخدمة';
-  static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
-  static const String discountCode = 'كود الخصم';
-  static const String enterDiscountCode = 'ادخل كود الخصم';
-  static const String securePaymentNote =
-      'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
-
-  static const String savedCards = 'البطاقات المحفوظة';
-  static const String defaultCard = 'افتراضي';
-  static const String addNewCard = 'اضافة بطاقه جديد';
-  // Typo fixed: 'امام' -> 'أمام'
-  static const String specialInstructionsHint = 'مثال: اتصل أمام المسجد..';
-
-  // --- Booking Flow: Order Summary ---
-  static const String bookingSummary = 'ملخص الحجز';
-
-  // --- House Cleaning Flow Config ---
-  static const String houseCleaningTitle = 'تنظيف المنزل';
-  static const String howManyHours = 'كم ساعة تريد عاملة / عاملة التنظيف؟';
-  static const String regularWithCleaningAddOn = 'عادة + إضافة التنظيف';
-  static const String oneHour = 'ساعة';
-  static const String hours = 'ساعات';
-  static const String twoHours = 'ساعتين';
-  static const String hours3 = '3 ساعات';
-  static const String hours4 = '4 ساعات';
-  static const String hours5 = '5 ساعات';
-  static const String howManyWorkers = 'كم عدد العاملات /العمال؟';
-  static const String countRoomsKitchens = 'كم عدد الغرف / المطابخ؟';
-  static const String oneRoom = ' غرفة ١';
-  static const String twoRooms = 'غرفة ٢';
-  static const String threeRooms = 'غرفة ٣';
-  static const String fourRooms = 'غرفة ٤';
-  static const String worker = 'عامل';
-  static const String placeSize = 'حجم المكان ؟';
-  static const String smallApartment = 'شقة صغيرة';
-  static const String mediumApartment = 'شقة متوسطة';
-  static const String largeApartment = 'شقة كبيرة';
-  static const String villa = 'فيلا';
-  static const String studio = 'استوديو';
-  static const String teamPreference = 'تفضيل الفريق؟';
-  static const String femaleTeam = 'نسائي';
-  static const String maleTeam = 'رجالي';
-  static const String noPreference = 'لا يهم';
-  static const String detailsFloors = 'تفاصيل الطوابق؟';
-  static const String ground = 'أرضي';
-  static const String first = 'أول';
-  static const String second = 'ثاني';
-  static const String sports = 'رياضي';
-  static const String cleaningKitchen = 'تنظيف مطبخ';
-  static const String cleaningWindows = 'تنظيف نوافذ';
-  static const String cleaningBathroom = 'تنظيف حمام';
-  static const String polishingFloors = 'تلميع أرضيات';
-  static const String washingCurtains = 'غسيل ستائر';
-  static const String cleaningOven = 'تنظيف فرن';
-  static const String pillowsSleeping = 'وسادات نوم';
-  static const String chairsDining = 'كراسي طعام';
-  static const String pillowsDecorative = 'وسادات للزينة';
-  static const String cockroaches = 'صراصير';
-  static const String ants = 'نمل';
-  static const String bedbugs = 'بق';
-  static const String mice = 'فئران';
-  static const String sofas = 'الكنب';
-  static const String carpets = 'سجاد';
-  static const String cleaningSofa = 'تنظيف الكنب';
-  static const String cleaningSofaOnL = 'تنظيف الكنب على شكل حرف L';
-  // cleaningInsideHome
-  static const String cleaningInsideHomeForCarpets =
-      'تنظيف احترافي للسجاد داخل المنزل';
-  // cleaningInsideHome2
-  static const String cleaningInsideHomeForSofas =
-      'تنظيف احترافي للكنب داخل المنزل';
-
-  // --- Service Frequency ---
-  static const String serviceFrequency = 'تكرار الخدمة';
-  static const String once = 'مرة واحدة';
-  static const String weekly = 'أسبوعياً';
-  static const String twoWeeks = 'أسبوعين';
-  static const String monthly = 'شهرياً';
-  static const String countTimesInWeek = 'عدد مرات في الأسبوع';
-  static const String discountUpTo10 = 'خصم يصل الى 10%';
-  static const String discountUpTo20 = 'خصم يصل الى 20%';
-  static const String discountUpTo70 = 'خصم يصل لـ %70';
-  static const String fivePercentDiscount = 'خصم 5٪';
-  static const String sevenPercentDiscount = 'خصم 7%';
-  static const String discountUpToTwelvePercent = 'خصم يصل إلى 12%';
-  static const String discountUpToTwentyFivePercent = 'خصم يصل إلى 25%';
-
-  // --- Appointments ---
-  static const String noAppointmentsAvailable = 'لا تتوفر مواعيد';
-  static const String noAppointmentsDesc =
-      'عذراً، جميع المواعيد محجوزة لليوم المختار، إليك بعض الاقتراحات البديلة:';
-  static const String viewAllAppointments = 'عرض جميع المواعيد';
-  static const String bookingConfirmedPopupDesc =
-      'تم تأكيد حجزك وسيتم تذكيرك قبل موعد الزيارة بساعة';
-  static const String bookingNumber = 'رقم الحجز';
-  static const String bookingDetails = 'تفاصيل الحجز';
-  // --- Booking Success / Failure ---
-  static const String doneConfirmBooking = 'تم تأكيد الحجز';
-  static const String doneCopyNumberBooking = 'تم نسخ رقم الحجز';
-
-  // ==================================================
-  // PAYMENT
-  // // ==================================================
-  // static const String paymentTitle = 'الدفع';
-
-  // //  Merge duplicate semantic keys in future cleanup
-  // // paymentMethod duplicates paymentMethodLabel
-  // static const String paymentMethod = 'طريقة الدفع';
-
-  // //  Merge duplicate semantic keys in future cleanup
-  // // payAfterService duplicates paymentOnService ('الدفع عند الخدمة')
-  // static const String payAfterService = 'الدفع عند الخدمة';
-
-  // //  Merge duplicate semantic keys in future cleanup
-  // // payAfterServiceDesc duplicates afterCompletionService
-  // static const String payAfterServiceDesc = 'ادفع نقداً بعد اتمام الخدمة';
-
-  // static const String discountCode = 'كود الخصم';
-  // static const String enterDiscountCode = 'ادخل كود الخصم';
-
-  // //  Merge duplicate semantic keys in future cleanup
-  // // securePaymentNote duplicates securePaymentNoteAlt
-  // static const String securePaymentNote =
-  //     'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
-
-  // //  Merge duplicate semantic keys in future cleanup
-  // // savedCards duplicates cardsSaved ('البطاقات المحفوظة')
-  // static const String savedCards = 'البطاقات المحفوظة';
-
-  // static const String defaultCard = 'افتراضي';
-  // static const String addNewCard = '+ اضافة بطاقه جديد';
-  // ==================================================
-  static const String payment = 'الدفع';
-  // static const String discountCode = 'كود الخصم';
-  // static const String enterDiscountCode = 'أدخل كود الخصم';
-  // static const String securePaymentNote =
-  //     'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
-  // static const String defaultCard = 'افتراضي';
-  // static const String addNewCard = '+ إضافة بطاقة جديدة';
-
-  // --- Order Summary ---
-  static const String paymentSummary = 'ملخص الدفع';
-  static const String totalIncludingVat = 'المجموع (شامل الضريبة المضافة)';
-  static const String totalLabel = 'المجموع';
-  static const String totalPrice = 'السعر الاجمالي';
-
-  // --- Payment Methods Screen ---
-  static const String afterCompletionService = 'ادفع نقداً بعد إتمام الخدمة';
-  static const String cardCreditMada = 'بطاقة الائتمان / مدى';
-  static const String cardsSaved = 'البطاقات المحفوظة';
-  static const String mada = 'مدى';
-  static const String paymentOnService = 'الدفع عند الخدمة';
-  static const String changeMethodPayment = 'تغيير طريقة الدفع';
-  static const String paymentFailedDescriptionAlt =
-      'نعتذر، لم نتمكن من معالجة عملية الدفع الخاصة بك. يرجى التحقق من بيانات البطاقة أو المحاولة مرة أخرى.';
-
-  static const String noSavedPaymentMethods = 'لا توجد طرق دفع محفوظة';
-  static const String addPaymentMethodDesc =
-      'قم بإضافة وسيلة دفع لتسهيل إتمام الطلبات بسرعة وأمان.';
-  static const String addPaymentMethodBtn = 'إضافة وسيلة دفع';
-  static const String defaultPaymentNotice =
-      'سيتم استخدام وسيلة الدفع الافتراضية تلقائياً لجميع الحجوزات القادمة. يمكنك تغيير هذا الإعداد في أي وقت قبل إتمام عملية الدفع.';
-  static const String cardNumberLabel = 'رقم البطاقة';
-  static const String cardHolderLabel = 'اسم حامل البطاقة';
-
-  // Typo fixed: 'هوا' -> 'هو', 'علي' -> 'على'
-  static const String cardHolderPlaceholder = 'ادخل الاسم كما هو على البطاقة';
-  static const String expiryDateLabel = 'تاريخ الانتهاء';
-  static const String cvvLabel = 'رمز الأمان';
-  static const String saveCardForLater = 'حفظ البطاقة لاستخدامها لاحقاً';
-  // --- Payment Result Popups ---
-  static const String paymentFailed = 'فشل الدفع';
-
-  // ==================================================
-  // TRACKING
-  // ==================================================
-  static const String trackOrder = 'تتبع الطلب';
-  static const String onTheWay = 'في الطريق';
-  static const String eta5Mins = 'الوصول المتوقع خلال 5 دقائق';
-  static const String serviceStatus = 'حالة الخدمة';
-  static const String bookingConfirmedStatus = 'تم تأكيد الحجز';
-  static const String teamOnTheWay = 'الفريق في الطريق إليك';
-  static const String serviceInProgress = 'الخدمة قيد التنفيذ';
-  static const String serviceCompletedStatus = 'تم الانتهاء';
-  static const String teamLeader = 'قائد الفريق';
-  static const String completedService = 'اكتملت الخدمة';
-  static const String summaryWorkCompleted = 'ملخص العمل المنجز';
-  static const String timeSpent = 'الوقت المستغرق';
-  static const String expectedArrival = 'الوصول المتوقع';
-
-  // --- Service Completed ---
-  static const String thankYouForChoosingUs = 'شكراً لاختيارك لنا';
-  static const String serviceExecutedSuccessfully =
-      'تم تنفيذ خدمة التنظيف العميق لمنزلك بنجاح ونتمنى رضاك وجودة الخدمة المقدمة.';
-
-  static const String serviceType = 'نوع الخدمة';
-  static const String typePlace = 'نوع المكان';
-  static const String namePlace = 'اسم المكان';
-  static const String areaPlace = 'مساحة المكان';
-  static const String roomsCompletedDesc =
-      'شامل الصالة، المطبخ، وغرف النوم مع التعقيم الكامل.';
-  static const String trackBooking = 'تتبع الحجز';
-  // ==================================================
-  // RATINGS & REVIEWS
-  // ==================================================
-  static const String rateExperience = 'قيم تجربتك';
-  static const String serviceRating = 'تقييم الخدمة';
-  static const String teamRating = 'تقييم الفريق';
-  static const String rating = ' ملاحظاتك';
-  static const String teamRatingQuestion =
-      'كيف كانت تجربتك مع فريق "ابراهيم محمد" اليوم؟';
-  static const String addYourNotesHere = 'أضف ملاحظاتك هنا...';
-  static const String levelOfServiceRatingQuestion =
-      'كيف كانت تجربتك مع مستوى الخدمة اليوم؟';
-  static const String submitRating = 'إرسال التقييم';
-  static const String forRating = 'شكراً لتقييمك';
-  static const String ratingHelpsImprove = 'رأيك يساعدنا على تحسين الخدمة';
-
-  // ==================================================
-  // FAVORITES
-  // ==================================================
-  static const String favorites = 'المفضلات';
-  static const String noFavoritesYet = 'لا توجد خدمات مفضلة حتى الآن';
-  static const String saveServicesToAccessLater =
-      'قم بحفظ الخدمات التي تعجبك للوصول إليها بسرعة لاحقًا.';
-  static const String edit = 'تعديل';
-  static const String delete = 'حذف';
-  static const String deletecard = 'حذف البطاقة';
-  static const String deletecardwaring =
-      ' هل انت متاكد انك تريد خذف هذة البطاقة';
-
-  static const String defaultText = 'افتراضي';
-  static const String mySavedAddresses = 'عناويني المحفوظة';
-  static const String deleteAddressConfirmation =
-      'هل أنت متأكد أنك تريد حذف هذا العنوان؟';
-  static const String editAddress = 'تعديل العنوان';
-  static const String addAddress = 'إضافة عنوان';
-  static const String expiresIn = 'تنتهي في';
-  static const String card = 'بطاقة';
-  //static const String addCard = 'إضافة بطاقة';
-  static const String editCard = 'تعديل البطاقة';
-
-  // ==================================================
-  // PROFILE
-  // ==================================================
-  static const String editProfile = ' الملف الشخصي';
-  static const String nameLabel = 'الاسم';
-  static const String phoneLabel = 'الهاتف';
-  static const String emailLabel = 'البريد الإلكتروني';
-  static const String deleteAccountBtn = 'حذف الحساب';
-  static const String footerHint =
-      'سيتم استخدام هذه المعلومات للتواصل معك بشأن حجوزاتك والخدمات المتاحة، ولن يتم مشاركتها بشكل عام.';
-
-  // --- Delete Account Screens ---
-  static const String deleteAccountHeader = 'حذف الحساب';
-  static const String deleteWarningTitle = 'حذف الحساب نهائياً!';
-  static const String deleteWarningDesc =
-      'سيؤدي حذف حسابك إلى إزالة بياناتك الشخصية والعناوين المحفوظة وسجل الطلبات والإحصاءات بشكل نهائي.';
-
-  static const String rule1Title = 'لا يمكن التراجع عن هذا الإجراء بعد التأكيد';
-  static const String rule1Desc = 'سيتم حذف حسابك وجميع بياناتك بشكل دائم.';
-  static const String rule2Title = 'يجب إنهاء أو إلغاء جميع الطلبات النشطة';
-  static const String rule2Desc =
-      'لا يمكنك حذف الحساب ولديك طلبات قيد التنفيذ.';
-  static const String rule3Title = 'سيتم إلغاء أي اشتراكات أو باقات مفعولة';
-  static const String rule3Desc =
-      'جميع الاشتراكات أو الباقات المدفوعة المرتبطة بحسابك سيتم إلغاؤها.';
-  static const String rule4Title =
-      'قد يتم الاحتفاظ ببعض البيانات لأغراض قانونية';
-  static const String rule4Desc =
-      'مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.';
-
-  static const String confirmDeleteHint = 'لتأكيد حذف الحساب يرجى كتابة كلمة (';
-  static const String deleteConfirmWord = 'حذف';
-  static const String confirmFieldHint = 'كلمة التأكيد غير صحيحة';
-  static const String deleteConfirmBtn = 'حذف الحساب نهائياً';
-
-  // --- Pop-ups ---
-  static const String cannotDeleteTitle = 'لا يمكن حذف الحساب';
-  static const String cannotDeleteDesc =
-      'لديك طلبات أو باقات نشطة، يرجى إنهاء أو إلغاء المعاملات النشطة أولاً ثم إعادة المحاولة.';
-
-  // --- Profile Sections ---
-  static const String myAddresses = 'العناوين';
-  static const String mySubscriptions = 'اشتراكاتي';
-  static const String paymentMethods = 'طرق الدفع';
-  static const String settings = 'الإعدادات';
-  static const String contactUs = 'تواصل معنا';
-
-  // ==================================================
-  // SETTINGS
-  // ==================================================
-  static const String changePassword = 'تغيير كلمة المرور';
-  static const String privacy = 'الخصوصية';
-  static const String help = 'المساعدة';
-  static const String language = 'اللغة';
-  static const String arabic = 'العربية';
-  static const String bookingNotifications = 'إشعارات الحجز';
-  static const String logout = 'تسجيل الخروج';
-  static const String logoutContent =
-      'هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟ ';
-
-  // ==================================================
-  // HELP CENTER
-  // ==================================================
-  static const String helpCenter = 'مركز المساعدة';
-  static const String faq = 'الأسئلة الشائعة';
-  static const String technicalSupport = 'الدعم الفني';
-  static const String newIssue = 'مشكلة جديدة  +';
-  static const String open = 'مفتوح';
-  static const String resolved = 'تم الحل';
-  static const String ticketPrefix = 'TKT.';
-  static const String careTechnician = 'فني العناية';
-
-  // --- FAQ Section (Intro) ---
-  static const String faqIntro =
-      'يمكنك اختيار الخدمة المناسبة، تحديد العنوان والموعد، ثم تأكيد الطلب والدفع مباشرة من التطبيق أو اطلب معاينة وسيتواصل معك الفريق المختص مجاناً.';
-  static const String faqModifyBooking = 'هل يمكن تعديل أو إلغاء الحجز؟';
-
-  static const String faqOrderStatus = 'كيف أعرف حالة طلبي؟';
-  static const String faqPaymentMethods = 'ما طرق الدفع المتوفرة؟';
-  static const String faqProblemDuringService =
-      'ماذا أفعل إذا واجهت مشكلة أثناء الخدمة؟';
-
-  // --- FAQ Section (Detailed Questions) ---
-  static const String faqQ1 = 'كيف يمكنني حجز خدمة؟';
-  static const String faqQ4 = 'كيف يمكنني التواصل مع الدعم الفني؟';
-
-  // --- Chat & Ticket Details ---
-  // Typo fixed: 'هذة المحادثة للقراة فقط' -> 'هذه المحادثة للقراءة فقط'
-  static const String readOnlyChat = 'هذه المحادثة للقراءة فقط';
-  static const String reopenTicket = 'إعادة فتح التذكرة';
-  static const String writeYourMessage = 'اكتب رسالتك...';
-  // --- New Issue Bottom Sheet ---
-  static const String newIssueTitle = 'مشكلة جديدة';
-  static const String issueTitleLabel = 'عنوان المشكلة*';
-  static const String issueTitleHint = 'مثال : مشكلة في خدمة التنظيف';
-  static const String orderNumberLabel = 'رقم الطلب (اختياري)';
-  static const String issueDescLabel = 'وصف المشكلة *';
-  static const String issueDescHint = 'اشرح مشكلتك بالتفصيل.....';
-  static const String writeAnyNotesHelpUsUnderstandYourNeed =
-      'اكتب أي ملاحظات تساعدنا نفهم احتياجك...';
-
-  // --- Chat & Support ---
-  static const String active = 'نشط';
-  static const String online = 'متصل';
-
-  // --- Help Center Extra ---
-  static const String contactInfoLabel = 'معلومات التواصل';
-  static const String customerServiceNumberLabel = 'رقم خدمة العملاء';
-  static const String emailAddressLabel = 'البريد الإلكتروني';
-  static const String privacyConfidentialityNote =
-      'جميع بياناتك وآراؤك تُعامل بسرية تامة ولا تُشارك مع أي طرف ثالث.';
-
-  // ==================================================
-  // SUBSCRIPTIONS
-  // ==================================================
-  static const String currentSubscriptions = 'الحالية';
-  static const String previousSubscriptions = 'السابقة';
-  static const String noActiveSubscriptions = 'لا توجد اشتراكات نشطة';
-  static const String subscribePackagesDesc =
-      'اشترك في إحدى الباقات لتوفير الوقت والحصول على زيارات منتظمة بسهولة.';
-  static const String browsePackagesBtn = 'استعراض الباقات';
-  static const String manageSubscription = 'إدارة الاشتراك';
-  static const String activeStatus = 'نشط';
-  static const String pausedStatus = 'موقوف';
-  static const String endedStatus = 'منتهي';
-  static const String subscriptionTypeLabel = 'نوع الاشتراك';
-  static const String nextVisitLabel = 'الزيارة القادمة';
-  static const String timeLabel = 'الوقت';
-  static const String priceLabel = 'السعر';
-  static const String monthlyPriceSuffix = 'ر.ق / شهرياً';
-  static const String viewVisits = 'عرض الزيارات';
-  static const String viewVisitsDesc = 'عرض المواعيد القادمة وسجل الزيارات';
-  static const String pauseTemporarily = 'إيقاف مؤقت';
-  static const String pauseTemporarilyDesc = 'إيقاف الاشتراك لفترة مؤقتة';
-  static const String changePackage = 'تغيير الباقة';
-  static const String changePackageDesc = 'تغيير الباقة الحالية لباقة أخرى';
-  static const String cancelSubscription = 'إلغاء الاشتراك';
-  static const String cancelSubscriptionDesc = 'إيقاف الاشتراك نهائياً';
-  static const String reactivateBtn = 'إعادة التفعيل';
-  static const String subscribeAgainBtn = 'اشترك مرة أخرى';
-  static const String subscriptionPausedMsg = 'تم إيقاف الاشتراك مؤقتاً';
-
-  // --- Subscription Popups ---
-  static const String pausePopupTitle = 'إيقاف الاشتراك مؤقتاً';
-  static const String pausePopupDesc =
-      'لن يتم جدولة أي زيارات أثناء فترة الإيقاف يمكنك إعادة تفعيلة في أي وقت';
-  static const String confirmPauseBtn = 'تأكيد الإيقاف';
-  static const String cancelPopupTitle = 'إلغاء الاشتراك';
-  static const String cancelPopupDesc =
-      'سيتم إلغاء جميع الزيارات القادمة لن تتمكن من استئناف الاشتراك بعد إلغائه';
-  // ==================================================
-  // VISITS
-  // ==================================================
-  static const String myVisits = 'زياراتي';
-  // ==================================================
-  // LEGAL & POLICIES
-  // ==================================================
-  // Typo fixed: 'القوانيين والسياسات' -> 'القوانين والسياسات'
-  static const String policiesAndRules = 'القوانين والسياسات';
-
-  static const String privacyPolicyLabel = 'سياسة الخصوصية';
-  static const String termsAndConditionsLabel = 'الشروط والأحكام';
-
-  // --- Privacy Policy Content ---
-  static const String privacyPolicyIntro =
-      'في خدمتنا، خصوصيتك تأتي أولًا. توضح هذه السياسة كيفية جمع بياناتك الشخصية واستخدامها وحمايتها عند استخدامك لتطبيق حجز الخدمات المنزلية. نلتزم بحماية خصوصيتك والشفافية الكاملة حول بياناتك.';
-  static const String collectedData = 'البيانات التي نجمعها';
-  static const String dataUsage = 'كيفية استخدام البيانات';
-  static const String dataProtection = 'حماية البيانات';
-  static const String dataSharing = 'مشاركة البيانات';
-  static const String acceptanceOfTerms = 'القبول بالشروط';
-  static const String policyModifications = 'التعديلات على السياسة';
-
-  // --- Terms & Conditions Content ---
-  static const String termsIntro =
-      'باستخدامك لتطبيق وخدمات منصة الخدمات المنزلية، فإنك تقر وتوافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي جزء من هذه الشروط، يرجى عدم استخدام الخدمة.';
-  static const String services = 'الخدمات';
-  static const String bookings = 'الحجوزات';
-  static const String serviceCancellation = 'إلغاء الخدمة';
-  static const String responsibility = 'المسؤولية';
-  static const String companyResponsibilities = 'مسؤوليات الشركة';
-  static const String accounts = 'الحسابات';
-  static const String modifications = 'التعديلات';
-
-  // ==================================================
-  // DUMMY DATA / PLACEHOLDERS
-  // ==================================================
-  //  Replace with API or local storage values
-  static const String profileName = 'Ahmed Ibrahim';
-  static const String phoneNumber = '+974 5123 4567';
-  static const String emailValue = 'ahmed.m@gmail.com';
-  static const String ibrahimMohamed = 'إبراهيم محمد';
-  static const String ibrahimInitial = 'إ';
-
-  // Example promo code value
-  static const String promoCode = 'CLEAN15';
-
-  // Example price value
-  static const String price120 = '120';
-
-  // Support contact info
-  static const String customerServiceNumber = '+974 3000 0000';
-  static const String supportEmailAddress = 'support@migroup.com';
-
-  // Help Center example tickets
-  static const String ticketTitle1 = 'مشكلة في خدمه التنظيف';
-
-  // Typo fixed: 'تنضيفهما' -> 'تنظيفهما'
-  static const String ticketDesc1 =
-      'المطبخ والحمام الرئيسي لم يتم تنظيفهما بشكل جيد';
-
-  static const String ticketTitle2 = 'سعر خدمة مكافحة الحشرات';
-  static const String ticketDesc2 = 'شكرا لكم هذا واضح';
-  static const String timeOneDayAgo = 'منذ ١ يوم';
-
-  // Example chat messages
-  static const String supportMsg1 = 'مرحباً أحمد، كيف يمكننا مساعدتك اليوم؟';
-  static const String userMsg1 = 'أريد الاستفسار عن موعد الزيارة القادم.';
-
-  // Example address values
-  static const String exampleHomeFrontMosque = 'مثال: المنزل أمام المسجد';
-  static const String homeAddressSubtitle = '18، شارع النغيب، الدوحة، الدوحة';
-  static const String workAddressSubtitle = 'برج المراقب - الطابق الثامن';
-
-  // Example tracking / job summary values
-  static const String eightRoomsCompleted = 'تم العمل ٨ غرف';
-  static const String within18Minutes = 'خلال 18د';
-  static const String minutes45 = '45 دقيقة';
-  static const String oneHundredEightyMinutes = '١٨٠ دقيقة';
-  static const String roomsCompleted = 'تم إنجاز 4 غرف';
-
-  // Example subscription name
-  static const String weeklyCleaning = 'تنظيف منزلي أسبوعي';
-
-  // Example nubmer of booking
-  static const String twelveThousandBookings = '12,000 حجز';
-
-  // Example Area
-  static const String smallNumber100Number200 = 'صغيرة الحجم (100 * 200 م)';
-  static const String mediumSize150By275 = 'متوسطة الحجم (150 * 275 م)';
-  static const String largeSize250By345 = 'كبيرة الحجم (250 * 345 م)';
-
-  static const String morning = 'ص';
-  static const String tenTwentyEightAm = '10:28 ص';
+  static bool get _isArabic {
+    try {
+      final saved = CacheHelper.getData(key: 'language');
+      if (saved == 'en') return false;
+      return true;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  static bool get isArabic => _isArabic;
+
+  static void syncLocale(String language) {
+    CacheHelper.saveData(key: 'language', value: language);
+  }
+
+  static String get confirm => _isArabic ? 'تأكيد' : 'Confirm';
+  static String get sendCode => _isArabic ? 'أرسل الكود' : 'Send Code';
+  static String get emailLabel => _isArabic ? 'البريد الإلكتروني' : 'Email Address';
+  static String get emailPlaceholder => _isArabic ? 'أدخل البريد الإلكتروني' : 'Enter email address';
+  static String get passwordLabel => _isArabic ? 'كلمة المرور' : 'Password';
+  static String get passwordPlaceholder => _isArabic ? 'أدخل كلمة المرور' : 'Enter password';
+  static String get confirmPasswordLabel => _isArabic ? 'تأكيد كلمة المرور' : 'Confirm Password';
+  static String get confirmPasswordPlaceholder => _isArabic ? 'أعد إدخال كلمة المرور' : 'Re-enter password';
+  static String get login => _isArabic ? 'تسجيل الدخول' : 'Login';
+  static String get termsAndPrivacy => _isArabic
+      ? 'بتسجيل الدخول أنت توافق على الشروط والأحكام وسياسة الخصوصية'
+      : 'By logging in, you agree to our Terms & Conditions and Privacy Policy';
+  static String get orUsing => _isArabic ? 'أو باستخدام' : 'Or using';
+  static String get viewAll => _isArabic ? 'عرض الكل' : 'View All';
+  static String get bookNow => _isArabic ? 'احجز الآن' : 'Book Now';
+
+  static String get welcomeBack => _isArabic ? 'أهلاً بعودتك' : 'Welcome Back';
+  static String get welcomeBackAlt => _isArabic ? 'مرحباً بعودتك' : 'Welcome Back';
+  static String get verificationMethodInfo => _isArabic
+      ? 'ستصلك رسالة تحتوي على رمز التحقق لإكمال تسجيل الدخول.'
+      : 'You will receive a message containing the verification code to complete login.';
+  static String get signUpWithGoogle => _isArabic ? 'تسجيل عبر Google' : 'Sign in with Google';
+  static String get signUpWithApple => _isArabic ? 'تسجيل عبر Apple' : 'Sign in with Apple';
+  static String get signInWithGoogle => _isArabic ? 'تسجيل الدخول عبر Google' : 'Sign In with Google';
+  static String get signInWithApple => _isArabic ? 'تسجيل الدخول عبر Apple' : 'Sign In with Apple';
+  static String get continueAsGuest => _isArabic ? 'المتابعة كضيف' : 'Continue as Guest';
+  static String get alreadyHaveAccount => _isArabic ? 'لديك حساب بالفعل؟ ' : 'Already have an account? ';
+  static String get dontHaveAccount => _isArabic ? 'ليس لديك حساب ؟ ' : 'Don\'t have an account? ';
+  static String get createAccount => _isArabic ? 'إنشاء حساب' : 'Create Account';
+  static String get forgotPassword => _isArabic ? 'نسيت كلمة المرور؟' : 'Forgot Password?';
+  static String get rememberMe => _isArabic ? 'تذكرني' : 'Remember Me';
+  static String get phonePlaceholder => _isArabic ? '5123 4567' : '5123 4567';
+  static String get defaultCountryCode => _isArabic ? '+974' : '+974';
+
+  static String get confirmCode => _isArabic ? 'تأكيد الرمز' : 'Confirm Code';
+  static String get enterVerificationCode => _isArabic
+      ? 'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى'
+      : 'Enter the 6-digit verification code sent to';
+  static String get resendCodePrompt => _isArabic ? 'لم تتلقى الكود بعد؟ ' : 'Didn\'t receive code? ';
+  static String get resendCodePromptAlt => _isArabic ? 'لم تتلقى الكود بعد ؟ ' : 'Didn\'t receive code? ';
+  static String get resendCodeLink => _isArabic ? 'إعادة إرسال الكود' : 'Resend Code';
+  static String get defaultOtpTimer => _isArabic ? '0:59' : '0:59';
+
+  static String get completeProfile => _isArabic ? 'أكمل ملفك الشخصي' : 'Complete Your Profile';
+  static String get completeProfileSubtitle => _isArabic
+      ? 'أضف بعض المعلومات لتخصيص تجربتك داخل التطبيق'
+      : 'Add some information to customize your experience in the app';
+  static String get nameLabel => _isArabic ? 'الاسم' : 'Full Name';
+  static String get namePlaceholder => _isArabic ? 'أدخل اسمك بالكامل' : 'Enter your full name';
+  static String get completeRegistration => _isArabic ? 'إكمال التسجيل' : 'Complete Registration';
+
+  static String get resetPassword => _isArabic ? 'إعادة تعيين كلمة المرور' : 'Reset Password';
+  static String get resetPasswordDescription => _isArabic
+      ? 'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر'
+      : 'Please enter your email to reset your password';
+  static String get checkEmail => _isArabic ? 'تحقق من بريدك الإلكتروني' : 'Check your email';
+  static String get emailSentDescription => _isArabic
+      ? 'تم إرسال رابط إعادة تعيين إلى ahmed...‌@gmail.com أدخل الرمز المتكون من 4 أرقام لتأكيد البريد الإلكتروني'
+      : 'A reset link has been sent to ahmed...‌@gmail.com. Enter the 4-digit code to verify your email';
+
+  static String get setNewPassword => _isArabic ? 'تعيين كلمة مرور جديدة' : 'Set New Password';
+  static String get setNewPasswordDescription => _isArabic
+      ? 'أنشئ كلمة مرور جديدة، وتأكد من أنها مختلفة عن كلمة المرور السابقة .'
+      : 'Create a new password. Make sure it is different from your previous password.';
+  static String get passwordChangedSuccessfully => _isArabic ? 'تم تغيير كلمة المرور بنجاح' : 'Password changed successfully';
+  static String get loginWithNewPassword => _isArabic ? 'يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة' : 'You can now log in with your new password';
+
+  static String get setYourLocation => _isArabic ? 'حدد موقعك' : 'Set Your Location';
+  static String get locationPermissionDescription => _isArabic
+      ? 'نحتاج إلى موقعك لعرض الخدمات المتاحة بالقرب منك'
+      : 'We need your location to show available services near you';
+  static String get setCurrentLocation => _isArabic ? 'تحديد الموقع الحالي' : 'Use Current Location';
+  static String get chooseLocationManually => _isArabic ? 'اختيار الموقع يدويا' : 'Choose Location Manually';
+  static String get searchLocationPlaceholder => _isArabic ? 'ابحث عن منطقة أو عنوان...' : 'Search for area or address...';
+  static String get confirmLocation => _isArabic ? 'تأكيد الموقع' : 'Confirm Location';
+
+  static String get currentLocation => _isArabic ? 'الموقع الحالي' : 'Current Location';
+  static String get searchServiceOrProblem => _isArabic ? 'ابحث عن خدمة أو مشكلة...' : 'Search for service or problem...';
+  static String get deepCleaning => _isArabic ? 'تنظيف عميق' : 'Deep Cleaning';
+  static String get houseCleaning => _isArabic ? 'تنظيف منزل' : 'House Cleaning';
+  static String get pestControl => _isArabic ? 'مكافحة حشرات' : 'Pest Control';
+  static String get corporateServices => _isArabic ? 'خدمات المؤسسات' : 'Corporate Services';
+  static String get mostRequested => _isArabic ? 'الأكثر طلباً' : 'Most Requested';
+  static String get navHome => _isArabic ? 'الرئيسية' : 'Home';
+  static String get navBookings => _isArabic ? 'حجوزاتي' : 'Bookings';
+  static String get navAccount => _isArabic ? 'حسابي' : 'My Account';
+
+  static String get recentSearches => _isArabic ? 'عمليات البحث الأخيرة' : 'Recent Searches';
+  static String get clearAll => _isArabic ? 'مسح الكل' : 'Clear All';
+  static String get popularServices => _isArabic ? 'خدمات شائعة' : 'Popular Services';
+  static String get youMightBeLookingFor => _isArabic ? 'ربما تبحث عن' : 'You might be looking for';
+  static String get categories => _isArabic ? 'تصنيفات' : 'Categories';
+  static String get noResultsFound => _isArabic ? 'لم يتم العثور على نتائج' : 'No results found';
+  static String get browseServices => _isArabic ? 'تصفح الخدمات' : 'Browse Services';
+  static String get tryOtherWords => _isArabic ? 'جرب كلمات أخرى' : 'Try other keywords';
+
+  static String get chooseYourAddress => _isArabic ? 'اختر عنوانك' : 'Choose Your Address';
+  static String get addNewAddress => _isArabic ? '+ إضافة عنوان جديد' : '+ Add New Address';
+  static String get addressHome => _isArabic ? 'المنزل' : 'Home';
+  static String get addressWork => _isArabic ? 'العمل' : 'Work';
+  static String get streetNameOrNumber => _isArabic ? 'اسم الشارع/الرقم' : 'Street Name/Number';
+  static String get buildingNumber => _isArabic ? 'رقم المبنى' : 'Building Number';
+  static String get floorNumber => _isArabic ? 'الدور' : 'Floor';
+  static String get officeOrFloorNumber => _isArabic ? 'رقم المكتب / الدور' : 'Office/Floor Number';
+  static String get additionalNotes => _isArabic ? 'ملاحظات إضافية' : 'Additional Notes';
+  static String get editAddressHint => _isArabic
+      ? 'لتعديل عنوان، اذهب إلى حسابي -> العناوين .'
+      : 'To edit an address, go to My Account -> Addresses.';
+
+  static String get notifications => _isArabic ? 'الاشعارات' : 'Notifications';
+  static String get noNewNotifications => _isArabic ? 'لا توجد تنبيهات جديدة' : 'No new notifications';
+  static String get newNotifications => _isArabic ? 'جديد' : 'New';
+  static String get today => _isArabic ? 'اليوم' : 'Today';
+  static String get earlier => _isArabic ? 'سابقا' : 'Earlier';
+  static String get serviceCompleted => _isArabic ? 'اكتملت الخدمة' : 'Service Completed';
+  static String get serviceCompletedDesc => _isArabic
+      ? 'نأمل أن تكون قد استمتعت بخدمة تنظيف السجاد، رأيك يهمنا، يرجى تقييم الفريق.'
+      : 'We hope you enjoyed the carpet cleaning service. Your feedback matters, please rate the team.';
+  static String get serviceStarted => _isArabic ? 'بدء الخدمة' : 'Service Started';
+  static String get serviceStartedDesc => _isArabic
+      ? 'يعمل فريقنا الآن على تنفيذ خدمتك المطلوبة بأعلى جودة.'
+      : 'Our team is now executing your requested service with the highest quality.';
+  static String get serviceReminder => _isArabic ? 'تذكير بموعد الخدمة' : 'Service Reminder';
+  static String get serviceReminderDesc => _isArabic ? 'موعد خدمتك اليوم الساعة 5:00 مساءً' : 'Your service appointment is today at 5:00 PM';
+  static String get bookingConfirmed => _isArabic ? 'تم تأكيد حجزك' : 'Booking Confirmed';
+  static String get bookingConfirmedDesc => _isArabic
+      ? 'تم تأكيد موعد الخدمة يوم الثلاثاء الساعة 4:00 مساءً.'
+      : 'Your service appointment has been confirmed for Tuesday at 4:00 PM.';
+  static String get appointmentModified => _isArabic ? 'تم تعديل موعد الخدمة' : 'Appointment Modified';
+  static String get appointmentModifiedDesc => _isArabic
+      ? 'تم تحديث موعد الحجز إلى الساعة 6:00 مساءً بناءً على طلبك.'
+      : 'Your appointment time has been updated to 6:00 PM based on your request.';
+  static String get rebookPrompt => _isArabic ? 'هل ترغب بإعادة الحجز؟' : 'Would you like to rebook?';
+  static String get rebookPromptDesc => _isArabic ? 'احجز نفس الخدمة مرة أخرى خلال ثواني.' : 'Rebook the same service in seconds.';
+  static String get specialDiscount => _isArabic ? 'خصم خاص لفترة محدودة' : 'Special limited-time discount';
+  static String get specialDiscountDesc => _isArabic
+      ? 'استمتع بخصم 20٪ على خدمات تنظيف الكنب كود الخصم clean20.'
+      : 'Enjoy 20% off sofa cleaning services. Promo code: clean20.';
+
+  static String get reviewsCount => _isArabic ? 'تقييم' : 'Reviews';
+  static String get discount => _isArabic ? 'خصم' : 'Discount';
+  static String get code => _isArabic ? 'كود' : 'Code';
+  static String get applyCode => _isArabic ? 'تطبيق الكود' : 'Apply Code';
+  static String get viewServiceDetails => _isArabic ? 'عرض تفاصيل الخدمة' : 'View Service Details';
+  static String get serviceIncludes => _isArabic ? 'تشمل الخدمة:' : 'Service Includes:';
+  static String get notesBeforeBooking => _isArabic ? 'ملاحظات قبل الحجز:' : 'Notes Before Booking:';
+  static String get currency => _isArabic ? 'ر.ق' : 'QAR';
+  static String get add => _isArabic ? 'أضف +' : 'Add +';
+
+  static String get step => _isArabic ? 'الخطوة' : 'Step';
+  static String get ofText => _isArabic ? 'من' : 'of';
+  static String get next => _isArabic ? 'التالي' : 'Next';
+  static String get currentTotal => _isArabic ? 'المجموع الحالي' : 'Current Total';
+
+  static String get addonsTitle => _isArabic ? 'الاضافات' : 'Add-ons';
+  static String get notSureFreeInspection => _isArabic ? 'لست متأكداً احصل على معاينة مجانية' : 'Not sure? Get a free inspection';
+  static String get inspectionDescription => _isArabic
+      ? 'فريقنا جاهز لمساعدتك في اختيار الخدمة المناسبة بسهولة'
+      : 'Our team is ready to help you choose the right service easily';
+  static String get requestInspection => _isArabic ? 'اطلب معاينة' : 'Request Inspection';
+
+  static String get dateAndTimeTitle => _isArabic ? 'التاريخ والوقت' : 'Date & Time';
+  static String get chooseDay => _isArabic ? 'اختر اليوم' : 'Choose Day';
+  static String get chooseTime => _isArabic ? 'اختر وقت' : 'Choose Time';
+  static String get cancellationPolicy => _isArabic
+      ? 'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في حال الإلغاء خلال أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة 25٪. عرض التفاصيل'
+      : 'You can cancel or modify your booking for free up to 5 hours before the scheduled time. Cancellations under 5 hours will incur a 25% fee. View Details';
+  static String get saturday => _isArabic ? 'السبت' : 'Saturday';
+  static String get sunday => _isArabic ? 'الاحد' : 'Sunday';
+  static String get monday => _isArabic ? 'الاثنين' : 'Monday';
+  static String get tuesday => _isArabic ? 'الثلاثاء' : 'Tuesday';
+  static String get wednesday => _isArabic ? 'الاربعاء' : 'Wednesday';
+  static String get thursday => _isArabic ? 'الخميس' : 'Thursday';
+  static String get friday => _isArabic ? 'الجمعة' : 'Friday';
+
+  static String get addressTitle => _isArabic ? 'العنوان' : 'Address';
+  static String get savedAddresses => _isArabic ? 'عناوين المحفوظة' : 'Saved Addresses';
+  static String get specialInstructions => _isArabic ? 'ملاحظات او تعليمات خاصة (اختياري)' : 'Special notes or instructions (Optional)';
+  static String get specialInstructionsHint => _isArabic ? 'مثال: اتصل امام المسجد..' : 'e.g. Call when in front of the mosque..';
+
+  static String get paymentTitle => _isArabic ? 'الدفع' : 'Payment';
+  static String get paymentMethod => _isArabic ? 'طريقة الدفع' : 'Payment Method';
+  static String get payAfterService => _isArabic ? 'الدفع عند الخدمة' : 'Pay After Service';
+  static String get payAfterServiceDesc => _isArabic ? 'ادفع نقداً بعد اتمام الخدمة' : 'Pay in cash after service completion';
+  static String get discountCode => _isArabic ? 'كود الخصم' : 'Discount Code';
+  static String get enterDiscountCode => _isArabic ? 'ادخل كود الخصم' : 'Enter discount code';
+  static String get securePaymentNote => _isArabic
+      ? 'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.'
+      : 'All payments are encrypted to ensure the highest security and privacy.';
+
+  static String get savedCards => _isArabic ? 'البطاقات المحفوظة' : 'Saved Cards';
+  static String get defaultCard => _isArabic ? 'افتراضي' : 'Default';
+  static String get addNewCard => _isArabic ? '+ اضافة بطاقه جديد' : '+ Add New Card';
+
+  static String get bookingSummary => _isArabic ? 'ملخص الحجز' : 'Booking Summary';
+  static String get paymentSummary => _isArabic ? 'ملخص الدفع' : 'Payment Summary';
+  static String get totalIncludingVat => _isArabic ? 'المجموع (شامل الضريبة المضافة)' : 'Total (incl. VAT)';
+  static String get totalLabel => _isArabic ? 'المجموع' : 'Total';
+
+  static String get houseCleaningTitle => _isArabic ? 'تنظيف المنزل' : 'House Cleaning';
+  static String get howManyHours => _isArabic ? 'كم ساعة تريد عاملة / عاملة التنظيف؟' : 'How many hours of cleaning do you need?';
+  static String get oneHour => _isArabic ? 'ساعة' : '1 Hour';
+  static String get twoHours => _isArabic ? 'ساعتين' : '2 Hours';
+  static String get hours3 => _isArabic ? '3 ساعات' : '3 Hours';
+  static String get hours4 => _isArabic ? '4 ساعات' : '4 Hours';
+  static String get hours5 => _isArabic ? '5 ساعات' : '5 Hours';
+  static String get howManyWorkers => _isArabic ? 'كم عدد العاملات /العمال؟' : 'How many cleaners?';
+  static String get worker => _isArabic ? 'عامل' : 'cleaner';
+  static String get placeSize => _isArabic ? 'حجم المكان ؟' : 'Size of place?';
+  static String get smallApartment => _isArabic ? 'شقة صغيرة' : 'Small Apartment';
+  static String get mediumApartment => _isArabic ? 'شقة متوسطة' : 'Medium Apartment';
+  static String get largeApartment => _isArabic ? 'شقة كبيرة' : 'Large Apartment';
+  static String get villa => _isArabic ? 'فيلا' : 'Villa';
+  static String get teamPreference => _isArabic ? 'تفضيل الفريق؟' : 'Team Preference?';
+  static String get femaleTeam => _isArabic ? 'نسائي' : 'Female Team';
+  static String get maleTeam => _isArabic ? 'رجالي' : 'Male Team';
+  static String get noPreference => _isArabic ? 'لا يهم' : 'No Preference';
+
+  static String get serviceFrequency => _isArabic ? 'تكرار الخدمة' : 'Service Frequency';
+  static String get once => _isArabic ? 'مرة واحدة' : 'Once';
+  static String get weekly => _isArabic ? 'أسبوعيا' : 'Weekly';
+  static String get monthly => _isArabic ? 'شهريا' : 'Monthly';
+  static String get discountUpTo10 => _isArabic ? 'خصم يصل الى 10%' : 'Discount up to 10%';
+  static String get discountUpTo20 => _isArabic ? 'خصم يصل الى 20%' : 'Discount up to 20%';
+
+  static String get trackOrder => _isArabic ? 'تتبع الطلب' : 'Track Order';
+  static String get onTheWay => _isArabic ? 'في الطريق' : 'On the Way';
+  static String get eta5Mins => _isArabic ? 'الوصول المتوقع خلال 5 دقائق' : 'ETA: 5 Minutes';
+  static String get serviceStatus => _isArabic ? 'حالة الخدمة' : 'Service Status';
+  static String get bookingConfirmedStatus => _isArabic ? 'تم تأكيد الحجز' : 'Booking Confirmed';
+  static String get teamOnTheWay => _isArabic ? 'الفريق في الطريق إليك' : 'Team is on the way';
+  static String get serviceInProgress => _isArabic ? 'الخدمة قيد التنفيذ' : 'Service in progress';
+  static String get serviceCompletedStatus => _isArabic ? 'تم الانتهاء' : 'Service completed';
+  static String get teamLeader => _isArabic ? 'قائد الفريق' : 'Team Leader';
+
+  static String get serviceCompletedScreenTitle => _isArabic ? 'اكتملت الخدمة' : 'Service Completed';
+  static String get thankYouForChoosingUs => _isArabic ? 'شكرا لاختيارك لنا' : 'Thank you for choosing us';
+  static String get serviceExecutedSuccessfully => _isArabic
+      ? 'تم تنفيذ خدمة التنظيف العميق لمنزلك بنجاح وبأعلى معايير الجودة الفندقية.'
+      : 'Deep cleaning service has been executed successfully with hospitality standards.';
+  static String get workSummary => _isArabic ? 'ملخص العمل المنجز' : 'Work Summary';
+  static String get serviceType => _isArabic ? 'نوع الخدمة' : 'Service Type';
+  static String get timeTaken => _isArabic ? 'الوقت المستغرق' : 'Time Taken';
+  static String get minutes45 => _isArabic ? '45 دقيقة' : '45 Minutes';
+  static String get roomsCompleted => _isArabic ? 'تم إنجاز 4 غرف' : '4 Rooms Completed';
+  static String get roomsCompletedDesc => _isArabic
+      ? 'شمل الصالة، المطبخ، وغرف النوم مع التعقيم الكامل.'
+      : 'Including living room, kitchen, and bedrooms with full sanitization.';
+  static String get rebook => _isArabic ? 'إعادة الحجز' : 'Rebook';
+  static String get rateExperience => _isArabic ? 'قيم تجربتك' : 'Rate Your Experience';
+
+  static String get serviceRating => _isArabic ? 'تقييم الخدمة' : 'Service Rating';
+  static String get teamRating => _isArabic ? 'تقييم الفريق' : 'Team Rating';
+  static String get teamRatingQuestion => _isArabic
+      ? 'كيف كانت تجربتك مع فريق "ابراهيم محمد" اليوم؟'
+      : 'How was your experience with "Ibrahim Mohamed" team today?';
+  static String get addYourNotesHere => _isArabic ? 'أضف ملاحظاتك هنا...' : 'Add your comments here...';
+  static String get levelOfServiceRatingQuestion => _isArabic
+      ? 'كيف كانت تجربتك مع مستوى الخدمة اليوم؟'
+      : 'How was your experience with the service level today?';
+  static String get submitRating => _isArabic ? 'إرسال التقييم' : 'Submit Rating';
+
+  static String get thankYouForRating => _isArabic ? 'شكرا لتقييمك' : 'Thank you for rating';
+  static String get ratingHelpsImprove => _isArabic ? 'رأيك يساعدنا على تحسين الخدمة' : 'Your feedback helps us improve the service';
+  static String get backToHome => _isArabic ? 'العودة للرئيسية' : 'Back to Home';
+  static String get noAppointmentsAvailable => _isArabic ? 'لا تتوفر مواعيد' : 'No appointments available';
+  static String get noAppointmentsDesc => _isArabic
+      ? 'عذراً، جميع المواعيد محجوزة لليوم المختار، إليك بعض الاقتراحات البديلة:'
+      : 'Sorry, all appointments are fully booked for the selected day. Here are some alternative options:';
+  static String get viewAllAppointments => _isArabic ? 'عرض جميع المواعيد' : 'View all appointments';
+
+  static String get bookingConfirmedSuccess => _isArabic ? 'تم تأكيد حجزك بنجاح !' : 'Booking Confirmed Successfully!';
+  static String get bookingConfirmedPopupDesc => _isArabic
+      ? 'تم تأكيد حجزك وسيتم تذكيرك قبل موعد الزيارة بساعة'
+      : 'Your booking has been confirmed and we will remind you an hour before the visit';
+  static String get bookingNumber => _isArabic ? 'رقم الحجز' : 'Booking Number';
+  static String get copy => _isArabic ? 'نسخ' : 'Copy';
+  static String get share => _isArabic ? 'مشاركة' : 'Share';
+  static String get trackBooking => _isArabic ? 'تتبع الحجز' : 'Track Booking';
+  static String get paymentFailed => _isArabic ? 'فشل الدفع' : 'Payment Failed';
+  static String get paymentFailedDesc => _isArabic
+      ? 'نعتذر، لم نتمكن من معالجة عملية الدفع الخاصة بك، يرجى التحقق من بيانات البطاقة أو المحاولة مرة أخرى.'
+      : 'Sorry, we could not process your payment. Please check your card details or try again.';
+  static String get retry => _isArabic ? 'اعادة المحاولة' : 'Retry';
+  static String get changePaymentMethod => _isArabic ? 'تغيير طريقه الدفع' : 'Change Payment Method';
+
+  static String get errorIncorrectPassword => _isArabic ? 'كلمة مرور غير صحيحة' : 'Incorrect password';
+  static String get errorPasswordsDoNotMatch => _isArabic ? 'كلمتا المرور غير متطابقتين' : 'Passwords do not match';
+  static String get errorOutOfZone => _isArabic ? 'عذراً لا نقدم خدمة في هذه المنطقة' : 'Sorry, we do not serve this area';
+  static String get errorFieldRequired => _isArabic ? 'هذا الحقل مطلوب' : 'This field is required';
+  static String get errorInvalidEmail => _isArabic ? 'البريد الإلكتروني غير صالح' : 'Invalid email address';
+
+  static String get passwordsDoNotMatch => _isArabic ? 'كلمتا المرور غير متطابقتين' : 'Passwords do not match';
+  static String get passwordsMatch => _isArabic ? 'كلمتا المرور متطابقتين' : 'Passwords match';
+  static String get phoneRequired => _isArabic ? 'رقم الهاتف مطلوب' : 'Phone number is required';
+  static String get signUpOtpMessage => _isArabic ? 'تم إرسال رمز التحقق إلى هاتفك' : 'Verification code sent to your phone';
+
+  static String get otpVerificationTitle => _isArabic ? 'تأكيد الرمز' : 'Confirm Code';
+  static String get otpVerificationSubtitle => _isArabic
+      ? 'أدخل رمز التحقق المكون من 6 أرقام المرسل إلى'
+      : 'Enter the 6-digit verification code sent to';
+  static String get otpVerifiedSuccess => _isArabic ? 'تم تأكيد الرمز بنجاح!' : 'Code verified successfully!';
+  static String get otpVerificationError => _isArabic ? 'الرمز غير صحيح' : 'Invalid code';
+
+  static String get resetPasswordTitle => _isArabic ? 'إعادة تعيين كلمة المرور' : 'Reset Password';
+  static String get resetPasswordSubtitle => _isArabic
+      ? 'من فضلك أدخل بريدك الإلكتروني لإعادة تعيين كلمة السر'
+      : 'Please enter your email to reset your password';
+  static String get sendCodeSuccess => _isArabic
+      ? 'تم إرسال رمز التحقق إلى'
+      : 'Verification code sent to';
+  static String get sendCodeButton => _isArabic ? 'أرسل الكود' : 'Send Code';
+
+  static String get checkEmailTitle => _isArabic ? 'تحقق من بريدك الالكتروني' : 'Check Your Email';
+  static String get resetLinkSent => _isArabic ? 'تم إرسال رابط إعادة تعيين إلى' : 'Reset link sent to';
+  static String get enter4DigitCode => _isArabic
+      ? 'أدخل الرمز المكون من 4 أرقام المذكور في البريد الإلكتروني'
+      : 'Enter the 4-digit code mentioned in the email';
+  static String get emailVerifiedSuccess => _isArabic ? 'تم التحقق من بريدك الإلكتروني بنجاح' : 'Email verified successfully';
+
+  static String get onboardingSkip => _isArabic ? 'تخطي' : 'Skip';
+  static String get onboardingNext => _isArabic ? 'التالي' : 'Next';
+  static String get onboardingGetStarted => _isArabic ? 'ابدأ الآن' : 'Get Started';
+  static String get onboardingStep1Title => _isArabic
+      ? 'معدات وخامات بمعايير احترافية'
+      : 'Professional-Grade Equipment & Supplies';
+  static String get onboardingStep1Description => _isArabic
+      ? 'نعتمد على أحدث المعدات والخامات عالية الجودة لضمان نتائج تنظيف احترافية تدوم'
+      : 'We rely on the latest high-quality equipment to ensure professional, long-lasting cleaning results';
+  static String get onboardingStep2Title => _isArabic
+      ? 'أفضل الكفاءات لخدمة منزلك'
+      : 'The Best Professionals for Your Home';
+  static String get onboardingStep2Description => _isArabic
+      ? 'خدمات احترافية يقدمها فريق موثوق ومدرب بعناية لضمان الجودة والراحة في كل زيارة'
+      : 'Professional services delivered by a trusted, carefully trained team to ensure quality and comfort on every visit';
+
+  static String get appTitle => _isArabic ? 'تطبيق الخدمات المنزلية' : 'Home Service App';
+
+  static String get termsIntro => _isArabic ? 'مقدمة' : 'Introduction';
+  static String get bookings => _isArabic ? 'الحجوزات' : 'Bookings';
+  static String get serviceCancellation => _isArabic ? 'إلغاء الخدمة' : 'Service Cancellation';
+  static String get responsibility => _isArabic ? 'المسؤولية' : 'Responsibility';
+  static String get companyResponsibilities => _isArabic ? 'مسؤوليات الشركة' : 'Company Responsibilities';
+  static String get accounts => _isArabic ? 'الحسابات' : 'Accounts';
+  static String get modifications => _isArabic ? 'التعديلات' : 'Modifications';
+  static String get ticketTitle1 => _isArabic ? 'التذكرة' : 'Ticket';
+  static String get writeYourMessage => _isArabic ? 'اكتب رسالتك' : 'Write your message';
+  static String get open => _isArabic ? 'فتح' : 'Open';
+  static String get contactUs => _isArabic ? 'اتصل بنا' : 'Contact Us';
+  static String get customerServiceNumber => _isArabic ? 'رقم خدمة العملاء' : 'Customer Service Number';
+  static String get supportEmailAddress => _isArabic ? 'بريد الدعم الفني' : 'Support Email Address';
+  static String get privacyConfidentialityNote => _isArabic ? 'ملاحظة الخصوصية والسرية' : 'Privacy & Confidentiality Note';
+  static String get arabic => _isArabic ? 'العربية' : 'Arabic';
+  static String get newIssueTitle => _isArabic ? 'مشكلة جديدة' : 'New Issue';
+  static String get issueTitleLabel => _isArabic ? 'عنوان المشكلة' : 'Issue Title';
+  static String get issueTitleHint => _isArabic ? 'أدخل عنوان المشكلة' : 'Enter issue title';
+  static String get orderNumberLabel => _isArabic ? 'رقم الطلب' : 'Order Number';
+  static String get issueDescLabel => _isArabic ? 'وصف المشكلة' : 'Issue Description';
+  static String get issueDescHint => _isArabic ? 'أدخل وصف المشكلة' : 'Enter issue description';
+  static String get send => _isArabic ? 'إرسال' : 'Send';
+  static String get technicalSupport => _isArabic ? 'الدعم الفني' : 'Technical Support';
+  static String get newIssue => _isArabic ? 'مشكلة جديدة' : 'New Issue';
+
+  static String get privacyPolicyIntro => _isArabic ? 'مقدمة سياسة الخصوصية' : 'Privacy Policy Introduction';
+  static String get dataSharing => _isArabic ? 'مشاركة البيانات' : 'Data Sharing';
+  static String get policyModifications => _isArabic ? 'تعديلات السياسة' : 'Policy Modifications';
+  static String get editNewPassDescription => _isArabic ? 'تعديل كلمة المرور' : 'Edit Password Description';
+  static String get passwordNow => _isArabic ? 'كلمة المرور الحالية' : 'Current Password';
+  static String get enterPassword => _isArabic ? 'أدخل كلمة المرور' : 'Enter Password';
+  static String get newPassword => _isArabic ? 'كلمة المرور الجديدة' : 'New Password';
+  static String get reEnterPassword => _isArabic ? 'أعد إدخال كلمة المرور' : 'Re-enter Password';
+  static String get confirmPassword => _isArabic ? 'تأكيد كلمة المرور' : 'Confirm Password';
+  static String get settings => _isArabic ? 'الإعدادات' : 'Settings';
+  static String get changePassword => _isArabic ? 'تغيير كلمة المرور' : 'Change Password';
+  static String get language => _isArabic ? 'اللغة' : 'Language';
+  static String get bookingNotifications => _isArabic ? 'إشعارات الحجوزات' : 'Booking Notifications';
+  static String get helpCenter => _isArabic ? 'مركز المساعدة' : 'Help Center';
+  static String get policiesAndRules => _isArabic ? 'السياسات والقواعد' : 'Policies and Rules';
+  static String get logout => _isArabic ? 'تسجيل الخروج' : 'Logout';
+  static String get logoutContent => _isArabic ? 'هل أنت متأكد من تسجيل الخروج؟' : 'Are you sure you want to logout?';
+  static String get termsAndConditionsLabel => _isArabic ? 'الشروط والأحكام' : 'Terms and Conditions';
+  static String get data => _isArabic ? 'البيانات' : 'Data';
+  static String get services => _isArabic ? 'الخدمات' : 'Services';
+
+  static String get faqQ1 => _isArabic ? 'سؤال 1' : 'Question 1';
+  static String get faqQ2 => _isArabic ? 'سؤال 2' : 'Question 2';
+  static String get faqQ3 => _isArabic ? 'سؤال 3' : 'Question 3';
+  static String get faqQ4 => _isArabic ? 'سؤال 4' : 'Question 4';
+  static String get faqQ5 => _isArabic ? 'سؤال 5' : 'Question 5';
+  static String get faqIntro => _isArabic ? 'مقدمة' : 'Introduction';
+  static String get faq => _isArabic ? 'الأسئلة الشائعة' : 'FAQ';
+  static String get ticketPrefix => _isArabic ? 'تذكرة #' : 'Ticket #';
+  static String get timeOneDayAgo => _isArabic ? 'منذ يوم واحد' : '1 day ago';
+  static String get ticketDesc1 => _isArabic ? 'وصف التذكرة 1' : 'Ticket description 1';
+  static String get ticketDesc2 => _isArabic ? 'وصف التذكرة 2' : 'Ticket description 2';
+  static String get ticketTitle2 => _isArabic ? 'عنوان التذكرة 2' : 'Ticket title 2';
+  static String get resolved => _isArabic ? 'تم الحل' : 'Resolved';
+  static String get privacyPolicyLabel => _isArabic ? 'سياسة الخصوصية' : 'Privacy Policy';
+  static String get start => _isArabic ? 'البداية' : 'Start';
+  static String get collectedData => _isArabic ? 'البيانات المجمعة' : 'Collected Data';
+  static String get dataUsage => _isArabic ? 'استخدام البيانات' : 'Data Usage';
+  static String get dataProtection => _isArabic ? 'حماية البيانات' : 'Data Protection';
+
+  static String get okBtn => _isArabic ? 'موافق' : 'OK';
+  static String get addYourAddress => _isArabic ? 'أضف عنوانك' : 'Add Your Address';
+  static String get saveAddress => _isArabic ? 'حفظ العنوان' : 'Save Address';
+  static String get apartmentNumber => _isArabic ? 'رقم الشقة' : 'Apartment Number';
+  static String get companyName => _isArabic ? 'اسم الشركة' : 'Company Name';
+  static String get signInAction => _isArabic ? 'تسجيل الدخول' : 'Sign In';
+  static String get welcomeSignUp => _isArabic ? 'مرحباً بك' : 'Welcome';
+  static String get signUpSubtitle => _isArabic ? 'أنشئ حساباً جديداً' : 'Create a new account';
+  static String get dettailsbooking => _isArabic ? 'تفاصيل الحجز' : 'Booking Details';
+  static String get rating => _isArabic ? 'التقييم' : 'Rating';
+  static String get paid => _isArabic ? 'مدفوع' : 'Paid';
+  static String get totalprice => _isArabic ? 'الإجمالي' : 'Total Price';
+  static String get currentSubscriptions => _isArabic ? 'الاشتراكات الحالية' : 'Current Subscriptions';
+  static String get previousSubscriptions => _isArabic ? 'الاشتراكات السابقة' : 'Previous Subscriptions';
+  static String get notFindbooking => _isArabic ? 'لم يتم العثور على حجوزات' : 'No bookings found';
+  static String get bookdesc => _isArabic ? 'وصف الحجز' : 'Booking Description';
+  static String get cancelBooking => _isArabic ? 'إلغاء الحجز' : 'Cancel Booking';
+  static String get areYouSureCancel => _isArabic ? 'هل أنت متأكد من إلغاء الحجز؟' : 'Are you sure you want to cancel this booking?';
+  static String get cancelWarning => _isArabic ? 'تحذير: لا يمكن التراجع عن هذا الإجراء' : 'Warning: This action cannot be undone';
+  static String get mentionCancelReason => _isArabic ? 'اذكر سبب الإلغاء (اختياري)' : 'Mention cancellation reason (optional)';
+  static String get confirmcancel => _isArabic ? 'تأكيد الإلغاء' : 'Confirm Cancellation';
+  static String get goBack => _isArabic ? 'العودة' : 'Go Back';
+  static String get confirmReschedule => _isArabic ? 'تأكيد إعادة الجدولة' : 'Confirm Reschedule';
+  static String get confirmReschedule2 => _isArabic ? 'تأكيد' : 'Confirm';
+  static String get specialNotesOptional => _isArabic ? 'ملاحظات خاصة (اختياري)' : 'Special notes (optional)';
+  static String get exampleHomeLocation => _isArabic ? 'مثال: أمام المسجد، الدور الثاني' : 'e.g. In front of the mosque, 2nd floor';
+  static String get viewDetails => _isArabic ? 'عرض التفاصيل' : 'View Details';
+  static String get upcoming => _isArabic ? 'القادمة' : 'Upcoming';
+  static String get previous => _isArabic ? 'السابقة' : 'Previous';
+  static String get cancelReasonOptional => _isArabic ? 'سبب الإلغاء (اختياري)' : 'Cancellation reason (optional)';
+  static String get deepFurnitureCleaning => _isArabic ? 'تنظيف الأثاث العميق' : 'Deep Furniture Cleaning';
+  static String get discountUpTo70 => _isArabic ? 'خصم يصل إلى 70%' : 'Discount up to 70%';
+  static String get pestControlService => _isArabic ? 'خدمة مكافحة الحشرات' : 'Pest Control Service';
+  static String get glassCleaning => _isArabic ? 'تنظيف الزجاج' : 'Glass Cleaning';
+  static String get bestCleaningWork => _isArabic ? 'أفضل عمل تنظيف' : 'Best Cleaning Work';
+  static String get hourlyClean => _isArabic ? 'تنظيف بالساعة' : 'Hourly Cleaning';
+  static String get price120 => _isArabic ? '120 ر.ق' : '120 QAR';
+  static String get startingPrice => _isArabic ? 'السعر يبدأ من' : 'Starting from';
+  static String get specialOfferTitle => _isArabic ? 'عرض خاص' : 'Special Offer';
+  static String get serviceAvailable24h => _isArabic ? 'خدمة متاحة 24 ساعة' : 'Service available 24h';
+  static String get contactInfoLabel => _isArabic ? 'معلومات الاتصال' : 'Contact Information';
+  static String get deleteConfirmBtn => _isArabic ? 'تأكيد الحذف' : 'Confirm Delete';
+  static String get cannotDeleteTitle => _isArabic ? 'لا يمكن حذف الحساب' : 'Cannot Delete Account';
+  static String get cannotDeleteDesc => _isArabic ? 'لديك حجوزات نشطة، يرجى إلغاؤها أولاً' : 'You have active bookings, please cancel them first';
+  static String get cancelledStatus => _isArabic ? 'ملغي' : 'Cancelled';
+  static String get customerServiceNumberLabel => _isArabic ? 'رقم خدمة العملاء' : 'Customer Service Number';
+  static String get emailAddressLabel => _isArabic ? 'عنوان البريد الإلكتروني' : 'Email Address';
+  static String get deleteConfirmWord => _isArabic ? 'حذف' : 'DELETE';
+  static String get deleteAccountHeader => _isArabic ? 'حذف الحساب' : 'Delete Account';
+  static String get ibmFieldLabel12 => _isArabic ? 'حقل' : 'Field';
+  static String get bold16Cyan => _isArabic ? 'نص' : 'Text';
+  static String get catalogue => _isArabic ? 'كاتالوج' : 'Catalogue';
+  static String get promoCode => _isArabic ? 'كود الخصم' : 'Promo Code';
+  static String get bookingDetails => _isArabic ? 'تفاصيل الحجز' : 'Booking Details';
+  static String get rescheduleBooking => _isArabic ? 'إعادة جدولة الحجز' : 'Reschedule Booking';
+  static String get serviceDetails => _isArabic ? 'تفاصيل الخدمة' : 'Service Details';
+  static String get workerFilter => _isArabic ? 'تصفية العمال' : 'Worker Filter';
+  static String get editProfile => _isArabic ? 'تعديل الملف الشخصي' : 'Edit Profile';
+  static String get notification => _isArabic ? 'الإشعارات' : 'Notifications';
+  static String get search => _isArabic ? 'بحث' : 'Search';
+  static String get deleteAccount => _isArabic ? 'حذف الحساب' : 'Delete Account';
+  static String get subscriptions => _isArabic ? 'الاشتراكات' : 'Subscriptions';
+  static String get paymentMethods => _isArabic ? 'طرق الدفع' : 'Payment Methods';
+  static String get setting => _isArabic ? 'الإعدادات' : 'Settings';
+  static String get myVisits => _isArabic ? 'زياراتي' : 'My Visits';
+  static String get subscriptionDetail => _isArabic ? 'تفاصيل الاشتراك' : 'Subscription Detail';
+  static String get favorites => _isArabic ? 'المفضلة' : 'Favorites';
+  static String get noResultsFoundDescription => _isArabic ? 'لم يتم العثور على نتائج' : 'No results found';
+  static String get save => _isArabic ? 'حفظ' : 'Save';
+  static String get deleteAccountBtn => _isArabic ? 'حذف الحساب' : 'Delete Account';
+  static String get noFavoritesYet => _isArabic ? 'لا توجد مفضلات بعد' : 'No favorites yet';
+  static String get saveServicesToAccessLater => _isArabic ? 'احفظ الخدمات للوصول إليها لاحقاً' : 'Save services to access later';
+  static String get upcomingVisits => _isArabic ? 'الزيارات القادمة' : 'Upcoming Visits';
+  static String get noSavedPaymentMethods => _isArabic ? 'لا توجد طرق دفع محفوظة' : 'No saved payment methods';
+  static String get addPaymentMethodDesc => _isArabic ? 'أضف طريقة دفع جديدة' : 'Add a new payment method';
+  static String get addPaymentMethodBtn => _isArabic ? 'إضافة طريقة دفع' : 'Add Payment Method';
+  static String get cardNumberLabel => _isArabic ? 'رقم البطاقة' : 'Card Number';
+  static String get cardHolderPlaceholder => _isArabic ? 'اسم حامل البطاقة' : 'Cardholder Name';
+  static String get cardHolderLabel => _isArabic ? 'اسم حامل البطاقة' : 'Cardholder Name';
+  static String get cvvLabel => _isArabic ? 'CVV' : 'CVV';
+  static String get expiryDateLabel => _isArabic ? 'تاريخ الانتهاء' : 'Expiry Date';
+  static String get saveCardForLater => _isArabic ? 'حفظ البطاقة لاستخدامها لاحقاً' : 'Save card for later use';
+  static String get confirmDeleteHint => _isArabic ? 'اكتب "حذف" للتأكيد' : 'Type "DELETE" to confirm';
+  static String get deleteWarningTitle => _isArabic ? 'تحذير' : 'Warning';
+  static String get deleteWarningDesc => _isArabic ? 'هذا الإجراء لا يمكن التراجع عنه' : 'This action cannot be undone';
+  static String get deleteAddressTitle => _isArabic ? 'حذف العنوان' : 'Delete Address';
+  static String get deleteDefaultAddressDesc => _isArabic ? 'لا يمكن حذف العنوان الافتراضي' : 'Cannot delete default address';
+  static String get cancelBtn => _isArabic ? 'إلغاء' : 'Cancel';
+  static String get confirmFieldHint => _isArabic ? 'تأكيد' : 'Confirm';
+  static String get rule1Title => _isArabic ? 'القاعدة 1' : 'Rule 1';
+  static String get rule1Desc => _isArabic ? 'وصف القاعدة 1' : 'Rule 1 description';
+  static String get rule2Title => _isArabic ? 'القاعدة 2' : 'Rule 2';
+  static String get rule2Desc => _isArabic ? 'وصف القاعدة 2' : 'Rule 2 description';
+  static String get rule3Title => _isArabic ? 'القاعدة 3' : 'Rule 3';
+  static String get rule3Desc => _isArabic ? 'وصف القاعدة 3' : 'Rule 3 description';
+  static String get rule4Title => _isArabic ? 'القاعدة 4' : 'Rule 4';
+  static String get rule4Desc => _isArabic ? 'وصف القاعدة 4' : 'Rule 4 description';
+  static String get profileName => _isArabic ? 'اسم الملف الشخصي' : 'Profile Name';
+  static String get phoneLabel => _isArabic ? 'رقم الهاتف' : 'Phone';
+  static String get phoneNumber => _isArabic ? 'رقم الهاتف' : 'Phone Number';
+  static String get emailValue => _isArabic ? 'البريد الإلكتروني' : 'Email';
+  static String get manageSubscription => _isArabic ? 'إدارة الاشتراك' : 'Manage Subscription';
+  static String get pausePopupTitle => _isArabic ? 'إيقاف مؤقت' : 'Pause';
+  static String get pausePopupDesc => _isArabic ? 'هل تريد إيقاف الاشتراك مؤقتاً؟' : 'Do you want to pause the subscription?';
+  static String get confirmPauseBtn => _isArabic ? 'تأكيد الإيقاف' : 'Confirm Pause';
+  static String get cancelPopupTitle => _isArabic ? 'إلغاء الاشتراك' : 'Cancel Subscription';
+  static String get cancelPopupDesc => _isArabic ? 'هل تريد إلغاء الاشتراك؟' : 'Do you want to cancel the subscription?';
+  static String get confirmCancelBtn => _isArabic ? 'تأكيد الإلغاء' : 'Confirm Cancellation';
+  static String get weeklyCleaning => _isArabic ? 'تنظيف أسبوعي' : 'Weekly Cleaning';
+  static String get viewVisits => _isArabic ? 'عرض الزيارات' : 'View Visits';
+  static String get viewVisitsDesc => _isArabic ? 'عرض زيارات الاشتراك' : 'View subscription visits';
+  static String get pauseTemporarily => _isArabic ? 'إيقاف مؤقت' : 'Pause Temporarily';
+  static String get pauseTemporarilyDesc => _isArabic ? 'إيقاف الاشتراك مؤقتاً' : 'Pause subscription temporarily';
+  static String get changePackage => _isArabic ? 'تغيير الباقة' : 'Change Package';
+  static String get changePackageDesc => _isArabic ? 'تغيير باقة الاشتراك' : 'Change subscription package';
+  static String get cancelSubscription => _isArabic ? 'إلغاء الاشتراك' : 'Cancel Subscription';
+  static String get cancelSubscriptionDesc => _isArabic ? 'إلغاء الاشتراك نهائياً' : 'Cancel subscription permanently';
+  static String get subscriptionTypeLabel => _isArabic ? 'نوع الاشتراك' : 'Subscription Type';
+  static String get nextVisitLabel => _isArabic ? 'الزيارة القادمة' : 'Next Visit';
+  static String get timeLabel => _isArabic ? 'الوقت' : 'Time';
+  static String get expiryDateLabelTitle => _isArabic ? 'تاريخ الانتهاء' : 'Expiry Date';
+  static String get reactivateBtn => _isArabic ? 'إعادة التفعيل' : 'Reactivate';
+  static String get subscribeAgainBtn => _isArabic ? 'الاشتراك مرة أخرى' : 'Subscribe Again';
+  static String get activeStatus => _isArabic ? 'نشط' : 'Active';
+  static String get pausedStatus => _isArabic ? 'متوقف مؤقتاً' : 'Paused';
+  static String get endedStatus => _isArabic ? 'منتهي' : 'Ended';
+  static String get priceLabel => _isArabic ? 'السعر' : 'Price';
+  static String get monthlyPriceSuffix => _isArabic ? '/شهر' : '/month';
+  static String get noActiveSubscriptions => _isArabic ? 'لا توجد اشتراكات نشطة' : 'No active subscriptions';
+  static String get subscribePackagesDesc => _isArabic ? 'تصفح الباقات المتاحة' : 'Browse available packages';
+  static String get browsePackagesBtn => _isArabic ? 'تصفح الباقات' : 'Browse Packages';
+  static String get scheduledStatus => _isArabic ? 'مجدولة' : 'Scheduled';
+  static String get inProgressStatus => _isArabic ? 'قيد التنفيذ' : 'In Progress';
+  static String get defaultPaymentNotice => _isArabic ? 'طريقة الدفع الافتراضية' : 'Default payment method';
+  static String get footerHint => _isArabic ? 'ملاحظة' : 'Note';
+  static String get myAddresses => _isArabic ? 'عناويني' : 'My Addresses';
+  static String get mySubscriptions => _isArabic ? 'اشتراكاتي' : 'My Subscriptions';
 }

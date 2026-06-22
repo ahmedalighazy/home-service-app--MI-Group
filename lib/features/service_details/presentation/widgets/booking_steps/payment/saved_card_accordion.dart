@@ -5,6 +5,7 @@ import 'package:home_service_app/features/service_details/presentation/widgets/b
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/saved_card_model.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class SavedCardsAccordion extends StatelessWidget {
   final List<SavedCard> cards;
@@ -30,7 +31,7 @@ class SavedCardsAccordion extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Header
+
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.04,
@@ -44,14 +45,13 @@ class SavedCardsAccordion extends StatelessWidget {
                   color: AppColors.body,
                   size: 20,
                 ),
-                Text(context.l10n.cardsSaved, style: AppText.semiBold14Black),
+                Text(SdStrings.cardsSaved, style: AppText.semiBold14Black),
               ],
             ),
           ),
 
           const Divider(height: 1, color: AppColors.border),
 
-          // Card tiles
           ...cards.asMap().entries.map(
             (entry) => SavedCardTile(
               card: entry.value,
@@ -60,18 +60,17 @@ class SavedCardsAccordion extends StatelessWidget {
             ),
           ),
 
-          // Add new card link
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.04,
               vertical: size.height * 0.012,
             ),
             child: Align(
-              alignment: Alignment.centerRight,
+              alignment: AlignmentDirectional.centerStart,
               child: GestureDetector(
                 onTap: () {},
                 child: Text(
-                  context.l10n.addCard,
+                  SdStrings.addCard,
                   style: AppText.semiBold14Black.copyWith(
                     color: AppColors.primary,
                   ),

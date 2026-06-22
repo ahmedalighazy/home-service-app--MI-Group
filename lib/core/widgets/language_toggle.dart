@@ -1,74 +1,75 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import '../themes/colors/app_colors.dart';
-import '../utils/helpers/cache_helper.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/language/language_cubit.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
 
-class LanguageToggle extends StatefulWidget {
-  final Function(String)? onLanguageChanged;
-
-  const LanguageToggle({super.key, this.onLanguageChanged});
-
-  @override
-  State<LanguageToggle> createState() => _LanguageToggleState();
-}
-
-class _LanguageToggleState extends State<LanguageToggle> {
-  bool isArabic = true;
-
-  @override
-  void initState() {
-    super.initState();
-    final savedLang = CacheHelper.getData(key: 'language') ?? 'ar';
-    isArabic = savedLang == 'ar';
-  }
-
-  void _onToggle(bool value) async {
-    setState(() => isArabic = value);
-    final newLang = value ? 'ar' : 'en';
-    await CacheHelper.saveData(key: 'language', value: newLang);
-    widget.onLanguageChanged?.call(newLang);
-  }
+class LanguageToggle extends StatelessWidget {
+  const LanguageToggle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsGeometry.all(5),
-      child: AnimatedToggleSwitch<bool>.dual(
-        current: isArabic,
-        first: false, // EN
-        second: true, // AR
-        onChanged: _onToggle,
-        style: ToggleStyle(
-          backgroundColor: const Color(0xFFEEEEEE),
-          borderColor: const Color(0xFFDDDDDD),
-          indicatorColor: AppColors.greenPrimary,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        styleBuilder: (value) =>
-            ToggleStyle(indicatorColor: AppColors.greenPrimary),
-        iconBuilder: (value) => Text(
-          value ? 'ع' : 'EN',
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        textBuilder: (value) => Center(
-          child: Text(
-            value ? 'EN' : 'ع',
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF555555),
+    return BlocBuilder<LanguageCubit, LanguageState>(
+      bloc: getIt<LanguageCubit>(),
+      builder: (context, state) {
+        final isArabic = state.isArabic;
+        return Directionality(
+
+          textDirection: TextDirection.ltr,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+            child: AnimatedToggleSwitch<bool>.dual(
+              current: isArabic,
+              first: false,
+              second: true,
+              onChanged: (value) async {
+                final cubit = getIt<LanguageCubit>();
+                if (value) {
+                  await cubit.setArabic();
+                } else {
+                  await cubit.setEnglish();
+                }
+              },
+              style: ToggleStyle(
+                backgroundColor: const Color(0xFFEEEEEE),
+                borderColor: const Color(0xFFDDDDDD),
+                indicatorColor: AppColors.greenPrimary,
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              styleBuilder: (value) =>
+                  const ToggleStyle(indicatorColor: AppColors.greenPrimary),
+
+              iconBuilder: (value) => Text(
+                value ? 'ع' : 'EN',
+                textDirection: TextDirection.ltr,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+
+              textBuilder: (value) => Center(
+                child: Text(
+                  value ? 'EN' : 'ع',
+                  textDirection: TextDirection.ltr,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF555555),
+                  ),
+                ),
+              ),
+              height: 32.h,
+              spacing: 4.w,
+              animationDuration: const Duration(milliseconds: 300),
+              animationCurve: Curves.easeInOutCubic,
             ),
           ),
-        ),
-        height: 32,
-        spacing: 4,
-        animationDuration: const Duration(milliseconds: 300),
-        animationCurve: Curves.easeInOutCubic,
-      ),
+        );
+      },
     );
   }
 }

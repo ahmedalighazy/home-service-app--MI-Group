@@ -38,4 +38,3 @@ class CorporateHeroIconButton extends StatelessWidget {
     );
   }
 }
-

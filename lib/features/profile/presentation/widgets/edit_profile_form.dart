@@ -34,7 +34,7 @@ class EditProfileForm extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
               IconsPath
-                  .container, // Assuming this was the intended icon from the original code (IconsPath.container)
+                  .container,
               height: 3,
               width: 1,
             ),

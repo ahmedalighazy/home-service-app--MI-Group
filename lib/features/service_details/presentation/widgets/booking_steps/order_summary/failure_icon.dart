@@ -20,4 +20,3 @@ class FailureIcon extends StatelessWidget {
     );
   }
 }
-

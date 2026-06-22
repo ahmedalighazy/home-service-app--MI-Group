@@ -1,236 +1,238 @@
-// class AppStrings {
-//   const context.l10n._();
+import 'package:easy_localization/easy_localization.dart';
 
-//   static const String add = 'أضف';
-//   static const String add2 = 'أضف كود الخصم';
-//   static const String addCard = '+ إضافة بطاقة جديدة';
-//   static const String addHere = 'أضف ملاحظاتك هنا...';
-//   static const String addNewAddress = '+ إضافة عنوان جديد';
-//   static const String addressLocation = 'عنوان الموقع';
-//   static const String codePrefix = 'الكود';
-//   static const String afterCompletionService = 'ادفع نقداً بعد إتمام الخدمة';
-//   static const String allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy =
-//       'جميع المدفوعات مشفرة لضمان أعلى مستويات الأمان والخصوصية.';
-//   static const String ants = 'نمل';
-//   static const String apartment = 'شقة كبيرة';
-//   static const String apartment2 = 'شقة متوسطة';
-//   static const String apartmentSmall = 'شقة صغيرة';
-//   static const String applyCode = 'طبق الكود';
-//   static const String areaPlace = 'مساحة المكان';
-//   static const String bedbugs = 'بق';
-//   static const String cancelBookingOrModifyBeforeNumber5 =
-//       'يمكنك إلغاء الحجز أو تعديله مجاناً قبل 5 ساعة من الموعد المقرر. في ';
-//   static const String cardCreditMada = 'بطاقة الائتمان / مدى';
-//   static const String cardsSaved = 'البطاقات المحفوظة';
-//   static const String carpets = 'سجاد';
-//   static const String carpetsCategory = 'السجاد';
-//   static const String caseBeforeLessFromNumber5HourWillBe =
-//       'حال الإلغاء قبل أقل من 5 ساعة، سيتم تطبيق رسوم إلغاء بنسبة ‎20٪.';
-//   static const String chairsDining = 'كراسي طعام';
-//   static const String changeMethodPayment = 'تغيير طريقة الدفع';
-//   static const String chooseTime = 'اختر وقت';
-//   static const String chooseToday = 'اختر اليوم';
-//   static const String cleaningBathroom = 'تنظيف حمام';
-//   static const String cleaningDeepThatWasWaitingForYourSofa =
-//       'التنظيف العميق الذي كانت تنتظره كنبتك';
-//   static const String cleaningFull = 'تنظيف شامل';
-//   static const String cleaningHome = 'تنظيف المنزل';
-//   static const String cleaningHome2 = 'تنظيف منزلي';
-//   static const String cleaningInsideHome = 'تنظيف احترافي للسجاد داخل المنزل';
-//   static const String cleaningInsideHome2 = 'تنظيف احترافي للكنب داخل المنزل';
-//   static const String cleaningKitchen = 'تنظيف مطبخ';
-//   static const String cleaningOnL = 'تنظيف عميق لكنب على شكل حرف L';
-//   static const String cleaningOven = 'تنظيف فرن';
-//   static const String cleaningSimpleSofaVacuumThingButDustGrains =
-//       'تنظيف بسيط للكنبة بالمكنسة شيء، لكن الغبار وحبيبات الرمل والبقع المخفية التي تتراكم داخل نسيج الكنبة شيء مختلف تماماً.\\n\\nيقوم متخصصو التنظيف المعتمدون لدينا بالوصول إليك مجهزين بالكامل والعمل على كل طبقة من الكنبة لإعادة الانتعاش واللون والراحة إليها.';
-//   static const String cleaningSofa = 'تنظيف الكنب';
-//   static const String cleaningSofaOnL = 'تنظيف الكنب على شكل حرف L';
-//   static const String cleaningWindows = 'تنظيف نوافذ';
-//   static const String cockroaches = 'صراصير';
-//   static const String companiesMosques = 'خدمات الشركات والمساجد';
-//   static const String company = 'شركة';
-//   static const String completedService = 'اكتملت الخدمة';
-//   static const String confirm = 'تأكيد';
-//   static const String copy = 'نسخ';
-//   static const String countRoomsKitchens = 'كم عدد الغرف / المطابخ؟';
-//   static const String countTimesInWeek = 'عدد مرات في الأسبوع';
-//   static const String countWorkersWorkers = 'كم عدد العاملات / العمال؟';
-//   static const String dateTime = 'التاريخ والوقت';
-//   static const String defaultCard = 'افتراضي';
-//   static const String detailsAdditionalOptional = 'تفاصيل إضافية (اختياري)';
-//   static const String detailsFloors = 'تفاصيل الطوابق؟';
-//   static const String determineFinalAfterOnly =
-//       'يتم تحديد السعر النهائي بعد المعاينة فقط';
-//   static const String discountUpToTwelvePercent = 'خصم يصل إلى 12%';
-//   static const String discountUpToTwentyFivePercent = 'خصم يصل إلى 25%';
-//   static const String doneConfirmBooking = 'تم تأكيد الحجز';
-//   static const String doneConfirmYourBookingSuccessfully =
-//       'تم تأكيد حجزك بنجاح !';
-//   static const String
-//   doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit =
-//       'تم تأكيد حجزك وسنقوم بتذكيرك قبل موعد الزيارة بساعة';
-//   static const String doneCopyNumberBooking = 'تم نسخ رقم الحجز';
-//   static const String doneFinished = 'تم الانتهاء';
-//   static const String donePerformedCleaningDeepYourHomeSuccessfullyWeHope =
-//       'تم تنفيذ خدمة التنظيف العميق لمنزلك بنجاح ونتمنى رضاك وجودة الخدمة المقدمة.';
-//   static const String doneReceivedRequest = 'تم استلام طلب المعاينة';
-//   static const String eightRoomsCompleted = 'تم العمل ٨ غرف';
-//   static const String exampleHomeFrontMosque = 'مثال: المنزل أمام المسجد';
-//   static const String extras = 'اضافات';
-//   static const String extras2 = 'الإضافات';
-//   static const String failedPayment = 'فشل الدفع';
-//   static const String female = 'نسائي';
-//   static const String first = 'أول';
-//   static const String fivePercentDiscount = 'خصم 5٪';
-//   static const String forChoosingUs = 'شكراً لاختيارك لنا';
-//   static const String forRating = 'شكراً لتقييمك';
-//   static const String fourRooms = '4 غرفة';
-//   static const String fullLivingRoomKitchenBedroomsWithCleaningComplete =
-//       'شامل الصالة، المطبخ، وغرف النوم مع التنظيف الكامل.';
-//   static const String furniture = 'الأثاث';
-//   static const String furnitureCleaning = 'تنظيف الاثاث';
-//   static const String ground = 'أرضي';
-//   static const String home = 'المنزل';
-//   static const String backToHome = 'العودة للرئيسية';
-//   static const String homeAddressSubtitle = '18، شارع النغيب، الدوحة، الدوحة';
-//   static const String hour = 'ساعة';
-//   static const String hours = 'ساعات';
-//   static const String hourCleaning = 'كم ساعة تريد عاملة / عاملة التنظيف؟';
-//   static const String hourRegularCleaning = 'كم ساعة تريد غداً / عادة التنظيف؟';
-//   static const String howWasExperienceWithIbrahimMohamedToday =
-//       'كيف كانت تجربتك مع فريق "إبراهيم محمد" اليوم؟';
-//   static const String howWasExperienceWithLevelServiceToday =
-//       'كيف كانت تجربتك مع مستوى الخدمة اليوم؟';
-//   static const String ibrahimInitial = 'إ';
-//   static const String ibrahimMohamed = 'إبراهيم محمد';
-//   static const String includesService = 'تشمل الخدمة:';
-//   static const String requestInspectionCta = 'اطلب معاينة';
-//   static const String inspectionFreeFully = 'معاينة مجانية بالكامل';
-//   static const String inspectSofaDetermineTypeFabricDetermineNeedsCleaning =
-//       'فحص الكنبة لتحديد نوع القماش\\nتحديد احتياجات التنظيف\\nفحص الكنبة لتحديد نوع القماش\\nتنظيف جاف بالمكنسة لإزالة الغبار والشعر والمخلفات\\nتنظيف رطب بالشامبو باستخدام مواد متخصصة\\nاستخراج البقع أثناء عملية الشامبو لمعالجتها\\nمعالجة موضعية لاستخراج البقع العنيدة';
-//   static const String inWay = 'في الطريق';
-//   static const String mada = 'مدى';
-//   static const String male = 'رجالي';
-//   static const String mayRemainSofaWetDurationUpToToNumber12 =
-//       'قد تظل الكنبة رطبة لمدة تصل إلى 12 ساعة بعد التنظيف.\\nيعتمد وقت التجفيف على نوع القماش ودرجة التهوية في المكان.\\nقد يصعب إزالة بعض البقع العنيدة جداً مثل بقع الحيوانات أو الدم أو الزيوت.\\nسيقوم المختص بإرشادك إذا كانت بعض طرق التنظيف غير مناسبة لبعض أنواع الأقمشة.\\nيرجى تغطية العناصر التي لا تشملها الخدمة أو لا يمكن تنظيفها.';
-//   static const String methodPayment = 'طريقة الدفع';
-//   static const String mice = 'فئران';
-//   static const String mosque = 'مسجد';
-//   static const String morning = 'ص';
-//   static const String most = 'الأكثر طلباً';
-//   static const String namePlace = 'اسم المكان';
-//   static const String next = 'التالي';
-//   static const String from = 'من';
-//   static const String not = 'لا يهم';
-//   static const String sharingUnavailable = 'المشاركة غير متاحة حالياً';
-//   static const String notesBeforeBooking = 'ملاحظات قبل الحجز:';
-//   static const String notesOptional = 'ملاحظات او تعليمات خاصه (اختياري)';
-//   static const String notExistsAnyCommitmentAfter =
-//       'لا يوجد أي التزام بعد المعاينة';
-//   static const String notSureGetFreeInspection =
-//       'لست وائقاً! احصل على معاينة مجانية';
-//   static const String mediumSize150By275 = 'متوسطة الحجم (150 * 275 م)';
-//   static const String largeSize250By345 = 'كبيرة الحجم (250 * 345 م)';
-//   static const String numberBooking = 'رقم الحجز';
-//   static const String onceOne = 'مرة واحدة';
-//   static const String oneHundredEightyMinutes = '١٨٠ دقيقة';
-//   static const String oneRoom = '1 غرفة';
-//   static const String ourTeamReadyHelpYouInChooseServiceSuitableEasily =
-//       'فريقنا جاهز لمساعدتك في اختيار الخدمة المناسبة بسهولة.';
-//   static const String payment = 'الدفع';
-//   static const String paymentOnService = 'الدفع عند الخدمة';
-//   static const String qar = 'ر.ق';
-//   static const String pestControl = 'مكافحة الحشرات';
-//   static const String pestControlAntsApartment = 'مكافحة نمل - شقة';
-//   static const String pestControlAntsVilla = 'مكافحة نمل - فيلا';
-//   static const String pestControlApartment = 'مكافحة الصراصير - شقة';
-//   static const String pestControlBedbugsApartment = 'مكافحة بق - شقة';
-//   static const String pestControlBedbugsVilla = 'مكافحة بق - فيلا';
-//   static const String pestControlMiceApartment = 'مكافحة فئران - شقة';
-//   static const String pestControlMiceVilla = 'مكافحة فئران - فيلا';
-//   static const String pestControlPests = 'مكافحة حشرات';
-//   static const String pestControlVilla = 'مكافحة الصراصير - فيلا';
-//   static const String pillowsDecorative = 'وسادات للزينة';
-//   static const String pillowsSleeping = 'وسادات نوم';
-//   static const String polishingFloors = 'تلميع أرضيات';
-//   static const String preferenceTeam = 'تفضيل الفريق؟';
-//   static const String provideCleaningSanitizationOfficesMosquesDetermine =
-//       'نقدم خدمات تنظيف وتعقيم للمكاتب والمساجد وفقاً لتحديد احتياجك بدقة وتقديم عرض سعر واضح بدون التزام.';
-//   static const String rateExperience = 'قيم تجربتك';
-//   static const String ratingService = 'تقييم الخدمة';
-//   static const String ratingTeam = 'تقييم الفريق';
-//   static const String riyalQar = 'ريال.ق';
-//   static const String rebookBooking = 'إعادة الحجز';
-//   static const String rebookRetry = 'إعادة المحاولة';
-//   static const String regular = 'عادة';
-//   static const String regularWithCleaningAddOn = 'عادة + إضافة التنظيف';
-//   static const String repeatService = 'تكرار الخدمة';
-//   static const String requestInspection = 'طلب معاينة';
-//   static const String savedAddressesTitle = 'عناويني المحفوظة';
-//   static const String second = 'ثاني';
-//   static const String serviceInProgressExecution = 'الخدمة قيد التنفيذ';
-//   static const String services = 'الخدمات الإضافية';
-//   static const String sevenPercentDiscount = 'خصم 7%';
-//   static const String seventyPercentDiscount = '70% خصم';
-//   static const String share = 'مشاركة';
-//   static const String showDetails = 'عرض التفاصيل';
-//   static const String showDetailsService = 'عرض تفاصيل الخدمة';
-//   static const String sizePlace = 'حجم المكان؟';
-//   static const String smallNumber100Number200 = 'صغيرة الحجم (100 * 200 م)';
-//   static const String sofas = 'الكنب';
-//   static const String sorryCouldNotFromProcessProcessPaymentYour =
-//       'نعتذر، لم نتمكن من معالجة عملية الدفع الخاصة بك. يرجى التحقق من بيانات البطاقة أو المحاولة مرة أخرى.';
-//   static const String timeSpent = 'الوقت المستغرق';
-//   static const String sports = 'رياضي';
-//   static const String sprayFullAntsInApartment = 'رش شامل لمكافحة نمل في الشقة';
-//   static const String sprayFullAntsInVilla = 'رش شامل لمكافحة نمل في الفيلا';
-//   static const String sprayFullBedbugsInApartment =
-//       'رش شامل لمكافحة بق في الشقة';
-//   static const String sprayFullBedbugsInVilla = 'رش شامل لمكافحة بق في الفيلا';
-//   static const String sprayFullInApartment =
-//       'رش شامل لمكافحة الصراصير في الشقة';
-//   static const String sprayFullInVilla = 'رش شامل لمكافحة الصراصير في الفيلا';
-//   static const String sprayFullMiceInApartment =
-//       'رش شامل لمكافحة فئران في الشقة';
-//   static const String sprayFullMiceInVilla = 'رش شامل لمكافحة فئران في الفيلا';
-//   static const String statusService = 'حالة الخدمة';
-//   static const String step = 'الخطوة';
-//   static const String stepNumber1FromNumber5 = 'الخطوة 1 من 5';
-//   static const String studio = 'استوديو';
-//   static const String summaryBooking = 'ملخص الحجز';
-//   static const String summaryWorkCompleted = 'ملخص العمل المنجز';
-//   static const String teamInWayToYou = 'الفريق في الطريق إليك';
-//   static const String tenPercentDiscount = 'خصم 10٪';
-//   static const String tenTwentyEightAm = '10:28 ص';
-//   static const String text132 = 'شهرياً';
-//   static const String text150 = 'فني العناية';
-//   static const String text161 = 'كود الخصم';
-//   static const String text18 = 'إرسال التقييم';
-//   static const String text20 = 'أسبوعياً';
-//   static const String text51 = 'العنوان';
-//   static const String text59 = 'الوصول المتوقع';
-//   static const String threeRooms = '3 غرفة';
-//   static const String total = 'المجموع';
-//   static const String totalCurrent = 'المجموع الحالي';
-//   static const String trackingBooking = 'تتبع الحجز';
-//   static const String trackingOrder = 'تتبع الطلب';
-//   static const String twelveThousandBookings = '12,000 حجز';
-//   static const String twoRooms = '2 غرفة';
-//   static const String twoWeekly = '2 أسبوعياً';
-//   static const String twoWeeks = 'أسبوعين';
-//   static const String typePlace = 'نوع المكان';
-//   static const String typeService = 'نوع الخدمة';
-//   static const String typeServiceRequired = 'نوع الخدمة المطلوبة';
-//   static const String villa = 'فيلا';
-//   static const String washingCurtains = 'غسيل ستائر';
-//   static const String weekly = 'اسبوعيا';
-//   static const String within18Minutes = 'خلال 18د';
-//   static const String work = 'العمل';
-//   static const String workAddressSubtitle = 'برج المراقب - الطابق الثامن';
-//   static const String writeAnyNotesHelpUsUnderstandYourNeed =
-//       'اكتب أي ملاحظات تساعدنا نفهم احتياجك...';
-//   static const String writeLocationInDetail = 'اكتب الموقع بالتفصيل';
-//   static const String writeNameCompanyOrMosque = 'اكتب اسم الشركة أو المسجد';
-//   static const String yourOpinionHelpsUsOnImproveService =
-//       'رأيك يساعدنا على تحسين الخدمة';
-// }
+/// Localization keys for the service_details feature.
+/// All strings are loaded from assets/translations/{locale}.json via easy_localization.
+class SdStrings {
+  const SdStrings._();
+
+  static String get add => 'sd_add'.tr();
+  static String get addDiscountCode => 'sd_addDiscountCode'.tr();
+  static String get addCard => 'sd_addCard'.tr();
+  static String get addNotesHere => 'sd_addNotesHere'.tr();
+  static String get addressLocation => 'sd_addressLocation'.tr();
+  static String get codePrefix => 'sd_codePrefix'.tr();
+  static String get afterCompletionService => 'sd_afterCompletionService'.tr();
+  static String get allPaymentsEncrypted => 'sd_allPaymentsEncrypted'.tr();
+  static String get applyCode => 'sd_applyCode'.tr();
+  static String get areaPlace => 'sd_areaPlace'.tr();
+  static String get cancelBookingBefore5h => 'sd_cancelBookingBefore5h'.tr();
+  static String get cardCreditMada => 'sd_cardCreditMada'.tr();
+  static String get cardsSaved => 'sd_cardsSaved'.tr();
+  static String get changeMethodPayment => 'sd_changeMethodPayment'.tr();
+  static String get chooseTime => 'sd_chooseTime'.tr();
+  static String get chooseDay => 'sd_chooseDay'.tr();
+  static String get companiesMosques => 'sd_companiesMosques'.tr();
+  static String get company => 'sd_company'.tr();
+  static String get confirm => 'sd_confirm'.tr();
+  static String get copy => 'sd_copy'.tr();
+  static String get countRoomsKitchens => 'sd_countRoomsKitchens'.tr();
+  static String get countTimesInWeek => 'sd_countTimesInWeek'.tr();
+  static String get countWorkersWorkers => 'sd_countWorkersWorkers'.tr();
+  static String get dateTime => 'sd_dateTime'.tr();
+  static String get defaultCard => 'sd_defaultCard'.tr();
+  static String get detailsAdditionalOptional => 'sd_detailsAdditionalOptional'.tr();
+  static String get detailsFloors => 'sd_detailsFloors'.tr();
+  static String get determineFinalAfterOnly => 'sd_determineFinalAfterOnly'.tr();
+  static String get doneConfirmBooking => 'sd_doneConfirmBooking'.tr();
+  static String get doneConfirmYourBookingSuccessfully => 'sd_doneConfirmBookingSuccessfully'.tr();
+  static String get doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit => 'sd_doneConfirmBookingReminder'.tr();
+  static String get doneCopyNumberBooking => 'sd_doneCopyNumberBooking'.tr();
+  static String get doneFinished => 'sd_doneFinished'.tr();
+  static String get donePerformedCleaningDeepYourHomeSuccessfullyWeHope => 'sd_donePerformedCleaningSuccessfully'.tr();
+  static String get doneReceivedRequest => 'sd_doneReceivedRequest'.tr();
+  static String get extras => 'sd_extras'.tr();
+  static String get extras2 => 'sd_extras'.tr();
+  static String get failedPayment => 'sd_failedPayment'.tr();
+  static String get female => 'sd_female'.tr();
+  static String get from => 'sd_from'.tr();
+  static String get forChoosingUs => 'sd_forChoosingUs'.tr();
+  static String get forRating => 'sd_forRating'.tr();
+  static String get furniture => 'sd_furniture'.tr();
+  static String get furnitureCleaning => 'sd_furnitureCleaning'.tr();
+  static String get home => 'sd_home'.tr();
+  static String get backToHome => 'sd_backToHome'.tr();
+  static String get hourCleaning => 'sd_hourCleaning'.tr();
+  static String get hourRegularCleaning => 'sd_hourCleaning'.tr();
+  static String get howWasExperienceWithIbrahimMohamedToday => 'sd_howWasExperienceTeam'.tr();
+  static String get howWasExperienceWithLevelServiceToday => 'sd_howWasExperienceService'.tr();
+  static String get includesService => 'sd_includesService'.tr();
+  static String get requestInspectionCta => 'sd_requestInspectionCta'.tr();
+  static String get inspectionFreeFully => 'sd_inspectionFreeFully'.tr();
+  static String get inWay => 'sd_inWay'.tr();
+  static String get male => 'sd_male'.tr();
+  static String get methodPayment => 'sd_methodPayment'.tr();
+  static String get mosque => 'sd_mosque'.tr();
+  static String get most => 'sd_most'.tr();
+  static String get namePlace => 'sd_namePlace'.tr();
+  static String get next => 'sd_next'.tr();
+  static String get not => 'sd_not'.tr();
+  static String get sharingUnavailable => 'sd_sharingUnavailable'.tr();
+  static String get notesBeforeBooking => 'sd_notesBeforeBooking'.tr();
+  static String get notesOptional => 'sd_notesOptional'.tr();
+  static String get notExistsAnyCommitmentAfter => 'sd_notExistsAnyCommitmentAfter'.tr();
+  static String get notSureGetFreeInspection => 'sd_notSureGetFreeInspection'.tr();
+  static String get numberBooking => 'sd_numberBooking'.tr();
+  static String get onceOne => 'sd_onceOne'.tr();
+  static String get payment => 'sd_payment'.tr();
+  static String get paymentOnService => 'sd_paymentOnService'.tr();
+  static String get qar => 'sd_qar'.tr();
+  static String get riyalQar => 'sd_riyalQar'.tr();
+  static String get pestControl => 'sd_pestControl'.tr();
+  static String get pestControlPests => 'sd_pestControlPests'.tr();
+  static String get preferenceTeam => 'sd_preferenceTeam'.tr();
+  static String get provideCleaningSanitizationOfficesMosquesDetermine => 'sd_provideCleaningSanitization'.tr();
+  static String get rateExperience => 'sd_rateExperience'.tr();
+  static String get ratingService => 'sd_ratingService'.tr();
+  static String get ratingTeam => 'sd_ratingTeam'.tr();
+  static String get rebookBooking => 'sd_rebookBooking'.tr();
+  static String get rebookRetry => 'sd_rebookRetry'.tr();
+  static String get repeatService => 'sd_repeatService'.tr();
+  static String get requestInspection => 'sd_requestInspection'.tr();
+  static String get savedAddressesTitle => 'sd_savedAddressesTitle'.tr();
+  static String get serviceInProgressExecution => 'sd_serviceInProgressExecution'.tr();
+  static String get share => 'sd_share'.tr();
+  static String get showDetails => 'sd_showDetails'.tr();
+  static String get showDetailsService => 'sd_showDetailsService'.tr();
+  static String get sizePlace => 'sd_sizePlace'.tr();
+  static String get sorryCouldNotFromProcessProcessPaymentYour => 'sd_sorryCouldNotProcessPayment'.tr();
+  static String get timeSpent => 'sd_timeSpent'.tr();
+  static String get statusService => 'sd_statusService'.tr();
+  static String get step => 'sd_step'.tr();
+  static String get summaryBooking => 'sd_summaryBooking'.tr();
+  static String get summaryWorkCompleted => 'sd_summaryWorkCompleted'.tr();
+  static String get teamInWayToYou => 'sd_teamInWayToYou'.tr();
+  static String get total => 'sd_total'.tr();
+  static String get totalCurrent => 'sd_totalCurrent'.tr();
+  static String get trackingBooking => 'sd_trackingBooking'.tr();
+  static String get trackingOrder => 'sd_trackingOrder'.tr();
+  static String get typePlace => 'sd_typePlace'.tr();
+  static String get typeService => 'sd_typeService'.tr();
+  static String get typeServiceRequired => 'sd_typeServiceRequired'.tr();
+  static String get villa => 'sd_villa'.tr();
+  static String get work => 'sd_work'.tr();
+  static String get writeAnyNotesHelpUsUnderstandYourNeed => 'sd_writeAnyNotes'.tr();
+  static String get writeLocationInDetail => 'sd_writeLocationInDetail'.tr();
+  static String get writeNameCompanyOrMosque => 'sd_writeNameCompanyOrMosque'.tr();
+  static String get yourOpinionHelpsUsOnImproveService => 'sd_yourOpinionHelpsImprove'.tr();
+
+  // Missing translation keys
+  static String get tenPercentDiscount => 'sd_tenPercentDiscount'.tr();
+  static String get fivePercentDiscount => 'sd_fivePercentDiscount'.tr();
+  static String get seventyPercentDiscount => 'sd_seventyPercentDiscount'.tr();
+  static String get smallNumber100Number200 => 'sd_smallNumber100Number200'.tr();
+  static String get mediumSize150By275 => 'sd_mediumSize150By275'.tr();
+  static String get largeSize250By345 => 'sd_largeSize250By345'.tr();
+  static String get addNewAddress => 'sd_addNewAddress'.tr();
+  static String get exampleHomeFrontMosque => 'sd_exampleHomeFrontMosque'.tr();
+  static String get chooseToday => 'sd_chooseToday'.tr();
+  static String get sevenPercentDiscount => 'sd_sevenPercentDiscount'.tr();
+  static String get weekly => 'sd_weekly'.tr();
+  static String get discountUpToTwelvePercent => 'sd_discountUpToTwelvePercent'.tr();
+  static String get discountUpToTwentyFivePercent => 'sd_discountUpToTwentyFivePercent'.tr();
+  static String get cancelBookingOrModifyBeforeNumber5 => 'sd_cancelBookingOrModifyBeforeNumber5'.tr();
+  static String get caseBeforeLessFromNumber5HourWillBe => 'sd_caseBeforeLessFromNumber5HourWillBe'.tr();
+  static String get ourTeamReadyHelpYouInChooseServiceSuitableEasily => 'sd_ourTeamReadyHelpYouInChooseServiceSuitableEasily'.tr();
+  static String get services => 'sd_services'.tr();
+  static String get add2 => 'sd_add2'.tr();
+  static String get allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy => 'sd_allPaymentsEncryptedEnsureHighestLevelsSecurityPrivacy'.tr();
+  static String get addHere => 'sd_addHere'.tr();
+  static String get cleaningFull => 'sd_cleaningFull'.tr();
+
+  // Kept as static data (mock/demo values — should come from API in production)
+  static const String ibrahimMohamed = 'Ibrahim Mohamed';
+  static const String ibrahimInitial = 'I';
+  static const String tenTwentyEightAm = '10:28 AM';
+  static const String within18Minutes = 'In 18 min';
+  static const String twelveThousandBookings = '12,000 bookings';
+  static const String homeAddressSubtitle = '18, Al-Nageeb St, Doha';
+  static const String workAddressSubtitle = 'Al-Muraqab Tower - 8th Floor';
+
+  static String get apartment => 'sd_apartment'.tr();
+  static String get apartment2 => 'sd_apartment2'.tr();
+  static String get apartmentSmall => 'sd_apartmentSmall'.tr();
+  static String get studio => 'sd_studio'.tr();
+  static String get ground => 'sd_ground'.tr();
+  static const String cleaningDeepThatWasWaitingForYourSofa =
+      'The deep cleaning your sofa has been waiting for';
+  static const String cleaningSimpleSofaVacuumThingButDustGrains =
+      'Simple vacuuming is one thing, but the dust, sand grains, and hidden stains accumulating inside sofa fabric are a completely different matter.\n\nOur certified cleaning specialists come fully equipped and work on every layer of your sofa to restore its freshness, color, and comfort.';
+  static const String inspectSofaDetermineTypeFabricDetermineNeedsCleaning =
+      'Inspect sofa to determine fabric type\nDetermine cleaning needs\nDry vacuum to remove dust, hair, and debris\nWet shampooing using specialized products\nStain extraction during shampooing process\nSpot treatment for stubborn stains';
+  static const String mayRemainSofaWetDurationUpToToNumber12 =
+      'The sofa may remain wet for up to 12 hours after cleaning.\nDrying time depends on fabric type and room ventilation.\nSome very stubborn stains (pets, blood, oils) may be difficult to remove.\nThe specialist will advise if some cleaning methods are unsuitable for certain fabrics.\nPlease cover items not included in the service or that cannot be cleaned.';
+
+  // Pest control labels
+  static const String ants = 'Ants';
+  static const String cockroaches = 'Cockroaches';
+  static const String bedbugs = 'Bed Bugs';
+  static const String mice = 'Mice';
+  static const String carpets = 'Carpets';
+  static const String carpetsCategory = 'Carpets';
+  static const String sofas = 'Sofas';
+  static const String chairsDining = 'Dining Chairs';
+  static const String pillowsDecorative = 'Decorative Pillows';
+  static const String pillowsSleeping = 'Sleeping Pillows';
+  static const String sports = 'Sports';
+  static const String mada = 'Mada';
+
+  // Service name labels
+  static const String cleaningBathroom = 'Bathroom Cleaning';
+  static const String cleaningKitchen = 'Kitchen Cleaning';
+  static const String cleaningOven = 'Oven Cleaning';
+  static const String cleaningWindows = 'Window Cleaning';
+  static const String cleaningHome = 'Home Cleaning';
+  static const String cleaningHome2 = 'Home Cleaning';
+  static const String polishingFloors = 'Floor Polishing';
+  static const String washingCurtains = 'Curtain Washing';
+  static const String furnitureCleaning2 = 'Furniture Cleaning';
+  static const String cleaningInsideHome = 'Professional carpet cleaning inside home';
+  static const String cleaningInsideHome2 = 'Professional sofa cleaning inside home';
+  static const String cleaningSofa = 'Sofa Cleaning';
+  static const String cleaningSofaOnL = 'L-shaped Sofa Cleaning';
+  static const String cleaningOnL = 'Deep cleaning for L-shaped sofa';
+  static const String pestControlAntsApartment = 'Ant Control - Apartment';
+  static const String pestControlAntsVilla = 'Ant Control - Villa';
+  static const String pestControlApartment = 'Cockroach Control - Apartment';
+  static const String pestControlVilla = 'Cockroach Control - Villa';
+  static const String pestControlBedbugsApartment = 'Bed Bug Control - Apartment';
+  static const String pestControlBedbugsVilla = 'Bed Bug Control - Villa';
+  static const String pestControlMiceApartment = 'Mouse Control - Apartment';
+  static const String pestControlMiceVilla = 'Mouse Control - Villa';
+  static const String sprayFullAntsInApartment = 'Full spray for ant control in apartment';
+  static const String sprayFullAntsInVilla = 'Full spray for ant control in villa';
+  static const String sprayFullInApartment = 'Full spray for cockroach control in apartment';
+  static const String sprayFullInVilla = 'Full spray for cockroach control in villa';
+  static const String sprayFullBedbugsInApartment = 'Full spray for bed bug control in apartment';
+  static const String sprayFullBedbugsInVilla = 'Full spray for bed bug control in villa';
+  static const String sprayFullMiceInApartment = 'Full spray for mouse control in apartment';
+  static const String sprayFullMiceInVilla = 'Full spray for mouse control in villa';
+
+  // Numeric/time display values
+  static const String morning = 'AM';
+  static const String oneRoom = '1 Room';
+  static const String twoRooms = '2 Rooms';
+  static const String threeRooms = '3 Rooms';
+  static const String fourRooms = '4 Rooms';
+  static const String eightRoomsCompleted = '8 rooms completed';
+  static const String oneHundredEightyMinutes = '180 min';
+  static const String first = 'First';
+  static const String second = 'Second';
+  static const String hour = 'Hour';
+  static const String hours = 'Hours';
+  static const String regular = 'Regular';
+  static const String regularWithCleaningAddOn = 'Regular + Cleaning Add-on';
+  static const String twoWeekly = '2x Weekly';
+  static const String twoWeeks = '2 Weeks';
+  static const String fullLivingRoomKitchenBedroomsWithCleaningComplete =
+      'Including living room, kitchen, and bedrooms with full cleaning.';
+  static const String completedService = 'Service Completed';
+  static const String namePlace2 = 'Place Name';
+  static const String text132 = 'Monthly';
+  static const String text150 = 'Care Technician';
+  static const String text161 = 'Discount Code';
+  static const String text18 = 'Submit Rating';
+  static const String text20 = 'Weekly';
+  static const String text51 = 'Address';
+  static const String text59 = 'ETA';
+  static const String stepNumber1FromNumber5 = 'Step 1 of 5';
+}

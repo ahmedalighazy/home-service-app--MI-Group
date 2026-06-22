@@ -1,4 +1,4 @@
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:home_service_app/features/service_details/service_details_strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
@@ -36,7 +36,7 @@ class TimeSlotChip extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '${slot.startTime} ${context.l10n.morning}',
+              '${slot.startTime} ${SdStrings.morning}',
               style: AppText.semiBold12Black.copyWith(
                 color: color,
                 fontSize: 11,
@@ -44,8 +44,11 @@ class TimeSlotChip extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              '${slot.endTime}- ${context.l10n.morning}',
-              style: AppText.regular12Grey.copyWith(color: color, fontSize: 11),
+              '${slot.endTime}- ${SdStrings.morning}',
+              style: AppText.regular12Grey.copyWith(
+                color: color,
+                fontSize: 11,
+              ),
               textAlign: TextAlign.center,
             ),
           ],

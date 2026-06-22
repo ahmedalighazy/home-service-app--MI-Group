@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../themes/colors/app_colors.dart';
 import 'language_toggle.dart';
+import '../themes/image/app_assets.dart';
 
 class ScreenWithLanguageToggle extends StatelessWidget {
   final Widget child;
@@ -26,15 +27,7 @@ class ScreenWithLanguageToggle extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: backgroundColor ?? AppColors.white,
         elevation: 0,
-        leading: showBackButton
-            ? IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: AppColors.dark,
-                ),
-                onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
-              )
-            : null,
+        leading: null,
         title: title != null
             ? Text(
                 title!,
@@ -47,11 +40,16 @@ class ScreenWithLanguageToggle extends StatelessWidget {
             : null,
         centerTitle: true,
         actions: [
-          // Language Toggle in top right
-          Padding(
-            padding: EdgeInsets.only(right: 16.w, top: 8.h),
-            child: const LanguageToggle(),
-          ),
+          if (showBackButton)
+            IconButton(
+              icon: Image.asset(
+                AppAssets.iconBack,
+                width: 24.w,
+                height: 24.w,
+              ),
+              onPressed: onBackPressed ?? () => Navigator.of(context).pop(),
+            ),
+          const LanguageToggle(),
         ],
       ),
       body: child,

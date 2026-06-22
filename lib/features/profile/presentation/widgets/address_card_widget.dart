@@ -29,19 +29,24 @@ class AddressCardWidget extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(AppSizes.paddingSmall.r),
       decoration: ShapeDecoration(
-        color: AppColors.bgSecondary,
+        color: const Color(0xFFF8FBFF) ,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: AppColors.borderCards),
-          borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
+          side: const BorderSide(
+            width: 1,
+            color: Color(0xFFF1F5F9) ,
+          ),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           Row(
+
             children: [
               SvgPicture.asset(
-                address.iconPath,
+                address.iconPath ?? '',
                 width: 24.r,
                 height: 24.r,
                 colorFilter: const ColorFilter.mode(
@@ -50,25 +55,31 @@ class AddressCardWidget extends StatelessWidget {
                 ),
               ),
               horizontalSpace(8),
-              Expanded(
-                child: Text(
-                  address.label,
-                  style: AppText.ibmHeading16(color: AppColors.black),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+
+              Text(
+                address.label ?? '',
+                style: AppText.ibmHeading16(color: AppColors.black),
               ),
-              if (address.isDefault) const _DefaultBadge(),
+
+              const Spacer(),
+              if (address.isDefault ?? false) _DefaultBadge(),
             ],
           ),
+
           verticalSpace(8),
-          Text(
-            address.details,
-            style: AppText.ibmDescription14(color: AppColors.textLightGrey),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+
+          Align(
+            alignment: AlignmentGeometry.bottomRight,
+            child: Text(
+              address.details ?? '',
+              style: AppText.ibmDescription14(color: AppColors.textLightGrey),
+
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           verticalSpace(12),
+
           Row(
             children: [
               _ActionButton(

@@ -22,4 +22,3 @@ class SuccessMark extends StatelessWidget {
     );
   }
 }
-

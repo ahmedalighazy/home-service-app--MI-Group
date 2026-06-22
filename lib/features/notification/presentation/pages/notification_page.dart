@@ -5,12 +5,18 @@ import 'package:home_service_app/features/notification/presentation/cubit/notifi
 import 'package:home_service_app/features/notification/presentation/cubit/notification_state.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_empty_section.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_list_section.dart';
+import 'package:home_service_app/features/notification/presentation/widgets/notification_app_bar.dart';
+import 'notification_logic.dart';
 
-import '../../../../core/utils/l10n/app_strings.dart';
-
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
 
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage>
+    with NotificationLogic {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +32,11 @@ class NotificationPage extends StatelessWidget {
                     return const NotificationsEmptySection();
                   }
 
+                  // Note: NotificationsListSection handles onTap internally
+                  // via NotificationCard → markAsRead. The mixin's
+                  // markNotificationAsRead(context, notification) is ready
+                  // for use if NotificationsListSection exposes an onTap
+                  // callback in the future.
                   return NotificationsListSection(
                     notifications: state.notifications,
                   );

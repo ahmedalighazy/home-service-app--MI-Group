@@ -14,6 +14,8 @@ class AuthTextField extends StatefulWidget {
   final bool hasError;
   final String? errorMessage;
   final ValueChanged<String>? onChanged;
+  final bool optional;
+  final int maxLines;
 
   const AuthTextField({
     super.key,
@@ -26,6 +28,8 @@ class AuthTextField extends StatefulWidget {
     this.hasError = false,
     this.errorMessage,
     this.onChanged,
+    this.optional = false,
+    this.maxLines = 1,
   });
 
   @override
@@ -46,15 +50,26 @@ class _AuthTextFieldState extends State<AuthTextField> {
             : AppColors.borderInputs;
     final double borderWidth = _isFocused ? 1.5 : 1.0;
 
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         // ── Label ──────────────────────────────────────────
-        Text(
-          widget.label,
-          style: AppText.ibmFieldLabel14(
-            color: widget.hasError ? AppColors.errorRed : AppColors.dark,
-          ),
+        Row(
+          children: [
+            Text(
+              widget.label,
+              style: AppText.ibmFieldLabel14(
+                color: widget.hasError ? AppColors.errorRed : AppColors.dark,
+              ),
+            ),
+            if (widget.optional)
+              Text(
+                ' (${widget.optional ? 'اختياري' : 'Optional'})',
+                style: AppText.ibmCaption11(color: AppColors.secondaryText),
+              ),
+          ],
         ),
         SizedBox(height: 8.h),
 
@@ -63,7 +78,6 @@ class _AuthTextFieldState extends State<AuthTextField> {
           onFocusChange: (focused) => setState(() => _isFocused = focused),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            height: 56.h,
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12.r),
@@ -83,7 +97,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
                 controller: widget.controller,
                 obscureText: showObscure && _obscure,
                 keyboardType: widget.keyboardType,
-                textDirection: TextDirection.rtl,
+                textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+                maxLines: widget.maxLines,
                 onChanged: widget.onChanged,
                 style: AppText.ibmDescription14(color: AppColors.primaryText),
                 decoration: InputDecoration(
@@ -94,11 +109,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
                     horizontal: 16.w,
                     vertical: 14.h,
                   ),
-                  prefixIcon: Icon(
-                    widget.prefixIcon,
-                    size: 20.sp,
-                    color: _isFocused ? AppColors.greenPrimary : AppColors.placeholder,
-                  ),
+                  prefixIcon: widget.maxLines > 1
+                      ? null
+                      : Icon(
+                          widget.prefixIcon,
+                          size: 20.sp,
+                          color: _isFocused ? AppColors.greenPrimary : AppColors.placeholder,
+                        ),
                   suffixIcon: showObscure
                       ? IconButton(
                           icon: Icon(
@@ -121,7 +138,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
         if (widget.hasError && widget.errorMessage != null) ...[
           SizedBox(height: 6.h),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
             child: Text(
               widget.errorMessage!,
               style: AppText.ibmError12(),

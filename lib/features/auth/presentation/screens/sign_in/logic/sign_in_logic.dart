@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
-
+import '../../../../../../core/di/injection.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../cubits/auth_cubit.dart';
-import '../../../cubits/auth_state.dart';
+import '../../../states/auth_state.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 mixin SignInLogic<T extends StatefulWidget> on State<T> {
-  // Controllers
   final TextEditingController emailCtrl = TextEditingController();
   final TextEditingController passwordCtrl = TextEditingController();
 
-  // State
   bool rememberMe = false;
   bool hasError = false;
 
-  // Computed properties
   bool get canSubmit =>
       emailCtrl.text.trim().isNotEmpty && passwordCtrl.text.isNotEmpty;
 
@@ -29,11 +25,8 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  // Methods
   void onFieldChanged(String _) {
-    if (hasError) {
-      setState(() => hasError = false);
-    }
+    if (hasError) setState(() => hasError = false);
   }
 
   void onRememberMeChanged(bool? value) {
@@ -41,13 +34,15 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
   }
 
   void onLogin(BuildContext context) {
-    if (!canSubmit) return;
-
+    if (emailCtrl.text.trim().isEmpty || passwordCtrl.text.isEmpty) {
+      setState(() => hasError = true);
+      _showError(context, context.tr('errorFieldRequired'));
+      return;
+    }
     setState(() => hasError = false);
-
-    context.read<AuthCubit>().loginWithEmail(
-      emailCtrl.text.trim(),
-      passwordCtrl.text,
+    getIt<AuthCubit>().login(
+      email: emailCtrl.text.trim(),
+      password: passwordCtrl.text,
     );
   }
 
@@ -56,11 +51,11 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
   }
 
   void onGoogleSignIn(BuildContext context) {
-    _showComingSoon(context, 'جاري تطوير تسجيل الدخول عبر Google');
+    getIt<AuthCubit>().signInWithGoogle();
   }
 
   void onAppleSignIn(BuildContext context) {
-    _showComingSoon(context, 'جاري تطوير تسجيل الدخول عبر Apple');
+    getIt<AuthCubit>().signInWithApple();
   }
 
   void onSignUp(BuildContext context) {
@@ -68,45 +63,25 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
   }
 
   void handleState(BuildContext context, AuthState state) {
-    if (state is SignInSuccess) {
-      setState(() => hasError = false);
-      context.go(AppRouter.home);
-    } else if (state is SignInInvalidCredentials) {
+    if (state is AuthSuccessState &&
+        (state.action == 'sign_in' ||
+            state.action == 'google_sign_in' ||
+            state.action == 'apple_sign_in')) {
+      if (context.mounted) context.go(AppRouter.home);
+    } else if (state is AuthErrorState) {
       setState(() => hasError = true);
-      _showError(context, context.l10n.errorIncorrectPassword);
-    } else if (state is SignInError) {
-      setState(() => hasError = false);
       _showError(context, state.message);
     }
-  }
-
-  void _showComingSoon(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: AppText.ibmDescription14(color: AppColors.white),
-        ),
-        backgroundColor: AppColors.greenPrimary,
-      ),
-    );
   }
 
   void _showError(BuildContext context, String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            message,
-            style: AppText.ibmDescription14(color: AppColors.white),
-          ),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      );
+      ..showSnackBar(SnackBar(
+        content: Text(message, style: AppText.ibmDescription14(color: AppColors.white)),
+        backgroundColor: AppColors.errorRed,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ));
   }
 }

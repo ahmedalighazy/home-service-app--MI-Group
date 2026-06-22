@@ -18,12 +18,12 @@ class HelpCenterContactInfo extends StatelessWidget {
           context.tr(LocaleKeys.settingsContactUs),
           style: AppText.ibmHeading16(color: AppColors.primaryText),
         ),
-        verticalSpace(16),
+        SizedBox(height: 16.h),
         _ContactRow(
           icon: Icons.phone_outlined,
           value: context.tr(LocaleKeys.settingsCustomerServiceNumber),
         ),
-        verticalSpace(12),
+        SizedBox(height: 12.h),
         _ContactRow(
           icon: Icons.email_outlined,
           value: context.tr(LocaleKeys.settingsSupportEmailAddress),

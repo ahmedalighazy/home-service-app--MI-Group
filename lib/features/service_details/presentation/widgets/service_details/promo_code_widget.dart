@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/promo_apply_button.dart';
 
@@ -33,16 +32,12 @@ class PromoCodeWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Apply button — leading edge in LTR becomes trailing in RTL context
+
           const PromoApplyButton(),
 
-          // Discount info row
           Column(
             children: [
-              Text(
-                '${context.l10n.codePrefix} $promoCode',
-                style: AppText.semiBold14Black,
-              ),
+              Text('${SdStrings.codePrefix} $promoCode', style: AppText.semiBold14Black),
               SizedBox(width: size.width * 0.02),
               Row(
                 children: [

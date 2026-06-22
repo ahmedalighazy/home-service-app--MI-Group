@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/step_progress_strip.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -37,7 +36,7 @@ class StepAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Column(
                   children: [
                     Text(
-                      '${context.l10n.step} $currentStep ${context.l10n.ofText} $totalSteps',
+                      '${SdStrings.step} $currentStep ${SdStrings.from} $totalSteps',
                       style: AppText.regular12Grey.copyWith(fontSize: 10),
                     ),
                     const SizedBox(height: 2),

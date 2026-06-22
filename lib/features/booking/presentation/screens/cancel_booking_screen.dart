@@ -50,7 +50,7 @@ class _CancelIcon extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(44),
       decoration: ShapeDecoration(
-        color: const Color(0xFFFEF2F2) /* bg-error */,
+        color: const Color(0xFFFEF2F2) ,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
       ),
       child: SvgPicture.asset(

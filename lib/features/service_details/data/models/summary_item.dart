@@ -7,4 +7,3 @@ class SummaryItem {
 
   double get totalPrice => price * qty;
 }
-

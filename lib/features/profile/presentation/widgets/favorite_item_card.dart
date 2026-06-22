@@ -91,6 +91,7 @@ class FavoriteItemCard extends StatelessWidget {
         color: AppColors.bgSecondary,
         borderRadius: BorderRadius.circular(AppSizes.radiusMedium.r),
       ),
+
       child: Icon(
         Icons.cleaning_services_outlined,
         color: AppColors.primary,

@@ -36,4 +36,3 @@ class TimeSlotGrid extends StatelessWidget {
     );
   }
 }
-

@@ -1,15 +1,21 @@
 class AddressModel {
-  final String id;
-  final String label;
-  final String details;
-  final bool isDefault;
-  final String iconPath;
+  final String? id;
+  final String? title;
+  final String? address;
+  final String? iconPath;
+  final bool? isSelected;
+  final String? label;
+  final String? details;
+  final bool? isDefault;
 
   AddressModel({
-    required this.id,
-    required this.label,
-    required this.details,
-    this.isDefault = false,
-    required this.iconPath,
+    this.id,
+    this.title,
+    this.address,
+    this.iconPath,
+    this.isSelected,
+    this.label,
+    this.details,
+    this.isDefault,
   });
 }

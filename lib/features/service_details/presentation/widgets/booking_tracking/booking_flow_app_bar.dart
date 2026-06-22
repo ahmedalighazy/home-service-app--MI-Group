@@ -3,6 +3,8 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
 
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+
 class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBack;
@@ -35,7 +37,7 @@ class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
                 textAlign: TextAlign.center,
               ),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: AlignmentDirectional.centerStart,
                 child: InkWell(
                   onTap: onBack,
                   borderRadius: BorderRadius.circular(19),
@@ -46,8 +48,8 @@ class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.border),
                     ),
-                    child: const Icon(
-                      Icons.arrow_forward_rounded,
+                    child: Icon(
+                      AppStrings.isArabic ? Icons.arrow_forward_rounded : Icons.arrow_back_rounded,
                       size: 22,
                       color: AppColors.black,
                     ),
@@ -61,4 +63,3 @@ class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-

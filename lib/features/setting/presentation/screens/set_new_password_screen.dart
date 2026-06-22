@@ -37,19 +37,19 @@ class UpdatePasswordScreen extends StatelessWidget {
               ),
               verticalSpace(32),
               PasswordTextField(
-                label: context.tr(LocaleKeys.settingsPasswordNow),
-                hintText: context.tr(LocaleKeys.settingsEnterPassword),
+                label: AppStrings.passwordNow,
+                hintText: AppStrings.enterPassword,
               ),
               const ForgetPasswordLink(),
               verticalSpace(16),
               PasswordTextField(
-                label: context.tr(LocaleKeys.settingsNewPassword),
-                hintText: context.tr(LocaleKeys.settingsEnterPassword),
+                label: AppStrings.newPassword,
+                hintText: AppStrings.enterPassword,
               ),
               verticalSpace(16),
               PasswordTextField(
-                label: context.tr(LocaleKeys.settingsConfirmPassword),
-                hintText: context.tr(LocaleKeys.settingsReEnterPassword),
+                label: AppStrings.confirmPassword,
+                hintText: AppStrings.reEnterPassword,
               ),
               const Spacer(),
               CustomButtom(

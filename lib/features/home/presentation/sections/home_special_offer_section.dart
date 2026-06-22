@@ -81,7 +81,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
                 style: AppText.ibmCaption11(color: AppColors.white),
               ),
             ),
-            //
+
             PositionedDirectional(
               end: 0,
               bottom: 0,

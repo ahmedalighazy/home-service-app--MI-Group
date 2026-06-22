@@ -20,4 +20,3 @@ class ServiceItemCounterIconButton extends StatelessWidget {
     );
   }
 }
-

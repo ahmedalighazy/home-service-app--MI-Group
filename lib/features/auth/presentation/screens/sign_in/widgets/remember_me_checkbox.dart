@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
+
 
 class RememberMeCheckbox extends StatelessWidget {
   final bool rememberMe;
@@ -37,7 +39,7 @@ class RememberMeCheckbox extends StatelessWidget {
             ),
             SizedBox(width: 8.w),
             Text(
-              context.l10n.rememberMe,
+              context.tr('rememberMe'),
               style: AppText.ibmDescription14(color: AppColors.dark),
             ),
           ],
@@ -46,7 +48,7 @@ class RememberMeCheckbox extends StatelessWidget {
         GestureDetector(
           onTap: onForgotTap,
           child: Text(
-            context.l10n.forgotPassword,
+            context.tr('forgotPassword'),
             style: AppText.ibmLink13(color: AppColors.greenPrimary),
           ),
         ),

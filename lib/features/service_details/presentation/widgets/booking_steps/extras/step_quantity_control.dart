@@ -26,6 +26,3 @@ class StepQuantityControl extends StatelessWidget {
           );
   }
 }
-
-// Private
-

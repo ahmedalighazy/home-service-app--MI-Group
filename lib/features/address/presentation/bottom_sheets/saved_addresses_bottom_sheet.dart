@@ -37,7 +37,7 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                   SizedBox(height: AppSizes.spacingLarge),
 
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       context.l10n.chooseYourAddress,
                       style: AppText.ibmPlexSansArabic16SemiBold,

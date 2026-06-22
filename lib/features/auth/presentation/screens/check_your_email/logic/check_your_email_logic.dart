@@ -1,11 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
+
+import '../../../../../../core/utils/l10n/localization_service.dart';
 
 class VerificationController extends ChangeNotifier {
-  final List<TextEditingController> controllers = List.generate(
-    4,
-    (_) => TextEditingController(),
-  );
+  final List<TextEditingController> controllers =
+      List.generate(4, (_) => TextEditingController());
   final List<FocusNode> focusNodes = List.generate(4, (_) => FocusNode());
   bool isButtonEnabled = false;
 
@@ -19,6 +24,8 @@ class VerificationController extends ChangeNotifier {
     }
     startTimer();
   }
+
+  // ── Timer ──────────────────────────────────────────────────────────────────
 
   void startTimer() {
     _timer?.cancel();
@@ -41,13 +48,14 @@ class VerificationController extends ChangeNotifier {
   String get formattedTime {
     final minutes = (secondsRemaining ~/ 60).toString();
     final seconds = (secondsRemaining % 60).toString().padLeft(2, '0');
-    return "$minutes:$seconds";
+    return '$minutes:$seconds';
   }
 
+  // ── OTP input ──────────────────────────────────────────────────────────────
+
   void _checkCompletion() {
-    bool completed = controllers.every(
-      (controller) => controller.text.isNotEmpty,
-    );
+    final completed =
+        controllers.every((controller) => controller.text.isNotEmpty);
     if (completed != isButtonEnabled) {
       isButtonEnabled = completed;
       notifyListeners();
@@ -64,29 +72,62 @@ class VerificationController extends ChangeNotifier {
     }
   }
 
-  void resendCode() {
-    if (!isTimerActive) {
-      // ignore: avoid_print
-      print("إعادة إرسال الكود...");
-      startTimer();
+  // ── Actions ────────────────────────────────────────────────────────────────
+
+  /// إعادة إرسال الكود — يستدعي الـ API فعلاً ويعيد العداد
+  void resendCode(BuildContext context, String email) {
+    if (isTimerActive) return;
+    getIt<AuthCubit>().sendResetCode(email);
+    startTimer();
+  }
+
+  /// تأكيد الكود — يستدعي verifyResetCode والـ navigation تتم عبر handleState
+  void onConfirm(BuildContext context, String email) {
+    if (!isButtonEnabled) return;
+    getIt<AuthCubit>().verifyResetCode(email, otpCode);
+  }
+
+  // ── State handler ──────────────────────────────────────────────────────────
+
+  void handleState(BuildContext context, AuthState state, String email) {
+    if (state is AuthSuccessState && state.action == 'reset_code_verified') {
+      GoRouter.of(context).push(
+        AppRouter.setNewPassword,
+        extra: <String, dynamic>{'email': email, 'code': otpCode},
+      );
+    } else if (state is ResetCodeError) {
+      _showSnackBar(context, state.message, const Color(0xFFE05C5C));
+    } else if (state is AuthErrorState) {
+      _showSnackBar(context, state.message, const Color(0xFFE05C5C));
+    } else if (state is ResetCodeSentState) {
+      _showSnackBar(context, LocalizationService.instance.translate('resendCodeSuccess'), const Color(0xFF1B85A6));
     }
   }
 
-  void verifyCode() {
-    if (isButtonEnabled) {
-      // ignore: avoid_print
-      print("جاري التحقق من الكود: $otpCode");
-    }
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  void _showSnackBar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: color,
+          behavior: SnackBarBehavior.floating,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    for (var controller in controllers) {
-      controller.dispose();
+    for (final c in controllers) {
+      c.dispose();
     }
-    for (var node in focusNodes) {
-      node.dispose();
+    for (final f in focusNodes) {
+      f.dispose();
     }
     super.dispose();
   }

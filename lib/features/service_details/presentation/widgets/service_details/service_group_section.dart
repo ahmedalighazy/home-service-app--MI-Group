@@ -3,10 +3,10 @@ import 'package:home_service_app/features/service_details/presentation/widgets/s
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_item_card.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../data/models/service_group_model.dart';
+import '../../../data/models/service_page_model.dart';
 
 class ServiceGroupSection extends StatelessWidget {
-  final ServiceGroupModel group;
+  final ServicePageGroupModel group;
 
   const ServiceGroupSection({super.key, required this.group});
 
@@ -21,7 +21,7 @@ class ServiceGroupSection extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: AppColors.border),
           ...group.items.indexed.map(
             (entry) => ServiceItemCard(
-              // Use index to guarantee uniqueness even when titles repeat
+
               key: ValueKey('${group.categoryTitle}_${entry.$1}'),
               itemKey: '${group.categoryTitle}|${entry.$1}',
               item: entry.$2,
@@ -32,4 +32,3 @@ class ServiceGroupSection extends StatelessWidget {
     );
   }
 }
-

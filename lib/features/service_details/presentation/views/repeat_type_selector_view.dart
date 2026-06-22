@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/extensions/context_extensions.dart';
 
@@ -11,6 +11,7 @@ import '../widgets/booking_steps/frequency/repeat_option_card.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'date_time_step_view.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class RepeatTypeSelector extends StatelessWidget {
   final double cartTotal;
@@ -28,27 +29,25 @@ class RepeatTypeSelector extends StatelessWidget {
     this.selectedExtras = const [],
   });
 
-  List<RepeatOption> _options(BuildContext context) {
-    return [
-      RepeatOption(type: RepeatType.once, title: context.l10n.once),
-      RepeatOption(
-        type: RepeatType.twoWeeks,
-        title: context.l10n.twoWeeks,
-        discount: context.l10n.sevenPercentDiscount,
-        recommended: true,
-      ),
-      RepeatOption(
-        type: RepeatType.weekly,
-        title: context.l10n.weekly,
-        discount: context.l10n.discountUpToTwelvePercent,
-      ),
-      RepeatOption(
-        type: RepeatType.multipleTimes,
-        title: context.l10n.countTimesInWeek,
-        discount: context.l10n.discountUpToTwentyFivePercent,
-      ),
-    ];
-  }
+  static final options = [
+    RepeatOption(type: RepeatType.once, title: SdStrings.onceOne),
+    RepeatOption(
+      type: RepeatType.twoWeeks,
+      title: SdStrings.twoWeeks,
+      discount: SdStrings.sevenPercentDiscount,
+      recommended: true,
+    ),
+    RepeatOption(
+      type: RepeatType.weekly,
+      title: SdStrings.weekly,
+      discount: SdStrings.discountUpToTwelvePercent,
+    ),
+    RepeatOption(
+      type: RepeatType.multipleTimes,
+      title: SdStrings.countTimesInWeek,
+      discount: SdStrings.discountUpToTwentyFivePercent,
+    ),
+  ];
 
   void _goToDateTimeStep(BuildContext context) {
     final featureCubit = context.read<FeatureCubit>();
@@ -79,7 +78,7 @@ class RepeatTypeSelector extends StatelessWidget {
 
         return Scaffold(
           appBar: StepAppBar(
-            title: context.l10n.serviceFrequency,
+            title: SdStrings.repeatService,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),

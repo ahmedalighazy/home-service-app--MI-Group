@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 
 class AppTextStyles {
-  // Headings
+
   static TextStyle heading1 = GoogleFonts.cairo(
     fontSize: 24,
     fontWeight: FontWeight.bold,
@@ -22,7 +22,6 @@ class AppTextStyles {
     color: AppColors.primaryText,
   );
 
-  // Body Text
   static TextStyle bodyLarge = GoogleFonts.cairo(
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -41,7 +40,6 @@ class AppTextStyles {
     color: AppColors.secondaryText,
   );
 
-  // Special Styles
   static TextStyle priceText = GoogleFonts.cairo(
     fontSize: 32,
     fontWeight: FontWeight.bold,

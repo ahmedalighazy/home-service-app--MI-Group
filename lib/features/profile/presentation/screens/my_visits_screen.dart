@@ -16,19 +16,21 @@ class MyVisitsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Replace with real data from Cubit
+
     final upcomingVisits = [
       VisitModel(
         id: '1',
-        date: 'الأحد، 15 مايو 2026',
+        serviceType: 'Cleaning',
+        date: DateTime(2026, 5, 15),
+        status: 'scheduled',
         time: '08:00 ص - 09:00 ص',
-        status: VisitStatus.scheduled,
       ),
       VisitModel(
         id: '2',
-        date: 'الأحد، 15 مايو 2026',
+        serviceType: 'Cleaning',
+        date: DateTime(2026, 5, 15),
+        status: 'in_progress',
         time: '08:00 ص - 09:00 ص',
-        status: VisitStatus.inProgress,
       ),
     ];
 
@@ -46,8 +48,9 @@ class MyVisitsScreen extends StatelessWidget {
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
-              Tab(text: context.tr(LocaleKeys.profileUpcomingVisits)),
-              Tab(text: context.tr(LocaleKeys.profilePreviousVisits)),
+              Tab(text: AppStrings.upcomingVisits),
+
+              Tab(text: AppStrings.previousSubscriptions),
             ],
           ),
         ),

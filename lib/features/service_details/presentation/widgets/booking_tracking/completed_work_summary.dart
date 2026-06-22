@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/summary_metric_card.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../core/themes/image/app_assets.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class CompletedWorkSummary extends StatelessWidget {
   const CompletedWorkSummary({super.key});
@@ -18,10 +18,7 @@ class CompletedWorkSummary extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                context.l10n.summaryWorkCompleted,
-                style: AppText.semiBold14Black,
-              ),
+              Text(SdStrings.summaryWorkCompleted, style: AppText.semiBold14Black),
               const SizedBox(width: 8),
               Container(width: 2, height: 18, color: AppColors.primary),
             ],
@@ -33,16 +30,16 @@ class CompletedWorkSummary extends StatelessWidget {
             Expanded(
               child: SummaryMetricCard(
                 icon: Icons.access_time_rounded,
-                label: context.l10n.timeSpent,
-                value: context.l10n.oneHundredEightyMinutes,
+                label: SdStrings.timeSpent,
+                value: SdStrings.oneHundredEightyMinutes,
               ),
             ),
             SizedBox(width: 12),
             Expanded(
               child: SummaryMetricCard(
                 icon: Icons.cleaning_services_outlined,
-                label: context.l10n.serviceType,
-                value: context.l10n.houseCleaningTitle,
+                label: SdStrings.typeService,
+                value: SdStrings.cleaningHome2,
               ),
             ),
           ],
@@ -72,14 +69,14 @@ class CompletedWorkSummary extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      context.l10n.eightRoomsCompleted,
+                      SdStrings.eightRoomsCompleted,
                       style: AppText.semiBold12Black.copyWith(
                         color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      context.l10n.roomsCompletedDesc,
+                      SdStrings.fullLivingRoomKitchenBedroomsWithCleaningComplete,
                       textAlign: TextAlign.end,
                       style: AppText.regular12Grey.copyWith(height: 1.35),
                     ),

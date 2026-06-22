@@ -3,9 +3,14 @@ import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class PolicyBanner extends StatelessWidget {
   const PolicyBanner({super.key});
+
+  static String get _policyText =>
+      SdStrings.cancelBookingOrModifyBeforeNumber5 +
+      SdStrings.caseBeforeLessFromNumber5HourWillBe;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +23,9 @@ class PolicyBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon + policy text
+
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,8 +42,7 @@ class PolicyBanner extends StatelessWidget {
                 child: Text(
                   context.l10n.cancellationPolicy,
                   style: AppText.regular12Grey,
-                  textAlign: TextAlign.end,
-                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.start,
                 ),
               ),
             ],
@@ -46,13 +50,12 @@ class PolicyBanner extends StatelessWidget {
 
           SizedBox(height: size.height * 0.01),
 
-          // context.l10n.showDetails link
           Align(
-            alignment: Alignment.centerRight,
+            alignment: AlignmentDirectional.centerStart,
             child: GestureDetector(
               onTap: () {},
               child: Text(
-                context.l10n.viewDetails,
+                SdStrings.showDetails,
                 style: AppText.semiBold12Black.copyWith(
                   color: AppColors.primary,
                   decoration: TextDecoration.underline,

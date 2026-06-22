@@ -67,7 +67,6 @@ class _HomePromoBannerSectionState extends State<HomePromoBannerSection> {
 
         SizedBox(height: AppSizes.spacingMedium),
 
-        // Page Indicator
         CustomPageIndicator(widget: widget, currentIndex: _currentIndex),
       ],
     );

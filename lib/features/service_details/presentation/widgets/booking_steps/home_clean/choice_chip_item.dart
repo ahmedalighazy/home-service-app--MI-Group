@@ -41,4 +41,3 @@ class ChoiceChipItem extends StatelessWidget {
     );
   }
 }
-

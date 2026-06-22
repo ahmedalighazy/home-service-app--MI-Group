@@ -32,11 +32,11 @@ class TicketCard extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: ShapeDecoration(
-          color: const Color(0xFFF8FBFF) /* bg-secondary */,
+          color: const Color(0xFFF8FBFF) ,
           shape: RoundedRectangleBorder(
             side: const BorderSide(
               width: 1,
-              color: Color(0xFFF1F5F9) /* border-cards */,
+              color: Color(0xFFF1F5F9) ,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -122,7 +122,7 @@ class TicketCard extends StatelessWidget {
   Widget _buildStatusBadge() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-      //  padding: const EdgeInsets.all(8),
+
       decoration: ShapeDecoration(
         color: statusColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44)),

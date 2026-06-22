@@ -3,6 +3,7 @@ import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class PromoCodeField extends StatelessWidget {
   final TextEditingController controller;
@@ -22,7 +23,23 @@ class PromoCodeField extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // context.l10n.add cyan button
+          Expanded(
+            child: TextField(
+              controller: controller,
+              textAlign: TextAlign.start,
+              style: AppText.regular14Black,
+              onChanged: onChanged,
+              decoration: InputDecoration(
+                hintText: SdStrings.add2,
+                hintStyle: AppText.regular12Grey,
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.03,
+                  vertical: size.height * 0.014,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.all(size.width * 0.025),
             child: GestureDetector(
@@ -42,30 +59,10 @@ class PromoCodeField extends StatelessWidget {
                     const Icon(Icons.add, color: AppColors.white, size: 15),
                     const SizedBox(width: 4),
                     Text(
-                      context.l10n.add,
+                      SdStrings.add,
                       style: AppText.semiBold14White.copyWith(fontSize: 13),
                     ),
                   ],
-                ),
-              ),
-            ),
-          ),
-
-          // Input
-          Expanded(
-            child: TextField(
-              controller: controller,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: AppText.regular14Black,
-              onChanged: onChanged,
-              decoration: InputDecoration(
-                hintText: context.l10n.enterDiscountCode,
-                hintStyle: AppText.regular12Grey,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.03,
-                  vertical: size.height * 0.014,
                 ),
               ),
             ),

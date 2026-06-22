@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 
 import 'dialog_filled_button.dart';
 import 'dialog_outlined_button.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class SuccessDialogActions extends StatelessWidget {
   final VoidCallback onBackToHome;
@@ -20,14 +20,14 @@ class SuccessDialogActions extends StatelessWidget {
       children: [
         Expanded(
           child: DialogOutlinedButton(
-            label: context.l10n.backToHome,
+            label: SdStrings.backToHome,
             onPressed: onBackToHome,
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: DialogFilledButton(
-            label: context.l10n.trackBooking,
+            label: SdStrings.trackingBooking,
             onPressed: onTrackBooking,
           ),
         ),

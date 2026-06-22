@@ -32,4 +32,3 @@ class StepProgressStrip extends StatelessWidget {
     );
   }
 }
-

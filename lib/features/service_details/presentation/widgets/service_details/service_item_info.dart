@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../data/models/service_item_model.dart';
+import '../../../data/models/service_page_model.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class ServiceItemInfo extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback onFavoritePressed;
-  final ServiceItemModel item;
+  final ServicePageItemModel item;
 
   const ServiceItemInfo({
     super.key,
@@ -55,7 +55,7 @@ class ServiceItemInfo extends StatelessWidget {
         ),
         SizedBox(height: size.height * 0.005),
         Text(
-          '${item.price.toStringAsFixed(0)} ${context.l10n.currency}',
+          '${item.price.toStringAsFixed(0)} ${SdStrings.riyalQar}',
           style: AppText.bold12Black,
           textAlign: TextAlign.end,
         ),

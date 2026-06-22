@@ -10,6 +10,7 @@ class AuthBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -21,7 +22,7 @@ class AuthBackButton extends StatelessWidget {
           color: AppColors.white,
         ),
         child: Icon(
-          Icons.arrow_back,
+          isRtl ? Icons.arrow_forward : Icons.arrow_back,
           size: 15.sp,
           color: AppColors.primaryText,
         ),

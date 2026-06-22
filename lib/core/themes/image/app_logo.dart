@@ -44,7 +44,6 @@ class _LogoPainter extends CustomPainter {
     final double w = size.width;
     final double h = size.height;
 
-    // Paints
     final Paint darkPaint = Paint()
       ..color = AppColors.dark
       ..strokeWidth = w * 0.07
@@ -59,19 +58,17 @@ class _LogoPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
-    // Draw the surrounding hexagon/shield
     final Path hexPath = Path();
-    hexPath.moveTo(w * 0.5, h * 0.05); // Top center
-    hexPath.lineTo(w * 0.88, h * 0.25); // Top right
-    hexPath.lineTo(w * 0.88, h * 0.75); // Bottom right
-    hexPath.lineTo(w * 0.5, h * 0.95); // Bottom center
-    hexPath.lineTo(w * 0.12, h * 0.75); // Bottom left
-    hexPath.lineTo(w * 0.12, h * 0.25); // Top left
+    hexPath.moveTo(w * 0.5, h * 0.05);
+    hexPath.lineTo(w * 0.88, h * 0.25);
+    hexPath.lineTo(w * 0.88, h * 0.75);
+    hexPath.lineTo(w * 0.5, h * 0.95);
+    hexPath.lineTo(w * 0.12, h * 0.75);
+    hexPath.lineTo(w * 0.12, h * 0.25);
     hexPath.close();
 
     canvas.drawPath(hexPath, darkPaint);
 
-    // Draw stylized letter M (Left side)
     final Path mPath = Path();
     mPath.moveTo(w * 0.23, h * 0.65);
     mPath.lineTo(w * 0.23, h * 0.35);
@@ -79,7 +76,6 @@ class _LogoPainter extends CustomPainter {
     mPath.lineTo(w * 0.44, h * 0.47);
     canvas.drawPath(mPath, darkPaint);
 
-    // Draw stylized letter G (Right side)
     final Path gPath = Path();
     gPath.moveTo(w * 0.77, h * 0.4);
     gPath.lineTo(w * 0.77, h * 0.35);
@@ -90,13 +86,11 @@ class _LogoPainter extends CustomPainter {
     gPath.lineTo(w * 0.68, h * 0.52);
     canvas.drawPath(gPath, darkPaint);
 
-    // Draw stylized letter I (Center - Bright Cyan)
     final Path iPath = Path();
     iPath.moveTo(w * 0.5, h * 0.3);
     iPath.lineTo(w * 0.5, h * 0.7);
     canvas.drawPath(iPath, fillPaint);
 
-    // I dot or top/bottom crossbars
     canvas.drawCircle(Offset(w * 0.5, h * 0.23), w * 0.035, Paint()..color = AppColors.greenPrimary);
   }
 

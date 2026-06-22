@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/order_summary/payment_summary_tile.dart';
@@ -13,6 +13,7 @@ import '../../../views/booking_tracking_view.dart';
 import '../../dialogs/booking_failure_dialog.dart';
 import '../../dialogs/booking_success_dialog.dart';
 import 'confirm_button.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class SummaryBottomSheet extends StatefulWidget {
   static const String bookingReference = 'LMS-125846';
@@ -93,7 +94,7 @@ class _SummaryBottomSheetState extends State<SummaryBottomSheet> {
         children: [
           SizedBox(height: size.height * 0.016),
 
-          Text(context.l10n.bookingSummary, style: AppText.semiBold18Black),
+          Text(SdStrings.summaryBooking, style: AppText.semiBold18Black),
 
           SizedBox(height: size.height * 0.016),
           const Divider(color: AppColors.border, height: 1),

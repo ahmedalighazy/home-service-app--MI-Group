@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_state.dart';
-
+import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
+import '../../../../../../core/di/injection.dart';
 import '../../../../../../core/routes/app_routes.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
+import '../../../../../../core/utils/l10n/localization_service.dart';
 
 enum OtpFieldState { idle, error, success }
 
@@ -85,7 +85,7 @@ class OtpScreenLogic {
   void onConfirm(BuildContext context) {
     if (ctrl.text.length < length) return;
     focusNode.unfocus();
-    context.read<AuthCubit>().verifyOtp(phoneNumber, ctrl.text);
+    getIt<AuthCubit>().verifyOtp(phoneNumber: phoneNumber, otp: ctrl.text);
   }
 
   void onResend(BuildContext context) {
@@ -93,44 +93,41 @@ class OtpScreenLogic {
     ctrl.clear();
     fieldState = OtpFieldState.idle;
     onStateChanged();
-
-    context.read<AuthCubit>().loginWithPhone(phoneNumber);
+    getIt<AuthCubit>().loginWithPhone(phoneNumber);
     startTimer();
     focusNode.requestFocus();
   }
 
   void handleState(BuildContext context, AuthState state) {
-    if (state is OtpVerified) {
+    if (state is AuthSuccessState && state.action == 'otp_verified') {
       fieldState = OtpFieldState.success;
       onStateChanged();
       final router = GoRouter.of(context);
       Future.delayed(const Duration(milliseconds: 500), () {
         router.go(AppRouter.completeProfile, extra: phoneNumber);
       });
-    } else if (state is OtpError || state is AuthError) {
+    } else if (state is OtpErrorState || state is AuthErrorState) {
       fieldState = OtpFieldState.error;
       onStateChanged();
       shakeCtrl.forward(from: 0.0);
-      final msg = state is OtpError ? state.message : (state as AuthError).message;
+      final msg = state is OtpErrorState
+          ? state.message
+          : (state as AuthErrorState).message;
       _showSnackBar(context, msg, AppColors.errorRed);
-    } else if (state is OtpSent) {
-      _showSnackBar(context, 'تم إعادة إرسال رمز التحقق بنجاح', AppColors.greenPrimary);
+    } else if (state is OtpSentState) {
+      _showSnackBar(context, LocalizationService.instance.translate('otpResendSuccess'), AppColors.greenPrimary);
     }
   }
 
   void _showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(message),
-          backgroundColor: color,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      );
+      ..showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ));
   }
 
   void dispose() {

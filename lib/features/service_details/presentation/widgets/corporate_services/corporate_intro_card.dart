@@ -67,4 +67,3 @@ class CorporateIntroCard extends StatelessWidget {
     );
   }
 }
-

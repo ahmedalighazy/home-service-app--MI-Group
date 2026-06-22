@@ -16,9 +16,9 @@ class FavoritesListWidget extends StatelessWidget {
       separatorBuilder: (context, index) => verticalSpace(12),
       itemBuilder: (context, index) {
         return FavoriteItemCard(
-          title: context.tr(LocaleKeys.homeDeepCleaning),
-          category: context.tr(LocaleKeys.homeHouseCleaning),
-          price: '٥٠ ${context.tr(LocaleKeys.homeCurrency)}',
+          title: AppStrings.deepCleaning,
+          category: AppStrings.houseCleaning,
+          price: '٥٠ ${AppStrings.currency}',
         );
       },
     );

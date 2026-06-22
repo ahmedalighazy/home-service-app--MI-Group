@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
-
-import '../../../../../../core/themes/colors/app_colors.dart';
-import '../../../../../../core/themes/image/app_assets.dart';
-import '../../../../../../core/themes/text/app_text.dart';
-import '../../../widgets/auth_footer_link.dart';
+import 'sign_in_header.dart';
+import 'email_input_field.dart';
+import 'password_input_field.dart';
+import 'login_button.dart';
+import 'remember_me_section.dart';
+import 'social_sign_in_buttons.dart';
+import 'footer_link.dart';
 import '../../../widgets/auth_or_divider.dart';
-import '../../../widgets/auth_primary_button.dart';
-import '../../../widgets/auth_social_button.dart';
-import '../../../widgets/auth_text_field.dart';
 import '../../../widgets/terms_and_privacy_text.dart';
-import 'remember_me_checkbox.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class SignInBody extends StatelessWidget {
   final TextEditingController emailController;
@@ -52,85 +50,34 @@ class SignInBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(height: 20.h),
-
-          Text(
-            context.l10n.welcomeBack,
-            textAlign: TextAlign.right,
-            style: AppText.ibmHeading22(color: AppColors.dark),
-          ),
-
+          const SignInHeader(),
           SizedBox(height: 32.h),
-
-          AuthTextField(
-            label: context.l10n.emailLabel,
-            hint: context.l10n.emailPlaceholder,
-            controller: emailController,
-            prefixIcon: Icons.mail_outline_rounded,
-            keyboardType: TextInputType.emailAddress,
-            onChanged: onFieldChanged,
-          ),
-
+          EmailInputField(controller: emailController, onChanged: onFieldChanged),
           SizedBox(height: 16.h),
-
-          AuthTextField(
-            label: context.l10n.passwordLabel,
-            hint: context.l10n.passwordPlaceholder,
-            controller: passwordController,
-            prefixIcon: Icons.lock_outline_rounded,
-            isPassword: true,
-            hasError: hasError,
-            errorMessage: context.l10n.errorIncorrectPassword,
-            onChanged: onFieldChanged,
-          ),
-
+          PasswordInputField(controller: passwordController, hasError: hasError, onChanged: onFieldChanged),
           SizedBox(height: 24.h),
-
-          AuthPrimaryButton(
-            label: context.l10n.login,
-            isLoading: isLoading,
-            onPressed: onLogin,
-          ),
-
+          LoginButton(isLoading: isLoading, onPressed: onLogin),
           SizedBox(height: 16.h),
-
-          RememberMeCheckbox(
+          RememberMeSection(
             rememberMe: rememberMe,
             onRememberChanged: onRememberChanged,
             onForgotTap: onForgotPassword,
           ),
-
           SizedBox(height: 32.h),
-
           const AuthOrDivider(),
-
           SizedBox(height: 24.h),
-
-          AuthSocialButton(
-            iconPath: AppAssets.iconGoogle,
-            text: context.l10n.signUpWithGoogle,
-            onTap: onGoogleSignIn,
+          SocialSignInButtons(
+            onGoogleSignIn: onGoogleSignIn,
+            onAppleSignIn: onAppleSignIn,
           ),
-
-          SizedBox(height: 12.h),
-
-          AuthSocialButton(
-            iconPath: AppAssets.iconApple,
-            text: context.l10n.signUpWithApple,
-            onTap: onAppleSignIn,
-          ),
-
           SizedBox(height: 32.h),
-
-          AuthFooterLink(
-            questionText: context.l10n.dontHaveAccount,
-            actionText: context.l10n.createAccount,
+          FooterLink(
+            questionText: context.tr('dontHaveAccount'),
+            actionText: context.tr('createAccount'),
             onTap: onSignUp,
           ),
-
           SizedBox(height: 16.h),
-
           const TermsAndPrivacyText(),
-
           SizedBox(height: 32.h),
         ],
       ),

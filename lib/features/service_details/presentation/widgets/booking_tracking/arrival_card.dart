@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class ArrivalCard extends StatelessWidget {
   const ArrivalCard({super.key});
@@ -24,7 +24,7 @@ class ArrivalCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
-              context.l10n.onTheWay,
+              SdStrings.inWay,
               style: AppText.semiBold12Black.copyWith(
                 color: AppColors.primary,
                 fontSize: 11,
@@ -36,12 +36,12 @@ class ArrivalCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                context.l10n.expectedArrival,
+                SdStrings.text59,
                 style: AppText.regular10Grey.copyWith(fontSize: 9),
               ),
               const SizedBox(height: 4),
               Text(
-                context.l10n.within18Minutes,
+                SdStrings.within18Minutes,
                 style: AppText.bold12Black.copyWith(fontSize: 12),
               ),
             ],

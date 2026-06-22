@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class WorkerPromoCard extends StatelessWidget {
   const WorkerPromoCard({super.key});
@@ -24,19 +24,19 @@ class WorkerPromoCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Copy
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      context.l10n.notSureGetFreeInspection,
+                      SdStrings.notSureGetFreeInspection,
                       style: AppText.semiBold14Black,
                       textAlign: TextAlign.end,
                     ),
                     SizedBox(height: size.height * 0.007),
                     Text(
-                      context.l10n.inspectionDescription,
+                      SdStrings.ourTeamReadyHelpYouInChooseServiceSuitableEasily,
                       style: AppText.regular12Grey,
                       textAlign: TextAlign.end,
                       maxLines: 3,
@@ -47,7 +47,6 @@ class WorkerPromoCard extends StatelessWidget {
 
               SizedBox(width: size.width * 0.03),
 
-              // Icon box
               Container(
                 width: size.width * 0.13,
                 height: size.width * 0.13,
@@ -66,7 +65,6 @@ class WorkerPromoCard extends StatelessWidget {
 
           SizedBox(height: size.height * 0.016),
 
-          // CTA button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -80,7 +78,7 @@ class WorkerPromoCard extends StatelessWidget {
             ),
             onPressed: () {},
             child: Text(
-              context.l10n.requestInspection,
+              SdStrings.requestInspectionCta,
               style: AppText.semiBold14Black.copyWith(color: AppColors.primary),
             ),
           ),

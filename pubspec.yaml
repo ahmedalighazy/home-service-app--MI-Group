@@ -2,7 +2,7 @@ name: home_service_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.11.4
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,31 +36,34 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.3
   shared_preferences: ^2.2.3
-  device_preview: ^1.3.1
   get_it: ^7.7.0
   flutter_bloc: ^8.1.5
-  smooth_page_indicator: ^2.0.1
-
-  intl: ^0.20.2
+  intl: any
   dio: ^5.4.0
   flutter_svg: ^2.0.10
-  go_router: ^14.6.2
-  animated_toggle_switch: ^0.8.7
   flutter_localizations:
     sdk: flutter
-  iconsax_flutter: ^1.0.1
-  equatable: ^2.0.8
-  injectable: ^2.6.0
+  go_router: ^17.3.0
+  image_picker: ^1.2.2
+  fpdart: ^1.1.0
+  injectable: ^2.4.2
+  equatable: ^2.0.5
   dartz: ^0.10.1
-  connectivity_plus:
+  http: ^1.2.1
+  connectivity_plus: ^6.0.2
+  google_sign_in: ^6.2.0
+  sign_in_with_apple: ^7.0.1
+  animated_toggle_switch: ^0.8.7
+  smooth_page_indicator: ^1.1.0
+  easy_localization: ^3.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^6.0.0
-  injectable_generator: ^2.10.0
-  build_runner: ^2.15.0
+  injectable_generator: ^2.4.2
+  build_runner: ^2.4.11
 
 flutter:
   generate: true
@@ -68,8 +71,18 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/translations/
     - assets/images/
     - assets/icons/
-    - lib/features/booking/localization/
-    - lib/features/profile/localization/
-    - lib/features/setting/localization/
+
+  fonts:
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 700

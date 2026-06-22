@@ -18,10 +18,14 @@ class AuthFooterLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          questionText,
-          style: AppText.ibmDescription14(color: AppColors.secondaryText),
+        Flexible(
+          child: Text(
+            questionText,
+            style: AppText.ibmDescription14(color: AppColors.secondaryText),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         GestureDetector(
           onTap: onTap,

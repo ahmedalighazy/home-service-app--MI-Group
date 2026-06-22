@@ -1,6 +1,5 @@
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+﻿import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
-/// Represents an optional add-on service the user can add to their booking.
 class ExtraItem {
   final String title;
   final double price;
@@ -16,20 +15,19 @@ class ExtraItem {
 
   double get subtotal => price * quantity;
 
-  /// Mock catalogue shown on the Extras step.
   static List<ExtraItem> get catalogue => [
     ExtraItem(
-      title: AppStrings.pillowsSleeping,
+      title: SdStrings.pillowsSleeping,
       price: 50,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.chairsDining,
+      title: SdStrings.chairsDining,
       price: 50,
       image: 'assets/images/Rectangle 46.png',
     ),
     ExtraItem(
-      title: AppStrings.pillowsDecorative,
+      title: SdStrings.pillowsDecorative,
       price: 50,
       image: 'assets/images/Rectangle 46.png',
     ),

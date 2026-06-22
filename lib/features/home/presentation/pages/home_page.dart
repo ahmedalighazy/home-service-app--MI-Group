@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/widgets/custom_bottom_navigation_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
+import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/home/presentation/pages/home_cotent.dart';
-
-import '../../../booking/presentation/screens/booking_screen.dart';
-import '../../../profile/presentation/screens/profile_screen.dart';
+import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,25 +14,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomeContent(),
-    const BookingScreen(),
-    const ProfileScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeCubit>().getHomeData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<HomeCubit>()),
+        BlocProvider(create: (context) => getIt<AddressCubit>()),
+        BlocProvider(create: (context) => getIt<NotificationCubit>()),
+      ],
+      child: const Scaffold(
+        body: HomeContent(),
       ),
     );
   }

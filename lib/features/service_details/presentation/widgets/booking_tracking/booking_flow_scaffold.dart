@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
 import 'booking_flow_app_bar.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class BookingFlowScaffold extends StatelessWidget {
   final String title;
@@ -20,7 +21,7 @@ class BookingFlowScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: BookingFlowAppBar(
@@ -50,4 +51,3 @@ class BookingFlowScaffold extends StatelessWidget {
     );
   }
 }
-

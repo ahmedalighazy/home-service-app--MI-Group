@@ -1,83 +1,50 @@
+/// User Profile Entity - Domain Layer
+/// 
+/// Represents user profile information
 class UserProfile {
-  final String? id;
-  final String fullName;
+  final String id;
   final String email;
-  final String phoneNumber;
-  final String gender;
-  final String? profileImageUrl;
+  final String phone;
+  final String? name;
+  final String? profileImage;
+  final String? gender;
+  final DateTime? dateOfBirth;
   final String? address;
   final String? bio;
-  final DateTime? dateOfBirth;
-  final String? profileCompletionStatus;
 
-  UserProfile({
-    this.id,
-    required this.fullName,
+  const UserProfile({
+    required this.id,
     required this.email,
-    required this.phoneNumber,
-    required this.gender,
-    this.profileImageUrl,
+    required this.phone,
+    this.name,
+    this.profileImage,
+    this.gender,
+    this.dateOfBirth,
     this.address,
     this.bio,
-    this.dateOfBirth,
-    this.profileCompletionStatus,
   });
 
   UserProfile copyWith({
     String? id,
-    String? fullName,
     String? email,
-    String? phoneNumber,
+    String? phone,
+    String? name,
+    String? profileImage,
     String? gender,
-    String? profileImageUrl,
+    DateTime? dateOfBirth,
     String? address,
     String? bio,
-    DateTime? dateOfBirth,
-    String? profileCompletionStatus,
   }) {
     return UserProfile(
       id: id ?? this.id,
-      fullName: fullName ?? this.fullName,
       email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phone: phone ?? this.phone,
+      name: name ?? this.name,
+      profileImage: profileImage ?? this.profileImage,
       gender: gender ?? this.gender,
-      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       address: address ?? this.address,
       bio: bio ?? this.bio,
-      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      profileCompletionStatus: profileCompletionStatus ?? this.profileCompletionStatus,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'fullName': fullName,
-      'email': email,
-      'phoneNumber': phoneNumber,
-      'gender': gender,
-      'profileImageUrl': profileImageUrl,
-      'address': address,
-      'bio': bio,
-      'dateOfBirth': dateOfBirth?.toIso8601String(),
-      'profileCompletionStatus': profileCompletionStatus,
-    };
-  }
-
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    return UserProfile(
-      id: json['id'],
-      fullName: json['fullName'] ?? '',
-      email: json['email'] ?? '',
-      phoneNumber: json['phoneNumber'] ?? '',
-      gender: json['gender'] ?? 'other',
-      profileImageUrl: json['profileImageUrl'],
-      address: json['address'],
-      bio: json['bio'],
-      dateOfBirth: json['dateOfBirth'] != null 
-          ? DateTime.parse(json['dateOfBirth']) 
-          : null,
-      profileCompletionStatus: json['profileCompletionStatus'],
     );
   }
 }

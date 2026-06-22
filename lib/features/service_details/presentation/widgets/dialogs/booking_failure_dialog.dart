@@ -5,6 +5,8 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../booking_steps/order_summary/failure_dialog_actions.dart';
 import '../booking_steps/order_summary/failure_icon.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class BookingFailureDialog extends StatelessWidget {
   final VoidCallback onRetry;
@@ -22,7 +24,7 @@ class BookingFailureDialog extends StatelessWidget {
     final dialogWidth = size.width.clamp(0, 330).toDouble();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
       child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         backgroundColor: AppColors.white,
@@ -37,7 +39,7 @@ class BookingFailureDialog extends StatelessWidget {
                 const FailureIcon(),
                 const SizedBox(height: 18),
                 Text(
-                  context.l10n.paymentFailed,
+                  SdStrings.failedPayment,
                   textAlign: TextAlign.center,
                   style: AppText.semiBold20Black.copyWith(
                     fontWeight: FontWeight.w700,
@@ -45,7 +47,7 @@ class BookingFailureDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  context.l10n.paymentFailedDescriptionAlt,
+                  SdStrings.sorryCouldNotFromProcessProcessPaymentYour,
                   textAlign: TextAlign.center,
                   style: AppText.regular12Grey.copyWith(height: 1.45),
                 ),

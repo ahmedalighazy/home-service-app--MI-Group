@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+﻿import 'package:flutter/foundation.dart';
 
 import '../../data/models/corporate_place_type.dart';
 import '../../data/models/corporate_service_type.dart';
 import '../../data/models/extra_item_model.dart';
 import '../../data/models/payment_method.dart';
 import '../../data/models/repeat_type.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 @immutable
 sealed class FeatureState {
@@ -67,8 +67,8 @@ final class FeatureLoaded extends FeatureState {
     this.bookingStepIndex = 0,
     this.selectedHours = 1,
     this.selectedWorkers = 1,
-    this.selectedSize = AppStrings.smallApartment,
-    this.selectedGender = AppStrings.femaleTeam,
+    this.selectedSize = 'apartmentSmall',
+    this.selectedGender = 'female',
     this.extraQuantities = const {},
     this.repeatType = RepeatType.once,
     this.selectedDayIndex = 0,

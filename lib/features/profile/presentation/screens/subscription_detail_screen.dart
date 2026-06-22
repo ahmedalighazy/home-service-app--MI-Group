@@ -26,7 +26,7 @@ class _SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ,
+
       appBar: CustomAppBar(
         title: context.tr(LocaleKeys.profileManageSubscription),
         onBack: () => context.pop(),

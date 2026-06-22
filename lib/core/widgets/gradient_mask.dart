@@ -14,10 +14,7 @@ class GradientMask extends StatelessWidget {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: gradient,
-          //  [
-          //   AppColors.greenPrimary,
-          //   AppColors.lightActive,
-          // ]
+
         ).createShader(bounds);
       },
       child: child,

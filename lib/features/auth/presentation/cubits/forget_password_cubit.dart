@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:home_service_app/core/utils/validation/validators_helper.dart';
+
 part 'forget_password_state.dart';
 
 @injectable
@@ -14,8 +16,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   bool get hasError => _hasError;
   bool get hasInput => _email.trim().isNotEmpty;
   bool get isValid {
-    final email = _email.trim();
-    return email.isNotEmpty && email.contains('@') && email.contains('.');
+    return ValidatorsHelper.isValidEmail(_email);
   }
 
   void updateEmail(String value) {

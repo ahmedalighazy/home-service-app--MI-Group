@@ -32,26 +32,7 @@ class BookingCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Row(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     _BookingImage(imageUrl: booking.imageUrl),
-          //     horizontalSpace(8),
-          //     _BookingInfo(booking: booking),
-          //     const Spacer(),
-          //     Column(
-          //       crossAxisAlignment: CrossAxisAlignment.end,
 
-          //       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: [
-          //         BookingStatusBadge(status: booking.status),
-          //         verticalSpace(40),
-
-          //         _BookingActions(onViewDetails: onViewDetails),
-          //       ],
-          //     ),
-          //   ],
-          // ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -65,7 +46,7 @@ class BookingCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  BookingStatusBadge(status: booking.status),
+                  BookingStatusBadge(status: booking.status.toString()),
                   verticalSpace(40),
                   _BookingActions(onViewDetails: onViewDetails),
                 ],
@@ -115,7 +96,7 @@ class _BookingInfo extends StatelessWidget {
         verticalSpace(4),
         _InfoRow(icon: IconsPath.location, text: booking.address),
         verticalSpace(4),
-        _InfoRow(icon: IconsPath.calendar, text: booking.date),
+        _InfoRow(icon: IconsPath.calendar, text: booking.date.toString().split(' ')[0]),
         verticalSpace(4),
         _InfoRow(icon: IconsPath.time, text: booking.time),
       ],
@@ -123,22 +104,6 @@ class _BookingInfo extends StatelessWidget {
   }
 }
 
-// class _InfoRow extends StatelessWidget {
-//   final String icon;
-//   final String text;
-//   const _InfoRow({required this.icon, required this.text});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         SvgPicture.asset(icon, width: 14.w, color: AppColors.textLightGrey),
-//         horizontalSpace(6),
-//         Text(text, style: AppText.ibmDescription12()),
-//       ],
-//     );
-//   }
-// }
 class _InfoRow extends StatelessWidget {
   final String icon;
   final String text;

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/extensions/context_extensions.dart';
 
@@ -8,6 +8,7 @@ import '../widgets/booking_tracking/booking_flow_scaffold.dart';
 import '../widgets/booking_tracking/booking_gradient_button.dart';
 import '../widgets/booking_tracking/rating_input_card.dart';
 import '../widgets/dialogs/rating_success_dialog.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class BookingRatingScreen extends StatefulWidget {
   const BookingRatingScreen({super.key});
@@ -55,16 +56,16 @@ class _BookingRatingScreenState extends State<BookingRatingScreen> {
         final cubit = context.read<FeatureCubit>();
 
         return BookingFlowScaffold(
-          title: context.l10n.serviceRating,
+          title: SdStrings.ratingService,
           bottomButton: BookingGradientButton(
-            label: context.l10n.submitRating,
+            label: SdStrings.text18,
             onPressed: _submitRating,
           ),
           child: ListView(
             children: [
               RatingInputCard(
-                title: context.l10n.teamRating,
-                question: context.l10n.teamRatingQuestion,
+                title: SdStrings.ratingTeam,
+                question: SdStrings.howWasExperienceWithIbrahimMohamedToday,
                 rating: loaded.teamRating,
                 controller: _teamCommentController,
                 onRatingChanged: cubit.updateTeamRating,
@@ -72,8 +73,8 @@ class _BookingRatingScreenState extends State<BookingRatingScreen> {
               ),
               const SizedBox(height: 20),
               RatingInputCard(
-                title: context.l10n.serviceRating,
-                question: context.l10n.levelOfServiceRatingQuestion,
+                title: SdStrings.ratingService,
+                question: SdStrings.howWasExperienceWithLevelServiceToday,
                 rating: loaded.serviceRating,
                 controller: _serviceCommentController,
                 onRatingChanged: cubit.updateServiceRating,

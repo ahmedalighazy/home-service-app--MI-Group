@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/payment/radio_dot.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import '../../../../data/models/saved_card_model.dart';
 import 'card_brand_logo.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class SavedCardTile extends StatelessWidget {
   final SavedCard card;
@@ -37,12 +37,11 @@ class SavedCardTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Options menu
+
             const Icon(Icons.more_vert, color: AppColors.body, size: 20),
 
             const Spacer(),
 
-            // Card number + holder
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -60,7 +59,7 @@ class SavedCardTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          context.l10n.defaultCard,
+                          SdStrings.defaultCard,
                           style: AppText.regular10Grey.copyWith(
                             color: AppColors.white,
                           ),
@@ -77,12 +76,10 @@ class SavedCardTile extends StatelessWidget {
 
             SizedBox(width: size.width * 0.03),
 
-            // Brand logo
             CardBrandLogo(brand: card.brand),
 
             SizedBox(width: size.width * 0.03),
 
-            // Radio dot
             RadioDot(isSelected: isSelected),
           ],
         ),

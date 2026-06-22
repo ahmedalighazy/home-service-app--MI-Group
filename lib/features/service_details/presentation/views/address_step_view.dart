@@ -12,6 +12,7 @@ import '../widgets/booking_steps/address/address_card.dart';
 import '../widgets/booking_steps/address/step_text_field.dart';
 import '../widgets/booking_steps/step_app_bar.dart';
 import '../widgets/booking_steps/step_bottom_bar.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class AddressStepScreen extends StatelessWidget {
   final double cartTotal;
@@ -60,7 +61,7 @@ class AddressStepScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBg,
           appBar: StepAppBar(
-            title: context.l10n.addressTitle,
+            title: SdStrings.text51,
             currentStep: currentStep,
             totalSteps: totalSteps,
             onBack: onBack ?? () => Navigator.maybePop(context),
@@ -74,9 +75,9 @@ class AddressStepScreen extends StatelessWidget {
             ),
             children: [
               Text(
-                context.l10n.savedAddressesTitle,
+                SdStrings.savedAddressesTitle,
                 style: AppText.semiBold16Black,
-                textAlign: TextAlign.end,
+                textAlign: TextAlign.start,
               ),
               SizedBox(height: size.height * 0.016),
               ...addresses.asMap().entries.map(
@@ -91,11 +92,11 @@ class AddressStepScreen extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: AlignmentDirectional.centerStart,
                 child: GestureDetector(
                   onTap: () {},
                   child: Text(
-                    context.l10n.addNewAddress,
+                    SdStrings.addNewAddress,
                     style: AppText.semiBold14Black.copyWith(
                       color: AppColors.primary,
                     ),
@@ -104,8 +105,8 @@ class AddressStepScreen extends StatelessWidget {
               ),
               SizedBox(height: size.height * 0.028),
               StepTextField(
-                label: context.l10n.specialInstructions,
-                hint: context.l10n.exampleHomeFrontMosque,
+                label: SdStrings.notesOptional,
+                hint: SdStrings.exampleHomeFrontMosque,
                 maxLines: 4,
                 maxLength: 300,
               ),

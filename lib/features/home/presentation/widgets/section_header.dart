@@ -4,7 +4,7 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 class SectionHeader extends StatelessWidget {
-  const SectionHeader({super.key, required this.title, this.onViewAll});
+  SectionHeader({super.key, required this.title, this.onViewAll});
 
   final String title;
   final VoidCallback? onViewAll;

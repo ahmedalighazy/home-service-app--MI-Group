@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../data/models/extra_item_model.dart';
@@ -18,7 +17,7 @@ class ExtraSummaryRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            '${extra.subtotal.toStringAsFixed(0)} ${context.l10n.currency}',
+            '${extra.subtotal.toStringAsFixed(0)} ${SdStrings.qar}',
             style: AppText.regular12Grey,
           ),
           const Spacer(),
@@ -27,7 +26,7 @@ class ExtraSummaryRow extends StatelessWidget {
             children: [
               Text(extra.title, style: AppText.semiBold14Black),
               Text(
-                '${extra.quantity} × ${extra.price.toStringAsFixed(0)} ${context.l10n.currency}',
+                '${extra.quantity} × ${extra.price.toStringAsFixed(0)} ${SdStrings.qar}',
                 style: AppText.regular12Grey,
               ),
             ],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../core/themes/text/app_text.dart';
 
-
 class CounterRow extends StatelessWidget {
   final int quantity;
   final VoidCallback onIncrement;
@@ -52,4 +51,3 @@ class CounterRow extends StatelessWidget {
     );
   }
 }
-

@@ -17,21 +17,18 @@ class IconsPath {
   static const String repeat = 'assets/icons/solar_repeat-bold.svg';
   static const String warning = 'assets/icons/waring.svg';
 
-  // New Icons from Design
   static const String backButton = 'assets/icons/frame_2147225407.svg';
-  static const String logout = 'assets/icons/logout.svg'; // Guessed
+  static const String logout = 'assets/icons/logout.svg';
   static const String faq = 'assets/icons/vector_632_3606.svg';
   static const String ticket = 'assets/icons/vector_I632_3748_370_2051.svg';
   static const String illustration = 'assets/images/illustration.png';
-  // static const String sofaCleaning =
-  //     'assets/images/sofa_cleaning.png'; // Placeholder for feature
+
   static const String sofaCleaning =
-      'assets/images/sofa_cleaning.png'; // Placeholder for service_details
+      'assets/images/sofa_cleaning.png';
   static const String send = 'assets/icons/icon_onlyprimary.svg';
   static const String back = 'assets/icons/frame_2147225407.svg';
   static const String frame = 'assets/icons/frame.svg';
 
-  // Addresses & Payment Icons
   static const String house = 'assets/icons/vector_I28_3982_294_1518.svg';
   static const String work = 'assets/icons/work.svg';
   static const String mastercard = 'assets/icons/logosmastercard.svg';
@@ -53,7 +50,6 @@ class IconsPath {
       'assets/icons/vector_I28_4235_252_1385.svg';
   static const String copy = 'assets/icons/solar_copy-linear.svg';
 
-  ///////////////////////////////////////////
   static const String calenderBlack = 'assets/icons/calender_black.svg';
   static const String calenderBlue = 'assets/icons/calender_blue.svg';
   static const String clean = 'assets/icons/clean.svg';
@@ -121,17 +117,17 @@ class IconsPath {
   static const String manualCleanerIcon = 'assets/icons/manual_cleaner.svg';
   static const String arrowIcon = 'assets/icons/arrow_icon.svg';
   static const String searchIconSVG = 'assets/icons/search_icon.svg';
-  // static const String sofaCleaning = 'assets/icons/sofa_cleaning.svg';
+
   static const String kitchenCleaning = 'assets/icons/Kitchen_cleaning.svg';
   static const String carpetCleaning = 'assets/icons/carpet_cleaning.svg';
   static const String trendingUp = 'assets/icons/trending_up.svg';
-  //booking
+
   static const String enlargement = "assets/icons/enlargement.svg";
   static const String rectangle = "assets/icons/Rectangle 48.svg";
   static const String rectanglepng = "assets/icons/Rectangle 48.png";
   static const String paid = "assets/icons/paid.svg";
   static const String notBooking = "assets/icons/not_booking.svg";
-  static const String notBookingPng = "assets/icons/not_booking_png.png"; //
+  static const String notBookingPng = "assets/icons/not_booking_png.png";
   static const String logOutDilaog = "assets/icons/log_out_dilaog.svg";
   static const String editGry = "assets/icons/edit_gry.svg";
 }

@@ -105,7 +105,6 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
-// Old Price
 class OldPrice extends StatelessWidget {
   const OldPrice({super.key, required this.price});
 
@@ -139,7 +138,6 @@ class OldPrice extends StatelessWidget {
   }
 }
 
-// Promo Code Badge
 class PromoCodeBadge extends StatelessWidget {
   const PromoCodeBadge({super.key, required this.promoCode});
 
@@ -161,7 +159,7 @@ class PromoCodeBadge extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingSmall,
-              //vertical: AppSizes.paddingSmall,
+
             ),
             child: Text(
               promoCode,

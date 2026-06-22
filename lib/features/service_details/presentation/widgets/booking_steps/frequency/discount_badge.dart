@@ -24,4 +24,3 @@ class DiscountBadge extends StatelessWidget {
     );
   }
 }
-

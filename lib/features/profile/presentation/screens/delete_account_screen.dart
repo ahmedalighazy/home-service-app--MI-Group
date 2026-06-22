@@ -48,9 +48,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: context.tr(LocaleKeys.profileDeleteAccountHeader),
-      ),
+      appBar: CustomAppBar(title: AppStrings.deleteAccountHeader),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(

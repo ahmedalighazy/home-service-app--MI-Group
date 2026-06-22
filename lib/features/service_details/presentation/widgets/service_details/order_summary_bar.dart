@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -35,14 +34,12 @@ class OrderSummaryBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Next Button
+
           OrderSummaryNextButton(onTap: onNext),
 
-          // Total summary
           OrderSummaryTotal(total: total),
         ],
       ),
     );
   }
 }
-

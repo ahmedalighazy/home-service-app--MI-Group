@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class WorkerCard extends StatelessWidget {
   const WorkerCard({super.key});
@@ -35,7 +35,7 @@ class WorkerCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(context.l10n.ibrahimMohamed, style: AppText.semiBold12Black),
+              Text(SdStrings.ibrahimMohamed, style: AppText.semiBold12Black),
               const SizedBox(height: 2),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -49,10 +49,7 @@ class WorkerCard extends StatelessWidget {
                   const SizedBox(width: 3),
                   const Icon(Icons.star, color: AppColors.yellow, size: 12),
                   const SizedBox(width: 3),
-                  Text(
-                    context.l10n.careTechnician,
-                    style: AppText.regular10Grey,
-                  ),
+                  Text(SdStrings.text150, style: AppText.regular10Grey),
                 ],
               ),
             ],
@@ -62,7 +59,7 @@ class WorkerCard extends StatelessWidget {
             radius: 18,
             backgroundColor: const Color(0xffEAFBFF),
             child: Text(
-              context.l10n.ibrahimInitial,
+              SdStrings.ibrahimInitial,
               style: AppText.bold14Black.copyWith(color: AppColors.primary),
             ),
           ),

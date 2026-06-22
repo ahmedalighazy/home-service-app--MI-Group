@@ -24,32 +24,26 @@ class PaymentMethodsScreen extends StatefulWidget {
 }
 
 class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
-  void _onAddPaymentMethod() {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: AppColors.transparentColor,
-      builder: (_) => const AddNewCardBottomSheet(),
-    );
-  }
-
-  void _onEditPaymentMethod(PaymentMethodModel method) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: AppColors.transparentColor,
-      builder: (_) =>
-          AddNewCardBottomSheet(paymentMethod: method, isEdit: true),
-    );
-  }
-
-  void _onDeletePaymentMethod(PaymentMethodModel method) {
-    showCannotDeleteDialogred(
-      context,
-      context.tr(LocaleKeys.profileDeleteCardTitle),
-      context.tr(LocaleKeys.profileDeleteCardWarning),
-    );
-  }
+  final List<PaymentMethodModel> _paymentMethods = [
+    PaymentMethodModel(
+      id: '1',
+      type: 'Visa',
+      lastFourDigits: '1234',
+      expiryDate: '12/26',
+      cardHolderName: 'Ahmed Ibrahim',
+      isDefault: true,
+      iconPath: IconsPath.visaCard,
+    ),
+    PaymentMethodModel(
+      id: '2',
+      type: 'Mastercard',
+      lastFourDigits: '5678',
+      expiryDate: '09/25',
+      cardHolderName: 'Ahmed Ibrahim',
+      isDefault: false,
+      iconPath: IconsPath.logosMastercardSvg,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,17 +76,13 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
       body: Column(
         children: [
           Expanded(
-            child: paymentMethods.isEmpty
+            child: _paymentMethods.isEmpty
                 ? EmptyStateWidget(
                     iconPath: IconsPath.wallet05Svg,
-                    title: context.tr(LocaleKeys.profileNoSavedPaymentMethods),
-                    subtitle: context.tr(
-                      LocaleKeys.profileAddPaymentMethodDesc,
-                    ),
-                    buttonLabel: context.tr(
-                      LocaleKeys.profileAddPaymentMethodBtn,
-                    ),
-                    onButtonPressed: _onAddPaymentMethod,
+                    title: AppStrings.noSavedPaymentMethods,
+                    subtitle: AppStrings.addPaymentMethodDesc,
+                    buttonLabel: AppStrings.addPaymentMethodBtn,
+
                   )
                 : ListView(
                     padding: EdgeInsets.all(AppSizes.padding.r),

@@ -17,10 +17,10 @@ class CancelChat extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FBFF) /* bg-secondary */,
+        color: const Color(0xFFF8FBFF) ,
       ),
       child: Row(
-        // mainAxisSize: MainAxisSize.min,
+
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 6,
@@ -30,11 +30,11 @@ class CancelChat extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 13.r, vertical: 5.r),
 
             decoration: ShapeDecoration(
-              // color: Colors.white /* white */,
+
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                   width: 1,
-                  color: const Color(0xFFE5E7EB) /* border-inputs */,
+                  color: const Color(0xFFE5E7EB) ,
                 ),
                 borderRadius: BorderRadius.circular(44),
               ),

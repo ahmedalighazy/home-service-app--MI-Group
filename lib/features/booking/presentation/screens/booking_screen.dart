@@ -21,20 +21,22 @@ class BookingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-        create: (context) => BookingCubit(BookingRepository())..fetchBookings(),
-        child: BlocBuilder<BookingCubit, BookingState>(
-          builder: (context, state) {
-            if (state is BookingLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is BookingSuccess) {
-              return const _BookingContent();
-            } else if (state is BookingError) {
-              return Center(child: Text(state.message));
-            }
-            return const SizedBox.shrink();
-          },
+    return Scaffold(
+      body: SafeArea(
+        child: BlocProvider(
+          create: (context) => BookingCubit(BookingRepository())..fetchBookings(),
+          child: BlocBuilder<BookingCubit, BookingState>(
+            builder: (context, state) {
+              if (state is BookingLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is BookingSuccess) {
+                return const _BookingContent();
+              } else if (state is BookingError) {
+                return Center(child: Text(state.message));
+              }
+              return const SizedBox.shrink();
+            },
+          ),
         ),
       ),
     );
@@ -85,15 +87,10 @@ class _BookingContent extends StatelessWidget {
               unselectedLabelColor: AppColors.primaryText,
               indicatorColor: AppColors.primary,
 
-              // indicatorSize: TabBarIndicatorSize.tab,
-              // tabs: [
-              //   Tab(text: context.tr(LocaleKeys.bookingUpcoming)),
-              //   Tab(text: context.tr(LocaleKeys.bookingPrevious)),
-              // automaticIndicatorColorAdjustment: false,
-              indicatorSize: TabBarIndicatorSize.tab, // dividerHeight: 59,
+              indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
-                Tab(text: context.l10n.currentSubscriptions),
-                Tab(text: context.l10n.previousSubscriptions),
+                Tab(text: AppStrings.currentSubscriptions),
+                Tab(text: AppStrings.previousSubscriptions),
               ],
             ),
             Expanded(

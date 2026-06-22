@@ -37,7 +37,7 @@ class AddressCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Icon box
+
             Container(
               width: size.width * 0.12,
               height: size.width * 0.12,
@@ -50,7 +50,6 @@ class AddressCard extends StatelessWidget {
 
             SizedBox(width: size.width * 0.03),
 
-            // Title + subtitle
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -71,4 +70,3 @@ class AddressCard extends StatelessWidget {
     );
   }
 }
-

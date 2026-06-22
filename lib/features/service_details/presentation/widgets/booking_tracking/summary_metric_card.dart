@@ -36,4 +36,3 @@ class SummaryMetricCard extends StatelessWidget {
     );
   }
 }
-

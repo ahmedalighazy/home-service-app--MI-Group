@@ -20,23 +20,27 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   final List<SubscriptionModel> _currentSubscriptions = [
     SubscriptionModel(
       id: '1',
-      title: LocaleKeys.profileWeeklyCleaning,
-      type: LocaleKeys.profileWeekly,
-      nextVisitDate: 'الأحد، 15 مايو 2026',
+      planName: AppStrings.weeklyCleaning,
+      status: SubscriptionStatus.active.name,
+      startDate: DateTime(2026, 5, 15),
+      title: AppStrings.weeklyCleaning,
+      type: AppStrings.weekly,
+      nextVisitDate: DateTime(2026, 5, 15),
       nextVisitTime: '9:00 ص',
       price: 350.0,
-      status: SubscriptionStatus.active,
     ),
   ];
 
   final List<SubscriptionModel> _previousSubscriptions = [
     SubscriptionModel(
       id: '2',
-      title: LocaleKeys.profileWeeklyCleaning,
-      type: LocaleKeys.profileWeekly,
-      expiryDate: 'الأحد، 15 مايو 2026',
+      planName: AppStrings.weeklyCleaning,
+      status: SubscriptionStatus.ended.name,
+      startDate: DateTime(2026, 5, 15),
+      title: AppStrings.weeklyCleaning,
+      type: AppStrings.weekly,
+      expiryDate: DateTime(2026, 5, 15),
       price: 350.0,
-      status: SubscriptionStatus.ended,
     ),
   ];
 
@@ -56,8 +60,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
             indicatorColor: AppColors.primary,
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
-              Tab(text: context.tr(LocaleKeys.profileCurrentSubscriptions)),
-              Tab(text: context.tr(LocaleKeys.profilePreviousSubscriptions)),
+              Tab(text: AppStrings.currentSubscriptions),
+              Tab(text: AppStrings.previousSubscriptions),
             ],
           ),
         ),

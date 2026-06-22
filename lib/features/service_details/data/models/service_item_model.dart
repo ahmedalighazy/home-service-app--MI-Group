@@ -11,4 +11,3 @@ class ServiceItemModel {
     required this.price,
   });
 }
-

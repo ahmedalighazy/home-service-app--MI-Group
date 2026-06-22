@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
+import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/check_your_email/widgets/check_your_email_widgets.dart';
-import '../../../../profile/presentation/widgets/custom_buttom.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
 import 'logic/check_your_email_logic.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  final String email;
+  final String code;
+
+  const VerificationScreen({
+    super.key,
+    required this.email,
+    required this.code,
+  });
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -17,9 +36,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void initState() {
     super.initState();
     _controller = VerificationController();
-    _controller.addListener(() {
-      setState(() {});
-    });
+    if (widget.code.isNotEmpty && widget.code.length == 4) {
+      for (int i = 0; i < 4; i++) {
+        _controller.controllers[i].text = widget.code[i];
+      }
+    }
+    _controller.addListener(() => setState(() {}));
   }
 
   @override
@@ -30,156 +52,99 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.grey.withValues(alpha: 0.2),
-                      ),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.black87,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ),
-                ),
-                const Spacer(flex: 1),
+    return BlocConsumer<AuthCubit, AuthState>(
+      bloc: getIt<AuthCubit>(),
+      listener: (context, state) =>
+          _controller.handleState(context, state, widget.email),
+      builder: (context, state) {
+        final isLoading = state is AuthLoadingState;
 
-                Center(
-                  child: Stack(
-                    alignment: Alignment.topRight,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Icon(
-                          Icons.mail_outline_rounded,
-                          size: 100,
-                          color: const Color(0xFF1B85A6).withValues(alpha: 0.8),
-                        ),
-                      ),
-                      Positioned(
-                        right: 15,
-                        top: 15,
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: const Color(0xFF1B85A6),
-                          child: Transform.rotate(
-                            angle: -0.5,
-                            child: const Icon(
-                              Icons.send_rounded,
-                              size: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+        return Scaffold(
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            leading: Padding(
+              padding: EdgeInsets.all(8.w),
+              child: AuthBackButton(
+                onTap: () {
+                  if (GoRouter.of(context).canPop()) {
+                    GoRouter.of(context).pop();
+                  } else {
+                    GoRouter.of(context).go(AppRouter.forgetPassword);
+                  }
+                },
+              ),
+            ),
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              keyboardDismissBehavior:
+                  ScrollViewKeyboardDismissBehavior.onDrag,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).padding.top -
+                      MediaQuery.of(context).padding.bottom -
+                      kToolbarHeight,
                 ),
-                const SizedBox(height: 32),
-
-                const Text(
-                  "تحقق من بريدك الالكتروني",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: const TextSpan(
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                        height: 1.5,
-                      ),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        TextSpan(text: "تم إرسال رابط إعادة تعيين إلى "),
-                        TextSpan(
-                          text: "ahmed...@gmail.com",
-                          style: TextStyle(
-                            color: Color(0xFF1B85A6),
-                            fontWeight: FontWeight.bold,
-                          ),
+                        verticalSpace(24.h),
+                        CheckEmailHeader(email: widget.email),
+                        verticalSpace(16.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: List.generate(4, (index) {
+                            return Expanded(
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 4.w),
+                                child: OtpCircleField(
+                                  controller:
+                                      _controller.controllers[index],
+                                  focusNode: _controller.focusNodes[index],
+                                  onChanged: (value) =>
+                                      _controller.handleOtpChange(
+                                          value, index),
+                                ),
+                              ),
+                            );
+                          }),
                         ),
-                        TextSpan(
-                          text:
-                              "\nأدخل الرمز المكون من 4 أرقام المذكور في البريد الإلكتروني",
+                        verticalSpace(32.h),
+                        CheckEmailResendRow(
+                          onResend: () =>
+                              _controller.resendCode(context, widget.email),
                         ),
+                        verticalSpace(36.h),
+                        isLoading
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                    color: AppColors.greenPrimary),
+                              )
+                            : AuthPrimaryButton(
+                                label: context.tr('confirm'),
+                                isEnabled: _controller.isButtonEnabled,
+                                onPressed: () => _controller.onConfirm(
+                                    context, widget.email),
+                              ),
+                        verticalSpace(24.h),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(4, (index) {
-                    return OtpCircleField(
-                      controller: _controller.controllers[index],
-                      focusNode: _controller.focusNodes[index],
-                      onChanged: (value) =>
-                          _controller.handleOtpChange(value, index),
-                    );
-                  }),
-                ),
-                const SizedBox(height: 32),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "لم تتلقي الكود بعد ؟ ",
-                      style: TextStyle(color: Colors.grey, fontSize: 14),
-                    ),
-                    GestureDetector(
-                      onTap: _controller.resendCode,
-                      child: const Text(
-                        "أعد ارسال الكود",
-                        style: TextStyle(
-                          color: Color(0xFF1B85A6),
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(flex: 2),
-
-                CustomButton(
-                  backgroundColor: const Color(0xFF1B85A6),
-                  textColor: Colors.white,
-                  text: "تأكيد",
-                  onPressed: _controller.verifyCode,
-                ),
-                const SizedBox(height: 24),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

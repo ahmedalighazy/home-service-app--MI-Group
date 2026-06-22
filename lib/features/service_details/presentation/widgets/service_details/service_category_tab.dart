@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_category_item.dart';
 
-import '../../../data/models/service_category_model.dart';
-
+import '../../../data/models/service_page_model.dart';
 
 class ServiceCategoryTabBar extends StatelessWidget {
-  final List<ServiceCategoryModel> categories;
+  final List<ServicePageCategoryModel> categories;
   final int selectedIndex;
   final ValueChanged<int> onCategorySelected;
 
@@ -24,7 +23,7 @@ class ServiceCategoryTabBar extends StatelessWidget {
       height: size.height * 0.115,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        // reverse=true keeps ordering right-to-left for Arabic
+
         reverse: true,
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
         itemCount: categories.length,
@@ -39,4 +38,3 @@ class ServiceCategoryTabBar extends StatelessWidget {
     );
   }
 }
-

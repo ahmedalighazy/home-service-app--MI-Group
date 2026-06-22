@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/promo_code_widget.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_details_bottom_sheet.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/service_group_section.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../data/models/service_group_model.dart';
 import '../../../data/models/service_page_model.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class ServicePageContent extends StatelessWidget {
   final ServicePageModel data;
@@ -19,7 +18,7 @@ class ServicePageContent extends StatelessWidget {
     required this.selectedCategoryIndex,
   });
 
-  ServiceGroupModel? get _activeGroup {
+  ServicePageGroupModel? get _activeGroup {
     final inRange =
         selectedCategoryIndex >= 0 &&
         selectedCategoryIndex < data.serviceGroups.length;
@@ -37,7 +36,7 @@ class ServicePageContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Promo code banner
+
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.04,
@@ -49,7 +48,6 @@ class ServicePageContent extends StatelessWidget {
             ),
           ),
 
-          // Service groups
           ...groups.map(
             (group) => Padding(
               padding: EdgeInsets.only(bottom: size.height * 0.012),
@@ -64,10 +62,7 @@ class ServicePageContent extends StatelessWidget {
               onTap: () {
                 showServiceBottomSheet(context);
               },
-              child: Text(
-                context.l10n.viewServiceDetails,
-                style: AppText.bold16Cyan,
-              ),
+              child: Text(SdStrings.showDetailsService, style: AppText.bold16Cyan),
             ),
           ),
         ],

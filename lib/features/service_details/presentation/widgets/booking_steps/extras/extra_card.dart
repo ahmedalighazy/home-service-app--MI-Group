@@ -1,4 +1,4 @@
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:home_service_app/features/service_details/service_details_strings.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
@@ -32,7 +32,7 @@ class ExtraCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Thumbnail — square aspect ratio
+
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: AspectRatio(
@@ -46,7 +46,7 @@ class ExtraCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                // Title
+
                 Text(
                   item.title,
                   style: AppText.semiBold12Black,
@@ -57,16 +57,14 @@ class ExtraCard extends StatelessWidget {
 
                 SizedBox(height: size.height * 0.004),
 
-                // Price
                 Text(
-                  '${item.price.toStringAsFixed(0)} ${context.l10n.currency}',
+                  '${item.price.toStringAsFixed(0)} ${SdStrings.riyalQar}',
                   style: AppText.regular10Grey,
                   textAlign: TextAlign.end,
                 ),
 
                 SizedBox(height: size.height * 0.01),
 
-                // Add / counter control
                 StepQuantityControl(
                   quantity: quantity,
                   onIncrement: onIncrement,

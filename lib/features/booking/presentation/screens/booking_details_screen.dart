@@ -33,7 +33,7 @@ class BookingDetailsScreen extends StatelessWidget {
             shape: RoundedRectangleBorder(
               side: const BorderSide(
                 width: 1,
-                color: Color(0xFFE5E7EB) /* border-inputs */,
+                color: const Color(0xFFE5E7EB) ,
               ),
               borderRadius: BorderRadius.circular(12.r),
             ),
@@ -42,7 +42,7 @@ class BookingDetailsScreen extends StatelessWidget {
             children: [
               BookingDetailsHeader(
                 serviceName: booking.serviceName,
-                status: booking.status,
+                status: booking.status.toString(),
                 imageUrl: booking.imageUrl,
               ),
               verticalSpace(8),
@@ -74,9 +74,8 @@ class _DetailsCard extends StatelessWidget {
         children: [
           BookingDetailsRow(
             value2: booking.time,
-            //label: context.tr(LocaleKeys.bookingDateAndTime),
-            label: context.l10n.dateAndTimeTitle,
-            value: booking.date,
+            label: AppStrings.dateAndTimeTitle,
+            value: booking.date.toString().split(' ')[0],
             icon: IconsPath.calendar,
             icon2: IconsPath.time,
           ),
@@ -94,16 +93,7 @@ class _DetailsCard extends StatelessWidget {
             icon: IconsPath.editGry,
           ),
           const Divider(height: 1),
-          // BookingDetailsRow(
-          //   label: context.tr(LocaleKeys.bookingPaid),
-          // if (booking.notes != null) ...[
-          //   BookingDetailsRow(
-          //     label: context.l10n.specialInstructions,
-          //     value: booking.notes!,
-          //     icon: IconsPath.infoCircle,
-          //   ),
-          //   const Divider(height: 1),
-          // ],
+
           BookingDetailsRow(
             label: context.l10n.paymentMethods,
             value: booking.paymentMethod ?? 'N/A',
@@ -118,9 +108,8 @@ class _DetailsCard extends StatelessWidget {
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            // label: context.tr(LocaleKeys.bookingTotalPrice),
-            label: context.l10n.totalPrice,
-            value: booking.price,
+            label: AppStrings.totalprice,
+            value: booking.price?.toString() ?? '0',
             icon: IconsPath.group,
           ),
         ],

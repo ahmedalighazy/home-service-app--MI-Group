@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../../data/models/service_category_model.dart';
-
+import '../../../data/models/service_page_model.dart';
 
 class ServiceCategoryItem extends StatelessWidget {
-  final ServiceCategoryModel category;
+  final ServicePageCategoryModel category;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -67,4 +66,3 @@ class ServiceCategoryItem extends StatelessWidget {
     );
   }
 }
-

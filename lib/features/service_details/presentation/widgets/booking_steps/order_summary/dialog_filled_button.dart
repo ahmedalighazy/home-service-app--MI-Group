@@ -38,4 +38,3 @@ class DialogFilledButton extends StatelessWidget {
     );
   }
 }
-

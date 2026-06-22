@@ -5,6 +5,7 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 
 import '../../data/models/message_model.dart';
+import '../../domain/entities/message_entity.dart';
 
 class ChatMessageBubble extends StatelessWidget {
   final MessageModel message;

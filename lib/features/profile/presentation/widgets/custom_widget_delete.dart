@@ -17,7 +17,7 @@ class CustomWidgetDelete extends StatelessWidget {
           fontSize: 14.sp,
         ).copyWith(height: 1.5),
         children: [
-          TextSpan(text: context.tr(LocaleKeys.profileDeleteConfirmHint)),
+          TextSpan(text: AppStrings.confirmDeleteHint),
           TextSpan(
             text: context.tr(LocaleKeys.profileDeleteConfirmWord),
             style: AppText.boldIbm(color: AppColors.redDanger, fontSize: 14.sp),

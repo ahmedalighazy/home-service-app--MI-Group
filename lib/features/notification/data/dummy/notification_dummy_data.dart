@@ -2,28 +2,34 @@ import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/features/notification/domain/entities/notification_entity.dart';
 
 class NotificationDummyData {
-  const NotificationDummyData._();
+  NotificationDummyData._();
 
-  static const notifications = [
+  static final notifications = [
     NotificationEntity(
+      id: '1',
       title: 'تم تأكيد الخدمة',
-      description: 'تم تأكيد طلبك وسيتم التواصل معك قريباً',
+      body: 'تم تأكيد طلبك وسيتم التواصل معك قريباً',
+      createdAt: DateTime.now().subtract(const Duration(minutes: 1)),
       time: 'منذ دقيقة',
       group: 'اليوم',
       iconPath: IconsPath.manualCleanerIcon,
     ),
 
     NotificationEntity(
+      id: '2',
       title: 'خصم جديد',
-      description: 'خصم 20% على خدمات التنظيف',
+      body: 'خصم 20% على خدمات التنظيف',
+      createdAt: DateTime.now().subtract(const Duration(hours: 1)),
       time: 'منذ ساعة',
       group: 'اليوم',
       iconPath: IconsPath.manualCleanerIcon,
     ),
 
     NotificationEntity(
+      id: '3',
       title: 'تم قبول الطلب',
-      description: 'تم قبول طلبك وسيتم البدء في التنفيذ',
+      body: 'تم قبول طلبك وسيتم البدء في التنفيذ',
+      createdAt: DateTime.now().subtract(const Duration(days: 1)),
       time: 'منذ يوم',
       group: 'الأمس',
       iconPath: IconsPath.cleanerIcon,

@@ -1,6 +1,4 @@
-enum MessageType { text, image }
-
-enum MessageSender { user, support }
+import '../../domain/entities/message_entity.dart';
 
 class MessageModel {
   final String id;
@@ -14,26 +12,8 @@ class MessageModel {
     required this.id,
     required this.content,
     required this.timestamp,
-    this.type = MessageType.text,
+    required this.type,
     required this.sender,
-    this.isSent = true,
+    required this.isSent,
   });
-
-  MessageModel copyWith({
-    String? id,
-    String? content,
-    DateTime? timestamp,
-    MessageType? type,
-    MessageSender? sender,
-    bool? isSent,
-  }) {
-    return MessageModel(
-      id: id ?? this.id,
-      content: content ?? this.content,
-      timestamp: timestamp ?? this.timestamp,
-      type: type ?? this.type,
-      sender: sender ?? this.sender,
-      isSent: isSent ?? this.isSent,
-    );
-  }
 }

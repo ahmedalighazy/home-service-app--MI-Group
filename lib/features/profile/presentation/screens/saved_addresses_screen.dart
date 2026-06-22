@@ -106,8 +106,8 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
                     },
                   ),
                   verticalSpace(24),
-                  _AddAddressButton(onTap: _onAddAddress),
-                  verticalSpace(24),
+                  CustomAddButtomSheet(isProfileScreen: true),
+
                 ],
               ),
             ),

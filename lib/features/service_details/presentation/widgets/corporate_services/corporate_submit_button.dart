@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class CorporateSubmitButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -26,7 +26,7 @@ class CorporateSubmitButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(28),
         ),
         child: Text(
-          context.l10n.requestInspection,
+          SdStrings.requestInspection,
           style: AppText.semiBold16Black.copyWith(
             color: AppColors.white,
             fontWeight: FontWeight.w700,

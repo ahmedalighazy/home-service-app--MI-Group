@@ -24,7 +24,7 @@ class StepTextField extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         if (label != null) ...[
@@ -35,8 +35,7 @@ class StepTextField extends StatelessWidget {
           controller: controller,
           maxLines: maxLines,
           maxLength: maxLength,
-          textAlign: TextAlign.right,
-          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.start,
           style: AppText.regular14Black,
           decoration: InputDecoration(
             hintText: hint,
@@ -65,4 +64,3 @@ class StepTextField extends StatelessWidget {
     ),
   );
 }
-

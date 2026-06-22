@@ -43,18 +43,16 @@ class StepRadioTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Radio dot — always on the left (leading in LTR / trailing in RTL)
+
             RadioDot(isSelected: isSelected),
 
             const Spacer(),
 
-            // Optional brand icons or service icon
             if (leading != null) ...[
               leading!,
               SizedBox(width: size.width * 0.03),
             ],
 
-            // Label + optional subtitle — right-aligned
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
@@ -72,4 +70,3 @@ class StepRadioTile extends StatelessWidget {
     );
   }
 }
-

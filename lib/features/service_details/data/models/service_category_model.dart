@@ -4,4 +4,3 @@ class ServiceCategoryModel {
 
   const ServiceCategoryModel({required this.image, required this.title});
 }
-

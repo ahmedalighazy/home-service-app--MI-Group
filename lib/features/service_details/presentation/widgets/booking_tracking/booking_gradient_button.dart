@@ -41,4 +41,3 @@ class BookingGradientButton extends StatelessWidget {
     );
   }
 }
-

@@ -27,39 +27,54 @@ class PaymentCardWidget extends StatelessWidget {
       padding: EdgeInsets.all(12.r),
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: ShapeDecoration(
-        color: AppColors.bgSecondary,
+        color: const Color(0xFFF8FBFF) ,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: AppColors.borderCards),
-          borderRadius: BorderRadius.circular(12.r),
+          side: const BorderSide(
+            width: 1,
+            color: Color(0xFFF1F5F9) ,
+          ),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Transform.translate(
-            offset: Offset(context.isRtl ? 8.w : -8.w, -8.h),
-            child: CustomPopupMenu(
-              onSelected: (action) {
-                switch (action) {
-                  case MenuAction.edit:
-                    onEdit();
-                    break;
-                  case MenuAction.delete:
-                    onDelete();
-                    break;
-                  case MenuAction.favorite:
-                    break;
-                }
-              },
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomPopupMenu(
+                onSelected: (action) {
+                  switch (action) {
+                    case MenuAction.favorite:
+
+                      break;
+
+                    case MenuAction.edit:
+
+                      break;
+
+                    case MenuAction.delete:
+
+                      break;
+                  }
+                },
+              ),
+
+              verticalSpace(40),
+            ],
           ),
+
+          horizontalSpace(12),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    if (paymentMethod.isDefault) const _DefaultBadge(),
+
+                    if (paymentMethod.isDefault) _buildDefaultBadge(),
                     const Spacer(),
                     Text(
                       '**** ${paymentMethod.lastFourDigits}',
@@ -75,22 +90,17 @@ class PaymentCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${context.tr(LocaleKeys.profileExpiresIn)} ${paymentMethod.expiryDate}',
-                      style: AppText.regularIbm(
+                      'تنتهي في ${paymentMethod.expiryDate ?? ''}',
+                      style: AppText.ibmDescription12(
                         color: AppColors.textLightGrey,
                         fontSize: 12.sp,
                       ),
                     ),
-                    Flexible(
-                      child: Text(
-                        paymentMethod.cardHolderName,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppText.mediumIbm(
-                          color: AppColors.black,
-                          fontSize: 12.sp,
-                        ),
-                      ),
+                    Text(
+                      paymentMethod.cardHolderName ?? '',
+                      style: AppText.ibmDescription12(
+                        color: AppColors.textLightGrey,
+                      ).copyWith(overflow: TextOverflow.ellipsis),
                     ),
                   ],
                 ),
@@ -100,10 +110,11 @@ class PaymentCardWidget extends StatelessWidget {
           horizontalSpace(12),
           Center(
             child: SvgPicture.asset(
-              paymentMethod.iconPath,
-              width: 32.w,
-              height: 20.h,
-              fit: BoxFit.contain,
+              paymentMethod.iconPath ?? '',
+
+              width: 18.w,
+              height: 18.h,
+
             ),
           ),
         ],
@@ -120,8 +131,8 @@ class _DefaultBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: AppColors.badgeCyan,
-        borderRadius: BorderRadius.circular(100.r),
+        color: const Color(0xFF53AABF),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Text(
         context.tr(LocaleKeys.profileDefault),

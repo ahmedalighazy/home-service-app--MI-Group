@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class RecommendedBadge extends StatelessWidget {
   const RecommendedBadge({super.key});
@@ -13,8 +13,8 @@ class RecommendedBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        context.l10n.mostRequested,
-        style: TextStyle(
+        SdStrings.most,
+        style: const TextStyle(
           fontSize: 9,
           fontWeight: FontWeight.w600,
           color: Colors.black,

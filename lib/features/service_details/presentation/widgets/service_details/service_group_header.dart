@@ -22,4 +22,3 @@ class ServiceGroupHeader extends StatelessWidget {
     );
   }
 }
-

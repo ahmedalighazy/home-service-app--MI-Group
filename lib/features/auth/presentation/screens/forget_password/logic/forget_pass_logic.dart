@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../../core/di/injection.dart';
+import '../../../../../../core/routes/app_routes.dart';
+import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../cubits/auth_cubit.dart';
-import '../../../cubits/auth_state.dart';
+import '../../../states/auth_state.dart';
 import '../../../cubits/forget_password_cubit.dart';
 
 class ForgetScreenLogic {
@@ -17,16 +21,22 @@ class ForgetScreenLogic {
 
   void handleForgetPasswordState(BuildContext context, ForgetPasswordState state) {
     if (state is ForgetPasswordSendCodeRequested) {
-      context.read<AuthCubit>().sendResetCode(state.email);
+      getIt<AuthCubit>().sendResetCode(state.email);
     }
   }
 
   void handleAuthState(BuildContext context, AuthState state) {
-    if (state is AuthSuccess) {
-    } else if (state is AuthError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(state.message)),
-      );
+    if (state is ResetCodeSentState) {
+      context.push(AppRouter.verifyResetCode, extra: state.email);
+    } else if (state is AuthErrorState) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(state.message),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ));
     }
   }
 

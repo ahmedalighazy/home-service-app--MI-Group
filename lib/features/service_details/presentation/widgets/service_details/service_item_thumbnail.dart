@@ -20,4 +20,3 @@ class ServiceItemThumbnail extends StatelessWidget {
     );
   }
 }
-

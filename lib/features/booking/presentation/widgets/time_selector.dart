@@ -88,7 +88,7 @@ class _TimeItem extends StatelessWidget {
 
             alignment: Alignment.center,
             child: FittedBox(
-              // fit: BoxFit.scaleDown,
+
               child: Text(
                 time,
                 style: AppText.ibmDescription12(color: AppColors.primaryText),

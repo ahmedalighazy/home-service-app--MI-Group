@@ -1,71 +1,31 @@
-import 'package:equatable/equatable.dart';
+import '../../domain/entities/booking_entity.dart';
 
-class BookingModel extends Equatable {
+class BookingModel {
   final String id;
+  final String serviceId;
   final String serviceName;
-  final String status;
-  final String address;
-  final String date;
+  final DateTime date;
   final String time;
-  final String price;
+  final String address;
+  final double totalPrice;
+  final BookingStatus status;
   final String? imageUrl;
-  final String? paymentMethod;
   final String? notes;
+  final String? paymentMethod;
+  final double? price;
 
-  const BookingModel({
+  BookingModel({
     required this.id,
+    required this.serviceId,
     required this.serviceName,
-    required this.status,
-    required this.address,
     required this.date,
     required this.time,
-    required this.price,
+    required this.address,
+    required this.totalPrice,
+    required this.status,
     this.imageUrl,
-    this.paymentMethod,
     this.notes,
+    this.paymentMethod,
+    this.price,
   });
-
-  factory BookingModel.fromJson(Map<String, dynamic> json) {
-    return BookingModel(
-      id: json['id'] as String,
-      serviceName: json['serviceName'] as String,
-      status: json['status'] as String,
-      address: json['address'] as String,
-      date: json['date'] as String,
-      time: json['time'] as String,
-      price: json['price'] as String,
-      imageUrl: json['imageUrl'] as String?,
-      paymentMethod: json['paymentMethod'] as String?,
-      notes: json['notes'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'serviceName': serviceName,
-      'status': status,
-      'address': address,
-      'date': date,
-      'time': time,
-      'price': price,
-      'imageUrl': imageUrl,
-      'paymentMethod': paymentMethod,
-      'notes': notes,
-    };
-  }
-
-  @override
-  List<Object?> get props => [
-        id,
-        serviceName,
-        status,
-        address,
-        date,
-        time,
-        price,
-        imageUrl,
-        paymentMethod,
-        notes,
-      ];
 }

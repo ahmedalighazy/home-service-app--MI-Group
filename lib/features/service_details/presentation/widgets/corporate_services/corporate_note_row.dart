@@ -36,4 +36,3 @@ class CorporateNoteRow extends StatelessWidget {
     );
   }
 }
-

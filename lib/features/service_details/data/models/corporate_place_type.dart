@@ -1,2 +1,1 @@
 enum PlaceType { company, mosque }
-

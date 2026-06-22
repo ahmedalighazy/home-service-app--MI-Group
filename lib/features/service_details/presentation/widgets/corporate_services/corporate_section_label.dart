@@ -11,4 +11,3 @@ class CorporateSectionLabel extends StatelessWidget {
     return Text(text, style: AppText.semiBold14Black);
   }
 }
-

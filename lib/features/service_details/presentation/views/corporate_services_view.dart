@@ -12,6 +12,8 @@ import '../widgets/corporate_services/corporate_form_card.dart';
 import '../widgets/corporate_services/corporate_hero.dart';
 import '../widgets/corporate_services/corporate_intro_card.dart';
 import '../widgets/corporate_services/corporate_notes_card.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
+import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class CorporateServicesScreen extends StatefulWidget {
   const CorporateServicesScreen({super.key});
@@ -40,7 +42,7 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          context.l10n.doneReceivedRequest,
+          SdStrings.doneReceivedRequest,
           textAlign: TextAlign.center,
           style: AppText.semiBold14White,
         ),
@@ -62,7 +64,7 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
         final cubit = context.read<FeatureCubit>();
 
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
           child: Scaffold(
             backgroundColor: AppColors.white,
             body: SafeArea(
@@ -81,9 +83,9 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
                         Transform.translate(
                           offset: const Offset(0, -32),
                           child: CorporateIntroCard(
-                            title: context.l10n.companiesMosques,
-                            description: AppStrings
-                                .provideCleaningSanitizationOfficesMosquesDetermine,
+                            title: SdStrings.companiesMosques,
+                            description:
+                                SdStrings.provideCleaningSanitizationOfficesMosquesDetermine,
                           ),
                         ),
                         Transform.translate(
@@ -109,9 +111,9 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
                           offset: const Offset(0, -2),
                           child: CorporateNotesCard(
                             notes: [
-                              context.l10n.inspectionFreeFully,
-                              context.l10n.noCommitmentAfterInspection,
-                              context.l10n.determineFinalAfterOnly,
+                              SdStrings.inspectionFreeFully,
+                              SdStrings.notExistsAnyCommitmentAfter,
+                              SdStrings.determineFinalAfterOnly,
                             ],
                           ),
                         ),

@@ -1,75 +1,65 @@
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
-
-import '../../../core/themes/image/app_assets.dart';
-import 'models/service_category_model.dart';
-import 'models/service_group_model.dart';
-import 'models/service_item_model.dart';
+﻿import '../../../core/themes/image/app_assets.dart';
 import 'models/service_page_model.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class ServiceMockData {
-  static const List<ServicePageModel> pages = [
+  static final List<ServicePageModel> pages = [
     ServicePageModel(
       coverImage: AppAssets.furnitureCleaningCover,
-      mainTitle: AppStrings.deepFurnitureCleaning,
+      mainTitle: SdStrings.furnitureCleaning,
       rate: '4.7',
-      reviews: AppStrings.twelveThousandBookings,
+      reviews: SdStrings.twelveThousandBookings,
       totalSteps: '5',
       currentStep: '1',
       promoCode: 'CLEAN15',
-      promoDiscount: AppStrings.discountUpTo70,
+      promoDiscount: SdStrings.seventyPercentDiscount,
       categories: [
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.sofas,
-        ),
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.carpets,
-        ),
+        ServicePageCategoryModel(title: SdStrings.sofas, image: AppAssets.serviceItem),
+        ServicePageCategoryModel(title: SdStrings.carpets, image: AppAssets.serviceItem),
       ],
       serviceGroups: [
-        ServiceGroupModel(
-          categoryTitle: AppStrings.sofas,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.sofas,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.cleaningSofa,
-              description: AppStrings.cleaningInsideHomeForSofas,
+              title: SdStrings.cleaningSofa,
+              description: SdStrings.cleaningInsideHome2,
               price: 50,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.cleaningSofaOnL,
-              description: AppStrings.cleaningSofaOnL,
+              title: SdStrings.cleaningSofaOnL,
+              description: SdStrings.cleaningOnL,
               price: 150,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.cleaningSofa,
-              description: AppStrings.cleaningInsideHomeForSofas,
+              title: SdStrings.cleaningSofa,
+              description: SdStrings.cleaningInsideHome2,
               price: 50,
             ),
           ],
         ),
-        ServiceGroupModel(
-          categoryTitle: AppStrings.carpets,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.carpetsCategory,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.smallNumber100Number200,
-              description: AppStrings.cleaningInsideHomeForCarpets,
+              title: SdStrings.smallNumber100Number200,
+              description: SdStrings.cleaningInsideHome,
               price: 150,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.mediumSize150By275,
-              description: AppStrings.cleaningInsideHomeForCarpets,
+              title: SdStrings.mediumSize150By275,
+              description: SdStrings.cleaningInsideHome,
               price: 200,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.largeSize250By345,
-              description: AppStrings.cleaningInsideHomeForCarpets,
+              title: SdStrings.largeSize250By345,
+              description: SdStrings.cleaningInsideHome,
               price: 300,
             ),
           ],
@@ -78,96 +68,84 @@ class ServiceMockData {
     ),
     ServicePageModel(
       coverImage: AppAssets.pestControlCover,
-      mainTitle: AppStrings.pestControl,
+      mainTitle: SdStrings.pestControl,
       rate: '4.7',
-      reviews: AppStrings.twelveThousandBookings,
+      reviews: SdStrings.twelveThousandBookings,
       totalSteps: '5',
       currentStep: '1',
       promoCode: 'CLEAN15',
-      promoDiscount: AppStrings.discountUpTo70,
+      promoDiscount: SdStrings.seventyPercentDiscount,
       categories: [
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.cockroaches,
-        ),
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.ants,
-        ),
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.bedbugs,
-        ),
-        ServiceCategoryModel(
-          image: AppAssets.serviceItem,
-          title: AppStrings.mice,
-        ),
+        ServicePageCategoryModel(title: SdStrings.cockroaches, image: AppAssets.serviceItem),
+        ServicePageCategoryModel(title: SdStrings.ants, image: AppAssets.serviceItem),
+        ServicePageCategoryModel(title: SdStrings.bedbugs, image: AppAssets.serviceItem),
+        ServicePageCategoryModel(title: SdStrings.mice, image: AppAssets.serviceItem),
       ],
       serviceGroups: [
-        ServiceGroupModel(
-          categoryTitle: AppStrings.cockroaches,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.cockroaches,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlApartment,
-              description: AppStrings.sprayFullInApartment,
+              title: SdStrings.pestControlApartment,
+              description: SdStrings.sprayFullInApartment,
               price: 120,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlVilla,
-              description: AppStrings.sprayFullInVilla,
+              title: SdStrings.pestControlVilla,
+              description: SdStrings.sprayFullInVilla,
               price: 250,
             ),
           ],
         ),
-        ServiceGroupModel(
-          categoryTitle: AppStrings.ants,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.ants,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlAntsApartment,
-              description: AppStrings.sprayFullAntsInApartment,
+              title: SdStrings.pestControlAntsApartment,
+              description: SdStrings.sprayFullAntsInApartment,
               price: 120,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlAntsVilla,
-              description: AppStrings.sprayFullAntsInVilla,
+              title: SdStrings.pestControlAntsVilla,
+              description: SdStrings.sprayFullAntsInVilla,
               price: 250,
             ),
           ],
         ),
-        ServiceGroupModel(
-          categoryTitle: AppStrings.bedbugs,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.bedbugs,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlBedbugsApartment,
-              description: AppStrings.sprayFullBedbugsInApartment,
+              title: SdStrings.pestControlBedbugsApartment,
+              description: SdStrings.sprayFullBedbugsInApartment,
               price: 120,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlBedbugsVilla,
-              description: AppStrings.sprayFullBedbugsInVilla,
+              title: SdStrings.pestControlBedbugsVilla,
+              description: SdStrings.sprayFullBedbugsInVilla,
               price: 250,
             ),
           ],
         ),
-        ServiceGroupModel(
-          categoryTitle: AppStrings.mice,
+        ServicePageGroupModel(
+          categoryTitle: SdStrings.mice,
           items: [
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlMiceApartment,
-              description: AppStrings.sprayFullMiceInApartment,
+              title: SdStrings.pestControlMiceApartment,
+              description: SdStrings.sprayFullMiceInApartment,
               price: 120,
             ),
-            ServiceItemModel(
+            ServicePageItemModel(
               image: AppAssets.serviceItem,
-              title: AppStrings.pestControlMiceVilla,
-              description: AppStrings.sprayFullMiceInVilla,
+              title: SdStrings.pestControlMiceVilla,
+              description: SdStrings.sprayFullMiceInVilla,
               price: 250,
             ),
           ],

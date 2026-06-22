@@ -29,7 +29,7 @@ class DaySelector extends StatelessWidget {
 
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            // reverse: true, // For RTL
+
             itemCount: 7,
             itemBuilder: (context, index) => _DayItem(
               dayName: _getDayName(context, index),
@@ -75,7 +75,7 @@ class _DayItem extends StatelessWidget {
       builder: (context, state) {
         var isSelected = context.read<BookingCubit>().selectedDayIndex == index;
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),

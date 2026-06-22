@@ -6,7 +6,6 @@ import '../../data/models/payment_method.dart';
 import '../../data/models/repeat_type.dart';
 import 'feature_state.dart';
 
-
 class FeatureCubit extends Cubit<FeatureState> {
   FeatureCubit() : super(const FeatureInitial()) {
     loadFeature();
@@ -228,4 +227,3 @@ class FeatureCubit extends Cubit<FeatureState> {
     emit(loadedState.copyWith(serviceComment: value));
   }
 }
-

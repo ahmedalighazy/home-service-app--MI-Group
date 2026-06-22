@@ -1,22 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/step_total_display.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class StepBottomBar extends StatelessWidget {
   final double total;
   final VoidCallback onNext;
   final String? nextLabel;
 
-  const StepBottomBar({
+  StepBottomBar({
     super.key,
     required this.total,
     required this.onNext,
-    this.nextLabel,
-  });
+    String? nextLabel,
+  }) : nextLabel = nextLabel ?? SdStrings.next;
 
   @override
   Widget build(BuildContext context) {

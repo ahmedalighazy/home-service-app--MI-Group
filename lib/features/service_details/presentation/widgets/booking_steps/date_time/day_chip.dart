@@ -42,4 +42,3 @@ class DayChip extends StatelessWidget {
     );
   }
 }
-

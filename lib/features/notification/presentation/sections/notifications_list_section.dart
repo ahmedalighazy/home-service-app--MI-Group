@@ -16,9 +16,10 @@ class NotificationsListSection extends StatelessWidget {
     final Map<String, List<NotificationEntity>> groupedNotifications = {};
 
     for (final notification in notifications) {
-      groupedNotifications.putIfAbsent(notification.group, () => []);
+      final groupKey = notification.group ?? 'other';
+      groupedNotifications.putIfAbsent(groupKey, () => []);
 
-      groupedNotifications[notification.group]!.add(notification);
+      groupedNotifications[groupKey]!.add(notification);
     }
 
     return ListView(
@@ -41,9 +42,9 @@ class NotificationsListSection extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: AppSizes.spacingMedium),
                 child: NotificationCard(
                   title: notification.title,
-                  description: notification.description,
-                  time: notification.time,
-                  iconPath: notification.iconPath,
+                  description: notification.description ?? '',
+                  time: notification.time ?? '',
+                  iconPath: notification.iconPath ?? '',
                   isRead: notification.isRead,
                   onTap: () {
                     context.read<NotificationCubit>().markAsRead(notification);

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../core/themes/text/app_text.dart';
 
-
 class StepNextButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
@@ -39,4 +38,3 @@ class StepNextButton extends StatelessWidget {
     );
   }
 }
-

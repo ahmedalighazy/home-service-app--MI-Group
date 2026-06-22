@@ -23,4 +23,3 @@ class CorporateNotesCard extends StatelessWidget {
     );
   }
 }
-

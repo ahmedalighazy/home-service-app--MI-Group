@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 
@@ -10,18 +11,27 @@ class LanguageTrailingText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          context.tr(LocaleKeys.settingsArabic),
-          style: AppText.ibmDescription14().copyWith(
-            color: AppColors.textLightGrey,
-            fontSize: 15,
-          ),
-        ),
-        const Icon(Icons.chevron_right),
-      ],
+    return BlocBuilder<LanguageCubit, LanguageState>(
+      bloc: getIt<LanguageCubit>(),
+      builder: (context, state) {
+        final currentLanguage = state.isArabic ? 'العربية' : 'English';
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              currentLanguage,
+              style: AppText.ibmDescription14().copyWith(
+                color: AppColors.textLightGrey,
+                fontSize: 15,
+              ),
+            ),
+            Icon(
+              state.isArabic ? Icons.chevron_left : Icons.chevron_right,
+              color: AppColors.textLightGrey,
+            ),
+          ],
+        );
+      },
     );
   }
 }

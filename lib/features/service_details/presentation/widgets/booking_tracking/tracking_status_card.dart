@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/timeline_step.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_tracking/timeline_step_state.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class TrackingStatusCard extends StatelessWidget {
   final VoidCallback onCompletedTap;
@@ -23,26 +23,26 @@ class TrackingStatusCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(context.l10n.serviceStatus, style: AppText.semiBold12Black),
+          Text(SdStrings.statusService, style: AppText.semiBold12Black),
           const SizedBox(height: 12),
           TimelineStep(
-            title: context.l10n.doneConfirmBooking,
-            time: context.l10n.tenTwentyEightAm,
+            title: SdStrings.doneConfirmBooking,
+            time: SdStrings.tenTwentyEightAm,
             state: TimelineStepState.done,
           ),
           TimelineStep(
-            title: context.l10n.teamOnTheWay,
+            title: SdStrings.teamInWayToYou,
             state: TimelineStepState.active,
           ),
           TimelineStep(
-            title: context.l10n.serviceInProgress,
+            title: SdStrings.serviceInProgressExecution,
             state: TimelineStepState.pending,
           ),
           InkWell(
             onTap: onCompletedTap,
             borderRadius: BorderRadius.circular(8),
             child: TimelineStep(
-              title: context.l10n.serviceCompletedStatus,
+              title: SdStrings.doneFinished,
               state: TimelineStepState.pending,
               isLast: true,
             ),

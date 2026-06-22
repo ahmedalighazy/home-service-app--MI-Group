@@ -3,7 +3,6 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
 
-
 class CorporateChoiceChip extends StatelessWidget {
   final String label;
   final bool isSelected;
@@ -41,4 +40,3 @@ class CorporateChoiceChip extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,3 @@
-import 'package:home_service_app/features/service_details/data/models/service_category_model.dart';
-import 'package:home_service_app/features/service_details/data/models/service_group_model.dart';
-
 class ServicePageModel {
   final String coverImage;
   final String mainTitle;
@@ -8,12 +5,12 @@ class ServicePageModel {
   final String reviews;
   final String totalSteps;
   final String currentStep;
-  final List<ServiceCategoryModel> categories;
+  final List<ServicePageCategoryModel> categories;
   final String promoCode;
   final String promoDiscount;
-  final List<ServiceGroupModel> serviceGroups;
+  final List<ServicePageGroupModel> serviceGroups;
 
-  const ServicePageModel({
+  ServicePageModel({
     required this.coverImage,
     required this.mainTitle,
     required this.rate,
@@ -27,3 +24,36 @@ class ServicePageModel {
   });
 }
 
+class ServicePageCategoryModel {
+  final String title;
+  final String image;
+
+  ServicePageCategoryModel({
+    required this.title,
+    required this.image,
+  });
+}
+
+class ServicePageGroupModel {
+  final String categoryTitle;
+  final List<ServicePageItemModel> items;
+
+  ServicePageGroupModel({
+    required this.categoryTitle,
+    required this.items,
+  });
+}
+
+class ServicePageItemModel {
+  final String image;
+  final String title;
+  final String description;
+  final double price;
+
+  ServicePageItemModel({
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.price,
+  });
+}

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/views/payment_step_view.dart';
@@ -13,6 +13,7 @@ import '../widgets/booking_steps/step_bottom_bar.dart';
 import 'address_step_view.dart';
 import 'date_time_step_view.dart';
 import 'extras_step_view.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 enum ServiceType { homeClean, deepClean }
 
@@ -49,7 +50,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
 
     return [
       ServiceStepModel(
-        title: context.l10n.addonsTitle,
+        title: SdStrings.extras,
         content: ExtrasStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 1,
@@ -58,7 +59,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.dateAndTimeTitle,
+        title: SdStrings.dateTime,
         content: DateTimeStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 2,
@@ -67,7 +68,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.addressTitle,
+        title: SdStrings.text51,
         content: AddressStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 3,
@@ -76,7 +77,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.payment,
+        title: SdStrings.payment,
         content: PaymentStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 4,
@@ -92,7 +93,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
 
     return [
       ServiceStepModel(
-        title: context.l10n.houseCleaningTitle,
+        title: SdStrings.cleaningHome,
         content: WorkerFilterCard(
           cartTotal: _initialCartTotal,
           currentStep: 1,
@@ -101,7 +102,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.addonsTitle,
+        title: SdStrings.extras,
         content: ExtrasStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 2,
@@ -111,7 +112,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.serviceFrequency,
+        title: SdStrings.repeatService,
         content: RepeatTypeSelector(
           cartTotal: _initialCartTotal,
           currentStep: 3,
@@ -120,7 +121,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.dateAndTimeTitle,
+        title: SdStrings.dateTime,
         content: DateTimeStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 4,
@@ -129,7 +130,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.addressTitle,
+        title: SdStrings.text51,
         content: AddressStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 5,
@@ -138,7 +139,7 @@ class _ServiceStepsScreenState extends State<ServiceStepsScreen> {
         ),
       ),
       ServiceStepModel(
-        title: context.l10n.payment,
+        title: SdStrings.payment,
         content: PaymentStepScreen(
           cartTotal: _initialCartTotal,
           currentStep: 6,

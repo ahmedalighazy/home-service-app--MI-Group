@@ -20,4 +20,3 @@ class CardBrandBadge extends StatelessWidget {
     );
   }
 }
-

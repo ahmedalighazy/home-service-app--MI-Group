@@ -9,6 +9,7 @@ import 'package:home_service_app/features/search/presentation/section/search_emp
 import 'package:home_service_app/features/search/presentation/section/search_maybe_looking_for_section.dart';
 import 'package:home_service_app/features/search/presentation/section/search_results_section.dart';
 import 'package:home_service_app/features/search/presentation/widgets/search_app_bar.dart';
+import 'search_logic.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -17,19 +18,11 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
-  late final TextEditingController _searchController;
-
+class _SearchPageState extends State<SearchPage> with SearchLogic {
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
+    initSearchController();
   }
 
   @override
@@ -39,10 +32,8 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           children: [
             SearchAppBar(
-              controller: _searchController,
-              onChanged: (value) {
-                context.read<SearchCubit>().search(value);
-              },
+              controller: searchController,
+              onChanged: (value) => onSearchChanged(context, value),
             ),
 
             Expanded(
@@ -50,16 +41,13 @@ class _SearchPageState extends State<SearchPage> {
                 builder: (context, state) {
                   final query = state.query;
 
-                  // Empty Search
                   if (query.isEmpty) {
                     return SingleChildScrollView(
                       child: Column(
                         children: [
                           RecentSearchesSection(
                             recentSearches: state.recentSearches,
-                            onClearAll: () {
-                              context.read<SearchCubit>().clearRecentSearches();
-                            },
+                            onClearAll: () => onClearRecentSearches(context),
                           ),
 
                           PopularSearchesSection(
@@ -74,22 +62,17 @@ class _SearchPageState extends State<SearchPage> {
                     );
                   }
 
-                  // No Results
                   if (state.results.isEmpty) {
                     return SearchEmptyState(searchInputText: '"$query"');
                   }
 
-                  // Results
                   return SingleChildScrollView(
                     child: Column(
                       children: [
                         SearchResultsSection(
                           results: state.results,
-                          onResultTap: (result) {
-                            context.read<SearchCubit>().addRecentSearch(
-                              result.title,
-                            );
-                          },
+                          onResultTap: (result) =>
+                              onResultTap(context, result.title),
                         ),
 
                         SearchCategoriesSection(categories: state.categories),
