@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
@@ -21,22 +22,20 @@ class BookingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) => BookingCubit(BookingRepository())..fetchBookings(),
-          child: BlocBuilder<BookingCubit, BookingState>(
-            builder: (context, state) {
-              if (state is BookingLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is BookingSuccess) {
-                return const _BookingContent();
-              } else if (state is BookingError) {
-                return Center(child: Text(state.message));
-              }
-              return const SizedBox.shrink();
-            },
-          ),
+    return SafeArea(
+      child: BlocProvider(
+        create: (context) => BookingCubit(BookingRepository())..fetchBookings(),
+        child: BlocBuilder<BookingCubit, BookingState>(
+          builder: (context, state) {
+            if (state is BookingLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is BookingSuccess) {
+              return const _BookingContent();
+            } else if (state is BookingError) {
+              return Center(child: Text(state.message));
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ),
     );
@@ -63,8 +62,7 @@ class _BookingContent extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    //context.tr(LocaleKeys.bookingUpcoming),
-                    context.l10n.navBookings,
+                    context.tr(LocaleKeys.bookingUpcoming),
                     style: AppText.boldIbm(
                       color: AppColors.black,
                       fontSize: 18,
@@ -89,8 +87,8 @@ class _BookingContent extends StatelessWidget {
 
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
-                Tab(text: AppStrings.currentSubscriptions),
-                Tab(text: AppStrings.previousSubscriptions),
+                Tab(text: context.tr(LocaleKeys.bookingUpcoming)),
+                Tab(text: context.tr(LocaleKeys.bookingPrevious)),
               ],
             ),
             Expanded(
@@ -110,14 +108,10 @@ class _BookingContent extends StatelessWidget {
                       : EmptyStateWidget(
                           isscreenBooking: true,
                           iconPath: IconsPath.notBooking,
-                          // title: context.tr(LocaleKeys.bookingNotFound),
-                          // subtitle: context.tr(LocaleKeys.bookingDescription),
-                          //onButtonPressed: () {},
-                          //buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
-                          title: context.l10n.noUpcomingBookings,
-                          subtitle: context.l10n.noUpcomingBookingsDescription,
+                          title: context.tr(LocaleKeys.bookingNotFound),
+                          subtitle: context.tr(LocaleKeys.bookingDescription),
                           onButtonPressed: () {},
-                          buttonLabel: context.l10n.bookNow,
+                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
                         ),
 
                   bookings.isEmpty
@@ -135,14 +129,10 @@ class _BookingContent extends StatelessWidget {
                           isscreenBooking: true,
 
                           iconPath: IconsPath.notBooking,
-                          // title: context.tr(LocaleKeys.bookingNotFound),
-                          // subtitle: context.tr(LocaleKeys.bookingDescription),
-                          // onButtonPressed: () {},
-                          // buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
-                          title: context.l10n.noUpcomingBookings,
-                          subtitle: context.l10n.noUpcomingBookingsDescription,
+                          title: context.tr(LocaleKeys.bookingNotFound),
+                          subtitle: context.tr(LocaleKeys.bookingDescription),
                           onButtonPressed: () {},
-                          buttonLabel: context.l10n.bookNow,
+                          buttonLabel: context.tr(LocaleKeys.bookingRebookNow),
                         ),
                 ],
               ),

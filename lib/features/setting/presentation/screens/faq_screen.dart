@@ -14,9 +14,9 @@ class FAQScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: AppStrings.faq),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.helpCenterFaq)),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(5.w),
         child: Column(
           children: [
             CustomExpansionTile(

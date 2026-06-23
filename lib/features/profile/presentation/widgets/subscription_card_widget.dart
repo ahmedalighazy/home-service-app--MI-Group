@@ -31,11 +31,11 @@ class SubscriptionCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-
+          // Header Section
           Container(
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
-              color: const Color(0xFFE8FBFF),
+              color: const Color(0xFFE8FBFF), // Light cyan from YAML
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(AppSizes.radiusM.r),
               ),
@@ -49,7 +49,7 @@ class SubscriptionCardWidget extends StatelessWidget {
                     horizontalSpace(8),
 
                     Text(
-                      subscription.title ?? '',
+                      context.tr(subscription.title),
                       style: AppText.ibmHeading14(color: AppColors.black),
                     ),
                   ],
@@ -59,36 +59,37 @@ class SubscriptionCardWidget extends StatelessWidget {
             ),
           ),
 
+          // Details Section
           Padding(
             padding: EdgeInsets.all(16.r),
             child: Column(
               children: [
                 _buildDetailRow(
-                  AppStrings.subscriptionTypeLabel,
-                  subscription.type ?? '',
+                  context.tr(LocaleKeys.profileSubscriptionTypeLabel),
+                  context.tr(subscription.type),
                   IconsPath.loadingDark,
                 ),
                 if (subscription.nextVisitDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.nextVisitLabel,
-                    subscription.nextVisitDate?.toIso8601String().split('T')[0] ?? '',
+                    context.tr(LocaleKeys.profileNextVisitLabel),
+                    subscription.nextVisitDate!,
                     IconsPath.calenderBlack,
                   ),
                 ],
                 if (subscription.nextVisitTime != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.timeLabel,
-                    subscription.nextVisitTime ?? '',
+                    context.tr(LocaleKeys.profileTimeLabel),
+                    subscription.nextVisitTime!,
                     IconsPath.time,
                   ),
                 ],
                 if (subscription.expiryDate != null) ...[
                   verticalSpace(12),
                   _buildDetailRow(
-                    AppStrings.expiryDateLabelTitle,
-                    subscription.expiryDate?.toIso8601String().split('T')[0] ?? '',
+                    context.tr(LocaleKeys.profileExpiryDateLabel),
+                    subscription.expiryDate!,
                     IconsPath.group,
                   ),
                 ],
@@ -97,11 +98,11 @@ class SubscriptionCardWidget extends StatelessWidget {
                 verticalSpace(16),
                 CustomButtom(
                   onTap: onTap,
-                  text: subscription.status == 'active'
-                      ? AppStrings.manageSubscription
-                      : (subscription.status == 'paused'
-                            ? AppStrings.reactivateBtn
-                            : AppStrings.subscribeAgainBtn),
+                  text: subscription.status == SubscriptionStatus.active
+                      ? context.tr(LocaleKeys.profileManageSubscription)
+                      : (subscription.status == SubscriptionStatus.paused
+                            ? context.tr(LocaleKeys.profileReactivateBtn)
+                            : context.tr(LocaleKeys.profileSubscribeAgainBtn)),
                   textStyle: AppText.ibmButton16(color: AppColors.white),
                   startColor: AppColors.primary,
                   endColor: AppColors.dark,
@@ -114,32 +115,28 @@ class SubscriptionCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusBadge() {
-    Color bgColor = const Color(0xFFECFDF5);
-    Color textColor = const Color(0xFF059669);
-    String label = AppStrings.activeStatus;
-
-    switch (subscription.status) {
-      case 'active':
-        bgColor = const Color(0xFFECFDF5);
-        textColor = const Color(0xFF059669);
-        label = AppStrings.activeStatus;
-        break;
-      case 'paused':
-        bgColor = const Color(0xFFFFFBEB);
-        textColor = const Color(0xFFD97706);
-        label = AppStrings.pausedStatus;
-        break;
-      case 'ended':
-        bgColor = const Color(0xFFFEF2F2);
-        textColor = const Color(0xFFDC2626);
-        label = AppStrings.endedStatus;
-        break;
-      default:
-        bgColor = const Color(0xFFECFDF5);
-        textColor = const Color(0xFF059669);
-        label = AppStrings.activeStatus;
-    }
+  Widget _buildStatusBadge(BuildContext context) {
+    final (
+      Color bgColor,
+      Color textColor,
+      String key,
+    ) = switch (subscription.status) {
+      SubscriptionStatus.active => (
+        const Color(0xFFECFDF5),
+        const Color(0xFF059669),
+        LocaleKeys.profileSubscriptionStatusActive,
+      ),
+      SubscriptionStatus.paused => (
+        const Color(0xFFFFFBEB),
+        const Color(0xFFD97706),
+        LocaleKeys.profileSubscriptionStatusPaused,
+      ),
+      SubscriptionStatus.ended => (
+        const Color(0xFFFEF2F2),
+        const Color(0xFFDC2626),
+        LocaleKeys.profileSubscriptionStatusEnded,
+      ),
+    };
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -169,7 +166,7 @@ class SubscriptionCardWidget extends StatelessWidget {
               label,
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
             ),
-
+            // Icon(icon, size: 18.r, color: AppColors.textLightGrey),
           ],
         ),
         Text(
@@ -199,7 +196,7 @@ class SubscriptionCardWidget extends StatelessWidget {
           ],
         ),
         Text(
-          '${subscription.price?.toInt() ?? 0} ${AppStrings.monthlyPriceSuffix}',
+          '${subscription.price.toInt()} ${context.tr(LocaleKeys.profileMonthlyPriceSuffix)}',
           style: AppText.ibmHeading14(color: AppColors.primary),
         ),
       ],

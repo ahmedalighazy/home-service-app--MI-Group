@@ -14,7 +14,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: AppStrings.privacyPolicyLabel),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.legalPrivacyPolicy)),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(

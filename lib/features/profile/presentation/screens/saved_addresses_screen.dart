@@ -36,10 +36,7 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.transparentColor,
-      builder: (_) => AddAddressBottomSheet(
-        address: address,
-        isEdit: true,
-      ),
+      builder: (_) => AddAddressBottomSheet(address: address, isEdit: true),
     );
   }
 
@@ -71,7 +68,9 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
     ];
 
     return Scaffold(
-      appBar: CustomAppBar(title: context.tr(LocaleKeys.profileSavedAddressesHeader)),
+      appBar: CustomAppBar(
+        title: context.tr(LocaleKeys.profileSavedAddressesHeader),
+      ),
       body: addresses.isEmpty
           ? EmptyStateWidget(
               iconPath: IconsPath.union,
@@ -106,8 +105,8 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
                     },
                   ),
                   verticalSpace(24),
-                  CustomAddButtomSheet(isProfileScreen: true),
-
+                  _AddAddressButton(onTap: _onAddAddress),
+                  verticalSpace(24),
                 ],
               ),
             ),
@@ -130,7 +129,10 @@ class _AddAddressButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 16.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.radiusM.r),
-          border: Border.all(color: AppColors.borderInputs, style: BorderStyle.solid),
+          border: Border.all(
+            color: AppColors.borderInputs,
+            style: BorderStyle.solid,
+          ),
           color: AppColors.white,
         ),
         child: Row(

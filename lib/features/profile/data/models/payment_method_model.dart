@@ -1,19 +1,19 @@
 class PaymentMethodModel {
   final String id;
-  final String type;
+  final String cardHolderName;
   final String lastFourDigits;
+  final String expiryDate;
+  final String brand; // e.g., 'Visa', 'Mastercard'
   final bool isDefault;
-  final String? expiryDate;
-  final String? cardHolderName;
-  final String? iconPath;
+  final String iconPath;
 
   PaymentMethodModel({
     required this.id,
-    required this.type,
+    required this.cardHolderName,
     required this.lastFourDigits,
+    required this.expiryDate,
+    required this.brand,
     this.isDefault = false,
-    this.expiryDate,
-    this.cardHolderName,
-    this.iconPath,
+    required this.iconPath,
   });
 }

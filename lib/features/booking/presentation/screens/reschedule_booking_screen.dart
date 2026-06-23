@@ -52,17 +52,18 @@ class RescheduleBookingScreen extends StatelessWidget {
                 ),
                 verticalSpace(5),
 
-              Row(
-                children: [
-                  Spacer(),
-                  Text(
-                    '300/0',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color(0xFF1D265C) ,
-                      fontSize: 14.sp,
-                      fontFamily: 'IBM Plex Sans Arabic',
-                      fontWeight: FontWeight.w500,
+                Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      '300/0',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFF1D265C),
+                        fontSize: 14.sp,
+                        fontFamily: 'IBM Plex Sans Arabic',
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),

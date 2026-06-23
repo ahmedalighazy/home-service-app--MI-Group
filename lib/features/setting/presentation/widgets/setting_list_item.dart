@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingListItem extends StatelessWidget {
   final String icon;
@@ -36,15 +36,18 @@ class SettingListItem extends StatelessWidget {
       trailing:
           trailing ??
           Icon(
-            AppStrings.isArabic ? Icons.chevron_left : Icons.chevron_right,
+            Icons.chevron_right,
             color: settingColorIcon ?? AppColors.greenPrimary,
             size: 24.sp,
           ),
-      title: Text(
-        title,
-        style: AppText.mediumIbm(
-          color: titleColor ?? AppColors.primaryText,
-          fontSize: 16,
+      title: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          title,
+          style: AppText.mediumIbm(
+            color: titleColor ?? AppColors.primaryText,
+            fontSize: 16,
+          ),
         ),
       ),
       leading: SvgPicture.asset(

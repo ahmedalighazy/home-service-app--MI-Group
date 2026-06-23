@@ -15,43 +15,45 @@ class TermsAndConditionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(title: AppStrings.termsAndConditionsLabel),
+      appBar: CustomAppBar(
+        title: context.tr(LocaleKeys.legalTermsAndConditions),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            SizedBox(height: 16.h),
+            verticalSpace(16),
             CustomExpansionTile(
-              title: AppStrings.data,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsAcceptance),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.services,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsServices),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.bookings,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsBookings),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.serviceCancellation,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsCancellation),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.responsibility,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsResponsibility),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.companyResponsibilities,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsCompanyResp),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.accounts,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsAccounts),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
             CustomExpansionTile(
-              title: AppStrings.modifications,
-              content: AppStrings.termsIntro,
+              title: context.tr(LocaleKeys.legalTermsModifications),
+              content: context.tr(LocaleKeys.legalTermsIntroduction),
             ),
           ],
         ),

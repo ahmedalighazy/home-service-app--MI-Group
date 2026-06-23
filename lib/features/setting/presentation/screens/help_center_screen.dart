@@ -19,8 +19,7 @@ class HelpCenterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: CustomAppBar(title: AppStrings.helpCenter),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.profileHelpCenter)),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         children: [

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
 import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
@@ -24,7 +23,7 @@ void showCannotDeleteDialogred(
     context: context,
     builder: (BuildContext context) {
       return Directionality(
-        textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: context.isRtl ? TextDirection.rtl : TextDirection.ltr,
         child: AlertDialog(
           backgroundColor: AppColors.white,
           shape: RoundedRectangleBorder(
@@ -55,66 +54,21 @@ void showCannotDeleteDialogred(
               verticalSpace(24),
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: Container(
-                      width: width(context) / 3.4,
-                      height: 40.h,
-
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFD2503C) ,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(44),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          titleButtom ?? (AppStrings.isArabic ? 'حذف' : 'Delete'),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Color(0xFFF8FAFC) ,
-                            fontSize: 16,
-                            fontFamily: 'IBM Plex Sans Arabic',
-                            fontWeight: FontWeight.w600,
-                            height: 1.40,
-                          ),
-                        ),
-                      ),
+                  Expanded(
+                    child: CustomActionButton(
+                      text: context.tr(LocaleKeys.profileDeleteAction),
+                      backgroundColor: AppColors.red,
+                      textColor: AppColors.white,
+                      onTap: () {
+                        // delete action
+                      },
                     ),
                   ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: Container(
-                      width: width(context) / 3.4,
-                      height: 48.h,
-
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            width: 1,
-                            color: Color(0xFFE5E7EB) ,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          AppStrings.cancelBtn,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Color(0xFF6D7688),
-                            fontSize: 16,
-                            fontFamily: 'IBM Plex Sans Arabic',
-                            fontWeight: FontWeight.w600,
-                            height: 1.40,
-                          ),
-                        ),
+                  horizontalSpace(10),
+                  Expanded(
+                    child: CustomActionButton(
+                      text: context.tr(
+                        LocaleKeys.profileDeleteAddressCancelBtn,
                       ),
                       backgroundColor: AppColors.white,
                       textColor: AppColors.primaryGrey,
@@ -142,7 +96,7 @@ void showCannotDeleteDialog(
     context: context,
     builder: (BuildContext context) {
       return Directionality(
-        textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: context.isRtl ? TextDirection.rtl : TextDirection.ltr,
         child: AlertDialog(
           backgroundColor: AppColors.white,
           shape: RoundedRectangleBorder(
@@ -169,8 +123,7 @@ void showCannotDeleteDialog(
               verticalSpace(24),
               CustomButtom(
                 onTap: () => context.pop(),
-                // text: context.tr(LocaleKeys.ok),
-                text: context.l10n.okBtn,
+                text: context.tr(LocaleKeys.ok),
                 textStyle: AppText.ibmButton16(),
                 startColor: AppColors.primary,
                 endColor: AppColors.primaryActive,

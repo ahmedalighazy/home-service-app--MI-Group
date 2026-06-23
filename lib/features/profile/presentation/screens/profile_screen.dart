@@ -1,103 +1,131 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../setting/presentation/widgets/setting_list_item.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/setting_group_widget.dart';
-import 'profile_logic.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> with ProfileLogic {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: height(context),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  const ProfileHeader(),
-                  Positioned(
-                    top: height(context) * 0.17,
-                    left: 0,
-                    right: 0,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const ProfileCard(),
-                        verticalSpace(10),
-                        SettingGroupWidget(
-                          items: [
-                            SettingListItem(
-                              icon: IconsPath.vectorPerson,
-                              title: AppStrings.editProfile,
-                              onTap: () => onEditProfileTap(context),
-                            ),
-                            SettingListItem(
-                              icon: IconsPath.vectorFavorite,
-                              title: AppStrings.favorites,
-                              onTap: () => onFavoritesTap(context),
-                            ),
-                            SettingListItem(
-                              icon: IconsPath.vectorLocation,
-                              title: AppStrings.myAddresses,
-                              onTap: () => onSavedAddressesTap(context),
-                            ),
-                            SettingListItem(
-                              icon: IconsPath.vectorSub,
-                              title: AppStrings.mySubscriptions,
-                              onTap: () => onSubscriptionsTap(context),
-                            ),
-                            SettingListItem(
-                              icon: IconsPath.group,
-                              title: AppStrings.paymentMethods,
-                              onTap: () => onPaymentMethodsTap(context),
-                            ),
-                          ],
-                        ),
-                        verticalSpace(7),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Divider(
-                            color: AppColors.borderGrey,
-                            thickness: 1,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: height(context),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const ProfileHeader(),
+                Positioned(
+                  top: height(context) * 0.17,
+                  left: 0,
+                  right: 0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const ProfileCard(),
+                      verticalSpace(10),
+                      SettingGroupWidget(
+                        items: [
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.vectorPerson,
+                            title: context.tr(LocaleKeys.profileEdit),
+                            onTap: () {
+                              context.pushNamed(AppRouter.editProfile);
+                            },
                           ),
-                        ),
-                        verticalSpace(7),
-                        SettingGroupWidget(
-                          items: [
-                            SettingListItem(
-                              icon: IconsPath.vectorSetting,
-                              title: AppStrings.settings,
-                              onTap: () => onSettingsTap(context),
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.vectorFavorite,
+                            title: context.tr(LocaleKeys.profileFavorites),
+                            onTap: () {
+                              context.pushNamed(AppRouter.favorites);
+                            },
+                          ),
+                          SettingListItem(
+                            seetingScreen: true,
+                            icon: IconsPath.vectorLocation,
+                            title: context.tr(LocaleKeys.profileMyAddresses),
+                            onTap: () {
+                              context.pushNamed(AppRouter.savedAddresses);
+                            },
+                          ),
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.vectorSub,
+                            title: context.tr(
+                              LocaleKeys.profileMySubscriptions,
                             ),
-                            SettingListItem(
-                              icon: IconsPath.iconLang,
-                              title: AppStrings.contactUs,
-                              onTap: () => onContactUsTap(context),
-                            ),
-                          ],
+                            onTap: () {
+                              context.pushNamed(AppRouter.subscriptions);
+                            },
+                          ),
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.group,
+                            title: context.tr(LocaleKeys.profilePaymentMethods),
+                            onTap: () {
+                              context.pushNamed(AppRouter.paymentMethods);
+                            },
+                          ),
+                        ],
+                      ),
+                      verticalSpace(7),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.borderGrey,
+                          thickness: 1,
                         ),
-                      ],
-                    ),
+                      ),
+                      verticalSpace(7),
+                      SettingGroupWidget(
+                        items: [
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.vectorSetting,
+                            title: context.tr(LocaleKeys.settingsTitle),
+                            onTap: () {
+                              context.pushNamed(AppRouter.setting);
+                            },
+                          ),
+
+                          SettingListItem(
+                            seetingScreen: true,
+
+                            icon: IconsPath.iconLang,
+                            title: context.tr(LocaleKeys.profileHelpCenter),
+                            onTap: () {
+                              context.pushNamed(AppRouter.contactUs);
+
+                              // context.pushNamed(AppRouter.helpCenter);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/helpers/spacing.dart';
+import '../../../../core/utils/l10n/app_strings.dart';
 import '../../../../core/utils/l10n/locale_keys.dart';
 import '../../../../core/utils/l10n/localization_extension.dart';
 import 'favorite_item_card.dart';

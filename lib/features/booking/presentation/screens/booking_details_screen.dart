@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../widgets/booking_details_header.dart';
 import '../widgets/booking_details_row.dart';
@@ -21,8 +21,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        // title: context.tr(LocaleKeys.bookingDetails),
-        title: context.l10n.bookingDetails,
+        title: context.tr(LocaleKeys.bookingDetails),
         actions: CustomPopupMenuBooking(onSelected: (MenuAction value) {}),
       ),
       body: SingleChildScrollView(
@@ -33,7 +32,7 @@ class BookingDetailsScreen extends StatelessWidget {
             shape: RoundedRectangleBorder(
               side: const BorderSide(
                 width: 1,
-                color: const Color(0xFFE5E7EB) ,
+                color: Color(0xFFE5E7EB) /* border-inputs */,
               ),
               borderRadius: BorderRadius.circular(12.r),
             ),
@@ -42,7 +41,7 @@ class BookingDetailsScreen extends StatelessWidget {
             children: [
               BookingDetailsHeader(
                 serviceName: booking.serviceName,
-                status: booking.status.toString(),
+                status: booking.status,
                 imageUrl: booking.imageUrl,
               ),
               verticalSpace(8),
@@ -74,42 +73,38 @@ class _DetailsCard extends StatelessWidget {
         children: [
           BookingDetailsRow(
             value2: booking.time,
-            label: AppStrings.dateAndTimeTitle,
-            value: booking.date.toString().split(' ')[0],
+            label: context.tr(LocaleKeys.bookingDateAndTime),
+            value: booking.date,
             icon: IconsPath.calendar,
             icon2: IconsPath.time,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            //label: context.tr(LocaleKeys.bookingAddress),
-            label: context.l10n.addressTitle,
+            label: context.tr(LocaleKeys.bookingAddress),
             value: booking.address,
             icon: IconsPath.location,
           ),
           BookingDetailsRow(
-            //label: context.tr(LocaleKeys.bookingRating),
-            label: context.l10n.rating,
+            label: context.tr(LocaleKeys.bookingRating),
             value: booking.notes ?? "",
             icon: IconsPath.editGry,
           ),
           const Divider(height: 1),
-
           BookingDetailsRow(
-            label: context.l10n.paymentMethods,
+            label: context.tr(LocaleKeys.bookingPaid),
             value: booking.paymentMethod ?? 'N/A',
             icon: IconsPath.paid,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            //label: context.tr(LocaleKeys.bookingNumber),
-            label: context.l10n.bookingNumber,
+            label: context.tr(LocaleKeys.bookingNumber),
             value: booking.id,
             icon: IconsPath.enlargement,
           ),
           const Divider(height: 1),
           BookingDetailsRow(
-            label: AppStrings.totalprice,
-            value: booking.price?.toString() ?? '0',
+            label: context.tr(LocaleKeys.bookingTotalPrice),
+            value: booking.price,
             icon: IconsPath.group,
           ),
         ],
