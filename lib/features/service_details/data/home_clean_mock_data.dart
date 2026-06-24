@@ -72,7 +72,7 @@ class HomeCleanMockData {
     ),
   ];
 
-  static final List<ServiceFrequency> frequencies = [
+  static List<ServiceFrequency> get frequencies => [
     ServiceFrequency(title: SdStrings.onceOne),
     ServiceFrequency(
       title: SdStrings.text20,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
-
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -16,6 +16,10 @@ class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isArabic = context.select(
+      (LanguageCubit cubit) => cubit.state.isArabic,
+    );
+
     return Container(
       color: AppColors.white,
       child: SafeArea(
@@ -49,7 +53,9 @@ class BookingFlowAppBar extends StatelessWidget implements PreferredSizeWidget {
                       border: Border.all(color: AppColors.border),
                     ),
                     child: Icon(
-                      AppStrings.isArabic ? Icons.arrow_forward_rounded : Icons.arrow_back_rounded,
+                      isArabic
+                          ? Icons.arrow_forward_rounded
+                          : Icons.arrow_back_rounded,
                       size: 22,
                       color: AppColors.black,
                     ),

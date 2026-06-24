@@ -138,101 +138,107 @@ class SdStrings {
   static String get addHere => 'sd_addHere'.tr();
   static String get cleaningFull => 'sd_cleaningFull'.tr();
 
-  // Kept as static data (mock/demo values — should come from API in production)
-  static const String ibrahimMohamed = 'Ibrahim Mohamed';
-  static const String ibrahimInitial = 'I';
-  static const String tenTwentyEightAm = '10:28 AM';
-  static const String within18Minutes = 'In 18 min';
-  static const String twelveThousandBookings = '12,000 bookings';
-  static const String homeAddressSubtitle = '18, Al-Nageeb St, Doha';
-  static const String workAddressSubtitle = 'Al-Muraqab Tower - 8th Floor';
+  // Mock/demo values. These should come from API in production.
+  static String get ibrahimMohamed => 'sd_ibrahimMohamed'.tr();
+  static String get ibrahimInitial => 'sd_ibrahimInitial'.tr();
+  static String get tenTwentyEightAm => 'sd_tenTwentyEightAm'.tr();
+  static String get within18Minutes => 'sd_within18Minutes'.tr();
+  static String get twelveThousandBookings => 'sd_twelveThousandBookings'.tr();
+  static String get homeAddressSubtitle => 'sd_homeAddressSubtitle'.tr();
+  static String get workAddressSubtitle => 'sd_workAddressSubtitle'.tr();
 
   static String get apartment => 'sd_apartment'.tr();
   static String get apartment2 => 'sd_apartment2'.tr();
   static String get apartmentSmall => 'sd_apartmentSmall'.tr();
   static String get studio => 'sd_studio'.tr();
   static String get ground => 'sd_ground'.tr();
-  static const String cleaningDeepThatWasWaitingForYourSofa =
-      'The deep cleaning your sofa has been waiting for';
-  static const String cleaningSimpleSofaVacuumThingButDustGrains =
-      'Simple vacuuming is one thing, but the dust, sand grains, and hidden stains accumulating inside sofa fabric are a completely different matter.\n\nOur certified cleaning specialists come fully equipped and work on every layer of your sofa to restore its freshness, color, and comfort.';
-  static const String inspectSofaDetermineTypeFabricDetermineNeedsCleaning =
-      'Inspect sofa to determine fabric type\nDetermine cleaning needs\nDry vacuum to remove dust, hair, and debris\nWet shampooing using specialized products\nStain extraction during shampooing process\nSpot treatment for stubborn stains';
-  static const String mayRemainSofaWetDurationUpToToNumber12 =
-      'The sofa may remain wet for up to 12 hours after cleaning.\nDrying time depends on fabric type and room ventilation.\nSome very stubborn stains (pets, blood, oils) may be difficult to remove.\nThe specialist will advise if some cleaning methods are unsuitable for certain fabrics.\nPlease cover items not included in the service or that cannot be cleaned.';
+  static String get cleaningDeepThatWasWaitingForYourSofa =>
+      'sd_cleaningDeepThatWasWaitingForYourSofa'.tr();
+  static String get cleaningSimpleSofaVacuumThingButDustGrains =>
+      'sd_cleaningSimpleSofaVacuumThingButDustGrains'.tr();
+  static String get inspectSofaDetermineTypeFabricDetermineNeedsCleaning =>
+      'sd_inspectSofaDetermineTypeFabricDetermineNeedsCleaning'.tr();
+  static String get mayRemainSofaWetDurationUpToToNumber12 =>
+      'sd_mayRemainSofaWetDurationUpToToNumber12'.tr();
 
   // Pest control labels
-  static const String ants = 'Ants';
-  static const String cockroaches = 'Cockroaches';
-  static const String bedbugs = 'Bed Bugs';
-  static const String mice = 'Mice';
-  static const String carpets = 'Carpets';
-  static const String carpetsCategory = 'Carpets';
-  static const String sofas = 'Sofas';
-  static const String chairsDining = 'Dining Chairs';
-  static const String pillowsDecorative = 'Decorative Pillows';
-  static const String pillowsSleeping = 'Sleeping Pillows';
-  static const String sports = 'Sports';
-  static const String mada = 'Mada';
+  static String get ants => 'sd_ants'.tr();
+  static String get cockroaches => 'sd_cockroaches'.tr();
+  static String get bedbugs => 'sd_bedbugs'.tr();
+  static String get mice => 'sd_mice'.tr();
+  static String get carpets => 'sd_carpets'.tr();
+  static String get carpetsCategory => 'sd_carpets'.tr();
+  static String get sofas => 'sd_sofas'.tr();
+  static String get chairsDining => 'sd_chairsDining'.tr();
+  static String get pillowsDecorative => 'sd_pillowsDecorative'.tr();
+  static String get pillowsSleeping => 'sd_pillowsSleeping'.tr();
+  static String get sports => 'sd_sports'.tr();
+  static String get mada => 'sd_mada'.tr();
 
   // Service name labels
-  static const String cleaningBathroom = 'Bathroom Cleaning';
-  static const String cleaningKitchen = 'Kitchen Cleaning';
-  static const String cleaningOven = 'Oven Cleaning';
-  static const String cleaningWindows = 'Window Cleaning';
-  static const String cleaningHome = 'Home Cleaning';
-  static const String cleaningHome2 = 'Home Cleaning';
-  static const String polishingFloors = 'Floor Polishing';
-  static const String washingCurtains = 'Curtain Washing';
-  static const String furnitureCleaning2 = 'Furniture Cleaning';
-  static const String cleaningInsideHome = 'Professional carpet cleaning inside home';
-  static const String cleaningInsideHome2 = 'Professional sofa cleaning inside home';
-  static const String cleaningSofa = 'Sofa Cleaning';
-  static const String cleaningSofaOnL = 'L-shaped Sofa Cleaning';
-  static const String cleaningOnL = 'Deep cleaning for L-shaped sofa';
-  static const String pestControlAntsApartment = 'Ant Control - Apartment';
-  static const String pestControlAntsVilla = 'Ant Control - Villa';
-  static const String pestControlApartment = 'Cockroach Control - Apartment';
-  static const String pestControlVilla = 'Cockroach Control - Villa';
-  static const String pestControlBedbugsApartment = 'Bed Bug Control - Apartment';
-  static const String pestControlBedbugsVilla = 'Bed Bug Control - Villa';
-  static const String pestControlMiceApartment = 'Mouse Control - Apartment';
-  static const String pestControlMiceVilla = 'Mouse Control - Villa';
-  static const String sprayFullAntsInApartment = 'Full spray for ant control in apartment';
-  static const String sprayFullAntsInVilla = 'Full spray for ant control in villa';
-  static const String sprayFullInApartment = 'Full spray for cockroach control in apartment';
-  static const String sprayFullInVilla = 'Full spray for cockroach control in villa';
-  static const String sprayFullBedbugsInApartment = 'Full spray for bed bug control in apartment';
-  static const String sprayFullBedbugsInVilla = 'Full spray for bed bug control in villa';
-  static const String sprayFullMiceInApartment = 'Full spray for mouse control in apartment';
-  static const String sprayFullMiceInVilla = 'Full spray for mouse control in villa';
+  static String get cleaningBathroom => 'sd_cleaningBathroom'.tr();
+  static String get cleaningKitchen => 'sd_cleaningKitchen'.tr();
+  static String get cleaningOven => 'sd_cleaningOven'.tr();
+  static String get cleaningWindows => 'sd_cleaningWindows'.tr();
+  static String get cleaningHome => 'sd_cleaningHome'.tr();
+  static String get cleaningHome2 => 'sd_cleaningHome'.tr();
+  static String get polishingFloors => 'sd_polishingFloors'.tr();
+  static String get washingCurtains => 'sd_washingCurtains'.tr();
+  static String get furnitureCleaning2 => 'sd_furnitureCleaning'.tr();
+  static String get cleaningInsideHome => 'sd_cleaningInsideHome'.tr();
+  static String get cleaningInsideHome2 => 'sd_cleaningInsideHome2'.tr();
+  static String get cleaningSofa => 'sd_cleaningSofa'.tr();
+  static String get cleaningSofaOnL => 'sd_cleaningSofaOnL'.tr();
+  static String get cleaningOnL => 'sd_cleaningOnL'.tr();
+  static String get pestControlAntsApartment => 'sd_pestControlAntsApartment'.tr();
+  static String get pestControlAntsVilla => 'sd_pestControlAntsVilla'.tr();
+  static String get pestControlApartment => 'sd_pestControlApartment'.tr();
+  static String get pestControlVilla => 'sd_pestControlVilla'.tr();
+  static String get pestControlBedbugsApartment =>
+      'sd_pestControlBedbugsApartment'.tr();
+  static String get pestControlBedbugsVilla => 'sd_pestControlBedbugsVilla'.tr();
+  static String get pestControlMiceApartment => 'sd_pestControlMiceApartment'.tr();
+  static String get pestControlMiceVilla => 'sd_pestControlMiceVilla'.tr();
+  static String get sprayFullAntsInApartment =>
+      'sd_sprayFullAntsInApartment'.tr();
+  static String get sprayFullAntsInVilla => 'sd_sprayFullAntsInVilla'.tr();
+  static String get sprayFullInApartment => 'sd_sprayFullInApartment'.tr();
+  static String get sprayFullInVilla => 'sd_sprayFullInVilla'.tr();
+  static String get sprayFullBedbugsInApartment =>
+      'sd_sprayFullBedbugsInApartment'.tr();
+  static String get sprayFullBedbugsInVilla =>
+      'sd_sprayFullBedbugsInVilla'.tr();
+  static String get sprayFullMiceInApartment =>
+      'sd_sprayFullMiceInApartment'.tr();
+  static String get sprayFullMiceInVilla => 'sd_sprayFullMiceInVilla'.tr();
 
   // Numeric/time display values
-  static const String morning = 'AM';
-  static const String oneRoom = '1 Room';
-  static const String twoRooms = '2 Rooms';
-  static const String threeRooms = '3 Rooms';
-  static const String fourRooms = '4 Rooms';
-  static const String eightRoomsCompleted = '8 rooms completed';
-  static const String oneHundredEightyMinutes = '180 min';
-  static const String first = 'First';
-  static const String second = 'Second';
-  static const String hour = 'Hour';
-  static const String hours = 'Hours';
-  static const String regular = 'Regular';
-  static const String regularWithCleaningAddOn = 'Regular + Cleaning Add-on';
-  static const String twoWeekly = '2x Weekly';
-  static const String twoWeeks = '2 Weeks';
-  static const String fullLivingRoomKitchenBedroomsWithCleaningComplete =
-      'Including living room, kitchen, and bedrooms with full cleaning.';
-  static const String completedService = 'Service Completed';
-  static const String namePlace2 = 'Place Name';
-  static const String text132 = 'Monthly';
-  static const String text150 = 'Care Technician';
-  static const String text161 = 'Discount Code';
-  static const String text18 = 'Submit Rating';
-  static const String text20 = 'Weekly';
-  static const String text51 = 'Address';
-  static const String text59 = 'ETA';
-  static const String stepNumber1FromNumber5 = 'Step 1 of 5';
+  static String get morning => 'sd_morning'.tr();
+  static String get oneRoom => 'sd_oneRoom'.tr();
+  static String get twoRooms => 'sd_twoRooms'.tr();
+  static String get threeRooms => 'sd_threeRooms'.tr();
+  static String get fourRooms => 'sd_fourRooms'.tr();
+  static String get eightRoomsCompleted => 'sd_eightRoomsCompleted'.tr();
+  static String get oneHundredEightyMinutes => 'sd_oneHundredEightyMinutes'.tr();
+  static String get first => 'sd_first'.tr();
+  static String get second => 'sd_second'.tr();
+  static String get hour => 'sd_hour'.tr();
+  static String get hours => 'sd_hours'.tr();
+  static String get regular => 'sd_regular'.tr();
+  static String get regularWithCleaningAddOn =>
+      'sd_regularWithCleaningAddOn'.tr();
+  static String get twoWeekly => 'sd_twoWeekly'.tr();
+  static String get twoWeeks => 'sd_twoWeeks'.tr();
+  static String get fullLivingRoomKitchenBedroomsWithCleaningComplete =>
+      'sd_fullLivingRoomKitchenBedroomsWithCleaningComplete'.tr();
+  static String get completedService => 'sd_completedService'.tr();
+  static String get namePlace2 => 'sd_namePlace'.tr();
+  static String get text132 => 'sd_monthly'.tr();
+  static String get text150 => 'sd_technicianCare'.tr();
+  static String get text161 => 'sd_discountCode'.tr();
+  static String get text18 => 'sd_submitRating'.tr();
+  static String get text20 => 'sd_weekly'.tr();
+  static String get text51 => 'sd_addressTitle'.tr();
+  static String get text59 => 'sd_eta'.tr();
+  static String get stepNumber1FromNumber5 => 'sd_stepNumber1FromNumber5'.tr();
 }

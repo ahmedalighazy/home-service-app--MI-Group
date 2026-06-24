@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
+import '../../../../core/language/language_cubit.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/image/app_assets.dart';
 import '../../../../core/themes/text/app_text.dart';
@@ -13,7 +12,6 @@ import '../widgets/corporate_services/corporate_hero.dart';
 import '../widgets/corporate_services/corporate_intro_card.dart';
 import '../widgets/corporate_services/corporate_notes_card.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class CorporateServicesScreen extends StatefulWidget {
   const CorporateServicesScreen({super.key});
@@ -63,67 +61,75 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
         final loaded = state is FeatureLoaded ? state : const FeatureLoaded();
         final cubit = context.read<FeatureCubit>();
 
-        return Directionality(
-          textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
-          child: Scaffold(
-            backgroundColor: AppColors.white,
-            body: SafeArea(
-              bottom: false,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  CorporateHero(
-                    imagePath: AppAssets.corporateServicesHero,
-                    onBack: () => Navigator.maybePop(context),
+        return BlocSelector<LanguageCubit, LanguageState, bool>(
+          selector: (state) => state.isArabic,
+          builder: (context, isArabic) {
+            return Directionality(
+              textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+              child: Scaffold(
+                backgroundColor: AppColors.white,
+                body: SafeArea(
+                  bottom: false,
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      CorporateHero(
+                        imagePath: AppAssets.corporateServicesHero,
+                        onBack: () => Navigator.maybePop(context),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 30, 28),
+                        child: Column(
+                          children: [
+                            Transform.translate(
+                              offset: const Offset(0, -32),
+                              child: CorporateIntroCard(
+                                title: SdStrings.companiesMosques,
+                                description:
+                                    SdStrings.provideCleaningSanitizationOfficesMosquesDetermine,
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: const Offset(0, -18),
+                              child: CorporateFormCard(
+                                placeType: loaded.corporatePlaceType,
+                                serviceType: loaded.corporateServiceType,
+                                placeNameController: _placeNameController,
+                                locationController: _locationController,
+                                areaController: _areaController,
+                                detailsController: _detailsController,
+                                onPlaceTypeChanged:
+                                    cubit.selectCorporatePlaceType,
+                                onServiceTypeChanged:
+                                    cubit.selectCorporateServiceType,
+                                onPlaceNameChanged:
+                                    cubit.updateCorporatePlaceName,
+                                onLocationChanged:
+                                    cubit.updateCorporateLocation,
+                                onAreaChanged: cubit.updateCorporateArea,
+                                onDetailsChanged: cubit.updateCorporateDetails,
+                                onSubmit: _requestPreview,
+                              ),
+                            ),
+                            Transform.translate(
+                              offset: const Offset(0, -2),
+                              child: CorporateNotesCard(
+                                notes: [
+                                  SdStrings.inspectionFreeFully,
+                                  SdStrings.notExistsAnyCommitmentAfter,
+                                  SdStrings.determineFinalAfterOnly,
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 0, 30, 28),
-                    child: Column(
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(0, -32),
-                          child: CorporateIntroCard(
-                            title: SdStrings.companiesMosques,
-                            description:
-                                SdStrings.provideCleaningSanitizationOfficesMosquesDetermine,
-                          ),
-                        ),
-                        Transform.translate(
-                          offset: const Offset(0, -18),
-                          child: CorporateFormCard(
-                            placeType: loaded.corporatePlaceType,
-                            serviceType: loaded.corporateServiceType,
-                            placeNameController: _placeNameController,
-                            locationController: _locationController,
-                            areaController: _areaController,
-                            detailsController: _detailsController,
-                            onPlaceTypeChanged: cubit.selectCorporatePlaceType,
-                            onServiceTypeChanged:
-                                cubit.selectCorporateServiceType,
-                            onPlaceNameChanged: cubit.updateCorporatePlaceName,
-                            onLocationChanged: cubit.updateCorporateLocation,
-                            onAreaChanged: cubit.updateCorporateArea,
-                            onDetailsChanged: cubit.updateCorporateDetails,
-                            onSubmit: _requestPreview,
-                          ),
-                        ),
-                        Transform.translate(
-                          offset: const Offset(0, -2),
-                          child: CorporateNotesCard(
-                            notes: [
-                              SdStrings.inspectionFreeFully,
-                              SdStrings.notExistsAnyCommitmentAfter,
-                              SdStrings.determineFinalAfterOnly,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

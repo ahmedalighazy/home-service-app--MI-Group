@@ -1598,4 +1598,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tenTwentyEightAm => '10:28 AM';
+
+  @override
+  String get from => 'From';
 }

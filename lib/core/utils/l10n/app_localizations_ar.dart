@@ -1573,4 +1573,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tenTwentyEightAm => '10:28 ص';
+
+  @override
+  String get from => 'من';
 }

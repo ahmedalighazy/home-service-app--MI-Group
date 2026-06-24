@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 import '../../../../data/models/extra_item_model.dart';
 

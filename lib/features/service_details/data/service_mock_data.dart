@@ -3,7 +3,7 @@ import 'models/service_page_model.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 class ServiceMockData {
-  static final List<ServicePageModel> pages = [
+  static List<ServicePageModel> get pages => [
     ServicePageModel(
       coverImage: AppAssets.furnitureCleaningCover,
       mainTitle: SdStrings.furnitureCleaning,

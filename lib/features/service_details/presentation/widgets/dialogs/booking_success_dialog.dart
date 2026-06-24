@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -7,7 +8,6 @@ import '../booking_steps/order_summary/booking_reference_card.dart';
 import '../booking_steps/order_summary/success_dialog_actions.dart';
 import '../booking_steps/order_summary/success_icon.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class BookingSuccessDialog extends StatelessWidget {
   final String bookingReference;
@@ -26,9 +26,11 @@ class BookingSuccessDialog extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final dialogWidth = size.width.clamp(0, 330).toDouble();
 
-    return Directionality(
-      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
-      child: Dialog(
+    return BlocSelector<LanguageCubit, LanguageState, bool>(
+      selector: (state) => state.isArabic,
+      builder: (context, isArabic) => Directionality(
+        textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+        child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         backgroundColor: AppColors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -64,6 +66,7 @@ class BookingSuccessDialog extends StatelessWidget {
               ],
             ),
           ),
+        ),
         ),
       ),
     );

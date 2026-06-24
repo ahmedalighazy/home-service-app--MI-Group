@@ -45,7 +45,7 @@ class StepBottomBar extends StatelessWidget {
             width: size.width * 0.38,
             child: CustomButtom(
               onTap: onNext,
-              text: nextLabel ?? context.l10n.next,
+              text: nextLabel!,
               textStyle: AppText.semiBold16Black.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.w700,

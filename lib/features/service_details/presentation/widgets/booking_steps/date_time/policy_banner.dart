@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
@@ -9,8 +8,8 @@ class PolicyBanner extends StatelessWidget {
   const PolicyBanner({super.key});
 
   static String get _policyText =>
-      SdStrings.cancelBookingOrModifyBeforeNumber5 +
-      SdStrings.caseBeforeLessFromNumber5HourWillBe;
+      '${SdStrings.cancelBookingOrModifyBeforeNumber5} '
+      '${SdStrings.caseBeforeLessFromNumber5HourWillBe}';
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class PolicyBanner extends StatelessWidget {
               SizedBox(width: size.width * 0.025),
               Expanded(
                 child: Text(
-                  context.l10n.cancellationPolicy,
+                  _policyText,
                   style: AppText.regular12Grey,
                   textAlign: TextAlign.start,
                 ),

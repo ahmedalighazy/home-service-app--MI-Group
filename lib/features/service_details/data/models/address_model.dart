@@ -12,7 +12,7 @@ class AddressModel {
     required this.icon,
   });
 
-  static final List<AddressModel> savedAddresses = [
+  static List<AddressModel> get savedAddresses => [
     AddressModel(
       title: SdStrings.home,
       subtitle: SdStrings.homeAddressSubtitle,

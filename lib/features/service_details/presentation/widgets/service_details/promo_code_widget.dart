@@ -1,5 +1,6 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/app_localizations.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/service_details/promo_apply_button.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -37,7 +38,7 @@ class PromoCodeWidget extends StatelessWidget {
 
           Column(
             children: [
-              Text('${SdStrings.codePrefix} $promoCode', style: AppText.semiBold14Black),
+              Text('${AppLocalizations.of(context)!.codePrefix} $promoCode', style: AppText.semiBold14Black),
               SizedBox(width: size.width * 0.02),
               Row(
                 children: [

@@ -1,6 +1,5 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 
 import '../../data/models/extra_item_model.dart';
 import '../../data/models/repeat_type.dart';
@@ -29,7 +28,7 @@ class RepeatTypeSelector extends StatelessWidget {
     this.selectedExtras = const [],
   });
 
-  static final options = [
+  static List<RepeatOption> get options => [
     RepeatOption(type: RepeatType.once, title: SdStrings.onceOne),
     RepeatOption(
       type: RepeatType.twoWeeks,
@@ -84,7 +83,7 @@ class RepeatTypeSelector extends StatelessWidget {
             onBack: onBack ?? () => Navigator.maybePop(context),
           ),
           body: Column(
-            children: _options(context).map((option) {
+            children: options.map((option) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: RepeatOptionCard(

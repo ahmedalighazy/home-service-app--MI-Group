@@ -3127,6 +3127,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'10:28 ص'**
   String get tenTwentyEightAm;
+
+  /// No description provided for @from.
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get from;
 }
 
 class _AppLocalizationsDelegate

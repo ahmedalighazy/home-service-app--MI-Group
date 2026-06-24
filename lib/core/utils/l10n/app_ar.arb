@@ -503,5 +503,6 @@
   "mediumSize150By275": "متوسطة الحجم (150 * 275 م)",
   "largeSize250By345": "كبيرة الحجم (250 * 345 م)",
   "morning": "ص",
-  "tenTwentyEightAm": "10:28 ص"
+  "tenTwentyEightAm": "10:28 ص",
+  "from" : "من"
 }

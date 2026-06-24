@@ -503,5 +503,6 @@
   "mediumSize150By275": "Medium Size (150 * 275 m)",
   "largeSize250By345": "Large Size (250 * 345 m)",
   "morning": "AM",
-  "tenTwentyEightAm": "10:28 AM"
+  "tenTwentyEightAm": "10:28 AM",
+  "from" : "From"
 }
