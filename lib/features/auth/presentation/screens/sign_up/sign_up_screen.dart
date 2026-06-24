@@ -35,21 +35,21 @@ class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
         child: BlocBuilder<AuthCubit, AuthState>(
           bloc: getIt<AuthCubit>(),
           builder: (context, state) {
-              return SafeArea(
-                child: SignUpBody(
-                  phoneController: phoneCtrl,
-                  hasError: hasError,
-                  errorMessage: errorMessage,
-                  isLoading: state is AuthLoadingState,
-                  onSendCode: () => onSendCode(context),
-                  onGoogleSignUp: () => onGoogleSignUp(context),
-                  onAppleSignUp: () => onAppleSignUp(context),
-                  onGuestMode: () => onGuestMode(context),
-                  onSignIn: () => onSignIn(context),
-                  onPhoneChanged: (_) => setState(() {}),
-                ),
-              );
-            },
+            return SafeArea(
+              child: SignUpBody(
+                phoneController: phoneCtrl,
+                hasError: hasError,
+                errorMessage: errorMessage,
+                isLoading: state is AuthLoadingState,
+                onSendCode: () => onSendCode(context),
+                onGoogleSignUp: () => onGoogleSignUp(context),
+                onAppleSignUp: () => onAppleSignUp(context),
+                onGuestMode: () => onGuestMode(context),
+                onSignIn: () => onSignIn(context),
+                onPhoneChanged: (_) => setState(() {}),
+              ),
+            );
+          },
         ),
       ),
     );

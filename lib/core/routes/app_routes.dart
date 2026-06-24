@@ -45,6 +45,8 @@ import 'package:home_service_app/features/booking/data/models/booking_model.dart
 import 'package:home_service_app/features/auth/presentation/screens/check_your_email/check_your_email_screen.dart';
 import 'package:home_service_app/core/di/injection.dart';
 
+import '../../features/setting/presentation/screens/set_new_password_screen.dart';
+
 class AppRouter {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
@@ -88,13 +90,18 @@ class AppRouter {
   static const String subscriptionDetail = '/subscription_detail';
   static const String favorites = '/favorites';
   static const String bookings = '/bookings';
+  static const String updatePasswordScreen = '/UpdatePasswordScreen';
 
   static final router = GoRouter(
     routes: [
-      GoRoute(path: splash, builder: (context, state) => const MainShell()),
+      GoRoute(path: splash, builder: (context, state) => const SplashScreen()),
       GoRoute(
         path: onboarding,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: updatePasswordScreen,
+        builder: (context, state) => const UpdatePasswordScreen(),
       ),
       GoRoute(path: signUp, builder: (context, state) => const SignUpScreen()),
       GoRoute(path: signIn, builder: (context, state) => const SignInScreen()),

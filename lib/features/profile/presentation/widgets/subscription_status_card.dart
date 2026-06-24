@@ -32,7 +32,7 @@ class SubscriptionStatusCard extends StatelessWidget {
               horizontalSpace(8),
 
               Text(
-                subscription.title,
+                context.tr(subscription.title),
                 style: AppText.ibmHeading14(color: AppColors.black),
               ),
             ],

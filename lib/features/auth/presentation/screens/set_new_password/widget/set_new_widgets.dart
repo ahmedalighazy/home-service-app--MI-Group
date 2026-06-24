@@ -7,7 +7,6 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../../core/utils/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/language/language_cubit.dart';
-import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class PasswordInputField extends StatelessWidget {

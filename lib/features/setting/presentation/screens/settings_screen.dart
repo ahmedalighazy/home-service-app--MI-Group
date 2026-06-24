@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingColorIcon: AppColors.greyDarker,
             icon: IconsPath.vectorPassword,
             title: context.tr(LocaleKeys.settingsChangePassword),
-            onTap: () => context.pushNamed(AppRouter.updatePassword),
+            onTap: () => context.pushNamed(AppRouter.updatePasswordScreen),
           ),
           const SettingsDivider(),
           SettingListItem(

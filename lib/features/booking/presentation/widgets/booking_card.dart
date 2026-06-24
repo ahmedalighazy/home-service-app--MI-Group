@@ -32,7 +32,6 @@ class BookingCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -96,7 +95,10 @@ class _BookingInfo extends StatelessWidget {
         verticalSpace(4),
         _InfoRow(icon: IconsPath.location, text: booking.address),
         verticalSpace(4),
-        _InfoRow(icon: IconsPath.calendar, text: booking.date.toString().split(' ')[0]),
+        _InfoRow(
+          icon: IconsPath.calendar,
+          text: booking.date.toString().split(' ')[0],
+        ),
         verticalSpace(4),
         _InfoRow(icon: IconsPath.time, text: booking.time),
       ],

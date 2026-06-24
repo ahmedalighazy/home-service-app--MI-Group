@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/di/injection.dart';
@@ -40,10 +41,10 @@ class _MainShellState extends State<MainShell> {
       child: Scaffold(
         body: IndexedStack(
           index: _currentIndex,
-          children: const [
-            HomeContent(),
-            BookingScreen(),
-            ProfileScreen(),
+          children: [
+            HomeContent(key: ValueKey('Home-${context.locale.languageCode}')),
+            BookingScreen(key: ValueKey('Booking-${context.locale.languageCode}')),
+            ProfileScreen(key: ValueKey('Profile-${context.locale.languageCode}')),
           ],
         ),
         bottomNavigationBar: CustomBottomNavigationBar(

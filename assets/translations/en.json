@@ -160,7 +160,7 @@
   "noPreference": "No Preference",
   "serviceFrequency": "Service Frequency",
   "once": "Once",
-  "twoWeeks":"Two weeks",
+  "twoWeeks": "Two weeks",
   "weekly": "Weekly",
   "monthly": "Monthly",
   "discountUpTo10": "Discount up to 10%",
@@ -711,7 +711,7 @@
   "profile_delete_rule3_desc": "All paid subscriptions or packages associated with your account will be cancelled.",
   "profile_delete_rule4_title": "Some data may be retained for legal purposes",
   "profile_delete_rule4_desc": "Such as billing and transaction data in accordance with applicable systems and regulations.",
-  "profile_delete_confirm_hint": "To confirm account deletion, please type the word (Delete)",
+  "profile_delete_confirm_hint": "To confirm account deletion, please type the word (",
   "profile_delete_confirm_word": "Delete",
   "profile_delete_confirm_btn": "Permanently Delete Account",
   "profile_delete_cancel_btn": "Cancel",
@@ -867,8 +867,4 @@
   "legal_terms_accounts": "Accounts",
   "legal_terms_modifications": "Modifications",
   "settings_forgot_password": "Forgot Password?"
-
-
-
-
 }

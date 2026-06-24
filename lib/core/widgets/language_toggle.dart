@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui' as ui;
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class LanguageToggle extends StatelessWidget {
   const LanguageToggle({super.key});
@@ -18,7 +16,6 @@ class LanguageToggle extends StatelessWidget {
       bloc: getIt<LanguageCubit>(),
       builder: (context, state) {
         final isArabic = state.isArabic;
-        log(isArabic.toString());
         return Directionality(
           textDirection: ui.TextDirection.ltr,
           child: Padding(
@@ -31,14 +28,8 @@ class LanguageToggle extends StatelessWidget {
                 final cubit = getIt<LanguageCubit>();
                 if (value) {
                   await cubit.setArabic();
-                  if (context.mounted) {
-                    await context.setLocale(const Locale('ar'));
-                  }
                 } else {
                   await cubit.setEnglish();
-                  if (context.mounted) {
-                    await context.setLocale(const Locale('en'));
-                  }
                 }
               },
               style: ToggleStyle(

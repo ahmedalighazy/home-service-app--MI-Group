@@ -69,10 +69,19 @@ class _BookingContent extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  SvgPicture.asset(
-                    IconsPath.notificationNew,
-                    width: 23.w,
-                    height: 23.h,
+                  // NotificationBell(
+                  //   onTap: () => context.push(AppRouter.notification),
+                  //   count: 1,
+                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      context.push(AppRouter.notification);
+                    },
+                    child: SvgPicture.asset(
+                      IconsPath.notificationNew,
+                      width: 23.w,
+                      height: 23.h,
+                    ),
                   ),
                 ],
               ),

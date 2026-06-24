@@ -20,14 +20,13 @@ void main() async {
   await setupGetIt();
 
   runApp(
-    BlocProvider<LanguageCubit>.value(
-      value: getIt<LanguageCubit>(),
-      child: EasyLocalization(
-        supportedLocales: const [Locale('ar'), Locale('en')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('ar'),
-        saveLocale: true,
-        useOnlyLangCode: true,
+    EasyLocalization(
+      supportedLocales: const [Locale('ar'), Locale('en')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('ar'),
+
+      child: BlocProvider<LanguageCubit>.value(
+        value: getIt<LanguageCubit>(),
         child: const HomeServiceApp(),
       ),
     ),
@@ -44,7 +43,12 @@ class HomeServiceApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocBuilder<LanguageCubit, LanguageState>(
+        return BlocConsumer<LanguageCubit, LanguageState>(
+          listener: (context, state) {
+            if (context.locale != state.locale) {
+              context.setLocale(state.locale);
+            }
+          },
           builder: (context, state) {
             return MaterialApp.router(
               key: ValueKey(context.locale.languageCode),
@@ -58,8 +62,9 @@ class HomeServiceApp extends StatelessWidget {
               supportedLocales: context.supportedLocales,
               localizationsDelegates: context.localizationDelegates,
               builder: (finalCtx, child) => Directionality(
-                textDirection:
-                    state.isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+                textDirection: state.isArabic
+                    ? ui.TextDirection.rtl
+                    : ui.TextDirection.ltr,
                 child: child!,
               ),
             );

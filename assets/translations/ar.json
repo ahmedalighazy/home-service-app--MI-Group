@@ -162,7 +162,7 @@
   "once": "مرة واحدة",
   "weekly": "أسبوعيا",
   "monthly": "شهريا",
-  "twoWeeks":"أسبوعين",
+  "twoWeeks": "أسبوعين",
   "discountUpTo10": "خصم يصل الى 10%",
   "discountUpTo20": "خصم يصل الى 20%",
   "trackOrder": "تتبع الطلب",
@@ -711,7 +711,7 @@
   "profile_delete_rule3_desc": "جميع الاشتراكات أو الباقات المدفوعة المرتبطة بحسابك سيتم إلغاؤها.",
   "profile_delete_rule4_title": "قد يتم الاحتفاظ ببعض البيانات لأغراض قانونية",
   "profile_delete_rule4_desc": "مثل بيانات الفواتير والمعاملات وفقاً للأنظمة واللوائح المعمول بها.",
-  "profile_delete_confirm_hint": "لتأكيد حذف الحساب يرجى كتابة كلمة (حذف)",
+  "profile_delete_confirm_hint": "لتأكيد حذف الحساب يرجى كتابة كلمة (",
   "profile_delete_confirm_word": "حذف",
   "profile_delete_confirm_btn": "حذف الحساب نهائياً",
   "profile_delete_cancel_btn": "إلغاء",
@@ -867,6 +867,4 @@
   "legal_terms_accounts": "الحسابات",
   "legal_terms_modifications": "التعديلات",
   "settings_forgot_password": "نسيت كلمة المرور؟"
-
-
 }
