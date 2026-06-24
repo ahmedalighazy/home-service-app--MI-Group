@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 /// A reusable labeled form field for auth screens that require validation.
 /// Uses [TextFormField] with validator support — use this inside a [Form] widget.
@@ -108,8 +107,7 @@ class _AuthFormFieldState extends State<AuthFormField> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),
-                borderSide:
-                    const BorderSide(color: AppColors.borderInputs),
+                borderSide: const BorderSide(color: AppColors.borderInputs),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14.r),

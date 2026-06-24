@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -27,7 +26,9 @@ class BookingSuccessDialog extends StatelessWidget {
     final dialogWidth = size.width.clamp(0, 330).toDouble();
 
     return Directionality(
-      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: AppStrings.isArabic
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         backgroundColor: AppColors.white,
@@ -50,7 +51,8 @@ class BookingSuccessDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  SdStrings.doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit,
+                  SdStrings
+                      .doneConfirmYourBookingWeWillRemindYouBeforeAppointmentVisit,
                   textAlign: TextAlign.center,
                   style: AppText.regular12Grey.copyWith(height: 1.35),
                 ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class SectionHeader extends StatelessWidget {
-  SectionHeader({super.key, required this.title, this.onViewAll});
+  const SectionHeader({super.key, required this.title, this.onViewAll});
 
   final String title;
   final VoidCallback? onViewAll;
@@ -21,7 +22,7 @@ class SectionHeader extends StatelessWidget {
         TextButton(
           onPressed: onViewAll,
           child: Text(
-            context.l10n.viewAll,
+            context.tr(LocaleKeys.viewAll),
             style: AppText.ibmLink13(color: AppColors.secondaryGrey),
           ),
         ),

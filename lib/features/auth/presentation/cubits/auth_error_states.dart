@@ -20,28 +20,25 @@ abstract class AuthErrorState extends Equatable {
 
   @override
   List<Object?> get props => [
-        message,
-        errorCode,
-        canRetry,
-        showDetails,
-        exceptionDetails,
-        context,
-      ];
+    message,
+    errorCode,
+    canRetry,
+    showDetails,
+    exceptionDetails,
+    context,
+  ];
 }
 
 class NetworkErrorState extends AuthErrorState {
-  NetworkErrorState({
-    String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
-  }) : super(
-          message: message ?? LocalizationService.instance.translate('errorNetworkNoInternet'),
-          errorCode: 'NETWORK_ERROR',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+  NetworkErrorState({String? message, super.exceptionDetails, super.context})
+    : super(
+        message:
+            message ??
+            LocalizationService.instance.translate('errorNetworkNoInternet'),
+        errorCode: 'NETWORK_ERROR',
+        canRetry: true,
+        showDetails: false,
+      );
 }
 
 class TimeoutErrorState extends AuthErrorState {
@@ -50,16 +47,16 @@ class TimeoutErrorState extends AuthErrorState {
   TimeoutErrorState({
     String? message,
     this.timeoutSeconds = 30,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorNetworkTimeout'),
-          errorCode: 'TIMEOUT_ERROR',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorNetworkTimeout'),
+         errorCode: 'TIMEOUT_ERROR',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [...super.props, timeoutSeconds];
@@ -73,34 +70,30 @@ class ServerErrorState extends AuthErrorState {
     String? message,
     this.statusCode,
     this.suggestContact = true,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorServer'),
-          errorCode: 'SERVER_ERROR',
-          canRetry: true,
-          showDetails: true,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ?? LocalizationService.instance.translate('errorServer'),
+         errorCode: 'SERVER_ERROR',
+         canRetry: true,
+         showDetails: true,
+       );
 
   @override
   List<Object?> get props => [...super.props, statusCode, suggestContact];
 }
 
 class BadRequestErrorState extends AuthErrorState {
-  BadRequestErrorState({
-    String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
-  }) : super(
-          message: message ?? LocalizationService.instance.translate('errorBadRequest'),
-          errorCode: 'BAD_REQUEST_ERROR',
-          canRetry: false,
-          showDetails: true,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+  BadRequestErrorState({String? message, super.exceptionDetails, super.context})
+    : super(
+        message:
+            message ??
+            LocalizationService.instance.translate('errorBadRequest'),
+        errorCode: 'BAD_REQUEST_ERROR',
+        canRetry: false,
+        showDetails: true,
+      );
 }
 
 class InvalidCredentialsErrorState extends AuthErrorState {
@@ -111,38 +104,38 @@ class InvalidCredentialsErrorState extends AuthErrorState {
     String? message,
     this.failedAttempts = 1,
     this.remainingAttempts,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorUnauthorized'),
-          errorCode: 'INVALID_CREDENTIALS',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorUnauthorized'),
+         errorCode: 'INVALID_CREDENTIALS',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        failedAttempts,
-        remainingAttempts,
-      ];
+    ...super.props,
+    failedAttempts,
+    remainingAttempts,
+  ];
 }
 
 class AccountNotFoundErrorState extends AuthErrorState {
   AccountNotFoundErrorState({
     String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorForbidden'),
-          errorCode: 'ACCOUNT_NOT_FOUND',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorForbidden'),
+         errorCode: 'ACCOUNT_NOT_FOUND',
+         canRetry: false,
+         showDetails: false,
+       );
 }
 
 class AccountLockedErrorState extends AuthErrorState {
@@ -151,19 +144,21 @@ class AccountLockedErrorState extends AuthErrorState {
   AccountLockedErrorState({
     String? message,
     this.remainingMinutes,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: remainingMinutes != null
-              ? LocalizationService.instance.translate('errorAccountLocked')
-                  .replaceAll('{minutes}', remainingMinutes.toString())
-              : (message ?? LocalizationService.instance.translate('errorAccountLocked')),
-          errorCode: 'ACCOUNT_LOCKED',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message: remainingMinutes != null
+             ? LocalizationService.instance
+                   .translate('errorAccountLocked')
+                   .replaceAll('{minutes}', remainingMinutes.toString())
+             : (message ??
+                   LocalizationService.instance.translate(
+                     'errorAccountLocked',
+                   )),
+         errorCode: 'ACCOUNT_LOCKED',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [...super.props, remainingMinutes];
@@ -172,31 +167,31 @@ class AccountLockedErrorState extends AuthErrorState {
 class TokenExpiredErrorState extends AuthErrorState {
   TokenExpiredErrorState({
     String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorTokenExpired'),
-          errorCode: 'TOKEN_EXPIRED',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorTokenExpired'),
+         errorCode: 'TOKEN_EXPIRED',
+         canRetry: false,
+         showDetails: false,
+       );
 }
 
 class UnauthorizedErrorState extends AuthErrorState {
   UnauthorizedErrorState({
     String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorUnauthorized'),
-          errorCode: 'UNAUTHORIZED',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorUnauthorized'),
+         errorCode: 'UNAUTHORIZED',
+         canRetry: false,
+         showDetails: false,
+       );
 }
 
 class InvalidOtpErrorState extends AuthErrorState {
@@ -207,56 +202,50 @@ class InvalidOtpErrorState extends AuthErrorState {
     String? message,
     this.failedAttempts = 1,
     this.remainingAttempts,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: remainingAttempts != null
-              ? LocalizationService.instance.translate('errorInvalidOtp')
-                  .replaceAll('{attempts}', remainingAttempts.toString())
-              : (message ?? LocalizationService.instance.translate('errorInvalidOtp')),
-          errorCode: 'INVALID_OTP',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message: remainingAttempts != null
+             ? LocalizationService.instance
+                   .translate('errorInvalidOtp')
+                   .replaceAll('{attempts}', remainingAttempts.toString())
+             : (message ??
+                   LocalizationService.instance.translate('errorInvalidOtp')),
+         errorCode: 'INVALID_OTP',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        failedAttempts,
-        remainingAttempts,
-      ];
+    ...super.props,
+    failedAttempts,
+    remainingAttempts,
+  ];
 }
 
 class OtpExpiredErrorState extends AuthErrorState {
-  OtpExpiredErrorState({
-    String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
-  }) : super(
-          message: message ?? LocalizationService.instance.translate('errorOtpExpired'),
-          errorCode: 'OTP_EXPIRED',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+  OtpExpiredErrorState({String? message, super.exceptionDetails, super.context})
+    : super(
+        message:
+            message ??
+            LocalizationService.instance.translate('errorOtpExpired'),
+        errorCode: 'OTP_EXPIRED',
+        canRetry: false,
+        showDetails: false,
+      );
 }
 
 class SmsSendingErrorState extends AuthErrorState {
-  SmsSendingErrorState({
-    String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
-  }) : super(
-          message: message ?? LocalizationService.instance.translate('errorSmsSendingFailed'),
-          errorCode: 'SMS_SENDING_FAILED',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+  SmsSendingErrorState({String? message, super.exceptionDetails, super.context})
+    : super(
+        message:
+            message ??
+            LocalizationService.instance.translate('errorSmsSendingFailed'),
+        errorCode: 'SMS_SENDING_FAILED',
+        canRetry: true,
+        showDetails: false,
+      );
 }
 
 class ValidationErrorState extends AuthErrorState {
@@ -267,53 +256,49 @@ class ValidationErrorState extends AuthErrorState {
     String? message,
     this.fieldName,
     this.validationRule,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorValidationGeneric'),
-          errorCode: 'VALIDATION_ERROR',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorValidationGeneric'),
+         errorCode: 'VALIDATION_ERROR',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
-  List<Object?> get props => [
-        ...super.props,
-        fieldName,
-        validationRule,
-      ];
+  List<Object?> get props => [...super.props, fieldName, validationRule];
 }
 
 class EmailAlreadyExistsErrorState extends AuthErrorState {
   EmailAlreadyExistsErrorState({
     String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorEmailAlreadyExists'),
-          errorCode: 'EMAIL_ALREADY_EXISTS',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorEmailAlreadyExists'),
+         errorCode: 'EMAIL_ALREADY_EXISTS',
+         canRetry: false,
+         showDetails: false,
+       );
 }
 
 class PhoneAlreadyRegisteredErrorState extends AuthErrorState {
   PhoneAlreadyRegisteredErrorState({
     String? message,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorPhoneAlreadyExists'),
-          errorCode: 'PHONE_ALREADY_REGISTERED',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorPhoneAlreadyExists'),
+         errorCode: 'PHONE_ALREADY_REGISTERED',
+         canRetry: false,
+         showDetails: false,
+       );
 }
 
 class LocalStorageErrorState extends AuthErrorState {
@@ -322,16 +307,16 @@ class LocalStorageErrorState extends AuthErrorState {
   LocalStorageErrorState({
     String? message,
     this.operationType,
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorLocalStorage'),
-          errorCode: 'LOCAL_STORAGE_ERROR',
-          canRetry: true,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ??
+             LocalizationService.instance.translate('errorLocalStorage'),
+         errorCode: 'LOCAL_STORAGE_ERROR',
+         canRetry: true,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [...super.props, operationType];
@@ -343,16 +328,15 @@ class UnknownErrorState extends AuthErrorState {
   UnknownErrorState({
     String? message,
     this.severity = 'error',
-    String? exceptionDetails,
-    Map<String, dynamic>? context,
+    super.exceptionDetails,
+    super.context,
   }) : super(
-          message: message ?? LocalizationService.instance.translate('errorUnknown'),
-          errorCode: 'UNKNOWN_ERROR',
-          canRetry: false,
-          showDetails: false,
-          exceptionDetails: exceptionDetails,
-          context: context,
-        );
+         message:
+             message ?? LocalizationService.instance.translate('errorUnknown'),
+         errorCode: 'UNKNOWN_ERROR',
+         canRetry: false,
+         showDetails: false,
+       );
 
   @override
   List<Object?> get props => [...super.props, severity];

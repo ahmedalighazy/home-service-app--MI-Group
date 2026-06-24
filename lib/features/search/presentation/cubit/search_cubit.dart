@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/features/search/data/dummy/search_dummy_data.dart';
 
-import '../../data/dummy/search_dummy_data.dart';
 import 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {

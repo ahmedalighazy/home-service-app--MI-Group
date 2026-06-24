@@ -1,4 +1,6 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/step_progress_strip.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
@@ -36,7 +38,7 @@ class StepAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Column(
                   children: [
                     Text(
-                      '${SdStrings.step} $currentStep ${SdStrings.from} $totalSteps',
+                      '${context.tr(LocaleKeys.step)} $currentStep ${context.tr(LocaleKeys.ofText)} $totalSteps',
                       style: AppText.regular12Grey.copyWith(fontSize: 10),
                     ),
                     const SizedBox(height: 2),

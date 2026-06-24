@@ -1,6 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
+import 'package:home_service_app/features/booking/presentation/screens/booking_screen.dart';
+import 'package:home_service_app/features/service_details/presentation/cubit/feature_cubit.dart';
+import 'package:home_service_app/features/service_details/presentation/views/corporate_services_view.dart';
+import 'package:home_service_app/features/service_details/presentation/views/service_details_view.dart';
+import 'package:home_service_app/features/service_details/presentation/views/worker_filter_view.dart';
+import 'package:home_service_app/features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import 'package:home_service_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:home_service_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_in/sign_in_screen.dart';
@@ -52,7 +58,8 @@ class AppRouter {
   static const String verifyResetCode = '/verify-reset-code';
   static const String checkYourEmail = '/check-your-email';
   static const String setNewPassword = '/set-new-password';
-  static const String passwordChangedSuccessfully = '/password-changed-successfully';
+  static const String passwordChangedSuccessfully =
+      '/password-changed-successfully';
   static const String home = '/home';
   static const String language = '/language';
   static const String updatePassword = '/update_password';
@@ -80,32 +87,26 @@ class AppRouter {
   static const String myVisits = '/my_visits';
   static const String subscriptionDetail = '/subscription_detail';
   static const String favorites = '/favorites';
+  static const String bookings = '/bookings';
 
   static final router = GoRouter(
     routes: [
-      GoRoute(
-        path: splash,
-        builder: (context, state) => const SplashScreen(),
-      ),
+      GoRoute(path: splash, builder: (context, state) => const SplashScreen()),
       GoRoute(
         path: onboarding,
         builder: (context, state) => const OnboardingScreen(),
       ),
-      GoRoute(
-        path: signUp,
-        builder: (context, state) => const SignUpScreen(),
-      ),
-      GoRoute(
-        path: signIn,
-        builder: (context, state) => const SignInScreen(),
-      ),
+      GoRoute(path: signUp, builder: (context, state) => const SignUpScreen()),
+      GoRoute(path: signIn, builder: (context, state) => const SignInScreen()),
       GoRoute(
         path: otp,
-        builder: (context, state) => OtpScreen(phoneNumber: state.extra as String? ?? ''),
+        builder: (context, state) =>
+            OtpScreen(phoneNumber: state.extra as String? ?? ''),
       ),
       GoRoute(
         path: completeProfile,
-        builder: (context, state) => CompleteProfileScreen(phoneNumber: state.extra as String?),
+        builder: (context, state) =>
+            CompleteProfileScreen(phoneNumber: state.extra as String?),
       ),
       GoRoute(
         path: forgetPassword,
@@ -113,7 +114,8 @@ class AppRouter {
       ),
       GoRoute(
         path: verifyResetCode,
-        builder: (context, state) => VerifyResetCodeScreen(email: state.extra as String? ?? ''),
+        builder: (context, state) =>
+            VerifyResetCodeScreen(email: state.extra as String? ?? ''),
       ),
       GoRoute(
         path: checkYourEmail,
@@ -135,10 +137,7 @@ class AppRouter {
           );
         },
       ),
-      GoRoute(
-        path: home,
-        builder: (context, state) => const MainShell(),
-      ),
+      GoRoute(path: home, builder: (context, state) => const MainShell()),
       GoRoute(
         path: favorites,
         builder: (context, state) => const FavoritesScreen(),
@@ -179,9 +178,8 @@ class AppRouter {
       ),
       GoRoute(
         path: bookingDetails,
-        builder: (context, state) => BookingDetailsScreen(
-          booking: state.extra as BookingModel,
-        ),
+        builder: (context, state) =>
+            BookingDetailsScreen(booking: state.extra as BookingModel),
       ),
       GoRoute(
         path: rescheduleBooking,
@@ -195,10 +193,7 @@ class AppRouter {
         path: chatDetail,
         builder: (context, state) => const ChatDetailScreen(),
       ),
-      GoRoute(
-        path: faq,
-        builder: (context, state) => const FAQScreen(),
-      ),
+      GoRoute(path: faq, builder: (context, state) => const FAQScreen()),
       GoRoute(
         path: helpCenter,
         builder: (context, state) => const HelpCenterScreen(),
@@ -237,9 +232,39 @@ class AppRouter {
         path: passwordChangedSuccessfully,
         builder: (context, state) => const PasswordChangedSuccessfullyScreen(),
       ),
+
+      GoRoute(
+        path: serviceDetails,
+        builder: (context, state) => BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: const ServiceDetailsScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: workerFilter,
+        builder: (context, state) => BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: WorkerFilterCard(cartTotal: 0),
+        ),
+      ),
+
+      GoRoute(
+        path: corporateServices,
+        builder: (context, state) => BlocProvider(
+          create: (_) => FeatureCubit(),
+          child: const CorporateServicesScreen(),
+        ),
+      ),
+
+      GoRoute(path: bookings, builder: (context, state) => BookingScreen()),
+
+      GoRoute(
+        path: termsAndConditions,
+        builder: (context, state) => const TermsAndConditionsScreen(),
+      ),
     ],
     redirect: (context, state) {
-
       if (state.matchedLocation == home) {
         final email = CacheHelper.getData(key: 'email') as String?;
         final loggedIn = email != null && email.isNotEmpty;
@@ -263,7 +288,8 @@ class AppRoutes {
   static const String verifyResetCode = AppRouter.verifyResetCode;
   static const String checkYourEmail = AppRouter.checkYourEmail;
   static const String setNewPassword = AppRouter.setNewPassword;
-  static const String passwordChangedSuccessfully = AppRouter.passwordChangedSuccessfully;
+  static const String passwordChangedSuccessfully =
+      AppRouter.passwordChangedSuccessfully;
   static const String home = AppRouter.home;
   static const String language = AppRouter.language;
 }

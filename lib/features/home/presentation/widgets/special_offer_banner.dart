@@ -25,7 +25,7 @@ class SpecialOfferBanner extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppSizes.radius),
           child: Stack(
             children: [
-
+              // Background Image
               Positioned.fill(
                 child: Image.asset(
                   'assets/images/Gemini_Generated_Image_oom6zkoom6zkoom6 12.png',
@@ -33,6 +33,7 @@ class SpecialOfferBanner extends StatelessWidget {
                 ),
               ),
 
+              // Overlay Gradient
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(
@@ -48,6 +49,7 @@ class SpecialOfferBanner extends StatelessWidget {
                 ),
               ),
 
+              // Content
               Positioned(
                 right: 20,
                 top: 20,

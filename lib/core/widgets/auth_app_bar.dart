@@ -10,11 +10,7 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final VoidCallback? onBackTap;
 
-  const AuthAppBar({
-    Key? key,
-    this.showBackButton = true,
-    this.onBackTap,
-  }) : super(key: key);
+  const AuthAppBar({super.key, this.showBackButton = true, this.onBackTap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +23,11 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
             ? Padding(
                 padding: EdgeInsets.all(8.w),
                 child: AuthBackButton(
-                  onTap: onBackTap ?? () {
-                    Navigator.of(context).maybePop();
-                  },
+                  onTap:
+                      onBackTap ??
+                      () {
+                        Navigator.of(context).maybePop();
+                      },
                 ),
               )
             : null;

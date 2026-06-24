@@ -5,7 +5,6 @@ import '../../data/models/corporate_service_type.dart';
 import '../../data/models/extra_item_model.dart';
 import '../../data/models/payment_method.dart';
 import '../../data/models/repeat_type.dart';
-import 'package:home_service_app/features/service_details/service_details_strings.dart';
 
 @immutable
 sealed class FeatureState {

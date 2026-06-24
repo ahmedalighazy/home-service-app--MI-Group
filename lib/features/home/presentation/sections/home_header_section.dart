@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/core/widgets/gradient_header.dart';
 import 'package:home_service_app/features/address/presentation/bottom_sheets/saved_addresses_bottom_sheet.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
@@ -37,13 +38,13 @@ class HomeHeaderSection extends StatelessWidget {
               );
 
               return HomeHeader(
-                locationLabel: AppStrings.currentLocation,
                 onAvatarTap: () => context.push(AppRouter.editProfile),
-
+                avatarPlaceholder: AppAssets.cleaningGuy,
                 locationAddress: selectedAddress.address,
 
                 notificationCount: unreadCount,
 
+                //  Location
                 onLocationTap: () {
                   showModalBottomSheet(
                     context: context,
@@ -60,7 +61,7 @@ class HomeHeaderSection extends StatelessWidget {
                 onNotificationTap: () {
                   context.push(AppRouter.notification);
                 },
-                locationLabel: context.l10n.currentLocation,
+                locationLabel: context.tr(LocaleKeys.currentLocation),
               );
             },
           ),

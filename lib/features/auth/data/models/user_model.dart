@@ -1,31 +1,21 @@
 import '../../domain/entities/user_entity.dart';
 
 /// User Model - Data Layer
-/// 
+///
 /// DTO (Data Transfer Object) for JSON serialization/deserialization
 /// Converts between API response and domain entity
 class UserModel extends UserEntity {
   const UserModel({
-    required String id,
-    required String email,
-    required String phone,
-    String? name,
-    String? profileImage,
-    String? gender,
-    required DateTime createdAt,
-    bool emailVerified = false,
-    bool phoneVerified = false,
-  }) : super(
-    id: id,
-    email: email,
-    phone: phone,
-    name: name,
-    profileImage: profileImage,
-    gender: gender,
-    createdAt: createdAt,
-    emailVerified: emailVerified,
-    phoneVerified: phoneVerified,
-  );
+    required super.id,
+    required super.email,
+    required super.phone,
+    super.name,
+    super.profileImage,
+    super.gender,
+    required super.createdAt,
+    super.emailVerified,
+    super.phoneVerified,
+  });
 
   /// Convert from JSON (API response)
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -36,7 +26,8 @@ class UserModel extends UserEntity {
       name: json['name'] as String?,
       profileImage: json['profileImage'] as String?,
       gender: json['gender'] as String?,
-      createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ??
+      createdAt:
+          DateTime.tryParse(json['createdAt'] as String? ?? '') ??
           DateTime.now(),
       emailVerified: json['emailVerified'] as bool? ?? false,
       phoneVerified: json['phoneVerified'] as bool? ?? false,

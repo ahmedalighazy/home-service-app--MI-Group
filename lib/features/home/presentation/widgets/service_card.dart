@@ -41,7 +41,7 @@ class ServiceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
+            // title
             Padding(
               padding: EdgeInsetsDirectional.only(
                 bottom: AppSizes.paddinMinHeight,
@@ -49,6 +49,7 @@ class ServiceCard extends StatelessWidget {
               child: Text(title, style: AppText.ibmFieldLabel12()),
             ),
 
+            // Discount Badge
             if (badge != null)
               Container(
                 padding: EdgeInsets.symmetric(
@@ -64,9 +65,10 @@ class ServiceCard extends StatelessWidget {
 
             SizedBox(height: AppSizes.spacingMin),
 
+            // Image Section
             Stack(
               children: [
-
+                // Image
                 ClipRRect(
                   borderRadius: BorderRadius.all(
                     Radius.circular(AppSizes.radius),
@@ -79,6 +81,7 @@ class ServiceCard extends StatelessWidget {
                   ),
                 ),
 
+                // Arrow Button
                 PositionedDirectional(
                   bottom: 0,
                   end: 0,
@@ -107,6 +110,7 @@ class ServiceCard extends StatelessWidget {
               ],
             ),
 
+            // Title Section
           ],
         ),
       ),

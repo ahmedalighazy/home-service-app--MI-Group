@@ -5,6 +5,8 @@ SizedBox verticalSpace(double height) => SizedBox(height: height.h);
 
 SizedBox horizontalSpace(double width) => SizedBox(width: width.w);
 
-double width(context) => MediaQuery.sizeOf(context).width;
+Size screenSize(BuildContext context) => MediaQuery.sizeOf(context);
 
-double height(context) => MediaQuery.sizeOf(context).height;
+double width(BuildContext context) => screenSize(context).width;
+
+double height(BuildContext context) => screenSize(context).height;

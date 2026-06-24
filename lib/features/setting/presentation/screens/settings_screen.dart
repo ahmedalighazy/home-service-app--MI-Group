@@ -40,7 +40,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SettingsDivider(),
           SettingListItem(
             seetingScreen: true,
-
             icon: IconsPath.iconLang,
             title: context.tr(LocaleKeys.settingsLanguage),
             trailing: const LanguageTrailingText(),

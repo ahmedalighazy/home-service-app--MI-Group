@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -50,17 +51,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: [
           _buildNavItem(
             iconPath: IconsPath.home,
-            label: context.l10n.navHome,
+            label: context.tr(LocaleKeys.navHome),
             index: 0,
           ),
           _buildNavItem(
             iconPath: IconsPath.calendar,
-            label: context.l10n.navBookings,
+            label: context.tr(LocaleKeys.navBookings),
             index: 1,
           ),
           _buildNavItem(
             iconPath: IconsPath.profile,
-            label: context.l10n.navAccount,
+            label: context.tr(LocaleKeys.navAccount),
             index: 2,
           ),
         ],
@@ -111,8 +112,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       children: [
                         SvgPicture.asset(
                           iconPath,
-                          width: AppSizes.iconSize,
-                          height: AppSizes.iconSize,
+                          width: AppSizes.iconSizeSmall,
+                          height: AppSizes.iconSizeSmall,
                           colorFilter: const ColorFilter.mode(
                             Colors.white,
                             BlendMode.srcIn,
@@ -121,7 +122,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         SizedBox(width: AppSizes.spacingSmall),
                         Text(
                           label,
-                          style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                          style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
                             color: AppColors.white,
                           ),
                         ),
@@ -136,8 +137,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     children: [
                       SvgPicture.asset(
                         iconPath,
-                        width: AppSizes.iconSize,
-                        height: AppSizes.iconSize,
+                        width: AppSizes.iconSizeSmall,
+                        height: AppSizes.iconSizeSmall,
                         colorFilter: const ColorFilter.mode(
                           AppColors.secondaryGrey,
                           BlendMode.srcIn,
@@ -146,7 +147,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       SizedBox(width: AppSizes.spacingSmall),
                       Text(
                         label,
-                        style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
+                        style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
                           color: AppColors.bgDisabled,
                         ),
                       ),

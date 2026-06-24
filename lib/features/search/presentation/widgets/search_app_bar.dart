@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../core/constants/app_sizes.dart';
@@ -35,7 +36,7 @@ class SearchAppBar extends StatelessWidget {
                   textInputAction: TextInputAction.search,
                   onChanged: onChanged,
                   decoration: InputDecoration(
-                    hintText: context.l10n.searchServiceOrProblem,
+                    hintText: context.tr(LocaleKeys.searchServiceOrProblem),
 
                     hintStyle: AppText.ibmDescription14(
                       color: AppColors.placeholder,

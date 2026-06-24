@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:home_service_app/features/home/presentation/cubit/home_state.dart';
 import 'package:home_service_app/features/home/presentation/sections/home_promo_banner_section.dart';
@@ -56,8 +57,12 @@ class HomeContent extends StatelessWidget {
 
                       SliverToBoxAdapter(
                         child: HomeSpecialOfferSection(
-                          specialOfferTitle: context.l10n.specialOfferTitle,
-                          serviceAvailable24h: context.l10n.serviceAvailable24h,
+                          specialOfferTitle: context.tr(
+                            LocaleKeys.specialOfferTitle,
+                          ),
+                          serviceAvailable24h: context.tr(
+                            LocaleKeys.serviceAvailable24h,
+                          ),
                         ),
                       ),
 

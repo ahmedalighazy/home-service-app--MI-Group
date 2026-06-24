@@ -1,5 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../data/models/extra_item_model.dart';
 
@@ -17,7 +19,7 @@ class ExtraSummaryRow extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            '${extra.subtotal.toStringAsFixed(0)} ${SdStrings.qar}',
+            '${extra.subtotal.toStringAsFixed(0)} ${context.tr(LocaleKeys.currency)}',
             style: AppText.regular12Grey,
           ),
           const Spacer(),
@@ -26,7 +28,7 @@ class ExtraSummaryRow extends StatelessWidget {
             children: [
               Text(extra.title, style: AppText.semiBold14Black),
               Text(
-                '${extra.quantity} × ${extra.price.toStringAsFixed(0)} ${SdStrings.qar}',
+                '${extra.quantity} × ${extra.price.toStringAsFixed(0)} ${context.tr(LocaleKeys.currency)}',
                 style: AppText.regular12Grey,
               ),
             ],

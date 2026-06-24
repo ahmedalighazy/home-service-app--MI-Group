@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../booking_tracking/booking_gradient_button.dart';
@@ -18,7 +17,9 @@ class RatingSuccessDialog extends StatelessWidget {
     final dialogWidth = size.width.clamp(0, 330).toDouble();
 
     return Directionality(
-      textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: AppStrings.isArabic
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 16),
         backgroundColor: AppColors.white,

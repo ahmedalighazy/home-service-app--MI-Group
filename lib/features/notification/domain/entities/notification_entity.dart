@@ -1,47 +1,47 @@
-class NotificationEntity {
-  final String id;
-  final String title;
-  final String body;
-  final DateTime createdAt;
-  final bool isRead;
-  final String? group;
-  final String? description;
-  final String? time;
-  final String? iconPath;
+import 'package:equatable/equatable.dart';
 
-  NotificationEntity({
-    required this.id,
+class NotificationEntity extends Equatable {
+  final String title;
+  final String description;
+  final String time;
+  final String group;
+  final String iconPath;
+  final bool isRead;
+
+  const NotificationEntity({
     required this.title,
-    required this.body,
-    required this.createdAt,
+    required this.description,
+    required this.time,
+    required this.group,
+    required this.iconPath,
     this.isRead = false,
-    this.group,
-    this.description,
-    this.time,
-    this.iconPath,
   });
 
   NotificationEntity copyWith({
-    String? id,
     String? title,
-    String? body,
-    DateTime? createdAt,
-    bool? isRead,
-    String? group,
     String? description,
     String? time,
+    String? group,
     String? iconPath,
+    bool? isRead,
   }) {
     return NotificationEntity(
-      id: id ?? this.id,
       title: title ?? this.title,
-      body: body ?? this.body,
-      createdAt: createdAt ?? this.createdAt,
-      isRead: isRead ?? this.isRead,
-      group: group ?? this.group,
       description: description ?? this.description,
       time: time ?? this.time,
+      group: group ?? this.group,
       iconPath: iconPath ?? this.iconPath,
+      isRead: isRead ?? this.isRead,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    title,
+    description,
+    time,
+    group,
+    iconPath,
+    isRead,
+  ];
 }

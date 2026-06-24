@@ -7,7 +7,7 @@ import '../../../../../../core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class SignInHeader extends StatelessWidget {
-  const SignInHeader({Key? key}) : super(key: key);
+  const SignInHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

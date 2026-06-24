@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class HomeSpecialOfferSection extends StatelessWidget {
   const HomeSpecialOfferSection({
@@ -81,7 +82,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
                 style: AppText.ibmCaption11(color: AppColors.white),
               ),
             ),
-
+            //
             PositionedDirectional(
               end: 0,
               bottom: 0,
@@ -109,7 +110,7 @@ class HomeSpecialOfferSection extends StatelessWidget {
                         vertical: AppSizes.paddingSmallHeight,
                       ),
                       child: Text(
-                        context.l10n.bookNow,
+                        context.tr(LocaleKeys.bookNow),
                         style: AppText.ibmFieldLabel14(color: AppColors.white),
                       ),
                     ),

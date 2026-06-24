@@ -71,6 +71,7 @@ class HomeDummyData {
       imagePath: AppAssets.banner,
     ),
   ];
+
   static HomeDataModel getHomeData() {
     return HomeDataModel(
       banners: banners,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
 class NotificationsEmptySection extends StatelessWidget {
@@ -24,13 +25,13 @@ class NotificationsEmptySection extends StatelessWidget {
             SizedBox(height: AppSizes.spacingLarge),
 
             Text(
-              context.l10n.noNewNotifications,
+              context.tr(LocaleKeys.noNewNotifications),
               style: AppText.ibmPlexSansArabic16SemiBold,
             ),
 
             SizedBox(height: AppSizes.spacingLarge),
             CustomButtom(
-              text: context.l10n.browseServices,
+              text: context.tr(LocaleKeys.browseServices),
               startColor: AppColors.greenPrimary,
               endColor: AppColors.dark,
               textStyle: AppText.ibmPlexSansArabic16SemiBold.copyWith(

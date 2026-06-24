@@ -6,7 +6,7 @@ import '../../domain/entities/search_result_entity.dart';
 import '../../domain/entities/search_suggestion_entity.dart';
 
 class SearchDummyData {
-  SearchDummyData._();
+  const SearchDummyData._();
 
   static const recentSearches = ['تنظيف منزل', 'مكافحة آفات', 'تعقيم'];
 
@@ -39,31 +39,11 @@ class SearchDummyData {
     ),
   ];
 
-  static final results = [
-    SearchResultEntity(
-      id: '1',
-      title: 'تنظيف منزل',
-      description: 'خدمة تنظيف منزل شاملة',
-      type: 'service',
-    ),
-    SearchResultEntity(
-      id: '2',
-      title: 'تنظيف أثاث',
-      description: 'خدمة تنظيف أثاث ومفروشات',
-      type: 'service',
-    ),
-    SearchResultEntity(
-      id: '3',
-      title: 'تنظيف بعد التشطيب',
-      description: 'خدمة تنظيف بعد التشطيب',
-      type: 'service',
-    ),
-    SearchResultEntity(
-      id: '4',
-      title: 'مكافحة حشرات',
-      description: 'خدمة مكافحة الحشرات',
-      type: 'service',
-    ),
+  static const results = [
+    SearchResultEntity(title: 'تنظيف منزل', id: ''),
+    SearchResultEntity(title: 'تنظيف أثاث', id: ''),
+    SearchResultEntity(title: 'تنظيف بعد التشطيب', id: ''),
+    SearchResultEntity(title: 'مكافحة حشرات', id: ''),
   ];
 
   static const categories = [

@@ -32,10 +32,9 @@ class SubscriptionStatusCard extends StatelessWidget {
               horizontalSpace(8),
 
               Text(
-                subscription.title ?? '',
+                subscription.title,
                 style: AppText.ibmHeading14(color: AppColors.black),
               ),
-
             ],
           ),
           const _ActiveStatusBadge(),
@@ -53,7 +52,7 @@ class _ActiveStatusBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: ShapeDecoration(
-        color: const Color(0xFFECFDF5) ,
+        color: const Color(0xFFECFDF5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(44)),
         shadows: const [
           BoxShadow(

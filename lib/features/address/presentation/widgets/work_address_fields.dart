@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_text_field.dart';
 
 class WorkAddressFields extends StatelessWidget {
@@ -20,7 +21,7 @@ class WorkAddressFields extends StatelessWidget {
     return Column(
       children: [
         AddressTextField(
-          hintText: context.l10n.companyName,
+          hintText: context.tr(LocaleKeys.companyName),
           controller: companyController,
         ),
 
@@ -30,7 +31,7 @@ class WorkAddressFields extends StatelessWidget {
           children: [
             Expanded(
               child: AddressTextField(
-                hintText: context.l10n.buildingNumber,
+                hintText: context.tr(LocaleKeys.buildingNumber),
                 controller: buildingController,
               ),
             ),
@@ -39,7 +40,7 @@ class WorkAddressFields extends StatelessWidget {
 
             Expanded(
               child: AddressTextField(
-                hintText: context.l10n.officeOrFloorNumber,
+                hintText: context.tr(LocaleKeys.officeOrFloorNumber),
                 controller: officeController,
               ),
             ),

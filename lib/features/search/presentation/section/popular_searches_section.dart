@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class PopularSearchesSection extends StatelessWidget {
   const PopularSearchesSection({super.key, required this.searches});
@@ -23,7 +24,7 @@ class PopularSearchesSection extends StatelessWidget {
         Padding(
           padding: EdgeInsetsDirectional.only(start: AppSizes.paddinMinWidth),
           child: Text(
-            context.l10n.popularServices,
+            context.tr(LocaleKeys.popularServices),
             style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
               color: AppColors.primaryText,
             ),

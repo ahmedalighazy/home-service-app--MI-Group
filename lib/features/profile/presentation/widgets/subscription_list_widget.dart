@@ -41,7 +41,7 @@ class SubscriptionListWidget extends StatelessWidget {
           child: SubscriptionCardWidget(
             subscription: subscription,
             onTap: () {
-              if (subscription.status == SubscriptionStatus.active.name) {
+              if (subscription.status == SubscriptionStatus.active) {
                 context.pushNamed(
                   AppRouter.subscriptionDetail,
                   arguments: subscription,

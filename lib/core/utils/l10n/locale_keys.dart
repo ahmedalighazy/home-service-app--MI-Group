@@ -1,4 +1,60 @@
 abstract class LocaleKeys {
+  // HOME
+  static const navHome = 'navHome';
+  static const navBookings = 'navBookings';
+  static const navAccount = 'navAccount';
+  static const addNewAddress = 'addNewAddress';
+  static const addressWork = 'addressWork';
+  static const addressHome = 'addressHome';
+  static const additionalNotes = 'additionalNotes';
+  static const saveAddress = 'saveAddress';
+  static const chooseYourAddress = 'chooseYourAddress';
+  static const editAddressHint = 'editAddressHint';
+  static const streetNameOrNumber = 'streetNameOrNumber';
+  static const buildingNumber = 'buildingNumber';
+  static const apartmentNumber = 'apartmentNumber';
+  static const floorNumber = 'floorNumber';
+  static const companyName = 'companyName';
+  static const officeOrFloorNumber = 'officeOrFloorNumber';
+  static const cancelBooking = 'cancelBooking';
+  static const areYouSureCancel = 'areYouSureCancel';
+  static const cancelWarning = 'cancelWarning';
+  static const confirmCancel = 'confirmCancel';
+  static const mentionCancelReason = 'mentionCancelReason';
+  static const goBack = 'goBack';
+  static const specialOfferTitle = 'specialOfferTitle';
+  static const serviceAvailable24h = 'serviceAvailable24h';
+  static const currentLocation = 'currentLocation';
+  static const mostRequested = 'mostRequested';
+  static const bookNow = 'bookNow';
+  static const searchServiceOrProblem = 'searchServiceOrProblem';
+  static const code = 'code';
+  static const viewAll = 'viewAll';
+  static const noNewNotifications = 'noNewNotifications';
+  static const browseServices = 'browseServices';
+  static const notifications = 'notifications';
+  static const popularServices = 'popularServices';
+  static const recentSearches = 'recentSearches';
+  static const clearAll = 'clearAll';
+  static const categories = 'categories';
+  static const noResultsFound = 'noResultsFound';
+  static const noResultsFoundDescription = 'noResultsFoundDescription';
+  static const tryOtherWords = 'tryOtherWords';
+  static const youMightBeLookingFor = 'youMightBeLookingFor';
+  static const step = 'sd_step';
+  static const ofText = 'ofText';
+  static const next = 'next';
+  //service
+  static const once = 'once';
+  static const twoWeeks = 'twoWeeks';
+  static const sevenPercentDiscount = 'sd_sevenPercentDiscount';
+  static const weekly = 'weekly';
+  static const discountUpTo12 = 'sd_discountUpTo12';
+  static const countTimesInWeek = 'sd_countTimesInWeek';
+  static const discountUpTo25 = 'sd_discountUpTo25';
+  static const serviceFrequency = 'serviceFrequency';
+  static const cancellationPolicy = 'cancellationPolicy';
+
   // Booking Keys
   static const bookingUpcoming = 'booking_upcoming';
   static const bookingPrevious = 'booking_previous';
@@ -77,7 +133,6 @@ abstract class LocaleKeys {
   static const profileSavedAddresses = 'profile_saved_addresses';
   static const profileNoFavoritesYet = 'profile_no_favorites_yet';
   static const profileSaveServicesHint = 'profile_save_services_hint';
-  static const profileAddAddress = 'profile_add_address';
   static const profileEditAddress = 'profile_edit_address';
   static const profileDeleteAddressConfirm = 'profile_delete_address_confirm';
   static const profileOptional = 'profile_optional';
@@ -154,7 +209,7 @@ abstract class LocaleKeys {
   static const profileCancelPopupTitle = 'profile_cancel_popup_title';
   static const profileCancelPopupDesc = 'profile_cancel_popup_desc';
   static const profileConfirmCancelBtn = 'profile_confirm_cancel_btn';
-  static const homeCurrency = 'home_currency';
+  static const currency = 'currency';
   static const homeDeepCleaning = 'home_deep_cleaning';
   static const homeHouseCleaning = 'home_house_cleaning';
   static const homeBrowseServices = 'home_browse_services';

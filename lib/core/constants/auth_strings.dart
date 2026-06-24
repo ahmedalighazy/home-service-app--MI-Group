@@ -4,10 +4,11 @@ import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 class AuthStrings {
   AuthStrings._();
 
-  static String _tr(String key) => GetIt.I<LocalizationService>().translate(key);
+  static String _tr(String key) =>
+      GetIt.I<LocalizationService>().translate(key);
 
   static String get confirm => _tr('confirm');
-  static String get reset_code_invalid => _tr('reset_code_invalid');
+  static String get resetCodeInvalid => _tr('reset_code_invalid');
   static String get signInTitle => _tr('signInTitle');
   static String get welcomeBackAlt => _tr('welcomeBackAlt');
   static String get emailLabel => _tr('emailLabel');
@@ -71,21 +72,25 @@ class AuthStrings {
   static String get profileCompletionSuccess => _tr('profileCompletionSuccess');
   static String get profileCompletionError => _tr('profileCompletionError');
   static String get forgotPasswordTitle => _tr('forgotPasswordTitle');
-  static String get forgotPasswordDescription => _tr('forgotPasswordDescription');
+  static String get forgotPasswordDescription =>
+      _tr('forgotPasswordDescription');
   static String get sendResetCode => _tr('sendResetCode');
   static String get checkEmailTitle => _tr('checkEmailTitle');
   static String get checkEmailDescription => _tr('checkEmailDescription');
   static String get backToSignIn => _tr('backToSignIn');
   static String get verifyResetCodeTitle => _tr('verifyResetCodeTitle');
-  static String get verifyResetCodeDescription => _tr('verifyResetCodeDescription');
+  static String get verifyResetCodeDescription =>
+      _tr('verifyResetCodeDescription');
   static String get resetCodeError => _tr('resetCodeError');
   static String get resetCodeExpired => _tr('resetCodeExpired');
   static String get setNewPasswordTitle => _tr('setNewPasswordTitle');
-  static String get setNewPasswordDescription => _tr('setNewPasswordDescription');
+  static String get setNewPasswordDescription =>
+      _tr('setNewPasswordDescription');
   static String get newPasswordLabel => _tr('newPasswordLabel');
   static String get newPasswordPlaceholder => _tr('newPasswordPlaceholder');
   static String get confirmPasswordLabel => _tr('confirmPasswordLabel');
-  static String get confirmPasswordPlaceholder => _tr('confirmPasswordPlaceholder');
+  static String get confirmPasswordPlaceholder =>
+      _tr('confirmPasswordPlaceholder');
   static String get passwordMismatch => _tr('passwordMismatch');
   static String get updatePassword => _tr('updatePassword');
   static String get passwordUpdated => _tr('passwordUpdated');
@@ -116,7 +121,8 @@ class AuthStrings {
   static String get errorUnauthorized => _tr('errorUnauthorized');
   static String get errorTokenExpired => _tr('errorTokenExpired');
   static String get errorAccountLocked => _tr('errorAccountLocked');
-  static String get errorAccountLockedWithTime => _tr('errorAccountLockedWithTime');
+  static String get errorAccountLockedWithTime =>
+      _tr('errorAccountLockedWithTime');
   static String get errorForbidden => _tr('errorForbidden');
   static String get invalidOtp => _tr('invalidOtp');
   static String get otpExpired => _tr('otpExpired');
@@ -126,7 +132,8 @@ class AuthStrings {
   static String get localStorageError => _tr('localStorageError');
   static String get unknownError => _tr('unknownError');
   static String get errorInvalidOtp => _tr('errorInvalidOtp');
-  static String get errorInvalidOtpWithAttempts => _tr('errorInvalidOtpWithAttempts');
+  static String get errorInvalidOtpWithAttempts =>
+      _tr('errorInvalidOtpWithAttempts');
   static String get errorOtpExpired => _tr('errorOtpExpired');
   static String get errorSmsSendingFailed => _tr('errorSmsSendingFailed');
   static String get errorValidationGeneric => _tr('errorValidationGeneric');
@@ -138,7 +145,8 @@ class AuthStrings {
   static String get errorUnknown => _tr('errorUnknown');
   static String get resendCodeSuccess => _tr('resendCodeSuccess');
   static String get otpInvalidTryAgain => _tr('otpInvalidTryAgain');
-  static String get passwordResetSuccessTitle => _tr('passwordResetSuccessTitle');
+  static String get passwordResetSuccessTitle =>
+      _tr('passwordResetSuccessTitle');
   static String get passwordMinLength6 => _tr('passwordMinLength6');
   static String get confirmPasswordRequired => _tr('confirmPasswordRequired');
   static String get emailRequired => _tr('emailRequired');
@@ -158,24 +166,29 @@ class AuthStrings {
   static String get passwordLowercaseError => _tr('passwordLowercaseError');
   static String get passwordDigitError => _tr('passwordDigitError');
   static String get passwordSpecialCharError => _tr('passwordSpecialCharError');
-  static String get passwordConsecutiveRepeatsError => _tr('passwordConsecutiveRepeatsError');
-  static String get passwordCommonPatternError => _tr('passwordCommonPatternError');
+  static String get passwordConsecutiveRepeatsError =>
+      _tr('passwordConsecutiveRepeatsError');
+  static String get passwordCommonPatternError =>
+      _tr('passwordCommonPatternError');
   static String get nameMinLengthError => _tr('nameMinLengthError');
   static String get nameMinLength3Error => _tr('nameMinLength3Error');
   static String get nameMaxLengthError => _tr('nameMaxLengthError');
   static String get nameContainsNumbersError => _tr('nameContainsNumbersError');
-  static String get nameConsecutiveSpacesError => _tr('nameConsecutiveSpacesError');
+  static String get nameConsecutiveSpacesError =>
+      _tr('nameConsecutiveSpacesError');
   static String get nameLettersOnlyError => _tr('nameLettersOnlyError');
   static String get phoneInvalid => _tr('phoneInvalid');
   static String get phoneLengthError => _tr('phoneLengthError');
   static String get phoneStartDigitError => _tr('phoneStartDigitError');
   static String get addressMinLengthError => _tr('addressMinLengthError');
   static String get addressMaxLengthError => _tr('addressMaxLengthError');
-  static String get addressInvalidCharactersError => _tr('addressInvalidCharactersError');
+  static String get addressInvalidCharactersError =>
+      _tr('addressInvalidCharactersError');
   static String get genderInvalid => _tr('genderInvalid');
   static String get otpRequired => _tr('otpRequired');
   static String get otpInvalid => _tr('otpInvalid');
   static String get bioMaxLengthError => _tr('bioMaxLengthError');
-  static String get bioInvalidCharactersError => _tr('bioInvalidCharactersError');
+  static String get bioInvalidCharactersError =>
+      _tr('bioInvalidCharactersError');
   static String get passwordsRequired => _tr('passwordsRequired');
 }

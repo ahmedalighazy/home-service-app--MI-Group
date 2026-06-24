@@ -13,12 +13,14 @@ class ValidatorsHelper {
   }
 
   static String normalizeUnicode(String value) {
-
     return value.trim();
   }
 
   static bool isXSSAttempt(String value) {
-    final xssRegex = RegExp(ValidationConstants.xssPattern, caseSensitive: false);
+    final xssRegex = RegExp(
+      ValidationConstants.xssPattern,
+      caseSensitive: false,
+    );
     return xssRegex.hasMatch(value);
   }
 
@@ -88,11 +90,15 @@ class ValidatorsHelper {
   }
 
   static bool hasUppercase(String password) {
-    return RegExp(ValidationConstants.passwordUppercasePattern).hasMatch(password);
+    return RegExp(
+      ValidationConstants.passwordUppercasePattern,
+    ).hasMatch(password);
   }
 
   static bool hasLowercase(String password) {
-    return RegExp(ValidationConstants.passwordLowercasePattern).hasMatch(password);
+    return RegExp(
+      ValidationConstants.passwordLowercasePattern,
+    ).hasMatch(password);
   }
 
   static bool hasDigit(String password) {
@@ -100,7 +106,9 @@ class ValidatorsHelper {
   }
 
   static bool hasSpecialChar(String password) {
-    return RegExp(ValidationConstants.passwordSpecialCharPattern).hasMatch(password);
+    return RegExp(
+      ValidationConstants.passwordSpecialCharPattern,
+    ).hasMatch(password);
   }
 
   static bool hasConsecutiveRepeats(String password) {
@@ -144,10 +152,11 @@ class ValidatorsHelper {
   }
 
   static Map<String, bool> getPasswordValidationDetails(String? password) {
-    if (password == null) password = '';
+    password ??= '';
 
     return {
-      'lengthValid': password.length >= ValidationConstants.passwordMinLength &&
+      'lengthValid':
+          password.length >= ValidationConstants.passwordMinLength &&
           password.length <= ValidationConstants.passwordMaxLength,
       'hasUppercase': hasUppercase(password),
       'hasLowercase': hasLowercase(password),
@@ -396,7 +405,10 @@ class ValidatorsHelper {
     return password == confirmPassword;
   }
 
-  static String getPasswordMatchErrorMessage(String password, String confirmPassword) {
+  static String getPasswordMatchErrorMessage(
+    String password,
+    String confirmPassword,
+  ) {
     if (password.isEmpty || confirmPassword.isEmpty) {
       return AuthStrings.passwordsRequired;
     }

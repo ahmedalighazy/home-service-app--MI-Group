@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
@@ -7,10 +8,6 @@ import 'package:home_service_app/features/service_details/service_details_string
 
 class PolicyBanner extends StatelessWidget {
   const PolicyBanner({super.key});
-
-  static String get _policyText =>
-      SdStrings.cancelBookingOrModifyBeforeNumber5 +
-      SdStrings.caseBeforeLessFromNumber5HourWillBe;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,6 @@ class PolicyBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,7 +36,7 @@ class PolicyBanner extends StatelessWidget {
               SizedBox(width: size.width * 0.025),
               Expanded(
                 child: Text(
-                  context.l10n.cancellationPolicy,
+                  context.tr(LocaleKeys.cancellationPolicy),
                   style: AppText.regular12Grey,
                   textAlign: TextAlign.start,
                 ),

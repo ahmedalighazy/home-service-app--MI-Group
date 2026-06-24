@@ -1,13 +1,11 @@
-class SearchResultEntity {
+import 'package:equatable/equatable.dart';
+
+class SearchResultEntity extends Equatable {
   final String id;
   final String title;
-  final String description;
-  final String type;
 
-  SearchResultEntity({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.type,
-  });
+  const SearchResultEntity({required this.id, required this.title});
+
+  @override
+  List<Object?> get props => [id, title];
 }

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart';
 import 'package:home_service_app/features/address/presentation/cubit/address_state.dart';
 import 'package:home_service_app/features/address/presentation/widgets/address_card.dart';
 import 'package:home_service_app/features/address/presentation/widgets/bottom_sheet_handle.dart';
-import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/features/address/presentation/widgets/custom_add_buttom_sheet.dart';
 
 class SavedAddressesBottomSheet extends StatelessWidget {
@@ -37,9 +39,9 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                   SizedBox(height: AppSizes.spacingLarge),
 
                   Align(
-                    alignment: AlignmentDirectional.centerStart,
+                    alignment: Alignment.centerRight,
                     child: Text(
-                      context.l10n.chooseYourAddress,
+                      context.tr(LocaleKeys.chooseYourAddress),
                       style: AppText.ibmPlexSansArabic16SemiBold,
                     ),
                   ),
@@ -78,9 +80,9 @@ class SavedAddressesBottomSheet extends StatelessWidget {
                   SizedBox(height: AppSizes.spacingMedium),
 
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => context.push(AppRouter.savedAddresses),
                     child: Text(
-                      context.l10n.editAddressHint,
+                      context.tr(LocaleKeys.editAddressHint),
                       style: AppText.ibmCaption11(
                         color: AppColors.greenPrimary,
                       ),

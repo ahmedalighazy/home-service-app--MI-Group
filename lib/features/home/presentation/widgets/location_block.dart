@@ -24,7 +24,7 @@ class LocationBlock extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
+          // Label row with dropdown chevron
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -41,6 +41,7 @@ class LocationBlock extends StatelessWidget {
 
           SizedBox(height: AppSizes.spacingMin),
 
+          // Address row with pin icon
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

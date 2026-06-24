@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
@@ -20,7 +21,7 @@ class CancelBookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: CustomAppBar(title: context.tr(LocaleKeys.bookingCancel)),
-      appBar: CustomAppBar(title: context.l10n.cancelBooking),
+      appBar: CustomAppBar(title: context.tr(LocaleKeys.cancelBooking)),
       body: Padding(
         padding: const EdgeInsets.all(11.0),
         child: SingleChildScrollView(
@@ -50,7 +51,7 @@ class _CancelIcon extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(44),
       decoration: ShapeDecoration(
-        color: const Color(0xFFFEF2F2) ,
+        color: const Color(0xFFFEF2F2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
       ),
       child: SvgPicture.asset(
@@ -70,14 +71,14 @@ class _WarningSection extends StatelessWidget {
       children: [
         Text(
           // context.tr(LocaleKeys.bookingAreYouSureCancel),
-          context.l10n.areYouSureCancel,
+          context.tr(LocaleKeys.areYouSureCancel),
           style: AppText.ibmHeading20(color: AppColors.black),
           textAlign: TextAlign.center,
         ),
         verticalSpace(8),
         Text(
           //context.tr(LocaleKeys.bookingCancelWarning),
-          context.l10n.cancelWarning,
+          context.tr(LocaleKeys.cancelWarning),
           style: AppText.ibmDescription14(),
           textAlign: TextAlign.center,
         ),
@@ -97,7 +98,7 @@ class _ReasonField extends StatelessWidget {
         CustomTextField(
           //hintText: context.tr(LocaleKeys.bookingMentionCancelReason),
           fillColor: AppColors.bgSecondary,
-          hintText: context.l10n.mentionCancelReason,
+          hintText: context.tr(LocaleKeys.mentionCancelReason),
           // fillColor: AppColors.gry,
           borderColor: AppColors.borderGrey,
         ),
@@ -118,7 +119,7 @@ class _ActionButtons extends StatelessWidget {
         CustomButton(
           flex: 44,
           //text: context.tr(LocaleKeys.bookingConfirmCancel),
-          text: context.l10n.confirmCancel,
+          text: context.tr(LocaleKeys.confirmCancel),
           backgroundColor: AppColors.red,
 
           textColor: AppColors.white,
@@ -127,7 +128,7 @@ class _ActionButtons extends StatelessWidget {
         CustomButton(
           flex: 44,
           //text: context.tr(LocaleKeys.bookingGoBack),
-          text: context.l10n.goBack,
+          text: context.tr(LocaleKeys.goBack),
           backgroundColor: AppColors.white,
 
           textColor: AppColors.primaryGrey,

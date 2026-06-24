@@ -1,11 +1,10 @@
+import 'dart:ui' as ui;
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import 'app_locallization_setting.dart';
-
 extension LocalizationExtension on BuildContext {
-  String tr(String key) {
-    return AppLocalizationsSetting.of(this)?.translate(key) ?? key;
-  }
+  String tr(String key) => key.tr();
 
-  bool get isRtl => Directionality.of(this) == TextDirection.rtl;
+  bool get isRtl => Directionality.of(this) == ui.TextDirection.rtl;
 }

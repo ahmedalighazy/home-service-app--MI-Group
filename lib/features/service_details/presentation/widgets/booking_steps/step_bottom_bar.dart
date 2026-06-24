@@ -1,5 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_buttom.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/step_total_display.dart';
 
@@ -45,7 +47,7 @@ class StepBottomBar extends StatelessWidget {
             width: size.width * 0.38,
             child: CustomButtom(
               onTap: onNext,
-              text: nextLabel ?? context.l10n.next,
+              text: nextLabel ?? context.tr(LocaleKeys.next),
               textStyle: AppText.semiBold16Black.copyWith(
                 color: AppColors.white,
                 fontWeight: FontWeight.w700,

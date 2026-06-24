@@ -29,24 +29,19 @@ class AddressCardWidget extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(AppSizes.paddingSmall.r),
       decoration: ShapeDecoration(
-        color: const Color(0xFFF8FBFF) ,
+        color: const Color(0xFFF8FBFF),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            width: 1,
-            color: Color(0xFFF1F5F9) ,
-          ),
+          side: const BorderSide(width: 1, color: Color(0xFFF1F5F9)),
           borderRadius: BorderRadius.circular(12),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
-
             children: [
               SvgPicture.asset(
-                address.iconPath ?? '',
+                address.iconPath,
                 width: 24.r,
                 height: 24.r,
                 colorFilter: const ColorFilter.mode(
@@ -57,12 +52,12 @@ class AddressCardWidget extends StatelessWidget {
               horizontalSpace(8),
 
               Text(
-                address.label ?? '',
+                address.label,
                 style: AppText.ibmHeading16(color: AppColors.black),
               ),
 
               const Spacer(),
-              if (address.isDefault ?? false) _DefaultBadge(),
+              if (address.isDefault) _DefaultBadge(),
             ],
           ),
 
@@ -71,7 +66,7 @@ class AddressCardWidget extends StatelessWidget {
           Align(
             alignment: AlignmentGeometry.bottomRight,
             child: Text(
-              address.details ?? '',
+              address.details,
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
 
               maxLines: 2,

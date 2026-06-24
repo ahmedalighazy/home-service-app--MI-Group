@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/address/presentation/bottom_sheets/add_address_bottom_sheet.dart';
 
 class CustomAddButtomSheet extends StatelessWidget {
@@ -43,7 +44,7 @@ class CustomAddButtomSheet extends StatelessWidget {
             SizedBox(width: AppSizes.spacingSmall),
 
             Text(
-              context.l10n.addNewAddress,
+              context.tr(LocaleKeys.addNewAddress),
               style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                 color: AppColors.greenPrimary,
               ),

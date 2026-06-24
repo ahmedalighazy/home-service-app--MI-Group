@@ -17,7 +17,7 @@ class SearchResultItem extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(
-
+          //horizontal: AppSizes.padding,
           vertical: AppSizes.paddingSmall,
         ),
         child: Row(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/text/app_text.dart';
-import 'package:flutter/widgets.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class RememberMeSection extends StatelessWidget {
@@ -11,11 +10,11 @@ class RememberMeSection extends StatelessWidget {
   final VoidCallback onForgotTap;
 
   const RememberMeSection({
-    Key? key,
+    super.key,
     required this.rememberMe,
     required this.onRememberChanged,
     required this.onForgotTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

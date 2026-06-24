@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:home_service_app/features/notification/presentation/cubit/notification_state.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_empty_section.dart';
 import 'package:home_service_app/features/notification/presentation/sections/notifications_list_section.dart';
 import 'package:home_service_app/features/notification/presentation/widgets/notification_app_bar.dart';
-import 'notification_logic.dart';
 
-class NotificationPage extends StatefulWidget {
+class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
-}
-
-class _NotificationPageState extends State<NotificationPage>
-    with NotificationLogic {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: AppStrings.notifications),
       body: SafeArea(
         child: Column(
           children: [
-            // const NotificationAppBar(),
+            const NotificationAppBar(),
+
             Expanded(
               child: BlocBuilder<NotificationCubit, NotificationState>(
                 builder: (context, state) {
@@ -32,11 +24,6 @@ class _NotificationPageState extends State<NotificationPage>
                     return const NotificationsEmptySection();
                   }
 
-                  // Note: NotificationsListSection handles onTap internally
-                  // via NotificationCard → markAsRead. The mixin's
-                  // markNotificationAsRead(context, notification) is ready
-                  // for use if NotificationsListSection exposes an onTap
-                  // callback in the future.
                   return NotificationsListSection(
                     notifications: state.notifications,
                   );

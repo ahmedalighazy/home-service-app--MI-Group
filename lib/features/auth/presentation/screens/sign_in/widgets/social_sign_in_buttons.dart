@@ -9,10 +9,10 @@ class SocialSignInButtons extends StatelessWidget {
   final VoidCallback onAppleSignIn;
 
   const SocialSignInButtons({
-    Key? key,
+    super.key,
     required this.onGoogleSignIn,
     required this.onAppleSignIn,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

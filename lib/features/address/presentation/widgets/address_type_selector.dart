@@ -22,12 +22,12 @@ class AddressTypeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-
+        //borderRadius: BorderRadius.circular(AppSizes.radius),
         onTap: onTap,
         child: Container(
           width: AppSizes.cardImageHeight,
           height: AppSizes.sectionOffset,
-
+          //alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isSelected ? AppColors.greenPrimary : AppColors.white,
             borderRadius: BorderRadius.circular(AppSizes.radiusXLarge),

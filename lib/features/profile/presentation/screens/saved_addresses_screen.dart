@@ -36,7 +36,7 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: AppColors.transparentColor,
-      builder: (_) => AddAddressBottomSheet(address: address, isEdit: true),
+      builder: (_) => AddAddressBottomSheet(),
     );
   }
 

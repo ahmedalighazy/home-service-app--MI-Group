@@ -1,6 +1,5 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/utils/helpers/booking_date_utils.dart';
 import '../../data/models/extra_item_model.dart';
@@ -98,7 +97,14 @@ class DateTimeStepScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
                 child: TimeSlotGrid(
-                  slots: slots.map((e) => TimeSlot(startTime: e.startTime, endTime: e.endTime)).toList(),
+                  slots: slots
+                      .map(
+                        (e) => TimeSlot(
+                          startTime: e.startTime,
+                          endTime: e.endTime,
+                        ),
+                      )
+                      .toList(),
                   selectedIndex: loaded.selectedSlotIndex,
                   onSlotSelected: cubit.selectTimeSlot,
                 ),

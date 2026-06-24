@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 class NotificationAppBar extends StatelessWidget {
@@ -18,7 +19,7 @@ class NotificationAppBar extends StatelessWidget {
           Expanded(
             child: Center(
               child: Text(
-                context.l10n.notifications,
+                context.tr(LocaleKeys.notifications),
                 style: AppText.ibmPlexSansArabic16SemiBold,
               ),
             ),

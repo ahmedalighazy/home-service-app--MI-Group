@@ -7,7 +7,7 @@ import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 
 class LanguageToggle extends StatelessWidget {
-  const LanguageToggle({Key? key}) : super(key: key);
+  const LanguageToggle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,6 @@ class LanguageToggle extends StatelessWidget {
       builder: (context, state) {
         final isArabic = state.isArabic;
         return Directionality(
-
           textDirection: TextDirection.ltr,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),

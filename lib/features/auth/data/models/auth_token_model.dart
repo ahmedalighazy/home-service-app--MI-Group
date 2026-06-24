@@ -1,20 +1,15 @@
 import '../../domain/entities/auth_token_entity.dart';
 
 /// Auth Token Model - Data Layer
-/// 
+///
 /// DTO for API token responses
 class AuthTokenModel extends AuthTokenEntity {
   const AuthTokenModel({
-    required String accessToken,
-    String? refreshToken,
-    required DateTime expiresAt,
-    String tokenType = 'Bearer',
-  }) : super(
-    accessToken: accessToken,
-    refreshToken: refreshToken,
-    expiresAt: expiresAt,
-    tokenType: tokenType,
-  );
+    required super.accessToken,
+    super.refreshToken,
+    required super.expiresAt,
+    super.tokenType,
+  });
 
   /// Convert from JSON (API response)
   factory AuthTokenModel.fromJson(Map<String, dynamic> json) {

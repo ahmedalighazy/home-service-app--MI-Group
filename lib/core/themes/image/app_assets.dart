@@ -1,7 +1,8 @@
 class AppAssets {
   static const String topographicBg = 'assets/images/Topographic 7.png';
   static const String logo = 'assets/images/logo.png';
-  static const String qatarMap = 'assets/images/qatar_map.png';
+  static const String qatarMap =
+      'assets/images/Gemini_Generated_Image_easzy8easzy8easz 1.png';
   static const String cleaningGuy =
       'assets/images/ChatGPT Image 30 أبريل 2026، 12_03_59 ص 1.png';
   static const String technicianGuy =
@@ -12,14 +13,14 @@ class AppAssets {
   static const String forgot = 'assets/images/illustration-forgot.png';
   static const String message = 'assets/images/illustration-message.png';
   static const String banner = 'assets/images/banner.png';
-  static const String glassCleaning = 'assets/images/تنظيف الزجاج.png';
+  static const String glassCleaning = 'assets/images/glassCleaning.png';
   static const String searchIcon = 'assets/images/searchIcon.png';
   static const String insectsInHouse = 'assets/images/insects_in_house.png';
   static const String notificationIcon = 'assets/images/notification_icon.png';
   static const String pestControlService =
-      'assets/images/مكافحة الحشرات.png';
+      'assets/images/pestControlService.png';
   static const String deepFurnitureCleaning =
-      'assets/images/تنظيف عميق للاثاث.png';
+      'assets/images/deepFurnitureCleaning.png';
   static const String specialOfferBanner =
       'assets/images/special_offer_img.png';
   static const String pestControlCover = 'assets/images/مكافحة الحشرات.png';

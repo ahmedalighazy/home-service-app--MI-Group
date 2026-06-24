@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
@@ -13,7 +12,6 @@ import '../widgets/corporate_services/corporate_hero.dart';
 import '../widgets/corporate_services/corporate_intro_card.dart';
 import '../widgets/corporate_services/corporate_notes_card.dart';
 import 'package:home_service_app/features/service_details/service_details_strings.dart';
-import 'package:home_service_app/core/utils/l10n/app_strings.dart';
 
 class CorporateServicesScreen extends StatefulWidget {
   const CorporateServicesScreen({super.key});
@@ -64,7 +62,9 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
         final cubit = context.read<FeatureCubit>();
 
         return Directionality(
-          textDirection: AppStrings.isArabic ? TextDirection.rtl : TextDirection.ltr,
+          textDirection: AppStrings.isArabic
+              ? TextDirection.rtl
+              : TextDirection.ltr,
           child: Scaffold(
             backgroundColor: AppColors.white,
             body: SafeArea(
@@ -84,8 +84,8 @@ class _CorporateServicesScreenState extends State<CorporateServicesScreen> {
                           offset: const Offset(0, -32),
                           child: CorporateIntroCard(
                             title: SdStrings.companiesMosques,
-                            description:
-                                SdStrings.provideCleaningSanitizationOfficesMosquesDetermine,
+                            description: SdStrings
+                                .provideCleaningSanitizationOfficesMosquesDetermine,
                           ),
                         ),
                         Transform.translate(

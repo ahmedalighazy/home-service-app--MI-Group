@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class PromoBannerCard extends StatelessWidget {
   const PromoBannerCard({
@@ -105,6 +106,7 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
+// Old Price
 class OldPrice extends StatelessWidget {
   const OldPrice({super.key, required this.price});
 
@@ -138,6 +140,7 @@ class OldPrice extends StatelessWidget {
   }
 }
 
+// Promo Code Badge
 class PromoCodeBadge extends StatelessWidget {
   const PromoCodeBadge({super.key, required this.promoCode});
 
@@ -159,7 +162,7 @@ class PromoCodeBadge extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSizes.paddingSmall,
-
+              //vertical: AppSizes.paddingSmall,
             ),
             child: Text(
               promoCode,
@@ -179,7 +182,7 @@ class PromoCodeBadge extends StatelessWidget {
               ),
             ),
             child: Text(
-              context.l10n.code,
+              context.tr(LocaleKeys.code),
               style: AppText.ibmCaption11(color: AppColors.white),
             ),
           ),

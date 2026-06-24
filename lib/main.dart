@@ -20,8 +20,9 @@ void main() async {
   await setupGetIt();
 
   final languageCubit = getIt<LanguageCubit>();
-  final initialLocale =
-      languageCubit.state.isArabic ? const Locale('ar') : const Locale('en');
+  final initialLocale = languageCubit.state.isArabic
+      ? const Locale('ar')
+      : const Locale('en');
 
   runApp(
     EasyLocalization(

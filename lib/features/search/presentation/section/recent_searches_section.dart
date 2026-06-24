@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/search/presentation/widgets/recent_search_item.dart';
 
 class RecentSearchesSection extends StatelessWidget {
@@ -29,7 +30,7 @@ class RecentSearchesSection extends StatelessWidget {
           Row(
             children: [
               Text(
-                context.l10n.recentSearches,
+                context.tr(LocaleKeys.recentSearches),
                 style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
                   color: AppColors.primaryText,
                 ),
@@ -45,7 +46,7 @@ class RecentSearchesSection extends StatelessWidget {
                 child: TextButton(
                   onPressed: onClearAll,
                   child: Text(
-                    context.l10n.clearAll,
+                    context.tr(LocaleKeys.clearAll),
                     style: AppText.ibmFieldLabel12(color: AppColors.bgPrimary),
                   ),
                 ),

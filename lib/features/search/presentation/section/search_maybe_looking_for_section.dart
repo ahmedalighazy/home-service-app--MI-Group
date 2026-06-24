@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/search/domain/entities/search_suggestion_entity.dart';
 import 'package:home_service_app/features/search/presentation/widgets/search_suggestion_card.dart';
 
@@ -23,7 +24,7 @@ class SearchMaybeLookingForSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.l10n.youMightBeLookingFor,
+            context.tr(LocaleKeys.youMightBeLookingFor),
             style: AppText.ibmPlexSansArabic16SemiBold.copyWith(
               color: AppColors.primaryText,
             ),

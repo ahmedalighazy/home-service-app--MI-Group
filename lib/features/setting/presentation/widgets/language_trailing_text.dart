@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/di/injection.dart';
 import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/widgets/language_toggle.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 
@@ -25,10 +27,12 @@ class LanguageTrailingText extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            Icon(
-              state.isArabic ? Icons.chevron_left : Icons.chevron_right,
-              color: AppColors.textLightGrey,
-            ),
+            SizedBox(width: AppSizes.spacingSmallWidth),
+            LanguageToggle(),
+            // Icon(
+            //   state.isArabic ? Icons.chevron_left : Icons.chevron_right,
+            //   color: AppColors.textLightGrey,
+            // ),
           ],
         );
       },

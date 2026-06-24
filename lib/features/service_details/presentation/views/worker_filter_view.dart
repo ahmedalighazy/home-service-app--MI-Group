@@ -1,6 +1,5 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import '../cubit/feature_cubit.dart';
 import '../cubit/feature_state.dart';
 import '../widgets/booking_steps/home_clean/filter_section.dart';
@@ -31,7 +30,11 @@ class WorkerFilterCard extends StatelessWidget {
     SdStrings.apartment,
     SdStrings.villa,
   ];
-  static List<String> get genders => [SdStrings.female, SdStrings.male, SdStrings.not];
+  static List<String> get genders => [
+    SdStrings.female,
+    SdStrings.male,
+    SdStrings.not,
+  ];
 
   void _goToExtrasStep(BuildContext context) {
     final featureCubit = context.read<FeatureCubit>();
@@ -83,7 +86,8 @@ class WorkerFilterCard extends StatelessWidget {
                   title: SdStrings.hourCleaning,
                   items: hours,
                   selectedItem: loaded.selectedHours,
-                  labelBuilder: (value) => value == 1 ? SdStrings.hour : '$value ${SdStrings.hours}',
+                  labelBuilder: (value) =>
+                      value == 1 ? SdStrings.hour : '$value ${SdStrings.hours}',
                   onSelected: cubit.selectHours,
                 ),
                 const SizedBox(height: 24),

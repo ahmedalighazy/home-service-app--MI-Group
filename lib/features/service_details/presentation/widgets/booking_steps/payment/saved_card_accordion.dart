@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_app/core/extensions/context_extensions.dart';
 import 'package:home_service_app/features/service_details/presentation/widgets/booking_steps/payment/saved_card_tile.dart';
 
 import '../../../../../../core/themes/colors/app_colors.dart';
@@ -31,7 +30,6 @@ class SavedCardsAccordion extends StatelessWidget {
       ),
       child: Column(
         children: [
-
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: size.width * 0.04,

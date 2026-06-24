@@ -2,7 +2,6 @@ import 'auth_exceptions.dart';
 import '../utils/auth_error_logger.dart';
 
 mixin ErrorHandlingMixin {
-
   Future<T?> executeWithErrorHandling<T>({
     required Future<T> Function() operation,
     required void Function(AuthException) onError,
@@ -78,8 +77,12 @@ mixin ErrorHandlingMixin {
         AuthErrorLogger().logInfo(
           'RETRY_ATTEMPT',
           'Retrying $operationName (attempt $attempt/$maxRetries) '
-          'after ${delay.inMilliseconds}ms',
-          context: {'attempt': attempt, 'maxRetries': maxRetries, 'delayMs': delay.inMilliseconds},
+              'after ${delay.inMilliseconds}ms',
+          context: {
+            'attempt': attempt,
+            'maxRetries': maxRetries,
+            'delayMs': delay.inMilliseconds,
+          },
         );
 
         await Future.delayed(delay);
@@ -152,7 +155,6 @@ mixin ErrorHandlingMixin {
 }
 
 mixin CubitErrorHandling<T> {
-
   Future<void> safeExecute(
     Future<void> Function() operation, {
     required void Function(String errorMessage) onError,
@@ -162,11 +164,7 @@ mixin CubitErrorHandling<T> {
     try {
       await operation();
     } on AuthException catch (e) {
-      AuthErrorLogger().logException(
-        e,
-        userId: userId,
-        context: context,
-      );
+      AuthErrorLogger().logException(e, userId: userId, context: context);
       onError(e.message);
     } catch (e, stackTrace) {
       final authException = AuthExceptionFactory.fromException(
@@ -188,10 +186,7 @@ class ErrorHandledResult<T> {
   final AuthException? error;
   final bool isSuccess;
 
-  ErrorHandledResult({
-    this.data,
-    this.error,
-  }) : isSuccess = error == null;
+  ErrorHandledResult({this.data, this.error}) : isSuccess = error == null;
 
   bool get isError => !isSuccess;
 
@@ -205,7 +200,7 @@ class ErrorHandledResult<T> {
   ErrorHandledResult<U> map<U>(U Function(T) mapper) {
     if (isSuccess && data != null) {
       try {
-        return ErrorHandledResult(data: mapper(data!));
+        return ErrorHandledResult(data: mapper(data as T));
       } catch (e, stackTrace) {
         final authException = AuthExceptionFactory.fromException(
           e,
@@ -217,12 +212,9 @@ class ErrorHandledResult<T> {
     return ErrorHandledResult(error: error);
   }
 
-  R fold<R>(
-    R Function(AuthException) onError,
-    R Function(T) onSuccess,
-  ) {
+  R fold<R>(R Function(AuthException) onError, R Function(T) onSuccess) {
     if (isSuccess && data != null) {
-      return onSuccess(data!);
+      return onSuccess(data as T);
     }
     return onError(error ?? UnknownAuthException());
   }
@@ -234,8 +226,8 @@ class ErrorHandledResult<T> {
 }
 
 extension AuthExceptionExtension on AuthException {
-
-  bool get isNetworkError => this is NetworkException || this is TimeoutException;
+  bool get isNetworkError =>
+      this is NetworkException || this is TimeoutException;
 
   bool get isAuthError =>
       this is InvalidCredentialsException ||
@@ -260,7 +252,6 @@ Stack Trace: $stackTrace
 }
 
 extension ResultExtension<T> on Future<T> {
-
   Future<ErrorHandledResult<T>> toErrorHandledResult() async {
     try {
       final result = await this;
