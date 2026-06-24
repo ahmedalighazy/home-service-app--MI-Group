@@ -33,7 +33,6 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/sign_in',
     routes: [
-
       ShellRoute(
         builder: (context, state, child) {
           return BlocProvider<AuthCubit>(
@@ -42,21 +41,18 @@ class AppRouter {
           );
         },
         routes: [
-
           GoRoute(
             path: '/sign_in',
             name: 'sign_in',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SignInScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SignInScreen()),
           ),
 
           GoRoute(
             path: '/sign_up',
             name: 'sign_up',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SignUpScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SignUpScreen()),
           ),
 
           GoRoute(
@@ -84,9 +80,8 @@ class AppRouter {
           GoRoute(
             path: '/forgot_password',
             name: 'forgot_password',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ForgetScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ForgetScreen()),
           ),
 
           GoRoute(

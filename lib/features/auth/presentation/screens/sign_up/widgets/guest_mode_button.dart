@@ -10,10 +10,7 @@ import '../../../../../../core/themes/text/app_text.dart';
 class GuestModeButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const GuestModeButton({
-    super.key,
-    required this.onTap,
-  });
+  const GuestModeButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

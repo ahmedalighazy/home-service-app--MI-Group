@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
@@ -45,21 +46,17 @@ class PasswordInputField extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: borderColor,
-              width: 1.5,
-            ),
+            border: Border.all(color: borderColor, width: 1.5),
           ),
           child: TextField(
             controller: controller,
             obscureText: obscureText,
-            textAlign: getIt<LanguageCubit>().isArabic ? TextAlign.right : TextAlign.left,
+            textAlign: context.watch<LanguageCubit>().state.isArabic
+                ? TextAlign.right
+                : TextAlign.left,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: const TextStyle(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
@@ -67,7 +64,9 @@ class PasswordInputField extends StatelessWidget {
               ),
               prefixIcon: IconButton(
                 icon: Icon(
-                  obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                  obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                   color: Colors.grey,
                 ),
                 onPressed: onObscurePressed,
@@ -88,13 +87,12 @@ class SetNewPasswordErrorText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Align(
-        alignment: getIt<LanguageCubit>().isArabic ? Alignment.centerRight : Alignment.centerLeft,
+        alignment: context.watch<LanguageCubit>().state.isArabic
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
         child: Text(
           context.tr('passwordMismatch'),
-          style: TextStyle(
-            color: AppColors.errorRed,
-            fontSize: 12,
-          ),
+          style: TextStyle(color: AppColors.errorRed, fontSize: 12),
         ),
       ),
     );
@@ -129,21 +127,21 @@ class SetNewPasswordButton extends StatelessWidget {
         ),
         child: isLoading
             ? const SizedBox(
-          width: 20,
-          height: 20,
-          child: CircularProgressIndicator(
-            color: Colors.white,
-            strokeWidth: 2,
-          ),
-        )
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2,
+                ),
+              )
             : Text(
-          context.tr('confirm'),
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: isSuccess ? AppColors.white : AppColors.bgDisabled,
-          ),
-        ),
+                context.tr('confirm'),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: isSuccess ? AppColors.white : AppColors.bgDisabled,
+                ),
+              ),
       ),
     );
   }
@@ -152,15 +150,14 @@ class SetNewPasswordButton extends StatelessWidget {
 class SetNewPasswordSuccessDialog extends StatelessWidget {
   final BuildContext parentContext;
 
-  const SetNewPasswordSuccessDialog({
-    super.key,
-    required this.parentContext,
-  });
+  const SetNewPasswordSuccessDialog({super.key, required this.parentContext});
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: getIt<LanguageCubit>().isArabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: context.watch<LanguageCubit>().state.isArabic
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
@@ -211,10 +208,9 @@ class SetNewPasswordSuccessDialog extends StatelessWidget {
                 height: 48.h,
                 child: ElevatedButton(
                   onPressed: () {
-
-                      GoRouter.of(parentContext).pop();
-                      GoRouter.of(parentContext).go(AppRouter.signIn);
-                    },
+                    GoRouter.of(parentContext).pop();
+                    GoRouter.of(parentContext).go(AppRouter.signIn);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.greenPrimary,
                     elevation: 0,

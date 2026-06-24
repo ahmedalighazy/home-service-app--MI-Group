@@ -1,17 +1,12 @@
 part of 'language_cubit.dart';
 
-class LanguageState {
-  final bool isArabic;
+class LanguageState extends Equatable {
+  final Locale locale;
 
-  const LanguageState({required this.isArabic});
+  const LanguageState(this.locale);
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is LanguageState &&
-          runtimeType == other.runtimeType &&
-          isArabic == other.isArabic;
+  bool get isArabic => locale.languageCode == 'ar';
 
   @override
-  int get hashCode => isArabic.hashCode;
+  List<Object> get props => [locale];
 }

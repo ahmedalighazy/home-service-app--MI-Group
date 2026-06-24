@@ -19,19 +19,15 @@ void main() async {
   await CacheHelper.init();
   await setupGetIt();
 
-  final languageCubit = getIt<LanguageCubit>();
-  final initialLocale = languageCubit.state.isArabic
-      ? const Locale('ar')
-      : const Locale('en');
-
   runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('ar'), Locale('en')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('ar'),
-      startLocale: initialLocale,
-      child: BlocProvider<LanguageCubit>.value(
-        value: getIt<LanguageCubit>(),
+    BlocProvider<LanguageCubit>.value(
+      value: getIt<LanguageCubit>(),
+      child: EasyLocalization(
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        saveLocale: true,
+        useOnlyLangCode: true,
         child: const HomeServiceApp(),
       ),
     ),
@@ -47,38 +43,23 @@ class HomeServiceApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (ctx, child) {
-        return BlocConsumer<LanguageCubit, LanguageState>(
-          bloc: getIt<LanguageCubit>(),
-          // Listener fires as a side-effect, NOT during build — safe to call setLocale here
-          listener: (ctx, languageState) {
-            final newLocale = languageState.isArabic
-                ? const Locale('ar')
-                : const Locale('en');
-            if (ctx.locale != newLocale) {
-              ctx.setLocale(newLocale);
-            }
-          },
-          builder: (ctx, languageState) {
-            final locale = languageState.isArabic
-                ? const Locale('ar')
-                : const Locale('en');
-
+      builder: (context, child) {
+        return BlocBuilder<LanguageCubit, LanguageState>(
+          builder: (context, state) {
             return MaterialApp.router(
-              key: ValueKey(locale.languageCode),
+              key: ValueKey(context.locale.languageCode),
               title: 'Home Service App',
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-              locale: locale,
-              supportedLocales: ctx.supportedLocales,
-              localizationsDelegates: ctx.localizationDelegates,
-              builder: (context, child) => Directionality(
-                textDirection: languageState.isArabic
-                    ? ui.TextDirection.rtl
-                    : ui.TextDirection.ltr,
+              locale: context.locale,
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
+              builder: (finalCtx, child) => Directionality(
+                textDirection:
+                    state.isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
                 child: child!,
               ),
             );

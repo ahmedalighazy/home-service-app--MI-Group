@@ -3,7 +3,9 @@ import 'package:home_service_app/core/routes/navigation_extensions.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+// import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:home_service_app/core/widgets/custom_app_bar.dart';
 
 import '../../../../core/constants/icons_path.dart';
