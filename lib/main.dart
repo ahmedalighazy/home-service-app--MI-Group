@@ -1,11 +1,10 @@
 import 'dart:ui' as ui;
 
-import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/utils/helpers/observer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'core/di/injection.dart';
 import 'core/language/language_cubit.dart';
@@ -16,20 +15,24 @@ import 'core/utils/helpers/cache_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
+  GoogleFonts.config.allowRuntimeFetching = false;
   await CacheHelper.init();
   await setupGetIt();
+
+  final languageCubit = getIt<LanguageCubit>();
+  final initialLocale = languageCubit.state.isArabic
+      ? const Locale('ar')
+      : const Locale('en');
+
   runApp(
-    DevicePreview(
-      enabled: false,
-      builder: (context) => EasyLocalization(
-        supportedLocales: const [Locale('ar'), Locale('en')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('ar'),
-        child: BlocProvider<LanguageCubit>.value(
-          value: getIt<LanguageCubit>(),
-          child: const HomeServiceApp(),
-        ),
+    EasyLocalization(
+      supportedLocales: const [Locale('ar'), Locale('en')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('ar'),
+      startLocale: initialLocale,
+      child: BlocProvider<LanguageCubit>.value(
+        value: getIt<LanguageCubit>(),
+        child: const HomeServiceApp(),
       ),
     ),
   );
@@ -54,13 +57,13 @@ class HomeServiceApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-              locale: languageState.isArabic
-                  ? const Locale('ar')
-                  : const Locale('en'),
-              supportedLocales: ctx.supportedLocales,
-              localizationsDelegates: ctx.localizationDelegates,
+
+              locale: context.locale,
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
+
               builder: (context, child) => Directionality(
-                textDirection: languageState.isArabic
+                textDirection: context.locale.languageCode == 'ar'
                     ? ui.TextDirection.rtl
                     : ui.TextDirection.ltr,
                 child: child!,

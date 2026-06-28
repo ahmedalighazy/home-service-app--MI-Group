@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
@@ -11,7 +12,6 @@ import '../../../widgets/auth_social_button.dart';
 import '../../../widgets/terms_and_privacy_text.dart';
 import 'guest_mode_button.dart';
 import 'phone_input_field.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class SignUpBody extends StatelessWidget {
   final TextEditingController phoneController;
@@ -49,10 +49,12 @@ class SignUpBody extends StatelessWidget {
         children: [
           verticalSpace(20.h),
 
-          Text(
-            context.tr('welcomeBack'),
-            textAlign: TextAlign.end,
-            style: AppText.ibmHeading22(color: AppColors.dark),
+          Center(
+            child: Text(
+              context.tr('welcomeBack'),
+              textAlign: TextAlign.end,
+              style: AppText.ibmHeading22(color: AppColors.dark),
+            ),
           ),
           verticalSpace(32.h),
 

@@ -12,23 +12,27 @@ class LanguageCubit extends Cubit<LanguageState> {
   LanguageCubit() : super(_getInitialState());
 
   static LanguageState _getInitialState() {
-    final saved = CacheHelper.getData(key: _langKey);
-    if (saved == 'ar') {
-      return const LanguageState(Locale('ar'));
-    } else if (saved == 'en') {
-      return const LanguageState(Locale('en'));
+    final savedLanguage = CacheHelper.getData(key: _langKey);
+
+    switch (savedLanguage) {
+      case 'en':
+        return const LanguageState(Locale('en'));
+
+      case 'ar':
+      default:
+        return const LanguageState(Locale('ar'));
     }
-    // Default to Arabic
-    return const LanguageState(Locale('ar'));
   }
 
   Future<void> setArabic() async {
     await CacheHelper.saveData(key: _langKey, value: 'ar');
+
     emit(const LanguageState(Locale('ar')));
   }
 
   Future<void> setEnglish() async {
     await CacheHelper.saveData(key: _langKey, value: 'en');
+
     emit(const LanguageState(Locale('en')));
   }
 

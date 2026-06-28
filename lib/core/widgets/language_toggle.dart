@@ -1,10 +1,11 @@
 import 'dart:ui' as ui;
+
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/di/injection.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:home_service_app/core/language/language_cubit.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 
@@ -14,9 +15,9 @@ class LanguageToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, LanguageState>(
-      bloc: getIt<LanguageCubit>(),
       builder: (context, state) {
         final isArabic = state.isArabic;
+
         return Directionality(
           textDirection: ui.TextDirection.ltr,
           child: Padding(
@@ -26,12 +27,19 @@ class LanguageToggle extends StatelessWidget {
               first: false, // English
               second: true, // Arabic
               onChanged: (value) async {
-                final cubit = getIt<LanguageCubit>();
+                final cubit = context.read<LanguageCubit>();
+
                 if (value) {
-                  await context.setLocale(Locale('ar'));
+                  await context.setLocale(const Locale('ar'));
+
+                  if (!context.mounted) return;
+
                   await cubit.setArabic();
                 } else {
-                  await context.setLocale(Locale('en'));
+                  await context.setLocale(const Locale('en'));
+
+                  if (!context.mounted) return;
+
                   await cubit.setEnglish();
                 }
               },
@@ -43,7 +51,6 @@ class LanguageToggle extends StatelessWidget {
               ),
               styleBuilder: (value) =>
                   const ToggleStyle(indicatorColor: AppColors.greenPrimary),
-
               iconBuilder: (value) => Text(
                 value ? 'ع' : 'EN',
                 textDirection: ui.TextDirection.ltr,
@@ -53,12 +60,9 @@ class LanguageToggle extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-
               textBuilder: (value) => Center(
                 child: Text(
-                  value
-                      ? 'EN'
-                      : 'AR', // Fixed labels to show the selected language
+                  value ? 'EN' : 'AR',
                   textDirection: ui.TextDirection.ltr,
                   style: TextStyle(
                     fontSize: 12.sp,
