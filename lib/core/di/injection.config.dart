@@ -10,7 +10,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
-import 'package:home_service_app/core/network/dio_client.dart' as _i953;
 import 'package:home_service_app/core/network/network_info.dart' as _i702;
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart'
     as _i565;
@@ -49,16 +48,15 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i565.AddressCubit>(() => _i565.AddressCubit());
     gh.factory<_i83.ForgetPasswordCubit>(() => _i83.ForgetPasswordCubit());
-    gh.lazySingleton<_i953.DioClient>(() => _i953.DioClient());
     gh.lazySingleton<_i745.NotificationCubit>(() => _i745.NotificationCubit());
     gh.lazySingleton<_i516.HomeLocalDataSource>(
       () => _i678.HomeLocalDataSourceImpl(),
     );
+    gh.lazySingleton<_i3.HomeRemoteDataSource>(
+      () => _i1023.HomeRemoteDataSourceImpl(),
+    );
     gh.lazySingleton<_i406.SearchUseCase>(
       () => _i406.SearchUseCase(gh<_i200.SearchRepository>()),
-    );
-    gh.lazySingleton<_i3.HomeRemoteDataSource>(
-      () => _i1023.HomeRemoteDataSourceImpl(gh<_i953.DioClient>()),
     );
     gh.lazySingleton<_i138.HomeRepository>(
       () => _i761.HomeRepositoryImpl(

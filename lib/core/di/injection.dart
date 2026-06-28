@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../features/profile/data/repo/profile_repo.dart';
+import '../network/api_service.dart';
+import '../network/dio_client.dart';
 import '../utils/helpers/cache_helper.dart';
 import '../utils/l10n/localization_service.dart';
 import '../../features/auth/presentation/cubits/auth_cubit.dart';
@@ -31,11 +35,12 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> setupGetIt() async {
-
   getIt.init();
 
   if (!getIt.isRegistered<SharedPreferences>()) {
-    getIt.registerLazySingleton<SharedPreferences>(() => CacheHelper.sharedPreferences);
+    getIt.registerLazySingleton<SharedPreferences>(
+      () => CacheHelper.sharedPreferences,
+    );
   }
 
   if (!getIt.isRegistered<AuthLocalDataSource>()) {
@@ -62,31 +67,49 @@ Future<void> setupGetIt() async {
     getIt.registerLazySingleton(() => SignInUseCase(getIt<AuthRepository>()));
   }
   if (!getIt.isRegistered<VerifyOtpUseCase>()) {
-    getIt.registerLazySingleton(() => VerifyOtpUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => VerifyOtpUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<CompleteProfileUseCase>()) {
-    getIt.registerLazySingleton(() => CompleteProfileUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => CompleteProfileUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<RequestPasswordResetUseCase>()) {
-    getIt.registerLazySingleton(() => RequestPasswordResetUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => RequestPasswordResetUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<VerifyResetCodeUseCase>()) {
-    getIt.registerLazySingleton(() => VerifyResetCodeUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => VerifyResetCodeUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<ResetPasswordUseCase>()) {
-    getIt.registerLazySingleton(() => ResetPasswordUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => ResetPasswordUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<SignInWithGoogleUseCase>()) {
-    getIt.registerLazySingleton(() => SignInWithGoogleUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => SignInWithGoogleUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<SignInWithAppleUseCase>()) {
-    getIt.registerLazySingleton(() => SignInWithAppleUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => SignInWithAppleUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<GetCurrentUserUseCase>()) {
-    getIt.registerLazySingleton(() => GetCurrentUserUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => GetCurrentUserUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<RefreshTokenUseCase>()) {
-    getIt.registerLazySingleton(() => RefreshTokenUseCase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(
+      () => RefreshTokenUseCase(getIt<AuthRepository>()),
+    );
   }
   if (!getIt.isRegistered<SignOutUseCase>()) {
     getIt.registerLazySingleton(() => SignOutUseCase(getIt<AuthRepository>()));
@@ -98,20 +121,22 @@ Future<void> setupGetIt() async {
   if (getIt.isRegistered<AuthCubit>()) {
     getIt.unregister<AuthCubit>();
   }
-  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(
-        getIt<SignInUseCase>(),
-        getIt<VerifyOtpUseCase>(),
-        getIt<CompleteProfileUseCase>(),
-        getIt<RequestPasswordResetUseCase>(),
-        getIt<VerifyResetCodeUseCase>(),
-        getIt<ResetPasswordUseCase>(),
-        getIt<SignInWithGoogleUseCase>(),
-        getIt<SignInWithAppleUseCase>(),
-        getIt<GetCurrentUserUseCase>(),
-        getIt<RefreshTokenUseCase>(),
-        getIt<SignOutUseCase>(),
-        getIt<SendOtpUseCase>(),
-      ));
+  getIt.registerLazySingleton<AuthCubit>(
+    () => AuthCubit(
+      getIt<SignInUseCase>(),
+      getIt<VerifyOtpUseCase>(),
+      getIt<CompleteProfileUseCase>(),
+      getIt<RequestPasswordResetUseCase>(),
+      getIt<VerifyResetCodeUseCase>(),
+      getIt<ResetPasswordUseCase>(),
+      getIt<SignInWithGoogleUseCase>(),
+      getIt<SignInWithAppleUseCase>(),
+      getIt<GetCurrentUserUseCase>(),
+      getIt<RefreshTokenUseCase>(),
+      getIt<SignOutUseCase>(),
+      getIt<SendOtpUseCase>(),
+    ),
+  );
 
   if (!getIt.isRegistered<ForgetPasswordCubit>()) {
     getIt.registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit());
@@ -119,14 +144,15 @@ Future<void> setupGetIt() async {
 
   try {
     registerCoreModules(getIt);
-  } catch (_) {
-
-  }
+  } catch (_) {}
 
   if (!getIt.isRegistered<LocalizationService>()) {
     getIt.registerSingleton<LocalizationService>(LocalizationService.instance);
   }
   if (!getIt.isRegistered<LanguageCubit>()) {
-    getIt.registerSingleton<LanguageCubit>(LanguageCubit());
+    getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
+  Dio dio = DioClient.getDio();
+  getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
 }

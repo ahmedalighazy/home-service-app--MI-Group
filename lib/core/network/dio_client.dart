@@ -1,17 +1,38 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:home_service_app/core/network/api_interceptors.dart'
+    show ApiInterceptor;
 
-@lazySingleton
 class DioClient {
-  final Dio dio;
+  /// private constructor as I don't want to allow creating an instance of this class
+  DioClient._();
 
-  DioClient()
-    : dio = Dio(
-        BaseOptions(
-          connectTimeout: const Duration(seconds: 30),
-          receiveTimeout: const Duration(seconds: 30),
-          sendTimeout: const Duration(seconds: 30),
-          headers: {'Content-Type': 'application/json'},
-        ),
-      );
+  static Dio? dio;
+  static Dio getDio() {
+    Duration timeOut = const Duration(seconds: 10);
+
+    if (dio == null) {
+      dio = Dio();
+      dio!
+        ..options.connectTimeout = timeOut
+        ..options.receiveTimeout = timeOut;
+      addDioInterceptor();
+      return dio!;
+    } else {
+      return dio!;
+    }
+  }
+
+  static void addDioInterceptor() {
+    dio?.interceptors.add(ApiInterceptor());
+    dio?.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        error: true,
+      ),
+    );
+  }
 }
