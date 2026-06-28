@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  AppColors._();
 
   static const Color transparentColor = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);
@@ -33,9 +34,7 @@ class AppColors {
   static const Color greenPrimary = Color(0xFF189AB4);
   static const Color greenNormalActive = Color(0xFF137B90);
   static const Color iconDisabled = Color(0xFF949494);
-  static const Color select = Color(
-    0x40189AB4,
-  );
+  static const Color select = Color(0x40189AB4);
 
   static const Color border = Color(0xffE0E0E0);
   static const Color lightGrey = Color(0xffD9D9D9);
@@ -45,38 +44,24 @@ class AppColors {
   static const Color lightHover = Color(0xFFDCF0F4);
   static const Color lightActive = Color(0xFFB7E0E8);
 
-  static const Color primary = Color(
-    0xFF189AB4,
-  );
-  static const Color primaryHover = Color(
-    0xFF168BA2,
-  );
-  static const Color primaryActive = Color(
-    0xFF137B90,
-  );
+  static const Color primary = Color(0xFF189AB4);
+  static const Color primaryHover = Color(0xFF168BA2);
+  static const Color primaryActive = Color(0xFF137B90);
 
   static const Color darker = Color(0xFF083638);
-  static const Color whitecancel = Color(
-    0xFFD9E1EE,
-  );
-  static const Color dividerGrey = Color(
-    0xFFF3F4F6,
-  );
+  static const Color whitecancel = Color(0xFFD9E1EE);
+  static const Color dividerGrey = Color(0xFFF3F4F6);
 
   static const Color bgPrimary = Color(0xFFF8FAFC);
   static const Color softWhite = Color(0xFFF8FAFC);
   static const Color grayWhite = Color(0xFFF2F2F2);
 
   static const Color gray = Color(0xFF6D7688);
-  static const Color lightGray = Color(
-    0xFFD0D5D6,
-  );
+  static const Color lightGray = Color(0xFFD0D5D6);
   static const Color greyDarker = Color(0xFF2E353E);
   static const Color darkGrey = Color(0xFF2E353E);
   static const Color primaryGrey = Color(0xFF6D7688);
-  static const Color secondaryGrey = Color(
-    0xFF6D7688,
-  );
+  static const Color secondaryGrey = Color(0xFF6D7688);
   static const Color bgDisabled = Color(0xFF697D95);
   static const Color disabledText = Color(0xFFDAE1EE);
 
@@ -102,15 +87,11 @@ class AppColors {
   static const Color bgError = Color(0xFFFEF2F2);
 
   static const Color yellow = Color(0xFFFEBB38);
-  static const Color primaryYellow = Color(
-    0xFFFEBB38,
-  );
+  static const Color primaryYellow = Color(0xFFFEBB38);
   static const Color warningText = Color(0xFFD97706);
   static const Color bgWarning = Color(0xFFFFFBEB);
   static const Color warningRed = Color(0xFFD3503C);
-  static const Color warningDark = Color(
-    0xFF512C1B,
-  );
+  static const Color warningDark = Color(0xFF512C1B);
 
   static const Color bgHint = Color(0xFF84E0A6);
   static const Color successBackground = Color(0xFFEAFBF1);

@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:home_service_app/core/utils/helpers/observer.dart';
 
 import 'core/di/injection.dart';
@@ -17,7 +16,6 @@ import 'core/utils/helpers/cache_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
   await setupGetIt();
@@ -47,8 +45,7 @@ class HomeServiceApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (ctx, child) {
-        return BlocConsumer<LanguageCubit, LanguageState>(
-          listener: (ctx, languageState) {},
+        return BlocBuilder<LanguageCubit, LanguageState>(
           builder: (ctx, languageState) {
             return MaterialApp.router(
               title: 'Home Service App',

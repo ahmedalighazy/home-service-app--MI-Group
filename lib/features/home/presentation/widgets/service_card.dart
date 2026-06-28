@@ -4,7 +4,6 @@ import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/themes/text_styles.dart';
 
 class ServiceCard extends StatelessWidget {
   final String title;
@@ -60,7 +59,12 @@ class ServiceCard extends StatelessWidget {
                   color: AppColors.secondary,
                   borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
                 ),
-                child: Text(badge!, style: AppTextStyles.badgeText),
+                child: Text(
+                  badge!,
+                  style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
+                    color: AppColors.white,
+                  ),
+                ),
               ),
 
             SizedBox(height: AppSizes.spacingMin),
