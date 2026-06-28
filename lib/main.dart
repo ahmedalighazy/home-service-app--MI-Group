@@ -1,10 +1,12 @@
 import 'dart:ui' as ui;
 
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_service_app/core/utils/helpers/observer.dart';
 
 import 'core/di/injection.dart';
 import 'core/language/language_cubit.dart';
@@ -16,18 +18,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;
+  Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
   await setupGetIt();
-
   runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('ar'), Locale('en')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('ar'),
-
-      child: BlocProvider<LanguageCubit>.value(
-        value: getIt<LanguageCubit>(),
-        child: const HomeServiceApp(),
+    DevicePreview(
+      enabled: false,
+      builder: (context) => EasyLocalization(
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        child: BlocProvider<LanguageCubit>.value(
+          value: getIt<LanguageCubit>(),
+          child: const HomeServiceApp(),
+        ),
       ),
     ),
   );
@@ -42,27 +46,24 @@ class HomeServiceApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) {
+      builder: (ctx, child) {
         return BlocConsumer<LanguageCubit, LanguageState>(
-          listener: (context, state) {
-            if (context.locale != state.locale) {
-              context.setLocale(state.locale);
-            }
-          },
-          builder: (context, state) {
+          listener: (ctx, languageState) {},
+          builder: (ctx, languageState) {
             return MaterialApp.router(
-              key: ValueKey(context.locale.languageCode),
               title: 'Home Service App',
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-              locale: context.locale,
-              supportedLocales: context.supportedLocales,
-              localizationsDelegates: context.localizationDelegates,
-              builder: (finalCtx, child) => Directionality(
-                textDirection: state.isArabic
+              locale: languageState.isArabic
+                  ? const Locale('ar')
+                  : const Locale('en'),
+              supportedLocales: ctx.supportedLocales,
+              localizationsDelegates: ctx.localizationDelegates,
+              builder: (context, child) => Directionality(
+                textDirection: languageState.isArabic
                     ? ui.TextDirection.rtl
                     : ui.TextDirection.ltr,
                 child: child!,

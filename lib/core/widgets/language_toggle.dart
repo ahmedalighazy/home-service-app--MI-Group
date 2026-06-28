@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +28,10 @@ class LanguageToggle extends StatelessWidget {
               onChanged: (value) async {
                 final cubit = getIt<LanguageCubit>();
                 if (value) {
+                  await context.setLocale(Locale('ar'));
                   await cubit.setArabic();
                 } else {
+                  await context.setLocale(Locale('en'));
                   await cubit.setEnglish();
                 }
               },
