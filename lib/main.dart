@@ -45,7 +45,8 @@ class HomeServiceApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (ctx, child) {
-        return BlocBuilder<LanguageCubit, LanguageState>(
+        return BlocConsumer<LanguageCubit, LanguageState>(
+          listener: (ctx, languageState) {},
           builder: (ctx, languageState) {
             return MaterialApp.router(
               title: 'Home Service App',

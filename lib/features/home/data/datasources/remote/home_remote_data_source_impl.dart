@@ -6,9 +6,7 @@ import 'home_remote_data_source.dart';
 
 @LazySingleton(as: HomeRemoteDataSource)
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
-  final DioClient dioClient;
-
-  HomeRemoteDataSourceImpl(this.dioClient);
+  HomeRemoteDataSourceImpl();
 
   @override
   Future<HomeDataModel> getHomeData() async {
