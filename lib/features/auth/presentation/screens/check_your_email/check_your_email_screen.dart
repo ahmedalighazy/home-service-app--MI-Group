@@ -36,8 +36,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void initState() {
     super.initState();
     _controller = VerificationController();
-    if (widget.code.isNotEmpty && widget.code.length == 4) {
-      for (int i = 0; i < 4; i++) {
+    if (widget.code.isNotEmpty && widget.code.length == 6) {
+      for (int i = 0; i < 6; i++) {
         _controller.controllers[i].text = widget.code[i];
       }
     }
@@ -101,7 +101,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         verticalSpace(16.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(4, (index) {
+                          children: List.generate(6, (index) {
                             return Expanded(
                               child: Padding(
                                 padding:

@@ -51,12 +51,12 @@ class CompleteProfileLogic {
     onStateChanged();
   }
 
-  void onComplete({required BuildContext context, required String phoneNumber}) {
+  void onComplete({required BuildContext context, String email = ''}) {
     if (!formKey.currentState!.validate()) return;
     getIt<AuthCubit>().register(
       name: nameCtrl.text.trim(),
-      email: emailCtrl.text.trim(),
-      phone: phoneNumber,
+      email: emailCtrl.text.trim().isNotEmpty ? emailCtrl.text.trim() : email,
+      phone: '',
       password: passCtrl.text,
     );
   }

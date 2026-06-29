@@ -8,6 +8,12 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
 
+  /// Sign up with email and password
+  Future<Map<String, dynamic>> signUp({
+    required String email,
+    required String password,
+  });
+
   /// Send OTP to phone
   Future<void> sendOtpToPhone({
     required String phone,

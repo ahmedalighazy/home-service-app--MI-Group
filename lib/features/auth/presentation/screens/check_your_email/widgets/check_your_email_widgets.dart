@@ -23,8 +23,8 @@ class OtpCircleField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80.w,
-      height: 80.w,
+      width: 50.w,
+      height: 50.w,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
@@ -44,7 +44,7 @@ class OtpCircleField extends StatelessWidget {
             counterText: '',
             border: InputBorder.none,
           ),
-          style: AppText.ibmHeading22(color: AppColors.dark),
+          style: AppText.ibmHeading16(color: AppColors.dark),
           onChanged: onChanged,
         ),
       ),

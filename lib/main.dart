@@ -60,19 +60,14 @@ class HomeServiceApp extends StatelessWidget {
             }
           },
           builder: (ctx, languageState) {
-            final locale = languageState.isArabic
-                ? const Locale('ar')
-                : const Locale('en');
-
             return MaterialApp.router(
-              key: ValueKey(locale.languageCode),
               title: 'Home Service App',
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-              locale: locale,
+              locale: languageState.isArabic ? const Locale('ar') : const Locale('en'),
               supportedLocales: ctx.supportedLocales,
               localizationsDelegates: ctx.localizationDelegates,
               builder: (context, child) => Directionality(

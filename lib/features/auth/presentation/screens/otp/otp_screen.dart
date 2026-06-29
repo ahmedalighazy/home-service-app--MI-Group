@@ -15,8 +15,8 @@ import 'logic/otp_logic.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class OtpScreen extends StatefulWidget {
-  final String phoneNumber;
-  const OtpScreen({super.key, required this.phoneNumber});
+  final String email;
+  const OtpScreen({super.key, required this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -32,7 +32,7 @@ class _OtpScreenState extends State<OtpScreen>
     super.initState();
     getIt<AuthCubit>().resetState();
     _logic = OtpScreenLogic(
-      phoneNumber: widget.phoneNumber,
+      email: widget.email,
       vsync: this,
       onStateChanged: () {
         if (mounted) setState(() {});
@@ -105,7 +105,7 @@ class _OtpScreenState extends State<OtpScreen>
                         Directionality(
                           textDirection: TextDirection.ltr,
                           child: Text(
-                            widget.phoneNumber,
+                            widget.email,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppColors.greenPrimary,

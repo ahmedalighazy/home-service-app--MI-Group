@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/di/injection.dart';
+import '../../../../core/language/language_cubit.dart';
 import '../../../../core/themes/colors/app_colors.dart';
-
 
 class AuthBackButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -10,7 +11,7 @@ class AuthBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final isArabic = getIt<LanguageCubit>().isArabic;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -22,7 +23,7 @@ class AuthBackButton extends StatelessWidget {
           color: AppColors.white,
         ),
         child: Icon(
-          isRtl ? Icons.arrow_forward : Icons.arrow_back,
+          isArabic ? Icons.arrow_forward : Icons.arrow_back,
           size: 15.sp,
           color: AppColors.primaryText,
         ),

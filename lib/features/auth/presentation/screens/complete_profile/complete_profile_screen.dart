@@ -17,8 +17,8 @@ import 'logic/complete_profile_logic.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
-  final String? phoneNumber;
-  const CompleteProfileScreen({super.key, this.phoneNumber});
+  final String? email;
+  const CompleteProfileScreen({super.key, this.email});
 
   @override
   State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
@@ -38,6 +38,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
         if (mounted) setState(() {});
       },
     );
+    if (widget.email != null && widget.email!.isNotEmpty) {
+      _logic.emailCtrl.text = widget.email!;
+    }
   }
 
   @override
@@ -123,9 +126,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                               if (v == null || v.trim().isEmpty) {
                                 return context.tr('emailRequired');
                               }
-                              if (!v.contains('@') || !v.contains('.')) {
-                                return context.tr('emailInvalid');
-                              }
                               return null;
                             },
                           ),
@@ -179,7 +179,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                             isLoading: isLoading,
                             onPressed: () => _logic.onComplete(
                               context: context,
-                              phoneNumber: widget.phoneNumber ?? '',
                             ),
                           ),
 
