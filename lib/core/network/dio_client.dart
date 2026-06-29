@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:home_service_app/core/network/api_constants.dart';
 import 'package:home_service_app/core/network/api_interceptors.dart'
     show ApiInterceptor;
 
@@ -13,6 +14,7 @@ class DioClient {
     if (dio == null) {
       dio = Dio();
       dio!
+        ..options.baseUrl = ApiConstants.baseUrl
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut;
       addDioInterceptor();

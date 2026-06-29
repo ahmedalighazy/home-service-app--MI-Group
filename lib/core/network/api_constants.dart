@@ -1,8 +1,19 @@
 class ApiConstants {
   const ApiConstants._();
 
-  static const String baseUrl = 'https://api.example.com';
-  static const String login = '/login';
-  static const String home = '/home';
+  static const String baseUrl = 'https://cleaningapi.twintech-it.com';
+
+  // Auth
+  static const String auth = '/auth';
+
+  static const String login = '$auth/login';
+  static const String register = '$auth/register';
+  static const String refreshToken = '$auth/refresh-token';
+  static const String logout = '$auth/logout';
+
+  // Profile
   static const String profile = '/profile';
+
+  // Home
+  static const String home = '/home';
 }

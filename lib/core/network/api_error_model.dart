@@ -1,13 +1,17 @@
 class ApiErrorModel {
   final String? status;
-  final String? messege;
+  final String? message;
 
-  ApiErrorModel({this.messege, this.status});
+  ApiErrorModel({this.status, this.message});
 
-  factory ApiErrorModel.fromJson(Map<String, dynamic> json) => ApiErrorModel(
-    status: json['status'] as String?,
-    messege: json['message'] as String?,
-  );
+  factory ApiErrorModel.fromJson(Map<String, dynamic> json) {
+    return ApiErrorModel(
+      status: json['status']?.toString(),
+      message: json['message']?.toString(),
+    );
+  }
 
-  Map<String, dynamic> toJson() => {'status': status, 'message': messege};
+  Map<String, dynamic> toJson() {
+    return {'status': status, 'message': message};
+  }
 }
