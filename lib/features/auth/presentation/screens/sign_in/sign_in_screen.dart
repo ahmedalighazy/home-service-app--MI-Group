@@ -40,23 +40,23 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
         child: BlocBuilder<AuthCubit, AuthState>(
           bloc: getIt<AuthCubit>(),
           builder: (context, state) {
-              return SafeArea(
-                child: SignInBody(
-                  emailController: emailCtrl,
-                  passwordController: passwordCtrl,
-                  rememberMe: rememberMe,
-                  hasError: hasError,
-                  isLoading: state is AuthLoadingState,
-                  onLogin: () => onLogin(context),
-                  onFieldChanged: onFieldChanged,
-                  onRememberChanged: onRememberMeChanged,
-                  onForgotPassword: () => onForgotPassword(context),
-                  onGoogleSignIn: () => onGoogleSignIn(context),
-                  onAppleSignIn: () => onAppleSignIn(context),
-                  onSignUp: () => onSignUp(context),
-                ),
-              );
-            },
+            return SafeArea(
+              child: SignInBody(
+                emailController: emailCtrl,
+                passwordController: passwordCtrl,
+                rememberMe: rememberMe,
+                hasError: hasError,
+                isLoading: state is AuthLoadingState,
+                onLogin: () => onLogin(context),
+                onFieldChanged: onFieldChanged,
+                onRememberChanged: onRememberMeChanged,
+                onForgotPassword: () => onForgotPassword(context),
+                onGoogleSignIn: () => onGoogleSignIn(context),
+                onAppleSignIn: () => onAppleSignIn(context),
+                onSignUp: () => onSignUp(context),
+              ),
+            );
+          },
         ),
       ),
     );

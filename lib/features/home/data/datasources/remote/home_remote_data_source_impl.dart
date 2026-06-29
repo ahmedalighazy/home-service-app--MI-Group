@@ -1,4 +1,3 @@
-import 'package:home_service_app/core/network/dio_client.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../models/home_data_model.dart';

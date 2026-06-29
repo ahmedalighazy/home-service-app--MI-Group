@@ -28,23 +28,21 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => getIt<HomeCubit>()..getHomeData(),
-        ),
-        BlocProvider(
-          create: (_) => getIt<AddressCubit>(),
-        ),
-        BlocProvider(
-          create: (_) => getIt<NotificationCubit>(),
-        ),
+        BlocProvider(create: (_) => getIt<HomeCubit>()..getHomeData()),
+        BlocProvider(create: (_) => getIt<AddressCubit>()),
+        BlocProvider(create: (_) => getIt<NotificationCubit>()),
       ],
       child: Scaffold(
         body: IndexedStack(
           index: _currentIndex,
           children: [
             HomeContent(key: ValueKey('Home-${context.locale.languageCode}')),
-            BookingScreen(key: ValueKey('Booking-${context.locale.languageCode}')),
-            ProfileScreen(key: ValueKey('Profile-${context.locale.languageCode}')),
+            BookingScreen(
+              key: ValueKey('Booking-${context.locale.languageCode}'),
+            ),
+            ProfileScreen(
+              key: ValueKey('Profile-${context.locale.languageCode}'),
+            ),
           ],
         ),
         bottomNavigationBar: CustomBottomNavigationBar(

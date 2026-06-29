@@ -58,7 +58,6 @@ class HomeServiceApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-
               locale: context.locale,
               supportedLocales: context.supportedLocales,
               localizationsDelegates: context.localizationDelegates,

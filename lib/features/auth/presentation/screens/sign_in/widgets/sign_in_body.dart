@@ -52,9 +52,16 @@ class SignInBody extends StatelessWidget {
           SizedBox(height: 20.h),
           const SignInHeader(),
           SizedBox(height: 32.h),
-          EmailInputField(controller: emailController, onChanged: onFieldChanged),
+          EmailInputField(
+            controller: emailController,
+            onChanged: onFieldChanged,
+          ),
           SizedBox(height: 16.h),
-          PasswordInputField(controller: passwordController, hasError: hasError, onChanged: onFieldChanged),
+          PasswordInputField(
+            controller: passwordController,
+            hasError: hasError,
+            onChanged: onFieldChanged,
+          ),
           SizedBox(height: 24.h),
           LoginButton(isLoading: isLoading, onPressed: onLogin),
           SizedBox(height: 16.h),

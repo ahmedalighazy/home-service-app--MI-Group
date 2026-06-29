@@ -22,9 +22,9 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> login(dynamic body) async {
+  Future<void> login(dynamic body, String apiKey) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'apikey': apiKey};
     final _headers = <String, dynamic>{};
     final _data = body;
     final _options = _setStreamType<void>(
