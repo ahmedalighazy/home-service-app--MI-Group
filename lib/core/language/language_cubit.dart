@@ -11,6 +11,8 @@ class LanguageCubit extends Cubit<LanguageState> {
 
   LanguageCubit() : super(_getInitialState());
 
+  Object? get isArabic => null;
+
   static LanguageState _getInitialState() {
     final savedLanguage = CacheHelper.getData(key: _langKey);
 

@@ -59,9 +59,9 @@ class AppRouter {
             path: '/otp',
             name: 'otp',
             pageBuilder: (context, state) {
-              final phoneNumber = state.extra as String? ?? '';
+              final email = state.extra as String? ?? '';
               return NoTransitionPage(
-                child: OtpScreen(phoneNumber: phoneNumber),
+                child: OtpScreen(email: email),
               );
             },
           ),
@@ -70,9 +70,9 @@ class AppRouter {
             path: '/complete_profile',
             name: 'complete_profile',
             pageBuilder: (context, state) {
-              final phoneNumber = state.extra as String? ?? '';
+              final email = state.extra as String? ?? '';
               return NoTransitionPage(
-                child: CompleteProfileScreen(phoneNumber: phoneNumber),
+                child: CompleteProfileScreen(email: email),
               );
             },
           ),

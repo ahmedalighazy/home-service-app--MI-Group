@@ -13,6 +13,13 @@ abstract class AuthRepository {
     required String password,
   });
 
+  /// Sign up with email and password
+  Future<Either<Failure, AuthTokenEntity>> signUp({
+    required String email,
+    required String password,
+  });
+
+
   /// Sign up with phone number (send OTP)
   Future<Either<Failure, void>> sendOtpToPhone({
     required String phone,

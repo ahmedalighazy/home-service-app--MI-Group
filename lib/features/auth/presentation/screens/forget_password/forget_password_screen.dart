@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../../core/di/injection.dart';
-import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import '../../cubits/auth_cubit.dart';
 import '../../cubits/forget_password_cubit.dart';
 import '../../states/auth_state.dart';
-import '../../widgets/auth_back_button.dart';
 import 'logic/forget_pass_logic.dart';
 import 'widget/forget_pass_widget.dart';
 
@@ -71,8 +69,7 @@ class _ForgetScreenContentState extends State<_ForgetScreenContent> {
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
                 child: ConstrainedBox(
-                  constraints:
-                      BoxConstraints(minHeight: constraints.maxHeight),
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -81,15 +78,7 @@ class _ForgetScreenContentState extends State<_ForgetScreenContent> {
                         children: [
                           Align(
                             alignment: AlignmentDirectional.centerStart,
-                            child: AuthBackButton(
-                              onTap: () {
-                                if (GoRouter.of(context).canPop()) {
-                                  GoRouter.of(context).pop();
-                                } else {
-                                  GoRouter.of(context).go(AppRouter.signIn);
-                                }
-                              },
-                            ),
+                            child: CustomBackArrowButton(),
                           ),
                           const ForgetHeader(),
                           SizedBox(height: 32.h),
@@ -101,8 +90,7 @@ class _ForgetScreenContentState extends State<_ForgetScreenContent> {
                           const Spacer(),
                           SizedBox(height: 24.h),
                           ForgetSubmitButton(
-                            onPressed: () =>
-                                _logic.onSendResetCode(context),
+                            onPressed: () => _logic.onSendResetCode(context),
                           ),
                           SizedBox(height: 32.h),
                         ],

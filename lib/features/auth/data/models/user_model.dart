@@ -1,66 +1,69 @@
-import '../../domain/entities/user_entity.dart';
+class UserModel {
+  final String? token;
+  final String? refreshToken;
+  final String? name;
+  final String? id;
+  final String? role;
+  final bool? pending;
+  final String? email;
+  final String? phone;
+  final String? profileImage;
+  final String? gender;
+  final DateTime? createdAt;
+  final bool? emailVerified;
+  final bool? phoneVerified;
 
-/// User Model - Data Layer
-///
-/// DTO (Data Transfer Object) for JSON serialization/deserialization
-/// Converts between API response and domain entity
-class UserModel extends UserEntity {
   const UserModel({
-    required super.id,
-    required super.email,
-    required super.phone,
-    super.name,
-    super.profileImage,
-    super.gender,
-    required super.createdAt,
-    super.emailVerified,
-    super.phoneVerified,
+    this.token,
+    this.refreshToken,
+    this.name,
+    this.id,
+    this.role,
+    this.pending,
+    this.email,
+    this.phone,
+    this.profileImage,
+    this.gender,
+    this.createdAt,
+    this.emailVerified,
+    this.phoneVerified,
   });
 
-  /// Convert from JSON (API response)
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] as String? ?? '',
-      email: json['email'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
+      token: json['token'] as String?,
+      refreshToken: json['refreshToken'] as String?,
       name: json['name'] as String?,
+      id: json['id'] as String?,
+      role: json['role'] as String?,
+      pending: json['pending'] as bool?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
       profileImage: json['profileImage'] as String?,
       gender: json['gender'] as String?,
-      createdAt:
-          DateTime.tryParse(json['createdAt'] as String? ?? '') ??
-          DateTime.now(),
-      emailVerified: json['emailVerified'] as bool? ?? false,
-      phoneVerified: json['phoneVerified'] as bool? ?? false,
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
+      emailVerified: json['emailVerified'] as bool?,
+      phoneVerified: json['phoneVerified'] as bool?,
     );
   }
 
-  /// Convert to JSON (for sending to API)
   Map<String, dynamic> toJson() {
     return {
+      'token': token,
+      'refreshToken': refreshToken,
+      'name': name,
       'id': id,
+      'role': role,
+      'pending': pending,
       'email': email,
       'phone': phone,
-      'name': name,
       'profileImage': profileImage,
       'gender': gender,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String(),
       'emailVerified': emailVerified,
       'phoneVerified': phoneVerified,
     };
   }
-
-  /// Convert UserEntity to UserModel
-  static UserModel fromEntity(UserEntity entity) {
-    return UserModel(
-      id: entity.id,
-      email: entity.email,
-      phone: entity.phone,
-      name: entity.name,
-      profileImage: entity.profileImage,
-      gender: entity.gender,
-      createdAt: entity.createdAt,
-      emailVerified: entity.emailVerified,
-      phoneVerified: entity.phoneVerified,
-    );
-  }
-}
+}

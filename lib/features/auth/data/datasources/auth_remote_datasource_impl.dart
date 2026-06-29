@@ -56,6 +56,25 @@ class AuthRemoteDataSourceMock implements AuthRemoteDataSource {
   }
 
   @override
+  Future<Map<String, dynamic>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return {
+      'accessToken': 'mock_signup_access_token_$email',
+      'refreshToken': 'mock_signup_refresh_token',
+      'expiresIn': 3600,
+      'tokenType': 'Bearer',
+      'user': {
+        'id': 'user_123',
+        'email': email,
+        'name': 'New User',
+      },
+    };
+  }
+
+  @override
   Future<void> sendOtpToPhone({
     required String phone,
   }) async {

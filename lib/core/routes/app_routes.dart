@@ -108,12 +108,12 @@ class AppRouter {
       GoRoute(
         path: otp,
         builder: (context, state) =>
-            OtpScreen(phoneNumber: state.extra as String? ?? ''),
+            OtpScreen(email: state.extra as String? ?? ''),
       ),
       GoRoute(
         path: completeProfile,
         builder: (context, state) =>
-            CompleteProfileScreen(phoneNumber: state.extra as String?),
+            CompleteProfileScreen(email: state.extra as String?),
       ),
       GoRoute(
         path: forgetPassword,

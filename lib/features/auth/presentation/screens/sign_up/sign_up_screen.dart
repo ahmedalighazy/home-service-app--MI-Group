@@ -21,7 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
   void initState() {
     super.initState();
     getIt<AuthCubit>().resetState();
-    phoneCtrl.addListener(onPhoneChanged);
+    emailCtrl.addListener(onEmailChanged);
   }
 
   @override
@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
           builder: (context, state) {
             return SafeArea(
               child: SignUpBody(
-                phoneController: phoneCtrl,
+                emailController: emailCtrl,
                 hasError: hasError,
                 errorMessage: errorMessage,
                 isLoading: state is AuthLoadingState,
@@ -46,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
                 onAppleSignUp: () => onAppleSignUp(context),
                 onGuestMode: () => onGuestMode(context),
                 onSignIn: () => onSignIn(context),
-                onPhoneChanged: (_) => setState(() {}),
+                onEmailChanged: (_) => setState(() {}),
               ),
             );
           },

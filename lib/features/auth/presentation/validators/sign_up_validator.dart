@@ -1,15 +1,8 @@
 import 'package:home_service_app/core/utils/validation/validators_helper.dart';
 
-/// Validates Sign Up form data (Phone verification step)
+/// Validates Sign Up form data (Email & Phone verification step)
 /// 
-/// This validator ensures phone number meets Qatar requirements.
-/// Usage:
-/// ```dart
-/// if (!SignUpValidator.isPhoneValid(phone)) {
-///   final error = SignUpValidator.validatePhone(phone);
-///   // Show error to user
-/// }
-/// ```
+/// This validator ensures phone number meets Qatar requirements and email is formatted correctly.
 class SignUpValidator {
   /// Validate phone number
   /// 
@@ -27,5 +20,23 @@ class SignUpValidator {
   /// Get formatted phone error message
   static String getPhoneErrorMessage(String phone) {
     return validatePhone(phone) ?? '';
+  }
+
+  /// Validate email address
+  /// 
+  /// Returns null if email is valid, error message otherwise.
+  static String? validateEmail(String email) {
+    final err = ValidatorsHelper.getEmailErrorMessage(email);
+    return err.isEmpty ? null : err;
+  }
+
+  /// Check if email is valid
+  static bool isEmailValid(String email) {
+    return validateEmail(email) == null;
+  }
+
+  /// Get formatted email error message
+  static String getEmailErrorMessage(String email) {
+    return validateEmail(email) ?? '';
   }
 }

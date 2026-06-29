@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:home_service_app/core/di/injection.dart';
-import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
-import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/check_your_email/widgets/check_your_email_widgets.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
 import 'logic/check_your_email_logic.dart';
@@ -36,8 +34,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void initState() {
     super.initState();
     _controller = VerificationController();
-    if (widget.code.isNotEmpty && widget.code.length == 4) {
-      for (int i = 0; i < 4; i++) {
+    if (widget.code.isNotEmpty && widget.code.length == 6) {
+      for (int i = 0; i < 6; i++) {
         _controller.controllers[i].text = widget.code[i];
       }
     }
@@ -68,24 +66,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
             automaticallyImplyLeading: false,
             leading: Padding(
               padding: EdgeInsets.all(8.w),
-              child: AuthBackButton(
-                onTap: () {
-                  if (GoRouter.of(context).canPop()) {
-                    GoRouter.of(context).pop();
-                  } else {
-                    GoRouter.of(context).go(AppRouter.forgetPassword);
-                  }
-                },
-              ),
+              child: CustomBackArrowButton(),
             ),
           ),
           body: SafeArea(
             child: SingleChildScrollView(
-              keyboardDismissBehavior:
-                  ScrollViewKeyboardDismissBehavior.onDrag,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height -
+                  minHeight:
+                      MediaQuery.of(context).size.height -
                       MediaQuery.of(context).padding.top -
                       MediaQuery.of(context).padding.bottom -
                       kToolbarHeight,
@@ -101,18 +91,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         verticalSpace(16.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(4, (index) {
+                          children: List.generate(6, (index) {
                             return Expanded(
                               child: Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 4.w),
+                                padding: EdgeInsets.symmetric(horizontal: 4.w),
                                 child: OtpCircleField(
-                                  controller:
-                                      _controller.controllers[index],
+                                  controller: _controller.controllers[index],
                                   focusNode: _controller.focusNodes[index],
                                   onChanged: (value) =>
-                                      _controller.handleOtpChange(
-                                          value, index),
+                                      _controller.handleOtpChange(value, index),
                                 ),
                               ),
                             );
@@ -127,13 +114,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         isLoading
                             ? Center(
                                 child: CircularProgressIndicator(
-                                    color: AppColors.greenPrimary),
+                                  color: AppColors.greenPrimary,
+                                ),
                               )
                             : AuthPrimaryButton(
                                 label: context.tr('confirm'),
                                 isEnabled: _controller.isButtonEnabled,
                                 onPressed: () => _controller.onConfirm(
-                                    context, widget.email),
+                                  context,
+                                  widget.email,
+                                ),
                               ),
                         verticalSpace(24.h),
                       ],

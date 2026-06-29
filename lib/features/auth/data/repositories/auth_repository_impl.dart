@@ -50,6 +50,32 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(Failure(_handleException(e)));
     }
   }
+  @override
+  Future<Either<Failure, AuthTokenEntity>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _remoteDataSource.signUp(
+        email: email,
+        password: password,
+      );
+
+      final tokenModel = AuthTokenModel.fromJson(response);
+      await _localDataSource.saveToken(tokenModel);
+
+      final tokenEntity = AuthTokenEntity(
+        accessToken: tokenModel.accessToken,
+        refreshToken: tokenModel.refreshToken,
+        expiresAt: tokenModel.expiresAt,
+        tokenType: tokenModel.tokenType,
+      );
+
+      return Right(tokenEntity);
+    } on Exception catch (e) {
+      return Left(Failure(_handleException(e)));
+    }
+  }
 
   @override
   Future<Either<Failure, void>> sendOtpToPhone({
@@ -119,15 +145,15 @@ class AuthRepositoryImpl implements AuthRepository {
       
       // Convert model to entity
       final userEntity = UserEntity(
-        id: userModel.id,
-        email: userModel.email,
-        phone: userModel.phone,
+        id: userModel.id ?? '',
+        email: userModel.email ?? '',
+        phone: userModel.phone ?? '',
         name: userModel.name,
         profileImage: userModel.profileImage,
         gender: userModel.gender,
-        createdAt: userModel.createdAt,
-        emailVerified: userModel.emailVerified,
-        phoneVerified: userModel.phoneVerified,
+        createdAt: userModel.createdAt ?? DateTime.now(),
+        emailVerified: userModel.emailVerified ?? false,
+        phoneVerified: userModel.phoneVerified ?? false,
       );
       
       return Right(userEntity);
@@ -254,15 +280,15 @@ class AuthRepositoryImpl implements AuthRepository {
       
       // Convert model to entity
       final userEntity = UserEntity(
-        id: userModel.id,
-        email: userModel.email,
-        phone: userModel.phone,
+        id: userModel.id ?? '',
+        email: userModel.email ?? '',
+        phone: userModel.phone ?? '',
         name: userModel.name,
         profileImage: userModel.profileImage,
         gender: userModel.gender,
-        createdAt: userModel.createdAt,
-        emailVerified: userModel.emailVerified,
-        phoneVerified: userModel.phoneVerified,
+        createdAt: userModel.createdAt ?? DateTime.now(),
+        emailVerified: userModel.emailVerified ?? false,
+        phoneVerified: userModel.phoneVerified ?? false,
       );
       
       return Right(userEntity);

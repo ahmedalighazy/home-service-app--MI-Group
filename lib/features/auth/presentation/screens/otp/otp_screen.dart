@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import '../../../../../core/di/injection.dart';
-import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
-import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_confirm_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_input_row.dart';
 import 'logic/otp_logic.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class OtpScreen extends StatefulWidget {
-  final String phoneNumber;
-  const OtpScreen({super.key, required this.phoneNumber});
+  final String email;
+  const OtpScreen({super.key, required this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -32,7 +30,7 @@ class _OtpScreenState extends State<OtpScreen>
     super.initState();
     getIt<AuthCubit>().resetState();
     _logic = OtpScreenLogic(
-      phoneNumber: widget.phoneNumber,
+      email: widget.email,
       vsync: this,
       onStateChanged: () {
         if (mounted) setState(() {});
@@ -71,15 +69,7 @@ class _OtpScreenState extends State<OtpScreen>
                       children: [
                         Align(
                           alignment: AlignmentDirectional.centerStart,
-                          child: AuthBackButton(
-                            onTap: () {
-                              if (GoRouter.of(context).canPop()) {
-                                GoRouter.of(context).pop();
-                              } else {
-                                GoRouter.of(context).go(AppRouter.signUp);
-                              }
-                            },
-                          ),
+                          child: CustomBackArrowButton(),
                         ),
                         SizedBox(height: 40.h),
                         Text(
@@ -105,7 +95,7 @@ class _OtpScreenState extends State<OtpScreen>
                         Directionality(
                           textDirection: TextDirection.ltr,
                           child: Text(
-                            widget.phoneNumber,
+                            widget.email,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppColors.greenPrimary,

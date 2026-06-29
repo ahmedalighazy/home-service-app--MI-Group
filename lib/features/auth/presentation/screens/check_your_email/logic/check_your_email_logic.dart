@@ -10,8 +10,8 @@ import '../../../../../../core/utils/l10n/localization_service.dart';
 
 class VerificationController extends ChangeNotifier {
   final List<TextEditingController> controllers =
-      List.generate(4, (_) => TextEditingController());
-  final List<FocusNode> focusNodes = List.generate(4, (_) => FocusNode());
+      List.generate(6, (_) => TextEditingController());
+  final List<FocusNode> focusNodes = List.generate(6, (_) => FocusNode());
   bool isButtonEnabled = false;
 
   Timer? _timer;
@@ -65,7 +65,7 @@ class VerificationController extends ChangeNotifier {
   String get otpCode => controllers.map((c) => c.text).join();
 
   void handleOtpChange(String value, int index) {
-    if (value.length == 1 && index < 3) {
+    if (value.length == 1 && index < 5) {
       focusNodes[index + 1].requestFocus();
     } else if (value.isEmpty && index > 0) {
       focusNodes[index - 1].requestFocus();

@@ -11,7 +11,7 @@ import '../../../../../../core/utils/l10n/localization_service.dart';
 enum OtpFieldState { idle, error, success }
 
 class OtpScreenLogic {
-  final String phoneNumber;
+  final String email;
   final TickerProvider vsync;
   final VoidCallback onStateChanged;
 
@@ -30,7 +30,7 @@ class OtpScreenLogic {
   late Animation<double> shakeAnim;
 
   OtpScreenLogic({
-    required this.phoneNumber,
+    required this.email,
     required this.vsync,
     required this.onStateChanged,
   }) {
@@ -85,7 +85,7 @@ class OtpScreenLogic {
   void onConfirm(BuildContext context) {
     if (ctrl.text.length < length) return;
     focusNode.unfocus();
-    getIt<AuthCubit>().verifyOtp(phoneNumber: phoneNumber, otp: ctrl.text);
+    getIt<AuthCubit>().verifyOtp(phoneNumber: email, otp: ctrl.text);
   }
 
   void onResend(BuildContext context) {
@@ -93,7 +93,7 @@ class OtpScreenLogic {
     ctrl.clear();
     fieldState = OtpFieldState.idle;
     onStateChanged();
-    getIt<AuthCubit>().loginWithPhone(phoneNumber);
+    getIt<AuthCubit>().loginWithPhone(email);
     startTimer();
     focusNode.requestFocus();
   }
@@ -104,7 +104,7 @@ class OtpScreenLogic {
       onStateChanged();
       final router = GoRouter.of(context);
       Future.delayed(const Duration(milliseconds: 500), () {
-        router.go(AppRouter.completeProfile, extra: phoneNumber);
+        router.go(AppRouter.completeProfile, extra: email);
       });
     } else if (state is OtpErrorState || state is AuthErrorState) {
       fieldState = OtpFieldState.error;

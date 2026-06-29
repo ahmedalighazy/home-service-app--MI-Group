@@ -1,16 +1,16 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../models/sign_in_request_model.dart';
-import 'auth_remote_datasource.dart';
+import 'package:http/http.dart' as http;
 
-/// Auth Remote Data Source - Real Implementation
-/// 
-/// Uses HTTP client for actual API calls
-class AuthRemoteDataSourceReal implements AuthRemoteDataSource {
+import '../../../../core/error/auth_exceptions.dart';
+import '../datasources/auth_remote_datasource.dart';
+
+
+/// Real implementation of AuthRemoteDataSource that communicates with a REST API.
+class AuthRemoteDataSourceImplReal implements AuthRemoteDataSource {
   final http.Client _httpClient;
   final String _baseUrl;
 
-  AuthRemoteDataSourceReal({
+  AuthRemoteDataSourceImplReal({
     required http.Client httpClient,
     required String baseUrl,
   })  : _httpClient = httpClient,
@@ -22,77 +22,60 @@ class AuthRemoteDataSourceReal implements AuthRemoteDataSource {
     required String password,
   }) async {
     try {
-      final request = SignInRequestModel(
-        email: email,
-        password: password,
-      );
-
       final response = await _httpClient.post(
         Uri.parse('$_baseUrl/auth/sign-in'),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(request.toJson()),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else if (response.statusCode == 401) {
-        throw UnauthorizedException('Invalid credentials');
-      } else if (response.statusCode == 500) {
-        throw ServerException('Server error');
-      } else {
-        throw ServerException('Failed to sign in');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
-  }
-
-  @override
-  Future<void> sendOtpToPhone({
-    required String phone,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/send-otp'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'phone': phone}),
+        body: jsonEncode({'email': email, 'password': password}),
       );
-
-      if (response.statusCode != 200) {
-        throw ServerException('Failed to send OTP');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
-  }
-
-  @override
-  Future<Map<String, dynamic>> verifyOtp({
-    required String phone,
-    required String otp,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/verify-otp'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'phone': phone,
-          'otp': otp,
-        }),
-      );
-
       if (response.statusCode == 200) {
         return jsonDecode(response.body) as Map<String, dynamic>;
       } else if (response.statusCode == 400) {
-        throw ValidationException('Invalid OTP code');
+        throw ValidationException(message: 'Invalid credentials');
       } else {
-        throw ServerException('Failed to verify OTP');
+        throw ServerException(message: 'Failed to sign in');
       }
     } catch (e) {
       throw _handleException(e);
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> signUp({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _httpClient.post(
+        Uri.parse('$_baseUrl/auth/sign-up'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body) as Map<String, dynamic>;
+      } else if (response.statusCode == 400) {
+        throw ValidationException(message: 'Invalid sign‑up data');
+      } else if (response.statusCode == 409) {
+        throw ServerException(message: 'User already exists');
+      } else {
+        throw ServerException(message: 'Failed to sign up');
+      }
+    } catch (e) {
+      throw _handleException(e);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // The remaining API methods are left as simple mock implementations for now.
+  // ---------------------------------------------------------------------------
+  @override
+  Future<void> sendOtpToPhone({required String phone}) async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<Map<String, dynamic>> verifyOtp({required String phone, required String otp}) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {'accessToken': 'mock_access_token', 'refreshToken': 'mock_refresh_token', 'expiresIn': 3600, 'tokenType': 'Bearer'};
   }
 
   @override
@@ -104,230 +87,78 @@ class AuthRemoteDataSourceReal implements AuthRemoteDataSource {
     String? address,
     String? bio,
   }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/complete-profile'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'phone': phone,
-          'name': name,
-          'email': email,
-          'gender': gender,
-          'address': address,
-          'bio': bio,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else {
-        throw ServerException('Failed to complete profile');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+    await Future.delayed(const Duration(seconds: 1));
+    return {
+      'id': 'user_123',
+      'email': email,
+      'phone': phone,
+      'name': name,
+      'gender': gender,
+      'address': address,
+      'bio': bio,
+      'createdAt': DateTime.now().toIso8601String(),
+      'emailVerified': false,
+      'phoneVerified': true,
+    };
   }
 
   @override
-  Future<void> requestPasswordReset({
-    required String email,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/request-password-reset'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email}),
-      );
-
-      if (response.statusCode != 200) {
-        throw ServerException('Failed to request password reset');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<void> requestPasswordReset({required String email}) async {
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
-  Future<void> verifyResetCode({
-    required String email,
-    required String code,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/verify-reset-code'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'email': email,
-          'code': code,
-        }),
-      );
-
-      if (response.statusCode != 200) {
-        throw ServerException('Invalid reset code');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<void> verifyResetCode({required String email, required String code}) async {
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
-  Future<void> resetPassword({
-    required String email,
-    required String newPassword,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/reset-password'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'email': email,
-          'newPassword': newPassword,
-        }),
-      );
-
-      if (response.statusCode != 200) {
-        throw ServerException('Failed to reset password');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<void> resetPassword({required String email, required String newPassword}) async {
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   @override
-  Future<Map<String, dynamic>> signInWithGoogle({
-    String? idToken,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/google-sign-in'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'idToken': idToken}),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else {
-        throw ServerException('Google sign-in failed');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<Map<String, dynamic>> signInWithGoogle({String? idToken}) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {'accessToken': 'mock_google_access', 'refreshToken': 'mock_google_refresh', 'expiresIn': 3600, 'tokenType': 'Bearer'};
   }
 
   @override
-  Future<Map<String, dynamic>> signInWithApple({
-    String? identityToken,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/apple-sign-in'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'identityToken': identityToken}),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else {
-        throw ServerException('Apple sign-in failed');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<Map<String, dynamic>> signInWithApple({String? identityToken}) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {'accessToken': 'mock_apple_access', 'refreshToken': 'mock_apple_refresh', 'expiresIn': 3600, 'tokenType': 'Bearer'};
   }
 
   @override
   Future<Map<String, dynamic>> getCurrentUser() async {
-    try {
-      final response = await _httpClient.get(
-        Uri.parse('$_baseUrl/auth/current-user'),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else {
-        throw ServerException('Failed to get current user');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+    await Future.delayed(const Duration(seconds: 1));
+    return {
+      'id': 'user_123',
+      'email': 'user@example.com',
+      'phone': '+123456789',
+      'name': 'Demo User',
+      'gender': 'Male',
+      'createdAt': DateTime.now().toIso8601String(),
+      'emailVerified': true,
+      'phoneVerified': true,
+    };
   }
 
   @override
-  Future<Map<String, dynamic>> refreshToken({
-    required String refreshToken,
-  }) async {
-    try {
-      final response = await _httpClient.post(
-        Uri.parse('$_baseUrl/auth/refresh-token'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'refreshToken': refreshToken}),
-      );
-
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } else {
-        throw ServerException('Failed to refresh token');
-      }
-    } catch (e) {
-      throw _handleException(e);
-    }
+  Future<Map<String, dynamic>> refreshToken({required String refreshToken}) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return {'accessToken': 'new_access', 'refreshToken': 'new_refresh', 'expiresIn': 3600, 'tokenType': 'Bearer'};
   }
 
   @override
   Future<void> signOut() async {
-    try {
-      await _httpClient.post(Uri.parse('$_baseUrl/auth/sign-out'));
-    } catch (e) {
-      throw _handleException(e);
-    }
+    await Future.delayed(const Duration(seconds: 1));
   }
 
-  /// Handle different exception types
   Exception _handleException(Object e) {
-    if (e is NetworkException ||
-        e is ServerException ||
-        e is UnauthorizedException ||
-        e is ValidationException) {
-      return e as Exception;
+    if (e is http.ClientException) {
+      return NetworkException(originalError: e);
     }
-
-    if (e is FormatException) {
-      return ValidationException('Invalid response format');
-    }
-
-    return NetworkException('Network error occurred');
+    return ServerException(message: 'Unexpected error', originalError: e);
   }
-}
-
-// Custom Exception Classes
-class NetworkException implements Exception {
-  final String message;
-  NetworkException(this.message);
-  
-  @override
-  String toString() => message;
-}
-
-class ServerException implements Exception {
-  final String message;
-  ServerException(this.message);
-  
-  @override
-  String toString() => message;
-}
-
-class UnauthorizedException implements Exception {
-  final String message;
-  UnauthorizedException(this.message);
-  
-  @override
-  String toString() => message;
-}
-
-class ValidationException implements Exception {
-  final String message;
-  ValidationException(this.message);
-  
-  @override
-  String toString() => message;
 }

@@ -32,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
       backgroundColor: AppColors.white,
       appBar: SignUpAppBar(
         showBackButton: true,
-        onBackTap: () => GoRouter.of(context).go(AppRouter.signUp),
+        onPressed: () => GoRouter.of(context).go(AppRouter.signUp),
       ),
       body: BlocListener<AuthCubit, AuthState>(
         bloc: getIt<AuthCubit>(),

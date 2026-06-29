@@ -1,20 +1,20 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import '../../../widgets/auth_footer_link.dart';
-import '../../../widgets/auth_or_divider.dart';
-import '../../../widgets/auth_primary_button.dart';
-import '../../../widgets/auth_social_button.dart';
-import '../../../widgets/terms_and_privacy_text.dart';
-import 'guest_mode_button.dart';
-import 'phone_input_field.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:home_service_app/features/auth/presentation/screens/sign_up/widgets/guest_mode_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_footer_link.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_or_divider.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_social_button.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
+import 'package:home_service_app/features/auth/presentation/widgets/terms_and_privacy_text.dart';
 
 class SignUpBody extends StatelessWidget {
-  final TextEditingController phoneController;
+  final TextEditingController emailController;
   final bool hasError;
   final String? errorMessage;
   final bool isLoading;
@@ -23,11 +23,11 @@ class SignUpBody extends StatelessWidget {
   final VoidCallback onAppleSignUp;
   final VoidCallback onGuestMode;
   final VoidCallback onSignIn;
-  final ValueChanged<String> onPhoneChanged;
+  final ValueChanged<String> onEmailChanged;
 
   const SignUpBody({
     super.key,
-    required this.phoneController,
+    required this.emailController,
     required this.hasError,
     required this.errorMessage,
     required this.isLoading,
@@ -36,7 +36,7 @@ class SignUpBody extends StatelessWidget {
     required this.onAppleSignUp,
     required this.onGuestMode,
     required this.onSignIn,
-    required this.onPhoneChanged,
+    required this.onEmailChanged,
   });
 
   @override
@@ -49,27 +49,29 @@ class SignUpBody extends StatelessWidget {
         children: [
           verticalSpace(20.h),
 
-          Center(
-            child: Text(
-              context.tr('welcomeBack'),
-              textAlign: TextAlign.end,
-              style: AppText.ibmHeading22(color: AppColors.dark),
-            ),
+          Text(
+            context.tr('welcomeSignUp'),
+            textAlign: TextAlign.end,
+            style: AppText.ibmHeading22(color: AppColors.dark),
           ),
           verticalSpace(32.h),
 
-          PhoneInputField(
-            controller: phoneController,
+          AuthTextField(
+            label: context.tr('emailLabel'),
+            hint: context.tr('emailPlaceholder'),
+            controller: emailController,
+            prefixIcon: Icons.email_outlined,
+            keyboardType: TextInputType.emailAddress,
             hasError: hasError,
             errorMessage: errorMessage,
-            onChanged: onPhoneChanged,
+            onChanged: onEmailChanged,
           ),
           verticalSpace(24.h),
 
           AuthPrimaryButton(
             label: context.tr('sendCode'),
             isLoading: isLoading,
-            isEnabled: phoneController.text.isNotEmpty,
+            isEnabled: emailController.text.isNotEmpty,
             onPressed: onSendCode,
           ),
           verticalSpace(12.h),

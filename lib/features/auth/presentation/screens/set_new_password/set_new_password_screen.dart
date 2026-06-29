@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../../core/di/injection.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
-import 'package:home_service_app/features/auth/presentation/widgets/auth_back_button.dart';
 import 'logic/set_new_logic.dart';
 import 'widget/set_new_widgets.dart';
 
@@ -69,18 +69,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
             automaticallyImplyLeading: false,
             leading: Padding(
               padding: EdgeInsets.all(8.w),
-              child: AuthBackButton(
-                onTap: () {
-                  if (GoRouter.of(context).canPop()) {
-                    GoRouter.of(context).pop();
-                  } else {
-                    GoRouter.of(context).go(
-                      AppRouter.verifyResetCode,
-                      extra: widget.email,
-                    );
-                  }
-                },
-              ),
+              child: CustomBackArrowButton(),
             ),
           ),
           body: SafeArea(
@@ -127,16 +116,16 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                             const SizedBox(height: 20),
                             PasswordInputField(
                               title: context.tr('confirmPasswordLabel'),
-                              hintText:
-                                  context.tr('confirmPasswordPlaceholder'),
+                              hintText: context.tr(
+                                'confirmPasswordPlaceholder',
+                              ),
                               controller: _logic.confirmPasswordController,
                               obscureText: _logic.obscureConfirmPassword,
                               borderColor: _logic.getBorderColor(),
                               onObscurePressed:
                                   _logic.toggleObscureConfirmPassword,
                             ),
-                            if (_logic.isError)
-                              const SetNewPasswordErrorText(),
+                            if (_logic.isError) const SetNewPasswordErrorText(),
                             const Spacer(),
                             const SizedBox(height: 20),
                             SetNewPasswordButton(

@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/widgets/language_toggle.dart';
-import '../../../../core/routes/app_routes.dart';
-import 'auth_back_button.dart';
 
 class SignUpAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
-  final VoidCallback? onBackTap;
+  final VoidCallback? onPressed;
 
-  const SignUpAppBar({
-    super.key,
-    this.showBackButton = false,
-    this.onBackTap,
-  });
+  const SignUpAppBar({super.key, this.showBackButton = false, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +21,7 @@ class SignUpAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBackButton
           ? Padding(
               padding: EdgeInsets.all(8.w),
-              child: AuthBackButton(
-                onTap: onBackTap ?? () {
-                  if (GoRouter.of(context).canPop()) {
-                    GoRouter.of(context).pop();
-                  } else {
-                    GoRouter.of(context).go(AppRouter.signUp);
-                  }
-                },
-              ),
+              child: CustomBackArrowButton(onPressed: onPressed),
             )
           : null,
       actions: [

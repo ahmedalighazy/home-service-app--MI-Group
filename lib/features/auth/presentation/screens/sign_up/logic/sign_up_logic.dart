@@ -9,32 +9,33 @@ import '../../../states/auth_state.dart';
 import '../../../validators/sign_up_validator.dart';
 
 mixin SignUpLogic<T extends StatefulWidget> on State<T> {
-  final TextEditingController phoneCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
 
   bool hasError = false;
   String? errorMessage;
 
-  bool get canSubmit => phoneCtrl.text.trim().isNotEmpty;
-  String get fullPhoneNumber => '+974${phoneCtrl.text.trim()}';
+  bool get canSubmit => emailCtrl.text.trim().isNotEmpty;
 
   @override
   void dispose() {
-    phoneCtrl.dispose();
+    emailCtrl.dispose();
     super.dispose();
   }
 
-  void onPhoneChanged() {
+  void onEmailChanged() {
     if (hasError) {
       setState(() {
         hasError = false;
         errorMessage = null;
       });
+    } else {
+      setState(() {});
     }
   }
 
   void onSendCode(BuildContext context) {
-    final phone = phoneCtrl.text.trim();
-    final error = SignUpValidator.validatePhone(phone);
+    final email = emailCtrl.text.trim();
+    final error = SignUpValidator.validateEmail(email);
     if (error != null) {
       setState(() {
         hasError = true;
@@ -46,7 +47,8 @@ mixin SignUpLogic<T extends StatefulWidget> on State<T> {
       hasError = false;
       errorMessage = null;
     });
-    getIt<AuthCubit>().sendSmsCode(fullPhoneNumber);
+    // Re-use sendSmsCode in AuthCubit to trigger mock OTP, passing the email
+    getIt<AuthCubit>().sendSmsCode(email);
   }
 
   void onGuestMode(BuildContext context) {
@@ -68,7 +70,7 @@ mixin SignUpLogic<T extends StatefulWidget> on State<T> {
 
   void handleState(BuildContext context, AuthState state) {
     if (state is OtpSentState) {
-      context.push(AppRouter.otp, extra: fullPhoneNumber);
+      context.push(AppRouter.otp, extra: emailCtrl.text.trim());
     } else if (state is AuthSuccessState &&
         (state.action == 'guest_login' ||
             state.action == 'google_sign_up' ||

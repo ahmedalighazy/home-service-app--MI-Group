@@ -6,19 +6,20 @@ import '../routes/navigation_extensions.dart';
 
 class CustomBackArrowButton extends StatelessWidget {
   const CustomBackArrowButton({super.key, this.onPressed});
-  final Function()? onPressed;
+
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: AppSizes.radiusLarge,
-      backgroundColor: AppColors.borderInputs,
+      backgroundColor: AppColors.borderGrey,
       child: IconButton(
-        onPressed: () => context.pop(),
+        onPressed: onPressed ?? () => context.pop(),
         icon: Icon(
           Icons.arrow_back,
           color: AppColors.primaryText,
-          size: AppSizes.iconSize,
+          size: AppSizes.iconSizeMedium,
         ),
       ),
     );
