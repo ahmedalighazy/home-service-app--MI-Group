@@ -48,189 +48,182 @@ class _OtpScreenState extends State<OtpScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      bloc: getIt<AuthCubit>(),
-      listener: _logic.handleState,
-      builder: (context, state) {
-        final isLoading = state is AuthLoading;
-        return Scaffold(
-          backgroundColor: AppColors.white,
-          resizeToAvoidBottomInset: true,
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 120.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: CustomBackArrowButton(),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 120.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: CustomBackArrowButton(),
+                    ),
+                    SizedBox(height: 40.h),
+                    Text(
+                      context.tr('confirmCode'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.dark,
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      context.tr('enterVerificationCode'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 13.sp,
+                        height: 1.5,
+                      ),
+                    ),
+                    SizedBox(height: 6.h),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Text(
+                        widget.email,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.greenPrimary,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 40.h),
-                        Text(
-                          context.tr('confirmCode'),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.dark,
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          context.tr('enterVerificationCode'),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.secondaryText,
-                            fontSize: 13.sp,
-                            height: 1.5,
-                          ),
-                        ),
-                        SizedBox(height: 6.h),
-                        Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: Text(
-                            widget.email,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.greenPrimary,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 48.h),
-                        GestureDetector(
-                          onTap: () => _logic.focusNode.requestFocus(),
-                          child: OtpInputRow(
-                            digits: _digits,
-                            length: _length,
-                            fieldState: _logic.fieldState,
-                            shakeAnimation: _logic.shakeAnim,
-                            onTap: () => _logic.focusNode.requestFocus(),
-                          ),
-                        ),
-                        SizedBox(height: 20.h),
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 300),
-                          child: !_logic.canResend
-                              ? Text(
-                                  '0:${_logic.secondsLeft.toString().padLeft(2, '0')}',
-                                  key: const ValueKey('timer'),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: AppColors.gray,
-                                    fontSize: 14.sp,
-                                  ),
-                                )
-                              : const SizedBox.shrink(key: ValueKey('empty')),
-                        ),
-                        SizedBox(height: 10.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: _logic.canResend
-                                  ? () => _logic.onResend(context)
-                                  : null,
-                              child: Text(
-                                context.tr('resendCodeLink'),
-                                style: TextStyle(
-                                  color: _logic.canResend
-                                      ? AppColors.greenPrimary
-                                      : AppColors.placeholder,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: _logic.canResend
-                                      ? TextDecoration.underline
-                                      : TextDecoration.none,
-                                  decorationColor: AppColors.greenPrimary,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                ' ${context.tr('resendCodePrompt')}',
-                                style: TextStyle(
-                                  color: AppColors.gray,
-                                  fontSize: 13.sp,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 16.h),
-                        if (_logic.fieldState == OtpFieldState.error)
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 8.h),
-                            child: Text(
-                              context.tr('otpCodeError'),
+                      ),
+                    ),
+                    SizedBox(height: 48.h),
+                    GestureDetector(
+                      onTap: () => _logic.focusNode.requestFocus(),
+                      child: OtpInputRow(
+                        digits: _digits,
+                        length: _length,
+                        fieldState: _logic.fieldState,
+                        shakeAnimation: _logic.shakeAnim,
+                        onTap: () => _logic.focusNode.requestFocus(),
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: !_logic.canResend
+                          ? Text(
+                              '0:${_logic.secondsLeft.toString().padLeft(2, '0')}',
+                              key: const ValueKey('timer'),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: AppColors.errorRed,
-                                fontSize: 12.sp,
+                                color: AppColors.gray,
+                                fontSize: 14.sp,
                               ),
+                            )
+                          : const SizedBox.shrink(key: ValueKey('empty')),
+                    ),
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: _logic.canResend
+                              ? () => _logic.onResend(context)
+                              : null,
+                          child: Text(
+                            context.tr('resendCodeLink'),
+                            style: TextStyle(
+                              color: _logic.canResend
+                                  ? AppColors.greenPrimary
+                                  : AppColors.placeholder,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.bold,
+                              decoration: _logic.canResend
+                                  ? TextDecoration.underline
+                                  : TextDecoration.none,
+                              decorationColor: AppColors.greenPrimary,
                             ),
                           ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            ' ${context.tr('resendCodePrompt')}',
+                            style: TextStyle(
+                              color: AppColors.gray,
+                              fontSize: 13.sp,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ),
-                Positioned(
-                  left: 24.w,
-                  right: 24.w,
-                  bottom: 24.h,
-                  child: OtpConfirmButton(
-                    label: context.tr('confirm'),
-                    isLoading: isLoading,
-                    isSuccess: _logic.fieldState == OtpFieldState.success,
-                    isEnabled:
-                        _digits.length == _length &&
-                        _logic.fieldState != OtpFieldState.error,
-                    onPressed: _digits.length == _length
-                        ? () => _logic.onConfirm(context)
-                        : () {},
-                  ),
-                ),
-                Positioned(
-                  left: -9999,
-                  top: -9999,
-                  child: SizedBox(
-                    width: 1,
-                    height: 1,
-                    child: TextField(
-                      controller: _logic.ctrl,
-                      focusNode: _logic.focusNode,
-                      keyboardType: TextInputType.number,
-                      maxLength: _length,
-                      showCursor: false,
-                      enableInteractiveSelection: false,
-                      stylusHandwritingEnabled: false,
-                      selectionControls: EmptyTextSelectionControls(),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        counterText: '',
+                    SizedBox(height: 16.h),
+                    if (_logic.fieldState == OtpFieldState.error)
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: Text(
+                          context.tr('otpCodeError'),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.errorRed,
+                            fontSize: 12.sp,
+                          ),
+                        ),
                       ),
-                      style: const TextStyle(
-                        color: Colors.transparent,
-                        fontSize: 1,
-                      ),
-                      cursorColor: Colors.transparent,
-                    ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            Positioned(
+              left: 24.w,
+              right: 24.w,
+              bottom: 24.h,
+              child: OtpConfirmButton(
+                label: context.tr('confirm'),
+                isLoading: isLoading,
+                isSuccess: _logic.fieldState == OtpFieldState.success,
+                isEnabled:
+                    _digits.length == _length &&
+                    _logic.fieldState != OtpFieldState.error,
+                onPressed: _digits.length == _length
+                    ? () => _logic.onConfirm(context)
+                    : () {},
+              ),
+            ),
+            Positioned(
+              left: -9999,
+              top: -9999,
+              child: SizedBox(
+                width: 1,
+                height: 1,
+                child: TextField(
+                  controller: _logic.ctrl,
+                  focusNode: _logic.focusNode,
+                  keyboardType: TextInputType.number,
+                  maxLength: _length,
+                  showCursor: false,
+                  enableInteractiveSelection: false,
+                  stylusHandwritingEnabled: false,
+                  selectionControls: EmptyTextSelectionControls(),
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    counterText: '',
+                  ),
+                  style: const TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 1,
+                  ),
+                  cursorColor: Colors.transparent,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

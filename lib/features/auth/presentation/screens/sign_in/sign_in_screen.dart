@@ -5,8 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/di/injection.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/themes/colors/app_colors.dart';
-import '../../cubits/auth_cubit.dart';
-import '../../states/auth_state.dart';
+
 import '../../widgets/sign_up_app_bar.dart';
 import 'logic/sign_in_logic.dart';
 import 'widgets/sign_in_body.dart';
@@ -23,7 +22,6 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
   void initState() {
     super.initState();
     // Reset stale auth state so old results don't trigger navigation immediately
-    getIt<AuthCubit>().resetState();
   }
 
   @override
@@ -34,21 +32,7 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
         showBackButton: true,
         onPressed: () => GoRouter.of(context).go(AppRouter.signUp),
       ),
-      body: BlocListener<AuthCubit, AuthState>(
-        bloc: getIt<AuthCubit>(),
-        listener: (context, state) {
-          print("Listener => ${state.runtimeType}");
-
-          if (state is AuthSuccessState) {
-            print("Action => ${state.action}");
-          }
-
-          handleState(context, state);
-        },
-        child: BlocBuilder<AuthCubit, AuthState>(
-          bloc: getIt<AuthCubit>(),
-          builder: (context, state) {
-            return SafeArea(
+      body:  SafeArea(
               child: SignInBody(
                 emailController: emailCtrl,
                 passwordController: passwordCtrl,
@@ -64,9 +48,7 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
                 onSignUp: () => onSignUp(context),
               ),
             );
-          },
-        ),
-      ),
+       
     );
   }
 }
