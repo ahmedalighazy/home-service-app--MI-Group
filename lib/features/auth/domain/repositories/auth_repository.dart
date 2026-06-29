@@ -1,15 +1,16 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:home_service_app/features/auth/domain/entities/login_response_entity.dart';
 import '../entities/user_entity.dart';
 import '../entities/auth_token_entity.dart';
 
 /// Auth Repository Interface - Domain Layer
-/// 
+///
 /// Abstract interface for authentication operations
 /// Implementation is in data layer
 abstract class AuthRepository {
   /// Sign in with email and password
-  Future<Either<Failure, AuthTokenEntity>> signIn({
-    required String email,
+  Future<Either<Failure, LoginResponseEntity>> signIn({
+    required String identifier,
     required String password,
   });
 
@@ -19,11 +20,8 @@ abstract class AuthRepository {
     required String password,
   });
 
-
   /// Sign up with phone number (send OTP)
-  Future<Either<Failure, void>> sendOtpToPhone({
-    required String phone,
-  });
+  Future<Either<Failure, void>> sendOtpToPhone({required String phone});
 
   /// Verify OTP code
   Future<Either<Failure, AuthTokenEntity>> verifyOtp({
@@ -42,9 +40,7 @@ abstract class AuthRepository {
   });
 
   /// Request password reset (send code to email)
-  Future<Either<Failure, void>> requestPasswordReset({
-    required String email,
-  });
+  Future<Either<Failure, void>> requestPasswordReset({required String email});
 
   /// Verify reset code
   Future<Either<Failure, void>> verifyResetCode({
@@ -59,9 +55,7 @@ abstract class AuthRepository {
   });
 
   /// Sign in with Google
-  Future<Either<Failure, AuthTokenEntity>> signInWithGoogle({
-    String? idToken,
-  });
+  Future<Either<Failure, AuthTokenEntity>> signInWithGoogle({String? idToken});
 
   /// Sign in with Apple
   Future<Either<Failure, AuthTokenEntity>> signInWithApple({

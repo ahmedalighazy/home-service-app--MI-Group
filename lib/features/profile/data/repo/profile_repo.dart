@@ -12,10 +12,10 @@ class ProfileRepo {
     String email,
     String password,
   ) async {
-    Map<String, dynamic> map = {"email": email, "password": password};
+    //Map<String, dynamic> map = {"email": email, "password": password};
 
     try {
-      final response = await _apiService.getProfile(map);
+      final response = await _apiService.getProfile();
 
       return ApiResult.success(response);
     } catch (e) {

@@ -84,11 +84,18 @@ mixin SignUpLogic<T extends StatefulWidget> on State<T> {
   void _showError(BuildContext context, String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(message, style: AppText.ibmDescription14(color: AppColors.white)),
-        backgroundColor: AppColors.errorRed,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppText.ibmDescription14(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
   }
 }

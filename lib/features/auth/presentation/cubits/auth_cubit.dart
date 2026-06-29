@@ -65,11 +65,12 @@ class AuthCubit extends Cubit<AuthState> {
     );
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (user) => emit(AuthSuccessState(action: 'profile_completed', data: {
-        'userId': user.id,
-        'email': user.email,
-        'name': user.name,
-      })),
+      (user) => emit(
+        AuthSuccessState(
+          action: 'profile_completed',
+          data: {'userId': user.id, 'email': user.email, 'name': user.name},
+        ),
+      ),
     );
   }
 
@@ -97,10 +98,15 @@ class AuthCubit extends Cubit<AuthState> {
     required String newPassword,
   }) async {
     emit(const AuthLoadingState());
-    final result = await _resetPasswordUseCase(email: email, newPassword: newPassword);
+    final result = await _resetPasswordUseCase(
+      email: email,
+      newPassword: newPassword,
+    );
     result.fold(
       (failure) => emit(PasswordResetErrorState(failure.message)),
-      (_) => emit(AuthSuccessState(action: 'password_reset', data: {'email': email})),
+      (_) => emit(
+        AuthSuccessState(action: 'password_reset', data: {'email': email}),
+      ),
     );
   }
 
@@ -114,44 +120,90 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> login({
-    required String email,
+    required String identifier,
     required String password,
   }) async {
     emit(const AuthLoadingState());
-    final result = await _signInUseCase(email: email, password: password);
-    result.fold(
-      (failure) => emit(AuthErrorState(failure.message)),
-      (token) async {
-        await CacheHelper.saveData(key: 'email', value: email);
-        emit(AuthSuccessState(
-          action: 'sign_in',
-          data: {'email': email, 'token': token.accessToken},
-        ));
-      },
+
+    final result = await _signInUseCase(
+      identifier: identifier,
+      password: password,
     );
+
+    result.fold((failure) => emit(AuthErrorState(failure.message)), (
+      loginResponse,
+    ) async {
+      await CacheHelper.saveData(key: 'token', value: loginResponse.token);
+
+      print("Saved Token => ${CacheHelper.getData(key: 'token')}");
+
+      await CacheHelper.saveData(
+        key: 'refreshToken',
+        value: loginResponse.refreshToken,
+      );
+
+      emit(
+        AuthSuccessState(
+          action: 'sign_in',
+          data: {
+            'token': loginResponse.token,
+            'refreshToken': loginResponse.refreshToken,
+            'id': loginResponse.id,
+            'name': loginResponse.name,
+            'role': loginResponse.role,
+            'pending': loginResponse.pending,
+            'email': loginResponse.email,
+          },
+        ),
+      );
+    });
   }
 
   Future<void> signInWithGoogle() async {
     emit(const AuthLoadingState());
-    final result = await _signInWithGoogleUseCase(idToken: 'mock_google_id_token');
+    final result = await _signInWithGoogleUseCase(
+      idToken: 'mock_google_id_token',
+    );
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('googleSignInFailed'))),
-      (token) => emit(AuthSuccessState(
-        action: 'google_sign_in',
-        data: {'email': 'user@gmail.com', 'displayName': 'Google User', 'token': token.accessToken},
-      )),
+      (failure) => emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('googleSignInFailed'),
+        ),
+      ),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'google_sign_in',
+          data: {
+            'email': 'user@gmail.com',
+            'displayName': 'Google User',
+            'token': token.accessToken,
+          },
+        ),
+      ),
     );
   }
 
   Future<void> signInWithApple() async {
     emit(const AuthLoadingState());
-    final result = await _signInWithAppleUseCase(identityToken: 'mock_apple_identity_token');
+    final result = await _signInWithAppleUseCase(
+      identityToken: 'mock_apple_identity_token',
+    );
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('appleSignInFailed'))),
-      (token) => emit(AuthSuccessState(
-        action: 'apple_sign_in',
-        data: {'email': 'user@icloud.com', 'displayName': 'Apple User', 'token': token.accessToken},
-      )),
+      (failure) => emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('appleSignInFailed'),
+        ),
+      ),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'apple_sign_in',
+          data: {
+            'email': 'user@icloud.com',
+            'displayName': 'Apple User',
+            'token': token.accessToken,
+          },
+        ),
+      ),
     );
   }
 
@@ -159,7 +211,9 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthLoadingState());
     final result = await _sendOtpUseCase(phone: phoneNumber);
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('otpSendFailed'))),
+      (failure) => emit(
+        AuthErrorState(LocalizationService.instance.translate('otpSendFailed')),
+      ),
       (_) => emit(OtpSentState(phoneNumber: phoneNumber)),
     );
   }
@@ -171,11 +225,17 @@ class AuthCubit extends Cubit<AuthState> {
     emit(const AuthLoadingState());
     final result = await _verifyOtpUseCase(phone: phoneNumber, otp: otp);
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('otpVerificationFailed'))),
-      (token) => emit(AuthSuccessState(
-        action: 'otp_verified',
-        data: {'phoneNumber': phoneNumber, 'token': token.accessToken},
-      )),
+      (failure) => emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('otpVerificationFailed'),
+        ),
+      ),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'otp_verified',
+          data: {'phoneNumber': phoneNumber, 'token': token.accessToken},
+        ),
+      ),
     );
   }
 
@@ -184,31 +244,60 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _verifyResetCodeUseCase(email: email, code: code);
     result.fold(
       (failure) => emit(ResetCodeInvalidState(failure.message)),
-      (_) => emit(AuthSuccessState(action: 'reset_code_verified', data: {'email': email, 'code': code})),
+      (_) => emit(
+        AuthSuccessState(
+          action: 'reset_code_verified',
+          data: {'email': email, 'code': code},
+        ),
+      ),
     );
   }
 
   Future<void> signUpWithGoogle() async {
     emit(const AuthLoadingState());
-    final result = await _signInWithGoogleUseCase(idToken: 'mock_google_id_token');
+    final result = await _signInWithGoogleUseCase(
+      idToken: 'mock_google_id_token',
+    );
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('googleSignUpFailed'))),
-      (token) => emit(AuthSuccessState(
-        action: 'google_sign_up',
-        data: {'email': 'user@gmail.com', 'displayName': 'Google User', 'token': token.accessToken},
-      )),
+      (failure) => emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('googleSignUpFailed'),
+        ),
+      ),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'google_sign_up',
+          data: {
+            'email': 'user@gmail.com',
+            'displayName': 'Google User',
+            'token': token.accessToken,
+          },
+        ),
+      ),
     );
   }
 
   Future<void> signUpWithApple() async {
     emit(const AuthLoadingState());
-    final result = await _signInWithAppleUseCase(identityToken: 'mock_apple_identity_token');
+    final result = await _signInWithAppleUseCase(
+      identityToken: 'mock_apple_identity_token',
+    );
     result.fold(
-      (failure) => emit(AuthErrorState(LocalizationService.instance.translate('appleSignUpFailed'))),
-      (token) => emit(AuthSuccessState(
-        action: 'apple_sign_up',
-        data: {'email': 'user@icloud.com', 'displayName': 'Apple User', 'token': token.accessToken},
-      )),
+      (failure) => emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('appleSignUpFailed'),
+        ),
+      ),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'apple_sign_up',
+          data: {
+            'email': 'user@icloud.com',
+            'displayName': 'Apple User',
+            'token': token.accessToken,
+          },
+        ),
+      ),
     );
   }
 
@@ -217,12 +306,18 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await Future.delayed(const Duration(milliseconds: 500));
       await CacheHelper.saveData(key: 'email', value: 'guest');
-      emit(const AuthSuccessState(
-        action: 'guest_login',
-        data: {'email': 'guest', 'displayName': 'Guest'},
-      ));
+      emit(
+        const AuthSuccessState(
+          action: 'guest_login',
+          data: {'email': 'guest', 'displayName': 'Guest'},
+        ),
+      );
     } catch (e) {
-      emit(AuthErrorState(LocalizationService.instance.translate('guestLoginFailed')));
+      emit(
+        AuthErrorState(
+          LocalizationService.instance.translate('guestLoginFailed'),
+        ),
+      );
     }
   }
 
@@ -240,10 +335,12 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _getCurrentUserUseCase();
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (user) => emit(AuthSuccessState(
-        action: 'user_fetched',
-        data: {'userId': user.id, 'email': user.email, 'name': user.name},
-      )),
+      (user) => emit(
+        AuthSuccessState(
+          action: 'user_fetched',
+          data: {'userId': user.id, 'email': user.email, 'name': user.name},
+        ),
+      ),
     );
   }
 
@@ -251,10 +348,12 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _refreshTokenUseCase(refreshToken: refreshToken);
     result.fold(
       (failure) => emit(AuthErrorState(failure.message)),
-      (token) => emit(AuthSuccessState(
-        action: 'token_refreshed',
-        data: {'token': token.accessToken},
-      )),
+      (token) => emit(
+        AuthSuccessState(
+          action: 'token_refreshed',
+          data: {'token': token.accessToken},
+        ),
+      ),
     );
   }
 }
