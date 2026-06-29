@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
-import '../entities/auth_token_entity.dart';
+
+import '../entities/login_response_entity.dart';
 import '../repositories/auth_repository.dart';
 
 class SignInUseCase {
@@ -7,16 +8,18 @@ class SignInUseCase {
 
   SignInUseCase(this.repository);
 
-  Future<Either<Failure, AuthTokenEntity>> call({
-    required String email,
+  Future<Either<Failure, LoginResponseEntity>> call({
+    required String identifier,
     required String password,
   }) async {
-    if (email.isEmpty) {
-      return Left(Failure('Email is required'));
+    if (identifier.trim().isEmpty) {
+      return Left(Failure('Identifier is required'));
     }
-    if (password.isEmpty) {
+
+    if (password.trim().isEmpty) {
       return Left(Failure('Password is required'));
     }
-    return await repository.signIn(email: email, password: password);
+
+    return repository.signIn(identifier: identifier, password: password);
   }
 }

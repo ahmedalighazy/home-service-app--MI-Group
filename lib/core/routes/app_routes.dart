@@ -273,8 +273,8 @@ class AppRouter {
     ],
     redirect: (context, state) {
       if (state.matchedLocation == home) {
-        final email = CacheHelper.getData(key: 'email') as String?;
-        final loggedIn = email != null && email.isNotEmpty;
+        final token = CacheHelper.getData(key: 'token') as String?;
+        final loggedIn = token != null && token.isNotEmpty;
         if (!loggedIn) return signIn;
       }
       return null;

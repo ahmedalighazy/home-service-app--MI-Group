@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
-
 import 'package:retrofit/retrofit.dart';
-import '../../features/profile/data/models/profile_model.dart';
+
+import 'package:home_service_app/features/auth/data/models/request/login_request_model.dart';
+import 'package:home_service_app/features/auth/data/models/response/login_response_model.dart';
+import 'package:home_service_app/features/profile/data/models/profile_model.dart';
+
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
+
 // # dart
 // dart pub run build_runner build
 
@@ -12,11 +16,13 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  ///auth
-  @POST(ApiConstants.login)
-  Future<void> login(@Body() dynamic body, @Query('apikey') String apiKey);
+  // ========================= Auth =========================
 
-  ///home
+  @POST(ApiConstants.login)
+  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
+
+  // ======================== Profile =======================
+
   @GET(ApiConstants.profile)
-  Future<ProfileModel> getProfile(@Body() dynamic body);
+  Future<ProfileModel> getProfile();
 }

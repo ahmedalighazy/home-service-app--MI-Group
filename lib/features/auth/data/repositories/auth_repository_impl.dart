@@ -1,14 +1,16 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:home_service_app/features/auth/data/models/request/login_request_model.dart';
+import 'package:home_service_app/features/auth/domain/entities/login_response_entity.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/entities/auth_token_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_local_datasource.dart';
-import '../datasources/auth_remote_datasource.dart';
+import '../datasources/auth_remote_data_source.dart';
 import '../models/user_model.dart';
 import '../models/auth_token_model.dart';
 
 /// Auth Repository Implementation - Data Layer
-/// 
+///
 /// Implements abstract AuthRepository
 /// Coordinates between remote and local data sources
 class AuthRepositoryImpl implements AuthRepository {
@@ -18,38 +20,27 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
     required AuthRemoteDataSource remoteDataSource,
     required AuthLocalDataSource localDataSource,
-  })  : _remoteDataSource = remoteDataSource,
-        _localDataSource = localDataSource;
+  }) : _remoteDataSource = remoteDataSource,
+       _localDataSource = localDataSource;
 
   @override
-  Future<Either<Failure, AuthTokenEntity>> signIn({
-    required String email,
+  Future<Either<Failure, LoginResponseEntity>> signIn({
+    required String identifier,
     required String password,
   }) async {
     try {
       final response = await _remoteDataSource.signIn(
-        email: email,
-        password: password,
+        LoginRequestModel(identifier: identifier, password: password),
       );
-      
-      final tokenModel = AuthTokenModel.fromJson(response);
-      
-      // Save token to local storage
-      await _localDataSource.saveToken(tokenModel);
-      
-      // Convert model to entity
-      final tokenEntity = AuthTokenEntity(
-        accessToken: tokenModel.accessToken,
-        refreshToken: tokenModel.refreshToken,
-        expiresAt: tokenModel.expiresAt,
-        tokenType: tokenModel.tokenType,
-      );
-      
-      return Right(tokenEntity);
+
+      // ToDo: Save login data after updating AuthLocalDataSource
+
+      return Right(response);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
     }
   }
+
   @override
   Future<Either<Failure, AuthTokenEntity>> signUp({
     required String email,
@@ -78,9 +69,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> sendOtpToPhone({
-    required String phone,
-  }) async {
+  Future<Either<Failure, void>> sendOtpToPhone({required String phone}) async {
     try {
       await _remoteDataSource.sendOtpToPhone(phone: phone);
       return const Right(null);
@@ -99,12 +88,12 @@ class AuthRepositoryImpl implements AuthRepository {
         phone: phone,
         otp: otp,
       );
-      
+
       final tokenModel = AuthTokenModel.fromJson(response);
-      
+
       // Save token to local storage
       await _localDataSource.saveToken(tokenModel);
-      
+
       // Convert model to entity
       final tokenEntity = AuthTokenEntity(
         accessToken: tokenModel.accessToken,
@@ -112,7 +101,7 @@ class AuthRepositoryImpl implements AuthRepository {
         expiresAt: tokenModel.expiresAt,
         tokenType: tokenModel.tokenType,
       );
-      
+
       return Right(tokenEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -137,12 +126,12 @@ class AuthRepositoryImpl implements AuthRepository {
         address: address,
         bio: bio,
       );
-      
+
       final userModel = UserModel.fromJson(response);
-      
+
       // Save user to local storage
       await _localDataSource.saveUser(userModel);
-      
+
       // Convert model to entity
       final userEntity = UserEntity(
         id: userModel.id ?? '',
@@ -155,7 +144,7 @@ class AuthRepositoryImpl implements AuthRepository {
         emailVerified: userModel.emailVerified ?? false,
         phoneVerified: userModel.phoneVerified ?? false,
       );
-      
+
       return Right(userEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -180,10 +169,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String code,
   }) async {
     try {
-      await _remoteDataSource.verifyResetCode(
-        email: email,
-        code: code,
-      );
+      await _remoteDataSource.verifyResetCode(email: email, code: code);
       return const Right(null);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -217,12 +203,12 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await _remoteDataSource.signInWithGoogle(
         idToken: idToken,
       );
-      
+
       final tokenModel = AuthTokenModel.fromJson(response);
-      
+
       // Save token to local storage
       await _localDataSource.saveToken(tokenModel);
-      
+
       // Convert model to entity
       final tokenEntity = AuthTokenEntity(
         accessToken: tokenModel.accessToken,
@@ -230,7 +216,7 @@ class AuthRepositoryImpl implements AuthRepository {
         expiresAt: tokenModel.expiresAt,
         tokenType: tokenModel.tokenType,
       );
-      
+
       return Right(tokenEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -248,12 +234,12 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await _remoteDataSource.signInWithApple(
         identityToken: identityToken,
       );
-      
+
       final tokenModel = AuthTokenModel.fromJson(response);
-      
+
       // Save token to local storage
       await _localDataSource.saveToken(tokenModel);
-      
+
       // Convert model to entity
       final tokenEntity = AuthTokenEntity(
         accessToken: tokenModel.accessToken,
@@ -261,7 +247,7 @@ class AuthRepositoryImpl implements AuthRepository {
         expiresAt: tokenModel.expiresAt,
         tokenType: tokenModel.tokenType,
       );
-      
+
       return Right(tokenEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -272,12 +258,12 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserEntity>> getCurrentUser() async {
     try {
       final response = await _remoteDataSource.getCurrentUser();
-      
+
       final userModel = UserModel.fromJson(response);
-      
+
       // Save user to local storage
       await _localDataSource.saveUser(userModel);
-      
+
       // Convert model to entity
       final userEntity = UserEntity(
         id: userModel.id ?? '',
@@ -290,7 +276,7 @@ class AuthRepositoryImpl implements AuthRepository {
         emailVerified: userModel.emailVerified ?? false,
         phoneVerified: userModel.phoneVerified ?? false,
       );
-      
+
       return Right(userEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));
@@ -305,12 +291,12 @@ class AuthRepositoryImpl implements AuthRepository {
       final response = await _remoteDataSource.refreshToken(
         refreshToken: refreshToken,
       );
-      
+
       final tokenModel = AuthTokenModel.fromJson(response);
-      
+
       // Save new token to local storage
       await _localDataSource.saveToken(tokenModel);
-      
+
       // Convert model to entity
       final tokenEntity = AuthTokenEntity(
         accessToken: tokenModel.accessToken,
@@ -318,7 +304,7 @@ class AuthRepositoryImpl implements AuthRepository {
         expiresAt: tokenModel.expiresAt,
         tokenType: tokenModel.tokenType,
       );
-      
+
       return Right(tokenEntity);
     } on Exception catch (e) {
       return Left(Failure(_handleException(e)));

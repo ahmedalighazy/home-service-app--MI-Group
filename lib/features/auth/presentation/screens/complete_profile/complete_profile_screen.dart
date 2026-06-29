@@ -39,7 +39,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
       },
     );
     if (widget.email != null && widget.email!.isNotEmpty) {
-      _logic.emailCtrl.text = widget.email!;
+      _logic.identifierCtrl.text = widget.email!;
     }
   }
 
@@ -112,7 +112,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                         AuthFormField(
                           label: context.tr('emailLabel'),
                           hint: context.tr('emailPlaceholder'),
-                          controller: _logic.emailCtrl,
+                          controller: _logic.identifierCtrl,
                           prefixIcon: Icons.email_outlined,
                           keyboardType: TextInputType.emailAddress,
                           validator: (v) {

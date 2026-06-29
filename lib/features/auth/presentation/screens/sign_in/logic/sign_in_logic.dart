@@ -41,7 +41,7 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
     }
     setState(() => hasError = false);
     getIt<AuthCubit>().login(
-      email: emailCtrl.text.trim(),
+      identifier: emailCtrl.text.trim(),
       password: passwordCtrl.text,
     );
   }
@@ -67,6 +67,7 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
         (state.action == 'sign_in' ||
             state.action == 'google_sign_in' ||
             state.action == 'apple_sign_in')) {
+      print("Navigate To Home");
       if (context.mounted) context.go(AppRouter.home);
     } else if (state is AuthErrorState) {
       setState(() => hasError = true);
@@ -77,11 +78,18 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
   void _showError(BuildContext context, String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(message, style: AppText.ibmDescription14(color: AppColors.white)),
-        backgroundColor: AppColors.errorRed,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ));
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: AppText.ibmDescription14(color: AppColors.white),
+          ),
+          backgroundColor: AppColors.errorRed,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
   }
 }

@@ -13,7 +13,7 @@ class CompleteProfileLogic {
 
   final formKey = GlobalKey<FormState>();
   final nameCtrl = TextEditingController();
-  final emailCtrl = TextEditingController();
+  final identifierCtrl = TextEditingController();
   final passCtrl = TextEditingController();
   final confirmPassCtrl = TextEditingController();
 
@@ -55,7 +55,9 @@ class CompleteProfileLogic {
     if (!formKey.currentState!.validate()) return;
     getIt<AuthCubit>().register(
       name: nameCtrl.text.trim(),
-      email: emailCtrl.text.trim().isNotEmpty ? emailCtrl.text.trim() : email,
+      email: identifierCtrl.text.trim().isNotEmpty
+          ? identifierCtrl.text.trim()
+          : email,
       phone: '',
       password: passCtrl.text,
     );
@@ -67,20 +69,26 @@ class CompleteProfileLogic {
     } else if (state is AuthErrorState) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(state.message,
-              style: AppText.ibmDescription14(color: AppColors.white)),
-          backgroundColor: AppColors.errorRed,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ));
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              state.message,
+              style: AppText.ibmDescription14(color: AppColors.white),
+            ),
+            backgroundColor: AppColors.errorRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
     }
   }
 
   void dispose() {
     animCtrl.dispose();
     nameCtrl.dispose();
-    emailCtrl.dispose();
+    identifierCtrl.dispose();
     passCtrl.dispose();
     confirmPassCtrl.dispose();
   }

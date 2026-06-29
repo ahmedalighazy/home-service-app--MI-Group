@@ -11,7 +11,7 @@ import '../../features/auth/presentation/cubits/auth_cubit.dart';
 import '../../features/auth/presentation/cubits/forget_password_cubit.dart';
 import '../../features/auth/data/datasources/auth_local_datasource.dart';
 import '../../features/auth/data/datasources/auth_local_datasource_real.dart';
-import '../../features/auth/data/datasources/auth_remote_datasource.dart';
+import '../../features/auth/data/datasources/auth_remote_data_source.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource_impl.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
 import '../../features/auth/domain/repositories/auth_repository.dart';
@@ -48,9 +48,16 @@ Future<void> setupGetIt() async {
       () => AuthLocalDataSourceReal(getIt<SharedPreferences>()),
     );
   }
+
+  Dio dio = DioClient.getDio();
+
+  if (!getIt.isRegistered<ApiService>()) {
+    getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
+  }
+
   if (!getIt.isRegistered<AuthRemoteDataSource>()) {
     getIt.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceMock(),
+      () => AuthRemoteDataSourceImpl(getIt<ApiService>()),
     );
   }
 
@@ -152,7 +159,7 @@ Future<void> setupGetIt() async {
   if (!getIt.isRegistered<LanguageCubit>()) {
     getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
-  Dio dio = DioClient.getDio();
-  getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
-  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  if (!getIt.isRegistered<ProfileRepo>()) {
+    getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  }
 }
