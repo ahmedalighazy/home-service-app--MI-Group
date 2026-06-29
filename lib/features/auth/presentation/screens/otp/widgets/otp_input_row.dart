@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
-import '../logic/otp_logic.dart' show OtpFieldState;
+import 'otp_field_state.dart' show OtpFieldState;
 
 class OtpInputRow extends StatelessWidget {
   final String digits;

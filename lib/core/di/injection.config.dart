@@ -10,14 +10,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
-import 'package:home_service_app/core/network/api_service.dart' as _i574;
 import 'package:home_service_app/core/network/network_info.dart' as _i702;
 import 'package:home_service_app/features/address/presentation/cubit/address_cubit.dart'
     as _i565;
-import 'package:home_service_app/features/auth/data/datasources/auth_remote_data_source.dart'
-    as _i568;
-import 'package:home_service_app/features/auth/data/datasources/auth_remote_datasource_impl.dart'
-    as _i37;
 import 'package:home_service_app/features/auth/presentation/cubits/forget_password_cubit.dart'
     as _i83;
 import 'package:home_service_app/features/home/data/datasources/local/home_local_data_source.dart'
@@ -63,9 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i406.SearchUseCase>(
       () => _i406.SearchUseCase(gh<_i200.SearchRepository>()),
     );
-    gh.lazySingleton<_i568.AuthRemoteDataSource>(
-      () => _i37.AuthRemoteDataSourceImpl(gh<_i574.ApiService>()),
-    );
+
     gh.lazySingleton<_i138.HomeRepository>(
       () => _i761.HomeRepositoryImpl(
         gh<_i516.HomeLocalDataSource>(),

@@ -6,7 +6,6 @@ import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/image/app_assets.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:home_service_app/features/auth/presentation/states/auth_state.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/forget_password_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
