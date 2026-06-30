@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../features/profile/data/repo/profile_repo.dart';
+import '../../features/profile/presentation/cubit/profile_cubit.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';
 import '../utils/helpers/cache_helper.dart';
@@ -160,6 +162,13 @@ Future<void> setupGetIt() async {
     getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
   if (!getIt.isRegistered<ProfileRepo>()) {
-    getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+    getIt.registerLazySingleton<ProfileRepo>(
+      () => ProfileRepo(getIt<ApiService>()),
+    );
+  }
+  if (!getIt.isRegistered<ProfileCubit>()) {
+    getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(getIt<ProfileRepo>()),
+    );
   }
 }

@@ -6,6 +6,9 @@ import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
 import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../core/themes/colors/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/di/injection.dart';
+import '../cubit/profile_cubit.dart';
 import '../../../setting/presentation/widgets/setting_list_item.dart';
 import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
@@ -16,9 +19,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
+    return BlocProvider(
+      create: (context) => getIt<ProfileCubit>()..getProfile(),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
           child: SizedBox(
             height: height(context),
             child: Stack(
@@ -126,6 +131,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }
