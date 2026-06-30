@@ -3,17 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/network/api_error_handler.dart';
 import '../../../../core/network/api_result.dart';
 import '../../../../core/network/api_service.dart';
-import '../models/complete_responses.dart';
-import '../models/forget_password_responses.dart';
-import '../models/register_email_responses.dart';
-import '../models/register_responses.dart';
-import '../models/register_verify_otp_responses.dart';
-import '../models/request/login_request_model.dart';
-import '../models/request_reset_responses.dart';
-import '../models/reset_password_responses.dart';
-import '../models/resend_otp_responses.dart';
+
+import '../models/request/auth_request.dart';
+
 import '../models/response/login_response_model.dart';
-import '../models/verify_reset_otp.dart';
 
 class AuthRepo {
   final ApiService _apiService;
@@ -36,11 +29,15 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<LoginResponseModel>> loginWithPhone(
-    Map<String, dynamic> body,
-  ) async {
+  Future<ApiResult<LoginResponseModel>> loginWithPhone({
+    required String phone,
+    required String password,
+  }) async {
     try {
-      final response = await _apiService.loginPhone(body);
+      final response = await _apiService.loginPhone({
+        'phone': phone,
+        'password': password,
+      });
       await _cacheSession(response);
       return ApiResult.success(response);
     } catch (e) {
@@ -48,11 +45,15 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<LoginResponseModel>> loginWithEmail(
-    Map<String, dynamic> body,
-  ) async {
+  Future<ApiResult<LoginResponseModel>> loginWithEmail({
+    required String email,
+    required String password,
+  }) async {
     try {
-      final response = await _apiService.loginEmail(body);
+      final response = await _apiService.loginEmail({
+        'email': email,
+        'password': password,
+      });
       await _cacheSession(response);
       return ApiResult.success(response);
     } catch (e) {
@@ -60,10 +61,21 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<LoginResponseModel>> loginWithGoogle(
-    Map<String, dynamic> body,
-  ) async {
+  Future<ApiResult<LoginResponseModel>> loginWithGoogle({
+    required String idToken,
+    String? name,
+    String? email,
+    String? googleId,
+    String? profilePicture,
+  }) async {
     try {
+      final body = {
+        'idToken': idToken,
+        'name': name,
+        'email': email,
+        'googleId': googleId,
+        'profilePicture': profilePicture,
+      }..removeWhere((key, value) => value == null);
       final response = await _apiService.google(body);
       await _cacheSession(response);
       return ApiResult.success(response);
@@ -74,34 +86,8 @@ class AuthRepo {
 
   // ─────────────────────── Registration ───────────────────────
 
-  /// Send OTP to email to start registration
-  Future<ApiResult<String>> sendSmsCode(String email) async {
-    try {
-      final response = await _apiService.registerEmail(
-        RegisterEmailResponses(email: email),
-      );
-      return ApiResult.success(response);
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
-  }
-
-  /// Verify registration OTP
-  Future<ApiResult<String>> verifyOtp({
-    required String email,
-    required String otp,
-  }) async {
-    try {
-      final response = await _apiService.registerVerifyOtp(
-        RegisterVerifyOtpResponses(email: email, otp: otp),
-      );
-      return ApiResult.success(response);
-    } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
-    }
-  }
-
-  Future<ApiResult<String>> register(RegisterResponses request) async {
+  /// Register a new user (sends OTP)
+  Future<ApiResult<String>> register(RegisterRequest request) async {
     try {
       final response = await _apiService.register(request);
       return ApiResult.success(response);
@@ -110,7 +96,37 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<String>> completeProfile(CompleteResponses request) async {
+  /// Send OTP to email for registration
+  Future<ApiResult<String>> sendRegistrationOtp(String email) async {
+    try {
+      final response = await _apiService.registerEmail(
+        RegisterEmailRequest(email: email),
+      );
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  /// Verify registration OTP
+  Future<ApiResult<String>> verifyRegistrationOtp({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      final response = await _apiService.registerVerifyOtp(
+        RegisterVerifyOtpRequest(email: email, otp: otp),
+      );
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  /// Complete registration after OTP verification
+  Future<ApiResult<String>> completeRegistration(
+    CompleteProfileRequest request,
+  ) async {
     try {
       final response = await _apiService.registerComplete(request);
       return ApiResult.success(response);
@@ -119,10 +135,26 @@ class AuthRepo {
     }
   }
 
+  /// Resend OTP
   Future<ApiResult<String>> resendOtp(String email) async {
     try {
       final response = await _apiService.resendOtp(
-        ResendOtpResponses(email: email),
+        ResendOtpRequest(email: email),
+      );
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  /// Activate account (verify OTP)
+  Future<ApiResult<String>> activateAccount({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      final response = await _apiService.activate(
+        ActivateAccountRequest(email: email, otp: otp),
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -132,10 +164,10 @@ class AuthRepo {
 
   // ────────────────────── Password Reset ──────────────────────
 
-  Future<ApiResult<String>> sendResetCode(String email) async {
+  Future<ApiResult<String>> forgotPassword(String email) async {
     try {
       final response = await _apiService.forgotPassword(
-        ForgetPasswordResponses(email: email),
+        ForgotPasswordRequest(email: email),
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -143,13 +175,13 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<String>> verifyResetCode({
+  Future<ApiResult<String>> verifyResetOtp({
     required String email,
     required String otp,
   }) async {
     try {
       final response = await _apiService.verifyResetOtp(
-        VerifyResetOtp(email: email, otp: otp),
+        VerifyResetOtpRequest(email: email, otp: otp),
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -164,11 +196,7 @@ class AuthRepo {
   }) async {
     try {
       final response = await _apiService.resetPassword(
-        ResetPasswordResponses(
-          email: email,
-          otp: otp,
-          newPassword: newPassword,
-        ),
+        ResetPasswordRequest(email: email, otp: otp, newPassword: newPassword),
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -176,10 +204,11 @@ class AuthRepo {
     }
   }
 
+  // Alternate password reset endpoints (if needed)
   Future<ApiResult<String>> passwordRequestReset(String email) async {
     try {
       final response = await _apiService.passwordRequestReset(
-        RequestResetResponses(email: email),
+        PasswordRequestResetRequest(email: email),
       );
       return ApiResult.success(response);
     } catch (e) {
@@ -187,9 +216,42 @@ class AuthRepo {
     }
   }
 
-  Future<ApiResult<LoginResponseModel>> refreshToken(String token) async {
+  Future<ApiResult<String>> passwordVerifyOtp({
+    required String email,
+    required String otp,
+  }) async {
     try {
-      final response = await _apiService.refresh({'refreshToken': token});
+      final response = await _apiService.passwordVerifyOtp(
+        VerifyOtpRequest(email: email, otp: otp),
+      );
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  Future<ApiResult<String>> passwordReset({
+    required String email,
+    required String otp,
+    required String password,
+  }) async {
+    try {
+      final response = await _apiService.passwordReset(
+        PasswordResetRequest(email: email, otp: otp, password: password),
+      );
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  // ────────────────────── Refresh & Logout ─────────────────────
+
+  Future<ApiResult<LoginResponseModel>> refreshToken() async {
+    try {
+      final response = await _apiService.refresh({
+        'refreshToken': refreshToken,
+      });
       await _cacheSession(response);
       return ApiResult.success(response);
     } catch (e) {
@@ -197,29 +259,30 @@ class AuthRepo {
     }
   }
 
-  // ────────────────────── Session / Cache ─────────────────────
-
   Future<ApiResult<String>> signOut() async {
     try {
       final token = _prefs.getString(_tokenKey) ?? '';
-      await _apiService.logout({'token': token});
+      await _apiService.logout({
+        'refreshToken': token,
+      }); // أو 'token' حسب الـ API
     } catch (_) {
-      // Always clear locally even if remote call fails
+      // Continue with local clear
     } finally {
       await _clearSession();
     }
     return ApiResult.success('signed_out');
   }
 
+  // ────────────────────── Session / Cache ─────────────────────
+
   String? get cachedToken => _prefs.getString(_tokenKey);
   String? get cachedEmail => _prefs.getString(_emailKey);
-
-  // ────────────────────────── Helpers ─────────────────────────
 
   Future<void> _cacheSession(LoginResponseModel response) async {
     if (response.token != null) {
       await _prefs.setString(_tokenKey, response.token!);
     }
+
     if (response.email != null) {
       await _prefs.setString(_emailKey, response.email!);
     }
