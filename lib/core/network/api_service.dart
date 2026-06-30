@@ -3,7 +3,9 @@ import 'package:retrofit/retrofit.dart';
 
 import 'package:home_service_app/features/auth/data/models/request/login_request_model.dart';
 import 'package:home_service_app/features/auth/data/models/response/login_response_model.dart';
-import 'package:home_service_app/features/profile/data/models/profile_model.dart';
+import 'package:home_service_app/features/profile/data/models/profile_responses.dart';
+import 'package:home_service_app/features/profile/data/models/update_responses.dart';
+import 'package:home_service_app/features/profile/data/models/change_password_responses.dart';
 
 import 'api_constants.dart';
 
@@ -24,5 +26,14 @@ abstract class ApiService {
   // ======================== Profile =======================
 
   @GET(ApiConstants.profile)
-  Future<ProfileModel> getProfile();
+  Future<ProfileResponses> getProfile();
+
+  @PUT(ApiConstants.updateProfile)
+  Future<UpdateResponses> updateProfile(@Body() Map<String, dynamic> body);
+
+  @POST(ApiConstants.changePassword)
+  Future<void> changePassword(@Body() ChangePasswordResponses body);
+
+  @DELETE(ApiConstants.profile)
+  Future<void> deleteAccount();
 }

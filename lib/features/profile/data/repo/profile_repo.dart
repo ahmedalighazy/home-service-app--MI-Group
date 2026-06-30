@@ -1,54 +1,75 @@
 import '../../../../core/network/api_error_handler.dart';
 import '../../../../core/network/api_result.dart';
 import '../../../../core/network/api_service.dart';
-import '../models/profile_model.dart';
+import '../models/change_password_responses.dart';
+import '../models/profile_responses.dart';
+import '../models/update_responses.dart';
 
 class ProfileRepo {
   final ApiService _apiService;
 
   ProfileRepo(this._apiService);
 
-  Future<ApiResult<ProfileModel>> getProfile(
-    String email,
-    String password,
-  ) async {
-    //Map<String, dynamic> map = {"email": email, "password": password};
-
+  // ======================== Get Profile =======================
+  /// جلب بيانات البروفايل الخاصة بالمستخدم الحالي
+  Future<ApiResult<ProfileResponses>> getProfile() async {
     try {
       final response = await _apiService.getProfile();
-
       return ApiResult.success(response);
     } catch (e) {
       return ApiResult.failure(ErrorHandler.handle(e));
     }
   }
 
-  //exzample
+  // ======================== Update Profile =======================
+  /// تحديث بيانات البروفايل
+  Future<ApiResult<UpdateResponses>> updateProfile({
+    String? name,
+    String? phone,
+    String? bio,
+    String? preferredLanguage,
+  }) async {
+    try {
+      final Map<String, dynamic> body = {};
+      if (name != null) body['name'] = name;
+      if (phone != null) body['phone'] = phone;
+      if (bio != null) body['bio'] = bio;
+      if (preferredLanguage != null) body['preferredLanguage'] = preferredLanguage;
 
-  // class LoginCubit extends Cubit<LoginState> {
-  //   LoginCubit(this._loginRepo) : super(LoginInitial());
-  //   TextEditingController emailController = TextEditingController();
-  //   TextEditingController passwordController = TextEditingController();
-  //   GlobalKey<FormState> login = GlobalKey<FormState>();
+      final response = await _apiService.updateProfile(body);
+      return ApiResult.success(response);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 
-  //   final LoginRepo _loginRepo;
-  //   void emitLoginStates(BuildContext context) async {
-  //     if (login.currentState!.validate()) {
-  //       emit(LoginLoading());
-  //       final response = await _loginRepo.login(
-  //         emailController.text,
-  //         passwordController.text,
-  //       );
+  // ======================== Change Password =======================
+  /// تغيير كلمة المرور
+  Future<ApiResult<void>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await _apiService.changePassword(
+        ChangePasswordResponses(
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        ),
+      );
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 
-  //       response.when(
-  //         success: (loginResponse) {
-  //           if (!isClosed) emit(LoginSuccess(successString: ''));
-  //         },
-  //         failure: (error) {
-  //           emit(LoginFailure(message: error.messege ?? ''));
-  //         },
-  //       );
-  //     }
-  //   }
-  // }
+  // ======================== Delete Account =======================
+  /// حذف الحساب
+  Future<ApiResult<void>> deleteAccount() async {
+    try {
+      await _apiService.deleteAccount();
+      return ApiResult.success(null);
+    } catch (e) {
+      return ApiResult.failure(ErrorHandler.handle(e));
+    }
+  }
 }

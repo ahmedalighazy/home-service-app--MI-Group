@@ -13,6 +13,8 @@ class ApiConstants {
 
   // Profile
   static const String profile = '/profile';
+  static const String updateProfile = '/profile';
+  static const String changePassword = '/profile/change-password';
 
   // Home
   static const String home = '/home';

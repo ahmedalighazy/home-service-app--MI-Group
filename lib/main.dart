@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +26,17 @@ void main() async {
       : const Locale('en');
 
   runApp(
-    EasyLocalization(
-      supportedLocales: const [Locale('ar'), Locale('en')],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('ar'),
-      startLocale: initialLocale,
-      child: BlocProvider<LanguageCubit>.value(
-        value: getIt<LanguageCubit>(),
-        child: const HomeServiceApp(),
+    DevicePreview(
+      enabled: true,
+      builder: (context) => EasyLocalization(
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        startLocale: initialLocale,
+        child: BlocProvider<LanguageCubit>.value(
+          value: getIt<LanguageCubit>(),
+          child: const HomeServiceApp(),
+        ),
       ),
     ),
   );
