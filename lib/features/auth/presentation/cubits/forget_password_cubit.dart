@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:flutter/widgets.dart';
+
 // ── States ────────────────────────────────
 
 sealed class ForgetPasswordState {}
@@ -25,7 +27,13 @@ final class ForgetPasswordSendCodeRequested extends ForgetPasswordState {
 // ── Cubit ─────────────────────────────────
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
-  ForgetPasswordCubit() : super(ForgetPasswordInitial());
+  final TextEditingController emailCtrl = TextEditingController();
+
+  ForgetPasswordCubit() : super(ForgetPasswordInitial()) {
+    emailCtrl.addListener(() {
+      updateEmail(emailCtrl.text);
+    });
+  }
 
   String _email = '';
 
@@ -48,5 +56,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
 
   bool _isValidEmail(String email) {
     return RegExp(r'^[\w\-.]+@([\w\-]+\.)+[\w\-]{2,4}$').hasMatch(email);
+  }
+
+  @override
+  Future<void> close() {
+    emailCtrl.dispose();
+    return super.close();
   }
 }

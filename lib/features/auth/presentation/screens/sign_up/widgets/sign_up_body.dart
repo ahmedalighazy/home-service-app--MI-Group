@@ -48,14 +48,12 @@ class SignUpBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           verticalSpace(20.h),
-
           Text(
             context.tr('welcomeSignUp'),
             textAlign: TextAlign.end,
             style: AppText.ibmHeading22(color: AppColors.dark),
           ),
           verticalSpace(32.h),
-
           AuthTextField(
             label: context.tr('emailLabel'),
             hint: context.tr('emailPlaceholder'),
@@ -67,7 +65,6 @@ class SignUpBody extends StatelessWidget {
             onChanged: onEmailChanged,
           ),
           verticalSpace(24.h),
-
           AuthPrimaryButton(
             label: context.tr('sendCode'),
             isLoading: isLoading,
@@ -83,7 +80,6 @@ class SignUpBody extends StatelessWidget {
           verticalSpace(24.h),
           const AuthOrDivider(),
           verticalSpace(24.h),
-
           AuthSocialButton(
             iconPath: AppAssets.iconGoogle,
             text: context.tr('signUpWithGoogle'),
