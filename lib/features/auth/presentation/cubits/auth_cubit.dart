@@ -1,249 +1,482 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/models/complete_responses.dart';
+import '../../data/models/register_responses.dart';
+import '../../data/models/request/login_request_model.dart';
 import '../../data/repos/auth_repo.dart';
-import '../../logic/auth_controllers.dart';
-import '../../logic/auth_ui_state.dart';
-import '../../logic/sign_in_logic.dart';
-import '../../logic/sign_up_logic.dart';
-import '../../logic/reset_password_logic.dart';
-import '../../logic/otp_logic.dart';
-import '../../logic/session_logic.dart';
+
 import '../../logic/otp_timer.dart';
 import '../../logic/validators/sign_up_validator.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_field_state.dart';
 
 part 'auth_state.dart';
 
+//////////////////
+
 class AuthCubit extends Cubit<AuthState> {
-  final AuthControllers controllers = AuthControllers();
-  final AuthUiState uiState = AuthUiState();
+  final AuthRepo _authRepo;
 
-  final SignInLogic signInLogic;
-  final SignUpLogic signUpLogic;
-  final ResetPasswordLogic resetPasswordLogic;
-  final OtpLogic otpLogic;
-  final SessionLogic sessionLogic;
+  // ============================================================
+  //  Controllers (formerly AuthControllers)
+  // ============================================================
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
+  final signUpEmailCtrl = TextEditingController();
+  final nameCtrl = TextEditingController();
+  final phoneCtrl = TextEditingController();
+  final newPasswordCtrl = TextEditingController();
+  final confirmPasswordCtrl = TextEditingController();
+  final otpCodeCtrl = TextEditingController();
+  final resetCodeCtrl = TextEditingController();
 
-  AuthCubit(AuthRepo authRepo)
-      : signInLogic = SignInLogic(authRepo),
-        signUpLogic = SignUpLogic(authRepo),
-        resetPasswordLogic = ResetPasswordLogic(authRepo),
-        otpLogic = OtpLogic(authRepo),
-        sessionLogic = SessionLogic(authRepo),
-        super(AuthInitial()) {
-    controllers.newPasswordCtrl.addListener(_rebuild);
-    controllers.confirmPasswordCtrl.addListener(_rebuild);
-    controllers.otpCodeCtrl.addListener(_rebuild);
-    controllers.resetCodeCtrl.addListener(_rebuild);
+  final otpFocusNode = FocusNode();
+  final resetFocusNode = FocusNode();
+
+  final emailVerificationControllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  final emailVerificationFocusNodes = List.generate(6, (_) => FocusNode());
+
+  final signInFormKey = GlobalKey<FormState>();
+  final signUpFormKey = GlobalKey<FormState>();
+  final completeProfileFormKey = GlobalKey<FormState>();
+  final resetPasswordFormKey = GlobalKey<FormState>();
+
+  // ============================================================
+  //  UI State (formerly AuthUiState)
+  // ============================================================
+  bool rememberMe = false;
+  bool hasSignInError = false;
+  bool signUpHasError = false;
+  String? signUpErrorMessage;
+
+  OtpFieldState otpFieldState = OtpFieldState.idle;
+  int otpSecondsLeft = 59;
+  bool otpCanResend = false;
+  OtpTimer? otpTimer;
+  bool otpInitialized = false;
+
+  OtpFieldState resetFieldState = OtpFieldState.idle;
+
+  bool obscureCompleteProfilePass = true;
+  bool obscureCompleteProfileConfirm = true;
+
+  bool obscureNewPassword = true;
+  bool obscureConfirmNewPassword = true;
+
+  OtpTimer? emailVerificationTimer;
+  int emailVerificationSecondsLeft = 59;
+  bool emailVerificationTimerActive = true;
+  bool emailVerificationButtonEnabled = false;
+
+  AuthCubit(this._authRepo) : super(AuthInitial()) {
+    // Listen to text changes for password validation UI
+    newPasswordCtrl.addListener(_rebuild);
+    confirmPasswordCtrl.addListener(_rebuild);
+    otpCodeCtrl.addListener(_rebuild);
+    resetCodeCtrl.addListener(_rebuild);
   }
 
   void _rebuild() {
     if (!isClosed) emit(AuthInitial());
   }
 
-  void emitState(AuthState state) {
-    if (!isClosed) emit(state);
-  }
+  // ============================================================
+  //  UI Helpers (formerly extension getters & actions)
+  // ============================================================
+  String get emailVerificationOtpCode =>
+      emailVerificationControllers.map((c) => c.text).join();
 
-  void resetState() => emit(AuthInitial());
-
-  @override
-  Future<void> close() {
-    controllers.dispose();
-    uiState.dispose();
-    return super.close();
-  }
-}
-
-extension AuthCubitGetters on AuthCubit {
-  TextEditingController get emailCtrl => controllers.emailCtrl;
-  TextEditingController get passwordCtrl => controllers.passwordCtrl;
-  TextEditingController get signUpEmailCtrl => controllers.signUpEmailCtrl;
-  TextEditingController get nameCtrl => controllers.nameCtrl;
-  TextEditingController get phoneCtrl => controllers.phoneCtrl;
-  TextEditingController get newPasswordCtrl => controllers.newPasswordCtrl;
-  TextEditingController get confirmPasswordCtrl => controllers.confirmPasswordCtrl;
-  TextEditingController get otpCodeCtrl => controllers.otpCodeCtrl;
-  TextEditingController get resetCodeCtrl => controllers.resetCodeCtrl;
-
-  GlobalKey<FormState> get signInFormKey => controllers.signInFormKey;
-  GlobalKey<FormState> get signUpFormKey => controllers.signUpFormKey;
-  GlobalKey<FormState> get completeProfileFormKey => controllers.completeProfileFormKey;
-  GlobalKey<FormState> get resetPasswordFormKey => controllers.resetPasswordFormKey;
-
-  bool get rememberMe => uiState.rememberMe;
-  bool get hasSignInError => uiState.hasSignInError;
-  bool get signUpHasError => uiState.signUpHasError;
-  String? get signUpErrorMessage => uiState.signUpErrorMessage;
-}
-
-extension AuthCubitUiActions on AuthCubit {
-  void toggleRememberMe(bool value) {
-    uiState.rememberMe = value;
-    emitState(AuthInitial());
-  }
-
-  void setSignInError(bool value) {
-    uiState.hasSignInError = value;
-    emitState(AuthInitial());
-  }
-
-  void setSignUpError(bool hasError, [String? message]) {
-    uiState.signUpHasError = hasError;
-    uiState.signUpErrorMessage = message;
-    emitState(AuthInitial());
-  }
-
-  void sendSignUpSmsCode() {
-    final email = controllers.signUpEmailCtrl.text.trim();
-    final error = SignUpValidator.validateEmail(email);
-    if (error != null) {
-      setSignUpError(true, error);
-      return;
-    }
-    setSignUpError(false, null);
-    sendSmsCode(email);
-  }
-
-  void toggleCompleteProfilePass() {
-    uiState.obscureCompleteProfilePass = !uiState.obscureCompleteProfilePass;
-    emitState(AuthInitial());
-  }
-
-  void toggleCompleteProfileConfirm() {
-    uiState.obscureCompleteProfileConfirm = !uiState.obscureCompleteProfileConfirm;
-    emitState(AuthInitial());
-  }
-
-  void toggleNewPasswordObscure() {
-    uiState.obscureNewPassword = !uiState.obscureNewPassword;
-    emitState(AuthInitial());
-  }
-
-  void toggleConfirmNewPasswordObscure() {
-    uiState.obscureConfirmNewPassword = !uiState.obscureConfirmNewPassword;
-    emitState(AuthInitial());
-  }
-
-  bool isNewPasswordEmpty() {
-    return controllers.newPasswordCtrl.text.isEmpty || controllers.confirmPasswordCtrl.text.isEmpty;
-  }
+  bool isNewPasswordEmpty() =>
+      newPasswordCtrl.text.isEmpty || confirmPasswordCtrl.text.isEmpty;
 
   bool isNewPasswordError() {
-    final pass = controllers.newPasswordCtrl.text;
-    final confirm = controllers.confirmPasswordCtrl.text;
+    final pass = newPasswordCtrl.text;
+    final confirm = confirmPasswordCtrl.text;
     return pass.isNotEmpty && confirm.isNotEmpty && pass != confirm;
   }
 
   bool isNewPasswordSuccess() {
-    final pass = controllers.newPasswordCtrl.text;
-    final confirm = controllers.confirmPasswordCtrl.text;
+    final pass = newPasswordCtrl.text;
+    final confirm = confirmPasswordCtrl.text;
     return pass.isNotEmpty && confirm.isNotEmpty && pass == confirm;
   }
 
+  bool _isValidEmail(String email) =>
+      RegExp(r'^[\w\-.]+@([\w\-]+\.)+[\w\-]{2,4}$').hasMatch(email);
+
+  // ============================================================
+  //  UI Actions (toggle states)
+  // ============================================================
+  void toggleRememberMe(bool value) {
+    rememberMe = value;
+    emit(AuthInitial());
+  }
+
+  void setSignInError(bool value) {
+    hasSignInError = value;
+    emit(AuthInitial());
+  }
+
+  void setSignUpError(bool hasError, [String? message]) {
+    signUpHasError = hasError;
+    signUpErrorMessage = message;
+    emit(AuthInitial());
+  }
+
+  void toggleCompleteProfilePass() {
+    obscureCompleteProfilePass = !obscureCompleteProfilePass;
+    emit(AuthInitial());
+  }
+
+  void toggleCompleteProfileConfirm() {
+    obscureCompleteProfileConfirm = !obscureCompleteProfileConfirm;
+    emit(AuthInitial());
+  }
+
+  void toggleNewPasswordObscure() {
+    obscureNewPassword = !obscureNewPassword;
+    emit(AuthInitial());
+  }
+
+  void toggleConfirmNewPasswordObscure() {
+    obscureConfirmNewPassword = !obscureConfirmNewPassword;
+    emit(AuthInitial());
+  }
+
+  // ============================================================
+  //  OTP Timer
+  // ============================================================
   void initOtp(String email) {
-    uiState.otpInitialized = true;
-    uiState.otpFieldState = OtpFieldState.idle;
-    uiState.otpCanResend = false;
-    uiState.otpSecondsLeft = 59;
-    controllers.otpCodeCtrl.clear();
-    
-    uiState.otpTimer?.stop();
-    uiState.otpTimer = OtpTimer(
+    otpInitialized = true;
+    otpFieldState = OtpFieldState.idle;
+    otpCanResend = false;
+    otpSecondsLeft = 59;
+    otpCodeCtrl.clear();
+
+    otpTimer?.stop();
+    otpTimer = OtpTimer(
       totalSeconds: 59,
       onTick: (secondsLeft, canResend) {
-        uiState.otpSecondsLeft = secondsLeft;
-        uiState.otpCanResend = canResend;
-        emitState(AuthInitial());
+        otpSecondsLeft = secondsLeft;
+        otpCanResend = canResend;
+        emit(AuthInitial());
       },
     )..start();
   }
 
   void setOtpFieldState(OtpFieldState state) {
-    uiState.otpFieldState = state;
-    emitState(AuthInitial());
+    otpFieldState = state;
+    emit(AuthInitial());
   }
 
   void setResetFieldState(OtpFieldState state) {
-    uiState.resetFieldState = state;
-    emitState(AuthInitial());
+    resetFieldState = state;
+    emit(AuthInitial());
   }
 
   void initEmailVerification() {
-    uiState.emailVerificationButtonEnabled = false;
-    uiState.emailVerificationTimerActive = true;
-    uiState.emailVerificationSecondsLeft = 59;
-    
-    for (var c in controllers.emailVerificationControllers) {
+    emailVerificationButtonEnabled = false;
+    emailVerificationTimerActive = true;
+    emailVerificationSecondsLeft = 59;
+
+    for (var c in emailVerificationControllers) {
       c.clear();
     }
 
-    uiState.emailVerificationTimer?.stop();
-    uiState.emailVerificationTimer = OtpTimer(
+    emailVerificationTimer?.stop();
+    emailVerificationTimer = OtpTimer(
       totalSeconds: 59,
       onTick: (secondsLeft, canResend) {
-        uiState.emailVerificationSecondsLeft = secondsLeft;
-        uiState.emailVerificationTimerActive = !canResend;
-        emitState(AuthInitial());
+        emailVerificationSecondsLeft = secondsLeft;
+        emailVerificationTimerActive = !canResend;
+        emit(AuthInitial());
       },
     )..start();
   }
 
   void checkEmailVerificationCompletion() {
-    final completed = controllers.emailVerificationControllers.every((c) => c.text.isNotEmpty);
-    if (completed != uiState.emailVerificationButtonEnabled) {
-      uiState.emailVerificationButtonEnabled = completed;
-      emitState(AuthInitial());
+    final completed = emailVerificationControllers.every(
+      (c) => c.text.isNotEmpty,
+    );
+    if (completed != emailVerificationButtonEnabled) {
+      emailVerificationButtonEnabled = completed;
+      emit(AuthInitial());
     }
   }
 
-  String get emailVerificationOtpCode => controllers.emailVerificationControllers.map((c) => c.text).join();
-}
+  // ============================================================
+  //  API: Login
+  // ============================================================
+  Future<void> login(
+    String identifier,
+    String password,
+    BuildContext context,
+  ) async {
+    if (identifier.trim().isEmpty || password.isEmpty) {
+      setSignInError(true);
+      emit(LoginFailure(message: context.tr('errorFieldRequired')));
+      return;
+    }
+    setSignInError(false);
+    emit(LoginLoading());
+    final result = await _authRepo.login(
+      LoginRequestModel(identifier: identifier, password: password),
+    );
+    if (isClosed) return;
+    result.when(
+      success: (res) => emit(
+        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
+      ),
+      failure: (e) =>
+          emit(LoginFailure(message: e.message ?? 'فشل تسجيل الدخول')),
+    );
+  }
 
-extension AuthCubitRepoActions on AuthCubit {
-  Future<void> login({required String identifier, required String password}) =>
-      signInLogic.login(this, identifier: identifier, password: password);
+  Future<void> signInWithGoogle() async {
+    emit(LoginLoading());
+    final result = await _authRepo.loginWithGoogle({'provider': 'google'});
+    if (isClosed) return;
+    result.when(
+      success: (res) => emit(
+        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
+      ),
+      failure: (e) => emit(
+        LoginFailure(message: e.message ?? 'فشل تسجيل الدخول بـ Google'),
+      ),
+    );
+  }
 
-  Future<void> signInWithGoogle() => signInLogic.signInWithGoogle(this);
-  Future<void> signInWithApple() => signInLogic.signInWithApple(this);
-  Future<void> loginAsGuest() async => signInLogic.loginAsGuest(this);
+  Future<void> signInWithApple() async {
+    emit(LoginLoading());
+    final result = await _authRepo.loginWithGoogle({'provider': 'apple'});
+    if (isClosed) return;
+    result.when(
+      success: (res) => emit(
+        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
+      ),
+      failure: (e) =>
+          emit(LoginFailure(message: e.message ?? 'فشل تسجيل الدخول بـ Apple')),
+    );
+  }
 
-  Future<void> sendSmsCode(String email) => otpLogic.sendSmsCode(this, email);
-  Future<void> verifyOtp({required String phoneNumber, required String otp}) =>
-      otpLogic.verifyOtp(this, phoneNumber: phoneNumber, otp: otp);
+  void loginAsGuest() => emit(GuestLoginSuccess());
 
-  Future<void> loginWithPhone(String phone) => otpLogic.loginWithPhone(this, phone);
-  Future<void> resendOtp(String email) => otpLogic.resendOtp(this, email);
+  // ============================================================
+  //  API: OTP
+  // ============================================================
+  Future<void> sendSmsCode(String email) async {
+    emit(OtpSendLoading());
+    final result = await _authRepo.sendSmsCode(email);
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(OtpSendSuccess(email: email, message: msg)),
+      failure: (e) =>
+          emit(OtpSendFailure(message: e.message ?? 'فشل إرسال الكود')),
+    );
+  }
 
-  Future<void> register({
-    required String name,
-    required String email,
-    required String phone,
-    required String password,
-  }) =>
-      signUpLogic.register(this, name: name, email: email, phone: phone, password: password);
+  Future<void> verifyOtp(String phoneNumber, String otp) async {
+    emit(OtpVerifyLoading());
+    final result = await _authRepo.verifyOtp(email: phoneNumber, otp: otp);
+    if (isClosed) return;
+    result.when(
+      success: (msg) =>
+          emit(OtpVerifySuccess(email: phoneNumber, message: msg)),
+      failure: (e) =>
+          emit(OtpVerifyFailure(message: e.message ?? 'كود غير صحيح')),
+    );
+  }
 
-  Future<void> completeProfile({
-    required String email,
-    required String name,
-    required String phone,
-    required String password,
-  }) =>
-      signUpLogic.completeProfile(this, email: email, name: name, phone: phone, password: password);
+  Future<void> loginWithPhone(String phone) async {
+    emit(OtpSendLoading());
+    final result = await _authRepo.loginWithPhone({'phone': phone});
+    if (isClosed) return;
+    result.when(
+      success: (_) => emit(OtpSendSuccess(email: phone)),
+      failure: (e) =>
+          emit(OtpSendFailure(message: e.message ?? 'فشل إرسال الكود')),
+    );
+  }
 
-  Future<void> signUpWithGoogle() => signUpLogic.signUpWithGoogle(this);
-  Future<void> signUpWithApple() => signUpLogic.signUpWithApple(this);
+  Future<void> resendOtp(String email) async {
+    emit(OtpSendLoading());
+    final result = await _authRepo.resendOtp(email);
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(OtpSendSuccess(email: email, message: msg)),
+      failure: (e) =>
+          emit(OtpSendFailure(message: e.message ?? 'فشل إعادة الإرسال')),
+    );
+  }
 
-  Future<void> sendResetCode(String email) => resetPasswordLogic.sendResetCode(this, email);
-  Future<void> verifyResetCode(String email, String code) =>
-      resetPasswordLogic.verifyResetCode(this, email, code);
+  // ============================================================
+  //  API: Register
+  // ============================================================
+  Future<void> register(
+    String name,
+    String email,
+    String phone,
+    String password,
+  ) async {
+    emit(RegisterLoading());
+    final result = await _authRepo.register(
+      RegisterResponses(
+        name: name,
+        email: email,
+        password: password,
+        phone: phone,
+        role: 'user',
+      ),
+    );
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(RegisterSuccess(message: msg)),
+      failure: (e) =>
+          emit(RegisterFailure(message: e.message ?? 'فشل إنشاء الحساب')),
+    );
+  }
 
-  Future<void> resetPassword({
-    required String email,
-    required String code,
-    required String newPassword,
-  }) =>
-      resetPasswordLogic.resetPassword(this, email: email, code: code, newPassword: newPassword);
+  Future<void> completeProfile(
+    String email,
+    String name,
+    String phone,
+    String password,
+  ) async {
+    emit(CompleteProfileLoading());
+    final result = await _authRepo.completeProfile(
+      CompleteResponses(
+        email: email,
+        name: name,
+        phone: phone,
+        password: password,
+      ),
+    );
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(CompleteProfileSuccess(message: msg)),
+      failure: (e) => emit(
+        CompleteProfileFailure(message: e.message ?? 'فشل إتمام البروفايل'),
+      ),
+    );
+  }
 
-  Future<void> signOut() => sessionLogic.signOut(this);
+  Future<void> signUpWithGoogle() async {
+    emit(RegisterLoading());
+    final result = await _authRepo.loginWithGoogle({'provider': 'google'});
+    if (isClosed) return;
+    result.when(
+      success: (res) => emit(
+        RegisterSuccess(
+          message: res.name != null ? 'مرحباً ${res.name}' : null,
+        ),
+      ),
+      failure: (e) =>
+          emit(RegisterFailure(message: e.message ?? 'فشل التسجيل بـ Google')),
+    );
+  }
+
+  Future<void> signUpWithApple() async {
+    emit(RegisterLoading());
+    final result = await _authRepo.loginWithGoogle({'provider': 'apple'});
+    if (isClosed) return;
+    result.when(
+      success: (res) => emit(
+        RegisterSuccess(
+          message: res.name != null ? 'مرحباً ${res.name}' : null,
+        ),
+      ),
+      failure: (e) =>
+          emit(RegisterFailure(message: e.message ?? 'فشل التسجيل بـ Apple')),
+    );
+  }
+
+  // ============================================================
+  //  API: Reset Password (formerly ForgetPasswordCubit)
+  // ============================================================
+  Future<void> sendResetCode(String email) async {
+    if (!_isValidEmail(email)) {
+      emit(ResetCodeSendFailure(message: 'البريد الإلكتروني غير صحيح'));
+      return;
+    }
+    emit(ResetCodeSendLoading());
+    final result = await _authRepo.sendResetCode(email);
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(ResetCodeSendSuccess(email: email, message: msg)),
+      failure: (e) => emit(
+        ResetCodeSendFailure(message: e.message ?? 'فشل إرسال كود الاستعادة'),
+      ),
+    );
+  }
+
+  Future<void> verifyResetCode(String email, String code) async {
+    emit(ResetCodeVerifyLoading());
+    final result = await _authRepo.verifyResetCode(email: email, otp: code);
+    if (isClosed) return;
+    result.when(
+      success: (_) => emit(ResetCodeVerifySuccess(email: email, code: code)),
+      failure: (e) =>
+          emit(ResetCodeVerifyFailure(message: e.message ?? 'كود غير صحيح')),
+    );
+  }
+
+  Future<void> resetPassword(
+    String email,
+    String code,
+    String newPassword,
+  ) async {
+    emit(PasswordResetLoading());
+    final result = await _authRepo.resetPassword(
+      email: email,
+      otp: code,
+      newPassword: newPassword,
+    );
+    if (isClosed) return;
+    result.when(
+      success: (msg) => emit(PasswordResetSuccess(message: msg)),
+      failure: (e) => emit(
+        PasswordResetFailure(message: e.message ?? 'فشل تغيير كلمة المرور'),
+      ),
+    );
+  }
+
+  // ============================================================
+  //  API: Sign Out
+  // ============================================================
+  Future<void> signOut() async {
+    emit(SignOutLoading());
+    await _authRepo.signOut();
+    if (isClosed) return;
+    emit(SignOutSuccess());
+  }
+
+  // ============================================================
+  //  Dispose
+  // ============================================================
+  @override
+  Future<void> close() {
+    emailCtrl.dispose();
+    passwordCtrl.dispose();
+    signUpEmailCtrl.dispose();
+    nameCtrl.dispose();
+    phoneCtrl.dispose();
+    newPasswordCtrl.dispose();
+    confirmPasswordCtrl.dispose();
+    otpCodeCtrl.dispose();
+    resetCodeCtrl.dispose();
+    otpFocusNode.dispose();
+    resetFocusNode.dispose();
+    for (final ctrl in emailVerificationControllers) {
+      ctrl.dispose();
+    }
+    for (final node in emailVerificationFocusNodes) {
+      node.dispose();
+    }
+    otpTimer?.stop();
+    emailVerificationTimer?.stop();
+    return super.close();
+  }
 }

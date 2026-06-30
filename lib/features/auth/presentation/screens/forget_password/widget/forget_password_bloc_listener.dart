@@ -14,8 +14,8 @@ class ForgetPasswordBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
-          listenWhen: (previous, current) => current is ForgetPasswordSendCodeRequested,
+        BlocListener<AuthCubit, AuthState>(
+          listenWhen: (previous, current) => current is For,
           listener: (context, state) {
             if (state is ForgetPasswordSendCodeRequested) {
               context.read<AuthCubit>().sendResetCode(state.email);

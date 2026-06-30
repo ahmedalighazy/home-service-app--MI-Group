@@ -13,15 +13,6 @@ class ForgetScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final forgetCubit = context.watch<ForgetPasswordCubit>();
-    final authCubit = context.watch<AuthCubit>();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (authCubit.state is! AuthInitial) {
-        authCubit.resetState();
-      }
-    });
-
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(

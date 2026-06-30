@@ -47,7 +47,6 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i565.AddressCubit>(() => _i565.AddressCubit());
-    gh.factory<_i83.ForgetPasswordCubit>(() => _i83.ForgetPasswordCubit());
     gh.lazySingleton<_i745.NotificationCubit>(() => _i745.NotificationCubit());
     gh.lazySingleton<_i516.HomeLocalDataSource>(
       () => _i678.HomeLocalDataSourceImpl(),

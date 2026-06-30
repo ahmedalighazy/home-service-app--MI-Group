@@ -9,7 +9,7 @@ import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.da
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_confirm_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_input_row.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_field_state.dart';
-import 'package:home_service_app/features/auth/presentation/screens/verify_reset_code/widget/verify_reset_code_widgets.dart';
+import 'package:home_service_app/features/auth/presentation/screens/verify_reset_code/widgets/verify_reset_code_widgets.dart';
 import 'verify_reset_code_hidden_input.dart';
 
 class VerifyResetCodeScaffold extends StatelessWidget {

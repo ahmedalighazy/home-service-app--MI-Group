@@ -40,13 +40,7 @@ Future<void> setupGetIt() async {
   if (getIt.isRegistered<AuthCubit>()) {
     getIt.unregister<AuthCubit>();
   }
-  getIt.registerLazySingleton<AuthCubit>(
-    () => AuthCubit(getIt<AuthRepo>()),
-  );
-
-  if (!getIt.isRegistered<ForgetPasswordCubit>()) {
-    getIt.registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit());
-  }
+  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt<AuthRepo>()));
 
   // ── Profile ─────────────────────────────────────────────────
 

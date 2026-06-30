@@ -1,96 +1,149 @@
 part of 'auth_cubit.dart';
 
-// ─────────────────────────────────────────
-//  Auth States
-// ─────────────────────────────────────────
-
+// ============================================================
+//  Base State
+// ============================================================
 sealed class AuthState {}
-
-// ── Base ──────────────────────────────────
 
 final class AuthInitial extends AuthState {}
 
-/// اسمها AuthLoadingState عشان الـ widgets بتعمل
-/// reference عليها بنفس الاسم ده
-final class AuthLoadingState extends AuthState {}
+// ============================================================
+//  Login
+// ============================================================
+final class LoginLoading extends AuthState {}
 
-// ── Sign-In ───────────────────────────────
-
-/// نجاح الـ login (email/phone/Google/Apple)
-final class LoginSuccessState extends AuthState {
+final class LoginSuccess extends AuthState {
   final String? message;
-  LoginSuccessState({this.message});
+  LoginSuccess({this.message});
 }
 
-// ── Registration / OTP ────────────────────
+final class LoginFailure extends AuthState {
+  final String message;
+  LoginFailure({required this.message});
+}
 
-/// تم إرسال الـ OTP بنجاح
-final class OtpSentState extends AuthState {
+// ============================================================
+//  Register
+// ============================================================
+final class RegisterLoading extends AuthState {}
+
+final class RegisterSuccess extends AuthState {
+  final String? message;
+  RegisterSuccess({this.message});
+}
+
+final class RegisterFailure extends AuthState {
+  final String message;
+  RegisterFailure({required this.message});
+}
+
+// ============================================================
+//  Complete Profile
+// ============================================================
+final class CompleteProfileLoading extends AuthState {}
+
+final class CompleteProfileSuccess extends AuthState {
+  final String? message;
+  CompleteProfileSuccess({this.message});
+}
+
+final class CompleteProfileFailure extends AuthState {
+  final String message;
+  CompleteProfileFailure({required this.message});
+}
+
+// ============================================================
+//  OTP Send
+// ============================================================
+final class OtpSendLoading extends AuthState {}
+
+final class OtpSendSuccess extends AuthState {
   final String email;
   final String? message;
-  OtpSentState({required this.email, this.message});
+  OtpSendSuccess({required this.email, this.message});
 }
 
-/// تم التحقق من الـ OTP بنجاح
-final class OtpVerifiedState extends AuthState {
+final class OtpSendFailure extends AuthState {
+  final String message;
+  OtpSendFailure({required this.message});
+}
+
+// ============================================================
+//  OTP Verify
+// ============================================================
+final class OtpVerifyLoading extends AuthState {}
+
+final class OtpVerifySuccess extends AuthState {
   final String email;
   final String? message;
-  OtpVerifiedState({required this.email, this.message});
+  OtpVerifySuccess({required this.email, this.message});
 }
 
-/// تم تسجيل الحساب / إتمام البروفايل بنجاح
-final class RegisterSuccessState extends AuthState {
-  final String? message;
-  RegisterSuccessState({this.message});
+final class OtpVerifyFailure extends AuthState {
+  final String message;
+  OtpVerifyFailure({required this.message});
 }
 
-/// دخول كـ Guest
-final class GuestLoginSuccessState extends AuthState {}
+// ============================================================
+//  Reset Code Send
+// ============================================================
+final class ResetCodeSendLoading extends AuthState {}
 
-// ── Password Reset ─────────────────────────
-
-/// تم إرسال كود الاستعادة على الإيميل
-final class ResetCodeSentState extends AuthState {
+final class ResetCodeSendSuccess extends AuthState {
   final String email;
   final String? message;
-  ResetCodeSentState({required this.email, this.message});
+  ResetCodeSendSuccess({required this.email, this.message});
 }
 
-/// تم التحقق من الكود (نروح لشاشة الباسورد الجديد)
-final class ResetCodeVerifiedState extends AuthState {
+final class ResetCodeSendFailure extends AuthState {
+  final String message;
+  ResetCodeSendFailure({required this.message});
+}
+
+// ============================================================
+//  Reset Code Verify
+// ============================================================
+final class ResetCodeVerifyLoading extends AuthState {}
+
+final class ResetCodeVerifySuccess extends AuthState {
   final String email;
   final String code;
-  ResetCodeVerifiedState({required this.email, required this.code});
+  ResetCodeVerifySuccess({required this.email, required this.code});
 }
 
-/// تم تغيير الباسورد بنجاح
-final class PasswordResetSuccessState extends AuthState {
+final class ResetCodeVerifyFailure extends AuthState {
+  final String message;
+  ResetCodeVerifyFailure({required this.message});
+}
+
+// ============================================================
+//  Password Reset
+// ============================================================
+final class PasswordResetLoading extends AuthState {}
+
+final class PasswordResetSuccess extends AuthState {
   final String? message;
-  PasswordResetSuccessState({this.message});
+  PasswordResetSuccess({this.message});
 }
 
-// ── Session ───────────────────────────────
-
-final class SignOutSuccessState extends AuthState {}
-
-// ── Errors ────────────────────────────────
-
-final class AuthErrorState extends AuthState {
+final class PasswordResetFailure extends AuthState {
   final String message;
-  AuthErrorState({required this.message});
+  PasswordResetFailure({required this.message});
 }
 
-final class OtpErrorState extends AuthState {
+// ============================================================
+//  Sign Out
+// ============================================================
+final class SignOutLoading extends AuthState {}
+
+final class SignOutSuccess extends AuthState {}
+
+final class SignOutFailure extends AuthState {
   final String message;
-  OtpErrorState({required this.message});
+  SignOutFailure({required this.message});
 }
 
-final class ResetCodeError extends AuthState {
-  final String message;
-  ResetCodeError({required this.message});
-}
-
-final class PasswordResetErrorState extends AuthState {
-  final String message;
-  PasswordResetErrorState({required this.message});
-}
+// ============================================================
+//  Guest Login
+// ============================================================
+final class GuestLoginSuccess extends AuthState {}

@@ -41,14 +41,8 @@ abstract class ApiService {
   @POST(ApiConstants.resendOtp)
   Future<String> resendOtp(@Body() ResendOtpResponses request);
 
-  @POST(ApiConstants.register)
-  Future<String> register(@Body() RegisterResponses request);
-
   @POST(ApiConstants.registerVerifyOtp)
   Future<String> registerVerifyOtp(@Body() RegisterVerifyOtpResponses request);
-
-  @POST(ApiConstants.registerEmail)
-  Future<String> registerEmail(@Body() RegisterEmailResponses request);
 
   @POST(ApiConstants.registerComplete)
   Future<String> registerComplete(@Body() CompleteResponses request);
@@ -68,24 +62,14 @@ abstract class ApiService {
   @POST(ApiConstants.logout)
   Future<String> logout(@Body() Map<String, dynamic> body);
 
-  @POST(ApiConstants.loginPhone)
-  Future<LoginResponseModel> loginPhone(@Body() Map<String, dynamic> body);
-
-  @POST(ApiConstants.loginEmail)
-  Future<LoginResponseModel> loginEmail(@Body() Map<String, dynamic> body);
-
   @POST(ApiConstants.google)
   Future<LoginResponseModel> google(@Body() Map<String, dynamic> body);
 
   @POST(ApiConstants.forgotPassword)
   Future<String> forgotPassword(@Body() ForgetPasswordResponses request);
 
-  @POST(ApiConstants.activate)
-  Future<String> activate(@Body() VerifyOtpResponses request);
-
   // ======================== Profile =======================
 
   @GET(ApiConstants.profile)
   Future<ProfileModel> getProfile();
 }
-

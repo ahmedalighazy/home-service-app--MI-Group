@@ -5,7 +5,7 @@ import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:home_service_app/features/auth/presentation/screens/set_new_password/widget/set_new_widgets.dart';
+import 'package:home_service_app/features/auth/presentation/screens/set_new_password/widgets/set_new_widgets.dart';
 
 class SetNewPasswordScaffold extends StatelessWidget {
   final String email;

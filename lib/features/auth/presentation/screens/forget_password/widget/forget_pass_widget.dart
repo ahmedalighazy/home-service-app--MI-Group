@@ -57,17 +57,15 @@ class ForgetEmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
-      buildWhen: (previous, current) => true,
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        final cubit = context.read<ForgetPasswordCubit>();
         return AuthTextField(
           label: context.tr('emailLabel'),
           hint: context.tr('emailLabel'),
           controller: controller,
           prefixIcon: Icons.email_outlined,
           keyboardType: TextInputType.emailAddress,
-          hasError: cubit.hasError,
+          hasError: ,
           errorMessage: context.tr('invalidEmail'),
           onChanged: onChanged,
         );
@@ -83,13 +81,13 @@ class ForgetSubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, forgetState) {
-        final cubit = context.read<ForgetPasswordCubit>();
+        final cubit = context.read<AuthCubit>();
         return BlocBuilder<AuthCubit, AuthState>(
           bloc: getIt<AuthCubit>(),
           builder: (context, authState) {
-            final isLoading = authState is AuthLoadingState;
+            final isLoading = authState is ;
             return AuthPrimaryButton(
               label: context.tr('sendCode'),
               isLoading: isLoading,

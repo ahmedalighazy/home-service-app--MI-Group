@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import '../../../../../core/di/injection.dart';
 import '../../cubits/forget_password_cubit.dart';
 import 'widget/forget_screen_content.dart';
@@ -10,7 +11,7 @@ class ForgetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<ForgetPasswordCubit>(),
+      create: (_) => getIt<AuthCubit>(),
       child: const ForgetScreenContent(),
     );
   }
