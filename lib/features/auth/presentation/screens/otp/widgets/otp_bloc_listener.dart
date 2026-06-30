@@ -19,9 +19,17 @@ class OtpBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
+    if (!cubit.uiState.otpInitialized) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        cubit.initOtp(email);
+        cubit.controllers.otpFocusNode.requestFocus();
+      });
+    }
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        final cubit = context.read<AuthCubit>();
         if (state is OtpVerifiedState) {
           cubit.setOtpFieldState(OtpFieldState.success);
           Future.delayed(const Duration(milliseconds: 500), () {

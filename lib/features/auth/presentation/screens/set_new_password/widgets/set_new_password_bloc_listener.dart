@@ -15,6 +15,14 @@ class SetNewPasswordBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (cubit.state is! AuthInitial && cubit.state is! AuthLoadingState && cubit.state is! PasswordResetSuccessState) {
+        cubit.resetState();
+      }
+    });
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is PasswordResetSuccessState) {

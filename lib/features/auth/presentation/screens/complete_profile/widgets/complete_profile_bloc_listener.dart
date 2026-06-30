@@ -7,15 +7,25 @@ import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 
 class CompleteProfileBlocListener extends StatelessWidget {
+  final String? email;
   final Widget child;
 
   const CompleteProfileBlocListener({
     super.key,
     required this.child,
+    this.email,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (email != null && email!.isNotEmpty && cubit.emailCtrl.text.isEmpty) {
+        cubit.emailCtrl.text = email!;
+      }
+    });
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {

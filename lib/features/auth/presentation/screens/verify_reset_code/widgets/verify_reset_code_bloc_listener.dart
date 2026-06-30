@@ -19,9 +19,16 @@ class VerifyResetCodeBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!cubit.controllers.resetFocusNode.hasFocus) {
+        cubit.controllers.resetFocusNode.requestFocus();
+      }
+    });
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        final cubit = context.read<AuthCubit>();
         if (state is ResetCodeVerifiedState) {
           cubit.setResetFieldState(OtpFieldState.success);
           Future.delayed(const Duration(milliseconds: 500), () {

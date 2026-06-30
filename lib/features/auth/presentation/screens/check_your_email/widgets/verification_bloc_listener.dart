@@ -7,19 +7,34 @@ import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.da
 
 class VerificationBlocListener extends StatelessWidget {
   final String email;
+  final String code;
   final Widget child;
 
   const VerificationBlocListener({
     super.key,
     required this.email,
+    required this.code,
     required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (cubit.uiState.emailVerificationTimer == null) {
+        cubit.initEmailVerification();
+        if (code.isNotEmpty && code.length == 6) {
+          for (int i = 0; i < 6; i++) {
+            cubit.controllers.emailVerificationControllers[i].text = code[i];
+          }
+          cubit.checkEmailVerificationCompletion();
+        }
+      }
+    });
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        final cubit = context.read<AuthCubit>();
         if (state is ResetCodeVerifiedState) {
           context.push(
             AppRouter.setNewPassword,
