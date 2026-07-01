@@ -17,7 +17,7 @@ class CompleteProfileScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.state is AuthLoadingState;
+    final isLoading = cubit.isLoading;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -37,7 +37,10 @@ class CompleteProfileScaffold extends StatelessWidget {
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: CompleteProfileForm(email: email, isLoading: isLoading, cubit: cubit),
+            child: CompleteProfileForm(
+              email: email,
+              isLoading: isLoading,
+            ),
           ),
         ),
       ),

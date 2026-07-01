@@ -15,24 +15,18 @@ class SetNewPasswordBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (cubit.state is! AuthInitial && cubit.state is! AuthLoadingState && cubit.state is! PasswordResetSuccessState) {
-        cubit.resetState();
-      }
-    });
-
     return BlocListener<AuthCubit, AuthState>(
+      listenWhen: (previous, current) =>
+          current is PasswordResetSuccess || current is PasswordResetFailure,
       listener: (context, state) {
-        if (state is PasswordResetSuccessState) {
+        if (state is PasswordResetSuccess) {
+          context.read<AuthCubit>().resetState();
           GoRouter.of(context).go(AppRouter.passwordChangedSuccessfully);
-        } else if (state is PasswordResetErrorState || state is AuthErrorState) {
-          final msg = state is PasswordResetErrorState ? state.message : (state as AuthErrorState).message;
+        } else if (state is PasswordResetFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-              content: Text(msg),
+              content: Text(state.message),
               backgroundColor: AppColors.errorRed,
               behavior: SnackBarBehavior.floating,
             ));

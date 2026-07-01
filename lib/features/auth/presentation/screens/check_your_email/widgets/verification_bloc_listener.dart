@@ -22,11 +22,11 @@ class VerificationBlocListener extends StatelessWidget {
     final cubit = context.watch<AuthCubit>();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (cubit.uiState.emailVerificationTimer == null) {
+      if (cubit.emailVerificationTimer == null) {
         cubit.initEmailVerification();
         if (code.isNotEmpty && code.length == 6) {
           for (int i = 0; i < 6; i++) {
-            cubit.controllers.emailVerificationControllers[i].text = code[i];
+            cubit.emailVerificationControllers[i].text = code[i];
           }
           cubit.checkEmailVerificationCompletion();
         }
@@ -35,7 +35,7 @@ class VerificationBlocListener extends StatelessWidget {
 
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is ResetCodeVerifiedState) {
+        if (state is ResetCodeVerifySuccess) {
           context.push(
             AppRouter.setNewPassword,
             extra: <String, dynamic>{
@@ -43,15 +43,11 @@ class VerificationBlocListener extends StatelessWidget {
               'code': cubit.emailVerificationOtpCode,
             },
           );
-        } else if (state is ResetCodeError) {
+        } else if (state is ResetCodeVerifyFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text(state.message), backgroundColor: const Color(0xFFE05C5C)));
-        } else if (state is AuthErrorState) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(state.message), backgroundColor: const Color(0xFFE05C5C)));
-        } else if (state is ResetCodeSentState) {
+        } else if (state is ResetCodeSendSuccess) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(

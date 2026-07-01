@@ -18,27 +18,30 @@ class CompleteProfileBlocListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
+    final cubit = context.read<AuthCubit>();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (email != null && email!.isNotEmpty && cubit.emailCtrl.text.isEmpty) {
-        cubit.emailCtrl.text = email!;
-      }
-    });
+    if (email != null && email!.isNotEmpty && cubit.emailCtrl.text.isEmpty) {
+      cubit.emailCtrl.text = email!;
+    }
 
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is RegisterSuccessState) {
+        if (state is CompleteProfileSuccess || state is RegisterSuccess) {
           context.go(AppRouter.home);
-        } else if (state is AuthErrorState) {
+        } else if (state is CompleteProfileFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.message, style: AppText.ibmDescription14(color: AppColors.white)),
+                content: Text(
+                  state.message,
+                  style: AppText.ibmDescription14(color: AppColors.white),
+                ),
                 backgroundColor: AppColors.errorRed,
                 behavior: SnackBarBehavior.floating,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             );
         }

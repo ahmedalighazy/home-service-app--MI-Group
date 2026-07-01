@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_form_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
@@ -9,17 +10,17 @@ import 'complete_profile_widget.dart';
 class CompleteProfileForm extends StatelessWidget {
   final String? email;
   final bool isLoading;
-  final AuthCubit cubit;
 
   const CompleteProfileForm({
     super.key,
     required this.email,
     required this.isLoading,
-    required this.cubit,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
     return Form(
       key: cubit.completeProfileFormKey,
       child: Column(
@@ -35,9 +36,8 @@ class CompleteProfileForm extends StatelessWidget {
             hint: context.tr('namePlaceholder'),
             controller: cubit.nameCtrl,
             prefixIcon: Icons.person_outline_rounded,
-            validator: (v) => (v == null || v.trim().isEmpty)
-                ? context.tr('nameRequired')
-                : null,
+            validator: (v) =>
+                (v == null || v.trim().isEmpty) ? context.tr('nameRequired') : null,
           ),
           SizedBox(height: 16.h),
           AuthFormField(
@@ -46,9 +46,8 @@ class CompleteProfileForm extends StatelessWidget {
             controller: cubit.emailCtrl,
             prefixIcon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
-            validator: (v) => (v == null || v.trim().isEmpty)
-                ? context.tr('emailRequired')
-                : null,
+            validator: (v) =>
+                (v == null || v.trim().isEmpty) ? context.tr('emailRequired') : null,
           ),
           SizedBox(height: 16.h),
           AuthFormField(
@@ -57,7 +56,7 @@ class CompleteProfileForm extends StatelessWidget {
             controller: cubit.passwordCtrl,
             prefixIcon: Icons.lock_outline_rounded,
             isPassword: true,
-            obscureText: cubit.uiState.obscureCompleteProfilePass,
+            obscureText: cubit.obscureCompleteProfilePass,
             onToggleObscure: cubit.toggleCompleteProfilePass,
             validator: (v) {
               if (v == null || v.isEmpty) return context.tr('passwordRequired');
@@ -72,13 +71,11 @@ class CompleteProfileForm extends StatelessWidget {
             controller: cubit.confirmPasswordCtrl,
             prefixIcon: Icons.lock_outline_rounded,
             isPassword: true,
-            obscureText: cubit.uiState.obscureCompleteProfileConfirm,
+            obscureText: cubit.obscureCompleteProfileConfirm,
             onToggleObscure: cubit.toggleCompleteProfileConfirm,
             validator: (v) {
-              if (v == null || v.isEmpty)
-                return context.tr('confirmPasswordRequired');
-              if (v != cubit.passwordCtrl.text)
-                return context.tr('errorPasswordsDoNotMatch');
+              if (v == null || v.isEmpty) return context.tr('confirmPasswordRequired');
+              if (v != cubit.passwordCtrl.text) return context.tr('errorPasswordsDoNotMatch');
               return null;
             },
           ),
@@ -87,8 +84,7 @@ class CompleteProfileForm extends StatelessWidget {
             label: context.tr('completeRegistration'),
             isLoading: isLoading,
             onPressed: () {
-              if (!cubit.completeProfileFormKey.currentState!.validate())
-                return;
+              if (!cubit.completeProfileFormKey.currentState!.validate()) return;
               cubit.register(
                 name: cubit.nameCtrl.text.trim(),
                 email: cubit.emailCtrl.text.trim().isNotEmpty

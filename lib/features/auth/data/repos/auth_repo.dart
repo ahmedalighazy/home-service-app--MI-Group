@@ -249,8 +249,9 @@ class AuthRepo {
 
   Future<ApiResult<LoginResponseModel>> refreshToken() async {
     try {
+      final token = _prefs.getString(_tokenKey) ?? '';
       final response = await _apiService.refresh({
-        'refreshToken': refreshToken,
+        'refreshToken': token,
       });
       await _cacheSession(response);
       return ApiResult.success(response);

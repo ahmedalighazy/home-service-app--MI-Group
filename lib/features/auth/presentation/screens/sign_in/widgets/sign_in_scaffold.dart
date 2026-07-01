@@ -14,7 +14,7 @@ class SignInScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.state is AuthLoadingState;
+    final isLoading = cubit.isLoading;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -33,8 +33,8 @@ class SignInScaffold extends StatelessWidget {
                 hasError: cubit.hasSignInError,
                 isLoading: isLoading,
                 onLogin: () => cubit.login(
-                  identifier: cubit.emailCtrl.text,
-                  password: cubit.passwordCtrl.text,
+                  cubit.emailCtrl.text,
+                  cubit.passwordCtrl.text,
                 ),
                 onFieldChanged: (_) {
                   if (cubit.hasSignInError) cubit.setSignInError(false);

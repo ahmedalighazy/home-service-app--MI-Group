@@ -1,21 +1,25 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/request/auth_request.dart';
 import '../../data/repos/auth_repo.dart';
-
+import '../../logic/auth_animation.dart';
 import '../../logic/otp_timer.dart';
-import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_field_state.dart';
+import '../screens/otp/widgets/otp_field_state.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthRepo _authRepo;
+  final AuthRepo authRepo;
 
-  // ============================================================
-  //  Controllers
-  // ============================================================
+  AuthCubit(this.authRepo) : super(AuthInitial()) {
+    newPasswordCtrl.addListener(_rebuild);
+    confirmPasswordCtrl.addListener(_rebuild);
+    otpCodeCtrl.addListener(_rebuild);
+    resetCodeCtrl.addListener(_rebuild);
+  }
+
+  // ── Controllers ────────────────────────────────────────────
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
   final signUpEmailCtrl = TextEditingController();
@@ -25,62 +29,54 @@ class AuthCubit extends Cubit<AuthState> {
   final confirmPasswordCtrl = TextEditingController();
   final otpCodeCtrl = TextEditingController();
   final resetCodeCtrl = TextEditingController();
-
   final otpFocusNode = FocusNode();
   final resetFocusNode = FocusNode();
-
   final emailVerificationControllers = List.generate(
     6,
     (_) => TextEditingController(),
   );
   final emailVerificationFocusNodes = List.generate(6, (_) => FocusNode());
-
   final signInFormKey = GlobalKey<FormState>();
   final signUpFormKey = GlobalKey<FormState>();
   final completeProfileFormKey = GlobalKey<FormState>();
   final resetPasswordFormKey = GlobalKey<FormState>();
 
-  // ============================================================
-  //  UI State
-  // ============================================================
+  // ── UI State ───────────────────────────────────────────────
   bool rememberMe = false;
   bool hasSignInError = false;
   bool signUpHasError = false;
   String? signUpErrorMessage;
-
   OtpFieldState otpFieldState = OtpFieldState.idle;
   int otpSecondsLeft = 59;
   bool otpCanResend = false;
   OtpTimer? otpTimer;
   bool otpInitialized = false;
-
+  final otpAnimation = AuthAnimation();
   OtpFieldState resetFieldState = OtpFieldState.idle;
-
+  final resetAnimation = AuthAnimation();
   bool obscureCompleteProfilePass = true;
   bool obscureCompleteProfileConfirm = true;
-
   bool obscureNewPassword = true;
   bool obscureConfirmNewPassword = true;
-
   OtpTimer? emailVerificationTimer;
   int emailVerificationSecondsLeft = 59;
   bool emailVerificationTimerActive = true;
   bool emailVerificationButtonEnabled = false;
 
-  AuthCubit(this._authRepo) : super(AuthInitial()) {
-    newPasswordCtrl.addListener(_rebuild);
-    confirmPasswordCtrl.addListener(_rebuild);
-    otpCodeCtrl.addListener(_rebuild);
-    resetCodeCtrl.addListener(_rebuild);
-  }
+  // ── Helpers ────────────────────────────────────────────────
+  bool get isLoading =>
+      state is LoginLoading ||
+      state is RegisterLoading ||
+      state is OtpSendLoading ||
+      state is OtpVerifyLoading ||
+      state is ResetCodeSendLoading ||
+      state is ResetCodeVerifyLoading ||
+      state is CompleteProfileLoading ||
+      state is PasswordResetLoading ||
+      state is ActivateAccountLoading ||
+      state is RefreshTokenLoading ||
+      state is SignOutLoading;
 
-  void _rebuild() {
-    if (!isClosed) emit(AuthInitial());
-  }
-
-  // ============================================================
-  //  UI Helpers
-  // ============================================================
   String get emailVerificationOtpCode =>
       emailVerificationControllers.map((c) => c.text).join();
 
@@ -88,36 +84,35 @@ class AuthCubit extends Cubit<AuthState> {
       newPasswordCtrl.text.isEmpty || confirmPasswordCtrl.text.isEmpty;
 
   bool isNewPasswordError() {
-    final pass = newPasswordCtrl.text;
-    final confirm = confirmPasswordCtrl.text;
-    return pass.isNotEmpty && confirm.isNotEmpty && pass != confirm;
+    final p = newPasswordCtrl.text;
+    final c = confirmPasswordCtrl.text;
+    return p.isNotEmpty && c.isNotEmpty && p != c;
   }
 
   bool isNewPasswordSuccess() {
-    final pass = newPasswordCtrl.text;
-    final confirm = confirmPasswordCtrl.text;
-    return pass.isNotEmpty && confirm.isNotEmpty && pass == confirm;
+    final p = newPasswordCtrl.text;
+    final c = confirmPasswordCtrl.text;
+    return p.isNotEmpty && c.isNotEmpty && p == c;
   }
 
-  bool _isValidEmail(String email) =>
-      RegExp(r'^[\w\-.]+@([\w\-]+\.)+[\w\-]{2,4}$').hasMatch(email);
+  void _rebuild() {
+    if (!isClosed) emit(AuthInitial());
+  }
 
-  // ============================================================
-  //  UI Actions
-  // ============================================================
-  void toggleRememberMe(bool value) {
-    rememberMe = value;
+  // ── UI Actions ─────────────────────────────────────────────
+  void toggleRememberMe(bool v) {
+    rememberMe = v;
     emit(AuthInitial());
   }
 
-  void setSignInError(bool value) {
-    hasSignInError = value;
+  void setSignInError(bool v) {
+    hasSignInError = v;
     emit(AuthInitial());
   }
 
-  void setSignUpError(bool hasError, [String? message]) {
+  void setSignUpError(bool hasError, [String? msg]) {
     signUpHasError = hasError;
-    signUpErrorMessage = message;
+    signUpErrorMessage = msg;
     emit(AuthInitial());
   }
 
@@ -141,34 +136,31 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthInitial());
   }
 
-  // ============================================================
-  //  OTP Timer
-  // ============================================================
+  // ── OTP Timer ──────────────────────────────────────────────
   void initOtp(String email) {
     otpInitialized = true;
     otpFieldState = OtpFieldState.idle;
     otpCanResend = false;
     otpSecondsLeft = 59;
     otpCodeCtrl.clear();
-
     otpTimer?.stop();
     otpTimer = OtpTimer(
       totalSeconds: 59,
-      onTick: (secondsLeft, canResend) {
-        otpSecondsLeft = secondsLeft;
-        otpCanResend = canResend;
+      onTick: (s, c) {
+        otpSecondsLeft = s;
+        otpCanResend = c;
         emit(AuthInitial());
       },
     )..start();
   }
 
-  void setOtpFieldState(OtpFieldState state) {
-    otpFieldState = state;
+  void setOtpFieldState(OtpFieldState s) {
+    otpFieldState = s;
     emit(AuthInitial());
   }
 
-  void setResetFieldState(OtpFieldState state) {
-    resetFieldState = state;
+  void setResetFieldState(OtpFieldState s) {
+    resetFieldState = s;
     emit(AuthInitial());
   }
 
@@ -176,172 +168,118 @@ class AuthCubit extends Cubit<AuthState> {
     emailVerificationButtonEnabled = false;
     emailVerificationTimerActive = true;
     emailVerificationSecondsLeft = 59;
-
-    for (var c in emailVerificationControllers) {
+    for (final c in emailVerificationControllers) {
       c.clear();
     }
-
     emailVerificationTimer?.stop();
     emailVerificationTimer = OtpTimer(
       totalSeconds: 59,
-      onTick: (secondsLeft, canResend) {
-        emailVerificationSecondsLeft = secondsLeft;
-        emailVerificationTimerActive = !canResend;
+      onTick: (s, c) {
+        emailVerificationSecondsLeft = s;
+        emailVerificationTimerActive = !c;
         emit(AuthInitial());
       },
     )..start();
   }
 
   void checkEmailVerificationCompletion() {
-    final completed = emailVerificationControllers.every(
-      (c) => c.text.isNotEmpty,
-    );
-    if (completed != emailVerificationButtonEnabled) {
-      emailVerificationButtonEnabled = completed;
+    final done = emailVerificationControllers.every((c) => c.text.isNotEmpty);
+    if (done != emailVerificationButtonEnabled) {
+      emailVerificationButtonEnabled = done;
       emit(AuthInitial());
     }
   }
 
-  // ============================================================
-  //  API: Login (POST /auth/login, /login/phone, /login/email, /google)
-  // ============================================================
-
-  /// Login with identifier (email or phone) - POST /auth/login
-  Future<void> login(
-    String identifier,
-    String password,
-    BuildContext context,
-  ) async {
+  // ── Login ──────────────────────────────────────────────────
+  Future<void> login(String identifier, String password) async {
     if (identifier.trim().isEmpty || password.isEmpty) {
-      setSignInError(true);
-      emit(LoginFailure(message: context.tr('errorFieldRequired')));
+      hasSignInError = true;
+      emit(LoginFailure(message: 'Email and password are required'));
       return;
     }
-    setSignInError(false);
+    hasSignInError = false;
     emit(LoginLoading());
-    final result = await _authRepo.login(
+    final r = await authRepo.login(
       LoginRequestModel(identifier: identifier, password: password),
     );
     if (isClosed) return;
-    result.when(
-      success: (res) => emit(
-        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
-      ),
-      failure: (e) =>
-          emit(LoginFailure(message: e.message ?? 'فشل تسجيل الدخول')),
+    r.when(
+      success: (d) => emit(LoginSuccess(message: d.name)),
+      failure: (e) => emit(LoginFailure(message: e.message ?? 'Login failed')),
     );
   }
 
-  /// Login with email - POST /auth/login/email
   Future<void> loginWithEmail({
     required String email,
     required String password,
   }) async {
     emit(LoginLoading());
-    final result = await _authRepo.loginWithEmail(
-      email: email,
-      password: password,
-    );
+    final r = await authRepo.loginWithEmail(email: email, password: password);
     if (isClosed) return;
-    result.when(
-      success: (res) => emit(
-        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
-      ),
+    r.when(
+      success: (d) => emit(LoginSuccess(message: d.name)),
       failure: (e) =>
-          emit(LoginFailure(message: e.message ?? 'فشل تسجيل الدخول بالبريد')),
+          emit(LoginFailure(message: e.message ?? 'Email login failed')),
     );
   }
 
-  /// Login with phone - POST /auth/login/phone
   Future<void> loginWithPhone({
     required String phone,
     required String password,
   }) async {
     emit(LoginLoading());
-    final result = await _authRepo.loginWithPhone(
-      phone: phone,
-      password: password,
-    );
+    final r = await authRepo.loginWithPhone(phone: phone, password: password);
     if (isClosed) return;
-    result.when(
-      success: (res) => emit(
-        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
-      ),
+    r.when(
+      success: (d) => emit(LoginSuccess(message: d.name)),
       failure: (e) =>
-          emit(LoginFailure(message: e.message ?? 'فشل تسجيل الدخول بالهاتف')),
+          emit(LoginFailure(message: e.message ?? 'Phone login failed')),
     );
   }
 
-  /// Google OAuth - POST /auth/google
-  Future<void> signInWithGoogle({
-    required String idToken,
-    String? name,
-    String? email,
-    String? googleId,
-    String? profilePicture,
-  }) async {
+  Future<void> signInWithGoogle() async {
     emit(LoginLoading());
-    final result = await _authRepo.loginWithGoogle(
-      idToken: idToken,
-      name: name,
-      email: email,
-      googleId: googleId,
-      profilePicture: profilePicture,
-    );
+    final r = await authRepo.loginWithGoogle(idToken: '');
     if (isClosed) return;
-    result.when(
-      success: (res) => emit(
-        LoginSuccess(message: res.name != null ? 'مرحباً ${res.name}' : null),
-      ),
-      failure: (e) => emit(
-        LoginFailure(message: e.message ?? 'فشل تسجيل الدخول بـ Google'),
-      ),
+    r.when(
+      success: (d) => emit(LoginSuccess(message: d.name)),
+      failure: (e) =>
+          emit(LoginFailure(message: e.message ?? 'Google sign-in failed')),
     );
+  }
+
+  void signInWithApple() {
+    emit(LoginFailure(message: 'Apple sign-in is not yet supported'));
   }
 
   void loginAsGuest() => emit(GuestLoginSuccess());
 
-  // ============================================================
-  //  API: Registration Flow (with OTP)
-  //  - POST /auth/register/email
-  //  - POST /auth/register/verify-otp
-  //  - POST /auth/register/complete
-  //  - POST /auth/register
-  //  - POST /auth/resend-otp
-  //  - POST /auth/activate
-  // ============================================================
-
-  /// Send OTP to email for registration - POST /auth/register/email
+  // ── Registration ───────────────────────────────────────────
   Future<void> sendRegistrationOtp(String email) async {
     emit(OtpSendLoading());
-    final result = await _authRepo.sendRegistrationOtp(email);
+    final r = await authRepo.sendRegistrationOtp(email);
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(OtpSendSuccess(email: email, message: msg)),
+    r.when(
+      success: (m) => emit(OtpSendSuccess(email: email, message: m)),
       failure: (e) =>
-          emit(OtpSendFailure(message: e.message ?? 'فشل إرسال الكود')),
+          emit(OtpSendFailure(message: e.message ?? 'Failed to send code')),
     );
   }
 
-  /// Verify registration OTP - POST /auth/register/verify-otp
   Future<void> verifyRegistrationOtp({
     required String email,
     required String otp,
   }) async {
     emit(OtpVerifyLoading());
-    final result = await _authRepo.verifyRegistrationOtp(
-      email: email,
-      otp: otp,
-    );
+    final r = await authRepo.verifyRegistrationOtp(email: email, otp: otp);
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(OtpVerifySuccess(email: email, message: msg)),
+    r.when(
+      success: (m) => emit(OtpVerifySuccess(email: email, message: m)),
       failure: (e) =>
-          emit(OtpVerifyFailure(message: e.message ?? 'كود غير صحيح')),
+          emit(OtpVerifyFailure(message: e.message ?? 'Invalid code')),
     );
   }
 
-  /// Complete registration after OTP verification - POST /auth/register/complete
   Future<void> completeRegistration({
     required String email,
     required String name,
@@ -349,7 +287,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
   }) async {
     emit(CompleteProfileLoading());
-    final result = await _authRepo.completeRegistration(
+    final r = await authRepo.completeRegistration(
       CompleteProfileRequest(
         email: email,
         name: name,
@@ -358,15 +296,16 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(CompleteProfileSuccess(message: msg)),
+    r.when(
+      success: (m) => emit(CompleteProfileSuccess(message: m)),
       failure: (e) => emit(
-        CompleteProfileFailure(message: e.message ?? 'فشل إتمام البروفايل'),
+        CompleteProfileFailure(
+          message: e.message ?? 'Profile completion failed',
+        ),
       ),
     );
   }
 
-  /// Direct registration (if used) - POST /auth/register
   Future<void> register({
     required String name,
     required String email,
@@ -375,7 +314,7 @@ class AuthCubit extends Cubit<AuthState> {
     String role = 'USER',
   }) async {
     emit(RegisterLoading());
-    final result = await _authRepo.register(
+    final r = await authRepo.register(
       RegisterRequest(
         name: name,
         email: email,
@@ -385,186 +324,128 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(RegisterSuccess(message: msg)),
+    r.when(
+      success: (m) => emit(RegisterSuccess(message: m)),
       failure: (e) =>
-          emit(RegisterFailure(message: e.message ?? 'فشل إنشاء الحساب')),
+          emit(RegisterFailure(message: e.message ?? 'Registration failed')),
     );
   }
 
-  /// Resend OTP - POST /auth/resend-otp
-  Future<void> resendOtp(String email) async {
-    emit(OtpSendLoading());
-    final result = await _authRepo.resendOtp(email);
-    if (isClosed) return;
-    result.when(
-      success: (msg) => emit(OtpSendSuccess(email: email, message: msg)),
-      failure: (e) =>
-          emit(OtpSendFailure(message: e.message ?? 'فشل إعادة الإرسال')),
-    );
+  void sendSignUpSmsCode() {
+    final e = signUpEmailCtrl.text.trim();
+    if (e.isNotEmpty) sendRegistrationOtp(e);
   }
 
-  /// Activate account - POST /auth/activate
-  Future<void> activateAccount({
-    required String email,
-    required String otp,
-  }) async {
-    emit(ActivateAccountLoading());
-    final result = await _authRepo.activateAccount(email: email, otp: otp);
-    if (isClosed) return;
-    result.when(
-      success: (msg) => emit(ActivateAccountSuccess(message: msg)),
-      failure: (e) => emit(
-        ActivateAccountFailure(message: e.message ?? 'فشل تفعيل الحساب'),
-      ),
-    );
+  void signUpWithGoogle() {
+    emit(RegisterFailure(message: 'Google sign-up requires web OAuth setup'));
   }
 
-  // ============================================================
-  //  API: Password Reset
-  //  - POST /auth/forgot-password
-  //  - POST /auth/verify-reset-otp
-  //  - POST /auth/reset-password
-  //  - POST /auth/password/request-reset
-  //  - POST /auth/password/verify-otp
-  //  - POST /auth/password/reset
-  // ============================================================
+  void signUpWithApple() {
+    emit(RegisterFailure(message: 'Apple sign-up is not yet supported'));
+  }
 
-  /// Forgot password - POST /auth/forgot-password
+  // ── Password Reset ─────────────────────────────────────────
+  static bool _isValidEmail(String e) =>
+      RegExp(r'^[\w\-.]+@([\w\-]+\.)+[\w\-]{2,4}$').hasMatch(e);
+
   Future<void> forgotPassword(String email) async {
     if (!_isValidEmail(email)) {
-      emit(ResetCodeSendFailure(message: 'البريد الإلكتروني غير صحيح'));
+      emit(ResetCodeSendFailure(message: 'Invalid email address'));
       return;
     }
     emit(ResetCodeSendLoading());
-    final result = await _authRepo.forgotPassword(email);
+    final r = await authRepo.forgotPassword(email);
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(ResetCodeSendSuccess(email: email, message: msg)),
+    r.when(
+      success: (m) => emit(ResetCodeSendSuccess(email: email, message: m)),
       failure: (e) => emit(
-        ResetCodeSendFailure(message: e.message ?? 'فشل إرسال كود الاستعادة'),
+        ResetCodeSendFailure(message: e.message ?? 'Failed to send reset code'),
       ),
     );
   }
 
-  /// Verify reset OTP - POST /auth/verify-reset-otp
+  void sendResetCode(String email) => forgotPassword(email);
+
   Future<void> verifyResetOtp({
     required String email,
     required String otp,
   }) async {
     emit(ResetCodeVerifyLoading());
-    final result = await _authRepo.verifyResetOtp(email: email, otp: otp);
+    final r = await authRepo.verifyResetOtp(email: email, otp: otp);
     if (isClosed) return;
-    result.when(
+    r.when(
       success: (_) => emit(ResetCodeVerifySuccess(email: email, code: otp)),
       failure: (e) =>
-          emit(ResetCodeVerifyFailure(message: e.message ?? 'كود غير صحيح')),
+          emit(ResetCodeVerifyFailure(message: e.message ?? 'Invalid code')),
     );
   }
 
-  /// Reset password - POST /auth/reset-password
+  void verifyResetCode(String email, String code) =>
+      verifyResetOtp(email: email, otp: code);
+  void verifyOtp({required String phoneNumber, required String otp}) =>
+      verifyRegistrationOtp(email: phoneNumber, otp: otp);
+
+  Future<void> resendOtp(String email) async {
+    emit(OtpSendLoading());
+    final r = await authRepo.resendOtp(email);
+    if (isClosed) return;
+    r.when(
+      success: (m) {
+        initOtp(email);
+        emit(OtpSendSuccess(email: email, message: m));
+      },
+      failure: (e) =>
+          emit(OtpSendFailure(message: e.message ?? 'Failed to resend code')),
+    );
+  }
+
   Future<void> resetPassword({
     required String email,
     required String otp,
     required String newPassword,
   }) async {
     emit(PasswordResetLoading());
-    final result = await _authRepo.resetPassword(
+    final r = await authRepo.resetPassword(
       email: email,
       otp: otp,
       newPassword: newPassword,
     );
     if (isClosed) return;
-    result.when(
-      success: (msg) => emit(PasswordResetSuccess(message: msg)),
+    r.when(
+      success: (m) => emit(PasswordResetSuccess(message: m)),
       failure: (e) => emit(
-        PasswordResetFailure(message: e.message ?? 'فشل تغيير كلمة المرور'),
+        PasswordResetFailure(message: e.message ?? 'Password reset failed'),
       ),
     );
   }
 
-  /// Request password reset - POST /auth/password/request-reset
-  Future<void> passwordRequestReset(String email) async {
-    emit(ResetCodeSendLoading());
-    final result = await _authRepo.passwordRequestReset(email);
-    if (isClosed) return;
-    result.when(
-      success: (msg) => emit(ResetCodeSendSuccess(email: email, message: msg)),
-      failure: (e) => emit(
-        ResetCodeSendFailure(message: e.message ?? 'فشل طلب إعادة التعيين'),
-      ),
-    );
+  void resetState() {
+    newPasswordCtrl.clear();
+    confirmPasswordCtrl.clear();
+    emit(AuthInitial());
   }
 
-  /// Verify password reset OTP - POST /auth/password/verify-otp
-  Future<void> passwordVerifyOtp({
-    required String email,
-    required String otp,
-  }) async {
-    emit(ResetCodeVerifyLoading());
-    final result = await _authRepo.passwordVerifyOtp(email: email, otp: otp);
-    if (isClosed) return;
-    result.when(
-      success: (_) => emit(ResetCodeVerifySuccess(email: email, code: otp)),
-      failure: (e) =>
-          emit(ResetCodeVerifyFailure(message: e.message ?? 'كود غير صحيح')),
-    );
-  }
-
-  /// Reset password using verified OTP - POST /auth/password/reset
-  Future<void> passwordReset({
-    required String email,
-    required String otp,
-    required String password,
-  }) async {
-    emit(PasswordResetLoading());
-    final result = await _authRepo.passwordReset(
-      email: email,
-      otp: otp,
-      password: password,
-    );
-    if (isClosed) return;
-    result.when(
-      success: (msg) => emit(PasswordResetSuccess(message: msg)),
-      failure: (e) => emit(
-        PasswordResetFailure(
-          message: e.message ?? 'فشل إعادة تعيين كلمة المرور',
-        ),
-      ),
-    );
-  }
-
-  // ============================================================
-  //  API: Refresh Token - POST /auth/refresh
-  // ============================================================
+  // ── Session ────────────────────────────────────────────────
   Future<void> refreshToken() async {
     emit(RefreshTokenLoading());
-    final result = await _authRepo.refreshToken();
+    final r = await authRepo.refreshToken();
     if (isClosed) return;
-    result.when(
-      success: (res) => emit(
-        RefreshTokenSuccess(
-          message: res.name != null ? 'تم تحديث التوكن بنجاح' : null,
-        ),
+    r.when(
+      success: (d) => emit(RefreshTokenSuccess(message: d.name)),
+      failure: (e) => emit(
+        RefreshTokenFailure(message: e.message ?? 'Token refresh failed'),
       ),
-      failure: (e) =>
-          emit(RefreshTokenFailure(message: e.message ?? 'فشل تحديث التوكن')),
     );
   }
 
-  // ============================================================
-  //  API: Logout - POST /auth/logout
-  // ============================================================
   Future<void> signOut() async {
     emit(SignOutLoading());
-    await _authRepo.signOut();
+    await authRepo.signOut();
     if (isClosed) return;
     emit(SignOutSuccess());
   }
 
-  // ============================================================
-  //  Dispose
-  // ============================================================
+  // ── Dispose ────────────────────────────────────────────────
   @override
   Future<void> close() {
     emailCtrl.dispose();
@@ -578,14 +459,12 @@ class AuthCubit extends Cubit<AuthState> {
     resetCodeCtrl.dispose();
     otpFocusNode.dispose();
     resetFocusNode.dispose();
-    for (final ctrl in emailVerificationControllers) {
-      ctrl.dispose();
-    }
-    for (final node in emailVerificationFocusNodes) {
-      node.dispose();
-    }
+    for (final c in emailVerificationControllers) { c.dispose(); }
+    for (final n in emailVerificationFocusNodes) { n.dispose(); }
     otpTimer?.stop();
     emailVerificationTimer?.stop();
+    otpAnimation.dispose();
+    resetAnimation.dispose();
     return super.close();
   }
 }

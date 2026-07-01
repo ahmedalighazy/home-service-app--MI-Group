@@ -1,1 +1,0 @@
-// Deprecated in favor of single-class-per-file modular widgets.

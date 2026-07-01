@@ -36,13 +36,13 @@ class EmailVerificationForm extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.w),
                 child: OtpCircleField(
-                  controller: cubit.controllers.emailVerificationControllers[index],
-                  focusNode: cubit.controllers.emailVerificationFocusNodes[index],
+                  controller: cubit.emailVerificationControllers[index],
+                  focusNode: cubit.emailVerificationFocusNodes[index],
                   onChanged: (value) {
                     if (value.length == 1 && index < 5) {
-                      cubit.controllers.emailVerificationFocusNodes[index + 1].requestFocus();
+                      cubit.emailVerificationFocusNodes[index + 1].requestFocus();
                     } else if (value.isEmpty && index > 0) {
-                      cubit.controllers.emailVerificationFocusNodes[index - 1].requestFocus();
+                      cubit.emailVerificationFocusNodes[index - 1].requestFocus();
                     }
                     cubit.checkEmailVerificationCompletion();
                   },
@@ -54,7 +54,7 @@ class EmailVerificationForm extends StatelessWidget {
         verticalSpace(32.h),
         CheckEmailResendRow(
           onResend: () {
-            if (cubit.uiState.emailVerificationTimerActive) return;
+            if (cubit.emailVerificationTimerActive) return;
             cubit.sendResetCode(email);
             cubit.initEmailVerification();
           },
@@ -68,9 +68,9 @@ class EmailVerificationForm extends StatelessWidget {
               )
             : AuthPrimaryButton(
                 label: context.tr('confirm'),
-                isEnabled: cubit.uiState.emailVerificationButtonEnabled,
+                isEnabled: cubit.emailVerificationButtonEnabled,
                 onPressed: () {
-                  if (!cubit.uiState.emailVerificationButtonEnabled) return;
+                  if (!cubit.emailVerificationButtonEnabled) return;
                   cubit.verifyResetCode(email, cubit.emailVerificationOtpCode);
                 },
               ),

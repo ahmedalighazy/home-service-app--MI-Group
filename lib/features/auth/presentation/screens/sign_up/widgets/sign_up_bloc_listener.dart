@@ -13,34 +13,44 @@ class SignUpBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listenWhen: (previous, current) =>
-          current is OtpSentState ||
-          current is RegisterSuccessState ||
-          current is GuestLoginSuccessState ||
-          current is LoginSuccessState ||
-          current is AuthErrorState,
+          current is OtpSendSuccess ||
+          current is RegisterSuccess ||
+          current is GuestLoginSuccess ||
+          current is LoginSuccess ||
+          current is OtpSendFailure ||
+          current is RegisterFailure ||
+          current is LoginFailure,
       listener: (context, state) {
-        if (state is OtpSentState) {
+        if (state is OtpSendSuccess) {
           context.push(AppRouter.otp, extra: state.email);
-        } else if (state is RegisterSuccessState ||
-            state is GuestLoginSuccessState ||
-            state is LoginSuccessState) {
+        } else if (state is RegisterSuccess ||
+            state is GuestLoginSuccess ||
+            state is LoginSuccess) {
           context.go(AppRouter.home);
-        } else if (state is AuthErrorState) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.message,
-                  style: AppText.ibmDescription14(color: AppColors.white),
+        } else {
+          final msg = switch (state) {
+            OtpSendFailure(message: var m) => m,
+            RegisterFailure(message: var m) => m,
+            LoginFailure(message: var m) => m,
+            _ => null,
+          };
+          if (msg != null) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                    msg,
+                    style: AppText.ibmDescription14(color: AppColors.white),
+                  ),
+                  backgroundColor: AppColors.errorRed,
+                  behavior: SnackBarBehavior.floating,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                backgroundColor: AppColors.errorRed,
-                behavior: SnackBarBehavior.floating,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            );
+              );
+          }
         }
       },
       child: const SizedBox.shrink(),

@@ -18,7 +18,7 @@ class VerificationScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.state is AuthLoadingState;
+    final isLoading = cubit.isLoading;
 
     return Scaffold(
       backgroundColor: Colors.white,

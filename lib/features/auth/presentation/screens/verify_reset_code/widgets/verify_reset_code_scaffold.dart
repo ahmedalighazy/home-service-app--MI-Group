@@ -1,15 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_confirm_button.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_input_row.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/widgets/otp_field_state.dart';
-import 'package:home_service_app/features/auth/presentation/screens/verify_reset_code/widgets/verify_reset_code_widgets.dart';
+import 'verify_reset_code_widgets.dart';
 import 'verify_reset_code_hidden_input.dart';
 
 class VerifyResetCodeScaffold extends StatelessWidget {
@@ -21,7 +21,7 @@ class VerifyResetCodeScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.state is AuthLoadingState;
+    final isLoading = cubit.isLoading;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -54,29 +54,27 @@ class VerifyResetCodeScaffold extends StatelessWidget {
                           SizedBox(height: 36.h),
                           GestureDetector(
                             onTap: () =>
-                                cubit.controllers.resetFocusNode.requestFocus(),
+                                cubit.resetFocusNode.requestFocus(),
                             child: AnimatedBuilder(
-                              animation: cubit.uiState.resetAnimation.shakeAnim,
+                              animation: cubit.resetAnimation.shakeAnim,
                               builder: (context, _) => OtpInputRow(
                                 digits: cubit.resetCodeCtrl.text,
                                 length: length,
-                                fieldState: cubit.uiState.resetFieldState,
+                                fieldState: cubit.resetFieldState,
                                 shakeAnimation:
-                                    cubit.uiState.resetAnimation.shakeAnim,
-                                onTap: () => cubit.controllers.resetFocusNode
+                                    cubit.resetAnimation.shakeAnim,
+                                onTap: () => cubit.resetFocusNode
                                     .requestFocus(),
                               ),
                             ),
                           ),
                           SizedBox(height: 20.h),
-                          if (cubit.uiState.resetFieldState ==
+                          if (cubit.resetFieldState ==
                               OtpFieldState.error)
                             Padding(
                               padding: EdgeInsets.only(bottom: 8.h),
                               child: Text(
-                                LocalizationService.instance.translate(
-                                  'otpCodeError',
-                                ),
+                                context.tr('otpCodeError'),
                                 textAlign: TextAlign.center,
                                 style: AppText.ibmError12(),
                               ),
@@ -85,10 +83,10 @@ class VerifyResetCodeScaffold extends StatelessWidget {
                           VerifyResetCodeResendRow(
                             isLoading: isLoading,
                             onResend: () {
-                              cubit.controllers.resetCodeCtrl.clear();
+                              cubit.resetCodeCtrl.clear();
                               cubit.setResetFieldState(OtpFieldState.idle);
                               cubit.sendResetCode(email);
-                              cubit.controllers.resetFocusNode.requestFocus();
+                              cubit.resetFocusNode.requestFocus();
                             },
                           ),
                           SizedBox(height: 32.h),
@@ -102,24 +100,25 @@ class VerifyResetCodeScaffold extends StatelessWidget {
                       label: context.tr('confirm'),
                       isLoading: isLoading,
                       isSuccess:
-                          cubit.uiState.resetFieldState ==
-                          OtpFieldState.success,
-                      onPressed: cubit.resetCodeCtrl.text.length == length
-                          ? () {
-                              cubit.controllers.resetFocusNode.unfocus();
-                              cubit.verifyResetCode(
-                                email,
-                                cubit.resetCodeCtrl.text,
-                              );
-                            }
-                          : () {},
-                      isEnabled: cubit.resetCodeCtrl.text.length == length,
+                          cubit.resetFieldState == OtpFieldState.success,
+                      onPressed:
+                          cubit.resetCodeCtrl.text.length == length
+                              ? () {
+                                  cubit.resetFocusNode.unfocus();
+                                  cubit.verifyResetCode(
+                                    email,
+                                    cubit.resetCodeCtrl.text,
+                                  );
+                                }
+                              : () {},
+                      isEnabled:
+                          cubit.resetCodeCtrl.text.length == length,
                     ),
                   ),
                 ],
               ),
             ),
-            VerifyResetCodeHiddenInput(cubit: cubit, length: length),
+            const VerifyResetCodeHiddenInput(),
           ],
         ),
       ),

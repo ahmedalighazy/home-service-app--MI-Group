@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/forget_password_cubit.dart';
 import 'forget_pass_widget.dart';
 import 'forget_password_bloc_listener.dart';
 
@@ -13,6 +12,8 @@ class ForgetScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<AuthCubit>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -35,13 +36,16 @@ class ForgetScreenContent extends StatelessWidget {
                         const ForgetHeader(),
                         SizedBox(height: 32.h),
                         ForgetEmailField(
-                          controller: forgetCubit.emailCtrl,
-                          onChanged: forgetCubit.updateEmail,
+                          controller: cubit.emailCtrl,
                         ),
                         const Spacer(),
                         SizedBox(height: 24.h),
                         ForgetSubmitButton(
-                          onPressed: forgetCubit.onSendResetCode,
+                          onPressed: () {
+                            cubit.forgotPassword(
+                              cubit.emailCtrl.text.trim(),
+                            );
+                          },
                         ),
                         SizedBox(height: 32.h),
                         const ForgetPasswordBlocListener(),

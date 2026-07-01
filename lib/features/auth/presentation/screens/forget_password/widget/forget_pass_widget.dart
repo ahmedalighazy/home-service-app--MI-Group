@@ -1,14 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../core/di/injection.dart';
 import '../../../../../../core/themes/colors/app_colors.dart';
 import '../../../../../../core/themes/image/app_assets.dart';
 import '../../../../../../core/themes/text/app_text.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class ForgetHeader extends StatelessWidget {
   const ForgetHeader({super.key});
@@ -46,29 +45,17 @@ class ForgetHeader extends StatelessWidget {
 
 class ForgetEmailField extends StatelessWidget {
   final TextEditingController controller;
-  final ValueChanged<String> onChanged;
 
-  const ForgetEmailField({
-    super.key,
-    required this.controller,
-    required this.onChanged,
-  });
+  const ForgetEmailField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) {
-        return AuthTextField(
-          label: context.tr('emailLabel'),
-          hint: context.tr('emailLabel'),
-          controller: controller,
-          prefixIcon: Icons.email_outlined,
-          keyboardType: TextInputType.emailAddress,
-          hasError: ,
-          errorMessage: context.tr('invalidEmail'),
-          onChanged: onChanged,
-        );
-      },
+    return AuthTextField(
+      label: context.tr('emailLabel'),
+      hint: context.tr('emailLabel'),
+      controller: controller,
+      prefixIcon: Icons.email_outlined,
+      keyboardType: TextInputType.emailAddress,
     );
   }
 }
@@ -81,19 +68,13 @@ class ForgetSubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, forgetState) {
-        final cubit = context.read<AuthCubit>();
-        return BlocBuilder<AuthCubit, AuthState>(
-          bloc: getIt<AuthCubit>(),
-          builder: (context, authState) {
-            final isLoading = authState is ;
-            return AuthPrimaryButton(
-              label: context.tr('sendCode'),
-              isLoading: isLoading,
-              isEnabled: cubit.isValid,
-              onPressed: onPressed,
-            );
-          },
+      builder: (context, state) {
+        final isLoading = state is ResetCodeSendLoading;
+        return AuthPrimaryButton(
+          label: context.tr('sendCode'),
+          isLoading: isLoading,
+          isEnabled: !isLoading,
+          onPressed: onPressed,
         );
       },
     );

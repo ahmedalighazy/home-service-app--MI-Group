@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
@@ -19,7 +19,7 @@ class OtpScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.state is AuthLoadingState;
+    final isLoading = cubit.isLoading;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -60,36 +60,31 @@ class OtpScaffold extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 6.h),
-                    Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: Text(
-                        email,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.greenPrimary,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      email,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.greenPrimary,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 48.h),
                     GestureDetector(
-                      onTap: () =>
-                          cubit.controllers.otpFocusNode.requestFocus(),
+                      onTap: () => cubit.otpFocusNode.requestFocus(),
                       child: AnimatedBuilder(
-                        animation: cubit.uiState.otpAnimation.shakeAnim,
+                        animation: cubit.otpAnimation.shakeAnim,
                         builder: (context, _) => OtpInputRow(
                           digits: cubit.otpCodeCtrl.text,
                           length: 6,
-                          fieldState: cubit.uiState.otpFieldState,
-                          shakeAnimation: cubit.uiState.otpAnimation.shakeAnim,
-                          onTap: () =>
-                              cubit.controllers.otpFocusNode.requestFocus(),
+                          fieldState: cubit.otpFieldState,
+                          shakeAnimation: cubit.otpAnimation.shakeAnim,
+                          onTap: () => cubit.otpFocusNode.requestFocus(),
                         ),
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    OtpTimerSection(email: email, cubit: cubit),
+                    OtpTimerSection(email: email),
                   ],
                 ),
               ),
@@ -101,13 +96,13 @@ class OtpScaffold extends StatelessWidget {
               child: OtpConfirmButton(
                 label: context.tr('confirm'),
                 isLoading: isLoading,
-                isSuccess: cubit.uiState.otpFieldState == OtpFieldState.success,
+                isSuccess: cubit.otpFieldState == OtpFieldState.success,
                 isEnabled:
                     cubit.otpCodeCtrl.text.length == 6 &&
-                    cubit.uiState.otpFieldState != OtpFieldState.error,
+                    cubit.otpFieldState != OtpFieldState.error,
                 onPressed: cubit.otpCodeCtrl.text.length == 6
                     ? () {
-                        cubit.controllers.otpFocusNode.unfocus();
+                        cubit.otpFocusNode.unfocus();
                         cubit.verifyOtp(
                           phoneNumber: email,
                           otp: cubit.otpCodeCtrl.text,
@@ -116,7 +111,7 @@ class OtpScaffold extends StatelessWidget {
                     : () {},
               ),
             ),
-            OtpHiddenInput(cubit: cubit),
+            const OtpHiddenInput(),
           ],
         ),
       ),
