@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/forgot_password/forgot_password_cubit.dart';
 import '../cubit/forgot_password/forgot_password_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class CheckYourEmailListener extends StatelessWidget {
   final String email;

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -70,10 +71,15 @@ class ErrorHandler {
     }
 
     try {
-      return ApiErrorModel.fromJson(response.data);
+      final data = response.data;
+      if (data is String) {
+        return ApiErrorModel.fromJson(jsonDecode(data));
+      }
+
+      return ApiErrorModel.fromJson(data as Map<String, dynamic>);
     } catch (e) {
       return ApiErrorModel(
-        status: response.statusCode.toString(),
+        status: response.statusCode,
         message: response.statusMessage ?? 'خطأ في الخادم',
       );
     }

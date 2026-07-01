@@ -3,12 +3,13 @@ import 'dart:async';
 class OtpTimer {
   final int totalSeconds;
   final void Function(int secondsLeft, bool canResend) onTick;
+  final void Function()? onFinished;
   Timer? _timer;
   int _secondsLeft;
   bool _canResend = false;
 
-  OtpTimer({required this.totalSeconds, required this.onTick})
-      : _secondsLeft = totalSeconds;
+  OtpTimer({required this.totalSeconds, required this.onTick, this.onFinished})
+    : _secondsLeft = totalSeconds;
 
   int get secondsLeft => _secondsLeft;
   bool get canResend => _canResend;
@@ -27,6 +28,7 @@ class OtpTimer {
         _canResend = true;
         onTick(_secondsLeft, _canResend);
         timer.cancel();
+        onFinished?.call();
       }
     });
   }

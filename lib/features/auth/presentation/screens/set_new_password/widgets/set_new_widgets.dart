@@ -116,9 +116,9 @@ class SetNewPasswordButton extends StatelessWidget {
       width: double.infinity,
       height: 52,
       child: ElevatedButton(
-        onPressed: isSuccess && !isLoading ? onPressed : null,
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isSuccess ? AppColors.dark : AppColors.dark300,
+          backgroundColor: onPressed != null ? AppColors.dark : AppColors.dark300,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -138,7 +138,7 @@ class SetNewPasswordButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: isSuccess ? AppColors.white : AppColors.bgDisabled,
+                  color: onPressed != null ? AppColors.white : AppColors.bgDisabled,
                 ),
               ),
       ),

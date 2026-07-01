@@ -14,10 +14,7 @@ import 'check_email_resend_row.dart';
 class EmailVerificationForm extends StatelessWidget {
   final String email;
 
-  const EmailVerificationForm({
-    super.key,
-    required this.email,
-  });
+  const EmailVerificationForm({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +64,7 @@ class EmailVerificationForm extends StatelessWidget {
           builder: (context, isLoading) {
             if (isLoading) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.greenPrimary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.greenPrimary),
               );
             }
             return AuthPrimaryButton(
@@ -77,8 +72,7 @@ class EmailVerificationForm extends StatelessWidget {
               isEnabled: cubit.emailVerificationButtonEnabled,
               onPressed: () {
                 if (!cubit.emailVerificationButtonEnabled) return;
-                cubit.verifyResetCode(
-                    email, cubit.emailVerificationOtpCode);
+                cubit.verifyResetCode(email, cubit.emailVerificationOtpCode);
               },
             );
           },

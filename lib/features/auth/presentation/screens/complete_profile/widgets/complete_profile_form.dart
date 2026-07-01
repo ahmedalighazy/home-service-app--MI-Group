@@ -11,10 +11,7 @@ import 'complete_profile_widget.dart';
 class CompleteProfileForm extends StatefulWidget {
   final String? email;
 
-  const CompleteProfileForm({
-    super.key,
-    required this.email,
-  });
+  const CompleteProfileForm({super.key, required this.email});
 
   @override
   State<CompleteProfileForm> createState() => _CompleteProfileFormState();
@@ -23,7 +20,6 @@ class CompleteProfileForm extends StatefulWidget {
 class _CompleteProfileFormState extends State<CompleteProfileForm> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePass = true;
-  bool _obscureConfirm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +40,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
             hint: context.tr('namePlaceholder'),
             controller: cubit.nameCtrl,
             prefixIcon: Icons.person_outline_rounded,
-            validator: (v) =>
-                (v == null || v.trim().isEmpty) ? context.tr('nameRequired') : null,
+            validator: (v) => (v == null || v.trim().isEmpty)
+                ? context.tr('nameRequired')
+                : null,
           ),
           SizedBox(height: 16.h),
           AuthFormField(
@@ -54,8 +51,21 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
             controller: cubit.emailCtrl,
             prefixIcon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
-            validator: (v) =>
-                (v == null || v.trim().isEmpty) ? context.tr('emailRequired') : null,
+            validator: (v) => (v == null || v.trim().isEmpty)
+                ? context.tr('emailRequired')
+                : null,
+          ),
+          SizedBox(height: 16.h),
+
+          AuthFormField(
+            label: context.tr('phoneNumber'),
+            hint: context.tr('phonePlaceholder'),
+            controller: cubit.phoneCtrl,
+            prefixIcon: Icons.phone_android,
+            keyboardType: TextInputType.phone,
+            validator: (v) => (v == null || v.trim().isEmpty)
+                ? context.tr('phoneRequired')
+                : null,
           ),
           SizedBox(height: 16.h),
           AuthFormField(
@@ -73,22 +83,10 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
             },
           ),
           SizedBox(height: 16.h),
-          AuthFormField(
-            label: context.tr('confirmPasswordLabel'),
-            hint: context.tr('confirmPasswordPlaceholder'),
-            controller: cubit.confirmPasswordCtrl,
-            prefixIcon: Icons.lock_outline_rounded,
-            isPassword: true,
-            obscureText: _obscureConfirm,
-            onToggleObscure: () => setState(() => _obscureConfirm = !_obscureConfirm),
-            validator: (v) {
-              if (v == null || v.isEmpty) return context.tr('confirmPasswordRequired');
-              if (v != cubit.newPasswordCtrl.text) return context.tr('errorPasswordsDoNotMatch');
-              return null;
-            },
-          ),
+
           SizedBox(height: 32.h),
           _CompleteProfileSubmitButton(
+            phone: cubit.phoneCtrl,
             email: widget.email,
             formKey: _formKey,
             nameCtrl: cubit.nameCtrl,
@@ -107,6 +105,8 @@ class _CompleteProfileSubmitButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameCtrl;
   final TextEditingController emailCtrl;
+  final TextEditingController phone;
+
   final TextEditingController newPasswordCtrl;
 
   const _CompleteProfileSubmitButton({
@@ -115,6 +115,7 @@ class _CompleteProfileSubmitButton extends StatelessWidget {
     required this.nameCtrl,
     required this.emailCtrl,
     required this.newPasswordCtrl,
+    required this.phone,
   });
 
   @override
@@ -131,7 +132,7 @@ class _CompleteProfileSubmitButton extends StatelessWidget {
                 ? emailCtrl.text.trim()
                 : (email ?? ''),
             name: nameCtrl.text.trim(),
-            phone: '',
+            phone: phone.text,
             password: newPasswordCtrl.text,
           );
         },

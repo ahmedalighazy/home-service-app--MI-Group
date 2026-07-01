@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -16,23 +17,11 @@ import 'package:home_service_app/features/auth/presentation/widgets/auth_social_
 import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/terms_and_privacy_text.dart';
 
-class SignUpBody extends StatelessWidget {
-  final TextEditingController emailController;
-  final VoidCallback onSendCode;
-  final VoidCallback onGoogleSignUp;
-  final VoidCallback onAppleSignUp;
-  final VoidCallback onGuestMode;
-  final VoidCallback onSignIn;
+import '../../../../../../core/routes/app_routes.dart';
+import '../../../../listeners/register_bloc_listener.dart';
 
-  const SignUpBody({
-    super.key,
-    required this.emailController,
-    required this.onSendCode,
-    required this.onGoogleSignUp,
-    required this.onAppleSignUp,
-    required this.onGuestMode,
-    required this.onSignIn,
-  });
+class SignUpBody extends StatelessWidget {
+  const SignUpBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +44,22 @@ class SignUpBody extends StatelessWidget {
               AuthTextField(
                 label: context.tr('emailLabel'),
                 hint: context.tr('emailPlaceholder'),
-                controller: emailController,
+                controller: context.read<RegisterCubit>().signUpEmailCtrl,
                 prefixIcon: Icons.email_outlined,
                 keyboardType: TextInputType.emailAddress,
                 hasError: false,
                 onChanged: (_) {},
               ),
               verticalSpace(24.h),
-              AuthPrimaryButton(
-                label: context.tr('sendCode'),
-                isLoading: isLoading,
-                isEnabled: emailController.text.isNotEmpty && !isLoading,
-                onPressed: onSendCode,
+              ValueListenableBuilder<TextEditingValue>(
+                valueListenable: context.read<RegisterCubit>().signUpEmailCtrl,
+                builder: (context, value, _) => AuthPrimaryButton(
+                  label: context.tr('sendCode'),
+                  isLoading: isLoading,
+                  isEnabled: value.text.isNotEmpty,
+                  onPressed: () =>
+                      context.read<RegisterCubit>().sendSignUpSmsCode(),
+                ),
               ),
               verticalSpace(12.h),
               Text(
@@ -80,25 +73,28 @@ class SignUpBody extends StatelessWidget {
               AuthSocialButton(
                 iconPath: AppAssets.iconGoogle,
                 text: context.tr('signUpWithGoogle'),
-                onTap: onGoogleSignUp,
+                onTap: () {},
               ),
               verticalSpace(12.h),
               AuthSocialButton(
                 iconPath: AppAssets.iconApple,
                 text: context.tr('signUpWithApple'),
-                onTap: onAppleSignUp,
+                onTap: () {},
               ),
               verticalSpace(24.h),
-              Center(child: GuestModeButton(onTap: onGuestMode)),
+              Center(child: GuestModeButton(onTap: () {})),
               verticalSpace(16.h),
               AuthFooterLink(
                 questionText: context.tr('alreadyHaveAccount'),
                 actionText: context.tr('login'),
-                onTap: onSignIn,
+                onTap: () {
+                  context.go(AppRouter.signIn);
+                },
               ),
               verticalSpace(40.h),
               const TermsAndPrivacyText(),
               verticalSpace(32.h),
+              const RegisterBlocListener(),
             ],
           ),
         );

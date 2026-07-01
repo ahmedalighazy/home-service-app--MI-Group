@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
 import 'package:home_service_app/features/auth/listeners/forgot_password_bloc_listener.dart';
+import '../../../../../../core/routes/app_routes.dart';
 import 'forget_pass_widget.dart';
 
 class ForgetScreenContent extends StatelessWidget {
@@ -35,16 +37,17 @@ class ForgetScreenContent extends StatelessWidget {
                         ),
                         const ForgetHeader(),
                         SizedBox(height: 32.h),
-                        ForgetEmailField(
-                          controller: cubit.emailCtrl,
-                        ),
+                        ForgetEmailField(controller: cubit.emailCtrl),
                         const Spacer(),
                         SizedBox(height: 24.h),
                         ForgetSubmitButton(
                           onPressed: () {
-                            cubit.forgotPassword(
-                              cubit.emailCtrl.text.trim(),
-                            );
+                            // context.push(
+                            //   AppRouter.verifyResetCode,
+                            //   extra: 'mjad',
+                            // );
+
+                            cubit.forgotPassword(cubit.emailCtrl.text.trim());
                           },
                         ),
                         SizedBox(height: 32.h),

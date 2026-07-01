@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
@@ -20,10 +22,14 @@ mixin SplashLogic<T extends StatefulWidget> on State<T> {
   }
 
   void navigateFromSplash() {
+    // CacheHelper.clearData();
     if (!mounted) return;
-    final bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
-    final String? email = CacheHelper.getData(key: 'email');
-    final bool loggedIn = email != null && email.isNotEmpty;
+    final bool? onBoarding = CacheHelper.getData('onBoarding');
+    final String? email = CacheHelper.getData('email');
+    final bool loggedIn = email != null;
+    log(onBoarding.toString());
+    log(email.toString());
+    log(loggedIn.toString());
 
     if (loggedIn) {
       GoRouter.of(context).go(AppRouter.home);

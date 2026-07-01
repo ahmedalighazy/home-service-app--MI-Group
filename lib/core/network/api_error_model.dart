@@ -1,17 +1,36 @@
 class ApiErrorModel {
-  final String? status;
+  final String? timestamp;
+  final int? status;
+  final String? error;
   final String? message;
 
-  ApiErrorModel({this.status, this.message});
+  const ApiErrorModel({this.timestamp, this.status, this.error, this.message});
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) {
     return ApiErrorModel(
-      status: json['status']?.toString(),
-      message: json['message']?.toString(),
+      timestamp: json['timestamp'] as String?,
+      status: json['status'] as int?,
+      error: json['error'] as String?,
+      message: json['message'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'status': status, 'message': message};
+    return {
+      'timestamp': timestamp,
+      'status': status,
+      'error': error,
+      'message': message,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'ApiErrorModel('
+        'timestamp: $timestamp, '
+        'status: $status, '
+        'error: $error, '
+        'message: $message'
+        ')';
   }
 }

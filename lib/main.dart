@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_service_app/core/utils/helpers/observer.dart';
 
 import 'core/di/injection.dart';
 import 'core/language/language_cubit.dart';
@@ -18,6 +19,8 @@ void main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
   await CacheHelper.init();
   await setupGetIt();
+
+  Bloc.observer = MyBlocObserver();
 
   final languageCubit = getIt<LanguageCubit>();
   final initialLocale = languageCubit.state.isArabic

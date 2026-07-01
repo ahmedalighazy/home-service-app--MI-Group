@@ -5,7 +5,7 @@ class AppStrings {
 
   static bool get _isArabic {
     try {
-      final saved = CacheHelper.getData(key: 'language');
+      final saved = CacheHelper.getData('language');
       if (saved == 'en') return false;
       return true;
     } catch (_) {
@@ -16,7 +16,7 @@ class AppStrings {
   static bool get isArabic => _isArabic;
 
   static void syncLocale(String language) {
-    CacheHelper.saveData(key: 'language', value: language);
+    CacheHelper.saveData('language', language);
   }
 
   static String get confirm => _isArabic ? 'تأكيد' : 'Confirm';

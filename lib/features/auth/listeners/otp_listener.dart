@@ -5,17 +5,13 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/register/register_cubit.dart';
 import '../cubit/register/register_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class OtpListener extends StatelessWidget {
   final String email;
   final Widget child;
 
-  const OtpListener({
-    super.key,
-    required this.email,
-    required this.child,
-  });
+  const OtpListener({super.key, required this.email, required this.child});
 
   @override
   Widget build(BuildContext context) {

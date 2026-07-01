@@ -29,25 +29,22 @@ class _SignInScaffoldState extends State<SignInScaffold> {
         onPressed: () => GoRouter.of(context).go(AppRouter.signUp),
       ),
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
-            Positioned.fill(
-              child: SignInBody(
-                emailController: cubit.emailCtrl,
-                passwordController: cubit.passwordCtrl,
-                rememberMe: _rememberMe,
-                onLogin: () => cubit.login(
-                  cubit.emailCtrl.text,
-                  cubit.passwordCtrl.text,
-                ),
-                onRememberChanged: (val) =>
-                    setState(() => _rememberMe = val ?? false),
-                onForgotPassword: () => context.push(AppRouter.forgetPassword),
-                onGoogleSignIn: () => cubit.signInWithGoogle(),
-                onAppleSignIn: () => cubit.signInWithApple(),
-                onSignUp: () => context.go(AppRouter.signUp),
-              ),
+            SignInBody(
+              emailController: cubit.emailCtrl,
+              passwordController: cubit.passwordCtrl,
+              rememberMe: _rememberMe,
+              onLogin: () =>
+                  cubit.login(cubit.emailCtrl.text, cubit.passwordCtrl.text),
+              onRememberChanged: (val) =>
+                  setState(() => _rememberMe = val ?? false),
+              onForgotPassword: () => context.push(AppRouter.forgetPassword),
+              onGoogleSignIn: () {},
+              onAppleSignIn: () {},
+              onSignUp: () => context.go(AppRouter.signUp),
             ),
+
             const LoginBlocListener(),
           ],
         ),

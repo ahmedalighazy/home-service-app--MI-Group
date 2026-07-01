@@ -45,3 +45,5 @@ final class PasswordResetFailure extends ForgotPasswordState {
   final String message;
   PasswordResetFailure({required this.message});
 }
+
+class NewPasswordValidationChanged extends ForgotPasswordState {}

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,7 @@ import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_pass
 import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_state.dart';
 import 'set_new_widgets.dart';
 
-class SetNewPasswordScaffold extends StatelessWidget {
+class SetNewPasswordScaffold extends StatefulWidget {
   final String email;
   final String code;
 
@@ -17,6 +18,23 @@ class SetNewPasswordScaffold extends StatelessWidget {
     required this.email,
     required this.code,
   });
+
+  @override
+  State<SetNewPasswordScaffold> createState() => _SetNewPasswordScaffoldState();
+}
+
+class _SetNewPasswordScaffoldState extends State<SetNewPasswordScaffold> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ForgotPasswordCubit>().initPasswordListeners();
+  }
+
+  @override
+  void dispose() {
+    context.read<ForgotPasswordCubit>().disposePasswordListeners();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +55,7 @@ class SetNewPasswordScaffold extends StatelessWidget {
           builder: (context, constraints) {
             return SingleChildScrollView(
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(minHeight: constraints.maxHeight),
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -64,7 +81,11 @@ class SetNewPasswordScaffold extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 32),
-                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, Color>(
+                        BlocSelector<
+                          ForgotPasswordCubit,
+                          ForgotPasswordState,
+                          Color
+                        >(
                           selector: (_) => _borderColor(cubit),
                           builder: (context, borderColor) => Column(
                             children: [
@@ -79,8 +100,9 @@ class SetNewPasswordScaffold extends StatelessWidget {
                               SizedBox(height: 20.h),
                               PasswordInputField(
                                 title: context.tr('confirmPasswordLabel'),
-                                hintText:
-                                    context.tr('confirmPasswordPlaceholder'),
+                                hintText: context.tr(
+                                  'confirmPasswordPlaceholder',
+                                ),
                                 controller: cubit.confirmPasswordCtrl,
                                 obscureText: false,
                                 borderColor: borderColor,
@@ -89,7 +111,11 @@ class SetNewPasswordScaffold extends StatelessWidget {
                             ],
                           ),
                         ),
-                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, bool>(
+                        BlocSelector<
+                          ForgotPasswordCubit,
+                          ForgotPasswordState,
+                          bool
+                        >(
                           selector: (_) => cubit.isNewPasswordError(),
                           builder: (context, isError) {
                             if (!isError) return const SizedBox.shrink();
@@ -98,26 +124,32 @@ class SetNewPasswordScaffold extends StatelessWidget {
                         ),
                         const Spacer(),
                         const SizedBox(height: 20),
-                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, _NewPassBtnData>(
+                        BlocSelector<
+                          ForgotPasswordCubit,
+                          ForgotPasswordState,
+                          _NewPassBtnData
+                        >(
                           selector: (s) => _NewPassBtnData(
                             isLoading: s is PasswordResetLoading,
                             isSuccess: s is PasswordResetSuccess,
-                            isPasswordsValid: cubit.newPasswordCtrl.text.isNotEmpty &&
-                                cubit.newPasswordCtrl.text == cubit.confirmPasswordCtrl.text,
+                            isPasswordsValid: cubit.isPasswordsValid,
                           ),
-                          builder: (context, data) => SetNewPasswordButton(
-                            isSuccess: data.isSuccess,
-                            isLoading: data.isLoading,
-                            onPressed: data.isPasswordsValid
-                                ? () {
-                                    cubit.resetPassword(
-                                      email: email,
-                                      otp: code,
-                                      newPassword: cubit.newPasswordCtrl.text,
-                                    );
-                                  }
-                                : null,
-                          ),
+                          builder: (context, data) {
+                            // log(isPasswordsValid.);
+                            return SetNewPasswordButton(
+                              isSuccess: data.isSuccess,
+                              isLoading: data.isLoading,
+                              onPressed: data.isPasswordsValid
+                                  ? () {
+                                      cubit.resetPassword(
+                                        email: widget.email,
+                                        otp: widget.code,
+                                        newPassword: cubit.newPasswordCtrl.text,
+                                      );
+                                    }
+                                  : null,
+                            );
+                          },
                         ),
                         const SizedBox(height: 20),
                       ],
@@ -141,13 +173,17 @@ class SetNewPasswordScaffold extends StatelessWidget {
   }
 }
 
-class _NewPassBtnData {
+class _NewPassBtnData extends Equatable {
   final bool isLoading;
   final bool isSuccess;
   final bool isPasswordsValid;
+
   const _NewPassBtnData({
     required this.isLoading,
     required this.isSuccess,
     required this.isPasswordsValid,
   });
+
+  @override
+  List<Object?> get props => [isLoading, isSuccess, isPasswordsValid];
 }

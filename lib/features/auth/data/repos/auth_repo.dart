@@ -1,21 +1,23 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/network/api_error_handler.dart';
 import '../../../../core/network/api_result.dart';
 import '../../../../core/network/api_service.dart';
 
+import '../../../../core/utils/helpers/cache_helper.dart';
 import '../models/request/auth_request.dart';
 
 import '../models/response/login_response_model.dart';
 
 class AuthRepo {
   final ApiService _apiService;
-  final SharedPreferences _prefs;
 
-  static const String _tokenKey = 'auth_token';
-  static const String _emailKey = 'auth_email';
+  static const String _tokenKey = 'token';
+  static const String _emailKey = 'email';
 
-  AuthRepo(this._apiService, this._prefs);
+  AuthRepo(this._apiService);
 
   // ─────────────────────────── Login ───────────────────────────
 
@@ -249,10 +251,8 @@ class AuthRepo {
 
   Future<ApiResult<LoginResponseModel>> refreshToken() async {
     try {
-      final token = _prefs.getString(_tokenKey) ?? '';
-      final response = await _apiService.refresh({
-        'refreshToken': token,
-      });
+      final token = CacheHelper.getData(_tokenKey);
+      final response = await _apiService.refresh({'refreshToken': token});
       await _cacheSession(response);
       return ApiResult.success(response);
     } catch (e) {
@@ -262,7 +262,7 @@ class AuthRepo {
 
   Future<ApiResult<String>> signOut() async {
     try {
-      final token = _prefs.getString(_tokenKey) ?? '';
+      final token = CacheHelper.getData(_tokenKey) ?? '';
       await _apiService.logout({
         'refreshToken': token,
       }); // أو 'token' حسب الـ API
@@ -276,21 +276,21 @@ class AuthRepo {
 
   // ────────────────────── Session / Cache ─────────────────────
 
-  String? get cachedToken => _prefs.getString(_tokenKey);
-  String? get cachedEmail => _prefs.getString(_emailKey);
+  String? get cachedToken => CacheHelper.getData(_tokenKey);
+  String? get cachedEmail => CacheHelper.getData(_emailKey);
 
   Future<void> _cacheSession(LoginResponseModel response) async {
     if (response.token != null) {
-      await _prefs.setString(_tokenKey, response.token!);
+      await CacheHelper.saveData(_tokenKey, response.token!);
     }
 
     if (response.email != null) {
-      await _prefs.setString(_emailKey, response.email!);
+      await CacheHelper.saveData(_emailKey, response.email!);
     }
   }
 
   Future<void> _clearSession() async {
-    await _prefs.remove(_tokenKey);
-    await _prefs.remove(_emailKey);
+    await CacheHelper.removeData(_tokenKey);
+    await CacheHelper.removeData(_emailKey);
   }
 }

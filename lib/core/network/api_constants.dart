@@ -20,6 +20,7 @@ class ApiConstants {
   static const String resetPassword = '$auth/reset-password';
   static const String resendOtp = '$auth/resend-otp';
   static const String refresh = '$auth/refresh';
+
   static const String forgotPassword = '$auth/forgot-password';
   static const String passwordVerifyOtp = '$auth/password/verify-otp';
   static const String passwordReset = '$auth/password/reset';

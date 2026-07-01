@@ -5,15 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/forgot_password/forgot_password_cubit.dart';
 import '../cubit/forgot_password/forgot_password_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class SetNewPasswordListener extends StatelessWidget {
   final Widget child;
 
-  const SetNewPasswordListener({
-    super.key,
-    required this.child,
-  });
+  const SetNewPasswordListener({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +25,7 @@ class SetNewPasswordListener extends StatelessWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) => const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF189AB4),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF189AB4)),
             ),
           );
         } else {
@@ -39,7 +34,9 @@ class SetNewPasswordListener extends StatelessWidget {
           } catch (_) {}
           if (state is PasswordResetSuccess) {
             context.read<ForgotPasswordCubit>().resetState();
-            GoRouter.of(context).go(AppRouter.passwordChangedSuccessfully);
+            if (context.mounted) {
+              GoRouter.of(context).go(AppRouter.passwordChangedSuccessfully);
+            }
           } else if (state is PasswordResetFailure) {
             AppSnackBar.showError(context, state.message);
           }

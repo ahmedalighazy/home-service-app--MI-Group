@@ -28,8 +28,10 @@ class VerifyResetCodeHiddenInput extends StatelessWidget {
           stylusHandwritingEnabled: false,
           selectionControls: EmptyTextSelectionControls(),
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          decoration:
-              const InputDecoration(border: InputBorder.none, counterText: ''),
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            counterText: '',
+          ),
           style: const TextStyle(color: Colors.transparent, fontSize: 1),
           cursorColor: Colors.transparent,
         ),

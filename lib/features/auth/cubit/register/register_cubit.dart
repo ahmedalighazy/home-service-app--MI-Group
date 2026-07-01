@@ -1,19 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/auth_constants.dart';
 import '../../data/models/request/auth_request.dart';
 import '../../data/repos/auth_repo.dart';
-import '../../logic/otp_timer.dart';
+import '../../presentation/logic/otp_timer.dart';
 import 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final AuthRepo authRepo;
 
-  RegisterCubit(this.authRepo) : super(RegisterInitial()) {
-    newPasswordCtrl.addListener(_rebuild);
-    confirmPasswordCtrl.addListener(_rebuild);
-    otpCodeCtrl.addListener(_rebuild);
-  }
+  RegisterCubit(this.authRepo) : super(RegisterInitial());
 
   // ── Controllers ──
   final signUpEmailCtrl = TextEditingController();
@@ -27,27 +26,33 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   // ── OTP Timer State ──
   bool otpInitialized = false;
-  int otpSecondsLeft = 59;
+  int otpSecondsLeft = AuthConstants.otpTimerSeconds;
   bool otpCanResend = false;
   OtpTimer? otpTimer;
-
-  void _rebuild() {
-    if (!isClosed) emit(RegisterInitial());
-  }
+  final otpTimerNotifier = ValueNotifier<OtpTimerValue>(
+    OtpTimerValue(secondsLeft: AuthConstants.otpTimerSeconds, canResend: false),
+  );
 
   // ── OTP Timer ──
   void initOtp(String email) {
     otpInitialized = true;
     otpCanResend = false;
-    otpSecondsLeft = 59;
+    otpSecondsLeft = AuthConstants.otpTimerSeconds;
+    otpTimerNotifier.value = OtpTimerValue(
+      secondsLeft: AuthConstants.otpTimerSeconds,
+      canResend: false,
+    );
     otpCodeCtrl.clear();
     otpTimer?.stop();
     otpTimer = OtpTimer(
-      totalSeconds: 59,
+      totalSeconds: AuthConstants.otpTimerSeconds,
       onTick: (s, c) {
         otpSecondsLeft = s;
         otpCanResend = c;
-        if (!isClosed) emit(RegisterInitial());
+        otpTimerNotifier.value = OtpTimerValue(secondsLeft: s, canResend: c);
+      },
+      onFinished: () {
+        if (!isClosed) resendOtp(email);
       },
     )..start();
   }
@@ -59,8 +64,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     if (isClosed) return;
     r.when(
       success: (m) => emit(OtpSendSuccess(email: email, message: m)),
-      failure: (e) =>
-          emit(OtpSendFailure(message: e.message ?? 'Failed to send code')),
+      failure: (e) {
+        log(e.message.toString());
+
+        emit(OtpSendFailure(message: e.message ?? 'Failed to send code'));
+      },
     );
   }
 
@@ -78,8 +86,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     if (isClosed) return;
     r.when(
       success: (m) => emit(OtpVerifySuccess(email: email, message: m)),
-      failure: (e) =>
-          emit(OtpVerifyFailure(message: e.message ?? 'Invalid code')),
+      failure: (e) {
+        otpCodeCtrl.clear();
+        emit(OtpVerifyFailure(message: e.message ?? 'Invalid code'));
+        Future.delayed(const Duration(milliseconds: 600), () {
+          if (!isClosed) emit(RegisterInitial());
+        });
+      },
     );
   }
 
@@ -121,8 +134,17 @@ class RegisterCubit extends Cubit<RegisterState> {
         initOtp(email);
         emit(OtpSendSuccess(email: email, message: m));
       },
-      failure: (e) =>
-          emit(OtpSendFailure(message: e.message ?? 'Failed to resend code')),
+      failure: (e) {
+        log(e.message.toString());
+        otpTimer?.stop();
+        otpCanResend = true;
+        otpSecondsLeft = 0;
+        otpTimerNotifier.value = const OtpTimerValue(
+          secondsLeft: 0,
+          canResend: true,
+        );
+        emit(OtpSendFailure(message: e.message ?? 'Failed to resend code'));
+      },
     );
   }
 
@@ -136,7 +158,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   // ── Dispose ──
   @override
-  Future<void> close() {
+  Future<void> close() async {
     signUpEmailCtrl.dispose();
     emailCtrl.dispose();
     nameCtrl.dispose();
@@ -146,6 +168,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     otpCodeCtrl.dispose();
     otpFocusNode.dispose();
     otpTimer?.stop();
+    otpTimerNotifier.dispose();
     return super.close();
   }
+}
+
+class OtpTimerValue {
+  final int secondsLeft;
+  final bool canResend;
+  const OtpTimerValue({required this.secondsLeft, required this.canResend});
 }

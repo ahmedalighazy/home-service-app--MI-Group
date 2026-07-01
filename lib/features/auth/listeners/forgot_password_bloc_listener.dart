@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/forgot_password/forgot_password_cubit.dart';
 import '../cubit/forgot_password/forgot_password_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class ForgotPasswordBlocListener extends StatelessWidget {
   const ForgotPasswordBlocListener({super.key});
@@ -23,9 +23,7 @@ class ForgotPasswordBlocListener extends StatelessWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) => const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF189AB4),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF189AB4)),
             ),
           );
         } else {

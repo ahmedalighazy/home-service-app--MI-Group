@@ -15,7 +15,7 @@ import 'verify_reset_code_hidden_input.dart';
 
 class VerifyResetCodeScaffold extends StatefulWidget {
   final String email;
-  static const int length = 4;
+  static const int length = 6;
 
   const VerifyResetCodeScaffold({super.key, required this.email});
 
@@ -28,7 +28,6 @@ class _VerifyResetCodeScaffoldState extends State<VerifyResetCodeScaffold>
     with SingleTickerProviderStateMixin {
   late AnimationController _shakeCtrl;
   late Animation<double> _shakeAnim;
-  ForgotPasswordState _previousState = ForgotPasswordInitial();
 
   @override
   void initState() {
@@ -47,17 +46,6 @@ class _VerifyResetCodeScaffoldState extends State<VerifyResetCodeScaffold>
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final state = context.watch<ForgotPasswordCubit>().state;
-    if (state is ResetCodeVerifyFailure &&
-        _previousState is! ResetCodeVerifyFailure) {
-      _shakeCtrl.forward(from: 0.0);
-    }
-    _previousState = state;
-  }
-
-  @override
   void dispose() {
     _shakeCtrl.dispose();
     super.dispose();
@@ -65,151 +53,244 @@ class _VerifyResetCodeScaffoldState extends State<VerifyResetCodeScaffold>
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ForgotPasswordCubit>();
-
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        leading: Padding(
-          padding: EdgeInsets.all(8.w),
-          child: CustomBackArrowButton(),
+    return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
+      listenWhen: (previous, current) =>
+          current is ResetCodeVerifyFailure &&
+          previous is! ResetCodeVerifyFailure,
+      listener: (context, state) {
+        _shakeCtrl.forward(from: 0.0);
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          leading: Padding(
+            padding: EdgeInsets.all(8.w),
+            child: CustomBackArrowButton(),
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
-                      padding: EdgeInsets.symmetric(horizontal: 24.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SizedBox(height: 16.h),
-                          VerifyResetCodeHeader(email: widget.email),
-                          SizedBox(height: 36.h),
-                          GestureDetector(
-                            onTap: () => cubit.resetFocusNode.requestFocus(),
-                            child: AnimatedBuilder(
-                              animation: _shakeAnim,
-                              builder: (context, _) =>
-                                  BlocSelector<
-                                    ForgotPasswordCubit,
-                                    ForgotPasswordState,
-                                    OtpFieldState
-                                  >(
-                                    selector: (s) => s is ResetCodeVerifySuccess
-                                        ? OtpFieldState.success
-                                        : s is ResetCodeVerifyFailure
-                                        ? OtpFieldState.error
-                                        : OtpFieldState.idle,
-                                    builder: (context, fieldState) =>
-                                        OtpInputRow(
-                                          digits: cubit.resetCodeCtrl.text,
-                                          length:
-                                              VerifyResetCodeScaffold.length,
-                                          fieldState: fieldState,
-                                          shakeAnimation: _shakeAnim,
-                                          onTap: () => cubit.resetFocusNode
-                                              .requestFocus(),
-                                        ),
-                                  ),
-                            ),
-                          ),
-                          SizedBox(height: 20.h),
-                          BlocSelector<
-                            ForgotPasswordCubit,
-                            ForgotPasswordState,
-                            bool
-                          >(
-                            selector: (s) => s is ResetCodeVerifyFailure,
-                            builder: (context, isError) {
-                              if (!isError) return const SizedBox.shrink();
-                              return Padding(
-                                padding: EdgeInsets.only(bottom: 8.h),
-                                child: Text(
-                                  context.tr('otpCodeError'),
-                                  textAlign: TextAlign.center,
-                                  style: AppText.ibmError12(),
-                                ),
-                              );
-                            },
-                          ),
-                          SizedBox(height: 12.h),
-                          BlocSelector<
-                            ForgotPasswordCubit,
-                            ForgotPasswordState,
-                            bool
-                          >(
-                            selector: (s) => s is ResetCodeVerifyLoading,
-                            builder: (context, isLoading) =>
-                                VerifyResetCodeResendRow(
-                                  isLoading: isLoading,
-                                  onResend: () {
-                                    cubit.resetCodeCtrl.clear();
-                                    cubit.sendResetCode(widget.email);
-                                    cubit.resetFocusNode.requestFocus();
-                                  },
-                                ),
-                          ),
-                          SizedBox(height: 32.h),
-                        ],
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        padding: EdgeInsets.symmetric(horizontal: 24.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SizedBox(height: 16.h),
+                            VerifyResetCodeHeader(email: widget.email),
+                            SizedBox(height: 36.h),
+                            _ResetCodeInputSection(shakeAnim: _shakeAnim),
+                            SizedBox(height: 20.h),
+                            const _ResetCodeErrorText(),
+                            SizedBox(height: 12.h),
+                            _ResetCodeTimerSection(email: widget.email),
+                            SizedBox(height: 32.h),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
-                    child:
-                        BlocSelector<
-                          ForgotPasswordCubit,
-                          ForgotPasswordState,
-                          _ResetCodeBtnData
-                        >(
-                          selector: (s) {
-                            final isError = s is ResetCodeVerifyFailure;
-                            return _ResetCodeBtnData(
-                              isLoading: s is ResetCodeVerifyLoading,
-                              isSuccess: s is ResetCodeVerifySuccess,
-                              isError: isError,
-                            );
-                          },
-                          builder: (context, data) {
-                            final digitsLen = cubit.resetCodeCtrl.text.length;
-                            return OtpConfirmButton(
-                              label: context.tr('confirm'),
-                              isLoading: data.isLoading,
-                              isSuccess: data.isSuccess,
-                              onPressed:
-                                  digitsLen == VerifyResetCodeScaffold.length
-                                  ? () {
-                                      cubit.resetFocusNode.unfocus();
-                                      cubit.verifyResetCode(
-                                        widget.email,
-                                        cubit.resetCodeCtrl.text,
-                                      );
-                                    }
-                                  : () {},
-                              isEnabled:
-                                  digitsLen == VerifyResetCodeScaffold.length &&
-                                  !data.isError,
-                            );
-                          },
-                        ),
-                  ),
-                ],
+                    _ResetCodeConfirmButton(email: widget.email),
+                  ],
+                ),
               ),
+              const VerifyResetCodeHiddenInput(
+                length: VerifyResetCodeScaffold.length,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ResetCodeInputSection extends StatelessWidget {
+  final Animation<double> shakeAnim;
+
+  const _ResetCodeInputSection({required this.shakeAnim});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<ForgotPasswordCubit>();
+    final fieldState = context.select<ForgotPasswordCubit, OtpFieldState>(
+      (c) => c.state is ResetCodeVerifySuccess
+          ? OtpFieldState.success
+          : c.state is ResetCodeVerifyFailure
+          ? OtpFieldState.error
+          : OtpFieldState.idle,
+    );
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: cubit.resetCodeCtrl,
+      builder: (context, value, _) {
+        final digits = value.text;
+        return GestureDetector(
+          onTap: () => cubit.resetFocusNode.requestFocus(),
+          child: AnimatedBuilder(
+            animation: shakeAnim,
+            builder: (context, _) => OtpInputRow(
+              digits: digits,
+              length: VerifyResetCodeScaffold.length,
+              fieldState: fieldState,
+              shakeAnimation: shakeAnim,
+              onTap: () => cubit.resetFocusNode.requestFocus(),
             ),
-            VerifyResetCodeHiddenInput(length: VerifyResetCodeScaffold.length),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ResetCodeErrorText extends StatelessWidget {
+  const _ResetCodeErrorText();
+
+  @override
+  Widget build(BuildContext context) {
+    final isError = context.select<ForgotPasswordCubit, bool>(
+      (c) => c.state is ResetCodeVerifyFailure,
+    );
+    if (!isError) return const SizedBox.shrink();
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.h),
+      child: Text(
+        context.tr('otpCodeError'),
+        textAlign: TextAlign.center,
+        style: AppText.ibmError12(),
+      ),
+    );
+  }
+}
+
+class _ResetCodeTimerSection extends StatelessWidget {
+  final String email;
+
+  const _ResetCodeTimerSection({required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<ForgotPasswordCubit>();
+    final canResend = context.select<ForgotPasswordCubit, bool>(
+      (c) => c.resetCodeCanResend,
+    );
+    final secondsLeft = context.select<ForgotPasswordCubit, int>(
+      (c) => c.resetCodeSecondsLeft,
+    );
+    final isLoading = context.select<ForgotPasswordCubit, bool>(
+      (c) => c.state is ResetCodeSendLoading,
+    );
+
+    return Column(
+      children: [
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: !canResend
+              ? Text(
+                  '${secondsLeft ~/ 60}:${(secondsLeft % 60).toString().padLeft(2, '0')}',
+                  key: const ValueKey('timer'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.gray, fontSize: 14.sp),
+                )
+              : const SizedBox.shrink(key: ValueKey('empty')),
+        ),
+        SizedBox(height: 10.h),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (isLoading)
+              SizedBox(
+                width: 16.sp,
+                height: 16.sp,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: AppColors.greenPrimary,
+                ),
+              )
+            else ...[
+              GestureDetector(
+                onTap: canResend
+                    ? () {
+                        cubit.resetCodeCtrl.clear();
+                        cubit.resendResetCode(email);
+                        cubit.resetFocusNode.requestFocus();
+                      }
+                    : null,
+                child: Text(
+                  context.tr('resendCodeLink'),
+                  style: TextStyle(
+                    color: canResend
+                        ? AppColors.greenPrimary
+                        : AppColors.placeholder,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.bold,
+                    decoration: canResend
+                        ? TextDecoration.underline
+                        : TextDecoration.none,
+                    decorationColor: AppColors.greenPrimary,
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  ' ${context.tr('resendCodePrompt')}',
+                  style: TextStyle(color: AppColors.gray, fontSize: 13.sp),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
           ],
         ),
+      ],
+    );
+  }
+}
+
+class _ResetCodeConfirmButton extends StatelessWidget {
+  final String email;
+
+  const _ResetCodeConfirmButton({required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<ForgotPasswordCubit>();
+    final btnData = context.select<ForgotPasswordCubit, _ResetCodeBtnData>((c) {
+      final s = c.state;
+      final isError = s is ResetCodeVerifyFailure;
+      return _ResetCodeBtnData(
+        isLoading: s is ResetCodeVerifyLoading,
+        isSuccess: s is ResetCodeVerifySuccess,
+        isError: isError,
+      );
+    });
+    return Padding(
+      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+      child: ValueListenableBuilder<TextEditingValue>(
+        valueListenable: cubit.resetCodeCtrl,
+        builder: (context, value, _) {
+          final digitsLen = value.text.length;
+          return OtpConfirmButton(
+            label: context.tr('confirm'),
+            isLoading: btnData.isLoading,
+            isSuccess: btnData.isSuccess,
+            isEnabled:
+                digitsLen == VerifyResetCodeScaffold.length && !btnData.isError,
+            onPressed: digitsLen == VerifyResetCodeScaffold.length
+                ? () {
+                    cubit.resetFocusNode.unfocus();
+                    cubit.passwordVerifyOtp(email, value.text);
+                  }
+                : () {},
+          );
+        },
       ),
     );
   }
@@ -224,4 +305,15 @@ class _ResetCodeBtnData {
     required this.isSuccess,
     required this.isError,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _ResetCodeBtnData &&
+          isLoading == other.isLoading &&
+          isSuccess == other.isSuccess &&
+          isError == other.isError;
+
+  @override
+  int get hashCode => Object.hashAll([isLoading, isSuccess, isError]);
 }

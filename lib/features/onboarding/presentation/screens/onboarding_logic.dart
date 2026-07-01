@@ -43,7 +43,7 @@ mixin OnboardingLogic<T extends StatefulWidget> on State<T> {
 
   void finishOnboarding() {
     _resetAnimation();
-    CacheHelper.saveData(key: 'onBoarding', value: true).then((saved) {
+    CacheHelper.saveData('onBoarding', true).then((saved) {
       if (!mounted) return;
       if (saved) {
         GoRouter.of(context).go(AppRouter.signUp);

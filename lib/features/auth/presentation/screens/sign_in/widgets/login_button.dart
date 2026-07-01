@@ -8,10 +8,7 @@ import 'package:home_service_app/features/auth/presentation/widgets/auth_primary
 class LoginButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const LoginButton({
-    super.key,
-    required this.onPressed,
-  });
+  const LoginButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

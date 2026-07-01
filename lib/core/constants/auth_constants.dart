@@ -3,7 +3,7 @@ class AuthConstants {
 
   static const int otpCodeLength = 6;
 
-  static const int otpTimerSeconds = 59;
+  static const int otpTimerSeconds = 600;
 
   static const int shakeAnimationDuration = 600;
 

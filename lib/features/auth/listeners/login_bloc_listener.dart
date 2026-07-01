@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/login/login_cubit.dart';
 import '../cubit/login/login_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
@@ -24,9 +24,7 @@ class LoginBlocListener extends StatelessWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) => const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF189AB4),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF189AB4)),
             ),
           );
         } else {

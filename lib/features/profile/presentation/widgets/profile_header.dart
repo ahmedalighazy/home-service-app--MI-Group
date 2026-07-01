@@ -19,19 +19,18 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unreadCount = context
-        .watch<NotificationCubit>()
-        .state
-        .notifications
-        .where((notification) => !notification.isRead)
-        .length;
+    // final unreadCount = context
+    //     .read<NotificationCubit>()
+    //     .state
+    //     .notifications
+    //     .where((notification) => !notification.isRead)
+    //     .length;
     return Column(
       children: [
         ClipPath(
           clipper: BottomCurveClipper(),
           child: Container(
-            height:
-                height(context) * 0.28,
+            height: height(context) * 0.28,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -60,7 +59,7 @@ class ProfileHeader extends StatelessWidget {
 
                     NotificationBell(
                       onTap: () => context.push(AppRouter.notification),
-                      count: unreadCount,
+                      count: 5,
                     ),
                   ],
                 ),

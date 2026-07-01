@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../cubit/register/register_cubit.dart';
 import '../cubit/register/register_state.dart';
-import '../helpers/app_snackbar.dart';
+import '../../../core/utils/helpers/app_snackbar.dart';
 
 class RegisterBlocListener extends StatelessWidget {
   const RegisterBlocListener({super.key});
@@ -23,9 +23,7 @@ class RegisterBlocListener extends StatelessWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) => const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF189AB4),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF189AB4)),
             ),
           );
         } else {
