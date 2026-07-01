@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/set_new_password_bloc_listener.dart';
+import 'package:home_service_app/features/auth/listeners/set_new_password_listener.dart';
 import 'widgets/set_new_password_scaffold.dart';
 
 class SetNewPasswordScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class SetNewPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SetNewPasswordBlocListener(
+    return SetNewPasswordListener(
       child: SetNewPasswordScaffold(email: email, code: code),
     );
   }

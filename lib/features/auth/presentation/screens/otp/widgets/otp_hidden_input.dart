@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'otp_field_state.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
 
 class OtpHiddenInput extends StatelessWidget {
-  const OtpHiddenInput({super.key});
+  final String email;
+
+  const OtpHiddenInput({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<AuthCubit>();
+    final cubit = context.read<RegisterCubit>();
 
     return Positioned(
       left: -9999,
@@ -31,11 +32,6 @@ class OtpHiddenInput extends StatelessWidget {
               const InputDecoration(border: InputBorder.none, counterText: ''),
           style: const TextStyle(color: Colors.transparent, fontSize: 1),
           cursorColor: Colors.transparent,
-          onChanged: (val) {
-            if (cubit.otpFieldState == OtpFieldState.error) {
-              cubit.setOtpFieldState(OtpFieldState.idle);
-            }
-          },
         ),
       ),
     );

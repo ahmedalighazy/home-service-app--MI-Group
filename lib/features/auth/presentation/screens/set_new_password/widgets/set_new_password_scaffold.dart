@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_state.dart';
 import 'set_new_widgets.dart';
-import 'set_new_password_bloc_listener.dart';
 
 class SetNewPasswordScaffold extends StatelessWidget {
   final String email;
@@ -20,16 +20,7 @@ class SetNewPasswordScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.isLoading;
-    final isError = cubit.isNewPasswordError();
-    final isSuccess = cubit.isNewPasswordSuccess();
-
-    Color getBorderColor() {
-      if (isError) return AppColors.errorRed;
-      if (isSuccess) return AppColors.greenPrimary;
-      return AppColors.borderInputs;
-    }
+    final cubit = context.read<ForgotPasswordCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -41,85 +32,122 @@ class SetNewPasswordScaffold extends StatelessWidget {
           child: CustomBackArrowButton(),
         ),
       ),
-      body: SetNewPasswordBlocListener(
-        child: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 20),
-                          Text(
-                            context.tr('setNewPasswordTitle'),
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        Text(
+                          context.tr('setNewPasswordTitle'),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            context.tr('setNewPasswordDescription'),
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey,
-                              height: 1.5,
-                            ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          context.tr('setNewPasswordDescription'),
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                            height: 1.5,
                           ),
-                          const SizedBox(height: 32),
-                          PasswordInputField(
-                            title: context.tr('passwordLabel'),
-                            hintText: context.tr('passwordPlaceholder'),
-                            controller: cubit.newPasswordCtrl,
-                            obscureText: cubit.obscureNewPassword,
-                            borderColor: getBorderColor(),
-                            onObscurePressed: cubit.toggleNewPasswordObscure,
+                        ),
+                        const SizedBox(height: 32),
+                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, Color>(
+                          selector: (_) => _borderColor(cubit),
+                          builder: (context, borderColor) => Column(
+                            children: [
+                              PasswordInputField(
+                                title: context.tr('passwordLabel'),
+                                hintText: context.tr('passwordPlaceholder'),
+                                controller: cubit.newPasswordCtrl,
+                                obscureText: false,
+                                borderColor: borderColor,
+                                onObscurePressed: () {},
+                              ),
+                              SizedBox(height: 20.h),
+                              PasswordInputField(
+                                title: context.tr('confirmPasswordLabel'),
+                                hintText:
+                                    context.tr('confirmPasswordPlaceholder'),
+                                controller: cubit.confirmPasswordCtrl,
+                                obscureText: false,
+                                borderColor: borderColor,
+                                onObscurePressed: () {},
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 20),
-                          PasswordInputField(
-                            title: context.tr('confirmPasswordLabel'),
-                            hintText: context.tr('confirmPasswordPlaceholder'),
-                            controller: cubit.confirmPasswordCtrl,
-                            obscureText: cubit.obscureConfirmNewPassword,
-                            borderColor: getBorderColor(),
-                            onObscurePressed:
-                                cubit.toggleConfirmNewPasswordObscure,
+                        ),
+                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, bool>(
+                          selector: (_) => cubit.isNewPasswordError(),
+                          builder: (context, isError) {
+                            if (!isError) return const SizedBox.shrink();
+                            return const SetNewPasswordErrorText();
+                          },
+                        ),
+                        const Spacer(),
+                        const SizedBox(height: 20),
+                        BlocSelector<ForgotPasswordCubit, ForgotPasswordState, _NewPassBtnData>(
+                          selector: (s) => _NewPassBtnData(
+                            isLoading: s is PasswordResetLoading,
+                            isSuccess: s is PasswordResetSuccess,
+                            isPasswordsValid: cubit.newPasswordCtrl.text.isNotEmpty &&
+                                cubit.newPasswordCtrl.text == cubit.confirmPasswordCtrl.text,
                           ),
-                          if (isError) const SetNewPasswordErrorText(),
-                          const Spacer(),
-                          const SizedBox(height: 20),
-                          SetNewPasswordButton(
-                            isSuccess: isSuccess,
-                            isLoading: isLoading,
-                            onPressed: () {
-                              final pass =
-                                  cubit.newPasswordCtrl.text;
-                              if (pass.isEmpty ||
-                                  pass != cubit.confirmPasswordCtrl.text) { return; }
-                              cubit.resetPassword(
-                                email: email,
-                                otp: code,
-                                newPassword: pass,
-                              );
-                            },
+                          builder: (context, data) => SetNewPasswordButton(
+                            isSuccess: data.isSuccess,
+                            isLoading: data.isLoading,
+                            onPressed: data.isPasswordsValid
+                                ? () {
+                                    cubit.resetPassword(
+                                      email: email,
+                                      otp: code,
+                                      newPassword: cubit.newPasswordCtrl.text,
+                                    );
+                                  }
+                                : null,
                           ),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
+
+  Color _borderColor(ForgotPasswordCubit cubit) {
+    final isError = cubit.isNewPasswordError();
+    final isSuccess = cubit.isNewPasswordSuccess();
+    if (isError) return AppColors.errorRed;
+    if (isSuccess) return AppColors.greenPrimary;
+    return AppColors.borderInputs;
+  }
+}
+
+class _NewPassBtnData {
+  final bool isLoading;
+  final bool isSuccess;
+  final bool isPasswordsValid;
+  const _NewPassBtnData({
+    required this.isLoading,
+    required this.isSuccess,
+    required this.isPasswordsValid,
+  });
 }

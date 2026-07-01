@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 import 'sign_in_header.dart';
 import 'email_input_field.dart';
 import 'password_input_field.dart';
@@ -9,16 +10,12 @@ import 'social_sign_in_buttons.dart';
 import 'footer_link.dart';
 import '../../../widgets/auth_or_divider.dart';
 import '../../../widgets/terms_and_privacy_text.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
 
 class SignInBody extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final bool rememberMe;
-  final bool hasError;
-  final bool isLoading;
   final VoidCallback onLogin;
-  final ValueChanged<String> onFieldChanged;
   final ValueChanged<bool?> onRememberChanged;
   final VoidCallback onForgotPassword;
   final VoidCallback onGoogleSignIn;
@@ -30,10 +27,7 @@ class SignInBody extends StatelessWidget {
     required this.emailController,
     required this.passwordController,
     required this.rememberMe,
-    required this.hasError,
-    required this.isLoading,
     required this.onLogin,
-    required this.onFieldChanged,
     required this.onRememberChanged,
     required this.onForgotPassword,
     required this.onGoogleSignIn,
@@ -54,16 +48,15 @@ class SignInBody extends StatelessWidget {
           SizedBox(height: 32.h),
           EmailInputField(
             controller: emailController,
-            onChanged: onFieldChanged,
+            onChanged: (_) {},
           ),
           SizedBox(height: 16.h),
           PasswordInputField(
             controller: passwordController,
-            hasError: hasError,
-            onChanged: onFieldChanged,
+            onChanged: (_) {},
           ),
           SizedBox(height: 24.h),
-          LoginButton(isLoading: isLoading, onPressed: onLogin),
+          LoginButton(onPressed: onLogin),
           SizedBox(height: 16.h),
           RememberMeSection(
             rememberMe: rememberMe,

@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
+import 'package:home_service_app/features/auth/listeners/forgot_password_bloc_listener.dart';
 import 'forget_pass_widget.dart';
-import 'forget_password_bloc_listener.dart';
 
 class ForgetScreenContent extends StatelessWidget {
   const ForgetScreenContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
+    final cubit = context.read<ForgotPasswordCubit>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -48,7 +48,7 @@ class ForgetScreenContent extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: 32.h),
-                        const ForgetPasswordBlocListener(),
+                        const ForgotPasswordBlocListener(),
                       ],
                     ),
                   ),

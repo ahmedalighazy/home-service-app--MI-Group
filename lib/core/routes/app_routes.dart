@@ -9,6 +9,9 @@ import 'package:home_service_app/features/service_details/presentation/views/wor
 import 'package:home_service_app/features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import 'package:home_service_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:home_service_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:home_service_app/features/auth/cubit/login/login_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_in/sign_in_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_up/sign_up_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/otp_screen.dart';
@@ -103,46 +106,62 @@ class AppRouter {
         path: updatePasswordScreen,
         builder: (context, state) => const UpdatePasswordScreen(),
       ),
-      GoRoute(path: signUp, builder: (context, state) => const SignUpScreen()),
-      GoRoute(path: signIn, builder: (context, state) => const SignInScreen()),
-      GoRoute(
-        path: otp,
-        builder: (context, state) =>
-            OtpScreen(email: state.extra as String? ?? ''),
-      ),
-      GoRoute(
-        path: completeProfile,
-        builder: (context, state) =>
-            CompleteProfileScreen(email: state.extra as String?),
-      ),
-      GoRoute(
-        path: forgetPassword,
-        builder: (context, state) => const ForgetScreen(),
-      ),
-      GoRoute(
-        path: verifyResetCode,
-        builder: (context, state) =>
-            VerifyResetCodeScreen(email: state.extra as String? ?? ''),
-      ),
-      GoRoute(
-        path: checkYourEmail,
-        builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          return VerificationScreen(
-            email: extra?['email'] as String? ?? '',
-            code: extra?['code'] as String? ?? '',
-          );
-        },
-      ),
-      GoRoute(
-        path: setNewPassword,
-        builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          return SetNewPasswordScreen(
-            email: extra?['email'] as String? ?? '',
-            code: extra?['code'] as String? ?? '',
-          );
-        },
+      ShellRoute(
+        builder: (context, state, child) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => getIt<LoginCubit>()),
+            BlocProvider(create: (_) => getIt<RegisterCubit>()),
+            BlocProvider(create: (_) => getIt<ForgotPasswordCubit>()),
+          ],
+          child: child,
+        ),
+        routes: [
+          GoRoute(path: signUp, builder: (context, state) => const SignUpScreen()),
+          GoRoute(path: signIn, builder: (context, state) => const SignInScreen()),
+          GoRoute(
+            path: otp,
+            builder: (context, state) =>
+                OtpScreen(email: state.extra as String? ?? ''),
+          ),
+          GoRoute(
+            path: completeProfile,
+            builder: (context, state) =>
+                CompleteProfileScreen(email: state.extra as String?),
+          ),
+          GoRoute(
+            path: forgetPassword,
+            builder: (context, state) => const ForgetScreen(),
+          ),
+          GoRoute(
+            path: verifyResetCode,
+            builder: (context, state) =>
+                VerifyResetCodeScreen(email: state.extra as String? ?? ''),
+          ),
+          GoRoute(
+            path: checkYourEmail,
+            builder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              return VerificationScreen(
+                email: extra?['email'] as String? ?? '',
+                code: extra?['code'] as String? ?? '',
+              );
+            },
+          ),
+          GoRoute(
+            path: setNewPassword,
+            builder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              return SetNewPasswordScreen(
+                email: extra?['email'] as String? ?? '',
+                code: extra?['code'] as String? ?? '',
+              );
+            },
+          ),
+          GoRoute(
+            path: passwordChangedSuccessfully,
+            builder: (context, state) => const PasswordChangedSuccessfullyScreen(),
+          ),
+        ],
       ),
       GoRoute(path: home, builder: (context, state) => const MainShell()),
       GoRoute(
@@ -233,11 +252,6 @@ class AppRouter {
           create: (_) => SearchCubit(),
           child: const SearchPage(),
         ),
-      ),
-
-      GoRoute(
-        path: passwordChangedSuccessfully,
-        builder: (context, state) => const PasswordChangedSuccessfullyScreen(),
       ),
 
       GoRoute(

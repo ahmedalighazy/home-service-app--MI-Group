@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'otp_field_state.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_state.dart';
 
 class OtpTimerSection extends StatelessWidget {
   final String email;
@@ -13,7 +13,7 @@ class OtpTimerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
+    final cubit = context.read<RegisterCubit>();
 
     return Column(
       children: [
@@ -63,15 +63,20 @@ class OtpTimerSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 16.h),
-        if (cubit.otpFieldState == OtpFieldState.error)
-          Padding(
-            padding: EdgeInsets.only(bottom: 8.h),
-            child: Text(
-              context.tr('otpCodeError'),
-              textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.errorRed, fontSize: 12.sp),
-            ),
-          ),
+        BlocSelector<RegisterCubit, RegisterState, bool>(
+          selector: (state) => state is OtpVerifyFailure,
+          builder: (context, isError) {
+            if (!isError) return const SizedBox.shrink();
+            return Padding(
+              padding: EdgeInsets.only(bottom: 8.h),
+              child: Text(
+                context.tr('otpCodeError'),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: AppColors.errorRed, fontSize: 12.sp),
+              ),
+            );
+          },
+        ),
       ],
     );
   }

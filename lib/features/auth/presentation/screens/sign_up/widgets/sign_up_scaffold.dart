@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/login/login_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
+import 'package:home_service_app/features/auth/listeners/login_bloc_listener.dart';
+import 'package:home_service_app/features/auth/listeners/register_bloc_listener.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/sign_up_app_bar.dart';
 import 'sign_up_body.dart';
-import 'sign_up_bloc_listener.dart';
 
 class SignUpScaffold extends StatelessWidget {
   const SignUpScaffold({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.isLoading;
+    final registerCubit = context.read<RegisterCubit>();
+    final loginCubit = context.read<LoginCubit>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -24,21 +26,16 @@ class SignUpScaffold extends StatelessWidget {
           children: [
             Positioned.fill(
               child: SignUpBody(
-                emailController: cubit.signUpEmailCtrl,
-                hasError: cubit.signUpHasError,
-                errorMessage: cubit.signUpErrorMessage,
-                isLoading: isLoading,
-                onSendCode: () => cubit.sendSignUpSmsCode(),
-                onGoogleSignUp: () => cubit.signUpWithGoogle(),
-                onAppleSignUp: () => cubit.signUpWithApple(),
-                onGuestMode: () => cubit.loginAsGuest(),
+                emailController: registerCubit.signUpEmailCtrl,
+                onSendCode: () => registerCubit.sendSignUpSmsCode(),
+                onGoogleSignUp: () => loginCubit.signInWithGoogle(),
+                onAppleSignUp: () => loginCubit.signInWithApple(),
+                onGuestMode: () => loginCubit.loginAsGuest(),
                 onSignIn: () => context.go(AppRouter.signIn),
-                onEmailChanged: (_) {
-                  if (cubit.signUpHasError) cubit.setSignUpError(false, null);
-                },
               ),
             ),
-            const SignUpBlocListener(),
+            const RegisterBlocListener(),
+            const LoginBlocListener(),
           ],
         ),
       ),

@@ -2,27 +2,35 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_state.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_form_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
 import 'complete_profile_widget.dart';
 
-class CompleteProfileForm extends StatelessWidget {
+class CompleteProfileForm extends StatefulWidget {
   final String? email;
-  final bool isLoading;
 
   const CompleteProfileForm({
     super.key,
     required this.email,
-    required this.isLoading,
   });
 
   @override
+  State<CompleteProfileForm> createState() => _CompleteProfileFormState();
+}
+
+class _CompleteProfileFormState extends State<CompleteProfileForm> {
+  final _formKey = GlobalKey<FormState>();
+  bool _obscurePass = true;
+  bool _obscureConfirm = true;
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
+    final cubit = context.read<RegisterCubit>();
 
     return Form(
-      key: cubit.completeProfileFormKey,
+      key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -53,11 +61,11 @@ class CompleteProfileForm extends StatelessWidget {
           AuthFormField(
             label: context.tr('passwordLabel'),
             hint: context.tr('passwordPlaceholder'),
-            controller: cubit.passwordCtrl,
+            controller: cubit.newPasswordCtrl,
             prefixIcon: Icons.lock_outline_rounded,
             isPassword: true,
-            obscureText: cubit.obscureCompleteProfilePass,
-            onToggleObscure: cubit.toggleCompleteProfilePass,
+            obscureText: _obscurePass,
+            onToggleObscure: () => setState(() => _obscurePass = !_obscurePass),
             validator: (v) {
               if (v == null || v.isEmpty) return context.tr('passwordRequired');
               if (v.length < 6) return context.tr('passwordMinLength');
@@ -71,32 +79,62 @@ class CompleteProfileForm extends StatelessWidget {
             controller: cubit.confirmPasswordCtrl,
             prefixIcon: Icons.lock_outline_rounded,
             isPassword: true,
-            obscureText: cubit.obscureCompleteProfileConfirm,
-            onToggleObscure: cubit.toggleCompleteProfileConfirm,
+            obscureText: _obscureConfirm,
+            onToggleObscure: () => setState(() => _obscureConfirm = !_obscureConfirm),
             validator: (v) {
               if (v == null || v.isEmpty) return context.tr('confirmPasswordRequired');
-              if (v != cubit.passwordCtrl.text) return context.tr('errorPasswordsDoNotMatch');
+              if (v != cubit.newPasswordCtrl.text) return context.tr('errorPasswordsDoNotMatch');
               return null;
             },
           ),
           SizedBox(height: 32.h),
-          AuthPrimaryButton(
-            label: context.tr('completeRegistration'),
-            isLoading: isLoading,
-            onPressed: () {
-              if (!cubit.completeProfileFormKey.currentState!.validate()) return;
-              cubit.register(
-                name: cubit.nameCtrl.text.trim(),
-                email: cubit.emailCtrl.text.trim().isNotEmpty
-                    ? cubit.emailCtrl.text.trim()
-                    : (email ?? ''),
-                phone: '',
-                password: cubit.passwordCtrl.text,
-              );
-            },
+          _CompleteProfileSubmitButton(
+            email: widget.email,
+            formKey: _formKey,
+            nameCtrl: cubit.nameCtrl,
+            emailCtrl: cubit.emailCtrl,
+            newPasswordCtrl: cubit.newPasswordCtrl,
           ),
           SizedBox(height: 40.h),
         ],
+      ),
+    );
+  }
+}
+
+class _CompleteProfileSubmitButton extends StatelessWidget {
+  final String? email;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController nameCtrl;
+  final TextEditingController emailCtrl;
+  final TextEditingController newPasswordCtrl;
+
+  const _CompleteProfileSubmitButton({
+    required this.email,
+    required this.formKey,
+    required this.nameCtrl,
+    required this.emailCtrl,
+    required this.newPasswordCtrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<RegisterCubit, RegisterState, bool>(
+      selector: (state) => state is CompleteProfileLoading,
+      builder: (context, isLoading) => AuthPrimaryButton(
+        label: context.tr('completeRegistration'),
+        isLoading: isLoading,
+        onPressed: () {
+          if (!formKey.currentState!.validate()) return;
+          context.read<RegisterCubit>().completeRegistration(
+            email: emailCtrl.text.trim().isNotEmpty
+                ? emailCtrl.text.trim()
+                : (email ?? ''),
+            name: nameCtrl.text.trim(),
+            phone: '',
+            password: newPasswordCtrl.text,
+          );
+        },
       ),
     );
   }

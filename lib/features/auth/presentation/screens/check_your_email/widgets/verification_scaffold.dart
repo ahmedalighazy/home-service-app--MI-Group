@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'email_verification_form.dart';
 
 class VerificationScaffold extends StatelessWidget {
@@ -17,9 +15,6 @@ class VerificationScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.isLoading;
-
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -46,11 +41,7 @@ class VerificationScaffold extends StatelessWidget {
             child: IntrinsicHeight(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: EmailVerificationForm(
-                  email: email,
-                  isLoading: isLoading,
-                  cubit: cubit,
-                ),
+                child: EmailVerificationForm(email: email),
               ),
             ),
           ),

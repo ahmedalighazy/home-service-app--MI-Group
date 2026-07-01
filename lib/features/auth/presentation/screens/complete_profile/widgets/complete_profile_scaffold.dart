@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/widgets/custom_back_arrow_button.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/fade_slide_transition.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
@@ -16,9 +14,6 @@ class CompleteProfileScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.isLoading;
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -37,10 +32,7 @@ class CompleteProfileScaffold extends StatelessWidget {
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: CompleteProfileForm(
-              email: email,
-              isLoading: isLoading,
-            ),
+            child: CompleteProfileForm(email: email),
           ),
         ),
       ),

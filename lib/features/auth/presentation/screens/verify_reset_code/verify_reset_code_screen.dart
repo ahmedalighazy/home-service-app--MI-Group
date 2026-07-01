@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_app/features/auth/listeners/verify_reset_code_listener.dart';
 import 'widgets/verify_reset_code_scaffold.dart';
-import 'widgets/verify_reset_code_bloc_listener.dart';
 
 class VerifyResetCodeScreen extends StatelessWidget {
   final String email;
@@ -9,7 +9,7 @@ class VerifyResetCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VerifyResetCodeBlocListener(
+    return VerifyResetCodeListener(
       email: email,
       child: VerifyResetCodeScaffold(email: email),
     );

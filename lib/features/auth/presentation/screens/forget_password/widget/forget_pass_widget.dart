@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../core/themes/colors/app_colors.dart';
-import '../../../../../../core/themes/image/app_assets.dart';
-import '../../../../../../core/themes/text/app_text.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/image/app_assets.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_state.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/auth_primary_button.dart';
 
@@ -67,7 +68,7 @@ class ForgetSubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
       builder: (context, state) {
         final isLoading = state is ResetCodeSendLoading;
         return AuthPrimaryButton(

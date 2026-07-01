@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/complete_profile_bloc_listener.dart';
+import 'package:home_service_app/features/auth/listeners/complete_profile_listener.dart';
 import 'widgets/complete_profile_scaffold.dart';
 
 class CompleteProfileScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class CompleteProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CompleteProfileBlocListener(
+    return CompleteProfileListener(
       email: email,
       child: CompleteProfileScaffold(email: email),
     );

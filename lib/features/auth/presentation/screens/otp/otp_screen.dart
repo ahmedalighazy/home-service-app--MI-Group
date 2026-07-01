@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/otp_bloc_listener.dart';
+import 'package:home_service_app/features/auth/listeners/otp_listener.dart';
 import 'widgets/otp_scaffold.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OtpBlocListener(
+    return OtpListener(
       email: email,
       child: OtpScaffold(email: email),
     );

@@ -3,18 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
-import 'package:home_service_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/login/login_cubit.dart';
+import 'package:home_service_app/features/auth/listeners/login_bloc_listener.dart';
 import 'package:home_service_app/features/auth/presentation/widgets/sign_up_app_bar.dart';
 import 'sign_in_body.dart';
-import 'sign_in_bloc_listener.dart';
 
-class SignInScaffold extends StatelessWidget {
+class SignInScaffold extends StatefulWidget {
   const SignInScaffold({super.key});
 
   @override
+  State<SignInScaffold> createState() => _SignInScaffoldState();
+}
+
+class _SignInScaffoldState extends State<SignInScaffold> {
+  bool _rememberMe = false;
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<AuthCubit>();
-    final isLoading = cubit.isLoading;
+    final cubit = context.read<LoginCubit>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -29,24 +35,20 @@ class SignInScaffold extends StatelessWidget {
               child: SignInBody(
                 emailController: cubit.emailCtrl,
                 passwordController: cubit.passwordCtrl,
-                rememberMe: cubit.rememberMe,
-                hasError: cubit.hasSignInError,
-                isLoading: isLoading,
+                rememberMe: _rememberMe,
                 onLogin: () => cubit.login(
                   cubit.emailCtrl.text,
                   cubit.passwordCtrl.text,
                 ),
-                onFieldChanged: (_) {
-                  if (cubit.hasSignInError) cubit.setSignInError(false);
-                },
-                onRememberChanged: (val) => cubit.toggleRememberMe(val ?? false),
+                onRememberChanged: (val) =>
+                    setState(() => _rememberMe = val ?? false),
                 onForgotPassword: () => context.push(AppRouter.forgetPassword),
                 onGoogleSignIn: () => cubit.signInWithGoogle(),
                 onAppleSignIn: () => cubit.signInWithApple(),
                 onSignUp: () => context.go(AppRouter.signUp),
               ),
             ),
-            const SignInBlocListener(),
+            const LoginBlocListener(),
           ],
         ),
       ),

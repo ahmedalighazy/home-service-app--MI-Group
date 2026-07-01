@@ -50,7 +50,7 @@ class PasswordInputField extends StatelessWidget {
           child: TextField(
             controller: controller,
             obscureText: obscureText,
-            textAlign: context.watch<LanguageCubit>().state.isArabic
+            textAlign: context.select<LanguageCubit, bool>((c) => c.state.isArabic)
                 ? TextAlign.right
                 : TextAlign.left,
             decoration: InputDecoration(
@@ -86,7 +86,7 @@ class SetNewPasswordErrorText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Align(
-        alignment: context.watch<LanguageCubit>().state.isArabic
+        alignment: context.select<LanguageCubit, bool>((c) => c.state.isArabic)
             ? Alignment.centerRight
             : Alignment.centerLeft,
         child: Text(
@@ -154,7 +154,7 @@ class SetNewPasswordSuccessDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: context.watch<LanguageCubit>().state.isArabic
+      textDirection: context.select<LanguageCubit, bool>((c) => c.state.isArabic)
           ? TextDirection.rtl
           : TextDirection.ltr,
       child: Dialog(
