@@ -31,8 +31,6 @@ class RegisterBlocListener extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
           } catch (_) {}
           if (state is OtpSendSuccess) {
-            if (!context.mounted) return;
-
             context.push(AppRouter.otp, extra: state.email);
           } else if (state is OtpSendFailure) {
             AppSnackBar.showError(context, state.message);

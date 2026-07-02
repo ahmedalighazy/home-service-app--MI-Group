@@ -14,7 +14,6 @@ import 'core/utils/helpers/cache_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  GoogleFonts.config.allowRuntimeFetching = false;
   await CacheHelper.init();
   await setupGetIt();
 

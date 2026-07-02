@@ -274,12 +274,18 @@ class AuthRepo {
 
   Future<void> _cacheSession(LoginResponseModel response) async {
     if (response.token != null) {
+      // await CacheHelper.removeSecure(_tokenKey);
+
       await CacheHelper.setSecure(_tokenKey, response.token!);
     }
     if (response.refreshToken != null) {
+      // await CacheHelper.removeSecure(_refreshTokenKey);
+
       await CacheHelper.setSecure(_refreshTokenKey, response.refreshToken!);
     }
     if (response.email != null) {
+      // await CacheHelper.removeData(_emailKey);
+
       await CacheHelper.saveData(_emailKey, response.email!);
     }
   }

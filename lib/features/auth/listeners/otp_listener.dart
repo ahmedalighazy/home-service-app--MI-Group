@@ -46,7 +46,7 @@ class _OtpListenerState extends State<OtpListener> {
         if (state is OtpVerifySuccess) {
           Future.delayed(const Duration(milliseconds: 500), () {
             if (!context.mounted) return;
-            context.go(AppRouter.completeProfile, extra: widget.email);
+            context.push(AppRouter.completeProfile, extra: widget.email);
           });
         } else if (state is OtpVerifyFailure) {
           AppSnackBar.showError(context, state.message);

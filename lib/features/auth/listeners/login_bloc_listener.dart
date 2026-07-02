@@ -29,7 +29,9 @@ class LoginBlocListener extends StatelessWidget {
           );
         } else {
           try {
-            Navigator.of(context, rootNavigator: true).pop();
+            if (Navigator.of(context, rootNavigator: true).canPop()) {
+              Navigator.of(context, rootNavigator: true).pop();
+            }
           } catch (_) {}
           if (state is LoginSuccess) {
             if (!context.mounted) return;

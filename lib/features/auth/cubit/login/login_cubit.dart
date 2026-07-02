@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   final passwordCtrl = TextEditingController();
 
   Future<void> login(String identifier, String password) async {
-    if (identifier.trim().isEmpty || password.isEmpty) {
+    if (identifier.isEmpty || password.isEmpty) {
       emit(LoginFailure(message: 'Email and password are required'));
       return;
     }

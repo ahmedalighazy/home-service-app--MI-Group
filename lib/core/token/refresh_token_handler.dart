@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
 
 import '../network/api_constants.dart';
 import '../routes/app_routes.dart';
@@ -16,6 +15,7 @@ class RefreshTokenHandler {
   Completer<void>? _refreshCompleter;
 
   RefreshTokenHandler({required this.dio, required this.tokenManager});
+  bool _isRedirecting = false;
 
   Future<void> handleRefresh(
     DioException err,
@@ -137,10 +137,13 @@ class RefreshTokenHandler {
   }
 
   void _navigateToLogin() {
-    try {
-      // .go(AppRouter.signIn);
-    } catch (e) {
-      log('Navigation to login failed: $e');
-    }
+    if (_isRedirecting) return;
+
+    _isRedirecting = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppRouter.router.go(AppRouter.signIn);
+      _isRedirecting = false;
+    });
   }
 }

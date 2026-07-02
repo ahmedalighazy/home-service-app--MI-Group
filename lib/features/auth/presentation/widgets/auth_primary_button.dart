@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/themes/colors/app_colors.dart';
 import '../../../../core/themes/text/app_text.dart';
 
-
 class AuthPrimaryButton extends StatelessWidget {
   final String label;
   final bool isLoading;
@@ -20,7 +19,7 @@ class AuthPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool active = isEnabled && !isLoading;
+    final bool active = isEnabled;
 
     return GestureDetector(
       onTap: active ? onPressed : null,
@@ -49,21 +48,12 @@ class AuthPrimaryButton extends StatelessWidget {
               : [],
         ),
         child: Center(
-          child: isLoading
-              ? SizedBox(
-                  width: 22.w,
-                  height: 22.w,
-                  child: const CircularProgressIndicator(
-                    color: AppColors.white,
-                    strokeWidth: 2.5,
-                  ),
-                )
-              : Text(
-                  label,
-                  style: AppText.ibmButton16(
-                    color: isEnabled ? AppColors.white : AppColors.disabledText,
-                  ),
-                ),
+          child: Text(
+            label,
+            style: AppText.ibmButton16(
+              color: isEnabled ? AppColors.white : AppColors.disabledText,
+            ),
+          ),
         ),
       ),
     );

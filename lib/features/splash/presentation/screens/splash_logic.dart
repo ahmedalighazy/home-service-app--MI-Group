@@ -32,7 +32,7 @@ mixin SplashLogic<T extends StatefulWidget> on State<T> {
     log(loggedIn.toString());
 
     if (loggedIn) {
-      // GoRouter.of(context).go(AppRouter.home);
+      GoRouter.of(context).go(AppRouter.home);
     } else {
       final route = (onBoarding != null && onBoarding)
           ? AppRouter.signUp

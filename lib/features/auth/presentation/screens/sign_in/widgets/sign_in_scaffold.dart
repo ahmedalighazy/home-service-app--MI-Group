@@ -34,6 +34,7 @@ class _SignInScaffoldState extends State<SignInScaffold> {
             SignInBody(
               emailController: cubit.emailCtrl,
               passwordController: cubit.passwordCtrl,
+
               rememberMe: _rememberMe,
               onLogin: () =>
                   cubit.login(cubit.emailCtrl.text, cubit.passwordCtrl.text),

@@ -46,13 +46,19 @@ class _AuthTextFieldState extends State<AuthTextField> {
     final borderColor = widget.hasError
         ? AppColors.errorRed
         : _isFocused
-            ? AppColors.greenPrimary
-            : AppColors.borderInputs;
+        ? AppColors.greenPrimary
+        : AppColors.borderInputs;
 
     return Column(
-      crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: isArabic
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
-        _TextFieldLabel(label: widget.label, optional: widget.optional, hasError: widget.hasError),
+        _TextFieldLabel(
+          label: widget.label,
+          optional: widget.optional,
+          hasError: widget.hasError,
+        ),
         SizedBox(height: 8.h),
         Focus(
           onFocusChange: (focused) => setState(() => _isFocused = focused),
@@ -61,7 +67,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(color: borderColor, width: _isFocused ? 1.5 : 1.0),
+              border: Border.all(
+                color: borderColor,
+                width: _isFocused ? 1.5 : 1.0,
+              ),
               boxShadow: _isFocused
                   ? [
                       BoxShadow(
@@ -100,7 +109,11 @@ class _TextFieldLabel extends StatelessWidget {
   final bool optional;
   final bool hasError;
 
-  const _TextFieldLabel({required this.label, required this.optional, required this.hasError});
+  const _TextFieldLabel({
+    required this.label,
+    required this.optional,
+    required this.hasError,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -166,13 +179,18 @@ class _TextFieldInput extends StatelessWidget {
           hintText: hint,
           hintStyle: AppText.ibmPlaceholder14(),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 14.h,
+          ),
           prefixIcon: maxLines > 1
               ? null
               : Icon(
                   prefixIcon,
                   size: 20.sp,
-                  color: isFocused ? AppColors.greenPrimary : AppColors.placeholder,
+                  color: isFocused
+                      ? AppColors.greenPrimary
+                      : AppColors.placeholder,
                 ),
           suffixIcon: showObscure
               ? IconButton(
@@ -204,10 +222,7 @@ class _TextFieldError extends StatelessWidget {
       padding: EdgeInsets.only(top: 6.h),
       child: Align(
         alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
-        child: Text(
-          message,
-          style: AppText.ibmError12(),
-        ),
+        child: Text(message, style: AppText.ibmError12()),
       ),
     );
   }
