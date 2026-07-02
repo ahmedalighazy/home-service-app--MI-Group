@@ -7,11 +7,13 @@ import '../../../../core/widgets/custom_text_field.dart';
 class PasswordTextField extends StatefulWidget {
   final String label;
   final String hintText;
+  final TextEditingController? controller;
 
   const PasswordTextField({
     super.key,
     required this.label,
     required this.hintText,
+    this.controller,
   });
 
   @override
@@ -24,6 +26,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+      controller: widget.controller,
       label: widget.label,
       hintText: widget.hintText,
       obscureText: _obscureText,

@@ -55,22 +55,32 @@ class ProfileCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    style: AppText.semiBoldText(
-                      color: AppColors.headingText,
-                      fontSize: 12,
+                  if (state is ProfileLoading)
+                    const Center(
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    )
+                  else ...[
+                    Text(
+                      name,
+                      style: AppText.semiBoldText(
+                        color: AppColors.headingText,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  verticalSpace(5),
-                  Text(
-                    phone,
-                    textDirection: TextDirection.ltr,
-                    style: AppText.regularText(
-                      color: AppColors.secondaryText,
-                      fontSize: 12,
+                    verticalSpace(5),
+                    Text(
+                      phone,
+                      textDirection: TextDirection.ltr,
+                      style: AppText.regularText(
+                        color: AppColors.secondaryText,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
               horizontalSpace(20),

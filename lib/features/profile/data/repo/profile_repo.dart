@@ -10,8 +10,8 @@ class ProfileRepo {
 
   ProfileRepo(this._apiService);
 
-  // ======================== Get Profile =======================
-  /// جلب بيانات البروفايل الخاصة بالمستخدم الحالي
+
+
   Future<ApiResult<ProfileResponses>> getProfile() async {
     try {
       final response = await _apiService.getProfile();
@@ -21,8 +21,8 @@ class ProfileRepo {
     }
   }
 
-  // ======================== Update Profile =======================
-  /// تحديث بيانات البروفايل
+
+
   Future<ApiResult<UpdateResponses>> updateProfile({
     String? name,
     String? phone,
@@ -43,8 +43,8 @@ class ProfileRepo {
     }
   }
 
-  // ======================== Change Password =======================
-  /// تغيير كلمة المرور
+
+
   Future<ApiResult<void>> changePassword({
     required String currentPassword,
     required String newPassword,
@@ -62,8 +62,8 @@ class ProfileRepo {
     }
   }
 
-  // ======================== Delete Account =======================
-  /// حذف الحساب
+
+
   Future<ApiResult<void>> deleteAccount() async {
     try {
       await _apiService.deleteAccount();

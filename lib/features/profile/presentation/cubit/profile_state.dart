@@ -13,7 +13,7 @@ final class ProfileInitial extends ProfileState {}
 final class ProfileLoading extends ProfileState {}
 
 final class ProfileLoaded extends ProfileState {
-  final ProfileResponses profile;
+  final ProfileEntity profile;
   const ProfileLoaded(this.profile);
 
   @override
@@ -32,11 +32,11 @@ final class ProfileError extends ProfileState {
 final class ProfileUpdateLoading extends ProfileState {}
 
 final class ProfileUpdateSuccess extends ProfileState {
-  final UpdateResponses response;
-  const ProfileUpdateSuccess(this.response);
+  final ProfileEntity profile;
+  const ProfileUpdateSuccess(this.profile);
 
   @override
-  List<Object?> get props => [response];
+  List<Object?> get props => [profile];
 }
 
 final class ProfileUpdateError extends ProfileState {

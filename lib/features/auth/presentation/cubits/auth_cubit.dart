@@ -135,6 +135,9 @@ class AuthCubit extends Cubit<AuthState> {
     ) async {
       await CacheHelper.saveData(key: 'token', value: loginResponse.token);
 
+      // Save email for later use (e.g., splash screen)
+      await CacheHelper.saveData(key: 'email', value: loginResponse.email);
+
       print("Saved Token => ${CacheHelper.getData(key: 'token')}");
 
       await CacheHelper.saveData(

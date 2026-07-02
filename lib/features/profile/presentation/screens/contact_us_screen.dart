@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -35,14 +36,24 @@ class ContactUsScreen extends StatelessWidget {
               title: context.tr(LocaleKeys.profileCustomerServiceNumberLabel),
               value: context.tr(LocaleKeys.profileCustomerServiceNumber),
               icon: IconsPath.phone,
-              onCopy: () {},
+              onCopy: () {
+                Clipboard.setData(ClipboardData(text: context.tr(LocaleKeys.profileCustomerServiceNumber)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('تم النسخ بنجاح ✓')),
+                );
+              },
             ),
             verticalSpace(16),
             ContactCard(
               title: context.tr(LocaleKeys.profileEmailAddressLabel),
               value: context.tr(LocaleKeys.profileSupportEmailAddress),
               icon: IconsPath.email,
-              onCopy: () {},
+              onCopy: () {
+                Clipboard.setData(ClipboardData(text: context.tr(LocaleKeys.profileSupportEmailAddress)));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('تم النسخ بنجاح ✓')),
+                );
+              },
             ),
             const Spacer(),
             const ContactUsFooterNote(),

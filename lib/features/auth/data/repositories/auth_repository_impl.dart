@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:home_service_app/features/auth/data/models/request/login_request_model.dart';
 import 'package:home_service_app/features/auth/domain/entities/login_response_entity.dart';
@@ -343,6 +344,26 @@ class AuthRepositoryImpl implements AuthRepository {
 
   /// Handle different types of exceptions and return appropriate error messages
   String _handleException(Exception e) {
+    // Extract real server error message from DioException first
+    if (e is DioException) {
+      final data = e.response?.data;
+      if (data is Map && data['message'] != null) {
+        return data['message'].toString();
+      }
+      // Fallback based on status code
+      final statusCode = e.response?.statusCode;
+      if (statusCode == 401) return 'كلمة المرور غير صحيحة';
+      if (statusCode == 400) return 'البيانات المدخلة غير صحيحة';
+      if (statusCode == 404) return 'الحساب غير موجود';
+      if (statusCode == 500) return 'خطأ في الخادم، حاول لاحقاً';
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        return 'انتهت مهلة الاتصال، تحقق من الإنترنت';
+      }
+      if (e.type == DioExceptionType.connectionError) {
+        return 'لا يوجد اتصال بالإنترنت';
+      }
+    }
     if (e is NetworkException) {
       return 'خطأ في الاتصال بالإنترنت';
     } else if (e is ServerException) {

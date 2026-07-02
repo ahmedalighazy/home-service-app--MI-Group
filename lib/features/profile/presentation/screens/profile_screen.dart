@@ -14,13 +14,27 @@ import '../widgets/profile_card.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/setting_group_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final cubit = getIt<ProfileCubit>();
+    if (cubit.state is ProfileInitial || cubit.state is ProfileError) {
+      cubit.getProfile();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<ProfileCubit>()..getProfile(),
+    return BlocProvider.value(
+      value: getIt<ProfileCubit>(),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(

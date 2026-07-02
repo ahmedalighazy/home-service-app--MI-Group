@@ -1,14 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 
 class ApiInterceptor extends Interceptor {
+  // Auth endpoints that should NOT have Authorization header
+  static const _publicPaths = ['/auth/login', '/auth/register'];
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers.addAll({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    options.headers["Authorization"] =
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoic3RyaW5nIiwiaWQiOiI3ZTA1OTc0ZC02MTViLTRiNTktODJhNC1lNzA4ZTU5MzM0NjIiLCJzdWIiOiJtamFkMzc3N0BnbWFpbC5jb20iLCJpYXQiOjE3ODI4MjI4NTgsImV4cCI6MTgxNDM1ODg1OH0.of7Qd0Y7zePpkBiIrxPvWoq85-E4OdfSLYYWyUO5JQk";
+
+    // Only add token for protected routes
+    final isPublicPath = _publicPaths.any((p) => options.path.contains(p));
+    if (!isPublicPath) {
+      final token = CacheHelper.getData(key: 'token');
+      if (token != null && token.toString().isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
+    }
+
     super.onRequest(options, handler);
   }
 }

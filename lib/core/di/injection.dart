@@ -3,7 +3,12 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/profile/data/repo/profile_repo.dart';
+import '../../features/profile/data/repositories/profile_repository_impl.dart';
+import '../../features/profile/domain/repositories/profile_repository.dart';
+import '../../features/profile/domain/usecases/get_profile_usecase.dart';
+import '../../features/profile/domain/usecases/update_profile_usecase.dart';
+import '../../features/profile/domain/usecases/change_password_usecase.dart';
+import '../../features/profile/domain/usecases/delete_account_usecase.dart';
 import '../../features/profile/presentation/cubit/profile_cubit.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';
@@ -161,14 +166,40 @@ Future<void> setupGetIt() async {
   if (!getIt.isRegistered<LanguageCubit>()) {
     getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
   }
-  if (!getIt.isRegistered<ProfileRepo>()) {
-    getIt.registerLazySingleton<ProfileRepo>(
-      () => ProfileRepo(getIt<ApiService>()),
+  // ============= Profile Feature (Clean Architecture) =============
+  if (!getIt.isRegistered<ProfileRepository>()) {
+    getIt.registerLazySingleton<ProfileRepository>(
+      () => ProfileRepositoryImpl(getIt<ApiService>()),
+    );
+  }
+  if (!getIt.isRegistered<GetProfileUseCase>()) {
+    getIt.registerLazySingleton(
+      () => GetProfileUseCase(getIt<ProfileRepository>()),
+    );
+  }
+  if (!getIt.isRegistered<UpdateProfileUseCase>()) {
+    getIt.registerLazySingleton(
+      () => UpdateProfileUseCase(getIt<ProfileRepository>()),
+    );
+  }
+  if (!getIt.isRegistered<ChangePasswordUseCase>()) {
+    getIt.registerLazySingleton(
+      () => ChangePasswordUseCase(getIt<ProfileRepository>()),
+    );
+  }
+  if (!getIt.isRegistered<DeleteAccountUseCase>()) {
+    getIt.registerLazySingleton(
+      () => DeleteAccountUseCase(getIt<ProfileRepository>()),
     );
   }
   if (!getIt.isRegistered<ProfileCubit>()) {
-    getIt.registerFactory<ProfileCubit>(
-      () => ProfileCubit(getIt<ProfileRepo>()),
+    getIt.registerLazySingleton<ProfileCubit>(
+      () => ProfileCubit(
+        getIt<GetProfileUseCase>(),
+        getIt<UpdateProfileUseCase>(),
+        getIt<ChangePasswordUseCase>(),
+        getIt<DeleteAccountUseCase>(),
+      ),
     );
   }
 }
