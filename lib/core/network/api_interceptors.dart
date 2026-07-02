@@ -30,15 +30,18 @@ class ApiInterceptor extends Interceptor {
     if (token != null) {
       options.headers['Authorization'] = tokenManager.getAuthHeader(token);
     }
+
     handler.next(options);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final isUnauthorized = err.response?.statusCode == 401;
-    final isBypass = err.requestOptions.extra[_bypassAuth] == true;
+    final hasAuthorization = err.requestOptions.headers.containsKey(
+      'Authorization',
+    );
 
-    if (isUnauthorized && !isBypass) {
+    if (isUnauthorized && hasAuthorization) {
       refreshHandler.handleRefresh(err, handler);
     } else {
       handler.next(err);

@@ -21,22 +21,27 @@ mixin SplashLogic<T extends StatefulWidget> on State<T> {
     splashAnimCtrl.forward();
   }
 
-  void navigateFromSplash() {
+  void navigateFromSplash() async {
     // CacheHelper.clearData();
+
     if (!mounted) return;
     final bool? onBoarding = CacheHelper.getData('onBoarding');
-    final String? email = CacheHelper.getData('email');
+    final String? email = await CacheHelper.getSecure('token');
     final bool loggedIn = email != null;
     log(onBoarding.toString());
     log(email.toString());
     log(loggedIn.toString());
 
     if (loggedIn) {
+      if (!mounted) return;
+
       GoRouter.of(context).go(AppRouter.home);
     } else {
       final route = (onBoarding != null && onBoarding)
           ? AppRouter.signUp
           : AppRouter.onboarding;
+      if (!mounted) return;
+
       GoRouter.of(context).go(route);
     }
   }

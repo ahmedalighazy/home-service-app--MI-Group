@@ -18,6 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginFailure(message: 'Email and password are required'));
       return;
     }
+
     emit(LoginLoading());
     final r = await authRepo.login(
       LoginRequestModel(identifier: identifier, password: password),
