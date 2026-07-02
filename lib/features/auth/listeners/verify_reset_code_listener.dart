@@ -7,7 +7,7 @@ import '../cubit/forgot_password/forgot_password_cubit.dart';
 import '../cubit/forgot_password/forgot_password_state.dart';
 import '../../../core/utils/helpers/app_snackbar.dart';
 
-class VerifyResetCodeListener extends StatelessWidget {
+class VerifyResetCodeListener extends StatefulWidget {
   final String email;
   final Widget child;
 
@@ -18,13 +18,30 @@ class VerifyResetCodeListener extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<ForgotPasswordCubit>();
-    cubit.resetFocusNode.requestFocus();
-    if (cubit.resetCodeTimer == null) {
-      cubit.initResetCodeTimer(email);
-    }
+  State<VerifyResetCodeListener> createState() =>
+      _VerifyResetCodeListenerState();
+}
 
+class _VerifyResetCodeListenerState extends State<VerifyResetCodeListener> {
+  late final ForgotPasswordCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<ForgotPasswordCubit>();
+    _cubit.initResetCodeTimer(widget.email);
+    _cubit.resetFocusNode.requestFocus();
+  }
+
+  @override
+  void dispose() {
+    _cubit.resetCodeTimer?.stop();
+    _cubit.resetCodeCanResend = false;
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
       listenWhen: (previous, current) =>
           current is ResetCodeVerifySuccess ||
@@ -33,19 +50,20 @@ class VerifyResetCodeListener extends StatelessWidget {
           current is ResetCodeSendFailure,
       listener: (context, state) {
         if (state is ResetCodeVerifySuccess) {
+          _cubit.resetCodeTimer?.stop();
           Future.delayed(const Duration(milliseconds: 500), () {
             if (context.mounted) {
               context.push(
                 AppRouter.setNewPassword,
                 extra: <String, dynamic>{
-                  'email': email,
-                  'code': cubit.resetCodeCtrl.text,
+                  'email': widget.email,
+                  'code': _cubit.resetCodeCtrl.text,
                 },
               );
             }
           });
         } else if (state is ResetCodeVerifyFailure) {
-          cubit.resetCodeCtrl.clear();
+          _cubit.resetCodeCtrl.clear();
 
           AppSnackBar.showError(context, state.message);
         } else if (state is ResetCodeSendSuccess) {
@@ -54,7 +72,7 @@ class VerifyResetCodeListener extends StatelessWidget {
           AppSnackBar.showError(context, state.message);
         }
       },
-      child: child,
+      child: widget.child,
     );
   }
 }

@@ -17,7 +17,7 @@ class LoginButton extends StatelessWidget {
         final isLoading = state is LoginLoading;
         return AuthPrimaryButton(
           label: context.tr('login'),
-          isLoading: isLoading,
+          // isLoading: isLoading,
           isEnabled: !isLoading,
           onPressed: onPressed,
         );

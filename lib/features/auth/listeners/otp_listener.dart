@@ -7,21 +7,36 @@ import '../cubit/register/register_cubit.dart';
 import '../cubit/register/register_state.dart';
 import '../../../core/utils/helpers/app_snackbar.dart';
 
-class OtpListener extends StatelessWidget {
+class OtpListener extends StatefulWidget {
   final String email;
   final Widget child;
 
   const OtpListener({super.key, required this.email, required this.child});
 
   @override
+  State<OtpListener> createState() => _OtpListenerState();
+}
+
+class _OtpListenerState extends State<OtpListener> {
+  late final RegisterCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<RegisterCubit>();
+    _cubit.initOtp(widget.email);
+    _cubit.otpFocusNode.requestFocus();
+  }
+
+  @override
+  void dispose() {
+    _cubit.otpTimer?.stop();
+    _cubit.otpInitialized = false;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.read<RegisterCubit>();
-
-    if (!cubit.otpInitialized) {
-      cubit.initOtp(email);
-      cubit.otpFocusNode.requestFocus();
-    }
-
     return BlocListener<RegisterCubit, RegisterState>(
       listenWhen: (previous, current) =>
           current is OtpVerifySuccess ||
@@ -30,9 +45,8 @@ class OtpListener extends StatelessWidget {
       listener: (context, state) {
         if (state is OtpVerifySuccess) {
           Future.delayed(const Duration(milliseconds: 500), () {
-            if (context.mounted) {
-              context.go(AppRouter.completeProfile, extra: email);
-            }
+            if (!context.mounted) return;
+            context.go(AppRouter.completeProfile, extra: widget.email);
           });
         } else if (state is OtpVerifyFailure) {
           AppSnackBar.showError(context, state.message);
@@ -40,7 +54,7 @@ class OtpListener extends StatelessWidget {
           AppSnackBar.showSuccess(context, state.message ?? '');
         }
       },
-      child: child,
+      child: widget.child,
     );
   }
 }

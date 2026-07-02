@@ -35,7 +35,7 @@ class SetNewPasswordListener extends StatelessWidget {
           if (state is PasswordResetSuccess) {
             context.read<ForgotPasswordCubit>().resetState();
             if (context.mounted) {
-              GoRouter.of(context).go(AppRouter.passwordChangedSuccessfully);
+              GoRouter.of(context).push(AppRouter.passwordChangedSuccessfully);
             }
           } else if (state is PasswordResetFailure) {
             AppSnackBar.showError(context, state.message);

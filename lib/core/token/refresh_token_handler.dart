@@ -13,14 +13,9 @@ class RefreshTokenHandler {
 
   final Dio dio;
   final TokenManager tokenManager;
-  final GoRouter router;
   Completer<void>? _refreshCompleter;
 
-  RefreshTokenHandler({
-    required this.dio,
-    required this.tokenManager,
-    required this.router,
-  });
+  RefreshTokenHandler({required this.dio, required this.tokenManager});
 
   Future<void> handleRefresh(
     DioException err,
@@ -143,7 +138,7 @@ class RefreshTokenHandler {
 
   void _navigateToLogin() {
     try {
-      router.go(AppRouter.signIn);
+      // .go(AppRouter.signIn);
     } catch (e) {
       log('Navigation to login failed: $e');
     }

@@ -36,7 +36,6 @@ class DioClient {
         tokenManager: tokenManager,
         refreshHandler: RefreshTokenHandler(
           dio: dio,
-          router: getIt<GoRouter>(),
           tokenManager: getIt<TokenManager>(),
         ),
       ),

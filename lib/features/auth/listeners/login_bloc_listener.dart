@@ -31,7 +31,9 @@ class LoginBlocListener extends StatelessWidget {
           try {
             Navigator.of(context, rootNavigator: true).pop();
           } catch (_) {}
-          if (state is LoginSuccess || state is GuestLoginSuccess) {
+          if (state is LoginSuccess) {
+            if (!context.mounted) return;
+
             context.go(AppRouter.home);
           } else if (state is LoginFailure) {
             AppSnackBar.showError(context, state.message);

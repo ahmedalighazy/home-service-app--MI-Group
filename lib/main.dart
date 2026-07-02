@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +52,9 @@ class HomeServiceApp extends StatelessWidget {
         return BlocConsumer<LanguageCubit, LanguageState>(
           listener: (ctx, languageState) {},
           builder: (ctx, languageState) {
+            final locale = languageState.isArabic
+                ? const Locale('ar')
+                : const Locale('en');
             return MaterialApp.router(
               title: 'Home Service App',
               debugShowCheckedModeBanner: false,
@@ -61,16 +62,9 @@ class HomeServiceApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.light,
               routerConfig: AppRouter.router,
-              locale: context.locale,
+              locale: locale,
               supportedLocales: context.supportedLocales,
               localizationsDelegates: context.localizationDelegates,
-
-              builder: (context, child) => Directionality(
-                textDirection: context.locale.languageCode == 'ar'
-                    ? ui.TextDirection.rtl
-                    : ui.TextDirection.ltr,
-                child: child!,
-              ),
             );
           },
         );

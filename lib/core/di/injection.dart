@@ -1,12 +1,25 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../features/address/presentation/cubit/address_cubit.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
+import '../../features/home/data/datasources/local/home_local_data_source.dart';
+import '../../features/home/data/datasources/local/home_local_data_source_impl.dart';
+import '../../features/home/data/datasources/remote/home_remote_data_source.dart';
+import '../../features/home/data/datasources/remote/home_remote_data_source_impl.dart';
+import '../../features/home/data/repositories/home_repository_impl.dart';
+import '../../features/home/domain/repositories/home_repository.dart';
+import '../../features/home/domain/usecases/get_home_data_usecase.dart';
+import '../../features/home/presentation/cubit/home_cubit.dart';
+import '../../features/notification/presentation/cubit/notification_cubit.dart';
 import '../../features/profile/data/repo/profile_repo.dart';
 import '../language/language_cubit.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';
+import '../network/network_info.dart';
+import '../network/network_info_impl.dart';
 import '../routes/app_routes.dart';
 import '../token/refresh_token_handler.dart';
 import '../token/token_manager.dart';
@@ -24,9 +37,9 @@ Future<void> setupGetIt() async {
     getIt.registerSingleton<SharedPreferences>(CacheHelper.sharedPreferences);
   }
 
-  if (!getIt.isRegistered<GoRouter>()) {
-    getIt.registerLazySingleton<GoRouter>(() => AppRouter.router);
-  }
+  // if (!getIt.isRegistered<GoRouter>()) {
+  //   getIt.registerLazySingleton<GoRouter>(() => AppRouter.router);
+  // }
 
   // ── Auth ────────────────────────────────────────────────────
 
@@ -54,7 +67,6 @@ Future<void> setupGetIt() async {
 
   // ── Network ────────────────────────────────────────────────
 
-  // 3️⃣ تسجيل TokenManager (يعتمد على CacheHelper)
   if (!getIt.isRegistered<TokenManager>()) {
     getIt.registerLazySingleton<TokenManager>(() => TokenManager());
   }
@@ -65,15 +77,57 @@ Future<void> setupGetIt() async {
     getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
   }
 
-  // 4️⃣ تسجيل RefreshTokenHandler (يعتمد على Dio, TokenManager, GoRouter)
+  // ── Home Feature ──────────────────────────────────────────
 
-  // // 5️⃣ تسجيل ApiInterceptor (يعتمد على TokenManager, RefreshTokenHandler)
-  // if (!getIt.isRegistered<ApiInterceptor>()) {
-  //   getIt.registerLazySingleton<ApiInterceptor>(
-  //     () => ApiInterceptor(
-  //       tokenManager: getIt<TokenManager>(),
-  //       refreshHandler: getIt<RefreshTokenHandler>(),
-  //     ),
-  //   );
-  // }
+  if (!getIt.isRegistered<NetworkInfo>()) {
+    getIt.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(Connectivity()),
+    );
+  }
+
+  if (!getIt.isRegistered<HomeLocalDataSource>()) {
+    getIt.registerLazySingleton<HomeLocalDataSource>(
+      () => HomeLocalDataSourceImpl(),
+    );
+  }
+
+  if (!getIt.isRegistered<HomeRemoteDataSource>()) {
+    getIt.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(),
+    );
+  }
+
+  if (!getIt.isRegistered<HomeRepository>()) {
+    getIt.registerLazySingleton<HomeRepository>(
+      () => HomeRepositoryImpl(
+        getIt<HomeLocalDataSource>(),
+        getIt<HomeRemoteDataSource>(),
+        getIt<NetworkInfo>(),
+      ),
+    );
+  }
+
+  if (!getIt.isRegistered<GetHomeDataUseCase>()) {
+    getIt.registerLazySingleton<GetHomeDataUseCase>(
+      () => GetHomeDataUseCase(getIt<HomeRepository>()),
+    );
+  }
+
+  // ── Cubits ────────────────────────────────────────────────
+
+  if (!getIt.isRegistered<HomeCubit>()) {
+    getIt.registerLazySingleton<HomeCubit>(
+      () => HomeCubit(getIt<GetHomeDataUseCase>()),
+    );
+  }
+
+  if (!getIt.isRegistered<AddressCubit>()) {
+    getIt.registerLazySingleton<AddressCubit>(() => AddressCubit());
+  }
+
+  if (!getIt.isRegistered<NotificationCubit>()) {
+    getIt.registerLazySingleton<NotificationCubit>(
+      () => NotificationCubit(),
+    );
+  }
 }

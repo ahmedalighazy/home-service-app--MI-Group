@@ -31,6 +31,8 @@ class ForgotPasswordBlocListener extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
           } catch (_) {}
           if (state is ResetCodeSendSuccess) {
+            if (!context.mounted) return;
+
             context.push(AppRouter.verifyResetCode, extra: state.email);
           } else if (state is ResetCodeSendFailure) {
             AppSnackBar.showError(context, state.message);

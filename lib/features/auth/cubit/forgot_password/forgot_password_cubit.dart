@@ -77,6 +77,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     for (final c in emailVerificationControllers) {
       c.clear();
     }
+    resetCodeTimer?.stop();
     emailVerificationTimer?.stop();
     emailVerificationTimer = OtpTimer(
       totalSeconds: 59,
@@ -129,6 +130,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     resetCodeCanResend = false;
     resetCodeSecondsLeft = AuthConstants.otpTimerSeconds;
     resetCodeCtrl.clear();
+    emailVerificationTimer?.stop();
     resetCodeTimer?.stop();
     resetCodeTimer = OtpTimer(
       totalSeconds: AuthConstants.otpTimerSeconds,

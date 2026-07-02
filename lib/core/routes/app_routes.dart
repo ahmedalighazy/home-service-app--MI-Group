@@ -191,7 +191,12 @@ class AppRouter {
           child: const SignInScreen(),
         ),
       ),
-      GoRoute(path: home, builder: (context, state) => const MainShell()),
+      GoRoute(
+        name: 'home',
+
+        path: home,
+        builder: (context, state) => const MainShell(),
+      ),
       GoRoute(
         path: favorites,
         builder: (context, state) => const FavoritesScreen(),
@@ -313,13 +318,32 @@ class AppRouter {
         builder: (context, state) => const TermsAndConditionsScreen(),
       ),
     ],
-    redirect: (context, state) {
-      if (state.matchedLocation == home) {
-        final token = CacheHelper.getData('token') as String?;
-        final loggedIn = token != null && token.isNotEmpty;
-        if (!loggedIn) return signIn;
-      }
-      return null;
-    },
+    // redirect: (context, state) {
+    //   if (state.matchedLocation == home) {
+    //     final token = CacheHelper.getData('token') as String?;
+    //     final loggedIn = token != null && token.isNotEmpty;
+    //     if (!loggedIn) return signIn;
+    //   }
+    //   return null;
+    // },
   );
+}
+
+class AppRoutes {
+  static const String splash = AppRouter.splash;
+  static const String onboarding = AppRouter.onboarding;
+  static const String signUp = AppRouter.signUp;
+  static const String signIn = AppRouter.signIn;
+  static const String login = AppRouter.login;
+  static const String otp = AppRouter.otp;
+  static const String completeProfile = AppRouter.completeProfile;
+  static const String emailLogin = AppRouter.emailLogin;
+  static const String forgetPassword = AppRouter.forgetPassword;
+  static const String verifyResetCode = AppRouter.verifyResetCode;
+  static const String checkYourEmail = AppRouter.checkYourEmail;
+  static const String setNewPassword = AppRouter.setNewPassword;
+  static const String passwordChangedSuccessfully =
+      AppRouter.passwordChangedSuccessfully;
+  static const String home = AppRouter.home;
+  static const String language = AppRouter.language;
 }

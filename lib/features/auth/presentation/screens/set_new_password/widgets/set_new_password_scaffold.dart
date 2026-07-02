@@ -22,17 +22,18 @@ class SetNewPasswordScaffold extends StatefulWidget {
 }
 
 class _SetNewPasswordScaffoldState extends State<SetNewPasswordScaffold> {
+  late final ForgotPasswordCubit _cubit;
+
   @override
   void initState() {
     super.initState();
-    context.read<ForgotPasswordCubit>().initPasswordListeners();
+    _cubit = context.read<ForgotPasswordCubit>();
+    _cubit.initPasswordListeners();
   }
 
   @override
   void dispose() {
-    if (mounted) {
-      context.read<ForgotPasswordCubit>().disposePasswordListeners();
-    }
+    _cubit.disposePasswordListeners();
     super.dispose();
   }
 

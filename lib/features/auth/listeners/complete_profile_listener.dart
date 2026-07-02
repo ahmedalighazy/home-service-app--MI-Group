@@ -40,6 +40,8 @@ class CompleteProfileListener extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
           } catch (_) {}
           if (state is CompleteProfileSuccess) {
+            if (!context.mounted) return;
+
             context.go(AppRouter.home);
           } else if (state is CompleteProfileFailure) {
             AppSnackBar.showError(context, state.message);
