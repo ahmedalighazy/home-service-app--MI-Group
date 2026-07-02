@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 import 'package:home_service_app/features/booking/presentation/screens/booking_screen.dart';
 import 'package:home_service_app/features/service_details/presentation/cubit/feature_cubit.dart';
 import 'package:home_service_app/features/service_details/presentation/views/corporate_services_view.dart';
@@ -50,6 +49,7 @@ import 'package:home_service_app/features/auth/presentation/screens/check_your_e
 import 'package:home_service_app/core/di/injection.dart';
 
 import '../../features/setting/presentation/screens/set_new_password_screen.dart';
+import '../utils/helpers/cache_helper.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -313,13 +313,13 @@ class AppRouter {
         builder: (context, state) => const TermsAndConditionsScreen(),
       ),
     ],
-    // redirect: (context, state) {
-    //    if (state.matchedLocation == home) {
-    //      final token = CacheHelper.getData('token') as String?;
-    //      final loggedIn = token != null && token.isNotEmpty;
-    //    if (!loggedIn) return signIn;
-    //   }
-    //   return null;
-    // },
+    redirect: (context, state) {
+      if (state.matchedLocation == home) {
+        final token = CacheHelper.getData('token') as String?;
+        final loggedIn = token != null && token.isNotEmpty;
+        if (!loggedIn) return signIn;
+      }
+      return null;
+    },
   );
 }

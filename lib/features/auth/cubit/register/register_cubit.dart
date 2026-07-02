@@ -135,7 +135,6 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(OtpSendSuccess(email: email, message: m));
       },
       failure: (e) {
-        log(e.message.toString());
         otpTimer?.stop();
         otpCanResend = true;
         otpSecondsLeft = 0;

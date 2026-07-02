@@ -30,7 +30,9 @@ class _SetNewPasswordScaffoldState extends State<SetNewPasswordScaffold> {
 
   @override
   void dispose() {
-    context.read<ForgotPasswordCubit>().disposePasswordListeners();
+    if (mounted) {
+      context.read<ForgotPasswordCubit>().disposePasswordListeners();
+    }
     super.dispose();
   }
 
