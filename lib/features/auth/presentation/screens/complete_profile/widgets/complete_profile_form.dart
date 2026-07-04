@@ -28,7 +28,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20.h),
           const ProfileAvatar(),

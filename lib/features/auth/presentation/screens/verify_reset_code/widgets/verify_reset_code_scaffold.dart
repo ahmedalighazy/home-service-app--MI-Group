@@ -83,7 +83,7 @@ class _VerifyResetCodeScaffoldState extends State<VerifyResetCodeScaffold>
                             ScrollViewKeyboardDismissBehavior.onDrag,
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 16.h),
                             VerifyResetCodeHeader(email: widget.email),

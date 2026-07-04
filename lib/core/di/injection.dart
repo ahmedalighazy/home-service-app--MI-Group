@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/address/presentation/cubit/address_cubit.dart';
@@ -20,11 +19,9 @@ import '../network/api_service.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
 import '../network/network_info_impl.dart';
-import '../routes/app_routes.dart';
-import '../token/refresh_token_handler.dart';
+
 import '../token/token_manager.dart';
 import '../utils/helpers/cache_helper.dart';
-import '../utils/l10n/localization_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -57,9 +54,9 @@ Future<void> setupGetIt() async {
 
   // ── Core ────────────────────────────────────────────────────
 
-  if (!getIt.isRegistered<LocalizationService>()) {
-    getIt.registerSingleton<LocalizationService>(LocalizationService.instance);
-  }
+  // if (!getIt.isRegistered<LocalizationService>()) {
+  //   getIt.registerSingleton<LocalizationService>(LocalizationService.instance);
+  // }
 
   if (!getIt.isRegistered<LanguageCubit>()) {
     getIt.registerLazySingleton<LanguageCubit>(() => LanguageCubit());
@@ -126,8 +123,6 @@ Future<void> setupGetIt() async {
   }
 
   if (!getIt.isRegistered<NotificationCubit>()) {
-    getIt.registerLazySingleton<NotificationCubit>(
-      () => NotificationCubit(),
-    );
+    getIt.registerLazySingleton<NotificationCubit>(() => NotificationCubit());
   }
 }

@@ -79,15 +79,15 @@ class ValidatorsHelper {
     return true;
   }
 
-  static String getEmailErrorMessage(String? email) {
-    if (email == null || email.isEmpty) {
-      return AuthStrings.emailRequired;
-    }
-    if (!isValidEmail(email)) {
-      return AuthStrings.invalidEmail;
-    }
-    return '';
-  }
+  // static String getEmailErrorMessage(String? email) {
+  //   if (email == null || email.isEmpty) {
+  //     return AuthStrings.emailRequired;
+  //   }
+  //   if (!isValidEmail(email)) {
+  //     return AuthStrings.invalidEmail;
+  //   }
+  //   return '';
+  // }
 
   static bool hasUppercase(String password) {
     return RegExp(
@@ -167,45 +167,45 @@ class ValidatorsHelper {
     };
   }
 
-  static String getPasswordErrorMessage(String? password) {
-    if (password == null || password.isEmpty) {
-      return AuthStrings.passwordRequired;
-    }
+  // static String getPasswordErrorMessage(String? password) {
+  //   if (password == null || password.isEmpty) {
+  //     return AuthStrings.passwordRequired;
+  //   }
 
-    if (password.length < ValidationConstants.passwordMinLength) {
-      return AuthStrings.passwordMinLengthError;
-    }
+  //   if (password.length < ValidationConstants.passwordMinLength) {
+  //     return AuthStrings.passwordMinLengthError;
+  //   }
 
-    if (password.length > ValidationConstants.passwordMaxLength) {
-      return AuthStrings.passwordMaxLengthError;
-    }
+  //   if (password.length > ValidationConstants.passwordMaxLength) {
+  //     return AuthStrings.passwordMaxLengthError;
+  //   }
 
-    if (!hasUppercase(password)) {
-      return AuthStrings.passwordUppercaseError;
-    }
+  //   if (!hasUppercase(password)) {
+  //     return AuthStrings.passwordUppercaseError;
+  //   }
 
-    if (!hasLowercase(password)) {
-      return AuthStrings.passwordLowercaseError;
-    }
+  //   if (!hasLowercase(password)) {
+  //     return AuthStrings.passwordLowercaseError;
+  //   }
 
-    if (!hasDigit(password)) {
-      return AuthStrings.passwordDigitError;
-    }
+  //   if (!hasDigit(password)) {
+  //     return AuthStrings.passwordDigitError;
+  //   }
 
-    if (!hasSpecialChar(password)) {
-      return AuthStrings.passwordSpecialCharError;
-    }
+  //   if (!hasSpecialChar(password)) {
+  //     return AuthStrings.passwordSpecialCharError;
+  //   }
 
-    if (hasConsecutiveRepeats(password)) {
-      return AuthStrings.passwordConsecutiveRepeatsError;
-    }
+  //   if (hasConsecutiveRepeats(password)) {
+  //     return AuthStrings.passwordConsecutiveRepeatsError;
+  //   }
 
-    if (matchesCommonPattern(password)) {
-      return AuthStrings.passwordCommonPatternError;
-    }
+  //   if (matchesCommonPattern(password)) {
+  //     return AuthStrings.passwordCommonPatternError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidName(String? name) {
     if (name == null || name.isEmpty) return false;
@@ -227,36 +227,36 @@ class ValidatorsHelper {
     return true;
   }
 
-  static String getNameErrorMessage(String? name) {
-    if (name == null || name.isEmpty) {
-      return AuthStrings.nameRequired;
-    }
+  // static String getNameErrorMessage(String? name) {
+  //   if (name == null || name.isEmpty) {
+  //     return AuthStrings.nameRequired;
+  //   }
 
-    final trimmed = name.trim();
+  //   final trimmed = name.trim();
 
-    if (trimmed.length < ValidationConstants.nameMinLength) {
-      return AuthStrings.nameMinLengthError;
-    }
+  //   if (trimmed.length < ValidationConstants.nameMinLength) {
+  //     return AuthStrings.nameMinLengthError;
+  //   }
 
-    if (trimmed.length > ValidationConstants.nameMaxLength) {
-      return AuthStrings.nameMaxLengthError;
-    }
+  //   if (trimmed.length > ValidationConstants.nameMaxLength) {
+  //     return AuthStrings.nameMaxLengthError;
+  //   }
 
-    if (RegExp(r'\d').hasMatch(trimmed)) {
-      return AuthStrings.nameContainsNumbersError;
-    }
+  //   if (RegExp(r'\d').hasMatch(trimmed)) {
+  //     return AuthStrings.nameContainsNumbersError;
+  //   }
 
-    if (trimmed.contains('  ')) {
-      return AuthStrings.nameConsecutiveSpacesError;
-    }
+  //   if (trimmed.contains('  ')) {
+  //     return AuthStrings.nameConsecutiveSpacesError;
+  //   }
 
-    final nameRegex = RegExp(r"^[a-zA-Z\u0600-\u06FF\s\-']+$");
-    if (!nameRegex.hasMatch(trimmed)) {
-      return AuthStrings.nameLettersOnlyError;
-    }
+  //   final nameRegex = RegExp(r"^[a-zA-Z\u0600-\u06FF\s\-']+$");
+  //   if (!nameRegex.hasMatch(trimmed)) {
+  //     return AuthStrings.nameLettersOnlyError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidQatarPhone(String? phone) {
     if (phone == null || phone.isEmpty) return false;
@@ -269,28 +269,28 @@ class ValidatorsHelper {
     return firstDigit >= 3 && firstDigit <= 9;
   }
 
-  static String getQatarPhoneErrorMessage(String? phone) {
-    if (phone == null || phone.isEmpty) {
-      return AuthStrings.phoneRequired;
-    }
+  // static String getQatarPhoneErrorMessage(String? phone) {
+  //   if (phone == null || phone.isEmpty) {
+  //     return AuthStrings.phoneRequired;
+  //   }
 
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
+  //   final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
 
-    if (cleaned.isEmpty) {
-      return AuthStrings.phoneInvalid;
-    }
+  //   if (cleaned.isEmpty) {
+  //     return AuthStrings.phoneInvalid;
+  //   }
 
-    if (cleaned.length != ValidationConstants.qatarPhoneLength) {
-      return AuthStrings.phoneLengthError;
-    }
+  //   if (cleaned.length != ValidationConstants.qatarPhoneLength) {
+  //     return AuthStrings.phoneLengthError;
+  //   }
 
-    final firstDigit = int.tryParse(cleaned[0]) ?? 0;
-    if (firstDigit < 3 || firstDigit > 9) {
-      return AuthStrings.phoneStartDigitError;
-    }
+  //   final firstDigit = int.tryParse(cleaned[0]) ?? 0;
+  //   if (firstDigit < 3 || firstDigit > 9) {
+  //     return AuthStrings.phoneStartDigitError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidAddress(String? address) {
     if (address == null || address.isEmpty) return true;
@@ -309,27 +309,27 @@ class ValidatorsHelper {
     return true;
   }
 
-  static String getAddressErrorMessage(String? address) {
-    if (address == null || address.isEmpty) {
-      return '';
-    }
+  // static String getAddressErrorMessage(String? address) {
+  //   if (address == null || address.isEmpty) {
+  //     return '';
+  //   }
 
-    final trimmed = address.trim();
+  //   final trimmed = address.trim();
 
-    if (trimmed.length < ValidationConstants.addressMinLength) {
-      return AuthStrings.addressMinLengthError;
-    }
+  //   if (trimmed.length < ValidationConstants.addressMinLength) {
+  //     return AuthStrings.addressMinLengthError;
+  //   }
 
-    if (trimmed.length > ValidationConstants.addressMaxLength) {
-      return AuthStrings.addressMaxLengthError;
-    }
+  //   if (trimmed.length > ValidationConstants.addressMaxLength) {
+  //     return AuthStrings.addressMaxLengthError;
+  //   }
 
-    if (isXSSAttempt(trimmed)) {
-      return AuthStrings.addressInvalidCharactersError;
-    }
+  //   if (isXSSAttempt(trimmed)) {
+  //     return AuthStrings.addressInvalidCharactersError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidGender(String? gender) {
     if (gender == null || gender.isEmpty) return false;
@@ -338,17 +338,17 @@ class ValidatorsHelper {
     return ValidationConstants.validGenders.contains(normalized);
   }
 
-  static String getGenderErrorMessage(String? gender) {
-    if (gender == null || gender.isEmpty) {
-      return AuthStrings.genderRequired;
-    }
+  // static String getGenderErrorMessage(String? gender) {
+  //   if (gender == null || gender.isEmpty) {
+  //     return AuthStrings.genderRequired;
+  //   }
 
-    if (!isValidGender(gender)) {
-      return AuthStrings.genderInvalid;
-    }
+  //   if (!isValidGender(gender)) {
+  //     return AuthStrings.genderInvalid;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidOtp(String? otp) {
     if (otp == null || otp.isEmpty) return false;
@@ -359,17 +359,17 @@ class ValidatorsHelper {
     return otpRegex.hasMatch(cleaned);
   }
 
-  static String getOtpErrorMessage(String? otp) {
-    if (otp == null || otp.isEmpty) {
-      return AuthStrings.otpRequired;
-    }
+  // static String getOtpErrorMessage(String? otp) {
+  //   if (otp == null || otp.isEmpty) {
+  //     return AuthStrings.otpRequired;
+  //   }
 
-    if (!isValidOtp(otp)) {
-      return AuthStrings.otpInvalid;
-    }
+  //   if (!isValidOtp(otp)) {
+  //     return AuthStrings.otpInvalid;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool isValidBio(String? bio) {
     if (bio == null || bio.isEmpty) return true;
@@ -383,40 +383,40 @@ class ValidatorsHelper {
     return true;
   }
 
-  static String getBioErrorMessage(String? bio) {
-    if (bio == null || bio.isEmpty) {
-      return '';
-    }
+  // static String getBioErrorMessage(String? bio) {
+  //   if (bio == null || bio.isEmpty) {
+  //     return '';
+  //   }
 
-    final trimmed = bio.trim();
+  //   final trimmed = bio.trim();
 
-    if (trimmed.length > ValidationConstants.bioMaxLength) {
-      return AuthStrings.bioMaxLengthError;
-    }
+  //   if (trimmed.length > ValidationConstants.bioMaxLength) {
+  //     return AuthStrings.bioMaxLengthError;
+  //   }
 
-    if (isXSSAttempt(trimmed)) {
-      return AuthStrings.bioInvalidCharactersError;
-    }
+  //   if (isXSSAttempt(trimmed)) {
+  //     return AuthStrings.bioInvalidCharactersError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 
   static bool passwordsMatch(String password, String confirmPassword) {
     return password == confirmPassword;
   }
 
-  static String getPasswordMatchErrorMessage(
-    String password,
-    String confirmPassword,
-  ) {
-    if (password.isEmpty || confirmPassword.isEmpty) {
-      return AuthStrings.passwordsRequired;
-    }
+  // static String getPasswordMatchErrorMessage(
+  //   String password,
+  //   String confirmPassword,
+  // ) {
+  //   if (password.isEmpty || confirmPassword.isEmpty) {
+  //     return AuthStrings.passwordsRequired;
+  //   }
 
-    if (!passwordsMatch(password, confirmPassword)) {
-      return AuthStrings.passwordMismatch;
-    }
+  //   if (!passwordsMatch(password, confirmPassword)) {
+  //     return AuthStrings.passwordMismatch;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 }

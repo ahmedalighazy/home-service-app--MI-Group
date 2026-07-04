@@ -36,14 +36,12 @@ class _MainShellState extends State<MainShell> {
         body: IndexedStack(
           index: _currentIndex,
           children: [
-            HomeContent(
-              // key: ValueKey('Home-${context.locale.languageCode}')
-            ),
+            HomeContent(key: ValueKey('Home-${context.locale.languageCode}')),
             BookingScreen(
-              // key: ValueKey('Booking-${context.locale.languageCode}'),
+              key: ValueKey('Booking-${context.locale.languageCode}'),
             ),
             ProfileScreen(
-              // key: ValueKey('Profile-${context.locale.languageCode}'),
+              key: ValueKey('Profile-${context.locale.languageCode}'),
             ),
           ],
         ),

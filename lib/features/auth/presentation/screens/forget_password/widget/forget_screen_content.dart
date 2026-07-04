@@ -27,7 +27,7 @@ class ForgetScreenContent extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Align(
                           alignment: AlignmentDirectional.centerStart,

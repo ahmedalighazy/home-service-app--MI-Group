@@ -6,7 +6,6 @@ import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
-import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
 import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
 import 'package:home_service_app/features/auth/cubit/register/register_state.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_up/widgets/guest_mode_button.dart';
@@ -18,6 +17,7 @@ import 'package:home_service_app/features/auth/presentation/widgets/auth_text_fi
 import 'package:home_service_app/features/auth/presentation/widgets/terms_and_privacy_text.dart';
 
 import '../../../../../../core/routes/app_routes.dart';
+import '../../../../../../core/utils/l10n/localization_service.dart';
 import '../../../../listeners/register_bloc_listener.dart';
 
 class SignUpBody extends StatelessWidget {
@@ -32,12 +32,12 @@ class SignUpBody extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               verticalSpace(20.h),
               Text(
                 context.tr('welcomeSignUp'),
-                textAlign: TextAlign.end,
+                // textAlign: TextAlign.end,
                 style: AppText.ibmHeading22(color: AppColors.dark),
               ),
               verticalSpace(32.h),

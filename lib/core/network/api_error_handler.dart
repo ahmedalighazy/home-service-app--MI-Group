@@ -14,73 +14,83 @@ class ErrorHandler {
       switch (error.type) {
         case DioExceptionType.connectionError:
           return ApiErrorModel(
-            message: "Connection to server failed. Please check your network.",
+            message: "connection to server failed. please check your network.",
           );
         case DioExceptionType.cancel:
-          return ApiErrorModel(message: "Request to server was cancelled");
+          return ApiErrorModel(message: "request to server was cancelled.");
         case DioExceptionType.connectionTimeout:
           return ApiErrorModel(
-            message: "Connection timeout. Please try again later.",
+            message: "connection timeout. please try again later.",
           );
         case DioExceptionType.unknown:
           return _handleUnknownError(error);
         case DioExceptionType.receiveTimeout:
           return ApiErrorModel(
-            message: "Receive timeout. Server is not responding.",
+            message: "receive timeout. server is not responding.",
           );
         case DioExceptionType.badResponse:
           return _handleError(error.response);
         case DioExceptionType.sendTimeout:
           return ApiErrorModel(
-            message: "Send timeout. Please check your network speed.",
+            message: "send timeout. please check your network speed.",
           );
         case DioExceptionType.badCertificate:
-          return ApiErrorModel(message: "SSL certificate verification failed");
+          return ApiErrorModel(message: "ssl certificate verification failed.");
       }
     } else {
-      return ApiErrorModel(message: "Unexpected error: ${error.toString()}");
+      return ApiErrorModel(message: "unexpected error: ${error.toString()}");
     }
   }
 
   static ApiErrorModel _handleUnknownError(DioException error) {
     final err = error.error;
     if (err is SocketException) {
-      return ApiErrorModel(message: "No internet connection");
+      return ApiErrorModel(message: "no internet connection.");
     } else if (err is HandshakeException) {
-      return ApiErrorModel(message: "Connection terminated during handshake");
+      return ApiErrorModel(message: "connection terminated during handshake.");
     } else if (err is FormatException) {
-      return ApiErrorModel(message: "Data format error");
+      return ApiErrorModel(message: "data format error.");
     } else if (err is HttpException) {
-      return ApiErrorModel(message: "HTTP protocol error");
+      return ApiErrorModel(message: "http protocol error.");
     } else if (err is TimeoutException) {
-      return ApiErrorModel(message: "Connection timeout");
+      return ApiErrorModel(message: "connection timeout.");
     } else if (err is TlsException) {
-      return ApiErrorModel(message: "TLS/SSL communication error");
+      return ApiErrorModel(message: "tls/ssl communication error.");
     } else if (err != null) {
-      return ApiErrorModel(message: "Unexpected error: ${err.toString()}");
+      return ApiErrorModel(message: "unexpected error: ${err.toString()}");
     } else {
-      return ApiErrorModel(message: "Connection failed due to unknown reasons");
+      return ApiErrorModel(message: "connection failed due to unknown reasons.");
     }
   }
 
   static ApiErrorModel _handleError(Response? response) {
     if (response == null) {
       return ApiErrorModel(
-        message: "No response received from server$response",
+        message: "no response received from server.",
       );
     }
 
     try {
       final data = response.data;
+      ApiErrorModel errorModel;
       if (data is String) {
-        return ApiErrorModel.fromJson(jsonDecode(data));
+        errorModel = ApiErrorModel.fromJson(jsonDecode(data));
+      } else {
+        errorModel = ApiErrorModel.fromJson(data as Map<String, dynamic>);
       }
 
-      return ApiErrorModel.fromJson(data as Map<String, dynamic>);
+      // استخدام الدالة لتحويل الرسالة
+      final expressiveMessage = errorModel.getLocalizedErrorMessage();
+      return ApiErrorModel(
+        timestamp: errorModel.timestamp,
+        status: errorModel.status,
+        error: errorModel.error,
+        message: expressiveMessage,
+      );
     } catch (e) {
       return ApiErrorModel(
         status: response.statusCode,
-        message: response.statusMessage ?? 'خطأ في الخادم',
+        message: response.statusMessage?.toLowerCase() ?? "server error.",
       );
     }
   }

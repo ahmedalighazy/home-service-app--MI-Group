@@ -67,7 +67,7 @@ class _OtpScaffoldState extends State<OtpScaffold>
                       ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 120.h),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
                         alignment: AlignmentDirectional.centerStart,
