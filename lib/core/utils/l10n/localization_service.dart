@@ -15,5 +15,5 @@ import 'package:flutter/widgets.dart';
 
 extension LocalizationExtension on BuildContext {
   /// Delegates to easy_localization's .tr() which reads from JSON files.
-  String tr(String key) => key.tr();
+  String tr(String key) => key.tr(context: this);
 }

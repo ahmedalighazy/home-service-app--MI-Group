@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class ApiErrorModel {
   final String? timestamp;
   final int? status;
@@ -34,29 +36,28 @@ class ApiErrorModel {
         ')';
   }
 
-  // دالة لتحويل الرسائل إلى رسائل معبرة بأحرف صغيرة
   String getLocalizedErrorMessage() {
     final original = message?.toLowerCase() ?? '';
 
     if (original.contains('email sending failed') ||
         original.contains('failed to send email')) {
-      return "couldn't send the email. please check your address and try again.";
+      return 'error_email_sending_failed'.tr();
     }
     if (original.contains('invalid otp') ||
         original.contains('otp invalid')) {
-      return "the verification code is invalid or expired. please request a new one.";
+      return 'errorInvalidOtp'.tr();
     }
     if (original.contains('invalid credentials')) {
-      return "incorrect username or password. please double-check your entries.";
+      return 'error_invalid_credentials'.tr();
     }
     if (original.contains('user not found')) {
-      return "no account found with this email. would you like to sign up?";
+      return 'error_account_not_found_signup'.tr();
     }
     if (original.contains('invalid email') ||
         original.contains('invalid password')) {
-      return "the email or password you entered is incorrect. please try again.";
+      return 'error_invalid_email_password'.tr();
     }
 
-    return "something went wrong. please try again later. (error: $message)";
+    return 'error_something_went_wrong'.tr();
   }
 }
