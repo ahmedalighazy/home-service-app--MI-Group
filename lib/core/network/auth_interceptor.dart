@@ -3,14 +3,12 @@ import 'package:flutter/foundation.dart';
 
 import '../utils/helpers/cache_helper.dart';
 
-class ApiInterceptor extends Interceptor {
+class AuthInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers.addAll({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    });
-
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final token = CacheHelper.getData(key: 'token');
 
     if (token != null &&
@@ -22,7 +20,8 @@ class ApiInterceptor extends Interceptor {
     if (kDebugMode) {
       debugPrint('''
 ================ REQUEST ================
-${options.method} ${options.uri}
+${options.method}
+${options.uri}
 
 Headers:
 ${options.headers}
@@ -53,20 +52,23 @@ ${response.data}
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (kDebugMode) {
       debugPrint('''
 ================ ERROR ==================
 ${err.requestOptions.uri}
 
-Status Code: ${err.response?.statusCode}
+${err.response?.statusCode}
 
 ${err.response?.data}
 ========================================
 ''');
     }
 
-    // هنا مستقبلاً هنضيف Refresh Token لو رجع 401
+    /// ToDO:
+    /// لو رجع 401 هنا بعدين
+    /// هنعمل Refresh Token
+    /// ونعيد الـ Request تلقائياً.
 
     handler.next(err);
   }

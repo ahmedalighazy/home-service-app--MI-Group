@@ -1,4 +1,4 @@
-import 'api_error_model.dart';
+import 'error_model.dart';
 
 // api_result.dart
 // api_result.dart
@@ -8,22 +8,22 @@ abstract class ApiResult<T> {
 
   /// Factories like Freezed
   factory ApiResult.success(T data) = Success<T>;
-  factory ApiResult.failure(ApiErrorModel error) = Failure<T>;
+  factory ApiResult.failure(ErrorModel error) = Failure<T>;
 
   // ---- Pattern matching methods ----
   R when<R>({
     required R Function(T data) success,
-    required R Function(ApiErrorModel error) failure,
+    required R Function(ErrorModel error) failure,
   });
 
   R? whenOrNull<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
   });
 
   R maybeWhen<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
     required R Function() orElse,
   });
 
@@ -56,19 +56,19 @@ class Success<T> implements ApiResult<T> {
   @override
   R when<R>({
     required R Function(T data) success,
-    required R Function(ApiErrorModel error) failure,
+    required R Function(ErrorModel error) failure,
   }) => success(data);
 
   @override
   R? whenOrNull<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
   }) => success?.call(data);
 
   @override
   R maybeWhen<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
     required R Function() orElse,
   }) => success != null ? success(data) : orElse();
 
@@ -97,29 +97,29 @@ class Success<T> implements ApiResult<T> {
 
 /// ---------------- Failure ----------------
 class Failure<T> implements ApiResult<T> {
-  final ApiErrorModel error;
+  final ErrorModel error;
   const Failure(this.error);
 
-  Failure<T> copyWith({ApiErrorModel? error}) {
+  Failure<T> copyWith({ErrorModel? error}) {
     return Failure<T>(error ?? this.error);
   }
 
   @override
   R when<R>({
     required R Function(T data) success,
-    required R Function(ApiErrorModel error) failure,
+    required R Function(ErrorModel error) failure,
   }) => failure(error);
 
   @override
   R? whenOrNull<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
   }) => failure?.call(error);
 
   @override
   R maybeWhen<R>({
     R Function(T data)? success,
-    R Function(ApiErrorModel error)? failure,
+    R Function(ErrorModel error)? failure,
     required R Function() orElse,
   }) => failure != null ? failure(error) : orElse();
 

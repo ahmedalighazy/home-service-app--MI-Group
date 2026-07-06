@@ -37,9 +37,11 @@ class _SignInScreenState extends State<SignInScreen> with SignInLogic {
       body: BlocListener<AuthCubit, AuthState>(
         bloc: getIt<AuthCubit>(),
         listener: (context, state) {
+          // ignore: avoid_print
           print("Listener => ${state.runtimeType}");
 
           if (state is AuthSuccessState) {
+            // ignore: avoid_print
             print("Action => ${state.action}");
           }
 

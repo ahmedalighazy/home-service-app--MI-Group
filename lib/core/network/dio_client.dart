@@ -1,40 +1,54 @@
 import 'package:dio/dio.dart';
-import 'package:home_service_app/core/network/api_constants.dart';
-import 'package:home_service_app/core/network/api_interceptors.dart'
-    show ApiInterceptor;
+import 'package:flutter/foundation.dart';
+
+import 'api_constants.dart';
+import 'api_interceptors.dart';
 
 class DioClient {
-  /// private constructor as I don't want to allow creating an instance of this class
   DioClient._();
 
-  static Dio? dio;
+  static Dio? _dio;
+
   static Dio getDio() {
-    Duration timeOut = const Duration(seconds: 10);
-
-    if (dio == null) {
-      dio = Dio();
-      dio!
-        ..options.baseUrl = ApiConstants.baseUrl
-        ..options.connectTimeout = timeOut
-        ..options.receiveTimeout = timeOut;
-      addDioInterceptor();
-      return dio!;
-    } else {
-      return dio!;
+    if (_dio != null) {
+      return _dio!;
     }
-  }
 
-  static void addDioInterceptor() {
-    dio?.interceptors.add(ApiInterceptor());
-    dio?.interceptors.add(
-      LogInterceptor(
-        request: true,
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
+    const timeout = Duration(seconds: 10);
+
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstants.baseUrl,
+        connectTimeout: timeout,
+        receiveTimeout: timeout,
+        sendTimeout: timeout,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
       ),
     );
+
+    _addInterceptors();
+
+    return _dio!;
+  }
+
+  static void _addInterceptors() {
+    _dio!.interceptors.add(ApiInterceptor());
+
+    if (kDebugMode) {
+      _dio!.interceptors.add(
+        LogInterceptor(
+          request: true,
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+          logPrint: (object) => debugPrint(object.toString()),
+        ),
+      );
+    }
   }
 }

@@ -67,6 +67,7 @@ mixin SignInLogic<T extends StatefulWidget> on State<T> {
         (state.action == 'sign_in' ||
             state.action == 'google_sign_in' ||
             state.action == 'apple_sign_in')) {
+      // ignore: avoid_print
       print("Navigate To Home");
       if (context.mounted) context.go(AppRouter.home);
     } else if (state is AuthErrorState) {
