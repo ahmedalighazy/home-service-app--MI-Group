@@ -28,6 +28,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _emailController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    final profileState = getIt<ProfileCubit>().state;
+    if (profileState is ProfileLoaded) {
+      _nameController.text = profileState.profile.name ?? '';
+      _phoneController.text = profileState.profile.phone ?? '';
+      _emailController.text = profileState.profile.email ?? '';
+    }
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _phoneController.dispose();
