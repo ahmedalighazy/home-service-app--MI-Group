@@ -39,7 +39,7 @@ class ApiInterceptor extends Interceptor {
         options.headers['Authorization'] = tokenManager.getAuthHeader(token);
       } else {
         // Fallback to cache if tokenManager is empty
-        final cacheToken = CacheHelper.getData(key: 'token');
+        final cacheToken = CacheHelper.getData('token');
         if (cacheToken != null && cacheToken.toString().isNotEmpty) {
           options.headers['Authorization'] = 'Bearer $cacheToken';
         }

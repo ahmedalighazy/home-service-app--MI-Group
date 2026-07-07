@@ -29,7 +29,6 @@ void main() async {
         supportedLocales: const [Locale('ar'), Locale('en')],
         path: 'assets/translations',
         fallbackLocale: const Locale('ar'),
-        startLocale: initialLocale,
         child: BlocProvider<LanguageCubit>.value(
           value: getIt<LanguageCubit>(),
           child: const HomeServiceApp(),

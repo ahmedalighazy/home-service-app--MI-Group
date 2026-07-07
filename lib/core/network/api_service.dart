@@ -1,12 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-
 import 'package:home_service_app/features/auth/data/models/response/login_response_model.dart';
 import 'package:home_service_app/features/profile/data/models/profile_responses.dart';
 import 'package:home_service_app/features/profile/data/models/update_responses.dart';
 import 'package:home_service_app/features/profile/data/models/change_password_responses.dart';
-import 'package:home_service_app/features/profile/data/models/profile_model.dart';
-
 import '../../features/auth/data/models/request/auth_request.dart';
 import 'api_constants.dart';
 
