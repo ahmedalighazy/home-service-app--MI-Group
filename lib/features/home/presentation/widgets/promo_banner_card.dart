@@ -3,26 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
-import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
-import 'package:home_service_app/core/utils/l10n/localization_service.dart';
+import 'package:home_service_app/features/home/domain/entities/banner_entity.dart';
 
 class PromoBannerCard extends StatelessWidget {
-  const PromoBannerCard({
-    super.key,
-    required this.title,
-    required this.subTitle,
-    required this.price,
-    required this.offerPrice,
-    required this.promoCode,
-    required this.imagePath,
-  });
+  const PromoBannerCard({super.key, required this.banner});
 
-  final String title;
-  final String subTitle;
-  final String price;
-  final String offerPrice;
-  final String promoCode;
-  final String imagePath;
+  final BannerEntity banner;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +29,13 @@ class PromoBannerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSizes.radius),
         child: Stack(
           children: [
-            Positioned.fill(child: Image.asset(imagePath, fit: BoxFit.cover)),
+            Positioned.fill(
+              child: Image.network(
+                banner.imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => const SizedBox.shrink(),
+              ),
+            ),
 
             Padding(
               padding: EdgeInsetsDirectional.only(
@@ -54,7 +46,7 @@ class PromoBannerCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    banner.listingTitle,
                     textAlign: TextAlign.right,
                     style: AppText.ibmFieldLabel14(color: AppColors.secondary),
                   ),
@@ -62,40 +54,12 @@ class PromoBannerCard extends StatelessWidget {
                   SizedBox(height: AppSizes.spacingMin),
 
                   Text(
-                    subTitle,
+                    banner.listingTitle,
                     textAlign: TextAlign.right,
                     style: AppText.ibmPlexSansArabic12SemiBold,
                   ),
 
-                  SizedBox(height: AppSizes.spacingSmall),
-
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: AppSizes.paddingXXLarge,
-                    ),
-                    child: OldPrice(price: price),
-                  ),
-
-                  SizedBox(height: AppSizes.spacingMin),
-
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      start: AppSizes.padding,
-                    ),
-                    child: Text(
-                      offerPrice,
-                      style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
-                        fontSize: 20.sp,
-                      ),
-                    ),
-                  ),
-
                   const Spacer(),
-
-                  Align(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    child: PromoCodeBadge(promoCode: promoCode),
-                  ),
                 ],
               ),
             ),
@@ -106,7 +70,10 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
+// ===================================================================
 // Old Price
+// ===================================================================
+
 class OldPrice extends StatelessWidget {
   const OldPrice({super.key, required this.price});
 
@@ -121,7 +88,6 @@ class OldPrice extends StatelessWidget {
           price,
           style: AppText.ibmPlexSansArabic12SemiBold.copyWith(fontSize: 14.sp),
         ),
-
         Positioned(
           child: Transform.rotate(
             angle: -0.35,
@@ -140,7 +106,10 @@ class OldPrice extends StatelessWidget {
   }
 }
 
+// ===================================================================
 // Promo Code Badge
+// ===================================================================
+
 class PromoCodeBadge extends StatelessWidget {
   const PromoCodeBadge({super.key, required this.promoCode});
 
@@ -155,15 +124,11 @@ class PromoCodeBadge extends StatelessWidget {
           topStart: Radius.circular(AppSizes.radius),
         ),
       ),
-
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSizes.paddingSmall,
-              //vertical: AppSizes.paddingSmall,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall),
             child: Text(
               promoCode,
               style: AppText.ibmCaption11(color: AppColors.white),
@@ -178,11 +143,10 @@ class PromoCodeBadge extends StatelessWidget {
               color: AppColors.greenPrimary,
               borderRadius: BorderRadiusDirectional.only(
                 topStart: Radius.circular(AppSizes.radius),
-                topEnd: Radius.zero,
               ),
             ),
             child: Text(
-              context.tr(LocaleKeys.code),
+              'CODE',
               style: AppText.ibmCaption11(color: AppColors.white),
             ),
           ),

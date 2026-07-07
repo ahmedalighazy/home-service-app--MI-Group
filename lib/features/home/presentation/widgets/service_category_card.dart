@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -13,7 +12,7 @@ class ServiceCategoryCard extends StatelessWidget {
     super.key,
     required this.iconPath,
     required this.title,
-     required this.onTap,
+    required this.onTap,
   });
 
   @override
@@ -32,14 +31,13 @@ class ServiceCategoryCard extends StatelessWidget {
                 color: AppColors.grayWhite,
                 borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
               ),
-              child: SvgPicture.asset(
+              child: Image.network(
                 iconPath,
                 width: AppSizes.iconSizeLarge,
                 height: AppSizes.iconSizeLarge,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.greenPrimary,
-                  BlendMode.srcIn,
-                ),
+                fit: BoxFit.contain,
+                errorBuilder: (_, _, _) =>
+                    const Icon(Icons.category, color: AppColors.greenPrimary),
               ),
             ),
 

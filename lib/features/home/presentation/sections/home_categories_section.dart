@@ -37,8 +37,8 @@ class HomeCategoriesSection extends StatelessWidget {
               .entries
               .map(
                 (entry) => ServiceCategoryCard(
-                  iconPath: entry.value.iconPath,
-                  title: entry.value.title,
+                  iconPath: entry.value.iconUrl,
+                  title: entry.value.name,
                   onTap: () => navigateToCategory(entry.key),
                 ),
               )

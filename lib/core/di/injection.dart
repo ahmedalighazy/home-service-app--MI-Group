@@ -1,5 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
+import 'package:home_service_app/features/notification/data/datasources/remote/notification_remote_data_source.dart';
+import 'package:home_service_app/features/notification/data/datasources/remote/notification_remote_data_source_impl.dart';
+import 'package:home_service_app/features/notification/data/repositories/notification_repository_impl.dart';
+import 'package:home_service_app/features/notification/domain/repositories/notification_repository.dart';
+import 'package:home_service_app/features/notification/domain/usecases/get_notifications_usecase.dart';
+import 'package:home_service_app/features/notification/domain/usecases/mark_notification_as_read_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/address/presentation/cubit/address_cubit.dart';
@@ -90,7 +96,7 @@ Future<void> setupGetIt() async {
 
   if (!getIt.isRegistered<HomeRemoteDataSource>()) {
     getIt.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(),
+      () => HomeRemoteDataSourceImpl(getIt()),
     );
   }
 
@@ -110,6 +116,28 @@ Future<void> setupGetIt() async {
     );
   }
 
+  // ── Notification Feature ───────────────────────────────────
+
+  if (!getIt.isRegistered<NotificationRemoteDataSource>()) {
+    getIt.registerLazySingleton<NotificationRemoteDataSource>(
+      () => NotificationRemoteDataSourceImpl(getIt<ApiService>()),
+    );
+  }
+
+  if (!getIt.isRegistered<NotificationRepository>()) {
+    getIt.registerLazySingleton<NotificationRepository>(
+      () => NotificationRepositoryImpl(
+        getIt<NotificationRemoteDataSource>(),
+        getIt<NetworkInfo>(),
+      ),
+    );
+  }
+
+  if (!getIt.isRegistered<GetNotificationsUseCase>()) {
+    getIt.registerLazySingleton<GetNotificationsUseCase>(
+      () => GetNotificationsUseCase(getIt<NotificationRepository>()),
+    );
+  }
   // ── Cubits ────────────────────────────────────────────────
 
   if (!getIt.isRegistered<HomeCubit>()) {
@@ -121,8 +149,16 @@ Future<void> setupGetIt() async {
   if (!getIt.isRegistered<AddressCubit>()) {
     getIt.registerLazySingleton<AddressCubit>(() => AddressCubit());
   }
-
-  if (!getIt.isRegistered<NotificationCubit>()) {
-    getIt.registerLazySingleton<NotificationCubit>(() => NotificationCubit());
+  if (!getIt.isRegistered<MarkNotificationAsReadUseCase>()) {
+    getIt.registerLazySingleton<MarkNotificationAsReadUseCase>(
+      () => MarkNotificationAsReadUseCase(getIt<NotificationRepository>()),
+    );
   }
+
+  getIt.registerLazySingleton<NotificationCubit>(
+    () => NotificationCubit(
+      getIt<GetNotificationsUseCase>(),
+      getIt<MarkNotificationAsReadUseCase>(),
+    ),
+  );
 }

@@ -45,8 +45,8 @@ class SearchCategoriesSection extends StatelessWidget {
                     end: AppSizes.spacingMedium,
                   ),
                   child: ServiceCategoryCard(
-                    iconPath: category.iconPath,
-                    title: category.title,
+                    iconPath: category.iconUrl,
+                    title: category.name,
                     onTap: () {},
                   ),
                 );

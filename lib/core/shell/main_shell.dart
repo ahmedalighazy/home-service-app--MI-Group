@@ -30,7 +30,9 @@ class _MainShellState extends State<MainShell> {
       providers: [
         BlocProvider(create: (_) => getIt<HomeCubit>()..getHomeData()),
         BlocProvider(create: (_) => getIt<AddressCubit>()),
-        BlocProvider(create: (_) => getIt<NotificationCubit>()),
+        BlocProvider(
+          create: (_) => getIt<NotificationCubit>()..getNotifications(),
+        ),
       ],
       child: Scaffold(
         body: IndexedStack(

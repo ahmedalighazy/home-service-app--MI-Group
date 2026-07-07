@@ -53,14 +53,7 @@ class _HomePromoBannerSectionState extends State<HomePromoBannerSection> {
             itemBuilder: (context, index) {
               final banner = widget.banners[index];
 
-              return PromoBannerCard(
-                title: banner.title,
-                subTitle: banner.subTitle,
-                price: banner.price,
-                offerPrice: banner.offerPrice,
-                promoCode: banner.promoCode,
-                imagePath: banner.imagePath,
-              );
+              return PromoBannerCard(banner: banner);
             },
           ),
         ),

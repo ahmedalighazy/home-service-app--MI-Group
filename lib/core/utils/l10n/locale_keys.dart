@@ -44,6 +44,10 @@ abstract class LocaleKeys {
   static const step = 'sd_step';
   static const ofText = 'ofText';
   static const next = 'next';
+  static const newNotifications = 'newNotifications';
+  static const yesterday = 'yesterday';
+  static const today = 'today';
+  static const earlier = 'earlier';
   //service
   static const once = 'once';
   static const twoWeeks = 'twoWeeks';
