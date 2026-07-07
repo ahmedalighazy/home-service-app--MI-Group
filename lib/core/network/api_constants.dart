@@ -49,4 +49,10 @@ class ApiConstants {
   // Notification
   static const String notifications = '/api/v1/notifications';
   static const String notificationRead = '$notifications/{id}/read';
+
+  // Addresses
+  static const String addresses = '/api/addresses';
+  static const String myAddresses = '$addresses/me';
+  static const String userAddresses = '$addresses/user/{userId}';
+  static const String addressById = '$addresses/{id}';
 }

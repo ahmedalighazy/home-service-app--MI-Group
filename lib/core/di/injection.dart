@@ -8,7 +8,6 @@ import 'package:home_service_app/features/notification/domain/usecases/get_notif
 import 'package:home_service_app/features/notification/domain/usecases/mark_notification_as_read_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/address/presentation/cubit/address_cubit.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/home/data/datasources/local/home_local_data_source.dart';
 import '../../features/home/data/datasources/local/home_local_data_source_impl.dart';
@@ -24,6 +23,15 @@ import '../network/api_service.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
 import '../network/network_info_impl.dart';
+import '../../features/profile/data/datasources/address_remote_data_source.dart';
+import '../../features/profile/data/datasources/address_remote_data_source_impl.dart';
+import '../../features/profile/data/repositories/address_repository_impl.dart';
+import '../../features/profile/domain/repositories/address_repository.dart';
+import '../../features/profile/domain/usecases/get_addresses_usecase.dart';
+import '../../features/profile/domain/usecases/create_address_usecase.dart';
+import '../../features/profile/domain/usecases/update_address_usecase.dart';
+import '../../features/profile/domain/usecases/delete_address_usecase.dart';
+import '../../features/profile/presentation/cubit/address_cubit.dart';
 
 import '../token/token_manager.dart';
 import '../utils/helpers/cache_helper.dart';
@@ -137,6 +145,55 @@ Future<void> setupGetIt() async {
       () => GetNotificationsUseCase(getIt<NotificationRepository>()),
     );
   }
+  // ── Address Feature ──────────────────────────────────────
+
+  if (!getIt.isRegistered<AddressRemoteDataSource>()) {
+    getIt.registerLazySingleton<AddressRemoteDataSource>(
+      () => AddressRemoteDataSourceImpl(getIt<ApiService>()),
+    );
+  }
+
+  if (!getIt.isRegistered<AddressRepository>()) {
+    getIt.registerLazySingleton<AddressRepository>(
+      () => AddressRepositoryImpl(getIt<AddressRemoteDataSource>()),
+    );
+  }
+
+  if (!getIt.isRegistered<GetAddressesUseCase>()) {
+    getIt.registerLazySingleton<GetAddressesUseCase>(
+      () => GetAddressesUseCase(getIt<AddressRepository>()),
+    );
+  }
+
+  if (!getIt.isRegistered<CreateAddressUseCase>()) {
+    getIt.registerLazySingleton<CreateAddressUseCase>(
+      () => CreateAddressUseCase(getIt<AddressRepository>()),
+    );
+  }
+
+  if (!getIt.isRegistered<UpdateAddressUseCase>()) {
+    getIt.registerLazySingleton<UpdateAddressUseCase>(
+      () => UpdateAddressUseCase(getIt<AddressRepository>()),
+    );
+  }
+
+  if (!getIt.isRegistered<DeleteAddressUseCase>()) {
+    getIt.registerLazySingleton<DeleteAddressUseCase>(
+      () => DeleteAddressUseCase(getIt<AddressRepository>()),
+    );
+  }
+
+  if (!getIt.isRegistered<AddressCubit>()) {
+    getIt.registerLazySingleton<AddressCubit>(
+      () => AddressCubit(
+        getIt<GetAddressesUseCase>(),
+        getIt<CreateAddressUseCase>(),
+        getIt<UpdateAddressUseCase>(),
+        getIt<DeleteAddressUseCase>(),
+      ),
+    );
+  }
+
   // ── Cubits ────────────────────────────────────────────────
 
   if (!getIt.isRegistered<HomeCubit>()) {
@@ -145,9 +202,6 @@ Future<void> setupGetIt() async {
     );
   }
 
-  if (!getIt.isRegistered<AddressCubit>()) {
-    getIt.registerLazySingleton<AddressCubit>(() => AddressCubit());
-  }
   if (!getIt.isRegistered<MarkNotificationAsReadUseCase>()) {
     getIt.registerLazySingleton<MarkNotificationAsReadUseCase>(
       () => MarkNotificationAsReadUseCase(getIt<NotificationRepository>()),

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
 import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
-import 'package:home_service_app/features/profile/data/models/address_model.dart';
-
-import '../../../../core/constants/icons_path.dart';
+import 'package:home_service_app/features/profile/domain/entities/address_entity.dart';
 
 class AddressCardWidget extends StatelessWidget {
-  final AddressModel address;
+  final AddressEntity address;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
 
@@ -22,6 +21,28 @@ class AddressCardWidget extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
   });
+
+  String _buildDetails() {
+    final parts = <String>[
+      if (address.streetName != null && address.streetName!.isNotEmpty)
+        address.streetName!,
+      if (address.buildingNumber != null && address.buildingNumber!.isNotEmpty)
+        address.buildingNumber!,
+      if (address.apartmentNumber != null &&
+          address.apartmentNumber!.isNotEmpty)
+        'شقة ${address.apartmentNumber!}',
+      if (address.floorNumber != null && address.floorNumber!.isNotEmpty)
+        'طابق ${address.floorNumber!}',
+    ];
+    if (parts.isEmpty && address.description != null) {
+      return address.description!;
+    }
+    return parts.isNotEmpty ? parts.join(', ') : (address.label ?? '');
+  }
+
+  String _iconPath() {
+    return address.type == 'OFFICE' ? IconsPath.work : IconsPath.iconHome;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +62,7 @@ class AddressCardWidget extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset(
-                address.iconPath,
+                _iconPath(),
                 width: 24.r,
                 height: 24.r,
                 colorFilter: const ColorFilter.mode(
@@ -50,31 +71,27 @@ class AddressCardWidget extends StatelessWidget {
                 ),
               ),
               horizontalSpace(8),
-
               Text(
-                address.label,
+                address.label ?? (address.type == 'OFFICE'
+                    ? context.tr(LocaleKeys.profileAddressWork)
+                    : context.tr(LocaleKeys.profileAddressHome)),
                 style: AppText.ibmHeading16(color: AppColors.black),
               ),
-
               const Spacer(),
               if (address.isDefault) _DefaultBadge(),
             ],
           ),
-
           verticalSpace(8),
-
           Align(
             alignment: AlignmentGeometry.bottomRight,
             child: Text(
-              address.details,
+              _buildDetails(),
               style: AppText.ibmDescription14(color: AppColors.textLightGrey),
-
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           verticalSpace(12),
-
           Row(
             children: [
               _ActionButton(
@@ -147,7 +164,6 @@ class _ActionButton extends StatelessWidget {
               colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
             ),
             horizontalSpace(4),
-
             Text(label, style: AppText.regularIbm(color: color, fontSize: 15)),
           ],
         ),

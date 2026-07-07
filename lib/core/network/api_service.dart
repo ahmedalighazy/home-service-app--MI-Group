@@ -7,6 +7,9 @@ import 'package:home_service_app/features/auth/data/models/response/login_respon
 import 'package:home_service_app/features/profile/data/models/profile_responses.dart';
 import 'package:home_service_app/features/profile/data/models/update_responses.dart';
 import 'package:home_service_app/features/profile/data/models/change_password_responses.dart';
+import 'package:home_service_app/features/profile/data/models/address_model.dart';
+import 'package:home_service_app/features/profile/data/models/address_paginated_response.dart';
+import 'package:home_service_app/features/profile/data/models/address_request.dart';
 import '../../features/auth/data/models/request/auth_request.dart';
 import 'api_constants.dart';
 
@@ -112,4 +115,24 @@ abstract class ApiService {
 
   @PATCH(ApiConstants.notificationRead)
   Future<void> markNotificationAsRead(@Path('id') String id);
+
+  // ======================== Address ========================
+
+  @GET(ApiConstants.myAddresses)
+  Future<AddressPaginatedResponse> getMyAddresses();
+
+  @GET(ApiConstants.addressById)
+  Future<AddressModel> getAddressById(@Path('id') String id);
+
+  @POST(ApiConstants.addresses)
+  Future<AddressModel> createAddress(@Body() CreateAddressRequest request);
+
+  @PUT(ApiConstants.addressById)
+  Future<AddressModel> updateAddress(
+    @Path('id') String id,
+    @Body() UpdateAddressRequest request,
+  );
+
+  @DELETE(ApiConstants.addressById)
+  Future<void> deleteAddress(@Path('id') String id);
 }
