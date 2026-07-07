@@ -8,13 +8,6 @@ import 'package:home_service_app/features/notification/domain/usecases/get_notif
 import 'package:home_service_app/features/notification/domain/usecases/mark_notification_as_read_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/profile/data/repositories/profile_repository_impl.dart';
-import '../../features/profile/domain/repositories/profile_repository.dart';
-import '../../features/profile/domain/usecases/get_profile_usecase.dart';
-import '../../features/profile/domain/usecases/update_profile_usecase.dart';
-import '../../features/profile/domain/usecases/change_password_usecase.dart';
-import '../../features/profile/domain/usecases/delete_account_usecase.dart';
-import '../../features/profile/presentation/cubit/profile_cubit.dart';
 import '../../features/address/presentation/cubit/address_cubit.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/home/data/datasources/local/home_local_data_source.dart';
@@ -26,7 +19,6 @@ import '../../features/home/domain/repositories/home_repository.dart';
 import '../../features/home/domain/usecases/get_home_data_usecase.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../../features/notification/presentation/cubit/notification_cubit.dart';
-import '../../features/profile/data/repo/profile_repo.dart';
 import '../language/language_cubit.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';
@@ -59,11 +51,11 @@ Future<void> setupGetIt() async {
 
   // ── Profile ─────────────────────────────────────────────────
 
-  if (!getIt.isRegistered<ProfileRepo>()) {
-    getIt.registerLazySingleton<ProfileRepo>(
-      () => ProfileRepo(getIt<ApiService>()),
-    );
-  }
+  // if (!getIt.isRegistered<ProfileRepo>()) {
+  //   getIt.registerLazySingleton<ProfileRepo>(
+  //     () => ProfileRepo(getIt<ApiService>()),
+  //   );
+  // }
 
   // ── Core ────────────────────────────────────────────────────
 
@@ -168,41 +160,4 @@ Future<void> setupGetIt() async {
       getIt<MarkNotificationAsReadUseCase>(),
     ),
   );
-
-  // ============= Profile Feature (Clean Architecture) =============
-  if (!getIt.isRegistered<ProfileRepository>()) {
-    getIt.registerLazySingleton<ProfileRepository>(
-      () => ProfileRepositoryImpl(getIt<ApiService>()),
-    );
-  }
-  if (!getIt.isRegistered<GetProfileUseCase>()) {
-    getIt.registerLazySingleton(
-      () => GetProfileUseCase(getIt<ProfileRepository>()),
-    );
-  }
-  if (!getIt.isRegistered<UpdateProfileUseCase>()) {
-    getIt.registerLazySingleton(
-      () => UpdateProfileUseCase(getIt<ProfileRepository>()),
-    );
-  }
-  if (!getIt.isRegistered<ChangePasswordUseCase>()) {
-    getIt.registerLazySingleton(
-      () => ChangePasswordUseCase(getIt<ProfileRepository>()),
-    );
-  }
-  if (!getIt.isRegistered<DeleteAccountUseCase>()) {
-    getIt.registerLazySingleton(
-      () => DeleteAccountUseCase(getIt<ProfileRepository>()),
-    );
-  }
-  if (!getIt.isRegistered<ProfileCubit>()) {
-    getIt.registerLazySingleton<ProfileCubit>(
-      () => ProfileCubit(
-        getIt<GetProfileUseCase>(),
-        getIt<UpdateProfileUseCase>(),
-        getIt<ChangePasswordUseCase>(),
-        getIt<DeleteAccountUseCase>(),
-      ),
-    );
-  }
 }

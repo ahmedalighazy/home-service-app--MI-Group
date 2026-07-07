@@ -1,13 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 
 import '../token/refresh_token_handler.dart';
 import '../token/token_manager.dart';
 
 class ApiInterceptor extends Interceptor {
-  // Auth endpoints that should NOT have Authorization header
-  static const _publicPaths = ['/auth/login', '/auth/register'];
-
   static const String _bypassAuth = 'bypassAuth';
 
   final TokenManager tokenManager;
@@ -25,25 +21,14 @@ class ApiInterceptor extends Interceptor {
       'Content-Type': 'application/json',
     });
 
-    // Check if bypass via extra flag
     if (options.extra[_bypassAuth] == true) {
       handler.next(options);
       return;
     }
 
-    // Only add token for protected routes
-    final isPublicPath = _publicPaths.any((p) => options.path.contains(p));
-    if (!isPublicPath) {
-      final token = await tokenManager.getToken();
-      if (token != null) {
-        options.headers['Authorization'] = tokenManager.getAuthHeader(token);
-      } else {
-        // Fallback to cache if tokenManager is empty
-        final cacheToken = CacheHelper.getData('token');
-        if (cacheToken != null && cacheToken.toString().isNotEmpty) {
-          options.headers['Authorization'] = 'Bearer $cacheToken';
-        }
-      }
+    final token = await tokenManager.getToken();
+    if (token != null) {
+      options.headers['Authorization'] = tokenManager.getAuthHeader(token);
     }
 
     handler.next(options);
