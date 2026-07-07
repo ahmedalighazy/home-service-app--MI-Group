@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:home_service_app/features/home/data/models/category_model.dart';
+import 'package:home_service_app/features/home/data/models/home_data_model.dart';
+import 'package:home_service_app/features/notification/data/models/notification_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:home_service_app/features/auth/data/models/response/login_response_model.dart';
 import 'package:home_service_app/features/profile/data/models/profile_responses.dart';
@@ -93,4 +96,20 @@ abstract class ApiService {
 
   @DELETE(ApiConstants.profile)
   Future<void> deleteAccount();
+
+  // ======================== Home ========================
+
+  @GET(ApiConstants.home)
+  Future<HomeDataModel> getHome();
+
+  @GET(ApiConstants.categories)
+  Future<List<CategoryModel>> getCategories();
+
+  // ======================== Notification ========================
+
+  @GET(ApiConstants.notifications)
+  Future<List<NotificationModel>> getNotifications();
+
+  @PATCH(ApiConstants.notificationRead)
+  Future<void> markNotificationAsRead(@Path('id') String id);
 }

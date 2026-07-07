@@ -1,29 +1,38 @@
 import 'package:equatable/equatable.dart';
 
 class BannerEntity extends Equatable {
-  final String title;
-  final String subTitle;
-  final String price;
-  final String offerPrice;
-  final String promoCode;
-  final String imagePath;
+  final String id;
+  final String imageUrl;
+  final String redirectUrl;
+  final String listingId;
+  final String listingTitle;
+  final int displayOrder;
+  final bool isActive;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   const BannerEntity({
-    required this.title,
-    required this.subTitle,
-    required this.price,
-    required this.offerPrice,
-    required this.promoCode,
-    required this.imagePath,
+    required this.id,
+    required this.imageUrl,
+    required this.redirectUrl,
+    required this.listingId,
+    required this.listingTitle,
+    required this.displayOrder,
+    required this.isActive,
+    this.createdAt,
+    this.updatedAt,
   });
 
   @override
   List<Object?> get props => [
-    title,
-    subTitle,
-    price,
-    offerPrice,
-    promoCode,
-    imagePath,
+    id,
+    imageUrl,
+    redirectUrl,
+    listingId,
+    listingTitle,
+    displayOrder,
+    isActive,
+    createdAt,
+    updatedAt,
   ];
 }

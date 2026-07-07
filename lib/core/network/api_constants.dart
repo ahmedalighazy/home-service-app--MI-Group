@@ -35,4 +35,18 @@ class ApiConstants {
 
   // Home
   static const String home = '/home';
+
+  static const String categories = '/categories';
+
+  static const String services = '/services';
+
+  static const String searchServices = '$services/search';
+
+  static const String serviceDetails = '/services/{id}';
+
+  static const String serviceAddons = '/services/{id}/addons';
+
+  // Notification
+  static const String notifications = '/api/v1/notifications';
+  static const String notificationRead = '$notifications/{id}/read';
 }

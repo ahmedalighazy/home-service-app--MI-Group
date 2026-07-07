@@ -1,6 +1,5 @@
 import 'package:home_service_app/core/utils/validation/validation_constants.dart';
 
-
 class ValidatorsHelper {
   ValidatorsHelper._();
 

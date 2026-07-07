@@ -119,7 +119,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             BlendMode.srcIn,
                           ),
                         ),
-                        SizedBox(width: AppSizes.spacingSmall),
+                        SizedBox(width: AppSizes.spacingMin),
                         Text(
                           label,
                           style: AppText.ibmPlexSansArabic12SemiBold.copyWith(
@@ -144,7 +144,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                           BlendMode.srcIn,
                         ),
                       ),
-                      SizedBox(width: AppSizes.spacingSmall),
+                      SizedBox(width: AppSizes.spacingMin),
                       Text(
                         label,
                         style: AppText.ibmPlexSansArabic12SemiBold.copyWith(

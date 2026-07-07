@@ -3,22 +3,16 @@ import 'banner_model.dart';
 import 'category_model.dart';
 import 'service_model.dart';
 
-class HomeDataModel extends HomeDataEntity {
-  const HomeDataModel({
-    required super.banners,
-    required super.categories,
-    required super.services,
-  });
+class HomeDataModel {
+  final List<BannerModel> banners;
+  final List<CategoryModel> categories;
+  final List<ServiceModel> services;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'banners': banners.map((e) => (e as BannerModel).toJson()).toList(),
-      'categories': categories
-          .map((e) => (e as CategoryModel).toJson())
-          .toList(),
-      'services': services.map((e) => (e as ServiceModel).toJson()).toList(),
-    };
-  }
+  const HomeDataModel({
+    required this.banners,
+    required this.categories,
+    required this.services,
+  });
 
   factory HomeDataModel.fromJson(Map<String, dynamic> json) {
     return HomeDataModel(
@@ -27,11 +21,28 @@ class HomeDataModel extends HomeDataEntity {
           .toList(),
 
       categories: (json['categories'] as List<dynamic>? ?? [])
-          .map((e) => CategoryModel.fromJson(e))
+          .map((e) => CategoryModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      services: (json['services'] as List<dynamic>? ?? [])
-          .map((e) => ServiceModel.fromJson(e))
+
+      services: (json['featuredServices'] as List<dynamic>? ?? [])
+          .map((e) => ServiceModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
+  }
+
+  HomeDataEntity toEntity() {
+    return HomeDataEntity(
+      banners: banners.map((e) => e.toEntity()).toList(),
+      categories: categories.map((e) => e.toEntity()).toList(),
+      services: services.map((e) => e.toEntity()).toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'banners': banners.map((e) => e.toJson()).toList(),
+      'categories': categories.map((e) => e.toJson()).toList(),
+      'featuredServices': services.map((e) => e.toJson()).toList(),
+    };
   }
 }

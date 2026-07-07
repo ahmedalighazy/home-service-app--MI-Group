@@ -50,7 +50,6 @@ import 'package:home_service_app/core/di/injection.dart';
 
 import '../../features/setting/presentation/screens/set_new_password_screen.dart';
 
-
 class AppRouter {
   static const String splash = '/';
   static const String onboarding = '/onboarding';

@@ -16,10 +16,17 @@ class NotificationPage extends StatelessWidget {
         child: Column(
           children: [
             const NotificationAppBar(),
-
             Expanded(
               child: BlocBuilder<NotificationCubit, NotificationState>(
                 builder: (context, state) {
+                  if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (state.errorMessage != null) {
+                    return Center(child: Text(state.errorMessage!));
+                  }
+
                   if (state.notifications.isEmpty) {
                     return const NotificationsEmptySection();
                   }

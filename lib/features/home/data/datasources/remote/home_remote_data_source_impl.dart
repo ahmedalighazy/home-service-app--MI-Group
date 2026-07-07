@@ -1,14 +1,17 @@
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/network/api_service.dart';
 import '../../models/home_data_model.dart';
 import 'home_remote_data_source.dart';
 
 @LazySingleton(as: HomeRemoteDataSource)
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
-  HomeRemoteDataSourceImpl();
+  final ApiService apiService;
+
+  HomeRemoteDataSourceImpl(this.apiService);
 
   @override
   Future<HomeDataModel> getHomeData() async {
-    throw UnimplementedError();
+    return await apiService.getHome();
   }
 }

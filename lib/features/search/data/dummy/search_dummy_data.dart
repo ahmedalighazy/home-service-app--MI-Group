@@ -1,4 +1,3 @@
-import 'package:home_service_app/core/constants/icons_path.dart';
 import 'package:home_service_app/core/themes/image/app_assets.dart';
 import 'package:home_service_app/features/home/domain/entities/category_entity.dart';
 
@@ -46,10 +45,10 @@ class SearchDummyData {
     SearchResultEntity(title: 'مكافحة حشرات', id: ''),
   ];
 
-  static const categories = [
-    CategoryEntity(title: 'تنظيف مطابخ', iconPath: IconsPath.cleanerIcon),
-    CategoryEntity(title: 'تنظيف عادي', iconPath: IconsPath.manualCleanerIcon),
-    CategoryEntity(title: 'تنظيف سجاد', iconPath: IconsPath.bugIcon),
-    CategoryEntity(title: 'تنظيف كتب', iconPath: IconsPath.institutionsIcon),
+  static List<CategoryEntity> categories = [
+    // CategoryEntity(title: 'تنظيف مطابخ', iconPath: IconsPath.cleanerIcon),
+    // CategoryEntity(title: 'تنظيف عادي', iconPath: IconsPath.manualCleanerIcon),
+    // CategoryEntity(title: 'تنظيف سجاد', iconPath: IconsPath.bugIcon),
+    // CategoryEntity(title: 'تنظيف كتب', iconPath: IconsPath.institutionsIcon),
   ];
 }

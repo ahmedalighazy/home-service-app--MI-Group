@@ -1,5 +1,3 @@
-
-
 class AuthValidation {
   static bool isValidEmail(String email) {
     if (email.isEmpty) return false;

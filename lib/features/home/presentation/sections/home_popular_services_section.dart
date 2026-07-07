@@ -28,12 +28,7 @@ class HomePopularServicesSection extends StatelessWidget {
                       end: AppSizes.paddingMedium,
                       bottom: AppSizes.paddingXLargeHeight,
                     ),
-                    child: ServiceCard(
-                      title: service.title,
-                      imagePath: service.imagePath,
-                      badge: service.badge,
-                      onTap: () {},
-                    ),
+                    child: ServiceCard(service: service, onTap: () {}),
                   ),
                 )
                 .toList(),
