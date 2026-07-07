@@ -33,7 +33,7 @@ class PhoneInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -56,8 +56,9 @@ class PhoneInputField extends StatelessWidget {
                     SizedBox(width: 4.w),
                     Text(
                       countryCode,
-                      style: AppText.ibmDescription14(color: AppColors.dark)
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: AppText.ibmDescription14(
+                        color: AppColors.dark,
+                      ).copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 8.w),
                     Text(countryFlag, style: TextStyle(fontSize: 18.sp)),

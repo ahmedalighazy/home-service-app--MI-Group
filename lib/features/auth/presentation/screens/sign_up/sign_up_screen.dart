@@ -1,57 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/sign_up_scaffold.dart';
 
-import '../../../../../core/di/injection.dart';
-import '../../../../../core/themes/colors/app_colors.dart';
-import '../../cubits/auth_cubit.dart';
-import '../../states/auth_state.dart';
-import 'logic/sign_up_logic.dart';
-import '../../widgets/sign_up_app_bar.dart';
-import 'widgets/sign_up_body.dart';
-
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> with SignUpLogic {
-  @override
-  void initState() {
-    super.initState();
-    getIt<AuthCubit>().resetState();
-    emailCtrl.addListener(onEmailChanged);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: const SignUpAppBar(),
-      body: BlocListener<AuthCubit, AuthState>(
-        bloc: getIt<AuthCubit>(),
-        listener: handleState,
-        child: BlocBuilder<AuthCubit, AuthState>(
-          bloc: getIt<AuthCubit>(),
-          builder: (context, state) {
-            return SafeArea(
-              child: SignUpBody(
-                emailController: emailCtrl,
-                hasError: hasError,
-                errorMessage: errorMessage,
-                isLoading: state is AuthLoadingState,
-                onSendCode: () => onSendCode(context),
-                onGoogleSignUp: () => onGoogleSignUp(context),
-                onAppleSignUp: () => onAppleSignUp(context),
-                onGuestMode: () => onGuestMode(context),
-                onSignIn: () => onSignIn(context),
-                onEmailChanged: (_) => setState(() {}),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const SignUpScaffold();
 }

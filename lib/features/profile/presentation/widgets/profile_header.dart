@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,7 +6,6 @@ import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
 import 'package:home_service_app/features/home/presentation/widgets/notification_bell.dart';
-import 'package:home_service_app/features/notification/presentation/cubit/notification_cubit.dart';
 
 import '../../../../core/themes/text/app_text.dart';
 import '../../../../core/utils/helpers/buttom_curve_clipper.dart';
@@ -19,19 +17,18 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unreadCount = context
-        .watch<NotificationCubit>()
-        .state
-        .notifications
-        .where((notification) => !notification.isRead)
-        .length;
+    // final unreadCount = context
+    //     .read<NotificationCubit>()
+    //     .state
+    //     .notifications
+    //     .where((notification) => !notification.isRead)
+    //     .length;
     return Column(
       children: [
         ClipPath(
           clipper: BottomCurveClipper(),
           child: Container(
-            height:
-                height(context) * 0.28,
+            height: height(context) * 0.28,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -60,7 +57,7 @@ class ProfileHeader extends StatelessWidget {
 
                     NotificationBell(
                       onTap: () => context.push(AppRouter.notification),
-                      count: unreadCount,
+                      count: 5,
                     ),
                   ],
                 ),

@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_service_app/core/utils/helpers/cache_helper.dart';
 import 'package:home_service_app/features/booking/presentation/screens/booking_screen.dart';
 import 'package:home_service_app/features/service_details/presentation/cubit/feature_cubit.dart';
 import 'package:home_service_app/features/service_details/presentation/views/corporate_services_view.dart';
@@ -9,6 +8,10 @@ import 'package:home_service_app/features/service_details/presentation/views/wor
 import 'package:home_service_app/features/setting/presentation/screens/terms_and_conditions_screen.dart';
 import 'package:home_service_app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:home_service_app/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:home_service_app/features/auth/data/repos/auth_repo.dart';
+import 'package:home_service_app/features/auth/cubit/login/login_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/register/register_cubit.dart';
+import 'package:home_service_app/features/auth/cubit/forgot_password/forgot_password_cubit.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_in/sign_in_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/sign_up/sign_up_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/otp/otp_screen.dart';
@@ -46,6 +49,7 @@ import 'package:home_service_app/features/auth/presentation/screens/check_your_e
 import 'package:home_service_app/core/di/injection.dart';
 
 import '../../features/setting/presentation/screens/set_new_password_screen.dart';
+import '../utils/helpers/cache_helper.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -103,48 +107,96 @@ class AppRouter {
         path: updatePasswordScreen,
         builder: (context, state) => const UpdatePasswordScreen(),
       ),
-      GoRoute(path: signUp, builder: (context, state) => const SignUpScreen()),
-      GoRoute(path: signIn, builder: (context, state) => const SignInScreen()),
+      // ── Registration Flow: shares a single RegisterCubit across SignUp → OTP → CompleteProfile ──
+      //     RegisterCubit holds TextEditingControllers and OTP timer state shared by all three screens.
+      //     A new instance is created only when entering this flow and disposed on exit.
+      ShellRoute(
+        builder: (context, state, child) => BlocProvider(
+          create: (_) => RegisterCubit(getIt<AuthRepo>()),
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: signUp,
+            builder: (context, state) => BlocProvider(
+              // SignUp also needs LoginCubit for social sign-in / guest mode.
+              // A fresh, local instance is fine since these are fire-and-forget actions.
+              create: (_) => LoginCubit(getIt<AuthRepo>()),
+              child: const SignUpScreen(),
+            ),
+          ),
+          GoRoute(
+            path: otp,
+            builder: (context, state) =>
+                OtpScreen(email: state.extra as String? ?? ''),
+          ),
+          GoRoute(
+            path: completeProfile,
+            builder: (context, state) =>
+                CompleteProfileScreen(email: state.extra as String?),
+          ),
+        ],
+      ),
+      // ── Forgot Password Flow: shares a single ForgotPasswordCubit across all steps ──
+      //     ForgotPasswordCubit holds controllers, timers, and verification state shared by
+      //     ForgetPassword → VerifyResetCode → CheckYourEmail → SetNewPassword → PasswordChanged.
+      //     A new instance is created only when entering this flow and disposed on exit.
+      ShellRoute(
+        builder: (context, state, child) => BlocProvider(
+          create: (_) => ForgotPasswordCubit(getIt<AuthRepo>()),
+          child: child,
+        ),
+        routes: [
+          GoRoute(
+            path: forgetPassword,
+            builder: (context, state) => const ForgetScreen(),
+          ),
+          GoRoute(
+            path: verifyResetCode,
+            builder: (context, state) =>
+                VerifyResetCodeScreen(email: state.extra as String? ?? ''),
+          ),
+          GoRoute(
+            path: checkYourEmail,
+            builder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              return VerificationScreen(
+                email: extra?['email'] as String? ?? '',
+                code: extra?['code'] as String? ?? '',
+              );
+            },
+          ),
+          GoRoute(
+            path: setNewPassword,
+            builder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>?;
+              return SetNewPasswordScreen(
+                email: extra?['email'] as String? ?? '',
+                code: extra?['code'] as String? ?? '',
+              );
+            },
+          ),
+          GoRoute(
+            path: passwordChangedSuccessfully,
+            builder: (context, state) =>
+                const PasswordChangedSuccessfullyScreen(),
+          ),
+        ],
+      ),
+      // ── Standalone SignIn (owns its own LoginCubit) ──
       GoRoute(
-        path: otp,
-        builder: (context, state) =>
-            OtpScreen(email: state.extra as String? ?? ''),
+        path: signIn,
+        builder: (context, state) => BlocProvider(
+          create: (_) => LoginCubit(getIt<AuthRepo>()),
+          child: const SignInScreen(),
+        ),
       ),
       GoRoute(
-        path: completeProfile,
-        builder: (context, state) =>
-            CompleteProfileScreen(email: state.extra as String?),
+        name: 'home',
+
+        path: home,
+        builder: (context, state) => const MainShell(),
       ),
-      GoRoute(
-        path: forgetPassword,
-        builder: (context, state) => const ForgetScreen(),
-      ),
-      GoRoute(
-        path: verifyResetCode,
-        builder: (context, state) =>
-            VerifyResetCodeScreen(email: state.extra as String? ?? ''),
-      ),
-      GoRoute(
-        path: checkYourEmail,
-        builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          return VerificationScreen(
-            email: extra?['email'] as String? ?? '',
-            code: extra?['code'] as String? ?? '',
-          );
-        },
-      ),
-      GoRoute(
-        path: setNewPassword,
-        builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>?;
-          return SetNewPasswordScreen(
-            email: extra?['email'] as String? ?? '',
-            code: extra?['code'] as String? ?? '',
-          );
-        },
-      ),
-      GoRoute(path: home, builder: (context, state) => const MainShell()),
       GoRoute(
         path: favorites,
         builder: (context, state) => const FavoritesScreen(),
@@ -236,11 +288,6 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: passwordChangedSuccessfully,
-        builder: (context, state) => const PasswordChangedSuccessfullyScreen(),
-      ),
-
-      GoRoute(
         path: serviceDetails,
         builder: (context, state) => BlocProvider(
           create: (_) => FeatureCubit(),
@@ -271,14 +318,14 @@ class AppRouter {
         builder: (context, state) => const TermsAndConditionsScreen(),
       ),
     ],
-    redirect: (context, state) {
-      if (state.matchedLocation == home) {
-        final token = CacheHelper.getData(key: 'token') as String?;
-        final loggedIn = token != null && token.isNotEmpty;
-        if (!loggedIn) return signIn;
-      }
-      return null;
-    },
+    // redirect: (context, state) {
+    //   if (state.matchedLocation == home) {
+    //     final token = CacheHelper.getData('token') as String?;
+    //     final loggedIn = token != null && token.isNotEmpty;
+    //     if (!loggedIn) return signIn;
+    //   }
+    //   return null;
+    // },
   );
 }
 

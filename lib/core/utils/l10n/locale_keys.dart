@@ -333,4 +333,24 @@ abstract class LocaleKeys {
   static const legalTermsAccounts = 'legal_terms_accounts';
   static const legalTermsModifications = 'legal_terms_modifications';
   static const settingsForgotPassword = 'settings_forgot_password';
+
+  // Error Keys
+  static const errorConnectionFailed = 'error_connection_failed';
+  static const errorRequestCancelled = 'error_request_cancelled';
+  static const errorConnectionTimeout = 'error_connection_timeout';
+  static const errorReceiveTimeout = 'error_receive_timeout';
+  static const errorSendTimeout = 'error_send_timeout';
+  static const errorBadCertificate = 'error_bad_certificate';
+  static const errorHandshakeFailed = 'error_handshake_failed';
+  static const errorDataFormat = 'error_data_format';
+  static const errorHttpProtocol = 'error_http_protocol';
+  static const errorTlsSsl = 'error_tls_ssl';
+  static const errorConnectionFailedUnknown = 'error_connection_failed_unknown';
+  static const errorNoResponse = 'error_no_response';
+  static const errorServerFallback = 'error_server_fallback';
+  static const errorEmailSendingFailed = 'error_email_sending_failed';
+  static const errorInvalidCredentials = 'error_invalid_credentials';
+  static const errorAccountNotFoundSignup = 'error_account_not_found_signup';
+  static const errorInvalidEmailPassword = 'error_invalid_email_password';
+  static const errorSomethingWentWrong = 'error_something_went_wrong';
 }

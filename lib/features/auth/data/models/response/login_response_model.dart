@@ -1,25 +1,31 @@
-import 'package:home_service_app/features/auth/domain/entities/login_response_entity.dart';
+class LoginResponseModel {
+  final String? token;
+  final String? refreshToken;
+  final String? name;
+  final String? id;
+  final String? role;
+  final bool? pending;
+  final String? email;
 
-class LoginResponseModel extends LoginResponseEntity {
   const LoginResponseModel({
-    required super.token,
-    required super.refreshToken,
-    required super.id,
-    required super.name,
-    required super.role,
-    required super.pending,
-    super.email,
+    this.token,
+    this.refreshToken,
+    this.name,
+    this.id,
+    this.role,
+    this.pending,
+    this.email,
   });
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
-      token: json['token'] ?? '',
-      refreshToken: json['refreshToken'] ?? '',
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      role: json['role'] ?? '',
-      pending: json['pending'] ?? false,
-      email: json['email'],
+      token: json['token'] as String?,
+      refreshToken: json['refreshToken'] as String?,
+      name: json['name'] as String?,
+      id: json['id'] as String?,
+      role: json['role'] as String?,
+      pending: json['pending'] as bool?,
+      email: json['email'] as String?,
     );
   }
 
@@ -27,8 +33,8 @@ class LoginResponseModel extends LoginResponseEntity {
     return {
       'token': token,
       'refreshToken': refreshToken,
-      'id': id,
       'name': name,
+      'id': id,
       'role': role,
       'pending': pending,
       'email': email,

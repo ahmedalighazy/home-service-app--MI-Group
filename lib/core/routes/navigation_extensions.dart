@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 extension NavigationExtensions on BuildContext {
-
   void pushNamed(String routeName, {Object? arguments}) {
     GoRouter.of(this).push(routeName, extra: arguments);
   }
@@ -16,7 +15,6 @@ extension NavigationExtensions on BuildContext {
     bool Function(Route<dynamic>) predicate, {
     Object? arguments,
   }) {
-
     go(routeName, extra: arguments);
   }
 
@@ -26,7 +24,6 @@ extension NavigationExtensions on BuildContext {
 }
 
 extension NavigatorStateExtensions on NavigatorState {
-
   void pushNamed(String routeName, {Object? arguments}) {
     context.go(routeName, extra: arguments);
   }

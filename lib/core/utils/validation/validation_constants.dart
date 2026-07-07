@@ -1,5 +1,4 @@
 class ValidationConstants {
-
   ValidationConstants._();
 
   static const String emailPattern =
@@ -14,7 +13,8 @@ class ValidationConstants {
 
   static const String passwordDigitPattern = r'\d';
 
-  static const String passwordSpecialCharPattern = r'[@$!%*?&_\-\.\#\(\)\[\]\{\}]';
+  static const String passwordSpecialCharPattern =
+      r'[@$!%*?&_\-\.\#\(\)\[\]\{\}]';
 
   static const int passwordMinLength = 8;
   static const int passwordMaxLength = 128;
@@ -27,14 +27,12 @@ class ValidationConstants {
   static const int phoneMinLength = 7;
   static const int phoneMaxLength = 15;
 
-  static const String namePattern =
-      r"^[\p{L}\s\-']+$";
+  static const String namePattern = r"^[\p{L}\s\-']+$";
 
   static const int nameMinLength = 2;
   static const int nameMaxLength = 100;
 
-  static const String addressPattern =
-      r'^[a-zA-Z0-9\u0600-\u06FF\s\-,\.#]+$';
+  static const String addressPattern = r'^[a-zA-Z0-9\u0600-\u06FF\s\-,\.#]+$';
 
   static const int addressMinLength = 5;
   static const int addressMaxLength = 255;

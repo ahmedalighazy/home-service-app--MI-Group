@@ -25,55 +25,55 @@ class AuthValidation {
     return password == confirmPassword && password.isNotEmpty;
   }
 
-  static String getEmailErrorMessage(String email) {
-    if (email.isEmpty) {
-      return AuthStrings.emailRequired;
-    }
-    if (!isValidEmail(email)) {
-      return AuthStrings.invalidEmail;
-    }
-    return '';
-  }
+  // static String getEmailErrorMessage(String email) {
+  //   if (email.isEmpty) {
+  //     return AuthStrings.emailRequired;
+  //   }
+  //   if (!isValidEmail(email)) {
+  //     return AuthStrings.invalidEmail;
+  //   }
+  //   return '';
+  // }
 
-  static String getResetCodeErrorMessage(String code) {
-    if (code.isEmpty) {
-      return AuthStrings.otpRequired;
-    }
-    if (!isValidResetCode(code)) {
-      return AuthStrings.otpInvalid;
-    }
-    return '';
-  }
+  // static String getResetCodeErrorMessage(String code) {
+  //   if (code.isEmpty) {
+  //     return AuthStrings.otpRequired;
+  //   }
+  //   if (!isValidResetCode(code)) {
+  //     return AuthStrings.otpInvalid;
+  //   }
+  //   return '';
+  // }
 
-  static String getOtpErrorMessage(String code) {
-    if (code.isEmpty) {
-      return AuthStrings.otpRequired;
-    }
-    if (!isValidOtpCode(code)) {
-      return AuthStrings.otpInvalid;
-    }
-    return '';
-  }
+  // static String getOtpErrorMessage(String code) {
+  //   if (code.isEmpty) {
+  //     return AuthStrings.otpRequired;
+  //   }
+  //   if (!isValidOtpCode(code)) {
+  //     return AuthStrings.otpInvalid;
+  //   }
+  //   return '';
+  // }
 
-  static String getPasswordErrorMessage(String password) {
-    if (password.isEmpty) {
-      return AuthStrings.passwordRequired;
-    }
-    if (password.length < 6) {
-      return AuthStrings.passwordMinLength6;
-    }
-    return '';
-  }
+  // static String getPasswordErrorMessage(String password) {
+  //   if (password.isEmpty) {
+  //     return AuthStrings.passwordRequired;
+  //   }
+  //   if (password.length < 6) {
+  //     return AuthStrings.passwordMinLength6;
+  //   }
+  //   return '';
+  // }
 
-  static String getPhoneErrorMessage(String phone) {
-    if (phone.isEmpty) {
-      return AuthStrings.phoneRequired;
-    }
-    if (phone.length < 7) {
-      return AuthStrings.phoneInvalid;
-    }
-    return '';
-  }
+  // static String getPhoneErrorMessage(String phone) {
+  //   if (phone.isEmpty) {
+  //     return AuthStrings.phoneRequired;
+  //   }
+  //   if (phone.length < 7) {
+  //     return AuthStrings.phoneInvalid;
+  //   }
+  //   return '';
+  // }
 
   static bool isValidPhone(String phone) {
     return phone.isNotEmpty && phone.length >= 7;
@@ -86,22 +86,22 @@ class AuthValidation {
     return firstDigit >= 3 && firstDigit <= 9;
   }
 
-  static String getQatarPhoneErrorMessage(String phone) {
-    final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
+  // static String getQatarPhoneErrorMessage(String phone) {
+  //   final cleaned = phone.replaceAll(RegExp(r'[^0-9]'), '');
 
-    if (cleaned.isEmpty) {
-      return AuthStrings.phoneRequired;
-    }
+  //   if (cleaned.isEmpty) {
+  //     return AuthStrings.phoneRequired;
+  //   }
 
-    if (cleaned.length != 8) {
-      return AuthStrings.phoneLengthError;
-    }
+  //   if (cleaned.length != 8) {
+  //     return AuthStrings.phoneLengthError;
+  //   }
 
-    final firstDigit = int.parse(cleaned[0]);
-    if (firstDigit < 3 || firstDigit > 9) {
-      return AuthStrings.phoneStartDigitError;
-    }
+  //   final firstDigit = int.parse(cleaned[0]);
+  //   if (firstDigit < 3 || firstDigit > 9) {
+  //     return AuthStrings.phoneStartDigitError;
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 }
