@@ -4,6 +4,11 @@ import 'package:home_service_app/features/auth/data/models/response/login_respon
 import 'package:home_service_app/features/profile/data/models/profile_responses.dart';
 import 'package:home_service_app/features/profile/data/models/update_responses.dart';
 import 'package:home_service_app/features/profile/data/models/change_password_responses.dart';
+import 'package:home_service_app/features/favorites/data/models/favorite_responses.dart';
+import 'package:home_service_app/features/favorites/data/models/add_favorites_success.dart';
+import 'package:home_service_app/features/favorites/data/models/removed_favorites.dart';
+import 'package:home_service_app/features/favorites/data/models/check_favorite_responses.dart';
+import 'package:home_service_app/features/favorites/data/models/count_favorites_responses.dart';
 import '../../features/auth/data/models/request/auth_request.dart';
 import 'api_constants.dart';
 
@@ -93,4 +98,30 @@ abstract class ApiService {
 
   @DELETE(ApiConstants.profile)
   Future<void> deleteAccount();
+
+  // ======================== Favorites =====================
+
+  @GET(ApiConstants.favorites)
+  Future<FavoriteResponses> getFavorites(
+    @Query('page') int? page,
+    @Query('size') int? size,
+  );
+
+  @POST(ApiConstants.addRemoveFavorite)
+  Future<AddFavoritesSuccess> addFavorite(
+    @Path('listingId') String listingId,
+  );
+
+  @DELETE(ApiConstants.addRemoveFavorite)
+  Future<RemovedFavorites> removeFavorite(
+    @Path('listingId') String listingId,
+  );
+
+  @GET(ApiConstants.checkFavorite)
+  Future<CheckFavoriteResponses> checkFavorite(
+    @Path('listingId') String listingId,
+  );
+
+  @GET(ApiConstants.favoritesCount)
+  Future<CountFavoritesResponses> getFavoritesCount();
 }

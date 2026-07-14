@@ -21,7 +21,8 @@ import 'package:home_service_app/core/shell/main_shell.dart';
 import 'package:home_service_app/features/auth/presentation/screens/verify_reset_code/verify_reset_code_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/set_new_password/set_new_password_screen.dart';
 import 'package:home_service_app/features/auth/presentation/screens/password_changed/password_changed_screen.dart';
-import 'package:home_service_app/features/profile/presentation/screens/favorites_screen.dart';
+import 'package:home_service_app/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:home_service_app/features/favorites/logic/favorites_cubit.dart';
 import 'package:home_service_app/features/profile/presentation/screens/subscriptions_screen.dart';
 import 'package:home_service_app/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:home_service_app/features/profile/presentation/screens/saved_addresses_screen.dart';
@@ -199,7 +200,10 @@ class AppRouter {
       ),
       GoRoute(
         path: favorites,
-        builder: (context, state) => const FavoritesScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<FavoritesCubit>(),
+          child: const FavoritesScreen(),
+        ),
       ),
       GoRoute(
         path: subscriptions,

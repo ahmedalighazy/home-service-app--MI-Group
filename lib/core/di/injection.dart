@@ -21,6 +21,8 @@ import '../../features/home/domain/usecases/get_home_data_usecase.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../../features/notification/presentation/cubit/notification_cubit.dart';
 import '../../features/profile/data/repo/profile_repo.dart';
+import '../../features/favorites/data/repos/favorites_repo.dart';
+import '../../features/favorites/logic/favorites_cubit.dart';
 import '../language/language_cubit.dart';
 import '../network/api_service.dart';
 import '../network/dio_client.dart';
@@ -56,6 +58,14 @@ Future<void> setupGetIt() async {
   if (!getIt.isRegistered<ProfileRepo>()) {
     getIt.registerLazySingleton<ProfileRepo>(
       () => ProfileRepo(getIt<ApiService>()),
+    );
+  }
+
+  // ── Favorites ───────────────────────────────────────────────
+
+  if (!getIt.isRegistered<FavoritesRepo>()) {
+    getIt.registerLazySingleton<FavoritesRepo>(
+      () => FavoritesRepo(getIt<ApiService>()),
     );
   }
 
@@ -168,5 +178,11 @@ Future<void> setupGetIt() async {
 
   if (!getIt.isRegistered<NotificationCubit>()) {
     getIt.registerLazySingleton<NotificationCubit>(() => NotificationCubit());
+  }
+
+  if (!getIt.isRegistered<FavoritesCubit>()) {
+    getIt.registerFactory<FavoritesCubit>(
+      () => FavoritesCubit(getIt<FavoritesRepo>()),
+    );
   }
 }

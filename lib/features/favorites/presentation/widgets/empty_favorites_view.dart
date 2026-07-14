@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/constants/icons_path.dart';
-import '../../../../core/themes/colors/app_colors.dart';
-import '../../../../core/themes/text/app_text.dart';
-import '../../../../core/utils/helpers/spacing.dart';
-import '../../../../core/utils/l10n/locale_keys.dart';
-import '../../../../core/utils/l10n/localization_extension.dart';
-import '../../../../core/widgets/custom_buttom.dart';
+import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/themes/colors/app_colors.dart';
+import 'package:home_service_app/core/themes/text/app_text.dart';
+import 'package:home_service_app/core/utils/helpers/spacing.dart';
+import 'package:home_service_app/core/utils/l10n/locale_keys.dart';
+import 'package:home_service_app/core/utils/l10n/localization_extension.dart';
+import 'package:home_service_app/core/widgets/custom_buttom.dart';
 
 class EmptyFavoritesView extends StatelessWidget {
   const EmptyFavoritesView({super.key});
@@ -48,7 +48,7 @@ class EmptyFavoritesView extends StatelessWidget {
           CustomButtom(
             text: context.tr(LocaleKeys.profileBrowseServicesBtn),
             onTap: () {
-
+              Navigator.of(context).pop();
             },
             startColor: AppColors.greenPrimary,
             endColor: AppColors.dark,

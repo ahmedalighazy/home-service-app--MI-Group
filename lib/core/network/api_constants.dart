@@ -35,4 +35,11 @@ class ApiConstants {
 
   // Home
   static const String home = '/home';
+
+  // Favorites
+  static const String favorites = '/api/v1/favorites';
+  static const String addRemoveFavorite = '/api/v1/favorites/{listingId}';
+  static const String checkFavorite = '/api/v1/favorites/{listingId}/check';
+  static const String favoritesCount = '/api/v1/favorites/count';
 }
+
