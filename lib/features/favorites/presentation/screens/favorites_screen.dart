@@ -40,9 +40,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           } else if (state is FavoritesLoaded) {
             final items = state.favoriteResponses.content ?? [];
             if (items.isEmpty) {
-              return const EmptyFavoritesView();
+              return RefreshIndicator(
+                color: AppColors.primary,
+                onRefresh: () => context.read<FavoritesCubit>().getFavorites(),
+                child: const SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(height: 600, child: EmptyFavoritesView()),
+                ),
+              );
             }
-            return FavoritesListWidget(items: items);
+            return RefreshIndicator(
+              color: AppColors.primary,
+              onRefresh: () => context.read<FavoritesCubit>().getFavorites(),
+              child: FavoritesListWidget(items: items),
+            );
           } else if (state is FavoritesError) {
             return Center(
               child: Padding(

@@ -4,17 +4,18 @@ import 'package:home_service_app/features/service_details/presentation/widgets/s
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../core/themes/colors/app_colors.dart';
+import '../../../data/models/service_page_model.dart';
 import '../../cubit/feature_cubit.dart';
 import '../../cubit/feature_state.dart';
 
 class ServiceCover extends StatelessWidget {
-  final String coverImage;
+  final ServicePageModel data;
   final PageController pageController;
   final int pageCount;
 
   const ServiceCover({
     super.key,
-    required this.coverImage,
+    required this.data,
     required this.pageController,
     required this.pageCount,
   });
@@ -29,7 +30,7 @@ class ServiceCover extends StatelessWidget {
       child: Stack(
         children: [
 
-          Image.asset(coverImage, fit: BoxFit.cover, width: double.infinity),
+          Image.asset(data.coverImage, fit: BoxFit.cover, width: double.infinity),
 
           Positioned(
             top: size.height * 0.015,
@@ -39,15 +40,15 @@ class ServiceCover extends StatelessWidget {
               children: [
                 BlocSelector<FeatureCubit, FeatureState, bool>(
                   selector: (state) => state is FeatureLoaded
-                      ? state.isServiceCoverFavorite
+                      ? state.isServiceItemFavorite(data.mainTitle)
                       : false,
                   builder: (context, isFavorite) {
                     return ServiceCoverIconButton(
                       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
                       iconColor: isFavorite ? Colors.red : AppColors.black,
-                      onTap: context
+                      onTap: () => context
                           .read<FeatureCubit>()
-                          .toggleServiceCoverFavorite,
+                          .toggleServiceCoverFavorite(data),
                     );
                   },
                 ),

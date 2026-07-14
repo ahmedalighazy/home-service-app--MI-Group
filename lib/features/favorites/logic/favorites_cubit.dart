@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/models/favorite_responses.dart';
 import '../data/repos/favorites_repo.dart';
+import '../data/repos/local_favorites_manager.dart';
 import 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
@@ -10,14 +11,57 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   Future<void> getFavorites() async {
     emit(FavoritesLoading());
+    
+    // Load local items
+    final localItems = LocalFavoritesManager.getLocalFavorites();
+
     final result = await _favoritesRepo.getFavorites();
     result.when(
-      success: (data) => emit(FavoritesLoaded(data)),
-      failure: (error) => emit(FavoritesError(error.message ?? 'Unknown error occurred')),
+      success: (remoteData) {
+        final remoteItems = remoteData.content ?? [];
+        final mergedItems = [...localItems];
+        for (final remoteItem in remoteItems) {
+          if (!mergedItems.any((e) => e.id == remoteItem.id)) {
+            mergedItems.add(remoteItem);
+          }
+        }
+        LocalFavoritesManager.saveAllFavorites(mergedItems);
+
+        final response = FavoriteResponses(
+          totalElements: mergedItems.length,
+          totalPages: remoteData.totalPages,
+          pageable: remoteData.pageable,
+          first: remoteData.first,
+          last: remoteData.last,
+          size: remoteData.size,
+          content: mergedItems,
+          number: remoteData.number,
+          sort: remoteData.sort,
+          numberOfElements: mergedItems.length,
+          empty: mergedItems.isEmpty,
+        );
+        emit(FavoritesLoaded(response));
+      },
+      failure: (error) {
+        // If remote fails, fallback to local favorites if they exist
+        if (localItems.isNotEmpty) {
+          final response = FavoriteResponses(
+            totalElements: localItems.length,
+            content: localItems,
+            empty: false,
+          );
+          emit(FavoritesLoaded(response));
+        } else {
+          emit(FavoritesError(error.message ?? 'Unknown error occurred'));
+        }
+      },
     );
   }
 
   Future<void> removeFavorite(String listingId) async {
+    // Remove locally
+    await LocalFavoritesManager.removeFavorite(listingId);
+
     final currentState = state;
     if (currentState is FavoritesLoaded) {
       final oldContent = currentState.favoriteResponses.content;
@@ -39,16 +83,16 @@ class FavoritesCubit extends Cubit<FavoritesState> {
         empty: updatedContent?.isEmpty ?? true,
       );
 
-      // Optimistically update the UI to feel premium and fast
+      // Optimistically update the UI
       emit(FavoritesLoaded(updatedResponses));
 
       final result = await _favoritesRepo.removeFavorite(listingId);
       result.when(
         success: (_) {
-          // Keep the updated list
+          // Keep updated
         },
         failure: (error) {
-          // Revert back on error by fetching again
+          // Revert back on error
           getFavorites();
         },
       );
@@ -59,12 +103,12 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     final result = await _favoritesRepo.addFavorite(listingId);
     result.when(
       success: (_) {
-        // If we are currently on the screen, reload the list to get full details of the added listing
         getFavorites();
       },
       failure: (error) {
-        // Handle failure if needed
+        getFavorites();
       },
     );
   }
 }
+

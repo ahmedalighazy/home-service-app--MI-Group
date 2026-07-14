@@ -21,10 +21,10 @@ class ServiceGroupSection extends StatelessWidget {
           const Divider(height: 1, thickness: 1, color: AppColors.border),
           ...group.items.indexed.map(
             (entry) => ServiceItemCard(
-
               key: ValueKey('${group.categoryTitle}_${entry.$1}'),
               itemKey: '${group.categoryTitle}|${entry.$1}',
               item: entry.$2,
+              category: group.categoryTitle,
             ),
           ),
         ],

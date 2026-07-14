@@ -13,8 +13,14 @@ import '../../cubit/feature_state.dart';
 class ServiceItemCard extends StatelessWidget {
   final String itemKey;
   final ServicePageItemModel item;
+  final String category;
 
-  const ServiceItemCard({super.key, required this.itemKey, required this.item});
+  const ServiceItemCard({
+    super.key,
+    required this.itemKey,
+    required this.item,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +75,7 @@ class ServiceItemCard extends StatelessWidget {
                         isFavorite: itemState.favorite,
                         item: item,
                         onFavoritePressed: () =>
-                            cubit.toggleServiceItemFavorite(itemKey),
+                            cubit.toggleServiceItemFavorite(itemKey, item, category),
                       ),
                     ),
                     SizedBox(width: size.width * 0.025),

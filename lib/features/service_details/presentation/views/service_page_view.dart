@@ -36,7 +36,7 @@ class ServicePage extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: ServiceCover(
-                  coverImage: data.coverImage,
+                  data: data,
                   pageController: pageController,
                   pageCount: pageCount,
                 ),

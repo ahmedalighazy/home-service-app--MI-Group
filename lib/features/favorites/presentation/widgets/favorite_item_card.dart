@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/constants/app_sizes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
@@ -20,7 +22,11 @@ class FavoriteItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        context.push(AppRouter.serviceDetails);
+      },
+      child: Container(
       padding: EdgeInsets.all(AppSizes.paddingSmall.r),
       decoration: ShapeDecoration(
         color: AppColors.white,
@@ -79,7 +85,7 @@ class FavoriteItemCard extends StatelessWidget {
           _buildFavoriteButton(context),
         ],
       ),
-    );
+    ),);
   }
 
   Widget _buildItemImage() {

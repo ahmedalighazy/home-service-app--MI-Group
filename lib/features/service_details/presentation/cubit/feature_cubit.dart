@@ -1,4 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_service_app/core/di/injection.dart';
+import 'package:home_service_app/features/favorites/data/repos/local_favorites_manager.dart';
+import 'package:home_service_app/features/favorites/data/models/favorite_responses.dart';
+import 'package:home_service_app/features/favorites/data/repos/favorites_repo.dart';
+import '../../data/models/service_page_model.dart';
 
 import '../../data/models/corporate_place_type.dart';
 import '../../data/models/corporate_service_type.dart';
@@ -19,7 +24,9 @@ class FeatureCubit extends Cubit<FeatureState> {
 
   void loadFeature() {
     emit(const FeatureLoading());
-    emit(const FeatureLoaded());
+    final localFavorites = LocalFavoritesManager.getLocalFavorites();
+    final favoriteKeys = localFavorites.map((e) => e.id ?? '').toSet();
+    emit(FeatureLoaded(favoriteServiceItemKeys: favoriteKeys));
   }
 
   void resetFeature() {
@@ -79,20 +86,57 @@ class FeatureCubit extends Cubit<FeatureState> {
     );
   }
 
-  void toggleServiceItemFavorite(String itemKey) {
+  void toggleServiceItemFavorite(
+    String itemKey,
+    ServicePageItemModel item,
+    String category,
+  ) {
     final current = loadedState;
     final favorites = Set<String>.from(current.favoriteServiceItemKeys);
-    favorites.contains(itemKey)
-        ? favorites.remove(itemKey)
-        : favorites.add(itemKey);
+
+    if (favorites.contains(itemKey)) {
+      favorites.remove(itemKey);
+      LocalFavoritesManager.removeFavorite(itemKey);
+      getIt<FavoritesRepo>().removeFavorite(itemKey);
+    } else {
+      favorites.add(itemKey);
+      final favoriteContent = Content(
+        id: itemKey,
+        title: item.title,
+        description: item.description,
+        price: item.price,
+        categoryName: category,
+        imageUrls: [item.image],
+      );
+      LocalFavoritesManager.addFavorite(favoriteContent);
+      getIt<FavoritesRepo>().addFavorite(itemKey);
+    }
     emit(current.copyWith(favoriteServiceItemKeys: favorites));
   }
 
-  void toggleServiceCoverFavorite() {
+  void toggleServiceCoverFavorite(ServicePageModel data) {
     final current = loadedState;
-    emit(
-      current.copyWith(isServiceCoverFavorite: !current.isServiceCoverFavorite),
-    );
+    final coverKey = data.mainTitle;
+    final favorites = Set<String>.from(current.favoriteServiceItemKeys);
+
+    if (favorites.contains(coverKey)) {
+      favorites.remove(coverKey);
+      LocalFavoritesManager.removeFavorite(coverKey);
+      getIt<FavoritesRepo>().removeFavorite(coverKey);
+    } else {
+      favorites.add(coverKey);
+      final favoriteContent = Content(
+        id: coverKey,
+        title: data.mainTitle,
+        description: data.promoDiscount,
+        price: 0,
+        categoryName: 'Service',
+        imageUrls: [data.coverImage],
+      );
+      LocalFavoritesManager.addFavorite(favoriteContent);
+      getIt<FavoritesRepo>().addFavorite(coverKey);
+    }
+    emit(current.copyWith(favoriteServiceItemKeys: favorites));
   }
 
   void nextBookingStep(int maxIndex) {
