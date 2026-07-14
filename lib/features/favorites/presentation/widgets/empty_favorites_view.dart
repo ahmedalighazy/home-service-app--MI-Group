@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:home_service_app/core/constants/icons_path.dart';
+import 'package:home_service_app/core/routes/app_routes.dart';
 import 'package:home_service_app/core/themes/colors/app_colors.dart';
 import 'package:home_service_app/core/themes/text/app_text.dart';
 import 'package:home_service_app/core/utils/helpers/spacing.dart';
@@ -48,7 +50,7 @@ class EmptyFavoritesView extends StatelessWidget {
           CustomButtom(
             text: context.tr(LocaleKeys.profileBrowseServicesBtn),
             onTap: () {
-              Navigator.of(context).pop();
+              context.go(AppRouter.home);
             },
             startColor: AppColors.greenPrimary,
             endColor: AppColors.dark,

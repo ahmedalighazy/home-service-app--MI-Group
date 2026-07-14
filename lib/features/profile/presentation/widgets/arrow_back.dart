@@ -28,7 +28,7 @@ class ArrowBack extends StatelessWidget {
           child: Icon(
             // في RTL (AR) السهم يشير لليمين (Icons.arrow_forward)
             // في LTR (EN) السهم يشير لليسار (Icons.arrow_back)
-            Icons.arrow_back,
+            context.isRtl ? Icons.arrow_forward : Icons.arrow_back,
             size: 22.sp,
             color: AppColors.black,
           ),
