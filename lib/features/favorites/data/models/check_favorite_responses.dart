@@ -1,7 +1,3 @@
-/// additionalProp1 : true
-/// additionalProp2 : true
-/// additionalProp3 : true
-
 class CheckFavoriteResponses {
   CheckFavoriteResponses({
       this.additionalProp1, 

@@ -1,7 +1,3 @@
-/// additionalProp1 : 9007199254740991
-/// additionalProp2 : 9007199254740991
-/// additionalProp3 : 9007199254740991
-
 class CountFavoritesResponses {
   CountFavoritesResponses({
       this.additionalProp1, 

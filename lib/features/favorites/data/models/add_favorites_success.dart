@@ -1,7 +1,3 @@
-/// additionalProp1 : "string"
-/// additionalProp2 : "string"
-/// additionalProp3 : "string"
-
 class AddFavoritesSuccess {
   AddFavoritesSuccess({
       this.additionalProp1, 

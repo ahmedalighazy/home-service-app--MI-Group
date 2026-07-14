@@ -1,15 +1,3 @@
-/// totalElements : 9007199254740991
-/// totalPages : 1073741824
-/// pageable : {"unpaged":true,"paged":true,"pageNumber":1073741824,"pageSize":1073741824,"offset":9007199254740991,"sort":{"unsorted":true,"sorted":true,"empty":true}}
-/// first : true
-/// last : true
-/// size : 1073741824
-/// content : [{"id":"3fa85f64-5717-4562-b3fc-2c963f66afa6","userId":"3fa85f64-5717-4562-b3fc-2c963f66afa6","userName":"string","userPhone":"string","userVerified":true,"categoryId":"3fa85f64-5717-4562-b3fc-2c963f66afa6","categoryName":"string","title":"string","slug":"string","seoTitle":"string","seoDescription":"string","seoKeywords":"string","description":"string","price":0,"currency":{"id":"3fa85f64-5717-4562-b3fc-2c963f66afa6","code":"string","name":"string","symbol":"string"},"listingType":"SALE","condition":"NEW","status":"PENDING","latitude":0.1,"longitude":0.1,"city":{"id":"3fa85f64-5717-4562-b3fc-2c963f66afa6","name":"string","country":"string","countryCode":"string","region":"string","isActive":true,"createdAt":"2026-07-14T11:52:21.150Z","updatedAt":"2026-07-14T11:52:21.152Z"},"createdAt":"2026-07-14T11:52:21.152Z","updatedAt":"2026-07-14T11:52:21.152Z","expiryDate":"2026-07-14T11:52:21.152Z","expired":true,"attributes":[{"attributeId":"3fa85f64-5717-4562-b3fc-2c963f66afa6","attributeName":"string","attributeType":"string","valueString":"string","valueNumber":0,"iconUrl":"string","valueBoolean":true,"unit":"string"}],"imageUrls":["string"],"isFeatured":true,"featuredStartDate":"2026-07-14T11:52:21.152Z","featuredEndDate":"2026-07-14T11:52:21.152Z","featuredDurationWeeks":1073741824,"viewCount":9007199254740991,"leadCount":9007199254740991,"soldByLavent":true,"soldAt":"2026-07-14T11:52:21.152Z","serviceEnabled":true,"bookingEnabled":true,"hourlyRate":0,"workerRate":0,"minimumPrice":0,"favorite":true}]
-/// number : 1073741824
-/// sort : {"unsorted":true,"sorted":true,"empty":true}
-/// numberOfElements : 1073741824
-/// empty : true
-
 class FavoriteResponses {
   FavoriteResponses({
       this.totalElements, 
